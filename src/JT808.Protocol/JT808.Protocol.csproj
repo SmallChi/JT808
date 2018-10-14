@@ -1,16 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net461;net472;</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Copyright>Copyright 2018.</Copyright>
+    <Authors>SmallChi</Authors>
+    <PackageId>JT808</PackageId>
+    <Product>JT808</Product>
+    <Description>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议</Description>
+    <PackageReleaseNotes>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/SmallChi/JT808</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/SmallChi/JT808</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</PackageLicenseUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <LangVersion>7.3</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <LangVersion>7.3</LangVersion>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\**" />
     <Compile Remove="JT808PackageImpl\**" />
