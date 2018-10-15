@@ -38,7 +38,7 @@ namespace JT808.Protocol.MessageBody.JT808LocationAttach
             };
         }
 
-        public static void AddJT808LocationAttachMethod<TJT808LocationAttach>(byte attachInfoId)
+        internal static void AddJT808LocationAttachMethod<TJT808LocationAttach>(byte attachInfoId)
             where TJT808LocationAttach : JT808LocationAttachBase
         {
             JT808LocationAttachMethod.Add(attachInfoId, typeof(TJT808LocationAttach));

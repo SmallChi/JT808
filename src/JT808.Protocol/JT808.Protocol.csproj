@@ -17,15 +17,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\**" />
-    <Compile Remove="JT808PackageImpl\**" />
     <Compile Remove="JT808Properties\JT808LocationAttachProperties\**" />
     <Compile Remove="MessageBody\JT808LocationAttach\**" />
     <EmbeddedResource Remove="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\**" />
-    <EmbeddedResource Remove="JT808PackageImpl\**" />
     <EmbeddedResource Remove="JT808Properties\JT808LocationAttachProperties\**" />
     <EmbeddedResource Remove="MessageBody\JT808LocationAttach\**" />
     <None Remove="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\**" />
-    <None Remove="JT808PackageImpl\**" />
     <None Remove="JT808Properties\JT808LocationAttachProperties\**" />
     <None Remove="MessageBody\JT808LocationAttach\**" />
   </ItemGroup>
@@ -52,11 +49,6 @@
     <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x2BFormatter.cs" />
     <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x30Formatter.cs" />
     <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x31Formatter.cs" />
-    <Compile Include="JT808PackageImpl\JT808PackageBase.cs" />
-    <Compile Include="JT808PackageImpl\Reply\JT808_0x0001Package.cs" />
-    <Compile Include="JT808PackageImpl\Reply\JT808_0x8001Package.cs" />
-    <Compile Include="JT808PackageImpl\Reply\JT808_0x8100Package.cs" />
-    <Compile Include="JT808PackageImpl\Send\JT808_0x8300Package.cs" />
     <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachBase.cs" />
     <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x01.cs" />
     <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x02.cs" />

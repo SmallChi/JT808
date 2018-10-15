@@ -105,7 +105,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
 
         static JT808_0x0200Test()
         {
-            JT808LocationAttachBase.AddJT808LocationAttachMethod<JT808LocationAttachImpl0x06>(0x06);
+            JT808GlobalConfig.Instance.Register_0x0200_Attach<JT808LocationAttachImpl0x06>(0x06);
         }
 
         [Fact]

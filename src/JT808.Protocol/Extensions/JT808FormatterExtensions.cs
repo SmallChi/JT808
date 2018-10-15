@@ -1,5 +1,6 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.Exceptions;
+using JT808.Protocol.Enums;
 using JT808.Protocol.JT808Formatters;
 using System;
 using System.Reflection;
@@ -33,7 +34,7 @@ namespace JT808.Protocol.Extensions
             var attr = formatterType.GetTypeInfo().GetCustomAttribute<JT808FormatterAttribute>();
             if (attr == null)
             {
-                throw new JT808Exception($"该类{formatterType.FullName}没有标记JT808FormatterAttribute");
+                throw new JT808Exception(JT808ErrorCode.GetFormatterAttributeError, formatterType.FullName);
             }
             if (attr.Arguments == null)
             {

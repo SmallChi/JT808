@@ -11,11 +11,11 @@ namespace JT808.Protocol.Test.Extensions
         [Fact]
         public void Test1()
         {
-            var list0 = JT808EnumExtensions.ParseAlarmStatus(5);
-            var list1 = JT808EnumExtensions.ParseAlarmStatus(16);
-            var list2 = JT808EnumExtensions.ParseAlarmStatus(18);
-            var list3 = JT808EnumExtensions.ParseAlarmStatus(24);
-            var list4 = JT808EnumExtensions.ParseAlarmStatus(31);
+            var list0 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(5,32);
+            var list1 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(16, 32);
+            var list2 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(18, 32);
+            var list3 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(24, 32);
+            var list4 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(31, 32);
         }
     }
 }

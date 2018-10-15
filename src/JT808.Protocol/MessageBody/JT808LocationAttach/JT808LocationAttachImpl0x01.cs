@@ -18,6 +18,6 @@ namespace JT808.Protocol.MessageBody.JT808LocationAttach
         /// 里程 1/10km，对应车上里程表读数
         /// </summary>
         [IgnoreDataMember]
-        public double ConvertMileage => Mileage / 10;
+        public double ConvertMileage => Mileage / 10.0;
     }
 }

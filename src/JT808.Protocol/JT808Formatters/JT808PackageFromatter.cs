@@ -5,6 +5,7 @@ using JT808.Protocol.Extensions;
 using JT808.Protocol.Exceptions;
 using JT808.Protocol.Attributes;
 using System.Buffers;
+using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.JT808Formatters
 {
@@ -28,9 +29,12 @@ namespace JT808.Protocol.JT808Formatters
             //  2.3. 从消息头到校验码前一个字节
             byte checkCode = buffer.ToXor(1, checkIndex);
             //  2.4. 验证校验码
-            if (jT808Package.CheckCode != checkCode)
+            if (!JT808GlobalConfig.Instance.SkipCRCCode)
             {
-                throw new JT808Exception($"{jT808Package.CheckCode}!={checkCode}");
+                if (jT808Package.CheckCode != checkCode)
+                {
+                    throw new JT808Exception(JT808ErrorCode.CheckCodeNotEqual, $"{jT808Package.CheckCode}!={checkCode}");
+                }
             }
             jT808Package.Begin = buffer[offset];
             offset = offset + 1;
@@ -41,7 +45,7 @@ namespace JT808.Protocol.JT808Formatters
             }
             catch (Exception ex)
             {
-                throw new JT808Exception($"消息头解析错误,offset:{offset.ToString()}", ex);
+                throw new JT808Exception(JT808ErrorCode.HeaderParseError, ex);
             }
             offset = readSize;
             if (jT808Package.Header.MessageBodyProperty.DataLength != 0)
@@ -63,7 +67,7 @@ namespace JT808.Protocol.JT808Formatters
                         }
                         catch (Exception ex)
                         {
-                            throw new JT808Exception($"消息体解析错误,offset:{offset.ToString()}", ex);
+                            throw new JT808Exception(JT808ErrorCode.BodiesParseError, ex);
                         }
                     }
                 }
