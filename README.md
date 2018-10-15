@@ -212,6 +212,10 @@ JT808GlobalConfig.Instance
     .SetSkipCRCCode(true);
 ```
 
+| Package Name |  Version | Downloads
+|--------------|  ------- | ----
+| Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.svg)
+
 ## JT808终端通讯协议消息对照表
 
 |   序号     |   消息ID  |  完成情况   |   消息体名称
