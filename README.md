@@ -16,6 +16,202 @@
 5. 掌握快速ctrl+c、ctrl+v；
 6. 掌握以上装逼技能，就可以开始搬砖了。
 
+## JT808数据结构解析
+
+### 数据包[JT808Package]
+
+|头标识|数据头|数据体|校验码|尾标识
+|:------:|:------:|:------:|:------:|:------:|
+|  Begin  | JT808Header  |  JT808Bodies  | CheckCode | End |
+|  7E  | - | - | - | 7E |
+
+### 数据头[JT808Header]
+
+|消息ID|消息体属性|终端手机号|消息流水号|
+|:------:|:------:|:------:|:------:|
+| MsgId | JT808HeaderMessageBodyProperty | TerminalPhoneNo | MsgNum |
+
+#### 数据头-消息体属性[JT808HeaderMessageBodyProperty]
+
+|是否分包|加密标识|消息体长度|消息总包数|包序号
+|:------:|:------:|:------:|:------:|:------:|
+|  IsPackge  | Encrypt  |  DataLength  | PackgeCount | PackageIndex |
+
+#### 消息体属性[JT808Bodies]
+
+> 根据对应消息ID：MsgId
+
+***注意：数据内容(除去头和尾标识)进行转义判断***
+
+转义规则如下:
+
+1. 若数据内容中有出现字符 0x7e 的，需替换为字符 0x7d 紧跟字符 0x02;
+2. 若数据内容中有出现字符 0x7d 的，需替换为字符 0x7d 紧跟字符 0x01;
+
+反转义的原因：确认JT808协议的TCP消息边界。
+
+### 举个栗子1
+
+#### 1.组包：
+
+> MsgId 0x0200:位置信息汇报
+
+``` package
+
+JT808Package jT808Package = new JT808Package();
+
+jT808Package.Header = new JT808Header
+{
+    MsgId = Enums.JT808MsgId.位置信息汇报,
+    MsgNum = 126,
+    TerminalPhoneNo = "123456789012"
+};
+
+JT808_0x0200 jT808_0x0200 = new JT808_0x0200();
+jT808_0x0200.AlarmFlag = 1;
+jT808_0x0200.Altitude = 40;
+jT808_0x0200.GPSTime = DateTime.Parse("2018-10-15 10:10:10");
+jT808_0x0200.Lat = 12222222;
+jT808_0x0200.Lng = 132444444;
+jT808_0x0200.Speed = 60;
+jT808_0x0200.Direction = 0;
+jT808_0x0200.StatusFlag = 2;
+jT808_0x0200.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
+
+jT808_0x0200.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x01, new JT808LocationAttachImpl0x01
+{
+    Mileage = 100
+});
+
+jT808_0x0200.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x02, new JT808LocationAttachImpl0x02
+{
+    Oil = 125
+});
+
+jT808Package.Bodies = jT808_0x0200;
+
+byte[] data = JT808Serializer.Serialize(jT808Package);
+
+var hex = data.ToHexString();
+
+// 输出结果Hex：
+// 7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 13 7E
+```
+#### 2.手动解包：
+
+``` unpackage
+1.原包：
+7E 02 00 00 26 12 34 56 78 90 12 00 (7D 02) 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 (7D 01) 13 7E
+
+2.进行反转义
+7D 02 ->7E
+7D 01 ->7D
+反转义后
+7E 02 00 00 26 12 34 56 78 90 12 00 7E 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 13 7E
+
+3.拆解
+7E                  --头标识
+02 00               --数据头->消息ID
+00 26               --数据头->消息体属性
+12 34 56 78 90 12   --数据头->终端手机号
+00 7E               --数据头->消息流水号
+00 00 00 01         --消息体->报警标志
+00 00 00 02         --消息体->状态位标志
+00 BA 7F 0E         --消息体->纬度
+07 E4 F1 1C         --消息体->经度
+00 28               --消息体->海拔高度
+00 3C               --消息体->速度
+00 00               --消息体->方向
+18 10 15 10 10 10   --消息体->GPS时间
+01                  --消息体->附加信息->里程
+04                  --消息体->附加信息->长度
+00 00 00 64         --消息体->附加信息->数据
+02                  --消息体->附加信息->油量
+02                  --消息体->附加信息->长度
+00 7D               --消息体->附加信息->数据
+13                  --检验码
+7E                  --尾标识
+```
+
+#### 3.程序解包：
+
+``` unpackage2
+//1.转成byte数组
+byte[] bytes = "7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 13 7E".ToHexBytes();
+
+//2.将数组反序列化
+var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
+
+//3.数据包头
+Assert.Equal(Enums.JT808MsgId.位置信息汇报, jT808Package.Header.MsgId);
+Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
+Assert.Equal(126, jT808Package.Header.MsgNum);
+Assert.Equal("123456789012", jT808Package.Header.TerminalPhoneNo);
+Assert.False(jT808Package.Header.MessageBodyProperty.IsPackge);
+Assert.Equal(0, jT808Package.Header.MessageBodyProperty.PackageIndex);
+Assert.Equal(0, jT808Package.Header.MessageBodyProperty.PackgeCount);
+Assert.Equal(JT808EncryptMethod.None, jT808Package.Header.MessageBodyProperty.Encrypt);
+
+//4.数据包体
+JT808_0x0200 jT808_0x0200 = (JT808_0x0200)jT808Package.Bodies;
+Assert.Equal((uint)1, jT808_0x0200.AlarmFlag);
+Assert.Equal((uint)40, jT808_0x0200.Altitude);
+Assert.Equal(DateTime.Parse("2018-10-15 10:10:10"), jT808_0x0200.GPSTime);
+Assert.Equal(12222222, jT808_0x0200.Lat);
+Assert.Equal(132444444, jT808_0x0200.Lng);
+Assert.Equal(60, jT808_0x0200.Speed);
+Assert.Equal(0, jT808_0x0200.Direction);
+Assert.Equal((uint)2, jT808_0x0200.StatusFlag);
+//4.1.附加信息1
+Assert.Equal(100, ((JT808LocationAttachImpl0x01)jT808_0x0200.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x01]).Mileage);
+//4.2.附加信息2
+Assert.Equal(125, ((JT808LocationAttachImpl0x02)jT808_0x0200.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x02]).Oil);
+```
+
+### 举个栗子2
+
+``` create package
+// 使用消息Id的扩展方法创建JT808Package包
+JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012", 
+    new JT808_0x0200 { 
+        AlarmFlag = 1,
+        Altitude = 40,
+        GPSTime = DateTime.Parse("2018-10-15 10:10:10"),
+        Lat = 12222222,
+        Lng = 132444444,
+        Speed = 60,
+        Direction = 0,
+        StatusFlag = 2,
+        JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>
+        {
+            { JT808LocationAttachBase.AttachId0x01,new JT808LocationAttachImpl0x01{Mileage = 100}},
+            { JT808LocationAttachBase.AttachId0x02,new JT808LocationAttachImpl0x02{Oil = 125}}
+        }
+});
+
+byte[] data = JT808Serializer.Serialize(jT808Package);
+
+var hex = data.ToHexString();
+//输出结果Hex：
+//7E 02 00 00 26 12 34 56 78 90 12 00 01 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 6C 7E
+```
+
+### 举个栗子3
+
+``` config
+// 全局配置
+JT808GlobalConfig.Instance
+    // 注册自定义位置附加信息
+    .Register_0x0200_Attach<JT808LocationAttachImpl0x06>(0x06)
+    //.SetMsgSNDistributed(//todo 实现IMsgSNDistributed消息流水号)
+    // 注册自定义数据上行透传信息
+    //.Register_0x0900_Ext<>(//todo 继承自JT808_0x0900_BodyBase类)
+    // 注册自定义数据下行透传信息
+    //.Register_0x8900_Ext<>(//todo 继承自JT808_0x8900_BodyBase类)
+    // 跳过校验码验证
+    .SetSkipCRCCode(true);
+```
+
 ## JT808终端通讯协议消息对照表
 
 |   序号     |   消息ID  |  完成情况   |   消息体名称

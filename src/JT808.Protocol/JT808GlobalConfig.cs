@@ -45,7 +45,10 @@ namespace JT808.Protocol
         public JT808GlobalConfig Register_0x0200_Attach<TJT808LocationAttach>(byte attachInfoId)
                where TJT808LocationAttach : JT808LocationAttachBase
         {
-            JT808LocationAttachBase.AddJT808LocationAttachMethod<TJT808LocationAttach>(attachInfoId);
+            if (!JT808LocationAttachBase.JT808LocationAttachMethod.ContainsKey(attachInfoId))
+            {
+                JT808LocationAttachBase.AddJT808LocationAttachMethod<TJT808LocationAttach>(attachInfoId);
+            }
             return instance.Value;
         }
 
@@ -57,7 +60,10 @@ namespace JT808.Protocol
         public JT808GlobalConfig Register_0x0900_Ext<TJT808_0x0900_Ext>(byte passthroughType)
                where TJT808_0x0900_Ext : JT808_0x0900_BodyBase
         {
-            JT808_0x0900_BodyBase.AddJT808_0x0900Method<TJT808_0x0900_Ext>(passthroughType);
+            if (!JT808_0x0900_BodyBase.JT808_0x0900Method.ContainsKey(passthroughType))
+            {
+                JT808_0x0900_BodyBase.AddJT808_0x0900Method<TJT808_0x0900_Ext>(passthroughType);
+            }
             return instance.Value;
         }
 
@@ -69,7 +75,10 @@ namespace JT808.Protocol
         public JT808GlobalConfig Register_0x8900_Ext<TJT808_0x8900_Ext>(byte passthroughType)
                where TJT808_0x8900_Ext : JT808_0x8900_BodyBase
         {
-            JT808_0x8900_BodyBase.AddJT808_0x8900Method<TJT808_0x8900_Ext>(passthroughType);
+            if (!JT808_0x8900_BodyBase.JT808_0x8900Method.ContainsKey(passthroughType))
+            {
+                JT808_0x8900_BodyBase.AddJT808_0x8900Method<TJT808_0x8900_Ext>(passthroughType);
+            }
             return instance.Value;
         }
 
