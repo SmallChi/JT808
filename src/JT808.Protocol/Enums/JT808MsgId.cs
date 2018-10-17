@@ -151,6 +151,13 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x8202", "临时位置跟踪控制")]
         临时位置跟踪控制 = 0x8202,
         /// <summary>
+        /// 人工确认报警消息
+        /// 0x8203
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8203))]
+        [JT808MsgIdDescription("0x8203", "人工确认报警消息")]
+        人工确认报警消息 = 0x8203,
+        /// <summary>
         /// 车辆控制
         /// 0x8500
         /// </summary>
