@@ -67,6 +67,13 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x8001", "平台通用应答")]
         平台通用应答 = 0x8001,
         /// <summary>
+        /// 补传分包请求
+        /// 0x8003
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8003))]
+        [JT808MsgIdDescription("0x8003", "补传分包请求")]
+        补传分包请求 = 0x8003,
+        /// <summary>
         /// 终端注册应答
         /// 0x8100
         /// </summary>
