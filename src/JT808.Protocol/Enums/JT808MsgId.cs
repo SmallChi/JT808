@@ -10,7 +10,7 @@ namespace JT808.Protocol.Enums
     /// JT808消息
     /// </summary>
     public enum JT808MsgId : ushort
-    {
+    { 
         /// <summary>
         /// 终端通用应答
         /// 0x0001
