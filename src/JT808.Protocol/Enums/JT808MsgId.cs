@@ -12,7 +12,7 @@ namespace JT808.Protocol.Enums
     public enum JT808MsgId : ushort
     {
         /// <summary>
-        /// 终端通用应答 
+        /// 终端通用应答
         /// 0x0001
         /// </summary>
         [JT808BodiesType(typeof(JT808_0x0001))]
@@ -116,6 +116,13 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x0201", "位置信息查询应答")]
         位置信息查询应答 = 0x0201,
         /// <summary>
+        /// 设置终端参数
+        /// 0x8103
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8103))]
+        [JT808MsgIdDescription("0x8103", "设置终端参数")]
+        设置终端参数 = 0x8103,
+        /// <summary>
         /// 查询终端属性
         /// 0x8107
         /// </summary>
@@ -192,20 +199,6 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x8601))]
         [JT808MsgIdDescription("0x8601", "删除圆形区域")]
         删除圆形区域 = 0x8601,
-        /// <summary>
-        /// 设置矩形区域
-        /// 0x8602
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8602))]
-        [JT808MsgIdDescription("0x8602", "设置矩形区域")]
-        设置矩形区域 = 0x8602,
-        /// <summary>
-        /// 删除矩形区域
-        /// 0x8603
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8603))]
-        [JT808MsgIdDescription("0x8603", "删除矩形区域")]
-        删除矩形区域 = 0x8603,  
         /// <summary>
         /// 上报驾驶员身份信息请求
         /// 0x8702

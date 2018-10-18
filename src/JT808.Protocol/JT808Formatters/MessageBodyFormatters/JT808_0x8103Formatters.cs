@@ -1,0 +1,50 @@
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
+using JT808.Protocol.MessageBody.JT808_0x8103_Body;
+using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.Text;
+
+namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
+{
+    public class JT808_0x8103Formatter : IJT808Formatter<JT808_0x8103>
+    {
+        public JT808_0x8103 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
+        {
+            int offset = 0;
+            JT808_0x8103 jT808_0x8103 = new JT808_0x8103();
+            var paramCount = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);//参数总数
+            for (int i = 0; i < paramCount; i++)
+            {
+                var paramId= JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);//参数ID         
+                int readSubBodySize = 0;
+                if (JT808_0x8103_BodyBase.JT808_0x8103Method.TryGetValue(paramId, out Type type))
+                {
+                    if (jT808_0x8103.ParamList != null)
+                    {
+                        jT808_0x8103.ParamList.Add(JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(type), bytes.Slice(offset), out readSubBodySize));
+                    }
+                    else {
+                        jT808_0x8103.ParamList = new List<JT808_0x8103_BodyBase> { JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(type), bytes.Slice(offset), out readSubBodySize) }; 
+                    }   
+                }
+                offset = offset + readSubBodySize;
+            }           
+            readSize = offset;
+            return jT808_0x8103;
+        }
+
+        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8103 value)
+        {
+            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.ParamCount);
+            foreach (var item in value.ParamList)
+            {
+                offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item.ParamId);
+                object obj = JT808FormatterExtensions.GetFormatter(item.GetType());
+                offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj, memoryOwner, offset, item);
+            }
+            return offset;
+        }
+    }
+}
