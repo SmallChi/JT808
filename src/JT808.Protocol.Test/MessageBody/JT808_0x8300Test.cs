@@ -16,7 +16,7 @@ namespace JT808.Protocol.Test.MessageBodySend
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.文本信息下发,
+                MsgId = Enums.JT808MsgId.文本信息下发.ToUInt16Value(),
                 MsgNum = 1,
                 TerminalPhoneNo = "012345678900",
             };

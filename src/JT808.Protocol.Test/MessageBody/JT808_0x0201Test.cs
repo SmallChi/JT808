@@ -18,7 +18,7 @@ namespace JT808.Protocol.Test.MessageBodyReply
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息查询应答,
+                MsgId = Enums.JT808MsgId.位置信息查询应答.ToUInt16Value(),
                 MsgNum = 8888,
                 TerminalPhoneNo = "112233445566",
             };

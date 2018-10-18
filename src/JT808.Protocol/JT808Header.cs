@@ -12,8 +12,9 @@ namespace JT808.Protocol
     {
         /// <summary>
         /// 消息ID 
+        /// <see cref="JT808.Protocol.Enums.JT808MsgId"/>
         /// </summary>
-        public JT808MsgId MsgId { get; set; }
+        public ushort MsgId { get; set; }
         public JT808HeaderMessageBodyProperty MessageBodyProperty { get; set; } = new JT808HeaderMessageBodyProperty();
         /// <summary>
         /// 终端手机号

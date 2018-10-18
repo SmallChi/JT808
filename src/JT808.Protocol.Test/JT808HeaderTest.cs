@@ -30,7 +30,7 @@ namespace JT808.Protocol.Test
             jT808HeaderProperty.TerminalPhoneNo = "13812345678";
             jT808HeaderProperty.MessageBodyProperty.DataLength = 5;
             jT808HeaderProperty.MsgNum = 135;
-            jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权;
+            jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();
             //"01 02 00 05 01 38 12 34 56 78 00 87"
             var hex = JT808Serializer.Serialize(jT808HeaderProperty).ToHexString();
         }
@@ -44,7 +44,7 @@ namespace JT808.Protocol.Test
             Assert.Equal(135, jT808Header.MsgNum);
             Assert.Equal("13812345678", jT808Header.TerminalPhoneNo);
             Assert.False(jT808Header.MessageBodyProperty.IsPackge);
-            Assert.Equal(JT808MsgId.终端鉴权, jT808Header.MsgId);
+            Assert.Equal(JT808MsgId.终端鉴权.ToValue(), jT808Header.MsgId);
             Assert.Equal(5, jT808Header.MessageBodyProperty.DataLength);
         }
 
@@ -55,7 +55,7 @@ namespace JT808.Protocol.Test
             jT808HeaderProperty.TerminalPhoneNo = "13812345678";
             jT808HeaderProperty.MessageBodyProperty.DataLength = 5;
             jT808HeaderProperty.MsgNum = 135;
-            jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权;
+            jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();
             //"01 02 00 05 01 38 12 34 56 78 00 87"
             var hex = JT808Serializer.Serialize(jT808HeaderProperty).ToHexString();
             Assert.Equal("01 02 00 05 01 38 12 34 56 78 00 87", hex);
@@ -70,7 +70,7 @@ namespace JT808.Protocol.Test
             Assert.Equal(135, jT808Header.MsgNum);
             Assert.Equal("13812345678", jT808Header.TerminalPhoneNo);
             Assert.False(jT808Header.MessageBodyProperty.IsPackge);
-            Assert.Equal(JT808MsgId.终端鉴权, jT808Header.MsgId);
+            Assert.Equal(JT808MsgId.终端鉴权.ToValue(), jT808Header.MsgId);
             Assert.Equal(5, jT808Header.MessageBodyProperty.DataLength);
         }
     }

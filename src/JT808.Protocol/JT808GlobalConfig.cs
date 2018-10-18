@@ -83,6 +83,32 @@ namespace JT808.Protocol
         }
 
         /// <summary>
+        /// 注册自定义消息
+        /// </summary>
+        /// <typeparam name="TJT808Bodies"></typeparam>
+        /// <param name="msgId"></param>
+        /// <returns></returns>
+        public JT808GlobalConfig Register_CustomMsgId<TJT808Bodies>(ushort customMsgId)
+               where TJT808Bodies : JT808Bodies
+        {
+            JT808MsgIdFactory.SetMap<TJT808Bodies>(customMsgId);
+            return instance.Value;
+        }
+
+        /// <summary>
+        /// 重写消息
+        /// </summary>
+        /// <typeparam name="TJT808Bodies"></typeparam>
+        /// <param name="overwriteMsgId"></param>
+        /// <returns></returns>
+        public JT808GlobalConfig Overwrite_MsgId<TJT808Bodies>(ushort overwriteMsgId)
+               where TJT808Bodies : JT808Bodies
+        {
+            JT808MsgIdFactory.ReplaceMap<TJT808Bodies>(overwriteMsgId);
+            return instance.Value;
+        }
+
+        /// <summary>
         /// 设置消息序列号
         /// </summary>
         /// <param name="msgSNDistributed"></param>

@@ -12,7 +12,7 @@ namespace JT808.Protocol.Enums
     public enum JT808MsgId : ushort
     {
         /// <summary>
-        /// 终端通用应答
+        /// 终端通用应答 
         /// 0x0001
         /// </summary>
         [JT808BodiesType(typeof(JT808_0x0001))]

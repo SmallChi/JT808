@@ -133,7 +133,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                 MsgId= Enums.JT808MsgId.位置信息汇报,
+                 MsgId= Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
                  MsgNum=8888,
                  TerminalPhoneNo="112233445566",
                  //MessageBodyProperty=new JT808MessageBodyProperty(38),
@@ -187,7 +187,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
            
             byte[] bytes = "7E 02 00 00 26 11 22 33 44 55 66 22 B8 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37 57 7E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报, jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
 
             Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
             Assert.Equal(8888, jT808Package.Header.MsgNum);
@@ -227,7 +227,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
 
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报,
+                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
                 MsgNum = 126,
                 TerminalPhoneNo = "123456789012"
             };
@@ -273,7 +273,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
 
             //3.数据包头
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报, jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
             Assert.Equal(126, jT808Package.Header.MsgNum);
             Assert.Equal("123456789012", jT808Package.Header.TerminalPhoneNo);

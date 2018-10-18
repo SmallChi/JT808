@@ -6,6 +6,7 @@ using JT808.Protocol.Exceptions;
 using JT808.Protocol.Attributes;
 using System.Buffers;
 using JT808.Protocol.Enums;
+using JT808.Protocol.JT808Internal;
 
 namespace JT808.Protocol.JT808Formatters
 {
@@ -50,8 +51,8 @@ namespace JT808.Protocol.JT808Formatters
             offset = readSize;
             if (jT808Package.Header.MessageBodyProperty.DataLength != 0)
             {
-                JT808BodiesTypeAttribute jT808BodiesTypeAttribute = jT808Package.Header.MsgId.GetAttribute<JT808BodiesTypeAttribute>();
-                if (jT808BodiesTypeAttribute != null)
+                Type jT808BodiesImplType = JT808MsgIdFactory.GetBodiesImplTypeByMsgId(jT808Package.Header.MsgId);
+                if (jT808BodiesImplType != null)
                 {
                     if (jT808Package.Header.MessageBodyProperty.IsPackge)
                     {//4.分包消息体 从17位开始  或   未分包消息体 从13位开始
@@ -63,7 +64,7 @@ namespace JT808.Protocol.JT808Formatters
                         try
                         {
                             //5.处理消息体
-                            jT808Package.Bodies = JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(jT808BodiesTypeAttribute.JT808BodiesType), buffer.Slice(offset+1, jT808Package.Header.MessageBodyProperty.DataLength),  out readSize);
+                            jT808Package.Bodies = JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(jT808BodiesImplType), buffer.Slice(offset+1, jT808Package.Header.MessageBodyProperty.DataLength),  out readSize);
                         }
                         catch (Exception ex)
                         {
@@ -88,14 +89,13 @@ namespace JT808.Protocol.JT808Formatters
                 messageBodyOffset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, messageBodyOffset, value.Header.MessageBodyProperty.PackageIndex);
             }
             // 4. 数据体 
-            //JT808.Protocol.Enums.JT808MsgId 映射对应消息特性
-            JT808BodiesTypeAttribute jT808BodiesTypeAttribute = value.Header.MsgId.GetAttribute<JT808BodiesTypeAttribute>();
-            if (jT808BodiesTypeAttribute != null)
+            Type jT808BodiesImplType = JT808MsgIdFactory.GetBodiesImplTypeByMsgId(value.Header.MsgId);
+            if (jT808BodiesImplType != null)
             {
                 if (value.Bodies != null)
                 {
                     // 4.1 处理数据体
-                    messageBodyOffset = JT808FormatterResolverExtensions.JT808DynamicSerialize(JT808FormatterExtensions.GetFormatter(jT808BodiesTypeAttribute.JT808BodiesType), memoryOwner, offset, value.Bodies);
+                    messageBodyOffset = JT808FormatterResolverExtensions.JT808DynamicSerialize(JT808FormatterExtensions.GetFormatter(jT808BodiesImplType), memoryOwner, offset, value.Bodies);
                 }
             }
             Memory<byte> messageBodyBytes = null;

@@ -23,6 +23,17 @@ namespace JT808.Protocol.Extensions
         }
 
         /// <summary>
+        /// 转为 u16 整型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public static ushort ToUInt16Value<T>(this T t) where T : struct
+        {
+            return Convert.ToUInt16(t);
+        }
+
+        /// <summary>
         /// 转为Byte
         /// </summary>
         /// <typeparam name="T"></typeparam>

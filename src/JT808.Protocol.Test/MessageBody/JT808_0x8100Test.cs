@@ -13,7 +13,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.终端注册应答,
+                MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
                 MsgNum = 10,
                 TerminalPhoneNo = "012345678900",
             };
@@ -41,7 +41,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         {
             var bytes = "7E 81 00 00 09 01 23 45 67 89 00 00 0A 00 64 00 31 32 33 34 35 36 68 7E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.终端注册应答, jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId.终端注册应答.ToUInt16Value(), jT808Package.Header.MsgId);
             Assert.Equal(10, jT808Package.Header.MsgNum);
             Assert.Equal("12345678900", jT808Package.Header.TerminalPhoneNo);
 
@@ -57,7 +57,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.终端注册应答,
+                MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
                 MsgNum = 10,
                 TerminalPhoneNo = "12345678900",
             };
@@ -84,7 +84,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         {
             var bytes = "7E 81 00 00 03 01 23 45 67 89 00 00 0A 00 64 04 61 7E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.终端注册应答, jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId.终端注册应答.ToUInt16Value(), jT808Package.Header.MsgId);
             Assert.Equal(10, jT808Package.Header.MsgNum);
             Assert.Equal("12345678900", jT808Package.Header.TerminalPhoneNo);
 
@@ -101,7 +101,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.终端注册应答,
+                MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
                 MsgNum = 10,
                 TerminalPhoneNo = "12345678900",
             };
@@ -120,7 +120,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         {
             var bytes = "7E 81 00 00 13 01 23 45 67 89 00 00 0A 00 64 00 7A 73 73 64 61 66 32 33 31 32 34 73 66 64 73 63 3B 7E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.终端注册应答, jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId.终端注册应答.ToUInt16Value(), jT808Package.Header.MsgId);
             Assert.Equal(10, jT808Package.Header.MsgNum);
             Assert.Equal("12345678900", jT808Package.Header.TerminalPhoneNo);
 

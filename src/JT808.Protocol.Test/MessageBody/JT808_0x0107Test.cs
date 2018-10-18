@@ -15,7 +15,7 @@ namespace JT808.Protocol.Test.MessageBodyReply
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.查询终端属性应答,
+                MsgId = Enums.JT808MsgId.查询终端属性应答.ToUInt16Value(),
                 MsgNum = 8888,
                 TerminalPhoneNo = "112233445566",
             };
@@ -45,7 +45,7 @@ namespace JT808.Protocol.Test.MessageBodyReply
             JT808_0x0107 jT808_0X0107 = (JT808_0x0107)jT808Package.Bodies;
             Assert.Equal(8888, jT808Package.Header.MsgNum);
             Assert.Equal("112233445566", jT808Package.Header.TerminalPhoneNo);
-            Assert.Equal(Enums.JT808MsgId.查询终端属性应答, jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId.查询终端属性应答.ToUInt16Value(), jT808Package.Header.MsgId);
             Assert.Equal(5, jT808_0X0107.TerminalType);
             Assert.Equal("10601", jT808_0X0107.MakerId);
             Assert.Equal("10455545955103000000", jT808_0X0107.TerminalModel);
