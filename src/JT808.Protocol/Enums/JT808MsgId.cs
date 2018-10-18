@@ -198,7 +198,14 @@ namespace JT808.Protocol.Enums
         /// </summary>
         [JT808BodiesType(typeof(JT808_0x8602))]
         [JT808MsgIdDescription("0x8602", "设置矩形区域")]
-        设置矩形区域 = 0x8602,     
+        设置矩形区域 = 0x8602,
+        /// <summary>
+        /// 删除矩形区域
+        /// 0x8603
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8603))]
+        [JT808MsgIdDescription("0x8603", "删除矩形区域")]
+        删除矩形区域 = 0x8603,  
         /// <summary>
         /// 上报驾驶员身份信息请求
         /// 0x8702
