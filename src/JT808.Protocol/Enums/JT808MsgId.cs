@@ -179,6 +179,13 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x0500", "车辆控制应答")]
         车辆控制应答 = 0x0500,
         /// <summary>
+        /// 设置圆形区域
+        /// 0x8600
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8600))]
+        [JT808MsgIdDescription("0x8600", "设置圆形区域")]
+        设置圆形区域 =0x8600,
+        /// <summary>
         /// 上报驾驶员身份信息请求
         /// 0x8702
         /// </summary>

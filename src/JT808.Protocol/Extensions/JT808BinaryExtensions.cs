@@ -16,6 +16,7 @@ namespace JT808.Protocol.Extensions
 
         static JT808BinaryExtensions()
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             encoding = Encoding.GetEncoding("GBK");
         }
 
