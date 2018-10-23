@@ -17,8 +17,9 @@ namespace JT808.Protocol.MessageBody
     {
         /// <summary>
         /// 设置属性
+        /// <see cref="JT808.Protocol.Enums.JT808SettingProperty"/>
         /// </summary>
-        public JT808_0x8602_SettingProperty SettingProperty { get; set; }
+        public byte SettingAreaProperty { get; set; }
         /// <summary>
         /// 区域总数
         /// </summary>

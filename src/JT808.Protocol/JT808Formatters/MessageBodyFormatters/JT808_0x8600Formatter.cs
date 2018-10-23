@@ -15,7 +15,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         {
             int offset = 0;
             JT808_0x8600 jT808_0X8600 = new JT808_0x8600();
-            jT808_0X8600.SettingProperty = (JT808_0x8600_SettingProperty)JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            jT808_0X8600.SettingAreaProperty = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             jT808_0X8600.AreaCount= JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             jT808_0X8600.AreaItems = new List<JT808CircleAreaProperty>();
             for(var i=0;i< jT808_0X8600.AreaCount; i++)
@@ -47,7 +47,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 
         public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8600 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.SettingProperty);
+            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.SettingAreaProperty);
             if (value.AreaItems != null)
             {
                 offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.AreaItems.Count);
