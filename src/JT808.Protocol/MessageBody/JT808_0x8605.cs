@@ -7,11 +7,11 @@ using System.Text;
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
-    /// 删除矩形区域
-    /// 0x8603
+    /// 删除多边形区域
+    /// 0x8605
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x8603Formatter))]
-    public class JT808_0x8603:JT808Bodies
+    [JT808Formatter(typeof(JT808_0x8605Formatter))]
+    public class JT808_0x8605:JT808Bodies
     {
         /// <summary>
         /// 区域数
