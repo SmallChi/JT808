@@ -16,7 +16,7 @@
     <Version>1.0.0</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>E:\koike\My Project\JT808\src\JT808.Protocol\JT808.Protocol.xml</DocumentationFile>
+    <DocumentationFile>D:\My Project\JT808\src\JT808.Protocol\JT808.Protocol.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\**" />
