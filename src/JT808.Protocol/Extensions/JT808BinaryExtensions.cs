@@ -83,6 +83,20 @@ namespace JT808.Protocol.Extensions
             return dateTime;
         }
 
+        public static DateTime ReadDateTime5Little(ReadOnlySpan<byte> buf, ref int offset)
+        {
+            DateTime dateTime = new DateTime(
+                DateTime.Now.Year, 
+                DateTime.Now.Month,
+                DateTime.Now.Day,
+               (buf[offset]).ReadBCD32(1),
+               (buf[offset + 1]).ReadBCD32(1),
+               (buf[offset + 2]).ReadBCD32(1),
+               (buf[offset + 3]).ReadBCD32(1)+ (buf[offset + 4]).ReadBCD32(1));            
+            offset = offset + 5;
+            return dateTime;
+        }
+
         public static DateTime ReadDateLittle(ReadOnlySpan<byte> buf, ref int offset)
         {
             DateTime dateTime = new DateTime(
@@ -166,6 +180,17 @@ namespace JT808.Protocol.Extensions
             memoryOwner.Memory.Span[offset + 3] = ((byte)(date.Day)).ToBcdByte();
             return 4;
         }
+
+        public static int WriteDateTime5Little(IMemoryOwner<byte> memoryOwner, int offset, DateTime date)
+        {
+            memoryOwner.Memory.Span[offset] = (byte)(date.Hour);
+            memoryOwner.Memory.Span[offset + 1] = ((byte)date.Minute).ToBcdByte();
+            memoryOwner.Memory.Span[offset + 2] = ((byte)(date.Second)).ToBcdByte();
+            memoryOwner.Memory.Span[offset + 3] = (byte)(date.Millisecond >> 8);
+            memoryOwner.Memory.Span[offset + 4] = (byte)(date.Millisecond);
+            return 4;
+        }
+
 
         public static int WriteLittle(ref byte[] write, int offset, int data)
         {
