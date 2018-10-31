@@ -16,7 +16,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 多媒体ID
         /// </summary>
-        public int MultimediaId { get; set; }
+        public uint MultimediaId { get; set; }
         /// <summary>
         /// 删除标志
         /// </summary>

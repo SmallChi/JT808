@@ -1,0 +1,31 @@
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
+using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.Text;
+
+namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
+{
+    public class JT808_0x8800Formatter : IJT808Formatter<JT808_0x8800>
+    {
+        public JT808_0x8800 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
+        {
+            int offset = 0;
+            JT808_0x8800 jT808_0X8800 = new JT808_0x8800();
+            jT808_0X8800.MultimediaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
+            jT808_0X8800.RetransmitPackageCount = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            jT808_0X8800.RetransmitPackageIds = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset, jT808_0X8800.RetransmitPackageCount*2);
+            readSize = offset;
+            return jT808_0X8800;
+        }
+
+        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8800 value)
+        {
+            offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, value.MultimediaId);
+            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.RetransmitPackageIds.Length);
+            offset += JT808BinaryExtensions.WriteBytesLittle(memoryOwner, offset, value.RetransmitPackageIds);
+            return offset;
+        }
+    }
+}

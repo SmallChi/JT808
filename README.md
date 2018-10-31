@@ -97,6 +97,7 @@ var hex = data.ToHexString();
 // 输出结果Hex：
 // 7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 13 7E
 ```
+
 #### 2.手动解包：
 
 ``` unpackage
@@ -172,8 +173,8 @@ Assert.Equal(125, ((JT808LocationAttachImpl0x02)jT808_0x0200.JT808LocationAttach
 
 ``` create package
 // 使用消息Id的扩展方法创建JT808Package包
-JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012", 
-    new JT808_0x0200 { 
+JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012",
+    new JT808_0x0200 {
         AlarmFlag = 1,
         Altitude = 40,
         GPSTime = DateTime.Parse("2018-10-15 10:10:10"),
@@ -272,7 +273,7 @@ JT808GlobalConfig.Instance
 |   50  |   0x0705         |   √   |   CAN 总线数据上传
 |   51  |   0x0800         |   √   |   多媒体事件信息上传
 |   52  |   0x0801         |   x   |   多媒体数据上传
-|   53  |   0x8800         |   x   |   多媒体数据上传应答
+|   53  |   0x8800         |   √   |   多媒体数据上传应答
 |   54  |   0x8801         |   x   |   摄像头立即拍摄命令
 |   55  |   0x0805         |   x   |   摄像头立即拍摄命令应答
 |   56  |   0x8802         |   x   |   存储多媒体数据检索
