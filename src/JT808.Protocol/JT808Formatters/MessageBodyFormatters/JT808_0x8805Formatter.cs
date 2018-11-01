@@ -15,7 +15,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             int offset = 0;
             JT808_0x8805 jT808_0X8805 = new JT808_0x8805();
             jT808_0X8805.MultimediaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            jT808_0X8805.Deleted=(JT808MultimediaDeleted)JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            jT808_0X8805.MultimediaDeleted=JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             readSize = offset;
             return jT808_0X8805;
         }
@@ -23,7 +23,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8805 value)
         {
             offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, value.MultimediaId);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.Deleted);
+            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.MultimediaDeleted);
             return offset;
         }
     }

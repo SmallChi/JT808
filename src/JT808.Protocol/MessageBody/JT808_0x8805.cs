@@ -19,7 +19,8 @@ namespace JT808.Protocol.MessageBody
         public uint MultimediaId { get; set; }
         /// <summary>
         /// 删除标志
+        /// <see cref="JT808.Protocol.Enums.JT808MultimediaDeleted"/>
         /// </summary>
-        public JT808MultimediaDeleted Deleted { get; set; }
+        public byte MultimediaDeleted { get; set; }
     }
 }
