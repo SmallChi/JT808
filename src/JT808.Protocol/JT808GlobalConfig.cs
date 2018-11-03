@@ -19,6 +19,7 @@ namespace JT808.Protocol
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             MsgSNDistributed = new DefaultMsgSNDistributedImpl();
             SkipCRCCode = false;
+            Encoding = Encoding.GetEncoding("GBK");
         }
 
         public IMsgSNDistributed MsgSNDistributed { get; private set; }
@@ -30,6 +31,8 @@ namespace JT808.Protocol
                 return instance.Value;
             }
         }
+
+        public Encoding Encoding;
 
         /// <summary>
         /// 跳过校验码

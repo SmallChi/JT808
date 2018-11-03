@@ -16,6 +16,7 @@ namespace JT808.Protocol.Test.MessageBodySend
             jT808_0X8202.Interval = 69;
             jT808_0X8202.LocationTrackingValidity = 123;
             string hex = JT808Serializer.Serialize(jT808_0X8202).ToHexString();
+            Assert.Equal("00450000007B", hex);
         }
 
         [Fact]

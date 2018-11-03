@@ -29,19 +29,19 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8301;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8301 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8301 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.SettingType);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.SettingType);
             if(value.EventItems!=null && value.EventItems.Count > 0)
             {
-                offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.EventItems.Count);
+                offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.EventItems.Count);
                 foreach(var item in value.EventItems)
                 {
-                    offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, item.EventId);
+                    offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, item.EventId);
                     // 先计算内容长度（汉字为两个字节）
                     offset += 1;
-                    int byteLength = JT808BinaryExtensions.WriteStringLittle(memoryOwner, offset, item.EventContent);
-                    JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset - 1, (byte)byteLength);
+                    int byteLength = JT808BinaryExtensions.WriteStringLittle(bytes, offset, item.EventContent);
+                    JT808BinaryExtensions.WriteByteLittle(bytes, offset - 1, (byte)byteLength);
                     offset += byteLength;
                 }
             }

@@ -20,6 +20,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X8804.AudioSampleRate = 1;
             string hex = JT808Serializer.Serialize(jT808_0X8804).ToHexString();
             //"00 00 1E 00 01"
+            Assert.Equal("00001E0001", hex);
         }
 
         [Fact]

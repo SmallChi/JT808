@@ -21,13 +21,13 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters.JT808LocationAtta
             return jT808LocationAttachImpl0x13;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808LocationAttachImpl0x13 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808LocationAttachImpl0x13 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset,value.AttachInfoId);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.AttachInfoLength);
-            offset += JT808BinaryExtensions.WriteInt32Little(memoryOwner, offset, value.DrivenRouteId);
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.Time);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.DrivenRoute);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset,value.AttachInfoId);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AttachInfoLength);
+            offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.DrivenRouteId);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.Time);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.DrivenRoute);
             return offset;
         }
     }

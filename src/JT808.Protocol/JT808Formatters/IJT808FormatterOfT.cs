@@ -7,6 +7,6 @@ namespace JT808.Protocol.JT808Formatters
     {
         T Deserialize(ReadOnlySpan<byte> bytes,  out int readSize);
 
-        int Serialize(IMemoryOwner<byte> memoryOwner, int offset, T value);
+        int Serialize(ref byte[] bytes, int offset, T value);
     }
 }

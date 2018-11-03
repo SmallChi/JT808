@@ -1,8 +1,5 @@
-﻿using JT808.Protocol.Exceptions;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using System;
-using System.Buffers;
-using System.Text;
 
 namespace JT808.Protocol
 {
@@ -12,7 +9,7 @@ namespace JT808.Protocol
     /// </summary>
     public static class JT808Serializer
     {
-        public static byte[] Serialize(JT808Package jT808Package, int minBufferSize = 4096)
+        public static byte[] Serialize(JT808Package jT808Package, int minBufferSize = 1024)
         {
             return Serialize<JT808Package>(jT808Package, minBufferSize);
         }
@@ -22,23 +19,18 @@ namespace JT808.Protocol
             return Deserialize<JT808Package>(bytes);
         }
 
-        public static byte[] Serialize<T>(T obj, int minBufferSize = 4096)
+        public static byte[] Serialize<T>(T obj, int minBufferSize = 1024)
         {
             var formatter = JT808FormatterExtensions.GetFormatter<T>();
-            var pool = MemoryPool<byte>.Shared;
-            IMemoryOwner<byte> buffer = pool.Rent(minBufferSize);
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
             try
             {
-                var len = formatter.Serialize(buffer, 0, obj);
-                return buffer.Memory.Slice(0, len).ToArray();
+                var len = formatter.Serialize(ref buffer, 0, obj);
+                return buffer.AsSpan(0, len).ToArray();
             }
             finally
             {
-                // 源码：System.Memory.MemoryPool 
-                // private static readonly MemoryPool<T> s_shared = new ArrayMemoryPool<T>();
-                // 单例内存池 不需要手动释放资源
-                // buffer.Dispose() 相当于调用ArrayPool<T>.Shared.Return(array)
-                buffer.Dispose();
+                JT808ArrayPool.Return(buffer);
             }
         }
 

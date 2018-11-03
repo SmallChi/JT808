@@ -23,14 +23,14 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters.JT808LocationAtta
             return jT808LocationAttachImpl0x11;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808LocationAttachImpl0x11 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808LocationAttachImpl0x11 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset,value.AttachInfoId);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.AttachInfoLength);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.JT808PositionType);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset,value.AttachInfoId);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AttachInfoLength);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.JT808PositionType);
             if (value.JT808PositionType != JT808PositionType.无特定位置)
             {
-                offset += JT808BinaryExtensions.WriteInt32Little(memoryOwner, offset, value.AreaId);
+                offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.AreaId);
             }
             return offset;
         }

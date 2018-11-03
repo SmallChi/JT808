@@ -20,13 +20,13 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8304;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8304 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8304 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.InformationType);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.InformationType);
             // 先计算内容长度（汉字为两个字节）
             offset += 2;
-            int byteLength = JT808BinaryExtensions.WriteStringLittle(memoryOwner, offset, value.InformationContent);
-            JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset - 2, (ushort)byteLength);
+            int byteLength = JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.InformationContent);
+            JT808BinaryExtensions.WriteUInt16Little(bytes, offset - 2, (ushort)byteLength);
             offset += byteLength;
             return offset;
         }

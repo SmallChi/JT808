@@ -20,6 +20,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             };
             //"7E 00 02 00 00 01 23 45 67 89 00 00 0A 81 7E"
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
+            Assert.Equal("7E00020000012345678900000A817E", hex);
         }
 
         [Fact]

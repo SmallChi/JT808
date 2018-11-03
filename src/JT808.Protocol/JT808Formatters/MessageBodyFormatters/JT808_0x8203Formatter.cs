@@ -19,10 +19,10 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8203;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8203 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8203 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.AlarmMsgNum);
-            offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, value.ManualConfirmAlarmType);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.AlarmMsgNum);
+            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.ManualConfirmAlarmType);
             return offset;
         }
     }

@@ -21,11 +21,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8900;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8900 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8900 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.PassthroughType);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.PassthroughType);
             object obj = JT808FormatterExtensions.GetFormatter(value.JT808_0X8900_BodyBase.GetType());
-            offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj, memoryOwner, offset, value);
+            offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj,ref bytes, offset, value);
             return offset;
         }
     }

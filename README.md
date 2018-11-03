@@ -213,9 +213,44 @@ JT808GlobalConfig.Instance
     .SetSkipCRCCode(true);
 ```
 
+## NuGet安装
+
 | Package Name |  Version | Downloads
 |--------------|  ------- | ----
 | Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.svg)
+
+## 使用BenchmarkDotNet性能测试报告（只是玩玩，不能当真）
+
+``` ini
+
+BenchmarkDotNet=v0.11.0, OS=Windows 10.0.17134.285 (1803/April2018Update/Redstone4)
+Intel Core i7-8700K CPU 3.70GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
+.NET Core SDK=2.1.403
+  [Host]     : .NET Core 2.1.5 (CoreCLR 4.6.26919.02, CoreFX 4.6.26919.02), 64bit RyuJIT
+  Job-RUQNRZ : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.7.3163.0
+  Job-LKSCJQ : .NET Core 2.1.5 (CoreCLR 4.6.26919.02, CoreFX 4.6.26919.02), 64bit RyuJIT
+
+Platform=AnyCpu  Server=False  
+```
+
+|            Method | Runtime |     Toolchain |       N |          Mean |       Error |      StdDev |       Gen 0 |     Gen 1 |     Allocated |
+|------------------ |-------- |-------------- |-------- |--------------:|------------:|------------:|------------:|----------:|--------------:|
+|   **0x0200Serialize** |     **Clr** |       **Default** |     **100** |      **3.335 ms** |   **0.0548 ms** |   **0.0513 ms** |     **82.0313** |         **-** |     **507.82 KB** |
+| 0x0200Deserialize |     Clr |       Default |     100 |      2.991 ms |   0.0184 ms |   0.0154 ms |     82.0313 |         - |     520.32 KB |
+|   0x0200Serialize |    Core | .NET Core 2.1 |     100 |      2.694 ms |   0.0149 ms |   0.0139 ms |     74.2188 |         - |     456.25 KB |
+| 0x0200Deserialize |    Core | .NET Core 2.1 |     100 |      2.494 ms |   0.0467 ms |   0.0437 ms |     74.2188 |         - |     461.72 KB |
+|   **0x0200Serialize** |     **Clr** |       **Default** |   **10000** |    **340.080 ms** |   **6.6767 ms** |  **10.3949 ms** |   **8000.0000** |         **-** |   **50784.42 KB** |
+| 0x0200Deserialize |     Clr |       Default |   10000 |    300.888 ms |   2.1836 ms |   1.9357 ms |   8000.0000 |         - |   52032.62 KB |
+|   0x0200Serialize |    Core | .NET Core 2.1 |   10000 |    261.578 ms |   2.1118 ms |   1.7634 ms |   7000.0000 |         - |      45625 KB |
+| 0x0200Deserialize |    Core | .NET Core 2.1 |   10000 |    249.057 ms |   4.8000 ms |   4.4899 ms |   7333.3333 |         - |   46171.88 KB |
+|   **0x0200Serialize** |     **Clr** |       **Default** |  **100000** |  **3,302.609 ms** |  **12.7088 ms** |  **11.2660 ms** |  **82000.0000** |         **-** |  **507821.17 KB** |
+| 0x0200Deserialize |     Clr |       Default |  100000 |  3,040.852 ms |  65.1235 ms |  82.3604 ms |  84000.0000 |         - |  520318.04 KB |
+|   0x0200Serialize |    Core | .NET Core 2.1 |  100000 |  2,725.767 ms |  16.9146 ms |  15.8219 ms |  74000.0000 |         - |     456250 KB |
+| 0x0200Deserialize |    Core | .NET Core 2.1 |  100000 |  2,607.481 ms |  52.9243 ms | 103.2248 ms |  75000.0000 |         - |  461718.75 KB |
+|   **0x0200Serialize** |     **Clr** |       **Default** | **1000000** | **34,065.032 ms** | **670.7606 ms** | **848.2973 ms** | **826000.0000** | **3000.0000** | **5078164.22 KB** |
+| 0x0200Deserialize |     Clr |       Default | 1000000 | 30,162.112 ms | 123.7327 ms | 115.7396 ms | 846000.0000 | 3000.0000 | 5203172.61 KB |
+|   0x0200Serialize |    Core | .NET Core 2.1 | 1000000 | 27,196.163 ms | 102.3533 ms |  95.7414 ms | 742000.0000 | 2000.0000 |    4562500 KB |
+| 0x0200Deserialize |    Core | .NET Core 2.1 | 1000000 | 25,050.882 ms | 105.5313 ms |  98.7141 ms | 751000.0000 | 2000.0000 |  4617187.5 KB |
 
 ## JT808终端通讯协议消息对照表
 

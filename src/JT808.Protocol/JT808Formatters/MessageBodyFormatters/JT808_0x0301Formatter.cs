@@ -18,9 +18,9 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X0301;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x0301 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x0301 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.EventId);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.EventId);
             return offset;
         }
     }

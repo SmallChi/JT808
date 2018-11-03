@@ -45,6 +45,7 @@ namespace JT808.Protocol.Test.MessageBodyReply
             jT808_0X0201.Position = jT808UploadLocationRequest;
             jT808Package.Bodies = jT808_0X0201;
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
+            Assert.Equal("7E0201002A11223344556622B83039000000010000000200BA7F0E07E4F11C0028003C0000180715101010010400000064020200370000537E", hex);
         }
 
         [Fact]

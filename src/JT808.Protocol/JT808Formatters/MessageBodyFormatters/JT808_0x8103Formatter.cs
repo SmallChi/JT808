@@ -35,14 +35,14 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0x8103;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8103 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8103 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.ParamCount);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.ParamCount);
             foreach (var item in value.ParamList)
             {
-                offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item.ParamId);
+                offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.ParamId);
                 object obj = JT808FormatterExtensions.GetFormatter(item.GetType());
-                offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj, memoryOwner, offset, item);
+                offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj,ref bytes, offset, item);
             }
             return offset;
         }

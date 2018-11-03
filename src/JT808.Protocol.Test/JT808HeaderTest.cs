@@ -31,8 +31,9 @@ namespace JT808.Protocol.Test
             jT808HeaderProperty.MessageBodyProperty.DataLength = 5;
             jT808HeaderProperty.MsgNum = 135;
             jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();
-            //"01 02 00 05 01 38 12 34 56 78 00 87"
+
             var hex = JT808Serializer.Serialize(jT808HeaderProperty).ToHexString();
+            Assert.Equal("01 02 00 05 01 38 12 34 56 78 00 87".Replace(" ",""), hex);
         }
 
         [Fact]
@@ -58,7 +59,7 @@ namespace JT808.Protocol.Test
             jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();
             //"01 02 00 05 01 38 12 34 56 78 00 87"
             var hex = JT808Serializer.Serialize(jT808HeaderProperty).ToHexString();
-            Assert.Equal("01 02 00 05 01 38 12 34 56 78 00 87", hex);
+            Assert.Equal("010200050138123456780087", hex);
         }
 
         [Fact]

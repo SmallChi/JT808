@@ -27,6 +27,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
                  TerminalModel="smallchi123"
             };
             var hex = JT808Serializer.Serialize(jT808_0X0100).ToHexString();
+            Assert.Equal("7E0100002D000123456789000A002800323132333430736D616C6C6368693132333030303030303030304348493132333001D4C1413132333435BA7E", hex);
         }
 
         [Fact]

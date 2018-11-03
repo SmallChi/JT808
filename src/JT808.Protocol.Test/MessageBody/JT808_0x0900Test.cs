@@ -26,6 +26,7 @@ namespace JT808.Protocol.Test.MessageBody
                 PassthroughType = 0x83
             };
             var hex = JT808Serializer.Serialize(jT808_0X0900).ToHexString();
+            Assert.Equal("7E09000009000123456789000A83736D616C6C6368691D7E", hex);
         }
 
         [Fact]

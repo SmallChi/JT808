@@ -42,7 +42,7 @@ namespace JT808.Protocol.JT808Formatters
             return messageBodyProperty;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808HeaderMessageBodyProperty value)
+        public int Serialize(ref byte[] bytes, int offset, JT808HeaderMessageBodyProperty value)
         {
             // 2.消息体属性
             Span<char> msgMethod = new char[16];
@@ -76,7 +76,7 @@ namespace JT808.Protocol.JT808Formatters
             {
                 msgMethod[5 + i] = dataLen[i - 1];
             }
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, Convert.ToUInt16(msgMethod.ToString(), 2));
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, Convert.ToUInt16(msgMethod.ToString(), 2));
             return offset;
         }
     }

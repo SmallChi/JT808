@@ -24,14 +24,14 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8108;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8108 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8108 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset,(byte)value.UpgradeType);
-            offset += JT808BinaryExtensions.WriteStringLittle(memoryOwner, offset, value.MakerId.PadRight(5, '0'));
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset,(byte)value.VersionNum.Length);
-            offset += JT808BinaryExtensions.WriteStringLittle(memoryOwner, offset, value.VersionNum);
-            offset += JT808BinaryExtensions.WriteInt32Little(memoryOwner, offset, value.UpgradePackage.Length);
-            offset += JT808BinaryExtensions.WriteBytesLittle(memoryOwner, offset, value.UpgradePackage);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset,(byte)value.UpgradeType);
+            offset += JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.MakerId.PadRight(5, '0'));
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset,(byte)value.VersionNum.Length);
+            offset += JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.VersionNum);
+            offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.UpgradePackage.Length);
+            offset += JT808BinaryExtensions.WriteBytesLittle(bytes, offset, value.UpgradePackage);
             return offset;
         }
     }

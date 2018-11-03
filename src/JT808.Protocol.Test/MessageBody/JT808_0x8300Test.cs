@@ -25,6 +25,7 @@ namespace JT808.Protocol.Test.MessageBodySend
             jT808TextSend.TextFlag = 5;
             jT808Package.Bodies = jT808TextSend;
             string hex = JT808Serializer.Serialize(jT808Package).ToHexString();
+            Assert.Equal("7E8300000D012345678900000105736D616C6C63686920353138027E", hex);
         }
 
         [Fact]

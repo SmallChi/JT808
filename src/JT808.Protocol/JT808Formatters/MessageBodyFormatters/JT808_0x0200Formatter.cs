@@ -30,7 +30,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             jT808_0X0200.Altitude = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
             jT808_0X0200.Speed = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
             jT808_0X0200.Direction = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
-            jT808_0X0200.GPSTime=JT808BinaryExtensions.ReadDateTimeLittle(bytes,ref offset);
+            jT808_0X0200.GPSTime=JT808BinaryExtensions.ReadDateTime6Little(bytes,ref offset);
             // 位置附加信息
             jT808_0X0200.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
             if (bytes.Length > 28)
@@ -75,16 +75,16 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X0200;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x0200 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x0200 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset,value.AlarmFlag);
-            offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, value.StatusFlag);
-            offset += JT808BinaryExtensions.WriteInt32Little(memoryOwner, offset, value.Lat);
-            offset += JT808BinaryExtensions.WriteInt32Little(memoryOwner, offset, value.Lng);
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.Altitude);
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.Speed);
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.Direction);
-            offset += JT808BinaryExtensions.WriteDateTime6Little(memoryOwner, offset, value.GPSTime);
+            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset,value.AlarmFlag);
+            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.StatusFlag);
+            offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.Lat);
+            offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.Lng);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.Altitude);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.Speed);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.Direction);
+            offset += JT808BinaryExtensions.WriteDateTime6Little(bytes, offset, value.GPSTime);
             if (value.JT808LocationAttachData != null && value.JT808LocationAttachData.Count > 0)
             {
                 foreach (var item in value.JT808LocationAttachData)
@@ -92,7 +92,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                     try
                     {
                         object attachImplObj = JT808FormatterExtensions.GetFormatter(item.Value.GetType());
-                        offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(attachImplObj, memoryOwner, offset, item.Value);
+                        offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(attachImplObj,ref bytes, offset, item.Value);
                     }
                     catch (Exception ex)
                     {

@@ -30,6 +30,7 @@ namespace JT808.Protocol.Test.MessageBody
             });
             jT808_0X8401.JT808ContactProperties = jT808ContactProperties;
             var hex = JT808Serializer.Serialize(jT808_0X8401).ToHexString();
+            Assert.Equal("0202010C3133343536736D616C6C636808736D616C6C636869030B6B6F696B65313233343536056B6F696B65", hex);
             //"02 02 01 0C 31 33 34 35 36 73 6D 61 6C 6C 63 68 08 73 6D 61 6C 6C 63 68 69 03 0B 6B 6F 69 6B 65 31 32 33 34 35 36 05 6B 6F 69 6B 65"
         }
 

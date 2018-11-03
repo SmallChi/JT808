@@ -22,12 +22,12 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8804;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8804 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8804 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.RecordCmd);
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.RecordTime);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.RecordSave);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.AudioSampleRate);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.RecordCmd);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.RecordTime);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.RecordSave);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AudioSampleRate);
             return offset;
         }
     }

@@ -17,6 +17,7 @@ namespace JT808.Protocol.Test.MessageBodyReply
             jT808_0X0108.UpgradeType = JT808UpgradeType.北斗卫星定位模块;
             jT808_0X0108.UpgradeResult = JT808UpgradeResult.成功;
             string hex = JT808Serializer.Serialize(jT808_0X0108).ToHexString();
+            Assert.Equal("3400", hex);
         }
 
         [Fact]

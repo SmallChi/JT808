@@ -17,6 +17,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X0702.IC_Card_Status = JT808ICCardStatus.从业资格证IC卡拔出_驾驶员下班;
             jT808_0X0702.IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16");
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
+            Assert.Equal("02 18 08 16 09 16 16".Replace(" ", ""), hex);
         }
 
         [Fact]
@@ -36,6 +37,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X0702.IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16");
             jT808_0X0702.IC_Card_ReadResult = JT808ICCardReadResult.读卡失败_原因为卡片密钥认证未通过;
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
+            Assert.Equal("01 18 08 16 09 16 16 01".Replace(" ", ""), hex);
         }
 
         [Fact]
@@ -60,6 +62,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X0702.LicenseIssuing = "qwertx";
             jT808_0X0702.CertificateExpiresDate= DateTime.Parse("2018-08-16");
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
+            Assert.Equal("01 18 08 16 09 16 16 00 05 6B 6F 69 6B 65 71 77 65 31 32 33 34 35 36 61 61 61 30 30 30 30 30 30 30 30 06 71 77 65 72 74 78 07 E2 08 16".Replace(" ",""), hex);
             //"01 18 08 16 09 16 16 00 05 6B 6F 69 6B 65 71 77 65 31 32 33 34 35 36 61 61 61 30 30 30 30 30 30 30 30 06 71 77 65 72 74 78 07 E2 08 16"
         }
 

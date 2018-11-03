@@ -25,14 +25,14 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8100;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8100 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8100 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.MsgNum);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.JT808TerminalRegisterResult);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.MsgNum);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.JT808TerminalRegisterResult);
             // 只有在成功后才有该字段
             if (value.JT808TerminalRegisterResult == JT808TerminalRegisterResult.成功)
             {
-                offset += JT808BinaryExtensions.WriteStringLittle(memoryOwner, offset, value.Code);
+                offset += JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.Code);
             }
             return offset;
         }

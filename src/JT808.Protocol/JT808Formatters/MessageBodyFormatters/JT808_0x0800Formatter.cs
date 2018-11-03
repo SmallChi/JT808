@@ -22,13 +22,13 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X0800;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x0800 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x0800 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, value.MultiMediaId);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.MultiMediaType);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.MultiMediaCodingFormat);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.EventItemCoding);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.ChannelId);
+            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.MultiMediaId);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.MultiMediaType);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.MultiMediaCodingFormat);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.EventItemCoding);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.ChannelId);
             return offset;
         }
     }

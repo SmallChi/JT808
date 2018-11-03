@@ -34,6 +34,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             //61 
             //7E"
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
+            Assert.Equal("7E80010005012345678900000A0064020000617E", hex);
         }
 
         [Fact]

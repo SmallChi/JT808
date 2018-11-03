@@ -18,9 +18,9 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters.JT808_0x8900_0x09
             return jT808PassthroughType0x83;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x0900_0x83 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x0900_0x83 value)
         {
-            offset += JT808BinaryExtensions.WriteStringLittle(memoryOwner, offset, value.PassthroughContent);
+            offset += JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.PassthroughContent);
             return offset;
         }
     }

@@ -36,17 +36,17 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X0704;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x0704 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x0704 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.Count);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.LocationType);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.Count);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.LocationType);
             foreach (var item in value?.Positions)
             {
                 try
                 {
                     // 需要反着来，先序列化数据体（由于位置汇报数据体长度为2个字节，所以先偏移2个字节），再根据数据体的长度设置回去
-                    int positionOffset = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Serialize(memoryOwner, offset + 2, item);
-                    JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, (ushort)(positionOffset - offset - 2));
+                    int positionOffset = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Serialize(ref bytes, offset + 2, item);
+                    JT808BinaryExtensions.WriteUInt16Little(bytes, offset, (ushort)(positionOffset - offset - 2));
                     offset = positionOffset;
                 }
                 catch (Exception ex) 

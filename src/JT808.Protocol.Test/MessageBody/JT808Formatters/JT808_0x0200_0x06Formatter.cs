@@ -22,13 +22,13 @@ namespace JT808.Protocol.Test.JT808Formatters.MessageBodyFormatters.JT808Locatio
             return jT808LocationAttachImpl0x06;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808LocationAttachImpl0x06 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808LocationAttachImpl0x06 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset,value.AttachInfoId);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.AttachInfoLength);
-            offset += JT808BinaryExtensions.WriteInt32Little(memoryOwner, offset, value.Age);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.Gender);
-            offset += JT808BinaryExtensions.WriteStringLittle(memoryOwner, offset, value.UserName);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset,value.AttachInfoId);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AttachInfoLength);
+            offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.Age);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.Gender);
+            offset += JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.UserName);
             return offset;
         }
     }

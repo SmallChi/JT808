@@ -19,11 +19,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters.JT808LocationAtta
             return jT808LocationAttachImpl0x13;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808LocationAttachImpl0x25 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808LocationAttachImpl0x25 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset,value.AttachInfoId);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.AttachInfoLength);
-            offset += JT808BinaryExtensions.WriteInt32Little(memoryOwner, offset, value.CarSignalStatus);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset,value.AttachInfoId);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AttachInfoLength);
+            offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.CarSignalStatus);
             return offset;
         }
     }

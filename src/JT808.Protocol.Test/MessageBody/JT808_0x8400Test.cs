@@ -16,6 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X8400.CallBack = Enums.JT808CallBackType.普通通话;
             jT808_0X8400.PhoneNumber = "12345679810";
             var hex = JT808Serializer.Serialize(jT808_0X8400).ToHexString();
+            Assert.Equal("003132333435363739383130", hex);
         }
 
         [Fact]

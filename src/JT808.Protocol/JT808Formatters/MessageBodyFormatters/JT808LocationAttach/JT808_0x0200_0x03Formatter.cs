@@ -17,11 +17,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters.JT808LocationAtta
             readSize = offset;
             return jT808LocationAttachImpl0x03;
         }
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808LocationAttachImpl0x03 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808LocationAttachImpl0x03 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset,value.AttachInfoId);
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.AttachInfoLength);
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.Speed);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset,value.AttachInfoId);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AttachInfoLength);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.Speed);
             return offset;
         }
     }

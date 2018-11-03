@@ -30,8 +30,8 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                 bool bit0Flag =areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
                 if (!bit0Flag)
                 {
-                    jT808CircleAreaProperty.StartTime = JT808BinaryExtensions.ReadDateTimeLittle(bytes, ref offset);
-                    jT808CircleAreaProperty.EndTime = JT808BinaryExtensions.ReadDateTimeLittle(bytes, ref offset);
+                    jT808CircleAreaProperty.StartTime = JT808BinaryExtensions.ReadDateTime6Little(bytes, ref offset);
+                    jT808CircleAreaProperty.EndTime = JT808BinaryExtensions.ReadDateTime6Little(bytes, ref offset);
                 }
                 bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2,1).ToString().Equals("0");
                 if (!bit1Flag)
@@ -45,30 +45,30 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8600;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8600 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8600 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.SettingAreaProperty);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.SettingAreaProperty);
             if (value.AreaItems != null)
             {
-                offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.AreaItems.Count);
+                offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.AreaItems.Count);
                 foreach (var item in value.AreaItems)
                 {
-                    offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item.AreaId);
-                    offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, item.AreaProperty);
-                    offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item.CenterPointLat);
-                    offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item.CenterPointLng);
-                    offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item.Radius);
+                    offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.AreaId);
+                    offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, item.AreaProperty);
+                    offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.CenterPointLat);
+                    offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.CenterPointLng);
+                    offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.Radius);
                     ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(item.AreaProperty, 2).PadLeft(16, '0').AsSpan();
                     bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
                     if (!bit0Flag)
                     {
                         if (item.StartTime.HasValue)
                         {
-                            offset += JT808BinaryExtensions.WriteDateTime6Little(memoryOwner, offset, item.StartTime.Value);
+                            offset += JT808BinaryExtensions.WriteDateTime6Little(bytes, offset, item.StartTime.Value);
                         }
                         if (item.EndTime.HasValue)
                         {
-                            offset += JT808BinaryExtensions.WriteDateTime6Little(memoryOwner, offset, item.EndTime.Value);
+                            offset += JT808BinaryExtensions.WriteDateTime6Little(bytes, offset, item.EndTime.Value);
                         }
                     }
                     bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2,1).ToString().Equals("0");
@@ -76,11 +76,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                     {
                         if (item.HighestSpeed.HasValue)
                         {
-                            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, item.HighestSpeed.Value);
+                            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, item.HighestSpeed.Value);
                         }
                         if (item.OverspeedDuration.HasValue)
                         {
-                            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, item.OverspeedDuration.Value);
+                            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, item.OverspeedDuration.Value);
                         }     
                     }
                 }

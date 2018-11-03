@@ -21,8 +21,8 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
             if (!bit0Flag)
             {
-                jT808_0X8604.StartTime = JT808BinaryExtensions.ReadDateTimeLittle(bytes, ref offset);
-                jT808_0X8604.EndTime = JT808BinaryExtensions.ReadDateTimeLittle(bytes, ref offset);
+                jT808_0X8604.StartTime = JT808BinaryExtensions.ReadDateTime6Little(bytes, ref offset);
+                jT808_0X8604.EndTime = JT808BinaryExtensions.ReadDateTime6Little(bytes, ref offset);
             }
             bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2, 1).ToString().Equals("0");
             if (!bit1Flag)
@@ -46,21 +46,21 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8604;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8604 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8604 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, value.AreaId);
-            offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.AreaProperty);
+            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.AreaId);
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.AreaProperty);
             ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(value.AreaProperty, 2).PadLeft(16, '0').AsSpan();
             bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
             if (!bit0Flag)
             {
                 if (value.StartTime.HasValue)
                 {
-                    offset += JT808BinaryExtensions.WriteDateTime6Little(memoryOwner, offset, value.StartTime.Value);
+                    offset += JT808BinaryExtensions.WriteDateTime6Little(bytes, offset, value.StartTime.Value);
                 }
                 if (value.EndTime.HasValue)
                 {
-                    offset += JT808BinaryExtensions.WriteDateTime6Little(memoryOwner, offset, value.EndTime.Value);
+                    offset += JT808BinaryExtensions.WriteDateTime6Little(bytes, offset, value.EndTime.Value);
                 }
             }
             bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2, 1).ToString().Equals("0");
@@ -68,20 +68,20 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             {
                 if (value.HighestSpeed.HasValue)
                 {
-                    offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, value.HighestSpeed.Value);
+                    offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.HighestSpeed.Value);
                 }
                 if (value.OverspeedDuration.HasValue)
                 {
-                    offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.OverspeedDuration.Value);
+                    offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.OverspeedDuration.Value);
                 }
             }
             if(value.PeakItems!=null && value.PeakItems.Count > 0)
             {
-                offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset,(ushort)value.PeakItems.Count);
+                offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset,(ushort)value.PeakItems.Count);
                 foreach(var item in value.PeakItems)
                 {
-                    offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item.Lat);
-                    offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item.Lng);
+                    offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.Lat);
+                    offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.Lng);
                 }
             }
             return offset;

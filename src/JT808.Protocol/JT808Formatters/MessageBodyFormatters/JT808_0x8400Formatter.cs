@@ -21,10 +21,10 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8400;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8400 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8400 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset,(byte)value.CallBack);
-            offset += JT808BinaryExtensions.WriteStringLittle(memoryOwner, offset, value.PhoneNumber);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset,(byte)value.CallBack);
+            offset += JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.PhoneNumber);
             return offset;
         }
     }

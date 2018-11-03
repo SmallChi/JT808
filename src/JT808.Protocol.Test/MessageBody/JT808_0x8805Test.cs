@@ -16,6 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X8805.MultimediaId = 10000;
             jT808_0X8805.MultimediaDeleted = Enums.JT808MultimediaDeleted.保留.ToByteValue();
             string hex = JT808Serializer.Serialize(jT808_0X8805).ToHexString();
+            Assert.Equal("0000271000", hex);
         }
 
         [Fact]

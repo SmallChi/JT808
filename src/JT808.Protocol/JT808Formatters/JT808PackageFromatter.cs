@@ -78,15 +78,15 @@ namespace JT808.Protocol.JT808Formatters
             return jT808Package;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808Package value)
+        public int Serialize(ref byte[] bytes, int offset, JT808Package value)
         {
             // 1. 先判断是否分包（理论下发不需分包，但为了统一还是加上分包处理）
             // 2. 先序列化数据体，根据数据体的长度赋值给头部，在序列化头部。
             int messageBodyOffset = 0;
             if (value.Header.MessageBodyProperty.IsPackge)
             {   //3. 先写入分包消息总包数、包序号 
-                messageBodyOffset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, messageBodyOffset, value.Header.MessageBodyProperty.PackgeCount);
-                messageBodyOffset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, messageBodyOffset, value.Header.MessageBodyProperty.PackageIndex);
+                messageBodyOffset += JT808BinaryExtensions.WriteUInt16Little(bytes, messageBodyOffset, value.Header.MessageBodyProperty.PackgeCount);
+                messageBodyOffset += JT808BinaryExtensions.WriteUInt16Little(bytes, messageBodyOffset, value.Header.MessageBodyProperty.PackageIndex);
             }
             // 4. 数据体 
             Type jT808BodiesImplType = JT808MsgIdFactory.GetBodiesImplTypeByMsgId(value.Header.MsgId);
@@ -95,34 +95,33 @@ namespace JT808.Protocol.JT808Formatters
                 if (value.Bodies != null)
                 {
                     // 4.1 处理数据体
-                    messageBodyOffset = JT808FormatterResolverExtensions.JT808DynamicSerialize(JT808FormatterExtensions.GetFormatter(jT808BodiesImplType), memoryOwner, offset, value.Bodies);
+                    messageBodyOffset = JT808FormatterResolverExtensions.JT808DynamicSerialize(JT808FormatterExtensions.GetFormatter(jT808BodiesImplType), ref bytes, offset, value.Bodies);
                 }
             }
-            Memory<byte> messageBodyBytes = null;
+            byte[] messageBodyBytes = null;
             if (messageBodyOffset != 0)
             {
-                messageBodyBytes = new Memory<byte>(new byte[messageBodyOffset]);
-                memoryOwner.Memory.Slice(0, messageBodyOffset).CopyTo(messageBodyBytes);
+                messageBodyBytes = new byte[messageBodyOffset];
+                Array.Copy(bytes, 0, messageBodyBytes, 0, messageBodyOffset);
             }
             // ------------------------------------开始组包
             // 1.起始符
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.Begin);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.Begin);
             // 2.赋值头数据长度
             value.Header.MessageBodyProperty.DataLength = messageBodyOffset;
-            offset = JT808FormatterExtensions.GetFormatter<JT808Header>().Serialize(memoryOwner, offset, value.Header);
+            offset = JT808FormatterExtensions.GetFormatter<JT808Header>().Serialize(ref bytes, offset, value.Header);
             if (messageBodyOffset != 0)
             {
-                JT808BinaryExtensions.CopyTo(messageBodyBytes.Span, memoryOwner.Memory.Span, offset);
+                Array.Copy(messageBodyBytes, 0, bytes, offset, messageBodyOffset);
                 offset += messageBodyOffset;
                 messageBodyBytes = null;
             }
             // 4.校验码
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, memoryOwner.Memory.Span.ToXor(1, offset));
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, bytes.ToXor(1, offset));
             // 5.终止符
-            offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, value.End);
-            byte[] temp = JT808Escape(memoryOwner.Memory.Slice(0, offset).Span);
-            memoryOwner.Memory.Span.Clear();
-            JT808BinaryExtensions.CopyTo(temp, memoryOwner.Memory.Span, 0);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.End);
+            byte[] temp = JT808Escape(bytes.AsSpan(0, offset));
+            Array.Copy(temp, 0,bytes, 0, temp.Length);
             return temp.Length;
         }
 

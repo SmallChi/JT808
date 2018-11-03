@@ -27,16 +27,16 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X0705;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x0705 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x0705 value)
         {
             if (value.CanItems!=null && value.CanItems.Count > 0)
             {
-                offset += JT808BinaryExtensions.WriteUInt16Little(memoryOwner, offset, (ushort)value.CanItems.Count);
-                offset += JT808BinaryExtensions.WriteDateTime5Little(memoryOwner, offset, value.FirstCanReceiveTime);
+                offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, (ushort)value.CanItems.Count);
+                offset += JT808BinaryExtensions.WriteDateTime5Little(bytes, offset, value.FirstCanReceiveTime);
                 foreach(var item in value.CanItems)
                 {
-                    offset += JT808BinaryExtensions.WriteBytesLittle(memoryOwner, offset, item.CanId);
-                    offset += JT808BinaryExtensions.WriteBytesLittle(memoryOwner, offset, item.CanData);
+                    offset += JT808BinaryExtensions.WriteBytesLittle(bytes, offset, item.CanId);
+                    offset += JT808BinaryExtensions.WriteBytesLittle(bytes, offset, item.CanData);
                 }
             }
             return offset;

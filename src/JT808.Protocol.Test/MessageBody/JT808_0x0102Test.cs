@@ -13,6 +13,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             JT808_0x0102 jT808LoginRequestProperty = new JT808_0x0102();
             jT808LoginRequestProperty.Code = "45612";
             string hex= JT808Serializer.Serialize(jT808LoginRequestProperty) .ToHexString();
+            Assert.Equal("3435363132", hex);
         }
 
         [Fact]
@@ -38,6 +39,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
                  Code= "456121111"
             };
             string hex = JT808Serializer.Serialize(jT808LoginRequest).ToHexString();
+            Assert.Equal("7E010200090123456789003039343536313231313131BE7E", hex);
         }
 
         [Fact]

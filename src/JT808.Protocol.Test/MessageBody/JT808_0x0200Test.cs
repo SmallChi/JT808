@@ -39,6 +39,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
                 Oil = 55
             });
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
+            Assert.Equal("000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037", hex);
         }
 
         [Fact]
@@ -75,7 +76,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             //      00 37 
             //06
             //  0D 
-            //      00 00 00 12 01 00 00 00 00 00 00 00 00"
+            //      00 00 00 12 01 73 6D 61 6C 6C 63 68 69"
             JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200();
             jT808UploadLocationRequest.AlarmFlag = 1;
             jT808UploadLocationRequest.Altitude = 40;
@@ -101,6 +102,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
                 UserName = "smallchi"
             });
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
+            Assert.Equal("000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037060D0000001201736D616C6C636869", hex);
         }
 
         static JT808_0x0200Test()
@@ -258,7 +260,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             byte[] data = JT808Serializer.Serialize(jT808Package);
             
             var hex = data.ToHexString();
-
+            Assert.Equal("7E02000026123456789012007D02000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D01137E", hex);
             // 输出结果Hex：
             // 7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 13 7E
         }
@@ -323,6 +325,8 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             var hex = data.ToHexString();
             //输出结果Hex：
             //7E 02 00 00 26 12 34 56 78 90 12 00 01 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 6C 7E
+            //7E 02 00 00 26 12 34 56 78 90 12 00 01 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 6C 7E
+            Assert.Equal("7E020000261234567890120001000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D016C7E", hex);
         }
 
         [Fact]

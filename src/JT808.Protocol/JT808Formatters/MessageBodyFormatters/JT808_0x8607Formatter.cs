@@ -26,14 +26,14 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             return jT808_0X8607;
         }
 
-        public int Serialize(IMemoryOwner<byte> memoryOwner, int offset, JT808_0x8607 value)
+        public int Serialize(ref byte[] bytes, int offset, JT808_0x8607 value)
         {
             if (value.AreaIds != null)
             {
-                offset += JT808BinaryExtensions.WriteByteLittle(memoryOwner, offset, (byte)value.AreaIds.Count);
+                offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, (byte)value.AreaIds.Count);
                 foreach (var item in value.AreaIds)
                 {
-                    offset += JT808BinaryExtensions.WriteUInt32Little(memoryOwner, offset, item);
+                    offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item);
                 }
             }
             return offset;

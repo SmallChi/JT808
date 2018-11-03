@@ -1,0 +1,2907 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JT808.Protocol</name>
+    </assembly>
+    <members>
+        <member name="T:JT808.Protocol.Enums.JT808Alarm">
+            <summary>
+            报警标志
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.紧急报警_触动报警开关后触发">
+            <summary>
+            紧急报警_触动报警开关后触发
+            收到应答后清零
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.超速报警">
+            <summary>
+            超速报警
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.疲劳驾驶">
+            <summary>
+            标志维持至报警条件解除
+            疲劳驾驶
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.危险预警">
+            <summary>
+            危险预警
+            收到应答后清零
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.GNSS模块发生故障">
+            <summary>
+            GNSS模块发生故障
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.GNSS天线未接或被剪断">
+            <summary>
+            GNSS天线未接或被剪断
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.GNSS天线短路">
+            <summary>
+            GNSS天线短路
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.终端主电源欠压">
+            <summary>
+            终端主电源欠压
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.终端主电源掉电">
+            <summary>
+            终端主电源掉电
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.终端LCD或显示器故障">
+            <summary>
+            终端LCD或显示器故障
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.TTS模块故障">
+            <summary>
+            TTS模块故障
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.摄像头故障">
+            <summary>
+            摄像头故障
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.道路运输证IC卡模块故障">
+            <summary>
+            道路运输证IC卡模块故障
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.超速预警">
+            <summary>
+            超速预警
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.疲劳驾驶预警">
+            <summary>
+            疲劳驾驶预警
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.当天累计驾驶超时">
+            <summary>
+            当天累计驾驶超时
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.超时停车">
+            <summary>
+            超时停车
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.进出区域">
+            <summary>
+            进出区域
+            收到应答后清零
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.进出路线">
+            <summary>
+            进出路线
+            收到应答后清零
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.路段行驶时间不足或过长">
+            <summary>
+            路段行驶时间不足或过长
+            收到应答后清零
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.路线偏离报警">
+            <summary>
+            路线偏离报警
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆VSS故障">
+            <summary>
+            车辆VSS故障
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆油量异常">
+            <summary>
+            车辆油量异常
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆被盗">
+            <summary>
+            车辆被盗通过车辆防盗器
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆非法点火">
+            <summary>
+            车辆非法点火
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆非法位移">
+            <summary>
+            车辆非法位移
+            收到应答后清零
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.碰撞预警">
+            <summary>
+            碰撞预警
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.侧翻预警">
+            <summary>
+            侧翻预警
+            标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.非法开门报警">
+            <summary>
+            非法开门报警
+            （终端未设置区域时，不判断非法开门）
+            收到应答后清零
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808CallBackType">
+            <summary>
+            电话回拨类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808DirectionType">
+            <summary>
+            方向类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808DrivenRouteType">
+            <summary>
+            路线行驶返回结果
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ErrorCode.CheckCodeNotEqual">
+            <summary>
+            校验和不相等
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ErrorCode.GetFormatterAttributeError">
+            <summary>
+            没有标记
+            <see cref="T:JT808.Protocol.Attributes.JT808FormatterAttribute"/>
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ErrorCode.HeaderParseError">
+            <summary>
+            消息头解析错误
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ErrorCode.BodiesParseError">
+            <summary>
+            消息体解析错误
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808EventItemCoding">
+            <summary>
+            事件项编码
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808EventSettingType">
+            <summary>
+            事件设置类型
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.删除终端现有所有事件_该命令后不带后继字节">
+            <summary>
+            删除终端现有所有事件_该命令后不带后继字节
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.更新事件">
+            <summary>
+            更新事件
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.追加事件">
+            <summary>
+            追加事件
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.修改事件">
+            <summary>
+            修改事件
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.删除特定几项事件_之后事件项中无需带事件内容">
+            <summary>
+            删除特定几项事件，之后事件项中无需带事件内容
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808ICCardReadResult">
+            <summary>
+            IC 卡读取结果
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808ICCardStatus">
+            <summary>
+            插拔状态
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808MsgId">
+            <summary>
+            JT808消息
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.终端通用应答">
+            <summary>
+            终端通用应答
+            0x0001
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.终端心跳">
+            <summary>
+            终端心跳
+            0x0002
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.终端注册">
+            <summary>
+            终端注册
+            0x0100
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.终端注销">
+            <summary>
+            终端注销
+            0x0003
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.终端鉴权">
+            <summary>
+            终端鉴权
+            0x0102
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.位置信息汇报">
+            <summary>
+            位置信息汇报
+            0x0200
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.终端RSA公钥">
+            <summary>
+             终端RSA公钥【0A00】 
+             0x0A00
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.平台通用应答">
+            <summary>
+            平台通用应答
+            0x8001
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.补传分包请求">
+            <summary>
+            补传分包请求
+            0x8003
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.终端注册应答">
+            <summary>
+            终端注册应答
+            0x8100
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.文本信息下发">
+            <summary>
+            文本信息下发
+            0x8300
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.定位数据批量上传">
+            <summary>
+            定位数据批量上传
+            0x0704
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.多媒体数据上传">
+            <summary>
+            多媒体数据上传
+            0x0801
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.位置信息查询">
+            <summary>
+            位置信息查询
+            0x8201
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.位置信息查询应答">
+            <summary>
+            位置信息查询应答
+            0x0201
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.设置终端参数">
+            <summary>
+            设置终端参数
+            0x8103
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.查询终端属性">
+            <summary>
+            查询终端属性
+            0x8107
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.查询指定终端参数">
+            <summary>
+            查询指定终端参数
+            0x8106
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.查询终端属性应答">
+            <summary>
+            查询终端属性应答
+            0x0107
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.下发终端升级包">
+            <summary>
+            下发终端升级包
+            0x8108
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.终端升级结果通知">
+            <summary>
+            终端升级结果通知
+            0x0108
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.临时位置跟踪控制">
+            <summary>
+            临时位置跟踪控制
+            0x8202
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.人工确认报警消息">
+            <summary>
+            人工确认报警消息
+            0x8203
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.车辆控制">
+            <summary>
+            车辆控制
+            0x8500
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.车辆控制应答">
+            <summary>
+            车辆控制应答
+            0x0500
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.设置圆形区域">
+            <summary>
+            设置圆形区域
+            0x8600
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.删除圆形区域">
+            <summary>
+            删除圆形区域
+            0x8601
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.上报驾驶员身份信息请求">
+            <summary>
+            上报驾驶员身份信息请求
+            0x8702
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.电话回拨">
+            <summary>
+            电话回拨
+            0x8400
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.设置电话本">
+            <summary>
+            设置电话本
+            0x8401
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.录音开始命令">
+            <summary>
+            录音开始命令
+            0x8804
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.单条存储多媒体数据检索上传命令">
+            <summary>
+            单条存储多媒体数据检索上传命令
+            0x8805
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.数据上行透传">
+            <summary>
+            数据上行透传
+            0x0900
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808MultimediaCodingFormat">
+            <summary>
+            多媒体格式编码
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808MultimediaDeleted">
+            <summary>
+            删除标志
+            单条存储多媒体数据检索上传命令
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808MultimediaType">
+            <summary>
+            多媒体类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808PhoneNumberType">
+            <summary>
+            大陆11位 补0
+            香港8位  区号：852 补0
+            澳门8位  区号：853 补0
+            台湾的是10位 区号：886
+            台湾手机号码有10码，例如0912345678不过前面那个0是我们自己在台湾打的，
+            假如是其他地方打来要改成打 +886912345678
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.Success">
+            <summary>
+            成功/确认
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.Fail">
+            <summary>
+            失败
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.MessageError">
+            <summary>
+            消息有误
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.NotSupport">
+            <summary>
+            不支持
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.AlarmProcessorVerify">
+            <summary>
+            报警处理确认
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808PositionType">
+            <summary>
+            位置类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808RecordCmd">
+            <summary>
+            录音命令
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808RecordSave">
+            <summary>
+            保存标志
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808SettingProperty">
+            <summary>
+            设置属性
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808SettingTelephoneBook">
+            <summary>
+            设置电话本 设置类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808TelephoneBookContactType">
+            <summary>
+            电话本联系人标志
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808TerminalResult.Success">
+            <summary>
+            成功/确认
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808TerminalResult.Fail">
+            <summary>
+            失败
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808TerminalResult.MessageError">
+            <summary>
+            消息有误
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808TerminalResult.NotSupport">
+            <summary>
+            不支持
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808UpgradeResult">
+            <summary>
+            升级结果
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808UpgradeType">
+            <summary>
+            升级类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT808BinaryExtensions">
+            <summary>
+            
+            ref:"www.codeproject.com/tips/447938/high-performance-csharp-byte-array-to-hex-string-t"
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ToLatLng(System.Int32)">
+            <summary>
+            经纬度
+            </summary>
+            <param name="latlng"></param>
+            <returns></returns>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT808BinaryExtensions.DateLimitYear">
+            <summary>
+            日期限制于2000年
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadDateTime6Little(System.ReadOnlySpan{System.Byte},System.Int32@,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="format">D2： 10  X2：16</param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadDateTime4Little(System.ReadOnlySpan{System.Byte},System.Int32@,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="format">D2： 10  X2：16</param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadDateTime5Little(System.ReadOnlySpan{System.Byte},System.Int32@,System.String)">
+            <summary>
+            hh-mm-ss-msms
+            hh-mm-ss-fff
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.WriteDateTime6Little(System.Byte[],System.Int32,System.DateTime,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="memoryOwner"></param>
+            <param name="offset"></param>
+            <param name="date"></param>
+            <param name="fromBase">BCD：10  HEX：16</param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.WriteDateTime4Little(System.Byte[],System.Int32,System.DateTime,System.Int32)">
+            <summary>
+            YYYYMMDD
+            </summary>
+            <param name="bytes"></param>
+            <param name="offset"></param>
+            <param name="date"></param>
+            <param name="fromBase">BCD：10  HEX：16</param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.WriteDateTime5Little(System.Byte[],System.Int32,System.DateTime,System.Int32)">
+            <summary>
+            hh-mm-ss-msms
+            hh-mm-ss-fff
+            </summary>
+            <param name="bytes"></param>
+            <param name="offset"></param>
+            <param name="date"></param>
+            <param name="fromBase"></param>
+            <returns></returns>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT808BinaryExtensions.fromHexTable">
+            <summary>
+             values for '\0' to 'f' where 255 indicates invalid input character
+            starting from '\0' and not from '0' costs 48 bytes
+            but results 0 subtructions and less if conditions
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT808BinaryExtensions.fromHexTable16">
+            <summary>
+             same as above but valid values are multiplied by 16
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ToHexBytes(System.String)">
+            <summary>
+            16进制字符串转16进制数组
+            </summary>
+            <param name="hexString"></param>
+            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ToHexString(System.Byte[],System.Boolean)">
+            <summary>
+            hexIndicator: use prefix ("0x") or not
+            </summary>
+            <param name="source"></param>
+            <param name="hexIndicator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ToXor(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            异或
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ToXor(System.ReadOnlySpan{System.Byte},System.Int32,System.Int32)">
+            <summary>
+            异或
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ToXor(System.Span{System.Byte},System.Int32,System.Int32)">
+            <summary>
+            异或
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT808EnumExtensions">
+            <summary>
+            枚举扩展
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.ToValue``1(``0)">
+            <summary>
+            转为整型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.ToUInt16Value``1(``0)">
+            <summary>
+            转为 u16 整型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.ToByteValue``1(``0)">
+            <summary>
+            转为Byte
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.ToValueString``1(``0)">
+            <summary>
+            转为整型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.ToEnum``1(System.String)">
+            <summary>
+            字符转枚举
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetName(System.Enum)">
+            <summary>
+            获取枚举字符串
+            </summary>
+            <param name="valueEnum"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetDescription(System.Enum)">
+            <summary>
+            获取DescriptionAttribute特性枚举值的描述
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.IsEnumValid``1(System.Int32)">
+            <summary>
+            验证是否是枚举类型
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="enumValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetDescriptionAttributeDictionary(System.Enum)">
+            <summary>
+            获取DescriptionAttribute特性枚举及描述
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetDisplayName(System.Enum)">
+            <summary>
+            获取DisplayNameAttribute特性枚举值的描述
+            </summary>
+            <param name="obj">枚举值</param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetDisplayNameAttributeDictionary(System.Enum)">
+            <summary>
+            获取DisplayNameAttribute特性枚举及描述
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetAttribute``1(System.Enum)">
+            <summary>
+            获取枚举对应特性
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetEnumTypes``1(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            根据值获取对应枚举类型集合
+            </summary>
+            <typeparam name="T">具体枚举类型</typeparam>
+            <param name="value">枚举值</param>
+            <param name="digit">位数(8,16,32)</param>
+            <param name="ignoreUnknown">是否忽略未知数据</param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT808FormatterResolverExtensions">
+            <summary>
+            
+            ref http://adamsitnik.com/Span/#span-must-not-be-a-generic-type-argument
+            ref http://adamsitnik.com/Span/
+            ref:MessagePack.Formatters.DynamicObjectTypeFallbackFormatter
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Formatters.JT808HeaderFormatter">
+            <summary>
+            JT808头部序列化器
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Formatters.JT808HeaderMessageBodyPropertyFormatter">
+            <summary>
+            头部消息体属性的格式化器
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Formatters.JT808PackageFromatter">
+            <summary>
+            JT808包序列化器
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808Formatters.JT808PackageFromatter.JT808DeEscape(System.ReadOnlySpan{System.Byte},System.Int32,System.Int32)">
+            <summary>
+            转义
+            </summary>
+            <param name="buf"></param>
+            <param name="offset"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808Formatters.JT808PackageFromatter.JT808Escape(System.Span{System.Byte})">
+            <summary>
+            转码
+            </summary>
+            <param name="buf"></param>
+            <returns></returns>
+        </member>
+        <member name="P:JT808.Protocol.JT808GlobalConfig.SkipCRCCode">
+            <summary>
+            跳过校验码
+            默认：false
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0200_Attach``1(System.Byte)">
+            <summary>
+            注册自定义定位信息附加数据
+            </summary>
+            <typeparam name="TJT808LocationAttach"></typeparam>
+            <param name="attachInfoId"></param>
+        </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0900_Ext``1(System.Byte)">
+            <summary>
+            注册自定义数据上行透传信息
+            </summary>
+            <typeparam name="TJT808_0x0900_Ext"></typeparam>
+            <param name="attachInfoId"></param>
+        </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x8900_Ext``1(System.Byte)">
+            <summary>
+            注册自定义数据下行透传信息
+            </summary>
+            <typeparam name="TJT808_0x8900_Ext"></typeparam>
+            <param name="attachInfoId"></param>
+        </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_CustomMsgId``1(System.UInt16)">
+            <summary>
+            注册自定义消息
+            </summary>
+            <typeparam name="TJT808Bodies"></typeparam>
+            <param name="msgId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.Overwrite_MsgId``1(System.UInt16)">
+            <summary>
+            重写消息
+            </summary>
+            <typeparam name="TJT808Bodies"></typeparam>
+            <param name="overwriteMsgId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.SetMsgSNDistributed(JT808.Protocol.IMsgSNDistributed)">
+            <summary>
+            设置消息序列号
+            </summary>
+            <param name="msgSNDistributed"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.SetSkipCRCCode(System.Boolean)">
+            <summary>
+            设置跳过校验码
+            场景：测试的时候，可能需要收到改数据，所以测试的时候有用
+            </summary>
+            <param name="skipCRCCode"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.JT808Header">
+            <summary>
+            头部
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Header.MsgId">
+            <summary>
+            消息ID 
+            <see cref="T:JT808.Protocol.Enums.JT808MsgId"/>
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Header.TerminalPhoneNo">
+            <summary>
+            终端手机号
+            根据安装后终端自身的手机号转换。手机号不足 12 位，则在前补充数字，大陆手机号补充数字 0，港澳台则根据其区号进行位数补充
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Header.MsgNum">
+            <summary>
+            消息流水号
+            发送计数器
+            占用四个字节，为发送信息的序列号，用于接收方检测是否有信息的丢失，上级平台和下级平台接自己发送数据包的个数计数，互不影响。
+            程序开始运行时等于零，发送第一帧数据时开始计数，到最大数后自动归零
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.IsPackge">
+            <summary>
+            是否分包
+             true-1  表示消息体为长消息，进行分包发送处理
+             false-0 消息头中无消息包封装项字段。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.Encrypt">
+            <summary>
+            加密标识，0为不加密
+            当此三位都为 0，表示消息体不加密；
+            当第 10 位为 1，表示消息体经过 RSA 算法加密；
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.DataLength">
+            <summary>
+            消息体长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.PackgeCount">
+            <summary>
+            消息总包数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.PackageIndex">
+            <summary>
+            报序号 从1开始
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Package">
+            <summary>
+            JT808数据包
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.JT808Package.BeginFlag">
+            <summary>
+            起始符
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.JT808Package.EndFlag">
+            <summary>
+            终止符
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Package.Begin">
+            <summary>
+            起始符
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Package.End">
+            <summary>
+            起始符
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Package.CheckCode">
+            <summary>
+            校验码
+            从消息头开始，同后一字节异或，直到校验码前一个字节，占用一个字节。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Package.Header">
+            <summary>
+            头数据
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Package.Bodies">
+            <summary>
+            数据体
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808AlarmProperty">
+            <summary>
+            报警标志位定义
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808Properties.JT808AlarmProperty.#ctor(System.String)">
+            <summary>
+            初始化读取报警标志位
+            </summary>
+            <param name="alarmStr"></param>
+        </member>
+        <member name="M:JT808.Protocol.JT808Properties.JT808AlarmProperty.#ctor(System.Char[])">
+            <summary>
+            写入报警标志位
+            从左开始写入，不满32位自动补'0'
+            </summary>
+            <param name="alarmChar"></param>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit0">
+            <summary>
+            1:紧急报警，触动报警开关后触发    收到应答后清零
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit1">
+            <summary>
+            1:超速报警  标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit2">
+            <summary>
+            1:疲劳驾驶  标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit3">
+            <summary>
+            1:危险预警  收到应答后清零
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit4">
+            <summary>
+            GNSS模块发生故障  标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit5">
+            <summary>
+            GNSS天线未接或被剪断   标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit6">
+            <summary>
+            GNSS天线短路    标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit7">
+            <summary>
+            终端主电源欠压 标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit8">
+            <summary>
+            终端主电源掉电 标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit9">
+            <summary>
+            终端LCD或显示器故障 标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit10">
+            <summary>
+            TTS模块故障 标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit11">
+            <summary>
+            摄像头故障   标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit12">
+            <summary>
+            道路运输证IC卡模块故障    标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit13">
+            <summary>
+            超速预警    标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit14">
+            <summary>
+            疲劳驾驶预警  标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit15">
+            <summary>
+            保留15
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit16">
+            <summary>
+            保留16
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit17">
+            <summary>
+            保留17
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit18">
+            <summary>
+            当天累计驾驶超时    标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit19">
+            <summary>
+            超时停车    标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit20">
+            <summary>
+            进出区域    收到应答后清零
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit21">
+            <summary>
+            进出路线    收到应答后清零
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit22">
+            <summary>
+            路段行驶时间不足或过长 收到应答后清零
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit23">
+            <summary>
+            路线偏离报警  标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit24">
+            <summary>
+            车辆VSS故障 标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit25">
+            <summary>
+            车辆油量异常  标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit26">
+            <summary>
+            车辆被盗通过车辆防盗器 标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit27">
+            <summary>
+            车辆非法点火  
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit28">
+            <summary>
+            车辆非法位移  收到应答后清零
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit29">
+            <summary>
+            碰撞预警    标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit30">
+            <summary>
+            侧翻预警    标志维持至报警条件解除
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808AlarmProperty.Bit31">
+            <summary>
+            非法开门报警  （终端未设置区域时，不判断非法开门）收到应答后清零
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808Properties.JT808AlarmProperty.ToString">
+            <summary>
+            报警标志位
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808CanProperty">
+            <summary>
+            Can属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CanProperty.CanId">
+            <summary>
+            CAN ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CanProperty.CanData">
+            <summary>
+            CAN 数据
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808CircleAreaProperty">
+            <summary>
+            圆形区域属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.AreaId">
+            <summary>
+            区域 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.AreaProperty">
+            <summary>
+            区域属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.CenterPointLat">
+            <summary>
+            中心点纬度
+            以度为单位的纬度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.CenterPointLng">
+            <summary>
+            中心点经度
+            以度为单位的经度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.Radius">
+            <summary>
+            半径
+            单位为米（m），路段为该拐点到下一拐点
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.StartTime">
+            <summary>
+            起始时间
+            YY-MM-DD-hh-mm-ss，若区域属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.EndTime">
+            <summary>
+            结束时间
+            YY-MM-DD-hh-mm-ss，若区域属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.HighestSpeed">
+            <summary>
+            最高速度
+            Km/h，若区域属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808CircleAreaProperty.OverspeedDuration">
+            <summary>
+            超速持续时间 
+            单位为秒（s）（类似表述，同前修改），若区域属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808ContactProperty">
+            <summary>
+            电话本联系人项数据
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808ContactProperty.TelephoneBookContactType">
+            <summary>
+            标志 1：呼入；2：呼出；3：呼入/呼出
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808ContactProperty.PhoneNumberLength">
+            <summary>
+            号码长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808ContactProperty.PhoneNumber">
+            <summary>
+            电话号码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808ContactProperty.ContactLength">
+            <summary>
+            联系人长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808ContactProperty.Contact">
+            <summary>
+            经 GBK 编码
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808EventProperty">
+            <summary>
+            事件属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808EventProperty.EventId">
+            <summary>
+            事件 ID 
+            若终端已有同 ID 的事件，则被覆盖
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808EventProperty.EventContentLength">
+            <summary>
+            事件内容长度
+            后继事件内容字段字节长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808EventProperty.EventContent">
+            <summary>
+            事件内容
+            事件内容，经 GBK 编码
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808InflectionPointProperty">
+            <summary>
+            拐点属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.InflectionPointId">
+            <summary>
+            拐点 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.SectionId">
+            <summary>
+            路段 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.InflectionPointLat">
+            <summary>
+            拐点纬度
+            以度为单位的纬度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.InflectionPointLng">
+            <summary>
+            拐点经度
+            以度为单位的经度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.SectionWidth">
+            <summary>
+            路段宽度
+            单位为米（m），路段为该拐点到下一拐点
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.SectionProperty">
+            <summary>
+            路段属性
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.SectionLongDrivingThreshold">
+            <summary>
+            路段行驶过长阈值
+            单位为秒（s），若路段属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.SectionDrivingUnderThreshold">
+            <summary>
+            路段行驶不足阈值
+            单位为秒（s），若路段属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.SectionHighestSpeed">
+            <summary>
+            路段最高速度
+            单位为公里每小时（km/h），若路段属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808InflectionPointProperty.SectionOverspeedDuration">
+            <summary>
+            超速持续时间 
+            单位为秒（s），若路段属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808PeakProperty">
+            <summary>
+            顶点项
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808PeakProperty.Lat">
+            <summary>
+            顶点纬度
+            以度为单位的纬度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808PeakProperty.Lng">
+            <summary>
+            顶点经度
+            以度为单位的经度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty">
+            <summary>
+            矩形区域属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.AreaId">
+            <summary>
+            区域 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.AreaProperty">
+            <summary>
+            区域属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.UpLeftPointLat">
+            <summary>
+            左上点纬度
+            以度为单位的纬度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.UpLeftPointLng">
+            <summary>
+            左上点经度
+            以度为单位的经度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.LowRightPointLat">
+            <summary>
+            右下点纬度
+            以度为单位的纬度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.LowRightPointLng">
+            <summary>
+            右下点经度
+            以度为单位的经度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.StartTime">
+            <summary>
+            起始时间
+            YY-MM-DD-hh-mm-ss，若区域属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.EndTime">
+            <summary>
+            结束时间
+            YY-MM-DD-hh-mm-ss，若区域属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.HighestSpeed">
+            <summary>
+            最高速度
+            Km/h，若区域属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808RectangleAreaProperty.OverspeedDuration">
+            <summary>
+            超速持续时间 
+            单位为秒（s）（类似表述，同前修改），若区域属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Properties.JT808StatusProperty">
+            <summary>
+            状态位
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808Properties.JT808StatusProperty.#ctor(System.String)">
+            <summary>
+            初始化读取状态位
+            </summary>
+            <param name="alarmStr"></param>
+        </member>
+        <member name="M:JT808.Protocol.JT808Properties.JT808StatusProperty.#ctor(System.Char[])">
+            <summary>
+            写入状态位
+            从左开始写入，不满32位自动补'0'
+            </summary>
+            <param name="alarmChar"></param>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit0">
+            <summary>
+            0：ACC 关；1： ACC 开
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit1">
+            <summary>
+            0：未定位；1：定位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit2">
+            <summary>
+            0：北纬；1：南纬
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit3">
+            <summary>
+            0：东经；1：西经
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit4">
+            <summary>
+            0：运营状态；1：停运状态
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit5">
+            <summary>
+            0：经纬度未经保密插件加密；1：经纬度已经保密插件加密
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit6">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit7">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit8">
+            <summary>
+            00：空车；01：半载；10：保留；11：满载（可用于客车的空、重车及货车的空载、满载状态表示，人工输入或传感器获取）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit9">
+            <summary>
+            00：空车；01：半载；10：保留；11：满载（可用于客车的空、重车及货车的空载、满载状态表示，人工输入或传感器获取）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit10">
+            <summary>
+            0：车辆油路正常；1：车辆油路断开
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit11">
+            <summary>
+            0：车辆电路正常；1：车辆电路断开
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit12">
+            <summary>
+            0：车门解锁；1：车门加锁
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit13">
+            <summary>
+            0：门 1 关；1：门 1 开（前门）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit14">
+            <summary>
+            0：门 2 关；1：门 2 开（中门）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit15">
+            <summary>
+            0：门 3 关；1：门 3 开（后门）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit16">
+            <summary>
+            0：门 4 关；1：门 4 开（驾驶席门）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit17">
+            <summary>
+            0：门 5 关；1：门 5 开（自定义）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit18">
+            <summary>
+            0：未使用 GPS 卫星进行定位；1：使用 GPS 卫星进行定位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit19">
+            <summary>
+            0：未使用北斗卫星进行定位；1：使用北斗卫星进行定位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit20">
+            <summary>
+            0：未使用 GLONASS 卫星进行定位；1：使用 GLONASS 卫星进行定位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit21">
+            <summary>
+            0：未使用 Galileo 卫星进行定位；1：使用 Galileo 卫星进行定位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit22">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit23">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit24">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit25">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit26">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit27">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit28">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit29">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit30">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Properties.JT808StatusProperty.Bit31">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808Properties.JT808StatusProperty.ToString">
+            <summary>
+            状态位
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.JT808Serializer">
+            <summary>
+            
+             ref https://www.cnblogs.com/TianFang/p/9193881.html
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0001">
+            <summary>
+            终端通用应答
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.MsgNum">
+            <summary>
+            应答流水号
+            对应的平台消息的流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.MsgId">
+            <summary>
+            应答 ID
+            对应的平台消息的 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.JT808TerminalResult">
+            <summary>
+            结果
+            0：成功/确认；1：失败；2：消息有误；3：不支持
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0002">
+            <summary>
+            终端心跳
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0003">
+            <summary>
+            终端注销请求
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0100">
+            <summary>
+            终端注册
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.AreaID">
+            <summary>
+            省域 ID
+            标示终端安装车辆所在的省域，0 保留，由平台取默
+            认值。省域 ID 采用 GB/T 2260 中规定的行政区划代
+            码六位中前两位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.CityOrCountyId">
+            <summary>
+            市县域 ID
+            标示终端安装车辆所在的市域和县域，0 保留，由平
+            台取默认值。市县域 ID 采用 GB/T 2260 中规定的行
+            政区划代码六位中后四位。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.MakerId">
+            <summary>
+            制造商 ID
+            5 个字节，终端制造商编码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.TerminalModel">
+            <summary>
+            终端型号
+            20 个字节，此终端型号由制造商自行定义，位数不
+            足时，后补“0X00”。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.TerminalId">
+            <summary>
+            终端 ID
+            7 个字节，由大写字母和数字组成，此终端 ID 由制
+            造商自行定义，位数不足时，后补“0X00”。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.PlateColor">
+            <summary>
+            车牌颜色
+            车牌颜色，按照 JT/T415-2006 的 5.4.12。
+            未上牌时，取值为 0。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.PlateNo">
+            <summary>
+            车辆标识
+            车牌颜色为 0 时，表示车辆 VIN；
+            否则，表示公安交通管理部门颁发的机动车号牌。
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0102">
+            <summary>
+            终端鉴权
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0102.Code">
+            <summary>
+            鉴权码
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0107">
+            <summary>
+            查询终端属性应答
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.TerminalType">
+            <summary>
+            终端类型
+            bit0，0：不适用客运车辆，1：适用客运车辆；
+            bit1，0：不适用危险品车辆，1：适用危险品车辆；
+            bit2，0：不适用普通货运车辆，1：适用普通货运车辆；
+            bit3，0：不适用出租车辆，1：适用出租车辆；
+            bit6，0：不支持硬盘录像，1：支持硬盘录像；
+            bit7，0：一体机，1：分体机
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.MakerId">
+            <summary>
+            制造商 ID
+            5 个字节，终端制造商编码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.TerminalModel">
+            <summary>
+            终端型号
+            BYTE[20]
+            20 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.TerminalId">
+            <summary>
+            终端ID 
+            BYTE[7]
+            7 个字节，由大写字母和数字组成，此终端 ID 由制造商自行定义，位数不足时，后补“0X00”
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.Terminal_SIM_ICCID">
+            <summary>
+            终端 SIM 卡 ICCID 
+            BCD[10]
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.Terminal_Hardware_Version_Length">
+            <summary>
+            终端硬件版本号长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.Terminal_Hardware_Version_Num">
+            <summary>
+            终端硬件版本号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.Terminal_Firmware_Version_Length">
+            <summary>
+            终端固件版本号长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.Terminal_Firmware_Version_Num">
+            <summary>
+            终端固件版本号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.GNSSModule">
+            <summary>
+            GNSS 模块属性
+            bit0，0：不支持 GPS 定位， 1：支持 GPS 定位；
+            bit1，0：不支持北斗定位， 1：支持北斗定位；
+            bit2，0：不支持 GLONASS 定位， 1：支持 GLONASS 定位；
+            bit3，0：不支持 Galileo 定位， 1：支持 Galileo 定位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.CommunicationModule">
+            <summary>
+            通信模块属性
+            bit0，0：不支持GPRS通信， 1：支持GPRS通信；
+            bit1，0：不支持CDMA通信， 1：支持CDMA通信；
+            bit2，0：不支持TD-SCDMA通信， 1：支持TD-SCDMA通信；
+            bit3，0：不支持WCDMA通信， 1：支持WCDMA通信；
+            bit4，0：不支持CDMA2000通信， 1：支持CDMA2000通信。
+            bit5，0：不支持TD-LTE通信， 1：支持TD-LTE通信；
+            bit7，0：不支持其他通信方式， 1：支持其他通信方式
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0108">
+            <summary>
+            终端升级结果通知
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0108.UpgradeType">
+            <summary>
+            升级类型
+            0：终端，12：道路运输证 IC 卡读卡器，52：北斗卫星定位模块
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0108.UpgradeResult">
+            <summary>
+            升级结果
+            0：成功，1：失败，2：取消
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200">
+            <summary>
+            位置信息汇报
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.AlarmFlag">
+            <summary>
+            报警标志 
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.StatusFlag">
+            <summary>
+            状态位标志
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.Lat">
+            <summary>
+            纬度
+            以度为单位的纬度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.Lng">
+            <summary>
+            经度
+            以度为单位的经度值乘以 10 的 6 次方，精确到百万分之一度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.Altitude">
+            <summary>
+            高程
+            海拔高度，单位为米（m）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.Speed">
+            <summary>
+            速度 1/10km/h
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.Direction">
+            <summary>
+            方向 0-359，正北为 0，顺时针
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.GPSTime">
+            <summary>
+            YY-MM-DD-hh-mm-ss（GMT+8 时间，本标准中之后涉及的时间均采用此时区）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.JT808LocationAttachData">
+            <summary>
+            位置附加信息
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0201">
+            <summary>
+            位置信息查询应答
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0201.MsgNum">
+            <summary>
+            应答流水号
+            对应的终端注册消息的流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0201.Position">
+            <summary>
+            位置信息汇报见 8.12
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0301">
+            <summary>
+            事件报告
+            0x0301
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0301.EventId">
+            <summary>
+            事件 ID 
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0302">
+            <summary>
+            提问应答
+            0x0302
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0302.ReplySNo">
+            <summary>
+            应答流水号
+            对应的提问下发消息的流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0302.AnswerId">
+            <summary>
+            答案 ID 
+            提问下发中附带的答案 ID
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0303">
+            <summary>
+            信息点播/取消
+            0x0303
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0303.InformationType">
+            <summary>
+            信息类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0303.Flag">
+            <summary>
+            点播/取消标志
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0500">
+            <summary>
+            车辆控制应答
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0500.MsgNum">
+            <summary>
+            应答流水号
+            对应的终端注册消息的流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0500.JT808_0x0200">
+            <summary>
+            位置信息汇报消息体
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0702">
+            <summary>
+            驾驶员身份信息采集上报
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.IC_Card_Status">
+            <summary>
+            状态
+            0x01：从业资格证 IC 卡插入（驾驶员上班）；
+            0x02：从业资格证 IC 卡拔出（驾驶员下班）。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.IC_Card_PlugDateTime">
+            <summary>
+            插卡/拔卡时间，YY-MM-DD-hh-mm-ss；
+            以下字段在状态为 0x01 时才有效并做填充。
+            BCD[6]
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.IC_Card_ReadResult">
+            <summary>
+            IC 卡读取结果
+            0x00：IC 卡读卡成功；
+            0x01：读卡失败，原因为卡片密钥认证未通过；
+            0x02：读卡失败，原因为卡片已被锁定；
+            0x03：读卡失败，原因为卡片被拔出；
+            0x04：读卡失败，原因为数据校验错误。
+            以下字段在 IC 卡读取结果等于 0x00 时才有效。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.DriverUserNameLength">
+            <summary>
+            驾驶员姓名长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.DriverUserName">
+            <summary>
+            驾驶员姓名
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.QualificationCode">
+            <summary>
+            从业资格证编码
+            长度 20 位，不足补 0x00。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.LicenseIssuingLength">
+            <summary>
+            发证机构名称长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.LicenseIssuing">
+            <summary>
+            发证机构名称长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.CertificateExpiresDate">
+            <summary>
+            证件有效期 BCD[4]
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0704">
+            <summary>
+            定位数据批量上传
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0704.Count">
+            <summary>
+            数据项个数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0704.LocationType">
+            <summary>
+            位置数据类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0704.Positions">
+            <summary>
+            位置汇报数据集合
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0704.BatchLocationType">
+            <summary>
+            位置数据类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0705">
+            <summary>
+            CAN 总线数据上传
+            0x0705
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0705.CanItemCount">
+            <summary>
+            数据项个数
+            包含的 CAN 总线数据项个数，>0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0705.FirstCanReceiveTime">
+            <summary>
+            CAN 总线数据接收时间
+            第 1 条 CAN 总线数据的接收时间，hh-mm-ss-msms
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0705.CanItems">
+            <summary>
+            CAN 总线数据项
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0800">
+            <summary>
+            多媒体事件信息上传
+            0x0800
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0800.MultiMediaId">
+            <summary>
+            多媒体数据 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0800.MultiMediaType">
+            <summary>
+            多媒体类型
+            0：图像；1：音频；2：视频；
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0800.MultiMediaCodingFormat">
+            <summary>
+            多媒体格式编码 
+            0：JPEG；1：TIF；2：MP3；3：WAV；4：WMV；其他保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0800.EventItemCoding">
+            <summary>
+            事件项编码
+            0：平台下发指令；
+            1：定时动作；
+            2：抢劫报警触发；
+            3：碰撞侧翻报警触发；
+            4：门开拍照；
+            5：门关拍照；
+            6：车门由开变关，时速从＜20 公里到超过 20 公里；
+            7：定距拍照；
+            其他保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0800.ChannelId">
+            <summary>
+            通道 ID
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0900">
+            <summary>
+            数据上行透传
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0900.PassthroughType">
+            <summary>
+            透传消息类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0900.JT808_0x0900_BodyBase">
+            <summary>
+            透传消息内容
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8001">
+            <summary>
+            平台通用应答
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8003">
+            <summary>
+            补传分包请求
+            0x8003
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8003.OriginalMsgNum">
+            <summary>
+            原始消息流水号
+            对应要求补传的原始消息第一包的消息流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8003.AgainPackageCount">
+            <summary>
+            重传包总数
+            n
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8003.AgainPackageData">
+            <summary>
+            重传包 ID 列表
+            BYTE[2*n]
+            重传包序号顺序排列，如“包 ID1 包 ID2......包 IDn”。
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8100">
+            <summary>
+            终端注册应答
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8100.MsgNum">
+            <summary>
+            应答流水号
+            对应的终端注册消息的流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8100.JT808TerminalRegisterResult">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8100.Code">
+            <summary>
+            鉴权码
+            只有在成功后才有该字段
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103">
+            <summary>
+            终端注册应答
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103.ParamCount">
+            <summary>
+            参数总数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103.ParamList">
+            <summary>
+            参数列表
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_0x0001.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_0x0001.ParamValue">
+            <summary>
+            终端心跳发送间隔，单位为秒（s）
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8106">
+            <summary>
+            查询指定终端参数
+            0x8106
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8106.ParameterCount">
+            <summary>
+            参数总数
+            参数总数为 n
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8106.Parameters">
+            <summary>
+            参数 ID 列表
+            参数顺序排列，如“参数 ID1 参数 ID2......参数IDn”。
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8107">
+            <summary>
+            查询终端属性
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8108">
+            <summary>
+            下发终端升级包
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8108.UpgradeType">
+            <summary>
+            升级类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8108.MakerId">
+            <summary>
+            制造商 ID
+            5 个字节，终端制造商编码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8108.VersionNumLength">
+            <summary>
+            版本号长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8108.VersionNum">
+            <summary>
+            版本号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8108.UpgradePackageLength">
+            <summary>
+            升级数据包长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8108.UpgradePackage">
+            <summary>
+            升级数据包
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8201">
+            <summary>
+            位置信息查询
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8202">
+            <summary>
+            临时位置跟踪控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8202.Interval">
+            <summary>
+            时间间隔
+            单位为秒（s），0 则停止跟踪。停止跟踪无需带后继字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8202.LocationTrackingValidity">
+            <summary>
+            位置跟踪有效期
+            单位为秒（s），终端在接收到位置跟踪控制消息后，在有效期截止时间之前，依据消息中的时间间隔发送位置汇报
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8203">
+            <summary>
+            人工确认报警消息
+            0x8203
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8203.AlarmMsgNum">
+            <summary>
+            报警消息流水号
+            需人工确认的报警消息流水号，0 表示该报警类型所有消息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8203.ManualConfirmAlarmType">
+            <summary>
+            人工确认报警类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8300">
+            <summary>
+            文本信息下发
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8300.TextFlag">
+            <summary>
+            文本信息标志位含义见 表 38
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8300.TextInfo">
+            <summary>
+            文本信息
+            最长为 1024 字节，经GBK编码
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8301">
+            <summary>
+            事件设置
+            0x8301
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8301.SettingType">
+            <summary>
+            设置类型
+            <see cref="T:JT808.Protocol.Enums.JT808EventSettingType"/>
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8301.SettingCount">
+            <summary>
+            设置总数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8301.EventItems">
+            <summary>
+            事件项
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8304">
+            <summary>
+            信息服务
+            0x8304
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8304.InformationType">
+            <summary>
+            信息类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8304.InformationLength">
+            <summary>
+            信息长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8304.InformationContent">
+            <summary>
+            信息内容
+            经 GBK 编码
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8400">
+            <summary>
+            电话回拨
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8400.CallBack">
+            <summary>
+            0:普通通话；1:监听
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8400.PhoneNumber">
+            <summary>
+            电话号码 
+            最长为 20 字节
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8401">
+            <summary>
+            设置电话本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8401.SettingTelephoneBook">
+            <summary>
+            设置类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8401.ContactCount">
+            <summary>
+            联系人总数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8401.JT808ContactProperties">
+            <summary>
+            联系人项
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8500">
+            <summary>
+            车辆控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8500.ControlFlag">
+            <summary>
+            控制标志 
+            控制指令标志位数据格式
+            0：车门解锁；1：车门加锁
+            1-7 保留
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8600">
+            <summary>
+            设置圆形区域
+            0x8600
+            注：本条消息协议支持周期时间范围，如要限制每天的8:30-18:00，起始/结束时间设为：00-00-00-08-30-00/00-00-00-18-00-00，其他以此类推
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8600.SettingAreaProperty">
+            <summary>
+            设置属性
+            <see cref="T:JT808.Protocol.Enums.JT808SettingProperty"/>
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8600.AreaCount">
+            <summary>
+            区域总数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8600.AreaItems">
+            <summary>
+            区域项
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8601">
+            <summary>
+            删除圆形区域
+            0x8601
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8601.AreaCount">
+            <summary>
+            区域数
+            本条消息中包含的区域数，不超过 125 个，多于 125个建议用多条消息，0 为删除所有圆形区域
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8601.AreaIds">
+            <summary>
+            区域ID集合
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8602">
+            <summary>
+            设置矩形区域
+            0x8602
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8602.SettingAreaProperty">
+            <summary>
+            设置属性
+            <see cref="T:JT808.Protocol.Enums.JT808SettingProperty"/>
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8602.AreaCount">
+            <summary>
+            区域总数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8602.AreaItems">
+            <summary>
+            区域项
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8603">
+            <summary>
+            删除矩形区域
+            0x8603
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8603.AreaCount">
+            <summary>
+            区域数
+            本条消息中包含的区域数，不超过 125 个，多于 125个建议用多条消息，0 为删除所有圆形区域
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8603.AreaIds">
+            <summary>
+            区域ID集合
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8604">
+            <summary>
+            设置多边形区域
+            0x8604
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.AreaId">
+            <summary>
+            区域 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.AreaProperty">
+            <summary>
+            区域属性
+            <see cref="T:JT808.Protocol.Enums.JT808SettingProperty"/>
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.StartTime">
+            <summary>
+            起始时间
+            YY-MM-DD-hh-mm-ss，若区域属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.EndTime">
+            <summary>
+            结束时间
+            YY-MM-DD-hh-mm-ss，若区域属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.HighestSpeed">
+            <summary>
+            最高速度
+            Km/h，若区域属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.OverspeedDuration">
+            <summary>
+            超速持续时间 
+            单位为秒（s）（类似表述，同前修改），若区域属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.PeakCount">
+            <summary>
+            区域总顶点数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.PeakItems">
+            <summary>
+            顶点项
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8605">
+            <summary>
+            删除多边形区域
+            0x8605
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8605.AreaCount">
+            <summary>
+            区域数
+            本条消息中包含的区域数，不超过 125 个，多于 125个建议用多条消息，0 为删除所有圆形区域
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8605.AreaIds">
+            <summary>
+            区域ID集合
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8606">
+            <summary>
+            设置路线
+            0x8606
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.RouteId">
+            <summary>
+            路线 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.RouteProperty">
+            <summary>
+            路线属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.StartTime">
+            <summary>
+            起始时间
+            YY-MM-DD-hh-mm-ss，若区域属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.EndTime">
+            <summary>
+            结束时间
+            YY-MM-DD-hh-mm-ss，若区域属性 0 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.InflectionPointCount">
+            <summary>
+            路线总拐点数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.InflectionPointItems">
+            <summary>
+            拐点项
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8607">
+            <summary>
+            删除路线
+            0x8607
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8607.AreaCount">
+            <summary>
+            区域数
+            本条消息中包含的区域数，不超过 125 个，多于 125个建议用多条消息，0 为删除所有圆形区域
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8607.AreaIds">
+            <summary>
+            区域ID集合
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8702">
+            <summary>
+            上报驾驶员身份信息请求
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8800">
+            <summary>
+            多媒体数据上传应答
+            0x8800
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8800.MultimediaId">
+            <summary>
+            多媒体ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8800.RetransmitPackageCount">
+            <summary>
+            重传包总数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8800.RetransmitPackageIds">
+            <summary>
+            重传包 ID 列表
+            重传包序号顺序排列，如“包 ID1 包 ID2......包 IDn”。
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8803">
+            <summary>
+            存储多媒体数据上传命令
+            0x8803
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8803.MultimediaType">
+            <summary>
+            多媒体类型 
+            0：图像；1：音频；2：视频
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8803.ChannelId">
+            <summary>
+            通道 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8803.EventItemCoding">
+            <summary>
+            事件项编码
+            0：平台下发指令；1：定时动作；2：抢劫报警触发；3：碰撞侧翻报警触发；其他保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8803.StartTime">
+            <summary>
+            起始时间
+            YY-MM-DD-hh-mm-ss
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8803.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8803.MultimediaDeleted">
+            <summary>
+            删除标志
+            <see cref="T:JT808.Protocol.Enums.JT808MultimediaDeleted"/>
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8804">
+            <summary>
+            录音开始命令
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8804.RecordCmd">
+            <summary>
+            录音命令
+            0：停止录音；0x01：开始录音；
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8804.RecordTime">
+            <summary>
+            单位为秒（s），0 表示一直录音
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8804.RecordSave">
+            <summary>
+            保存标志
+            0：实时上传；1：保存
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8804.AudioSampleRate">
+            <summary>
+            音频采样率
+            0：8K；1：11K；2：23K；3：32K；其他保留
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8805">
+            <summary>
+            单条存储多媒体数据检索上传命令
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8805.MultimediaId">
+            <summary>
+            多媒体ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8805.MultimediaDeleted">
+            <summary>
+            删除标志
+            <see cref="T:JT808.Protocol.Enums.JT808MultimediaDeleted"/>
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8900">
+            <summary>
+            数据下行透传
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8900.PassthroughType">
+            <summary>
+            透传消息类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8900.JT808_0X8900_BodyBase">
+            <summary>
+            透传消息内容
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body.JT808_0x0900_0x83.PassthroughContent">
+            <summary>
+            透传内容
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body.JT808_0x0900_BodyBase">
+            <summary>
+            数据上行透传
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body.JT808_0x8900_BodyBase">
+            <summary>
+            数据下行透传
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase">
+            <summary>
+            位置附加信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase.JT808LocationAttachMethod">
+            <summary>
+            位置附加信息方法
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase.AttachInfoId">
+            <summary>
+            附加信息Id
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase.AttachInfoLength">
+            <summary>
+            附加信息长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x01.Mileage">
+            <summary>
+            里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x01.ConvertMileage">
+            <summary>
+            里程 1/10km，对应车上里程表读数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x02.Oil">
+            <summary>
+            油量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x02.ConvertOil">
+            <summary>
+            油量 1/10L，对应车上油量表读数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x03.Speed">
+            <summary>
+            行驶记录功能获取的速度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x03.ConvertSpeed">
+            <summary>
+            行驶记录功能获取的速度 1/10km/h
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x04.EventId">
+            <summary>
+            需要人工确认报警事件的 ID，从 1 开始计数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x11.JT808PositionType">
+            <summary>
+            超速报警附加信息
+            0：无特定位置；
+            1：圆形区域；
+            2：矩形区域；
+            3：多边形区域；
+            4：路段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x11.AreaId">
+            <summary>
+            区域或路段 ID
+            若位置类型为 0，无该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x12.JT808PositionType">
+            <summary>
+            位置类型
+            1：圆形区域；
+            2：矩形区域；
+            3：多边形区域；
+            4：路段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x12.AreaId">
+            <summary>
+            区域或路段 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x12.Direction">
+            <summary>
+            方向 
+            0：进
+            1：出
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x13.DrivenRouteId">
+            <summary>
+            路段 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x13.Time">
+            <summary>
+            路段行驶时间
+            单位为秒（s)
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x13.DrivenRoute">
+            <summary>
+             结果 0：不足；1：过长
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x25.CarSignalStatus">
+            <summary>
+            扩展车辆信号状态位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x2A.IOStatus">
+            <summary>
+            IO状态位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x2B.Analog">
+            <summary>
+            模拟量 bit0-15，AD0；bit16-31，AD1
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x30.WiFiSignalStrength">
+            <summary>
+            无线通信网络信号强度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x31.GNSSCount">
+            <summary>
+            GNSS 定位卫星数
+            </summary>
+        </member>
+    </members>
+</doc>
