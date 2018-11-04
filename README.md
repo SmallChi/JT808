@@ -1,12 +1,5 @@
 ﻿# JT808协议
 
-## 瞎逼逼
-
-1. 该JT808协议是参考[MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)一款二进制序列化器，借鉴其思想，不得不说站在巨人的肩膀上搬砖就是爽歪歪。
-2. 搜索了很多资源没有针对.NET开源的808协议库，难道做GPS行业的.NET很少人吗？可能是藏着，掖着<(￣3￣)>  <(￣3￣)>  <(￣3￣)> 。
-3. 不得不说这GB的文档，太坑了。。。
-4. 现在有了[JT809](https://github.com/SmallChi/JT809/blob/master/README.md)的基础，对JT808就只剩搬砖了。
-
 ## 前提条件
 
 1. 掌握进制转换：二进制转十六进制；
