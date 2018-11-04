@@ -11,7 +11,10 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8001 : JT808Bodies
     {
         public ushort MsgNum { get; set; }
-        public JT808MsgId MsgId { get; set; }
+        /// <summary>
+        /// <see cref="JT808.Protocol.Enums.JT808MsgId"/>
+        /// </summary>
+        public ushort MsgId { get; set; }
         public JT808PlatformResult JT808PlatformResult { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             int offset = 0;
             JT808_0x8001 jT808_0X8001 = new JT808_0x8001();
             jT808_0X8001.MsgNum = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
-            jT808_0X8001.MsgId = (JT808MsgId)JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
+            jT808_0X8001.MsgId = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
             jT808_0X8001.JT808PlatformResult = (JT808PlatformResult)JT808BinaryExtensions.ReadByteLittle(bytes,ref offset);
             readSize = offset;
             return jT808_0X8001;

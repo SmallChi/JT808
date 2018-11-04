@@ -19,7 +19,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             };
             jT808Package.Bodies = new JT808_0x8001
             {
-                 MsgId= Enums.JT808MsgId.位置信息汇报,
+                 MsgId= Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
                  JT808PlatformResult= Enums.JT808PlatformResult.Success,
                  MsgNum=100
             };
@@ -47,7 +47,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             Assert.Equal("12345678900", jT808Package.Header.TerminalPhoneNo);
 
             JT808_0x8001 JT808Bodies = (JT808_0x8001)jT808Package.Bodies;
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报, JT808Bodies.MsgId);
+            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToUInt16Value(), JT808Bodies.MsgId);
             Assert.Equal(100, JT808Bodies.MsgNum);
             Assert.Equal(Enums.JT808PlatformResult.Success, JT808Bodies.JT808PlatformResult);
         }
