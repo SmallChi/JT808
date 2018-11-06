@@ -1,19 +1,21 @@
-﻿using System;
+﻿using JT808.Protocol.Attributes;
+using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
-    /// 存储多媒体数据上传命令
-    /// 0x8803
+    /// 存储多媒体数据检索
+    /// 0x8802
     /// </summary>
-
-    public class JT808_0x8803:JT808Bodies
+    [JT808Formatter(typeof(JT808_0x8802Formatter))]
+    public class JT808_0x8802:JT808Bodies
     {
         /// <summary>
-        /// 多媒体类型 
-        /// 0：图像；1：音频；2：视频
+        /// 多媒体类型
+        /// <see cref="JT808.Protocol.Enums.JT808MultimediaType"/>
         /// </summary>
         public byte MultimediaType { get; set; }
         /// <summary>
@@ -35,10 +37,5 @@ namespace JT808.Protocol.MessageBody
         /// YY-MM-DD-hh-mm-ss
         /// </summary>
         public DateTime EndTime { get; set; }
-        /// <summary>
-        /// 删除标志
-        /// <see cref="JT808.Protocol.Enums.JT808MultimediaDeleted"/>
-        /// </summary>
-        public byte MultimediaDeleted { get; set; }
     }
 }
