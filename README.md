@@ -1,4 +1,4 @@
-﻿# JT808协议
+# JT808协议
 
 ## 前提条件
 
@@ -210,7 +210,8 @@ JT808GlobalConfig.Instance
 
 | Package Name |  Version | Downloads
 |--------------|  ------- | ----
-| Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.svg)
+| Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSmallChi%2FJT808.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSmallChi%2FJT808?ref=badge_shield)
+| ![JT808](https://img.shields.io/nuget/dt/JT808.svg)
 
 ## 使用BenchmarkDotNet性能测试报告（只是玩玩，不能当真）
 
@@ -316,3 +317,7 @@ Platform=AnyCpu  Server=False
 |   65  |   0x0A00         |   x   |   终端 RSA 公钥
 |   66  |   0x8F00~0x8FFF  |   x   |   平台下行消息保留
 |   67  |   0x0F00~0x0FFF  |   x   |   终端上行消息保留
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSmallChi%2FJT808.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSmallChi%2FJT808?ref=badge_large)
