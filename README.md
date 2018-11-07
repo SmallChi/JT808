@@ -1,5 +1,7 @@
 ﻿# JT808协议
 
+[![MIT Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/SmallChi/JT808/blob/master/LICENSE)  [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSmallChi%2FJT808.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSmallChi%2FJT808?ref=badge_shield)
+
 ## 前提条件
 
 1. 掌握进制转换：二进制转十六进制；
@@ -303,7 +305,7 @@ Platform=AnyCpu  Server=False
 |   52  |   0x0801         |   x   |   多媒体数据上传
 |   53  |   0x8800         |   √   |   多媒体数据上传应答
 |   54  |   0x8801         |   x   |   摄像头立即拍摄命令
-|   55  |   0x0805         |   x   |   摄像头立即拍摄命令应答
+|   55  |   0x0805         |   √   |   摄像头立即拍摄命令应答
 |   56  |   0x8802         |   √   |   存储多媒体数据检索
 |   57  |   0x0802         |   √   |   存储多媒体数据检索应答
 |   58  |   0x8803         |   √   |   存储多媒体数据上传
