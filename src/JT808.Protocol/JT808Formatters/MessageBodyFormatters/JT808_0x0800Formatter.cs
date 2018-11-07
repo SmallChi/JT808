@@ -13,9 +13,9 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         {
             int offset = 0;
             JT808_0x0800 jT808_0X0800 = new JT808_0x0800();
-            jT808_0X0800.MultiMediaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            jT808_0X0800.MultiMediaType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X0800.MultiMediaCodingFormat = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            jT808_0X0800.MultimediaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
+            jT808_0X0800.MultimediaType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            jT808_0X0800.MultimediaCodingFormat = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             jT808_0X0800.EventItemCoding = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             jT808_0X0800.ChannelId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             readSize = offset;
@@ -24,9 +24,9 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 
         public int Serialize(ref byte[] bytes, int offset, JT808_0x0800 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.MultiMediaId);
-            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.MultiMediaType);
-            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.MultiMediaCodingFormat);
+            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.MultimediaId);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.MultimediaType);
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.MultimediaCodingFormat);
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.EventItemCoding);
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.ChannelId);
             return offset;

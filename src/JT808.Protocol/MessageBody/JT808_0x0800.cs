@@ -16,17 +16,17 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 多媒体数据 ID
         /// </summary>
-        public uint MultiMediaId { get; set; }
+        public uint MultimediaId { get; set; }
         /// <summary>
         /// 多媒体类型
         /// 0：图像；1：音频；2：视频；
         /// </summary>
-        public byte MultiMediaType { get; set; }
+        public byte MultimediaType { get; set; }
         /// <summary>
         /// 多媒体格式编码 
         /// 0：JPEG；1：TIF；2：MP3；3：WAV；4：WMV；其他保留
         /// </summary>
-        public byte MultiMediaCodingFormat { get; set; }
+        public byte MultimediaCodingFormat { get; set; }
         /// <summary>
         /// 事件项编码
         /// 0：平台下发指令；
