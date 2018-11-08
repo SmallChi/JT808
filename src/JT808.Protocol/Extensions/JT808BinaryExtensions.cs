@@ -44,6 +44,13 @@ namespace JT808.Protocol.Extensions
             return temp.ToArray();
         }
 
+        public static byte[] ReadBytesLittle(ReadOnlySpan<byte> read, ref int offset)
+        {
+            ReadOnlySpan<byte> temp = read.Slice(offset);
+            offset = offset + temp.Length;
+            return temp.ToArray();
+        }
+
         public static int WriteUInt32Little(byte[] write, int offset, uint data)
         {
             write[offset] = (byte)(data >> 24);
