@@ -18,11 +18,14 @@ namespace JT808.Protocol
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             MsgSNDistributed = new DefaultMsgSNDistributedImpl();
+            Compress = new JT808GZipCompressImpl();
             SkipCRCCode = false;
             Encoding = Encoding.GetEncoding("GBK");
         }
 
         public IMsgSNDistributed MsgSNDistributed { get; private set; }
+
+        public JT808ICompress Compress { get; private set; }
 
         public static JT808GlobalConfig Instance
         {
@@ -36,6 +39,7 @@ namespace JT808.Protocol
 
         /// <summary>
         /// 跳过校验码
+        /// 测试的时候需要手动修改值，避免验证
         /// 默认：false
         /// </summary>
         public bool SkipCRCCode { get; private set; }
@@ -119,6 +123,18 @@ namespace JT808.Protocol
         public JT808GlobalConfig SetMsgSNDistributed(IMsgSNDistributed msgSNDistributed)
         {
             instance.Value.MsgSNDistributed = msgSNDistributed;
+            return instance.Value;
+        }
+
+        /// <summary>
+        /// 设置压缩算法
+        /// 默认GZip
+        /// </summary>
+        /// <param name="compressImpl"></param>
+        /// <returns></returns>
+        public JT808GlobalConfig SetCompress(JT808ICompress compressImpl)
+        {
+            instance.Value.Compress = compressImpl;
             return instance.Value;
         }
 

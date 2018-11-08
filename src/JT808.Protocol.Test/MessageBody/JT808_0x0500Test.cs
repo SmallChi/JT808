@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using JT808.Protocol.Extensions;
+using System.Diagnostics;
 
 namespace JT808.Protocol.Test.MessageBodyReply
 {
@@ -44,6 +45,8 @@ namespace JT808.Protocol.Test.MessageBodyReply
             jT808Package.Bodies = jT808_0X0500;
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
             //"7E0500002A11223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C0000180715101010010400000064020200370000B77E"
+            Console.WriteLine(hex);
+            Trace.WriteLine(hex);
             Assert.Equal("7E0500002A11223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C0000180715101010010400000064020200370000B77E", hex);
         }
 
