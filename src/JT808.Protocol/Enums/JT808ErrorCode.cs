@@ -23,6 +23,10 @@ namespace JT808.Protocol.Enums
         /// 消息体解析错误
         /// </summary>
         BodiesParseError = 1004,
-        GetAttributeError=1005
+        GetAttributeError=1005,
+        /// <summary>
+        /// 没有实现对应的类型
+        /// </summary>
+        NotImplType=1006
     }
 }

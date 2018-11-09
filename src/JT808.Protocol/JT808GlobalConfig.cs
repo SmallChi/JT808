@@ -103,6 +103,18 @@ namespace JT808.Protocol
         }
 
         /// <summary>
+        /// 注册电子运单内容实现类
+        /// </summary>
+        /// <typeparam name="TJT808_0x0701Body"></typeparam>
+        /// <returns></returns>
+        public JT808GlobalConfig Register_JT808_0x0701Body<TJT808_0x0701Body>()
+               where TJT808_0x0701Body : JT808_0x0701.JT808_0x0701Body
+        {
+            JT808_0x0701.JT808_0x0701Body.BodyImpl = typeof(TJT808_0x0701Body);
+            return instance.Value;
+        }
+
+        /// <summary>
         /// 重写消息
         /// </summary>
         /// <typeparam name="TJT808Bodies"></typeparam>

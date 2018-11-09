@@ -77,12 +77,6 @@ namespace JT808.Protocol.Extensions
             208, 224, 240
         };
 
-        //public static string ToHexString(this byte[] source)
-        //{
-        //    return string.Join(separator, source.Select(s => s.ToString("X2")));
-        //    //return ToHexString(source, false);
-        //}
-
         public static string ToHexString(this byte[] source, string separator = "")
         {
             return string.Join(separator, source.Select(s => s.ToString("X2")));
