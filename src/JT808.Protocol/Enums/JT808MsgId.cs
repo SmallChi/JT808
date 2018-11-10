@@ -123,12 +123,12 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x8103", "设置终端参数")]
         设置终端参数 = 0x8103,
         /// <summary>
-        /// 查询终端属性
-        /// 0x8107
+        /// 查询终端参数
+        /// 0x8104
         /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8107))]
-        [JT808MsgIdDescription("0x8107", "查询终端属性")]
-        查询终端属性 = 0x8107,
+        [JT808BodiesType(typeof(JT808_0x8104))]
+        [JT808MsgIdDescription("0x8104", "查询终端参数")]
+        查询终端参数 = 0x8104,
         /// <summary>
         /// 查询指定终端参数
         /// 0x8106
@@ -136,6 +136,22 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x8106))]
         [JT808MsgIdDescription("0x8106", "查询指定终端参数")]
         查询指定终端参数 = 0x8106,
+        /// <summary>
+        /// 查询终端参数应答
+        /// 0x0104
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0104))]
+        [JT808MsgIdDescription("0x0104", "查询终端参数应答")]
+        查询终端参数应答 = 0x0104,
+
+        /// <summary>
+        /// 查询终端属性
+        /// 0x8107
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8107))]
+        [JT808MsgIdDescription("0x8107", "查询终端属性")]
+        查询终端属性 = 0x8107,
+
         /// <summary>
         /// 查询终端属性应答
         /// 0x0107

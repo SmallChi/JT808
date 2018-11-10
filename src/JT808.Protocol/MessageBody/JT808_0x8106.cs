@@ -11,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x8106
     /// </summary>
     [JT808Formatter(typeof(JT808_0x8106Formatter))]
-    public class JT808_0x8106:JT808Bodies
+    public class JT808_0x8106 : JT808Bodies
     {
         /// <summary>
         /// 参数总数
@@ -22,6 +22,6 @@ namespace JT808.Protocol.MessageBody
         /// 参数 ID 列表
         /// 参数顺序排列，如“参数 ID1 参数 ID2......参数IDn”。
         /// </summary>
-        public byte[] Parameters { get; set; }
+        public UInt32[] Parameters { get; set; }
     }
 }

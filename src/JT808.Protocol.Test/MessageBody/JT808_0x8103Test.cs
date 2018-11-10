@@ -25,8 +25,8 @@ namespace JT808.Protocol.Test.MessageBody
                 ParamList =new List<JT808_0x8103_BodyBase> {
                     new JT808_0x8103_0x0001() {
                          ParamId=0x0001,
-                        ParamLength=4,
-                            ParamValue=10
+                         ParamLength=4,
+                         ParamValue=10
                     }
                 }
             };
@@ -46,7 +46,57 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x8103 JT808Bodies = (JT808_0x8103)jT808_0X8103.Bodies;
             foreach (var item in JT808Bodies.ParamList)
             {
-                Assert.Equal("10", ((JT808_0x8103_0x0001)item).ParamValue.ToString());
+                Assert.Equal(0x0001u, ((JT808_0x8103_0x0001)item).ParamId);
+                Assert.Equal(4, ((JT808_0x8103_0x0001)item).ParamLength);
+                Assert.Equal(10u, ((JT808_0x8103_0x0001)item).ParamValue);
+            }
+        }
+
+
+        [Fact]
+        public void Test2()
+        {
+            var JT808_0x8103=new JT808_0x8103
+            {
+                ParamList = new List<JT808_0x8103_BodyBase> {
+                    new JT808_0x8103_0x0001() {
+                         ParamId=0x0001,
+                         ParamLength=4,
+                         ParamValue=10
+                    },
+                    new JT808_0x8103_0x0013(){
+                         ParamId=0x0013,
+                          ParamValue="www.baidu.com"
+                    }
+                }
+            };
+            var hex = JT808Serializer.Serialize(JT808_0x8103).ToHexString();
+            Assert.Equal("0200000001040000000A000000130D7777772E62616964752E636F6D00", hex);
+        }
+
+        [Fact]
+        public void Test2_1()
+        {
+            byte[] bytes = "0200000001040000000A000000130D7777772E62616964752E636F6D00".ToHexBytes();
+            JT808_0x8103 jT808_0X8103 = JT808Serializer.Deserialize<JT808_0x8103>(bytes);
+            
+           foreach (var item in jT808_0X8103.ParamList)
+            {
+                switch (item.ParamId)
+                {
+                    case 0x0001:
+                        Assert.Equal(0x0001u, ((JT808_0x8103_0x0001)item).ParamId);
+                        Assert.Equal(4, ((JT808_0x8103_0x0001)item).ParamLength);
+                        Assert.Equal(10u, ((JT808_0x8103_0x0001)item).ParamValue);
+                        break;
+                    case 0x0013:
+                        Assert.Equal(0x0013u, ((JT808_0x8103_0x0013)item).ParamId);
+                        Assert.Equal("www.baidu.com", ((JT808_0x8103_0x0013)item).ParamValue);
+                        break;
+                    default:
+                        break;
+                }
+
             }
         }
     }
