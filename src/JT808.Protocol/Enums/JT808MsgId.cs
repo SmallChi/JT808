@@ -130,6 +130,13 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x8104", "查询终端参数")]
         查询终端参数 = 0x8104,
         /// <summary>
+        /// 终端控制
+        /// 0x8105
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8105))]
+        [JT808MsgIdDescription("0x8105", "终端控制")]
+        终端控制 = 0x8105,
+        /// <summary>
         /// 查询指定终端参数
         /// 0x8106
         /// </summary>
