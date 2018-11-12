@@ -12,8 +12,12 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         [Fact]
         public void Test1()
         {
-            //JT808_0x0801 jT808_0X0801 = new JT808_0x0801();
-            
+            JT808_0x8001 jT808_0X8001 = new JT808_0x8001();
+            jT808_0X8001.JT808PlatformResult = Enums.JT808PlatformResult.成功;
+            jT808_0X8001.MsgId = 999;
+            jT808_0X8001.MsgNum = 123;
+
+
         }
     }
 }
