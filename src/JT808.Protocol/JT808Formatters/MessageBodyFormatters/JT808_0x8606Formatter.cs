@@ -34,7 +34,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                 jT808InflectionPointProperty.InflectionPointLng = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
                 jT808InflectionPointProperty.SectionWidth = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
                 jT808InflectionPointProperty.SectionProperty = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-                ReadOnlySpan<char> sectionProperty16Bit = Convert.ToString(jT808_0X8606.RouteProperty, 2).PadLeft(16, '0').AsSpan();
+                ReadOnlySpan<char> sectionProperty16Bit = Convert.ToString(jT808InflectionPointProperty.SectionProperty, 2).PadLeft(16, '0').AsSpan();
                 bool sectionBit0Flag = sectionProperty16Bit.Slice(sectionProperty16Bit.Length - 1).ToString().Equals("0");
                 if (!sectionBit0Flag)
                 {
@@ -62,13 +62,10 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             if (!bit0Flag)
             {
                 if (value.StartTime.HasValue)
-                {
                     offset += JT808BinaryExtensions.WriteDateTime6Little(bytes, offset, value.StartTime.Value);
-                }
+                
                 if (value.EndTime.HasValue)
-                {
                     offset += JT808BinaryExtensions.WriteDateTime6Little(bytes, offset, value.EndTime.Value);
-                }
             }
             bool bit1Flag = routeProperty16Bit.Slice(routeProperty16Bit.Length - 2, 1).ToString().Equals("0");
             if(value.InflectionPointItems!=null && value.InflectionPointItems.Count > 0)

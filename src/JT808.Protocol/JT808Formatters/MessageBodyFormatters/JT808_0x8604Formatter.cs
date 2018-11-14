@@ -16,7 +16,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             int offset = 0;
             JT808_0x8604 jT808_0X8604 = new JT808_0x8604();
             jT808_0X8604.AreaId= JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            jT808_0X8604.AreaProperty = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            jT808_0X8604.AreaProperty = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
             ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(jT808_0X8604.AreaProperty, 2).PadLeft(16, '0').AsSpan();
             bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
             if (!bit0Flag)
