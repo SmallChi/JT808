@@ -17,7 +17,6 @@ namespace JT808.Protocol.MessageBody
         /// 多媒体ID
         /// </summary>
         public uint MultimediaId { get; set; }
-
         /// <summary>
         /// 重传包总数
         /// </summary>
