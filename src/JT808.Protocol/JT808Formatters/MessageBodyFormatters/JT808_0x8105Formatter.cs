@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace JT808.Protocol.JT808Formatters
+namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
     public class JT808_0x8105Formatter : IJT808Formatter<JT808_0x8105>
     {
