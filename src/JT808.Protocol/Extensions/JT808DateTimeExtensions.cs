@@ -96,7 +96,7 @@ namespace JT808.Protocol.Extensions
                 Convert.ToInt32(buf[offset].ToString(format)),
                 Convert.ToInt32(buf[offset + 1].ToString(format)),
                 Convert.ToInt32(buf[offset + 2].ToString(format)),
-                Convert.ToInt32(buf[offset + 3].ToString(format)) + Convert.ToInt32(buf[offset + 4].ToString(format)));
+                ((buf[offset + 3] << 8) + buf[offset + 4]));
             offset = offset + 5;
             return dateTime;
         }
@@ -159,12 +159,12 @@ namespace JT808.Protocol.Extensions
         /// <returns></returns>
         public static int WriteDateTime5Little(byte[] bytes, int offset, DateTime date, int fromBase = 16)
         {
-            bytes[offset] = Convert.ToByte(date.ToString("hh"), fromBase);
+            bytes[offset] = Convert.ToByte(date.ToString("HH"), fromBase);
             bytes[offset + 1] = Convert.ToByte(date.ToString("mm"), fromBase);
             bytes[offset + 2] = Convert.ToByte(date.ToString("ss"), fromBase);
             bytes[offset + 3] = (byte)(date.Millisecond >> 8);
             bytes[offset + 4] = (byte)(date.Millisecond);
-            return 4;
+            return 5;
         }
     }
 }

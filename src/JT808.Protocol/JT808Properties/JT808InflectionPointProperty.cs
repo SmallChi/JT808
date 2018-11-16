@@ -34,7 +34,6 @@ namespace JT808.Protocol.JT808Properties
         public byte SectionWidth { get; set; }
         /// <summary>
         /// 路段属性
-        /// 
         /// </summary>
         public byte SectionProperty { get; set; }
         /// <summary>

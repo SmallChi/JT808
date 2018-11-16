@@ -25,6 +25,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 多媒体格式编码 
         /// 0：JPEG；1：TIF；2：MP3；3：WAV；4：WMV；其他保留
+        /// <see cref="JT808.Protocol.Enums.JT808MultimediaCodingFormat"/>
         /// </summary>
         public byte MultimediaCodingFormat { get; set; }
         /// <summary>

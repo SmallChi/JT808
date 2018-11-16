@@ -11,10 +11,12 @@ namespace JT808.Protocol.JT808Properties
     {
         /// <summary>
         /// CAN ID
+        /// 4
         /// </summary>
         public byte[] CanId { get; set; }
         /// <summary>
         /// CAN 数据
+        /// 8
         /// </summary>
         public byte[] CanData{ get; set; }
     }

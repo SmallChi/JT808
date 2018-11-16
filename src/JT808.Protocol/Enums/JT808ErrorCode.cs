@@ -27,6 +27,10 @@ namespace JT808.Protocol.Enums
         /// <summary>
         /// 没有实现对应的类型
         /// </summary>
-        NotImplType=1006
+        NotImplType=1006,
+        /// <summary>
+        /// 长度不够
+        /// </summary>
+        NotEnoughLength=1007
     }
 }

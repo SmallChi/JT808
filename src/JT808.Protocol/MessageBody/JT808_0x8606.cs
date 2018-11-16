@@ -20,6 +20,7 @@ namespace JT808.Protocol.MessageBody
         public uint RouteId { get; set; }
         /// <summary>
         /// 路线属性
+        /// 路线属性数据格式见 表 67
         /// </summary>
         public ushort RouteProperty { get; set; }
         /// <summary>

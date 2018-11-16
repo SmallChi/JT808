@@ -33,7 +33,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AnswerId);
             offset += 2;
             int byteLength2 = JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.AnswerContent);
-            JT808BinaryExtensions.WriteByteLittle(bytes, offset - 2, (byte)byteLength2);
+            JT808BinaryExtensions.WriteUInt16Little(bytes, offset - 2, (ushort)byteLength2);
             offset += byteLength2;
             return offset;
         }
