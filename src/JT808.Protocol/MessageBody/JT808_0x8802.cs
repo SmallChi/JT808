@@ -24,6 +24,7 @@ namespace JT808.Protocol.MessageBody
         public byte ChannelId { get; set; }
         /// <summary>
         /// 事件项编码
+        /// <see cref="JT808.Protocol.Enums.JT808EventItemCoding"/>
         /// 0：平台下发指令；1：定时动作；2：抢劫报警触发；3：碰撞侧翻报警触发；其他保留
         /// </summary>
         public byte EventItemCoding { get; set; }

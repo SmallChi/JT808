@@ -15,6 +15,7 @@ namespace JT808.Protocol.MessageBody
     {
         /// <summary>
         /// 透传消息类型
+        /// 透传消息类型定义见 表 93
         /// </summary>
         public byte PassthroughType { get; set; }
 

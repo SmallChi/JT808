@@ -1,4 +1,6 @@
-﻿using System;
+﻿using JT808.Protocol.Attributes;
+using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,11 +10,12 @@ namespace JT808.Protocol.MessageBody
     /// 存储多媒体数据上传命令
     /// 0x8803
     /// </summary>
-
+    [JT808Formatter(typeof(JT808_0x8803Formatter))]
     public class JT808_0x8803:JT808Bodies
     {
         /// <summary>
         /// 多媒体类型 
+        /// <see cref="JT808.Protocol.Enums.JT808MultimediaType"/>
         /// 0：图像；1：音频；2：视频
         /// </summary>
         public byte MultimediaType { get; set; }
@@ -22,7 +25,8 @@ namespace JT808.Protocol.MessageBody
         public byte ChannelId { get; set; }
         /// <summary>
         /// 事件项编码
-        /// 0：平台下发指令；1：定时动作；2：抢劫报警触发；3：碰撞侧翻报警触发；其他保留
+        /// <see cref="JT808.Protocol.Enums.JT808EventItemCoding"/>
+        /// 0：平台下发指令；1：定时动作；2：抢劫报警触发；3：碰撞侧翻报警触发；其他保留 
         /// </summary>
         public byte EventItemCoding { get; set; }
         /// <summary>

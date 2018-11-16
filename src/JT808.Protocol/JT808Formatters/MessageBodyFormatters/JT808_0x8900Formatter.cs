@@ -24,8 +24,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public int Serialize(ref byte[] bytes, int offset, JT808_0x8900 value)
         {
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.PassthroughType);
-            object obj = JT808FormatterExtensions.GetFormatter(value.JT808_0X8900_BodyBase.GetType());
-            offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj,ref bytes, offset, value);
+            if (JT808_0x8900_BodyBase.JT808_0x8900Method.TryGetValue(value.PassthroughType, out Type type))
+            {
+                object obj = JT808FormatterExtensions.GetFormatter(type);
+                offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj, ref bytes, offset, value.JT808_0X8900_BodyBase);
+            }
             return offset;
         }
     }
