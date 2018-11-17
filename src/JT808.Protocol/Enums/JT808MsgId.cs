@@ -19,6 +19,13 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x0001", "终端通用应答")]
         终端通用应答 = 0x0001,
         /// <summary>
+        /// 平台通用应答
+        /// 0x8001
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8001))]
+        [JT808MsgIdDescription("0x8001", "平台通用应答")]
+        平台通用应答 = 0x8001,
+        /// <summary>
         /// 终端心跳
         /// 0x0002
         /// </summary>
@@ -26,12 +33,26 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x0002", "终端心跳")]
         终端心跳 = 0x0002,
         /// <summary>
+        /// 补传分包请求
+        /// 0x8003
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8003))]
+        [JT808MsgIdDescription("0x8003", "补传分包请求")]
+        补传分包请求 = 0x8003,
+        /// <summary>
         /// 终端注册
         /// 0x0100
         /// </summary>
         [JT808BodiesType(typeof(JT808_0x0100))]
         [JT808MsgIdDescription("0x0100", "终端注册")]
         终端注册 = 0x0100,
+        /// <summary>
+        /// 终端注册应答
+        /// 0x8100
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8100))]
+        [JT808MsgIdDescription("0x8100", "终端注册应答")]
+        终端注册应答 = 0x8100,
         /// <summary>
         /// 终端注销
         /// 0x0003
@@ -47,75 +68,6 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x0102", "终端鉴权")]
         终端鉴权 = 0x0102,
         /// <summary>
-        /// 位置信息汇报
-        /// 0x0200
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x0200))]
-        [JT808MsgIdDescription("0x0200", "位置信息汇报")]
-        位置信息汇报 = 0x0200,
-        /// <summary>
-        ///  终端RSA公钥【0A00】 
-        ///  0x0A00
-        /// </summary>
-        [JT808MsgIdDescription("0x0A00", "终端RSA公钥")]
-        终端RSA公钥 = 0x0A00,
-        /// <summary>
-        /// 平台通用应答
-        /// 0x8001
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8001))]
-        [JT808MsgIdDescription("0x8001", "平台通用应答")]
-        平台通用应答 = 0x8001,
-        /// <summary>
-        /// 补传分包请求
-        /// 0x8003
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8003))]
-        [JT808MsgIdDescription("0x8003", "补传分包请求")]
-        补传分包请求 = 0x8003,
-        /// <summary>
-        /// 终端注册应答
-        /// 0x8100
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8100))]
-        [JT808MsgIdDescription("0x8100", "终端注册应答")]
-        终端注册应答 = 0x8100,
-        /// <summary>
-        /// 文本信息下发
-        /// 0x8300
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8300))]
-        [JT808MsgIdDescription("0x8300", "文本信息下发")]
-        文本信息下发 = 0x8300,
-        /// <summary>
-        /// 定位数据批量上传
-        /// 0x0704
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x0704))]
-        [JT808MsgIdDescription("0x0704", "定位数据批量上传")]
-        定位数据批量上传 = 0x0704,
-        /// <summary>
-        /// 多媒体数据上传
-        /// 0x0801
-        /// </summary>
-        //[JT808BodiesType(typeof(JT808_0x0801))]
-        [JT808MsgIdDescription("0x0801", "多媒体数据上传")]
-        多媒体数据上传 = 0x0801,
-        /// <summary>
-        /// 位置信息查询
-        /// 0x8201
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8201))]
-        [JT808MsgIdDescription("0x8201", "位置信息查询")]
-        位置信息查询 =0x8201,
-        /// <summary>
-        /// 位置信息查询应答
-        /// 0x0201
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x0201))]
-        [JT808MsgIdDescription("0x0201", "位置信息查询应答")]
-        位置信息查询应答 = 0x0201,
-        /// <summary>
         /// 设置终端参数
         /// 0x8103
         /// </summary>
@@ -129,6 +81,13 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x8104))]
         [JT808MsgIdDescription("0x8104", "查询终端参数")]
         查询终端参数 = 0x8104,
+        /// <summary>
+        /// 查询终端参数应答
+        /// 0x0104
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0104))]
+        [JT808MsgIdDescription("0x0104", "查询终端参数应答")]
+        查询终端参数应答 = 0x0104,
         /// <summary>
         /// 终端控制
         /// 0x8105
@@ -144,28 +103,19 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x8106", "查询指定终端参数")]
         查询指定终端参数 = 0x8106,
         /// <summary>
-        /// 查询终端参数应答
-        /// 0x0104
-        /// </summary>
-        [JT808BodiesType(typeof(JT808_0x0104))]
-        [JT808MsgIdDescription("0x0104", "查询终端参数应答")]
-        查询终端参数应答 = 0x0104,
-
-        /// <summary>
         /// 查询终端属性
         /// 0x8107
         /// </summary>
         [JT808BodiesType(typeof(JT808_0x8107))]
         [JT808MsgIdDescription("0x8107", "查询终端属性")]
         查询终端属性 = 0x8107,
-
         /// <summary>
         /// 查询终端属性应答
         /// 0x0107
         /// </summary>
         [JT808BodiesType(typeof(JT808_0x0107))]
         [JT808MsgIdDescription("0x0107", "查询终端属性应答")]
-        查询终端属性应答 =0x0107,
+        查询终端属性应答 = 0x0107,
         /// <summary>
         /// 下发终端升级包
         /// 0x8108
@@ -181,6 +131,27 @@ namespace JT808.Protocol.Enums
         [JT808MsgIdDescription("0x0108", "终端升级结果通知")]
         终端升级结果通知 = 0x0108,
         /// <summary>
+        /// 位置信息查询
+        /// 0x8201
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8201))]
+        [JT808MsgIdDescription("0x8201", "位置信息查询")]
+        位置信息查询 = 0x8201,
+        /// <summary>
+        /// 位置信息汇报
+        /// 0x0200
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0200))]
+        [JT808MsgIdDescription("0x0200", "位置信息汇报")]
+        位置信息汇报 = 0x0200,
+        /// <summary>
+        /// 位置信息查询应答
+        /// 0x0201
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0201))]
+        [JT808MsgIdDescription("0x0201", "位置信息查询应答")]
+        位置信息查询应答 = 0x0201,
+        /// <summary>
         /// 临时位置跟踪控制
         /// 0x8202
         /// </summary>
@@ -194,6 +165,47 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x8203))]
         [JT808MsgIdDescription("0x8203", "人工确认报警消息")]
         人工确认报警消息 = 0x8203,
+        /// <summary>
+        /// 文本信息下发
+        /// 0x8300
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8300))]
+        [JT808MsgIdDescription("0x8300", "文本信息下发")]
+        文本信息下发 = 0x8300,
+        /// <summary>
+        /// 事件设置
+        /// 0x8301
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8301))]
+        [JT808MsgIdDescription("0x8301", "事件设置")]
+        事件设置 =0x8301,
+        /// <summary>
+        /// 事件报告
+        /// 0x0301
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8301))]
+        [JT808MsgIdDescription("0x0301", "事件报告")]
+        事件报告 = 0x0301,
+        /// <summary>
+        ///  终端RSA公钥【0A00】 
+        ///  0x0A00
+        /// </summary>
+        [JT808MsgIdDescription("0x0A00", "终端RSA公钥")]
+        终端RSA公钥 = 0x0A00,
+        /// <summary>
+        /// 定位数据批量上传
+        /// 0x0704
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0704))]
+        [JT808MsgIdDescription("0x0704", "定位数据批量上传")]
+        定位数据批量上传 = 0x0704,
+        /// <summary>
+        /// 多媒体数据上传
+        /// 0x0801
+        /// </summary>
+        //[JT808BodiesType(typeof(JT808_0x0801))]
+        [JT808MsgIdDescription("0x0801", "多媒体数据上传")]
+        多媒体数据上传 = 0x0801,
         /// <summary>
         /// 车辆控制
         /// 0x8500
