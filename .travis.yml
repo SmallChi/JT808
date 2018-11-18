@@ -1,6 +1,6 @@
 language: csharp
 solution: JT808.Protocol.sln
-dotnet: 2.1.5
+dotnet: 2.1.500
 os: linux
 mono: none
 dist: trusty
