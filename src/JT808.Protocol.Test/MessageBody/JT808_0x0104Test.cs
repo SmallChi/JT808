@@ -79,18 +79,18 @@ namespace JT808.Protocol.Test.MessageBody
                     },
                     new JT808_0x8103_0x0013(){
                          ParamId=0x0013,
-                          ParamValue="www.baidu.com"
+                         ParamValue="www.baidu.com"
                     }
                 }
             };
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
-            Assert.Equal("7E0104001F000123456789000A00140200000001040000000A000000130D7777772E62616964752E636F6D00F37E", hex);
+            Assert.Equal("7E0104001E000123456789000A00140200000001040000000A000000130D7777772E62616964752E636F6DF27E", hex);
         }
 
         [Fact]
         public void Test2_1()
         {
-            byte[] bytes = "7E0104001F000123456789000A00140200000001040000000A000000130D7777772E62616964752E636F6D00F37E".ToHexBytes();
+            byte[] bytes = "7E0104001E000123456789000A00140200000001040000000A000000130D7777772E62616964752E636F6DF27E".ToHexBytes();
             JT808Package jT808_0X8104 = JT808Serializer.Deserialize<JT808Package>(bytes);
             Assert.Equal(Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(), jT808_0X8104.Header.MsgId);
             Assert.Equal(10, jT808_0X8104.Header.MsgNum);

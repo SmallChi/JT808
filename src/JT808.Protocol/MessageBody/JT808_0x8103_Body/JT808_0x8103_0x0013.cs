@@ -16,7 +16,7 @@ namespace JT808.Protocol.MessageBody.JT808_0x8103_Body
         /// <summary>
         /// 数据 长度
         /// </summary>
-        public byte ParamLength { get; set; }
+        public override byte ParamLength { get; set; }
         /// <summary>
         /// 主服务器地址,IP 或域名
         /// </summary>

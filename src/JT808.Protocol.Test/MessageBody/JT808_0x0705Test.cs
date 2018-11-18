@@ -38,7 +38,7 @@ namespace JT808.Protocol.Test.MessageBody
 
             Assert.Equal(2, jT808_0X0705.CanItemCount);
 
-            Assert.Equal(DateTime.Parse("2018-11-15 20:00:05.350"), jT808_0X0705.FirstCanReceiveTime);
+            Assert.Equal(DateTime.Parse("20:00:05.350"), jT808_0X0705.FirstCanReceiveTime);
       
             Assert.Equal(new byte[] { 0x01, 0x02, 0x03, 0x04 }, jT808_0X0705.CanItems[0].CanId);
             Assert.Equal(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04 }, jT808_0X0705.CanItems[0].CanData);

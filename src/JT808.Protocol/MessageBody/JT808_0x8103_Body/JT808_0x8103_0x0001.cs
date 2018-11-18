@@ -3,6 +3,10 @@ using JT808.Protocol.JT808Formatters.MessageBodyFormatters.JT808_0x8103Formatter
 
 namespace JT808.Protocol.MessageBody.JT808_0x8103_Body
 {
+    /// <summary>
+    /// 终端心跳发送间隔，单位为秒（s）
+    /// 0x8103_0x0001
+    /// </summary>
     [JT808Formatter(typeof(JT808_0x8103_0x0001Formatter))]
     public class JT808_0x8103_0x0001 : JT808_0x8103_BodyBase
     {
@@ -10,7 +14,7 @@ namespace JT808.Protocol.MessageBody.JT808_0x8103_Body
         /// <summary>
         /// 数据 长度
         /// </summary>
-        public byte ParamLength { get; set; } = 4;
+        public override byte ParamLength { get; set; } = 4;
         /// <summary>
         /// 终端心跳发送间隔，单位为秒（s）
         /// </summary>

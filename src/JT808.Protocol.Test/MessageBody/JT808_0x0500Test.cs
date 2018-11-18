@@ -6,6 +6,7 @@ using System.Text;
 using Xunit;
 using JT808.Protocol.Extensions;
 using System.Diagnostics;
+using Xunit.Extensions;
 
 namespace JT808.Protocol.Test.MessageBodyReply
 {
@@ -44,16 +45,14 @@ namespace JT808.Protocol.Test.MessageBodyReply
             jT808_0X0500.MsgNum = 1000;
             jT808Package.Bodies = jT808_0X0500;
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
-            //"7E0500002A11223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C0000180715101010010400000064020200370000B77E"
-            Console.WriteLine(hex);
-            Trace.WriteLine(hex);
-            Assert.Equal("7E0500002A11223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C0000180715101010010400000064020200370000B77E", hex);
+            Assert.Equal("7E0500002811223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037B57E".Length, hex.Length);
+            Assert.Equal("7E0500002811223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037B57E", hex);
         }
 
         [Fact]
         public void Test2()
         {
-            byte[] bytes = "7E 05 00 00 2A 11 22 33 44 55 66 22 B8 03 E8 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37 00 00 B7 7E".ToHexBytes();
+            byte[] bytes = "7E0500002811223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037B57E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
             Assert.Equal(Enums.JT808MsgId.车辆控制应答.ToUInt16Value(), jT808Package.Header.MsgId);
             Assert.Equal(8888, jT808Package.Header.MsgNum);

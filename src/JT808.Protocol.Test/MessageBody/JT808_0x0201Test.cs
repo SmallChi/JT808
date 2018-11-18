@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using JT808.Protocol.Extensions;
+using System.Diagnostics;
 
 namespace JT808.Protocol.Test.MessageBodyReply
 {
@@ -13,8 +14,6 @@ namespace JT808.Protocol.Test.MessageBodyReply
         [Fact]
         public void Test1()
         {
-            //"7E 02 01 00 2A 11 22 33 44 55 66 22 B8 30 39 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37 00 00 53 7E"
-
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
@@ -45,13 +44,14 @@ namespace JT808.Protocol.Test.MessageBodyReply
             jT808_0X0201.Position = jT808UploadLocationRequest;
             jT808Package.Bodies = jT808_0X0201;
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
-            Assert.Equal("7E0201002A11223344556622B83039000000010000000200BA7F0E07E4F11C0028003C0000180715101010010400000064020200370000537E", hex);
+            Assert.Equal("7E0201002811223344556622B83039000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037517E".Length, hex.Length);
+            Assert.Equal("7E0201002811223344556622B83039000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037517E", hex);
         }
 
         [Fact]
         public void Test2()
         {
-            byte[] bytes = "7E 02 01 00 2A 11 22 33 44 55 66 22 B8 30 39 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37 00 00 53 7E".ToHexBytes();
+            byte[] bytes = "7E0201002811223344556622B83039000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037517E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize(bytes);
             JT808_0x0201 jT808_0X0201 = (JT808_0x0201) jT808Package.Bodies;
             Assert.Equal(12345, jT808_0X0201.MsgNum);

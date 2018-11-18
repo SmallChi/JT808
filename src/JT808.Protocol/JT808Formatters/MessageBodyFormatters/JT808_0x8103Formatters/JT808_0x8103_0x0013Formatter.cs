@@ -22,7 +22,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters.JT808_0x8103Forma
         {
             offset += 1;
             var lenth = JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.ParamValue);         
-            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset-1, (byte)lenth);
+            JT808BinaryExtensions.WriteByteLittle(bytes, offset-1, (byte)lenth);
             offset += lenth;
             return offset;
         }
