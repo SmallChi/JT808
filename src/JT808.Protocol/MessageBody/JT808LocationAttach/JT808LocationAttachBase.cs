@@ -43,6 +43,10 @@ namespace JT808.Protocol.MessageBody.JT808LocationAttach
         {
             JT808LocationAttachMethod.Add(attachInfoId, typeof(TJT808LocationAttach));
         }
+        internal static void AddJT808LocationAttachMethod(byte attachInfoId,Type jT808LocationAttach)
+        {
+            JT808LocationAttachMethod.Add(attachInfoId, jT808LocationAttach);
+        }
 
         /// <summary>
         /// 附加信息Id

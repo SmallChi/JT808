@@ -58,6 +58,14 @@ namespace JT808.Protocol
             }
             return instance.Value;
         }
+        public JT808GlobalConfig Register_0x0200_Attach(byte attachInfoId,Type jT808LocationAttach)
+        {
+            if (!JT808LocationAttachBase.JT808LocationAttachMethod.ContainsKey(attachInfoId))
+            {
+                JT808LocationAttachBase.AddJT808LocationAttachMethod(attachInfoId, jT808LocationAttach);
+            }
+            return instance.Value;
+        }
 
         /// <summary>
         /// 注册自定义数据上行透传信息
@@ -73,7 +81,6 @@ namespace JT808.Protocol
             }
             return instance.Value;
         }
-
         /// <summary>
         /// 注册自定义数据下行透传信息
         /// </summary>
@@ -88,7 +95,6 @@ namespace JT808.Protocol
             }
             return instance.Value;
         }
-
         /// <summary>
         /// 注册自定义消息
         /// </summary>
