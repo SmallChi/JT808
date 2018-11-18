@@ -5,10 +5,9 @@ os: linux
 mono: none
 dist: trusty
 script:
- - cd /src
- - dotnet restore JT808.Protocol.sln
- - dotnet build JT808.Protocol.Test/JT808.Protocol.Test.csproj
- - dotnet test JT808.Protocol.Test/JT808.Protocol.Test.csproj
+ - dotnet restore src/JT808.Protocol.sln
+ - dotnet build src/JT808.Protocol.Test/JT808.Protocol.Test.csproj
+ - dotnet test src/JT808.Protocol.Test/JT808.Protocol.Test.csproj
 after_success:
  - echo successful build!
 branches:
