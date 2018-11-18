@@ -6,8 +6,7 @@ mono: none
 dist: trusty
 script:
  - dotnet restore src/JT808.Protocol.sln
- - dotnet build --runtime ubuntu.14.04-x64 src/JT808.Protocol.sln
- - dotnet test src/JT808.Protocol/JT808.Protocol.csproj
+ - dotnet test --no-build src/JT808.Protocol/JT808.Protocol.csproj
 after_success:
  - echo successful build!
 branches:
