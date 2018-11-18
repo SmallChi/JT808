@@ -6,8 +6,8 @@ mono: none
 dist: trusty
 script:
  - dotnet restore src/JT808.Protocol.sln
- - dotnet build
- - dotnet test src/JT808.Protocol.Test
+ - dotnet build src/JT808.Protocol.sln
+ - dotnet test src/JT808.Protocol/JT808.Protocol.csproj
 after_success:
  - echo successful build!
 branches:
