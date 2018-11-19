@@ -12,16 +12,17 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         {
             int offset = 0;
             JT808_0x0901 jT808_0X0901 = new JT808_0x0901();
-            jT808_0X0901.CompressMessageLength = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            var data = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset, (int)jT808_0X0901.CompressMessageLength);
-            jT808_0X0901.CompressMessage = JT808GlobalConfig.Instance.Compress.Decompress(data);
+            var compressMessageLength = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
+            var data = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset, (int)compressMessageLength);
+            jT808_0X0901.UnCompressMessage = JT808GlobalConfig.Instance.Compress.Decompress(data);
+            jT808_0X0901.UnCompressMessageLength = (uint)jT808_0X0901.UnCompressMessage.Length;
             readSize = offset;
             return jT808_0X0901;
         }
 
         public int Serialize(ref byte[] bytes, int offset, JT808_0x0901 value)
         {
-            var data= JT808GlobalConfig.Instance.Compress.Compress(value.CompressMessage);
+            var data= JT808GlobalConfig.Instance.Compress.Compress(value.UnCompressMessage);
             offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset,(uint) data.Length);
             offset += JT808BinaryExtensions.WriteBytesLittle(bytes, offset, data);
             return offset;
