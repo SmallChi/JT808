@@ -67,6 +67,31 @@ namespace JT808.Protocol.Extensions.DependencyInjection
                 }
             }
             catch { }
+            try
+            {
+                var JT808_0x0900_BodyBaseExts = servicesProvider.GetServices<JT808_0x0900_BodyBase>();
+                foreach (var impl in JT808_0x0900_BodyBaseExts)
+                {
+                    JT808GlobalConfig.Instance.Register_0x0900_Ext(impl.JT808_0x0900_ExtId, impl.GetType());
+                }
+            }
+            catch { }
+            try
+            {
+                var JT808_0x8900_BodyBaseExts = servicesProvider.GetServices<JT808_0x8900_BodyBase>();
+                foreach (var impl in JT808_0x8900_BodyBaseExts)
+                {
+                    JT808GlobalConfig.Instance.Register_0x8900_Ext(impl.JT808_0x8900_ExtId, impl.GetType());
+                }
+            }
+            catch { }
+            try
+            {
+                var Register_JT808_0x0701BodyImpl = servicesProvider.GetServices<JT808_0x0701.JT808_0x0701Body>();
+                JT808GlobalConfig.Instance.Register_JT808_0x0701Body(Register_JT808_0x0701BodyImpl.GetType());
+            }
+            catch { }
+
             return services;
         }
     }

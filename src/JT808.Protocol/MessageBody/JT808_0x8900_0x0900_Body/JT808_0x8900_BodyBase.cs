@@ -9,6 +9,7 @@ namespace JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body
     /// </summary>
     public abstract class JT808_0x8900_BodyBase
     {
+        public virtual byte JT808_0x8900_ExtId { get; set; }
         public static IDictionary<byte, Type> JT808_0x8900Method { get; private set; }
 
         static JT808_0x8900_BodyBase()
@@ -20,6 +21,10 @@ namespace JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body
             where TJT808_0x8900_Body : JT808_0x8900_BodyBase
         {
             JT808_0x8900Method.Add(passthroughType, typeof(TJT808_0x8900_Body));
+        }
+        internal static void AddJT808_0x8900Method(byte passthroughType,Type jT808_0x8900_Body)
+        {
+            JT808_0x8900Method.Add(passthroughType, jT808_0x8900_Body);
         }
     }
 }

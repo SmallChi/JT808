@@ -81,6 +81,14 @@ namespace JT808.Protocol
             }
             return instance.Value;
         }
+        public JT808GlobalConfig Register_0x0900_Ext(byte passthroughType,Type jJT808_0x0900_Ext)
+        {
+            if (!JT808_0x0900_BodyBase.JT808_0x0900Method.ContainsKey(passthroughType))
+            {
+                JT808_0x0900_BodyBase.AddJT808_0x0900Method(passthroughType, jJT808_0x0900_Ext);
+            }
+            return instance.Value;
+        }
         /// <summary>
         /// 注册自定义数据下行透传信息
         /// </summary>
@@ -92,6 +100,19 @@ namespace JT808.Protocol
             if (!JT808_0x8900_BodyBase.JT808_0x8900Method.ContainsKey(passthroughType))
             {
                 JT808_0x8900_BodyBase.AddJT808_0x8900Method<TJT808_0x8900_Ext>(passthroughType);
+            }
+            return instance.Value;
+        }
+        /// <summary>
+        /// 注册自定义数据下行透传信息
+        /// </summary>
+        /// <typeparam name="TJT808_0x8900_Ext"></typeparam>
+        /// <param name="attachInfoId"></param>
+        public JT808GlobalConfig Register_0x8900_Ext(byte passthroughType,Type jJT808_0x8900_Ext)
+        {
+            if (!JT808_0x8900_BodyBase.JT808_0x8900Method.ContainsKey(passthroughType))
+            {
+                JT808_0x8900_BodyBase.AddJT808_0x8900Method(passthroughType, jJT808_0x8900_Ext);
             }
             return instance.Value;
         }
@@ -119,7 +140,11 @@ namespace JT808.Protocol
             JT808_0x0701.JT808_0x0701Body.BodyImpl = typeof(TJT808_0x0701Body);
             return instance.Value;
         }
-
+        public JT808GlobalConfig Register_JT808_0x0701Body(Type JT808_0x0701BodyImpl)
+        {
+            JT808_0x0701.JT808_0x0701Body.BodyImpl = JT808_0x0701BodyImpl;
+            return instance.Value;
+        }
         /// <summary>
         /// 重写消息
         /// </summary>
