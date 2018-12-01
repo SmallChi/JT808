@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using JT808.Protocol.Extensions;
+using System.Runtime.InteropServices;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -18,7 +19,15 @@ namespace JT808.Protocol.Test.MessageBody
             var data = Encoding.UTF8.GetBytes(UserName);
             jT808_0X0901.UnCompressMessage = data;
             var hex = JT808Serializer.Serialize(jT808_0X0901).ToHexString();
-            Assert.Equal("0000001F1F8B080000000000000B2BCE4DCCC949CEC82CA6320D0027F897E258000000", hex);
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Assert.Equal("0000001F1F8B08000000000000032BCE4DCCC949CEC82CA6320D0027F897E258000000", hex);
+            }
+            else if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Assert.Equal("0000001F1F8B080000000000000B2BCE4DCCC949CEC82CA6320D0027F897E258000000", hex);
+            }
+
         }
 
         [Fact]
