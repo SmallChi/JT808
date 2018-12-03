@@ -12,7 +12,7 @@ namespace JT808.Protocol.MessageBody.JT808LocationAttach
         /// <summary>
         /// 位置附加信息方法
         /// </summary>
-        public static IDictionary<byte, Type> JT808LocationAttachMethod { get; private set; }
+        internal static IDictionary<byte, Type> JT808LocationAttachMethod { get; private set; }
 
         static JT808LocationAttachBase()
         {
@@ -43,9 +43,10 @@ namespace JT808.Protocol.MessageBody.JT808LocationAttach
         {
             JT808LocationAttachMethod.Add(attachInfoId, typeof(TJT808LocationAttach));
         }
-        internal static void AddJT808LocationAttachMethod(byte attachInfoId,Type jT808LocationAttach)
+
+        internal static void AddJT808LocationAttachMethod(byte attachInfoId,Type type)
         {
-            JT808LocationAttachMethod.Add(attachInfoId, jT808LocationAttach);
+            JT808LocationAttachMethod.Add(attachInfoId, type);
         }
 
         /// <summary>
@@ -57,7 +58,6 @@ namespace JT808.Protocol.MessageBody.JT808LocationAttach
         /// 附加信息长度
         /// </summary>
         public abstract byte AttachInfoLength { get;  set; }
-
 
         public const byte AttachId0x01 = 0x01;
         public const byte AttachId0x02 = 0x02;

@@ -22,9 +22,10 @@ namespace JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body
         {
             JT808_0x8900Method.Add(passthroughType, typeof(TJT808_0x8900_Body));
         }
-        internal static void AddJT808_0x8900Method(byte passthroughType,Type jT808_0x8900_Body)
+
+        internal static void AddJT808_0x8900Method(byte passthroughType,Type type)
         {
-            JT808_0x8900Method.Add(passthroughType, jT808_0x8900_Body);
+            JT808_0x8900Method.Add(passthroughType, type);
         }
     }
 }

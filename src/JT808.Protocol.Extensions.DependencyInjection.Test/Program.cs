@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using JT808.Protocol.MessageBody.JT808LocationAttach;
 using System.Linq;
 using JT808.Protocol.MessageBody;
+using JT808.Protocol.Extensions.DependencyInjection.Test.JT808LocationAttach;
+using JT808.Protocol.Extensions.DependencyInjection.Test.JT808_0x0701BodiesImpl;
 
 namespace JT808.Protocol.Extensions.DependencyInjection.Test
 {
@@ -22,19 +24,12 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Test
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
-                    //注释掉协议包中的 JT808LocationAttachImpl0x01，JT808LocationAttachImpl0x02进行测试
-                    services.AddSingleton<JT808LocationAttachBase, JT808LocationAttachImpl0x01>();
-                    services.AddSingleton<JT808LocationAttachBase, JT808LocationAttachImpl0x02>();
-                    // 方式1：
-                    services.AddJT808Configure(hostContext.Configuration.GetSection("JT808Options"));
-                    // 方式2:
-                    //services.AddJT808Configure(new JT808Options
-                    //{
-                    //    SkipCRCCode = false
-                    //});
-
-                    byte[] bodys = "00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37".ToHexBytes();
-                    var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x0200>(bodys);
+                    services.AddJT808Configure(new JT808Options
+                    {
+                        SkipCRCCode = false
+                    }
+                    .Register_0x0200_Attach<JT808LocationAttachImpl0x06>(0x06)
+                    .Register_JT808_0x0701Body<JT808_0x0701TestBodiesImpl>());
                 });    
             await serverHostBuilder.RunConsoleAsync();
         }
