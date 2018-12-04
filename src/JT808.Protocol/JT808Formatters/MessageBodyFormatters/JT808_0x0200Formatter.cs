@@ -1,7 +1,6 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Properties;
 using JT808.Protocol.MessageBody;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
@@ -32,7 +31,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             jT808_0X0200.Direction = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
             jT808_0X0200.GPSTime=JT808BinaryExtensions.ReadDateTime6Little(bytes,ref offset);
             // 位置附加信息
-            jT808_0X0200.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
+            jT808_0X0200.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
             if (bytes.Length > 28)
             {
                 int attachOffset = 0;
@@ -45,7 +44,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                     try
                     {
                         Type jT808LocationAttachType;
-                        if (JT808LocationAttachBase.JT808LocationAttachMethod.TryGetValue(locationAttachSpan[attachOffset], out jT808LocationAttachType))
+                        if (JT808_0x0200_BodyBase.JT808LocationAttachMethod.TryGetValue(locationAttachSpan[attachOffset], out jT808LocationAttachType))
                         {
                             int attachContentLen = locationAttachSpan[attachOffset + 1];
                             int locationAttachTotalLen = attachId + attachLen + attachContentLen;

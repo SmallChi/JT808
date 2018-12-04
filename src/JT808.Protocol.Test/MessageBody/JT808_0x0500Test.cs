@@ -1,5 +1,4 @@
 ﻿using JT808.Protocol.MessageBody;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,12 +31,12 @@ namespace JT808.Protocol.Test.MessageBodyReply
             JT808_0x0200_1.Speed = 60;
             JT808_0x0200_1.Direction = 0;
             JT808_0x0200_1.StatusFlag = 2;
-            JT808_0x0200_1.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
-            JT808_0x0200_1.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x01, new JT808LocationAttachImpl0x01
+            JT808_0x0200_1.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            JT808_0x0200_1.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
             });
-            JT808_0x0200_1.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x02, new JT808LocationAttachImpl0x02
+            JT808_0x0200_1.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x02, new JT808_0x0200_0x02
             {
                 Oil = 55
             });
@@ -66,8 +65,8 @@ namespace JT808.Protocol.Test.MessageBodyReply
             Assert.Equal(0, JT808Bodies.JT808_0x0200.Direction);
             Assert.Equal(60, JT808Bodies.JT808_0x0200.Speed);
             Assert.Equal((uint)2, JT808Bodies.JT808_0x0200.StatusFlag);
-            Assert.Equal(100, ((JT808LocationAttachImpl0x01)JT808Bodies.JT808_0x0200.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x01]).Mileage);
-            Assert.Equal(55, ((JT808LocationAttachImpl0x02)JT808Bodies.JT808_0x0200.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x02]).Oil);
+            Assert.Equal(100, ((JT808_0x0200_0x01)JT808Bodies.JT808_0x0200.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
+            Assert.Equal(55, ((JT808_0x0200_0x02)JT808Bodies.JT808_0x0200.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
         }
     }
 }

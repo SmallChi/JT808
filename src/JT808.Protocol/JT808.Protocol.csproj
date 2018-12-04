@@ -23,15 +23,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\**" />
     <Compile Remove="JT808Properties\JT808LocationAttachProperties\**" />
-    <Compile Remove="MessageBody\JT808LocationAttach\**" />
-    <EmbeddedResource Remove="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\**" />
     <EmbeddedResource Remove="JT808Properties\JT808LocationAttachProperties\**" />
-    <EmbeddedResource Remove="MessageBody\JT808LocationAttach\**" />
-    <None Remove="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\**" />
     <None Remove="JT808Properties\JT808LocationAttachProperties\**" />
-    <None Remove="MessageBody\JT808LocationAttach\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,34 +35,6 @@
     <Compile Remove="JT808MessageBodyFactory.cs" />
     <Compile Remove="JT808Properties\JT808TerminalLoginRequestProperty.cs" />
     <Compile Remove="JT808Properties\JT808UploadLocationRequestProperty.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x01Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x02Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x03Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x04Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x11Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x12Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x13Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x25Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x2AFormatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x2BFormatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x30Formatter.cs" />
-    <Compile Include="JT808Formatters\MessageBodyFormatters\JT808LocationAttach\JT808_0x0200_0x31Formatter.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachBase.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x01.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x02.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x03.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x04.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x11.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x12.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x13.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x25.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x2A.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x2B.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x30.cs" />
-    <Compile Include="MessageBody\JT808LocationAttach\JT808LocationAttachImpl0x31.cs" />
   </ItemGroup>
   
   <ItemGroup>

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using JT808.Protocol.Extensions;
-using JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body;
 
 namespace JT808.Protocol.Test.MessageBody
 {

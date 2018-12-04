@@ -4,9 +4,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading.Tasks;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
-using System.Linq;
 using JT808.Protocol.MessageBody;
+using System.Linq;
 using JT808.Protocol.Extensions.DependencyInjection.Test.JT808LocationAttach;
 using JT808.Protocol.Extensions.DependencyInjection.Test.JT808_0x0701BodiesImpl;
 

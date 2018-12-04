@@ -1,6 +1,6 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using JT808.Protocol.MessageBody.JT808_0x8103_Body;
+using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
 using System.Text;

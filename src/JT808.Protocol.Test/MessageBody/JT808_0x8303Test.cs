@@ -1,5 +1,4 @@
 ﻿using JT808.Protocol.MessageBody;
-using JT808.Protocol.MessageBody.JT808_0x8103_Body;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -71,14 +71,14 @@ jT808_0x0200.Lng = 132444444;
 jT808_0x0200.Speed = 60;
 jT808_0x0200.Direction = 0;
 jT808_0x0200.StatusFlag = 2;
-jT808_0x0200.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
+jT808_0x0200.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
 
-jT808_0x0200.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x01, new JT808LocationAttachImpl0x01
+jT808_0x0200.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
 {
     Mileage = 100
 });
 
-jT808_0x0200.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x02, new JT808LocationAttachImpl0x02
+jT808_0x0200.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x02, new JT808_0x0200_0x02
 {
     Oil = 125
 });
@@ -159,9 +159,9 @@ Assert.Equal(60, jT808_0x0200.Speed);
 Assert.Equal(0, jT808_0x0200.Direction);
 Assert.Equal((uint)2, jT808_0x0200.StatusFlag);
 //4.1.附加信息1
-Assert.Equal(100, ((JT808LocationAttachImpl0x01)jT808_0x0200.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x01]).Mileage);
+Assert.Equal(100, ((JT808_0x0200_0x01)jT808_0x0200.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
 //4.2.附加信息2
-Assert.Equal(125, ((JT808LocationAttachImpl0x02)jT808_0x0200.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x02]).Oil);
+Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
 ```
 
 ### 举个栗子2
@@ -180,8 +180,8 @@ JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("12345678
         StatusFlag = 2,
         JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>
         {
-            { JT808LocationAttachBase.AttachId0x01,new JT808LocationAttachImpl0x01{Mileage = 100}},
-            { JT808LocationAttachBase.AttachId0x02,new JT808LocationAttachImpl0x02{Oil = 125}}
+            { JT808_0x0200_BodyBase.AttachId0x01,new JT808_0x0200_0x01{Mileage = 100}},
+            { JT808_0x0200_BodyBase.AttachId0x02,new JT808_0x0200_0x02{Oil = 125}}
         }
 });
 

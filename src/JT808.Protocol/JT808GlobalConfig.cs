@@ -3,8 +3,6 @@ using JT808.Protocol.JT808Formatters;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 using JT808.Protocol.JT808Internal;
 using JT808.Protocol.MessageBody;
-using JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
 using System;
 using System.Text;
 
@@ -50,14 +48,15 @@ namespace JT808.Protocol
         /// <typeparam name="TJT808LocationAttach"></typeparam>
         /// <param name="attachInfoId"></param>
         public JT808GlobalConfig Register_0x0200_Attach<TJT808LocationAttach>(byte attachInfoId)
-               where TJT808LocationAttach : JT808LocationAttachBase
+               where TJT808LocationAttach : JT808_0x0200_BodyBase
         {
-            if (!JT808LocationAttachBase.JT808LocationAttachMethod.ContainsKey(attachInfoId))
+            if (!JT808_0x0200_BodyBase.JT808LocationAttachMethod.ContainsKey(attachInfoId))
             {
-                JT808LocationAttachBase.AddJT808LocationAttachMethod<TJT808LocationAttach>(attachInfoId);
+                JT808_0x0200_BodyBase.AddJT808LocationAttachMethod<TJT808LocationAttach>(attachInfoId);
             }
             return instance.Value;
         }
+
         /// <summary>
         /// 注册自定义定位信息附加数据
         /// </summary>
@@ -65,9 +64,9 @@ namespace JT808.Protocol
         /// <param name="type"></param>
         public JT808GlobalConfig Register_0x0200_Attach(byte attachInfoId,Type type)
         {
-            if (!JT808LocationAttachBase.JT808LocationAttachMethod.ContainsKey(attachInfoId))
+            if (!JT808_0x0200_BodyBase.JT808LocationAttachMethod.ContainsKey(attachInfoId))
             {
-                JT808LocationAttachBase.AddJT808LocationAttachMethod(attachInfoId, type);
+                JT808_0x0200_BodyBase.AddJT808LocationAttachMethod(attachInfoId, type);
             }
             return instance.Value;
         }

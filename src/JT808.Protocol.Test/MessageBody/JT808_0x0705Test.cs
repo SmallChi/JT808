@@ -4,7 +4,6 @@ using System.Text;
 using Xunit;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
 
 namespace JT808.Protocol.Test.MessageBody
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
+using JT808.Protocol.MessageBody;
 using JT808.Protocol.Attributes;
 using JT808.Protocol.Enums;
 
@@ -52,6 +52,6 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 位置附加信息
         /// </summary>
-        public IDictionary<byte, JT808LocationAttachBase> JT808LocationAttachData { get; set; }
+        public IDictionary<byte, JT808_0x0200_BodyBase> JT808LocationAttachData { get; set; }
     }
 }

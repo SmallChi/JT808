@@ -1,5 +1,4 @@
 ﻿using JT808.Protocol.MessageBody;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,12 +31,12 @@ namespace JT808.Protocol.Test.MessageBodyReply
             jT808UploadLocationRequest.Speed = 60;
             jT808UploadLocationRequest.Direction = 0;
             jT808UploadLocationRequest.StatusFlag = 2;
-            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x01, new JT808LocationAttachImpl0x01
+            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
             });
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x02, new JT808LocationAttachImpl0x02
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x02, new JT808_0x0200_0x02
             {
                 Oil = 55
             });
@@ -61,8 +60,8 @@ namespace JT808.Protocol.Test.MessageBodyReply
             Assert.Equal(132444444, jT808_0X0201.Position.Lng);
             Assert.Equal(60, jT808_0X0201.Position.Speed);
             Assert.Equal((uint)2, jT808_0X0201.Position.StatusFlag);
-            Assert.Equal(100, ((JT808LocationAttachImpl0x01)jT808_0X0201.Position.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x01]).Mileage);
-            Assert.Equal(55, ((JT808LocationAttachImpl0x02)jT808_0X0201.Position.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x02]).Oil);
+            Assert.Equal(100, ((JT808_0x0200_0x01)jT808_0X0201.Position.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
+            Assert.Equal(55, ((JT808_0x0200_0x02)jT808_0X0201.Position.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
         }
     }
 }

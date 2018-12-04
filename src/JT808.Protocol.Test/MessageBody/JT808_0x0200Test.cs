@@ -1,5 +1,4 @@
 ﻿using JT808.Protocol.MessageBody;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,7 +8,6 @@ using JT808.Protocol.Test.JT808LocationAttach;
 using System.IO;
 using JT808.Protocol.JT808Formatters;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using JT808.Protocol.JT808Formatters.MessageBodyFormatters.JT808LocationAttach;
 using JT808.Protocol.Test.JT808Formatters.MessageBodyFormatters.JT808LocationAttach;
 using JT808.Protocol.Enums;
 
@@ -29,12 +27,12 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             jT808UploadLocationRequest.Speed = 60;
             jT808UploadLocationRequest.Direction = 0;
             jT808UploadLocationRequest.StatusFlag = 2;
-            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x01, new JT808LocationAttachImpl0x01
+            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
             });
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x02, new JT808LocationAttachImpl0x02
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x02, new JT808_0x0200_0x02
             {
                 Oil = 55
             });
@@ -53,8 +51,8 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808LocationAttachImpl0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x01]).Mileage);
-            Assert.Equal(55, ((JT808LocationAttachImpl0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x02]).Oil);
+            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
+            Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
         }
 
         [Fact]
@@ -86,12 +84,12 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             jT808UploadLocationRequest.Speed = 60;
             jT808UploadLocationRequest.Direction = 0;
             jT808UploadLocationRequest.StatusFlag = 2;
-            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x01, new JT808LocationAttachImpl0x01
+            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
             });
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x02, new JT808LocationAttachImpl0x02
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x02, new JT808_0x0200_0x02
             {
                 Oil = 55
             });
@@ -122,8 +120,8 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808LocationAttachImpl0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x01]).Mileage);
-            Assert.Equal(55, ((JT808LocationAttachImpl0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x02]).Oil);
+            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
+            Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
             Assert.Equal(18, ((JT808LocationAttachImpl0x06)jT808UploadLocationRequest.JT808LocationAttachData[0x06]).Age);
             Assert.Equal(1, ((JT808LocationAttachImpl0x06)jT808UploadLocationRequest.JT808LocationAttachData[0x06]).Gender);
             Assert.Equal("smallchi", ((JT808LocationAttachImpl0x06)jT808UploadLocationRequest.JT808LocationAttachData[0x06]).UserName);
@@ -149,12 +147,12 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             jT808UploadLocationRequest.Speed = 60;
             jT808UploadLocationRequest.Direction = 0;
             jT808UploadLocationRequest.StatusFlag = 2;
-            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x01, new JT808LocationAttachImpl0x01
+            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
             });
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x02, new JT808LocationAttachImpl0x02
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x02, new JT808_0x0200_0x02
             {
                 Oil = 55
             });
@@ -207,8 +205,8 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808LocationAttachImpl0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x01]).Mileage);
-            Assert.Equal(55, ((JT808LocationAttachImpl0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x02]).Oil);
+            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
+            Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
         }
 
 
@@ -243,14 +241,14 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             jT808_0x0200.Speed = 60;
             jT808_0x0200.Direction = 0;
             jT808_0x0200.StatusFlag = 2;
-            jT808_0x0200.JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>();
+            jT808_0x0200.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
 
-            jT808_0x0200.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x01, new JT808LocationAttachImpl0x01
+            jT808_0x0200.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
             });
 
-            jT808_0x0200.JT808LocationAttachData.Add(JT808LocationAttachBase.AttachId0x02, new JT808LocationAttachImpl0x02
+            jT808_0x0200.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x02, new JT808_0x0200_0x02
             {
                 Oil = 125
             });
@@ -295,9 +293,9 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             Assert.Equal(0, jT808_0x0200.Direction);
             Assert.Equal((uint)2, jT808_0x0200.StatusFlag);
             //4.1.附加信息1
-            Assert.Equal(100, ((JT808LocationAttachImpl0x01)jT808_0x0200.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x01]).Mileage);
+            Assert.Equal(100, ((JT808_0x0200_0x01)jT808_0x0200.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
             //4.2.附加信息2
-            Assert.Equal(125, ((JT808LocationAttachImpl0x02)jT808_0x0200.JT808LocationAttachData[JT808LocationAttachBase.AttachId0x02]).Oil);
+            Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
         }
 
         [Fact]
@@ -313,10 +311,10 @@ namespace JT808.Protocol.Test.MessageBodyRequest
                     Speed = 60,
                     Direction = 0,
                     StatusFlag = 2,
-                    JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>
+                    JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>
                     {
-                        { JT808LocationAttachBase.AttachId0x01,new JT808LocationAttachImpl0x01{Mileage = 100}},
-                        { JT808LocationAttachBase.AttachId0x02,new JT808LocationAttachImpl0x02{Oil = 125}}
+                        { JT808_0x0200_BodyBase.AttachId0x01,new JT808_0x0200_0x01{Mileage = 100}},
+                        { JT808_0x0200_BodyBase.AttachId0x02,new JT808_0x0200_0x02{Oil = 125}}
                     }
             });
 

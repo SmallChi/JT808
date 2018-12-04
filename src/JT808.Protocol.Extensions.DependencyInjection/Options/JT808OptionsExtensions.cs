@@ -1,6 +1,4 @@
 ﻿using JT808.Protocol.MessageBody;
-using JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body;
-using JT808.Protocol.MessageBody.JT808LocationAttach;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,7 +13,7 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
         /// <typeparam name="TJT808LocationAttach"></typeparam>
         /// <param name="attachInfoId"></param>
         public static JT808Options Register_0x0200_Attach<TJT808LocationAttach>(this JT808Options jT808Options, byte attachInfoId)
-               where TJT808LocationAttach : JT808LocationAttachBase
+               where TJT808LocationAttach : JT808_0x0200_BodyBase
         {
             if (!jT808Options.JT808LocationAttachMethod.ContainsKey(attachInfoId))
             {
