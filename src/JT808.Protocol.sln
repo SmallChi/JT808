@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Benchmark", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Extensions.DependencyInjection", "JT808.Protocol.Extensions.DependencyInjection\JT808.Protocol.Extensions.DependencyInjection.csproj", "{CCCE9EFE-8BF3-49B4-80C6-77E1FFE2A80A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JT808.Protocol.Extensions.DependencyInjection.Test", "JT808.Protocol.Extensions.DependencyInjection.Test\JT808.Protocol.Extensions.DependencyInjection.Test.csproj", "{7E7FC415-65E7-4925-9CC0-9179B056C71C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Extensions.DependencyInjection.Test", "JT808.Protocol.Extensions.DependencyInjection.Test\JT808.Protocol.Extensions.DependencyInjection.Test.csproj", "{7E7FC415-65E7-4925-9CC0-9179B056C71C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
