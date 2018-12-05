@@ -1056,26 +1056,40 @@
             <typeparam name="TJT808LocationAttach"></typeparam>
             <param name="attachInfoId"></param>
         </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0200_Attach(System.Byte,System.Type)">
+            <summary>
+            注册自定义定位信息附加数据
+            </summary>
+            <typeparam name="attachInfoId"></typeparam>
+            <param name="type"></param>
+        </member>
         <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0900_Ext``1(System.Byte)">
             <summary>
             注册自定义数据上行透传信息
             </summary>
             <typeparam name="TJT808_0x0900_Ext"></typeparam>
-            <param name="attachInfoId"></param>
+            <param name="passthroughType"></param>
+        </member>
+        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0900_Ext(System.Byte,System.Type)">
+            <summary>
+            注册自定义数据上行透传信息
+            </summary>
+            <typeparam name="passthroughType"></typeparam>
+            <param name="type"></param>
         </member>
         <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x8900_Ext``1(System.Byte)">
             <summary>
             注册自定义数据下行透传信息
             </summary>
             <typeparam name="TJT808_0x8900_Ext"></typeparam>
-            <param name="attachInfoId"></param>
+            <param name="passthroughType"></param>
         </member>
         <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x8900_Ext(System.Byte,System.Type)">
             <summary>
             注册自定义数据下行透传信息
             </summary>
-            <typeparam name="TJT808_0x8900_Ext"></typeparam>
-            <param name="attachInfoId"></param>
+            <typeparam name="passthroughType"></typeparam>
+            <param name="type"></param>
         </member>
         <member name="M:JT808.Protocol.JT808GlobalConfig.Register_CustomMsgId``1(System.UInt16)">
             <summary>
@@ -2195,6 +2209,139 @@
             位置附加信息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x01.Mileage">
+            <summary>
+            里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x01.ConvertMileage">
+            <summary>
+            里程 1/10km，对应车上里程表读数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x02.Oil">
+            <summary>
+            油量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x02.ConvertOil">
+            <summary>
+            油量 1/10L，对应车上油量表读数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x03.Speed">
+            <summary>
+            行驶记录功能获取的速度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x03.ConvertSpeed">
+            <summary>
+            行驶记录功能获取的速度 1/10km/h
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x04.EventId">
+            <summary>
+            需要人工确认报警事件的 ID，从 1 开始计数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x11.JT808PositionType">
+            <summary>
+            超速报警附加信息
+            0：无特定位置；
+            1：圆形区域；
+            2：矩形区域；
+            3：多边形区域；
+            4：路段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x11.AreaId">
+            <summary>
+            区域或路段 ID
+            若位置类型为 0，无该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x12.JT808PositionType">
+            <summary>
+            位置类型
+            1：圆形区域；
+            2：矩形区域；
+            3：多边形区域；
+            4：路段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x12.AreaId">
+            <summary>
+            区域或路段 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x12.Direction">
+            <summary>
+            方向 
+            0：进
+            1：出
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x13.DrivenRouteId">
+            <summary>
+            路段 ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x13.Time">
+            <summary>
+            路段行驶时间
+            单位为秒（s)
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x13.DrivenRoute">
+            <summary>
+             结果 0：不足；1：过长
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x25.CarSignalStatus">
+            <summary>
+            扩展车辆信号状态位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x2A.IOStatus">
+            <summary>
+            IO状态位
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x2B.Analog">
+            <summary>
+            模拟量 bit0-15，AD0；bit16-31，AD1
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x30.WiFiSignalStrength">
+            <summary>
+            无线通信网络信号强度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x31.GNSSCount">
+            <summary>
+            GNSS 定位卫星数
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_BodyBase">
+            <summary>
+            位置附加信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_BodyBase.JT808LocationAttachMethod">
+            <summary>
+            位置附加信息方法
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_BodyBase.AttachInfoId">
+            <summary>
+            附加信息Id
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_BodyBase.AttachInfoLength">
+            <summary>
+            附加信息长度
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0201">
             <summary>
             位置信息查询应答
@@ -2560,6 +2707,16 @@
             透传消息内容
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0900_0x83.PassthroughContent">
+            <summary>
+            透传内容
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0900_BodyBase">
+            <summary>
+            数据上行透传
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0901">
             <summary>
             数据压缩上报
@@ -2668,43 +2825,43 @@
             参数列表
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_0x0001">
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0001">
             <summary>
             终端心跳发送间隔，单位为秒（s）
             0x8103_0x0001
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_0x0001.ParamLength">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0001.ParamLength">
             <summary>
             数据 长度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_0x0001.ParamValue">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0001.ParamValue">
             <summary>
             终端心跳发送间隔，单位为秒（s）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_0x0013">
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0013">
             <summary>
             主服务器地址,IP 或域名
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_0x0013.ParamLength">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0013.ParamLength">
             <summary>
             数据 长度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_0x0013.ParamValue">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0013.ParamValue">
             <summary>
             主服务器地址,IP 或域名
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_BodyBase.ParamId">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_BodyBase.ParamId">
             <summary>
             参数 ID
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_Body.JT808_0x8103_BodyBase.ParamLength">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_BodyBase.ParamLength">
             <summary>
             参数长度
             </summary>
@@ -3523,17 +3680,7 @@
             透传消息内容
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body.JT808_0x0900_0x83.PassthroughContent">
-            <summary>
-            透传内容
-            </summary>
-        </member>
-        <member name="T:JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body.JT808_0x0900_BodyBase">
-            <summary>
-            数据上行透传
-            </summary>
-        </member>
-        <member name="T:JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body.JT808_0x8900_BodyBase">
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8900_BodyBase">
             <summary>
             数据下行透传
             </summary>
@@ -3554,139 +3701,6 @@
             <summary>
             n
             RSA 公钥{e,n}中的 n
-            </summary>
-        </member>
-        <member name="T:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase">
-            <summary>
-            位置附加信息
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase.JT808LocationAttachMethod">
-            <summary>
-            位置附加信息方法
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase.AttachInfoId">
-            <summary>
-            附加信息Id
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase.AttachInfoLength">
-            <summary>
-            附加信息长度
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x01.Mileage">
-            <summary>
-            里程
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x01.ConvertMileage">
-            <summary>
-            里程 1/10km，对应车上里程表读数
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x02.Oil">
-            <summary>
-            油量
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x02.ConvertOil">
-            <summary>
-            油量 1/10L，对应车上油量表读数
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x03.Speed">
-            <summary>
-            行驶记录功能获取的速度
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x03.ConvertSpeed">
-            <summary>
-            行驶记录功能获取的速度 1/10km/h
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x04.EventId">
-            <summary>
-            需要人工确认报警事件的 ID，从 1 开始计数
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x11.JT808PositionType">
-            <summary>
-            超速报警附加信息
-            0：无特定位置；
-            1：圆形区域；
-            2：矩形区域；
-            3：多边形区域；
-            4：路段
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x11.AreaId">
-            <summary>
-            区域或路段 ID
-            若位置类型为 0，无该字段
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x12.JT808PositionType">
-            <summary>
-            位置类型
-            1：圆形区域；
-            2：矩形区域；
-            3：多边形区域；
-            4：路段
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x12.AreaId">
-            <summary>
-            区域或路段 ID
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x12.Direction">
-            <summary>
-            方向 
-            0：进
-            1：出
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x13.DrivenRouteId">
-            <summary>
-            路段 ID
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x13.Time">
-            <summary>
-            路段行驶时间
-            单位为秒（s)
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x13.DrivenRoute">
-            <summary>
-             结果 0：不足；1：过长
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x25.CarSignalStatus">
-            <summary>
-            扩展车辆信号状态位
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x2A.IOStatus">
-            <summary>
-            IO状态位
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x2B.Analog">
-            <summary>
-            模拟量 bit0-15，AD0；bit16-31，AD1
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x30.WiFiSignalStrength">
-            <summary>
-            无线通信网络信号强度
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachImpl0x31.GNSSCount">
-            <summary>
-            GNSS 定位卫星数
             </summary>
         </member>
     </members>
