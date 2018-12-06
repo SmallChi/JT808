@@ -40,5 +40,11 @@ namespace JT808.Protocol
             int readSize;
             return formatter.Deserialize(bytes,out readSize);
         }
+
+        public static dynamic Deserialize(ReadOnlySpan<byte> bytes,Type type)
+        {
+            var formatter = JT808FormatterExtensions.GetFormatter(type);
+            return JT808FormatterResolverExtensions.JT808DynamicDeserialize(formatter,bytes,out int readSize);
+        }
     }
 }
