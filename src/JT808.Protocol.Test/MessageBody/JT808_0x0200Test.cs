@@ -85,6 +85,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             jT808UploadLocationRequest.Direction = 0;
             jT808UploadLocationRequest.StatusFlag = 2;
             jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            jT808UploadLocationRequest.JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
             jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
@@ -93,7 +94,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             {
                 Oil = 55
             });
-            jT808UploadLocationRequest.JT808LocationAttachData.Add(0x06, new JT808LocationAttachImpl0x06
+            jT808UploadLocationRequest.JT808CustomLocationAttachData.Add(0x06, new JT808LocationAttachImpl0x06
             {
                 Age = 18,
                 Gender = 1,
@@ -105,7 +106,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
 
         static JT808_0x0200Test()
         {
-            JT808GlobalConfig.Instance.Register_0x0200_Attach<JT808LocationAttachImpl0x06>(0x06);
+            JT808GlobalConfig.Instance.Register_0x0200_Attach(0x06);
         }
 
         [Fact]
@@ -122,9 +123,10 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
             Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
-            Assert.Equal(18, ((JT808LocationAttachImpl0x06)jT808UploadLocationRequest.JT808LocationAttachData[0x06]).Age);
-            Assert.Equal(1, ((JT808LocationAttachImpl0x06)jT808UploadLocationRequest.JT808LocationAttachData[0x06]).Gender);
-            Assert.Equal("smallchi", ((JT808LocationAttachImpl0x06)jT808UploadLocationRequest.JT808LocationAttachData[0x06]).UserName);
+            var jT808LocationAttachImpl0x06= JT808Serializer.Deserialize<JT808LocationAttachImpl0x06>(jT808UploadLocationRequest.JT808CustomLocationAttachOriginalData[0x06]);
+            Assert.Equal(18, jT808LocationAttachImpl0x06.Age);
+            Assert.Equal(1, jT808LocationAttachImpl0x06.Gender);
+            Assert.Equal("smallchi", jT808LocationAttachImpl0x06.UserName);
         }
 
         [Fact]
@@ -327,12 +329,12 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             Assert.Equal("7E020000261234567890120001000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D016C7E", hex);
         }
 
-        [Fact]
+   
         public void Demo4()
         {
             JT808GlobalConfig.Instance
                 // 注册自定义位置附加信息
-                .Register_0x0200_Attach<JT808LocationAttachImpl0x06>(0x06)
+                //.Register_0x0200_Attach<JT808LocationAttachImpl0x06>(0x06)
                 //.SetMsgSNDistributed(//todo 实现IMsgSNDistributed消息流水号)
                 // 注册自定义数据上行透传信息
                 //.Register_0x0900_Ext<>(//todo 继承自JT808_0x0900_BodyBase类)

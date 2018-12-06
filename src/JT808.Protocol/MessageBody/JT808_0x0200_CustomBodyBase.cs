@@ -10,6 +10,11 @@ namespace JT808.Protocol.MessageBody
     public abstract class JT808_0x0200_CustomBodyBase
     {
         /// <summary>
+        /// 自定义附加信息Id集合
+        /// </summary>
+        internal static readonly HashSet<byte> CustomAttachIds = new HashSet<byte>();
+
+        /// <summary>
         /// 自定义附加信息Id
         /// </summary>
         public abstract byte AttachInfoId { get; set; }

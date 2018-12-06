@@ -27,7 +27,7 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Test
                     {
                         SkipCRCCode = false
                     }
-                    .Register_0x0200_Attach<JT808LocationAttachImpl0x06>(0x06)
+                    //.Register_0x0200_Attach<JT808LocationAttachImpl0x06>(0x06)
                     .Register_JT808_0x0701Body<JT808_0x0701TestBodiesImpl>());
                 });    
             await serverHostBuilder.RunConsoleAsync();

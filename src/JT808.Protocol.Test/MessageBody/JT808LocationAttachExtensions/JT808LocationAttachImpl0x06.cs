@@ -13,7 +13,7 @@ namespace JT808.Protocol.Test.JT808LocationAttach
     /// Gerder-byte-1
     /// </summary>
     [JT808Formatter(typeof(JT808_0x0200_0x06Formatter))]
-    public class JT808LocationAttachImpl0x06: JT808_0x0200_BodyBase
+    public class JT808LocationAttachImpl0x06: JT808_0x0200_CustomBodyBase
     {
         public override byte AttachInfoId { get;  set; } = 0x06;
         public override byte AttachInfoLength { get;  set; } = 13;

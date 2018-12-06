@@ -8,20 +8,6 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
     public static  class JT808OptionsExtensions
     {
         /// <summary>
-        /// 注册自定义定位信息附加数据
-        /// </summary>
-        /// <typeparam name="TJT808LocationAttach"></typeparam>
-        /// <param name="attachInfoId"></param>
-        public static JT808Options Register_0x0200_Attach<TJT808LocationAttach>(this JT808Options jT808Options, byte attachInfoId)
-               where TJT808LocationAttach : JT808_0x0200_BodyBase
-        {
-            if (!jT808Options.JT808LocationAttachMethod.ContainsKey(attachInfoId))
-            {
-                jT808Options.JT808LocationAttachMethod.Add(attachInfoId, typeof(TJT808LocationAttach));
-            }
-            return jT808Options;
-        }
-        /// <summary>
         /// 注册自定义数据上行透传信息
         /// </summary>
         /// <typeparam name="TJT808_0x0900_Ext"></typeparam>

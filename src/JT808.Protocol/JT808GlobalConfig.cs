@@ -1,7 +1,4 @@
-﻿using JT808.Protocol.Enums;
-using JT808.Protocol.JT808Formatters;
-using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using JT808.Protocol.JT808Internal;
+﻿using JT808.Protocol.JT808Internal;
 using JT808.Protocol.MessageBody;
 using System;
 using System.Text;
@@ -45,32 +42,21 @@ namespace JT808.Protocol
         /// <summary>
         /// 注册自定义定位信息附加数据
         /// </summary>
-        /// <typeparam name="TJT808LocationAttach"></typeparam>
-        /// <param name="attachInfoId"></param>
-        public JT808GlobalConfig Register_0x0200_Attach<TJT808LocationAttach>(byte attachInfoId)
-               where TJT808LocationAttach : JT808_0x0200_BodyBase
-        {
-            if (!JT808_0x0200_BodyBase.JT808LocationAttachMethod.ContainsKey(attachInfoId))
-            {
-                JT808_0x0200_BodyBase.AddJT808LocationAttachMethod<TJT808LocationAttach>(attachInfoId);
-            }
-            return instance.Value;
-        }
-
-        /// <summary>
-        /// 注册自定义定位信息附加数据
-        /// </summary>
         /// <typeparam name="attachInfoId"></typeparam>
-        /// <param name="type"></param>
-        public JT808GlobalConfig Register_0x0200_Attach(byte attachInfoId,Type type)
+        public JT808GlobalConfig Register_0x0200_Attach(params byte[] attachInfoId)
         {
-            if (!JT808_0x0200_BodyBase.JT808LocationAttachMethod.ContainsKey(attachInfoId))
+            if(attachInfoId!=null && attachInfoId.Length > 0)
             {
-                JT808_0x0200_BodyBase.AddJT808LocationAttachMethod(attachInfoId, type);
+                foreach(var id in attachInfoId)
+                {
+                    if (!JT808_0x0200_CustomBodyBase.CustomAttachIds.Contains(id))
+                    {
+                        JT808_0x0200_CustomBodyBase.CustomAttachIds.Add(id);
+                    }
+                }
             }
             return instance.Value;
         }
-
 
         /// <summary>
         /// 注册自定义数据上行透传信息
@@ -86,6 +72,7 @@ namespace JT808.Protocol
             }
             return instance.Value;
         }
+
         /// <summary>
         /// 注册自定义数据上行透传信息
         /// </summary>
@@ -99,6 +86,7 @@ namespace JT808.Protocol
             }
             return instance.Value;
         }
+
         /// <summary>
         /// 注册自定义数据下行透传信息
         /// </summary>
@@ -113,6 +101,7 @@ namespace JT808.Protocol
             }
             return instance.Value;
         }
+
         /// <summary>
         /// 注册自定义数据下行透传信息
         /// </summary>

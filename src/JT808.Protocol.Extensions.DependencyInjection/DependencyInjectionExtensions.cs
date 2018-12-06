@@ -12,6 +12,7 @@ namespace JT808.Protocol.Extensions.DependencyInjection
         public static IServiceCollection AddJT808Configure(this IServiceCollection services, JT808Options jT808Options)
         {
             JT808GlobalConfig.Instance.SetSkipCRCCode(jT808Options.SkipCRCCode);
+            JT808GlobalConfig.Instance.Register_0x0200_Attach(jT808Options.JT808LocationAttachIds.ToArray());
             var servicesProvider = services.BuildServiceProvider();
             try
             {
@@ -25,10 +26,6 @@ namespace JT808.Protocol.Extensions.DependencyInjection
                 JT808GlobalConfig.Instance.SetCompress(compressImpl);
             }
             catch { }
-            foreach (var impl in jT808Options.JT808LocationAttachMethod)
-            {
-                JT808GlobalConfig.Instance.Register_0x0200_Attach(impl.Key, impl.Value);
-            }
             foreach (var impl in jT808Options.JT808_0x0900Method)
             {
                 JT808GlobalConfig.Instance.Register_0x0900_Ext(impl.Key, impl.Value);

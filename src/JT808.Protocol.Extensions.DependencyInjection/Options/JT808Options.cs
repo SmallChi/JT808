@@ -9,7 +9,7 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
         public JT808Options()
         {
             SkipCRCCode = false;
-            JT808LocationAttachMethod = new Dictionary<byte, Type>();
+            JT808LocationAttachIds = new List<byte>();
             JT808_0x0900Method = new Dictionary<byte, Type>();
             JT808_0x8900Method = new Dictionary<byte, Type>();
         }
@@ -21,19 +21,19 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
         public bool SkipCRCCode { get; set; }
         /// <summary>
         /// 注册自定义定位信息附加数据
-        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808LocationAttach.JT808LocationAttachBase)"/>
-        /// <see cref="typeof(实现JT808LocationAttachBase)"/>
+        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase)"/>
+        /// <see cref="typeof(实现JT808_0x0200_CustomBodyBase)"/>
         /// </summary>
-        public Dictionary<byte, Type> JT808LocationAttachMethod { get; set; }
+        public List<byte> JT808LocationAttachIds { get; set; }
         /// <summary>
         /// 注册自定义数据上行透传信息
-        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body.JT808_0x0900_BodyBase)"/>
+        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x0900_BodyBase)"/>
         /// <see cref="typeof(实现JT808_0x0900_BodyBase)"/>
         /// </summary>
         public Dictionary<byte, Type> JT808_0x0900Method { get; set; }
         /// <summary>
         /// 注册自定义数据下行透传信息
-        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x8900_0x0900_Body.JT808_0x8900_BodyBase)"/>
+        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x8900_BodyBase)"/>
         /// <see cref="typeof(实现JT808_0x8900_BodyBase)"/>
         /// </summary>
         public Dictionary<byte, Type> JT808_0x8900Method { get; set; }
