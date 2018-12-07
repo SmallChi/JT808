@@ -9,6 +9,7 @@ using System.IO;
 using JT808.Protocol.JT808Formatters;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 using JT808.Protocol.Enums;
+using Newtonsoft.Json.Linq;
 
 namespace JT808.Protocol.Test
 {
@@ -144,20 +145,112 @@ namespace JT808.Protocol.Test
 
         }
 
-        public class CustomAttachIdConstant
+        public interface IExtData
         {
-            public const byte dt1_0x81 = 0x81;
-            public const byte dt2_0x81 = 0x81;
+            JObject Data { get; set; }
         }
 
-        public class DeviceType1
+        public interface IExtDataProcessor
         {
-
+            IExtData Processor(IExtData extData);
         }
 
-        public class DeviceType2
-        {
 
+
+        public abstract class DeviceTypeBase
+        {
+            public abstract  Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
+            protected DeviceTypeBase(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
+            {
+                Execute(jT808CustomLocationAttachOriginalData);
+            }
+            protected abstract void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData);
+        }
+
+        public class DeviceType1 : DeviceTypeBase
+        {
+            private const byte dt1_0x81 = 0x81;
+            private const byte dt1_0x82 = 0x82;
+            public DeviceType1(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData) : base(jT808CustomLocationAttachOriginalData)
+            {
+            }
+            public override Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
+
+            public JT808_0x0200_DT1_0x81 JT808_0X0200_DT1_0X81 { get; private set; }
+
+            public JT808_0x0200_DT1_0x82 JT808_0X0200_DT1_0X82 { get; private set; }
+
+            protected override void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
+            {
+                JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
+                foreach(var item in jT808CustomLocationAttachOriginalData)
+                {
+                    try
+                    {
+                        switch (item.Key)
+                        {
+                            case dt1_0x81:
+                                var info81 = JT808Serializer.Deserialize<JT808_0x0200_DT1_0x81>(item.Value);
+                                if (info81 != null)
+                                {
+                                    JT808_0X0200_DT1_0X81 = info81;
+                                    JT808CustomLocationAttachData.Add(dt1_0x81, info81);
+                                }
+                                break;
+                            case dt1_0x82:
+                                var info82 = JT808Serializer.Deserialize<JT808_0x0200_DT1_0x82>(item.Value);
+                                if (info82 != null)
+                                {
+                                    JT808_0X0200_DT1_0X82 = info82;
+                                    JT808CustomLocationAttachData.Add(dt1_0x82, info82);
+                                }
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+                }
+            }
+        }
+
+        public class DeviceType2 : DeviceTypeBase
+        {
+            public DeviceType2(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData) : base(jT808CustomLocationAttachOriginalData)
+            {
+            }
+            public override Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
+
+            private const byte dt2_0x81 = 0x81;
+
+            public JT808_0x0200_DT2_0x81 JT808_0X0200_DT2_0X81 { get; private set; }
+
+            protected override void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
+            {
+                JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
+                foreach (var item in jT808CustomLocationAttachOriginalData)
+                {
+                    try
+                    {
+                        switch (item.Key)
+                        {
+                            case dt2_0x81:
+                                var info81 = JT808Serializer.Deserialize<JT808_0x0200_DT2_0x81>(item.Value);
+                                if (info81 != null)
+                                {
+                                    JT808_0X0200_DT2_0X81 = info81;
+                                    JT808CustomLocationAttachData.Add(dt2_0x81, info81);
+                                }
+                                break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+            }
         }
 
         /// <summary>
