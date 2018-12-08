@@ -167,7 +167,6 @@ namespace JT808.Protocol.Test
                 extData.Data.Add(nameof(JT808_0x0200_DT1_0x81.Age), jT808_0X0200_DT1_0X81.Age);
                 extData.Data.Add(nameof(JT808_0x0200_DT1_0x81.UserName), jT808_0X0200_DT1_0X81.UserName);
                 extData.Data.Add(nameof(JT808_0x0200_DT1_0x81.Gender), jT808_0X0200_DT1_0X81.Gender);
-                return extData;
             }
         }
 
@@ -230,10 +229,6 @@ namespace JT808.Protocol.Test
             }
             public override Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
 
-            public JT808_0x0200_DT1_0x81 JT808_0X0200_DT1_0X81 { get; private set; }
-
-            public JT808_0x0200_DT1_0x82 JT808_0X0200_DT1_0X82 { get; private set; }
-
             protected override void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
             {
                 JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
@@ -249,7 +244,6 @@ namespace JT808.Protocol.Test
                                 {
                                     IExtDataProcessor extDataProcessor = new JT808_0x0200_DT1_0x81_ExtDataProcessor(info81);
                                     extDataProcessor.Processor(ExtData);
-                                    JT808_0X0200_DT1_0X81 = info81;
                                     JT808CustomLocationAttachData.Add(dt1_0x81, info81);
                                 }
                                 break;
@@ -259,7 +253,6 @@ namespace JT808.Protocol.Test
                                 {
                                     IExtDataProcessor extDataProcessor = new JT808_0x0200_DT1_0x82_ExtDataProcessor(info82);
                                     extDataProcessor.Processor(ExtData);
-                                    JT808_0X0200_DT1_0X82 = info82;
                                     JT808CustomLocationAttachData.Add(dt1_0x82, info82);
                                 }
                                 break;
@@ -282,8 +275,6 @@ namespace JT808.Protocol.Test
 
             private const byte dt2_0x81 = 0x81;
 
-            public JT808_0x0200_DT2_0x81 JT808_0X0200_DT2_0X81 { get; private set; }
-
             protected override void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
             {
                 JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
@@ -297,7 +288,6 @@ namespace JT808.Protocol.Test
                                 var info81 = JT808Serializer.Deserialize<JT808_0x0200_DT2_0x81>(item.Value);
                                 if (info81 != null)
                                 {
-                                    JT808_0X0200_DT2_0X81 = info81;
                                     JT808CustomLocationAttachData.Add(dt2_0x81, info81);
                                 }
                                 break;
