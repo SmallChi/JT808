@@ -152,13 +152,67 @@ namespace JT808.Protocol.Test
 
         public interface IExtDataProcessor
         {
-            IExtData Processor(IExtData extData);
+            void Processor(IExtData extData);
         }
 
+        public class JT808_0x0200_DT1_0x81_ExtDataProcessor : IExtDataProcessor
+        {
+            private JT808_0x0200_DT1_0x81 jT808_0X0200_DT1_0X81;
+            public JT808_0x0200_DT1_0x81_ExtDataProcessor(JT808_0x0200_DT1_0x81 jT808_0X0200_DT1_0X81)
+            {
+                this.jT808_0X0200_DT1_0X81 = jT808_0X0200_DT1_0X81;
+            }
+            public void Processor(IExtData extData)
+            {
+                extData.Data.Add(nameof(JT808_0x0200_DT1_0x81.Age), jT808_0X0200_DT1_0X81.Age);
+                extData.Data.Add(nameof(JT808_0x0200_DT1_0x81.UserName), jT808_0X0200_DT1_0X81.UserName);
+                extData.Data.Add(nameof(JT808_0x0200_DT1_0x81.Gender), jT808_0X0200_DT1_0X81.Gender);
+                return extData;
+            }
+        }
 
+        public class JT808_0x0200_DT1_0x82_ExtDataProcessor : IExtDataProcessor
+        {
+            private JT808_0x0200_DT1_0x82 jT808_0X0200_DT1_0X82;
+            public JT808_0x0200_DT1_0x82_ExtDataProcessor(JT808_0x0200_DT1_0x82 jT808_0X0200_DT1_0X82)
+            {
+                this.jT808_0X0200_DT1_0X82 = jT808_0X0200_DT1_0X82;
+            }
+            public void Processor(IExtData extData)
+            {
+                extData.Data.Add(nameof(JT808_0x0200_DT1_0x82.Gender1), jT808_0X0200_DT1_0X82.Gender1);
+            }
+        }
+
+        public class DeviceTypeFactory
+        {
+            public static DeviceTypeBase Create(DeviceType deviceType, Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
+            {
+                switch (deviceType)
+                {
+                    case DeviceType.DT1:
+                        return new DeviceType1(jT808CustomLocationAttachOriginalData);
+                    case DeviceType.DT2:
+                        return new DeviceType2(jT808CustomLocationAttachOriginalData);
+                    default:
+                        return default;
+                }
+            }
+        }
+
+        public enum DeviceType
+        {
+            DT1=1,
+            DT2=2
+        }
 
         public abstract class DeviceTypeBase
         {
+            protected class DefaultExtDataImpl : IExtData
+            {
+                public JObject Data { get; set; } = new JObject();
+            }
+            public virtual IExtData ExtData { get; protected set; } = new DefaultExtDataImpl();
             public abstract  Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
             protected DeviceTypeBase(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
             {
@@ -193,6 +247,8 @@ namespace JT808.Protocol.Test
                                 var info81 = JT808Serializer.Deserialize<JT808_0x0200_DT1_0x81>(item.Value);
                                 if (info81 != null)
                                 {
+                                    IExtDataProcessor extDataProcessor = new JT808_0x0200_DT1_0x81_ExtDataProcessor(info81);
+                                    extDataProcessor.Processor(ExtData);
                                     JT808_0X0200_DT1_0X81 = info81;
                                     JT808CustomLocationAttachData.Add(dt1_0x81, info81);
                                 }
@@ -201,6 +257,8 @@ namespace JT808.Protocol.Test
                                 var info82 = JT808Serializer.Deserialize<JT808_0x0200_DT1_0x82>(item.Value);
                                 if (info82 != null)
                                 {
+                                    IExtDataProcessor extDataProcessor = new JT808_0x0200_DT1_0x82_ExtDataProcessor(info82);
+                                    extDataProcessor.Processor(ExtData);
                                     JT808_0X0200_DT1_0X82 = info82;
                                     JT808CustomLocationAttachData.Add(dt1_0x82, info82);
                                 }
@@ -271,7 +329,7 @@ namespace JT808.Protocol.Test
         {
             public override byte AttachInfoId { get; set; } = 0x82;
             public override byte AttachInfoLength { get; set; } = 1;
-            public byte Gender { get; set; }
+            public byte Gender1 { get; set; }
         }
         /// <summary>
         /// 设备类型2-对应消息协议0x81
@@ -323,7 +381,7 @@ namespace JT808.Protocol.Test
                 JT808_0x0200_DT1_0x82 jT808_0X0200_DT1_0X82 = new JT808_0x0200_DT1_0x82();
                 jT808_0X0200_DT1_0X82.AttachInfoId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
                 jT808_0X0200_DT1_0X82.AttachInfoLength = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-                jT808_0X0200_DT1_0X82.Gender = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+                jT808_0X0200_DT1_0X82.Gender1 = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
                 readSize = offset;
                 return jT808_0X0200_DT1_0X82;
             }
@@ -332,7 +390,7 @@ namespace JT808.Protocol.Test
             {
                 offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AttachInfoId);
                 offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.AttachInfoLength);
-                offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.Gender);
+                offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.Gender1);
                 return offset;
             }
         }
