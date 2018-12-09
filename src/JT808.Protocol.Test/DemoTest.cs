@@ -183,6 +183,20 @@ namespace JT808.Protocol.Test
             }
         }
 
+        public class JT808_0x0200_DT2_0x81_ExtDataProcessor : IExtDataProcessor
+        {
+            private JT808_0x0200_DT2_0x81 jT808_0X0200_DT2_0X81;
+            public JT808_0x0200_DT2_0x81_ExtDataProcessor(JT808_0x0200_DT2_0x81 jT808_0X0200_DT2_0X81)
+            {
+                this.jT808_0X0200_DT2_0X81 = jT808_0X0200_DT2_0X81;
+            }
+            public void Processor(IExtData extData)
+            {
+                extData.Data.Add(nameof(JT808_0x0200_DT2_0x81.Age), jT808_0X0200_DT2_0X81.Age);
+                extData.Data.Add(nameof(JT808_0x0200_DT2_0x81.Gender), jT808_0X0200_DT2_0X81.Gender);
+            }
+        }
+
         public class DeviceTypeFactory
         {
             public static DeviceTypeBase Create(DeviceType deviceType, Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
@@ -288,6 +302,8 @@ namespace JT808.Protocol.Test
                                 var info81 = JT808Serializer.Deserialize<JT808_0x0200_DT2_0x81>(item.Value);
                                 if (info81 != null)
                                 {
+                                    IExtDataProcessor extDataProcessor = new JT808_0x0200_DT2_0x81_ExtDataProcessor(info81);
+                                    extDataProcessor.Processor(ExtData);
                                     JT808CustomLocationAttachData.Add(dt2_0x81, info81);
                                 }
                                 break;
