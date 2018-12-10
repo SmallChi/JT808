@@ -115,12 +115,12 @@ namespace JT808.Protocol.Test
                         { JT808_0x0200_BodyBase.AttachId0x02,new JT808_0x0200_0x02{Oil = 125}}
                     }
                 });
-
+            jT808Package.Header.MsgNum = 1;
             byte[] data = JT808Serializer.Serialize(jT808Package);
-
             var hex = data.ToHexString();
             //输出结果Hex：
             //7E 02 00 00 26 12 34 56 78 90 12 00 01 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 6C 7E
+            //"7E020000261234567890120001000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D016C7E"
             Assert.Equal("7E020000261234567890120001000000010000000200BA7F0E07E4F11C0028003C00001810151010100104000000640202007D016C7E", hex);
         }
 
