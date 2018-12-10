@@ -10,6 +10,8 @@ using JT808.Protocol.JT808Formatters;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 using JT808.Protocol.Enums;
 using Newtonsoft.Json.Linq;
+using JT808.Protocol.Attributes;
+using Newtonsoft.Json;
 
 namespace JT808.Protocol.Test
 {
@@ -142,8 +144,46 @@ namespace JT808.Protocol.Test
         [Fact]
         public void Demo5()
         {
+            JT808GlobalConfig.Instance.Register_0x0200_Attach(0x81);
 
+            JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012",
+                                                        new JT808_0x0200
+                                                        {
+                                                            AlarmFlag = 1,
+                                                            Altitude = 40,
+                                                            GPSTime = DateTime.Parse("2018-12-20 20:10:10"),
+                                                            Lat = 12222222,
+                                                            Lng = 132444444,
+                                                            Speed = 60,
+                                                            Direction = 0,
+                                                            StatusFlag = 2,
+                                                             JT808CustomLocationAttachData=new Dictionary<byte, JT808_0x0200_CustomBodyBase>
+                                                             {
+                                                                 {0x81,new JT808_0x0200_DT1_0x81 {
+                                                                      Age=15,
+                                                                      Gender=1,
+                                                                      UserName="smallchi"
+                                                                 } }
+                                                             }
+                                                        });
+
+            byte[] data = JT808Serializer.Serialize(jT808Package);
+            var jT808PackageResult = JT808Serializer.Deserialize<JT808Package>(data);
+            JT808_0x0200 jT808_0X0200 = jT808PackageResult.Bodies as JT808_0x0200;
+            var attach = DeviceTypeFactory.Create(cache[jT808PackageResult.Header.TerminalPhoneNo], jT808_0X0200.JT808CustomLocationAttachOriginalData);
+            var extJson = attach.ExtData.Data.ToString(Formatting.None);
+            var attachinfo81 = (JT808_0x0200_DT1_0x81)attach.JT808CustomLocationAttachData[0x81];
+            Assert.Equal((uint)15, attachinfo81.Age);
+            Assert.Equal(1, attachinfo81.Gender);
+            Assert.Equal("smallchi", attachinfo81.UserName);
         }
+
+
+        private Dictionary<string, DeviceType> cache = new Dictionary<string, DeviceType>
+        {
+            { "123456789012",DeviceType.DT1 },
+            { "123456789013",DeviceType.DT2 }
+        };
 
         public interface IExtData
         {
@@ -320,6 +360,7 @@ namespace JT808.Protocol.Test
         /// <summary>
         /// 设备类型1-对应消息协议0x81
         /// </summary>
+        [JT808Formatter(typeof(JT808_0x0200_DT1_0x81Formatter))]
         public class JT808_0x0200_DT1_0x81 : JT808_0x0200_CustomBodyBase
         {
             public override byte AttachInfoId { get; set; } = 0x81;
