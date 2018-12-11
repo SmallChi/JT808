@@ -5,7 +5,7 @@ using System.Text;
 
 namespace JT808.Protocol
 {
-    public static class JT808ArrayPool
+    internal static class JT808ArrayPool
     {
         private readonly static ArrayPool<byte> ArrayPool;
 

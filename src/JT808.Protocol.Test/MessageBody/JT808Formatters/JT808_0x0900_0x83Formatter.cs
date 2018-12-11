@@ -1,11 +1,13 @@
 ﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.JT808Formatters;
 using JT808.Protocol.MessageBody;
+using JT808.Protocol.Test.JT808_0x0900_BodiesImpl;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Text;
 
-namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
+namespace JT808.Protocol.Test.MessageBody.JT808Formatters
 {
     public class JT808_0x0900_0x83Formatter : IJT808Formatter<JT808_0x0900_0x83>
     {

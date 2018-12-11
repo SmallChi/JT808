@@ -41,6 +41,19 @@ namespace JT808.Protocol
             return formatter.Deserialize(bytes,out readSize);
         }
 
+        /// <summary>
+        /// 用于负载或者分布式的时候，在网关只需要解到头部。
+        /// 根据头部的消息Id进行分发处理，可以防止小部分性能损耗。
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static JT808HeaderPackage HeaderDeserialize(ReadOnlySpan<byte> bytes)
+        {
+            var formatter = JT808FormatterExtensions.GetFormatter<JT808HeaderPackage>();
+            int readSize;
+            return formatter.Deserialize(bytes, out readSize);
+        }
+
         public static dynamic Deserialize(ReadOnlySpan<byte> bytes,Type type)
         {
             var formatter = JT808FormatterExtensions.GetFormatter(type);

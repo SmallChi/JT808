@@ -132,7 +132,7 @@ namespace JT808.Protocol.JT808Formatters
         /// <param name="offset"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        private static ReadOnlySpan<byte> JT808DeEscape(ReadOnlySpan<byte> buf, int offset, int length)
+        internal static ReadOnlySpan<byte> JT808DeEscape(ReadOnlySpan<byte> buf, int offset, int length)
         {
             List<byte> bytes = new List<byte>();
             int n = 0;
@@ -175,7 +175,7 @@ namespace JT808.Protocol.JT808Formatters
         /// </summary>
         /// <param name="buf"></param>
         /// <returns></returns>
-        private static byte[] JT808Escape(Span<byte> buf)
+        internal static byte[] JT808Escape(Span<byte> buf)
         {
             List<byte> bytes = new List<byte>();
             int n = 0;

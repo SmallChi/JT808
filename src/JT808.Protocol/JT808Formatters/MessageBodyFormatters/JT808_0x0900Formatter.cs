@@ -12,14 +12,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             int offset = 0;
             JT808_0x0900 jT808_0X0900 = new JT808_0x0900();
             jT808_0X0900.PassthroughType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            Type jT808PassthroughType;
-            if (JT808_0x0900_BodyBase.JT808_0x0900Method.TryGetValue(jT808_0X0900.PassthroughType, out jT808PassthroughType))
-            {
-                object obj = JT808FormatterExtensions.GetFormatter(jT808PassthroughType);
-                ReadOnlySpan<byte> passthroughTypeBuffer = bytes.Slice(offset, bytes.Length - offset);
-                dynamic objImpl = JT808FormatterResolverExtensions.JT808DynamicDeserialize(obj, passthroughTypeBuffer, out readSize);
-                jT808_0X0900.JT808_0x0900_BodyBase = objImpl;
-            }
+            jT808_0X0900.PassthroughData = bytes.Slice(offset, bytes.Length - offset).ToArray();
             readSize = bytes.Length;//读取整个数据体
             return jT808_0X0900;
         }

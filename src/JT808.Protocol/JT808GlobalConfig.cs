@@ -61,28 +61,18 @@ namespace JT808.Protocol
         /// <summary>
         /// 注册自定义数据上行透传信息
         /// </summary>
-        /// <typeparam name="TJT808_0x0900_Ext"></typeparam>
         /// <param name="passthroughType"></param>
-        public JT808GlobalConfig Register_0x0900_Ext<TJT808_0x0900_Ext>(byte passthroughType)
-               where TJT808_0x0900_Ext : JT808_0x0900_BodyBase
+        public JT808GlobalConfig Register_0x0900_Ext(params byte[] passthroughTypes)
         {
-            if (!JT808_0x0900_BodyBase.JT808_0x0900Method.ContainsKey(passthroughType))
+            if (passthroughTypes != null && passthroughTypes.Length > 0)
             {
-                JT808_0x0900_BodyBase.AddJT808_0x0900Method<TJT808_0x0900_Ext>(passthroughType);
-            }
-            return instance.Value;
-        }
-
-        /// <summary>
-        /// 注册自定义数据上行透传信息
-        /// </summary>
-        /// <typeparam name="passthroughType"></typeparam>
-        /// <param name="type"></param>
-        public JT808GlobalConfig Register_0x0900_Ext(byte passthroughType,Type type)
-        {
-            if (!JT808_0x0900_BodyBase.JT808_0x0900Method.ContainsKey(passthroughType))
-            {
-                JT808_0x0900_BodyBase.AddJT808_0x0900Method(passthroughType, type);
+                foreach (var type in passthroughTypes)
+                {
+                    if (!JT808_0x0900_BodyBase.JT808_0x0900Method.Contains(type))
+                    {
+                        JT808_0x0900_BodyBase.JT808_0x0900Method.Add(type);
+                    }
+                }
             }
             return instance.Value;
         }

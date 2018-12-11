@@ -2,6 +2,7 @@
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace JT808.Protocol.MessageBody
@@ -16,6 +17,12 @@ namespace JT808.Protocol.MessageBody
         /// 透传消息类型
         /// </summary>
         public byte PassthroughType { get; set; }
+
+        /// <summary>
+        /// 透传数据
+        /// </summary>
+        [IgnoreDataMember]
+        public byte[] PassthroughData { get; set; }
 
         /// <summary>
         /// 透传消息内容
