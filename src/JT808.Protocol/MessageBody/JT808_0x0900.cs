@@ -21,7 +21,6 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 透传数据
         /// </summary>
-        [IgnoreDataMember]
         public byte[] PassthroughData { get; set; }
 
         /// <summary>

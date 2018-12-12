@@ -10,11 +10,6 @@ namespace JT808.Protocol.Test.MessageBody
 {
     public class JT808_0x0900Test
     {
-        public JT808_0x0900Test()
-        {
-            JT808GlobalConfig.Instance.Register_0x0900_Ext(0x83);
-        }
-
         [Fact]
         public void Test1()
         {

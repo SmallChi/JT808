@@ -13,7 +13,6 @@ namespace JT808.Protocol.Extensions.DependencyInjection
         {
             JT808GlobalConfig.Instance.SetSkipCRCCode(jT808Options.SkipCRCCode);
             JT808GlobalConfig.Instance.Register_0x0200_Attach(jT808Options.JT808LocationAttachIds.ToArray());
-            JT808GlobalConfig.Instance.Register_0x0900_Ext(jT808Options.JT808_0x0900PassthroughTypes.ToArray());
             var servicesProvider = services.BuildServiceProvider();
             try
             {

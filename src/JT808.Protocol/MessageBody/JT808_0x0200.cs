@@ -54,7 +54,6 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 存储自定义附加信息源数据
         /// </summary>
-        [IgnoreDataMember]
         public Dictionary<byte, byte[]> JT808CustomLocationAttachOriginalData { get; set; }
         /// <summary>
         /// 自定义位置附加信息

@@ -58,24 +58,6 @@ namespace JT808.Protocol
             return instance.Value;
         }
 
-        /// <summary>
-        /// 注册自定义数据上行透传信息
-        /// </summary>
-        /// <param name="passthroughType"></param>
-        public JT808GlobalConfig Register_0x0900_Ext(params byte[] passthroughTypes)
-        {
-            if (passthroughTypes != null && passthroughTypes.Length > 0)
-            {
-                foreach (var type in passthroughTypes)
-                {
-                    if (!JT808_0x0900_BodyBase.JT808_0x0900Method.Contains(type))
-                    {
-                        JT808_0x0900_BodyBase.JT808_0x0900Method.Add(type);
-                    }
-                }
-            }
-            return instance.Value;
-        }
 
         /// <summary>
         /// 注册自定义数据下行透传信息
