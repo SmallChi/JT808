@@ -19,6 +19,11 @@ namespace JT808.Protocol.MessageBody
         public byte PassthroughType { get; set; }
 
         /// <summary>
+        /// 数据下行透传数据
+        /// </summary>
+        public byte[] PassthroughData { get; set; }
+
+        /// <summary>
         /// 透传消息内容
         /// </summary>
         public JT808_0x8900_BodyBase JT808_0X8900_BodyBase { get; set; }

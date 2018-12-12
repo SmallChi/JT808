@@ -12,10 +12,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             int offset = 0;
             JT808_0x8900 jT808_0X8900 = new JT808_0x8900();
             jT808_0X8900.PassthroughType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            if(JT808_0x8900_BodyBase.JT808_0x8900Method.TryGetValue(jT808_0X8900.PassthroughType,out Type type))
-            {
-                jT808_0X8900.JT808_0X8900_BodyBase = JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(type), bytes.Slice(offset),  out readSize);
-            }
+            jT808_0X8900.PassthroughData=bytes.Slice(offset).ToArray();
             readSize = offset;
             return jT808_0X8900;
         }
@@ -23,11 +20,8 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public int Serialize(ref byte[] bytes, int offset, JT808_0x8900 value)
         {
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.PassthroughType);
-            if (JT808_0x8900_BodyBase.JT808_0x8900Method.TryGetValue(value.PassthroughType, out Type type))
-            {
-                object obj = JT808FormatterExtensions.GetFormatter(type);
-                offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj, ref bytes, offset, value.JT808_0X8900_BodyBase);
-            }
+            object obj = JT808FormatterExtensions.GetFormatter(value.JT808_0X8900_BodyBase.GetType());
+            offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(obj, ref bytes, offset, value.JT808_0X8900_BodyBase);
             return offset;
         }
     }

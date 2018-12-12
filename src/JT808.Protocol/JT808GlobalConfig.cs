@@ -58,35 +58,6 @@ namespace JT808.Protocol
             return instance.Value;
         }
 
-
-        /// <summary>
-        /// 注册自定义数据下行透传信息
-        /// </summary>
-        /// <typeparam name="TJT808_0x8900_Ext"></typeparam>
-        /// <param name="passthroughType"></param>
-        public JT808GlobalConfig Register_0x8900_Ext<TJT808_0x8900_Ext>(byte passthroughType)
-               where TJT808_0x8900_Ext : JT808_0x8900_BodyBase
-        {
-            if (!JT808_0x8900_BodyBase.JT808_0x8900Method.ContainsKey(passthroughType))
-            {
-                JT808_0x8900_BodyBase.AddJT808_0x8900Method<TJT808_0x8900_Ext>(passthroughType);
-            }
-            return instance.Value;
-        }
-
-        /// <summary>
-        /// 注册自定义数据下行透传信息
-        /// </summary>
-        /// <typeparam name="passthroughType"></typeparam>
-        /// <param name="type"></param>
-        public JT808GlobalConfig Register_0x8900_Ext(byte passthroughType,Type type)
-        {
-            if (!JT808_0x8900_BodyBase.JT808_0x8900Method.ContainsKey(passthroughType))
-            {
-                JT808_0x8900_BodyBase.AddJT808_0x8900Method(passthroughType, type);
-            }
-            return instance.Value;
-        }
         /// <summary>
         /// 注册自定义消息
         /// </summary>

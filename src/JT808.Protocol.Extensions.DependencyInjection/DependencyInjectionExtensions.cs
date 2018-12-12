@@ -26,10 +26,6 @@ namespace JT808.Protocol.Extensions.DependencyInjection
                 JT808GlobalConfig.Instance.SetCompress(compressImpl);
             }
             catch { }
-            foreach (var impl in jT808Options.JT808_0x8900Method)
-            {
-                JT808GlobalConfig.Instance.Register_0x8900_Ext(impl.Key, impl.Value);
-            }
             return services;
         }
     }
