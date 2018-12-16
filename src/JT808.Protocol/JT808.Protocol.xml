@@ -1049,47 +1049,11 @@
             默认：false
             </summary>
         </member>
-        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0200_Attach``1(System.Byte)">
-            <summary>
-            注册自定义定位信息附加数据
-            </summary>
-            <typeparam name="TJT808LocationAttach"></typeparam>
-            <param name="attachInfoId"></param>
-        </member>
-        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0200_Attach(System.Byte,System.Type)">
+        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0200_Attach(System.Byte[])">
             <summary>
             注册自定义定位信息附加数据
             </summary>
             <typeparam name="attachInfoId"></typeparam>
-            <param name="type"></param>
-        </member>
-        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0900_Ext``1(System.Byte)">
-            <summary>
-            注册自定义数据上行透传信息
-            </summary>
-            <typeparam name="TJT808_0x0900_Ext"></typeparam>
-            <param name="passthroughType"></param>
-        </member>
-        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x0900_Ext(System.Byte,System.Type)">
-            <summary>
-            注册自定义数据上行透传信息
-            </summary>
-            <typeparam name="passthroughType"></typeparam>
-            <param name="type"></param>
-        </member>
-        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x8900_Ext``1(System.Byte)">
-            <summary>
-            注册自定义数据下行透传信息
-            </summary>
-            <typeparam name="TJT808_0x8900_Ext"></typeparam>
-            <param name="passthroughType"></param>
-        </member>
-        <member name="M:JT808.Protocol.JT808GlobalConfig.Register_0x8900_Ext(System.Byte,System.Type)">
-            <summary>
-            注册自定义数据下行透传信息
-            </summary>
-            <typeparam name="passthroughType"></typeparam>
-            <param name="type"></param>
         </member>
         <member name="M:JT808.Protocol.JT808GlobalConfig.Register_CustomMsgId``1(System.UInt16)">
             <summary>
@@ -1189,6 +1153,21 @@
         <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.PackageIndex">
             <summary>
             报序号 从1开始
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808HeaderPackage">
+            <summary>
+            JT808头部数据包
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808HeaderPackage.Header">
+            <summary>
+            头数据
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808HeaderPackage.Bodies">
+            <summary>
+            数据体
             </summary>
         </member>
         <member name="T:JT808.Protocol.JT808ICompress">
@@ -1936,6 +1915,14 @@
              ref https://www.cnblogs.com/TianFang/p/9193881.html
             </summary>
         </member>
+        <member name="M:JT808.Protocol.JT808Serializer.HeaderDeserialize(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            用于负载或者分布式的时候，在网关只需要解到头部。
+            根据头部的消息Id进行分发处理，可以防止小部分性能损耗。
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0001">
             <summary>
             终端通用应答
@@ -2209,6 +2196,23 @@
             位置附加信息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.JT808CustomLocationAttachOriginalData">
+            <summary>
+            存储自定义附加信息源数据
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.JT808CustomLocationAttachData">
+            <summary>
+            自定义位置附加信息
+            场景：
+            一个设备厂商对应多个设备类型，不同设备类型可能存在相同的自定义位置附加信息Id，导致自定义附加信息Id冲突，无法解析。
+            解决方式：
+            1.凡是解析自定义附加信息Id协议的，先进行分割存储，然后在根据外部的设备类型进行统一处理。
+            2.可以根据设备类型做个工厂，解耦对公共序列化器的依赖。
+            缺点：
+            依赖平台录入的设备类型
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x01.Mileage">
             <summary>
             里程
@@ -2340,6 +2344,26 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_BodyBase.AttachInfoLength">
             <summary>
             附加信息长度
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase">
+            <summary>
+            自定义位置附加信息
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase.CustomAttachIds">
+            <summary>
+            自定义附加信息Id集合
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase.AttachInfoId">
+            <summary>
+            自定义附加信息Id
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase.AttachInfoLength">
+            <summary>
+            自定义附加信息长度
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0201">
@@ -2702,14 +2726,14 @@
             透传消息类型
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0900.PassthroughData">
+            <summary>
+            透传数据
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0900.JT808_0x0900_BodyBase">
             <summary>
             透传消息内容
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0900_0x83.PassthroughContent">
-            <summary>
-            透传内容
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0900_BodyBase">
@@ -3673,6 +3697,11 @@
             <summary>
             透传消息类型
             透传消息类型定义见 表 93
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8900.PassthroughData">
+            <summary>
+            数据下行透传数据
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8900.JT808_0X8900_BodyBase">

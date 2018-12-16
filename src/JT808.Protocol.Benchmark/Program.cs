@@ -31,7 +31,7 @@ namespace JT808.Protocol.Benchmark
     {
         private byte[] bytes;
 
-        [Params(100, 10000, 100000, 1000000)]
+        [Params(100, 10000, 100000)]
         public int N;
         
         private ushort MsgId;
