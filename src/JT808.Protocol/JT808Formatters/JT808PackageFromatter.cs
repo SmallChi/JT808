@@ -123,50 +123,6 @@ namespace JT808.Protocol.JT808Formatters
             return JT808Escape(ref bytes, offset);
         }
 
-        /// <summary>
-        /// 转义
-        /// </summary>
-        /// <param name="buf"></param>
-        /// <param name="offset"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        [Obsolete("效率比较低")]
-        internal static ReadOnlySpan<byte> JT808DeEscapeOld(ReadOnlySpan<byte> buf, int offset, int length)
-        {
-            List<byte> bytes = new List<byte>();
-            int i = offset;
-            int len = offset + length;
-            while (i < len)
-            {
-                if (buf[i] == 0x7d)
-                {
-                    if (len > i + 1)
-                    {
-                        if (buf[i + 1] == 0x01)
-                        {
-                            bytes.Add(0x7d);
-                            i++;
-                        }
-                        else if (buf[i + 1] == 0x02)
-                        {
-                            bytes.Add(0x7e);
-                            i++;
-                        }
-                        else
-                        {
-                            bytes.Add(buf[i]);
-                        }
-                    }
-                }
-                else
-                {
-                    bytes.Add(buf[i]);
-                }
-                i++;
-            }
-            return bytes.ToArray();
-        }
-
         internal static ReadOnlySpan<byte> JT808DeEscape(ReadOnlySpan<byte> buf)
         {
             var bytes = JT808ArrayPool.Rent(buf.Length);
@@ -240,38 +196,6 @@ namespace JT808.Protocol.JT808Formatters
             }
             buf[tmpOffset++] = tmpBuffer[tmpBuffer.Length- 1];
             return tmpOffset;
-        }
-
-        /// <summary>
-        /// 转码
-        /// </summary>
-        /// <param name="buf"></param>
-        /// <returns></returns>
-        [Obsolete("效率比较低")]
-        internal static int JT808EscapeOld(ref byte[] buf, int offset)
-        {
-            List<byte> bytes = new List<byte>();
-            bytes.Add(buf[0]);
-            for (int i = 1; i < offset-1; i++)
-            {
-                if (buf[i] == 0x7e)
-                {
-                    bytes.Add(0x7d);
-                    bytes.Add(0x02);
-                }
-                else if (buf[i] == 0x7d)
-                {
-                    bytes.Add(0x7d);
-                    bytes.Add(0x01);
-                }
-                else
-                {
-                    bytes.Add(buf[i]);
-                }
-            }
-            bytes.Add(buf[offset - 1]);
-            Array.Copy(bytes.ToArray(), 0, buf, 0, bytes.Count);
-            return bytes.Count;
         }
     }
 }
