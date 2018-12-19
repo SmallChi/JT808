@@ -21,7 +21,7 @@ namespace JT808.Protocol.JT808Formatters
             JT808Package jT808Package = new JT808Package();
             // 转义还原——>验证校验码——>解析消息
             // 1. 解码（转义还原）
-            ReadOnlySpan<byte> buffer = JT808DeEscape(bytes, 0, bytes.Length);
+            ReadOnlySpan<byte> buffer = JT808DeEscape(bytes);
             // 2. 验证校验码
             //  2.1. 获取校验位索引
             int checkIndex = buffer.Length - 2;
@@ -120,9 +120,7 @@ namespace JT808.Protocol.JT808Formatters
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, bytes.ToXor(1, offset));
             // 5.终止符
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.End);
-            byte[] temp = JT808Escape(bytes.AsSpan(0, offset));
-            Array.Copy(temp, 0,bytes, 0, temp.Length);
-            return temp.Length;
+            return JT808Escape(ref bytes, offset);
         }
 
         /// <summary>
@@ -132,10 +130,10 @@ namespace JT808.Protocol.JT808Formatters
         /// <param name="offset"></param>
         /// <param name="length"></param>
         /// <returns></returns>
-        internal static ReadOnlySpan<byte> JT808DeEscape(ReadOnlySpan<byte> buf, int offset, int length)
+        [Obsolete("效率比较低")]
+        internal static ReadOnlySpan<byte> JT808DeEscapeOld(ReadOnlySpan<byte> buf, int offset, int length)
         {
             List<byte> bytes = new List<byte>();
-            int n = 0;
             int i = offset;
             int len = offset + length;
             while (i < len)
@@ -164,10 +162,53 @@ namespace JT808.Protocol.JT808Formatters
                 {
                     bytes.Add(buf[i]);
                 }
-                n++;
                 i++;
             }
             return bytes.ToArray();
+        }
+
+        internal static ReadOnlySpan<byte> JT808DeEscape(ReadOnlySpan<byte> buf)
+        {
+            var bytes = JT808ArrayPool.Rent(buf.Length);
+            try
+            {
+                int i = 0;
+                int offset = 0;
+                int len = 0 + buf.Length;
+                while (i < len)
+                {
+                    if (buf[i] == 0x7d)
+                    {
+                        if (len > i + 1)
+                        {
+                            if (buf[i + 1] == 0x01)
+                            {
+                                bytes[offset++] = 0x7d;
+                                i++;
+                            }
+                            else if (buf[i + 1] == 0x02)
+                            {
+                                bytes[offset++] = 0x7e;
+                                i++;
+                            }
+                            else
+                            {
+                                bytes[offset++] = buf[i];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        bytes[offset++] = buf[i];
+                    }
+                    i++;
+                }
+                return bytes.AsSpan(0, offset).ToArray();
+            }
+            finally
+            {
+                JT808ArrayPool.Return(bytes);
+            }
         }
 
         /// <summary>
@@ -175,39 +216,62 @@ namespace JT808.Protocol.JT808Formatters
         /// </summary>
         /// <param name="buf"></param>
         /// <returns></returns>
-        internal static byte[] JT808Escape(Span<byte> buf)
+        internal static int JT808Escape(ref byte[] buf,int offset)
+        {
+            var tmpBuffer = buf.AsSpan(0, offset).ToArray();
+            int tmpOffset = 0;
+            buf[tmpOffset++] = tmpBuffer[0];
+            for (int i = 1; i < offset - 1; i++)
+            {
+                if (tmpBuffer[i] == 0x7e)
+                {
+                    buf[tmpOffset++] = 0x7d;
+                    buf[tmpOffset++] = 0x02;
+                }
+                else if (tmpBuffer[i] == 0x7d)
+                {
+                    buf[tmpOffset++] = 0x7d;
+                    buf[tmpOffset++] = 0x01;
+                }
+                else
+                {
+                    buf[tmpOffset++] = tmpBuffer[i];
+                }
+            }
+            buf[tmpOffset++] = tmpBuffer[tmpBuffer.Length- 1];
+            return tmpOffset;
+        }
+
+        /// <summary>
+        /// 转码
+        /// </summary>
+        /// <param name="buf"></param>
+        /// <returns></returns>
+        [Obsolete("效率比较低")]
+        internal static int JT808EscapeOld(ref byte[] buf, int offset)
         {
             List<byte> bytes = new List<byte>();
-            int n = 0;
             bytes.Add(buf[0]);
-            for (int i = 1; i < buf.Length - 1; i++)
+            for (int i = 1; i < offset-1; i++)
             {
                 if (buf[i] == 0x7e)
                 {
                     bytes.Add(0x7d);
                     bytes.Add(0x02);
-                    n++;
                 }
                 else if (buf[i] == 0x7d)
                 {
                     bytes.Add(0x7d);
                     bytes.Add(0x01);
-                    n++;
                 }
                 else
                 {
                     bytes.Add(buf[i]);
                 }
             }
-            if (n > 0)
-            {
-                bytes.Add(buf[buf.Length - 1]);
-                return bytes.ToArray();
-            }
-            else
-            {
-                return buf.ToArray();
-            }
+            bytes.Add(buf[offset - 1]);
+            Array.Copy(bytes.ToArray(), 0, buf, 0, bytes.Count);
+            return bytes.Count;
         }
     }
 }

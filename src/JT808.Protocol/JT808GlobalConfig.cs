@@ -1,8 +1,11 @@
 ﻿using JT808.Protocol.JT808Internal;
 using JT808.Protocol.MessageBody;
 using System;
+using System.Runtime.CompilerServices;
 using System.Text;
 
+[assembly: InternalsVisibleTo("JT808.Protocol.Benchmark")]
+[assembly: InternalsVisibleTo("JT808.Protocol.Test")]
 namespace JT808.Protocol
 {
     public class JT808GlobalConfig
