@@ -45,11 +45,5 @@
     <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.0" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Reference Include="System.Buffers">
-      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.1.0\ref\netcoreapp2.1\System.Buffers.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
 </Project>

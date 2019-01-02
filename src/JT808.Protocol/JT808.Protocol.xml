@@ -1026,23 +1026,7 @@
             JT808包序列化器
             </summary>
         </member>
-        <member name="M:JT808.Protocol.JT808Formatters.JT808PackageFromatter.JT808DeEscapeOld(System.ReadOnlySpan{System.Byte},System.Int32,System.Int32)">
-            <summary>
-            转义
-            </summary>
-            <param name="buf"></param>
-            <param name="offset"></param>
-            <param name="length"></param>
-            <returns></returns>
-        </member>
         <member name="M:JT808.Protocol.JT808Formatters.JT808PackageFromatter.JT808Escape(System.Byte[]@,System.Int32)">
-            <summary>
-            转码
-            </summary>
-            <param name="buf"></param>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Protocol.JT808Formatters.JT808PackageFromatter.JT808EscapeOld(System.Byte[]@,System.Int32)">
             <summary>
             转码
             </summary>
