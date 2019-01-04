@@ -1087,7 +1087,7 @@
         <member name="M:JT808.Protocol.JT808GlobalConfig.SetSkipCRCCode(System.Boolean)">
             <summary>
             设置跳过校验码
-            场景：测试的时候，可能需要收到改数据，所以测试的时候有用
+            场景：测试的时候，可能需要手动改数据，所以测试的时候有用
             </summary>
             <param name="skipCRCCode"></param>
             <returns></returns>
@@ -1913,6 +1913,11 @@
             </summary>
             <param name="bytes"></param>
             <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.JT808SplitPackageBodies">
+            <summary>
+            统一分包数据体
+            </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0001">
             <summary>
