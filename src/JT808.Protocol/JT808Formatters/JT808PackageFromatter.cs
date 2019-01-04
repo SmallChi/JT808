@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Exceptions;
-using JT808.Protocol.Attributes;
-using System.Buffers;
 using JT808.Protocol.Enums;
 using JT808.Protocol.JT808Internal;
 
@@ -54,17 +50,51 @@ namespace JT808.Protocol.JT808Formatters
                 Type jT808BodiesImplType = JT808MsgIdFactory.GetBodiesImplTypeByMsgId(jT808Package.Header.MsgId);
                 if (jT808BodiesImplType != null)
                 {
+                    //4.分包消息体 从17位开始  或   未分包消息体 从13位开始
                     if (jT808Package.Header.MessageBodyProperty.IsPackge)
-                    {//4.分包消息体 从17位开始  或   未分包消息体 从13位开始
-                     //消息总包数2位+包序号2位=4位
+                    {
+                        //消息总包数2位+包序号2位=4位
                         offset = offset + 2 + 2;
+                        if (jT808Package.Header.MessageBodyProperty.PackageIndex > 1)
+                        {
+                            try
+                            {
+                                //5.处理第二包之后的分包数据消息体
+                                jT808Package.Bodies = JT808FormatterResolverExtensions.JT808DynamicDeserialize(
+                                    JT808FormatterExtensions.GetFormatter(typeof(JT808SplitPackageBodies)),
+                                    buffer.Slice(offset + 1, jT808Package.Header.MessageBodyProperty.DataLength),
+                                    out readSize);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new JT808Exception(JT808ErrorCode.BodiesParseError, ex);
+                            }
+                        }
+                        else
+                        {
+                            try
+                            {
+                                //5.处理消息体
+                                jT808Package.Bodies = JT808FormatterResolverExtensions.JT808DynamicDeserialize(
+                                    JT808FormatterExtensions.GetFormatter(jT808BodiesImplType),
+                                    buffer.Slice(offset + 1, jT808Package.Header.MessageBodyProperty.DataLength),
+                                    out readSize);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new JT808Exception(JT808ErrorCode.BodiesParseError, ex);
+                            }
+                        }
                     }
-                    if (jT808Package.Header.MessageBodyProperty.DataLength != 0)
+                    else
                     {
                         try
                         {
                             //5.处理消息体
-                            jT808Package.Bodies = JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(jT808BodiesImplType), buffer.Slice(offset+1, jT808Package.Header.MessageBodyProperty.DataLength),  out readSize);
+                            jT808Package.Bodies = JT808FormatterResolverExtensions.JT808DynamicDeserialize(
+                                JT808FormatterExtensions.GetFormatter(jT808BodiesImplType),
+                                buffer.Slice(offset + 1, jT808Package.Header.MessageBodyProperty.DataLength),
+                                out readSize);
                         }
                         catch (Exception ex)
                         {

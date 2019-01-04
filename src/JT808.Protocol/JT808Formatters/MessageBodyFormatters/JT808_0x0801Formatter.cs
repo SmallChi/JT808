@@ -17,7 +17,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             jT808_0X0801.MultimediaCodingFormat = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             jT808_0X0801.EventItemCoding = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             jT808_0X0801.ChannelId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset); 
-            jT808_0X0801.Position = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Deserialize(bytes.Slice(offset), out int bufReadSize);
+            jT808_0X0801.Position = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Deserialize(bytes.Slice(offset,28), out int bufReadSize);
             offset += 28;
             jT808_0X0801.MultimediaDataPackage = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset);
             readSize = offset;

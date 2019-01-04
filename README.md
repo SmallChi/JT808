@@ -215,7 +215,7 @@ JT808GlobalConfig.Instance
 场景：
 一个设备厂商对应多个设备类型，不同设备类型可能存在相同的自定义位置附加信息Id，导致自定义附加信息Id冲突，无法解析。
 
-##### 解决方式：
+***解决方式：***
 
 1.凡是解析自定义附加信息Id协议的，先进行分割存储，然后在根据外部的设备类型进行统一处理;
 
@@ -224,6 +224,23 @@ JT808GlobalConfig.Instance
 [可以参考DemoTest的Demo5](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/DemoTest.cs)
 
 > 要是哪位大佬还有其他的解决方式，请您告知我下，谢谢您了。
+
+### 举个栗子5
+
+#### 遇到的问题-多媒体数据上传进行分包处理
+
+场景:
+设备在上传多媒体数据的时候，由于数据比较多，一次上传不了，所以采用分包方式处理。
+
+***解决方式：***
+
+1. 第一包数据上来采用平常的方式去解析数据；
+
+2. 当N包数据上来，采用统一分包消息体去接收数据，最后在合并成一条。
+
+> 普及知识点：一般行业分包是按256的整数倍，太多不行，太少也不行，必须刚刚好。
+
+[可以参考DemoTest的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/DemoTest.cs)
 
 ## NuGet安装
 

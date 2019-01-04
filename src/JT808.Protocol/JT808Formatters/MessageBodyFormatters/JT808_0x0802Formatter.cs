@@ -23,7 +23,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                 jT808MultimediaSearchProperty.MultimediaType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
                 jT808MultimediaSearchProperty.ChannelId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
                 jT808MultimediaSearchProperty.EventItemCoding = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-                jT808MultimediaSearchProperty.Position = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Deserialize(bytes.Slice(offset), out bufReadSize);
+                jT808MultimediaSearchProperty.Position = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Deserialize(bytes.Slice(offset,28), out bufReadSize);
                 offset += 28;
                 JT808_0x0802.MultimediaSearchItems.Add(jT808MultimediaSearchProperty);
             }
