@@ -32,13 +32,13 @@ namespace JT808.Protocol.Test.MessageBody
                 }
             };
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
-            Assert.Equal("7E0104000C000123456789000A00140100000001040000000A907E", hex);
+            Assert.Equal("7E01040010000123456789000A0014010000000100000001040000000A8D7E", hex);
         }
 
         [Fact]
         public void Test1_1()
         {
-            byte[] bytes = "7E0104000C000123456789000A00140100000001040000000A907E".ToHexBytes();
+            byte[] bytes = "7E01040010000123456789000A0014010000000100000001040000000A8D7E".ToHexBytes();
             JT808Package jT808_0X8104= JT808Serializer.Deserialize<JT808Package>(bytes);
             Assert.Equal(Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(), jT808_0X8104.Header.MsgId);
             Assert.Equal(10, jT808_0X8104.Header.MsgNum);
@@ -83,7 +83,7 @@ namespace JT808.Protocol.Test.MessageBody
                 }
             };
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
-            Assert.Equal("7E0104001E000123456789000A00140200000001040000000A000000130D7777772E62616964752E636F6DF27E", hex);
+            Assert.Equal("7E01040026000123456789000A0014020000000100000001040000000A00000013000000130D7777772E62616964752E636F6DD87E", hex);
         }
 
         [Fact]

@@ -30,13 +30,13 @@ namespace JT808.Protocol.Test.MessageBody
                 }
             };
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
-            Assert.Equal("7E8103000A000123456789000A0100000001040000000A057E", hex);
+            Assert.Equal("7E8103000E000123456789000A010000000100000001040000000A007E", hex);
         }
 
         [Fact]
         public void Test1_1()
         {
-            byte[] bytes = "7E 81 03 00 0A 00 01 23 45 67 89 00 0A 01 00 00 00 01 04 00 00 00 0A 05 7E".ToHexBytes();
+            byte[] bytes = "7E8103000E000123456789000A010000000100000001040000000A007E".ToHexBytes();
             JT808Package jT808_0X8103 = JT808Serializer.Deserialize<JT808Package>(bytes);
             Assert.Equal(Enums.JT808MsgId.设置终端参数.ToUInt16Value(), jT808_0X8103.Header.MsgId);
             Assert.Equal(10, jT808_0X8103.Header.MsgNum);
@@ -71,7 +71,7 @@ namespace JT808.Protocol.Test.MessageBody
             };
             var hex = JT808Serializer.Serialize(JT808_0x8103).ToHexString();
             //"0200000001040000000A000000130D7777772E62616964752E636F6D"
-            Assert.Equal("0200000001040000000A000000130D7777772E62616964752E636F6D", hex);
+            Assert.Equal("020000000100000001040000000A00000013000000130D7777772E62616964752E636F6D", hex);
         }
 
         [Fact]
