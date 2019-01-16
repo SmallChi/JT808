@@ -9,10 +9,10 @@ namespace JT808.Protocol.Extensions.DependencyInjection
 {
     public static class DependencyInjectionExtensions
     {
-        public static IServiceCollection AddJT808Configure(this IServiceCollection services, JT808Options jT808Options)
+        public static IServiceCollection AddJT808Configure(this IServiceCollection services, IOptions<JT808Options> jT808Options)
         {
-            JT808GlobalConfig.Instance.SetSkipCRCCode(jT808Options.SkipCRCCode);
-            JT808GlobalConfig.Instance.Register_0x0200_Attach(jT808Options.JT808LocationAttachIds.ToArray());
+            JT808GlobalConfig.Instance.SetSkipCRCCode(jT808Options.Value.SkipCRCCode);
+            JT808GlobalConfig.Instance.Register_0x0200_Attach(jT808Options.Value.JT808LocationAttachIds.ToArray());
             var servicesProvider = services.BuildServiceProvider();
             try
             {

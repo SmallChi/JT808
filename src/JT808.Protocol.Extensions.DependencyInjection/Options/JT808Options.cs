@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace JT808.Protocol.Extensions.DependencyInjection.Options
 {
-    public class JT808Options
+    public class JT808Options:IOptions<JT808Options>
     {
         public JT808Options()
         {
@@ -30,5 +31,10 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
         /// <see cref="typeof(实现JT808_0x8900_BodyBase)"/>
         /// </summary>
         public Dictionary<byte, Type> JT808_0x8900Method { get; set; }
+
+        JT808Options IOptions<JT808Options>.Value
+        {
+            get { return this; }
+        }
     }
 }

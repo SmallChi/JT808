@@ -2,6 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Copyright>Copyright 2018.</Copyright>
+    <Authors>SmallChi</Authors>
+    <PackageId>JT808.Extensions.DependencyInjection</PackageId>
+    <Product>JT808.Extensions.DependencyInjection</Product>
+    <Description>JT808协议依赖注入扩展包</Description>
+    <PackageReleaseNotes>JT808协议依赖注入扩展包</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/SmallChi/JT808</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/SmallChi/JT808</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</PackageLicenseUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
