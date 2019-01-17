@@ -13,6 +13,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         {
             int offset = 0;
             JT808_0x8103 jT808_0x8103 = new JT808_0x8103();
+            jT808_0x8103.ParamList = new List<JT808_0x8103_BodyBase>();
             var paramCount = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);//参数总数
             for (int i = 0; i < paramCount; i++)
             {
@@ -20,13 +21,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                 int readSubBodySize = 0;
                 if (JT808_0x8103_BodyBase.JT808_0x8103Method.TryGetValue(paramId, out Type type))
                 {
-                    if (jT808_0x8103.ParamList != null)
-                    {
-                        jT808_0x8103.ParamList.Add(JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(type), bytes.Slice(offset), out readSubBodySize));
-                    }
-                    else {
-                        jT808_0x8103.ParamList = new List<JT808_0x8103_BodyBase> { JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(type), bytes.Slice(offset), out readSubBodySize) }; 
-                    }   
+                    jT808_0x8103.ParamList.Add(JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(type), bytes.Slice(offset), out readSubBodySize));
                 }
                 offset = offset + readSubBodySize;
             }           

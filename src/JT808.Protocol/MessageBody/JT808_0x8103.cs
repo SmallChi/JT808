@@ -24,6 +24,6 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 参数列表
         /// </summary>
-        public IList<JT808_0x8103_BodyBase> ParamList { get; set; }
+        public List<JT808_0x8103_BodyBase> ParamList { get; set; }
     }
 }

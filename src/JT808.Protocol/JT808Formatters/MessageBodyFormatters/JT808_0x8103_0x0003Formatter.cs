@@ -13,7 +13,6 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         {
             int offset = 0;
             JT808_0x8103_0x0003 jT808_0x8103_0x0003 = new JT808_0x8103_0x0003();
-            jT808_0x8103_0x0003.ParamId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
             jT808_0x8103_0x0003.ParamLength = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
             jT808_0x8103_0x0003.ParamValue = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
             readSize = offset;
@@ -22,7 +21,6 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 
         public int Serialize(ref byte[] bytes, int offset, JT808_0x8103_0x0003 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.ParamId);
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.ParamLength);
             offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.ParamValue);
             return offset;
