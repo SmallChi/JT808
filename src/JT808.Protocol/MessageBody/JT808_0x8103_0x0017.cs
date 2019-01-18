@@ -12,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     [JT808Formatter(typeof(JT808_0x8103_0x0017Formatter))]
     public class JT808_0x8103_0x0017 : JT808_0x8103_BodyBase
     {
-        public override uint ParamId { get; set; } = 0x0016;
+        public override uint ParamId { get; set; } = 0x0017;
         /// <summary>
         /// 数据 长度
         /// </summary>

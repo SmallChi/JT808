@@ -71,13 +71,13 @@ namespace JT808.Protocol.Test.MessageBody
             };
             var hex = JT808Serializer.Serialize(JT808_0x8103).ToHexString();
             //"0200000001040000000A000000130D7777772E62616964752E636F6D"
-            Assert.Equal("0200000001040000000A00000013000000130D7777772E62616964752E636F6D", hex);
+            Assert.Equal("0200000001040000000A000000130D7777772E62616964752E636F6D", hex);
         }
 
         [Fact]
         public void Test2_1()
         {
-            byte[] bytes = "0200000001040000000A00000013000000130D7777772E62616964752E636F6D".ToHexBytes();
+            byte[] bytes = "0200000001040000000A000000130D7777772E62616964752E636F6D".ToHexBytes();
             JT808_0x8103 jT808_0X8103 = JT808Serializer.Deserialize<JT808_0x8103>(bytes);
             
            foreach (var item in jT808_0X8103.ParamList)

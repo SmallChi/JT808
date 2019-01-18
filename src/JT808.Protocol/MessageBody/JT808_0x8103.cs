@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
-    /// 终端注册应答
+    /// 设置终端参数
     /// </summary>
     [JT808Formatter(typeof(JT808_0x8103Formatter))]
     public class JT808_0x8103 : JT808Bodies

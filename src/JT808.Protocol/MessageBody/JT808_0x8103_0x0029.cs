@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public override byte ParamLength { get; set; } = 4;
         /// <summary>
-        /// 紧急报警时汇报时间间隔，单位为秒（s），>0
+        /// 缺省时间汇报间隔，单位为秒（s），>0
         /// </summary>
         public uint ParamValue { get; set; }
     }

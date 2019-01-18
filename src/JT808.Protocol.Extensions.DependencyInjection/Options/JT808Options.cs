@@ -12,6 +12,7 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
             SkipCRCCode = false;
             JT808LocationAttachIds = new List<byte>();
             JT808_0x8900Method = new Dictionary<byte, Type>();
+            JT808_0x8103Method = new Dictionary<uint, Type>();
         }
 
         /// <summary>
@@ -31,6 +32,12 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
         /// <see cref="typeof(实现JT808_0x8900_BodyBase)"/>
         /// </summary>
         public Dictionary<byte, Type> JT808_0x8900Method { get; set; }
+        /// <summary>
+        /// 注册自定义设置终端参数Id
+        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x8103_BodyBase)"/>
+        /// <see cref="typeof(实现JT808_0x8103_BodyBase)"/>
+        /// </summary>
+        public Dictionary<uint, Type> JT808_0x8103Method { get; private set; }
 
         JT808Options IOptions<JT808Options>.Value
         {

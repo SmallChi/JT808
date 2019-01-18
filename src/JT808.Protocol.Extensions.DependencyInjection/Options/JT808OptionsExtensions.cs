@@ -44,7 +44,20 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
             JT808GlobalConfig.Instance.Overwrite_MsgId<TJT808Bodies>(overwriteMsgId);
             return jT808Options;
         }
-
+        /// <summary>
+        /// 注册自定义数据下行透传信息
+        /// </summary>
+        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x8103_BodyBase)"/>
+        /// <see cref="typeof(实现JT808_0x8103_BodyBase)"/>
+        public static JT808Options Register_0x8103_ParamId<TJT808_0x8103_BodyBase>(this JT808Options jT808Options,uint paramId)
+               where TJT808_0x8103_BodyBase : JT808_0x8103_BodyBase
+        {
+            if (!jT808Options.JT808_0x8103Method.ContainsKey(paramId))
+            {
+                jT808Options.JT808_0x8103Method.Add(paramId, typeof(TJT808_0x8103_BodyBase));
+            }
+            return jT808Options;
+        }
 
     }
 }

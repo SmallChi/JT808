@@ -62,6 +62,17 @@ namespace JT808.Protocol
         }
 
         /// <summary>
+        /// 注册自定义设置终端参数Id
+        /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x8103_BodyBase)"/>
+        /// <see cref="typeof(实现JT808_0x8103_BodyBase)"/>
+        /// <returns></returns>
+        public JT808GlobalConfig Register_0x8103_ParamId(uint paramId,Type type)
+        {
+            JT808_0x8103_BodyBase.AddJT808_0x8103Method(paramId, type);
+            return instance.Value;
+        }
+
+        /// <summary>
         /// 注册自定义消息
         /// </summary>
         /// <typeparam name="TJT808Bodies"></typeparam>
