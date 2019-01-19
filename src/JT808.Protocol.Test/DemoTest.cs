@@ -245,11 +245,11 @@ namespace JT808.Protocol.Test
                                             .Concat(jT808_0X0801_body_8.Data)
                                             .Concat(jT808_0X0801_body_9.Data)
                                             .Concat(jT808_0X0801_body_10.Data).ToArray();
-            using (MemoryStream ms = new MemoryStream(imageBytes))
-            {
-                Image image = Image.FromStream(ms);
-                image.Save("test.jpeg");
-            }
+            //using (MemoryStream ms = new MemoryStream(imageBytes))
+            //{
+            //    Image image = Image.FromStream(ms);
+            //    image.Save("test.jpeg");
+            //}
         }
 
         private Dictionary<string, DeviceType> cache = new Dictionary<string, DeviceType>
