@@ -25,13 +25,13 @@ namespace JT808.Protocol.Test.Extensions
         [Fact]
         public void DeEscapeTest3()
         {
-            byte[] buffer1 = JT808PackageFromatter.JT808DeEscape(deEscapeBytes).ToArray();
+            byte[] buffer1 = JT808Utils.JT808DeEscape(deEscapeBytes).ToArray();
         }
 
         [Fact]
         public void DeEscapeTest6()
         {
-            var len2 = JT808PackageFromatter.JT808Escape(ref escapeBytesPoll, escapeLen);
+            var len2 = JT808Utils.JT808Escape(ref escapeBytesPoll, escapeLen);
 
         }
 

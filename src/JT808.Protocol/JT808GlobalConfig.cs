@@ -17,6 +17,7 @@ namespace JT808.Protocol
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             MsgSNDistributed = new DefaultMsgSNDistributedImpl();
             Compress = new JT808GZipCompressImpl();
+            SplitPackageStrategy = new DefaultSplitPackageStrategyImpl();
             SkipCRCCode = false;
             Encoding = Encoding.GetEncoding("GBK");
         }
@@ -24,6 +25,8 @@ namespace JT808.Protocol
         public IMsgSNDistributed MsgSNDistributed { get; private set; }
 
         public JT808ICompress Compress { get; private set; }
+
+        public ISplitPackageStrategy SplitPackageStrategy { get; private set; }
 
         public static JT808GlobalConfig Instance
         {
@@ -132,7 +135,17 @@ namespace JT808.Protocol
             instance.Value.Compress = compressImpl;
             return instance.Value;
         }
-
+        /// <summary>
+        /// 设置分包算法
+        /// 默认3*256
+        /// </summary>
+        /// <param name="splitPackageStrategy"></param>
+        /// <returns></returns>
+        public JT808GlobalConfig SetSplitPackageStrategy(ISplitPackageStrategy  splitPackageStrategy)
+        {
+            instance.Value.SplitPackageStrategy = splitPackageStrategy;
+            return instance.Value;
+        }
         /// <summary>
         /// 设置跳过校验码
         /// 场景：测试的时候，可能需要手动改数据，所以测试的时候有用

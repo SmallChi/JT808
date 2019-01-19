@@ -17,7 +17,7 @@ namespace JT808.Protocol.JT808Formatters
             JT808HeaderPackage jT808HeaderPackage = new JT808HeaderPackage();
             // 转义还原——>验证校验码——>解析消息
             // 1. 解码（转义还原）
-            ReadOnlySpan<byte> buffer = JT808PackageFromatter.JT808DeEscape(bytes);
+            ReadOnlySpan<byte> buffer = JT808Utils.JT808DeEscape(bytes);
             // 2. 验证校验码
             //  2.1. 获取校验位索引
             int checkIndex = buffer.Length - 2;
