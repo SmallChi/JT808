@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/SmallChi/JT808</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</PackageLicenseUrl>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.1.2</Version>
+    <Version>1.1.3</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>D:\My Project\JT808\src\JT808.Protocol\JT808.Protocol.xml</DocumentationFile>
