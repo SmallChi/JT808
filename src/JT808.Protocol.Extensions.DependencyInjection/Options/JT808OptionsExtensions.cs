@@ -33,6 +33,18 @@ namespace JT808.Protocol.Extensions.DependencyInjection.Options
             return jT808Options;
         }
         /// <summary>
+        /// 注册自定义消息
+        /// </summary>
+        /// <typeparam name="TJT808Bodies"></typeparam>
+        /// <param name="customMsgId"></param>
+        /// <returns></returns>
+        public static JT808Options Register_CustomMsgId<TJT808Bodies>(this JT808Options jT808Options, ushort customMsgId)
+            where TJT808Bodies : JT808Bodies
+        {
+            JT808GlobalConfig.Instance.Register_CustomMsgId<TJT808Bodies>(customMsgId);
+            return jT808Options;
+        }
+        /// <summary>
         /// 重写消息
         /// </summary>
         /// <typeparam name="TJT808Bodies"></typeparam>
