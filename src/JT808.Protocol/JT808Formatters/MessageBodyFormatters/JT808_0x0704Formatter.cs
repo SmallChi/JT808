@@ -1,8 +1,7 @@
-﻿using JT808.Protocol.MessageBody;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
-using System.Buffers;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -11,25 +10,27 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x0704 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0704 jT808_0X0704 = new JT808_0x0704();
-            jT808_0X0704.Count = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
-            jT808_0X0704.LocationType= (JT808_0x0704.BatchLocationType)JT808BinaryExtensions.ReadByteLittle(bytes,ref offset);
+            JT808_0x0704 jT808_0X0704 = new JT808_0x0704
+            {
+                Count = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset),
+                LocationType = (JT808_0x0704.BatchLocationType)JT808BinaryExtensions.ReadByteLittle(bytes, ref offset)
+            };
             List<JT808_0x0200> jT808_0X0200s = new List<JT808_0x0200>();
             int bufReadSize;
             for (int i = 0; i < jT808_0X0704.Count; i++)
             {
-                int buflen = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
+                int buflen = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
                 //offset = offset + 2;
                 try
                 {
-                    JT808_0x0200 jT808_0X0200 = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Deserialize(bytes.Slice(offset, buflen),out bufReadSize);
+                    JT808_0x0200 jT808_0X0200 = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Deserialize(bytes.Slice(offset, buflen), out bufReadSize);
                     jT808_0X0200s.Add(jT808_0X0200);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }
-                offset = offset+ buflen;
+                offset = offset + buflen;
             }
             jT808_0X0704.Positions = jT808_0X0200s;
             readSize = offset;
@@ -49,9 +50,9 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                     JT808BinaryExtensions.WriteUInt16Little(bytes, offset, (ushort)(positionOffset - offset - 2));
                     offset = positionOffset;
                 }
-                catch (Exception ex) 
+                catch (Exception)
                 {
-                    
+
                 }
             }
             return offset;

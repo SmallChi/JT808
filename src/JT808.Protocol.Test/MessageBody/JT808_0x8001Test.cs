@@ -1,27 +1,28 @@
-﻿using System.Text;
-using Xunit;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBodyRequest
 {
-    public  class JT808_0x8001Test : JT808PackageBase
+    public class JT808_0x8001Test : JT808PackageBase
     {
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.平台通用应答.ToUInt16Value(),
-                MsgNum = 10,
-                TerminalPhoneNo = "12345678900",
-            };
-            jT808Package.Bodies = new JT808_0x8001
-            {
-                 MsgId= Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
-                 JT808PlatformResult= Enums.JT808PlatformResult.成功,
-                 MsgNum=100
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.平台通用应答.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "12345678900",
+                },
+                Bodies = new JT808_0x8001
+                {
+                    MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                    JT808PlatformResult = Enums.JT808PlatformResult.成功,
+                    MsgNum = 100
+                }
             };
             //"7E 
             //80 01 

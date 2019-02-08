@@ -10,7 +10,7 @@ namespace JT808.Protocol.MessageBody
         /// GNSS 定位卫星数
         /// </summary>
         public byte GNSSCount { get; set; }
-        public override byte AttachInfoId { get;  set; } = 0x31;
-        public override byte AttachInfoLength { get;  set; } = 1;
+        public override byte AttachInfoId { get; set; } = 0x31;
+        public override byte AttachInfoLength { get; set; } = 1;
     }
 }

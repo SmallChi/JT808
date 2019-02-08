@@ -1,7 +1,6 @@
-﻿using System;
-using System.Runtime.Serialization;
-using JT808.Protocol.Attributes;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
+using System.Runtime.Serialization;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -17,7 +16,7 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         [IgnoreDataMember]
         public double ConvertOil => Oil / 10.0;
-        public override byte AttachInfoId { get;  set; } = 0x02;
-        public override byte AttachInfoLength { get;  set; } = 2;
+        public override byte AttachInfoId { get; set; } = 0x02;
+        public override byte AttachInfoLength { get; set; } = 2;
     }
 }

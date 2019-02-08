@@ -10,9 +10,11 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         [Fact]
         public void Test1()
         {
-            JT808_0x8003 jT808_0X8003 = new JT808_0x8003();
-            jT808_0X8003.OriginalMsgNum = 1234;
-            jT808_0X8003.AgainPackageData = new byte[] { 0x01, 0x02, 0x02, 0x03 };
+            JT808_0x8003 jT808_0X8003 = new JT808_0x8003
+            {
+                OriginalMsgNum = 1234,
+                AgainPackageData = new byte[] { 0x01, 0x02, 0x02, 0x03 }
+            };
             var hex = JT808Serializer.Serialize(jT808_0X8003).ToHexString();
             Assert.Equal("04D20201020203", hex);
         }

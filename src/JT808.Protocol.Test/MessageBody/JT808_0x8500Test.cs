@@ -1,9 +1,6 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -12,8 +9,10 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x8500 jT808_0X8500 = new JT808_0x8500();
-            jT808_0X8500.ControlFlag = 12;
+            JT808_0x8500 jT808_0X8500 = new JT808_0x8500
+            {
+                ControlFlag = 12
+            };
             var hex = JT808Serializer.Serialize(jT808_0X8500).ToHexString();
             Assert.Equal("0C", hex);
         }

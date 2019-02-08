@@ -1,14 +1,12 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
+using System.Runtime.InteropServices;
 using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
-using System.Runtime.InteropServices;
 
 namespace JT808.Protocol.Test.MessageBody
 {
-    public  class JT808_0x0901Test
+    public class JT808_0x0901Test
     {
         const string UserName = "smallchismallchismallchismallchismallchismallchismallchismallchismallchismallchismallchi";
 
@@ -23,7 +21,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Assert.Equal("0000001F1F8B08000000000000032BCE4DCCC949CEC82CA6320D0027F897E258000000", hex);
             }
-            else if(RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 Assert.Equal("0000001F1F8B080000000000000B2BCE4DCCC949CEC82CA6320D0027F897E258000000", hex);
             }

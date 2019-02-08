@@ -2,9 +2,7 @@
 using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Buffers;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -13,14 +11,18 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x0705 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0705 jT808_0X0705 = new JT808_0x0705();
-            jT808_0X0705.CanItemCount = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
-            jT808_0X0705.FirstCanReceiveTime = JT808BinaryExtensions.ReadDateTime5Little(bytes, ref offset);
-            jT808_0X0705.CanItems = new List<JT808Properties.JT808CanProperty>();
+            JT808_0x0705 jT808_0X0705 = new JT808_0x0705
+            {
+                CanItemCount = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset),
+                FirstCanReceiveTime = JT808BinaryExtensions.ReadDateTime5Little(bytes, ref offset),
+                CanItems = new List<JT808Properties.JT808CanProperty>()
+            };
             for (var i = 0; i < jT808_0X0705.CanItemCount; i++)
             {
-                JT808Properties.JT808CanProperty jT808CanProperty = new JT808Properties.JT808CanProperty();
-                jT808CanProperty.CanId = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset, 4);
+                JT808Properties.JT808CanProperty jT808CanProperty = new JT808Properties.JT808CanProperty
+                {
+                    CanId = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset, 4)
+                };
                 if (jT808CanProperty.CanId.Length != 4)
                 {
                     throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(jT808CanProperty.CanId)}->4");
@@ -38,11 +40,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 
         public int Serialize(ref byte[] bytes, int offset, JT808_0x0705 value)
         {
-            if (value.CanItems!=null && value.CanItems.Count > 0)
+            if (value.CanItems != null && value.CanItems.Count > 0)
             {
                 offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, (ushort)value.CanItems.Count);
                 offset += JT808BinaryExtensions.WriteDateTime5Little(bytes, offset, value.FirstCanReceiveTime);
-                foreach(var item in value.CanItems)
+                foreach (var item in value.CanItems)
                 {
                     if (item.CanId.Length != 4)
                     {

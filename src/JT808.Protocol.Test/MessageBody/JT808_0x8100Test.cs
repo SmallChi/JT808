@@ -1,27 +1,28 @@
-﻿using System.Text;
-using Xunit;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBodyRequest
 {
-    public  class JT808_0x8100Test: JT808PackageBase
+    public class JT808_0x8100Test : JT808PackageBase
     {
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
-                MsgNum = 10,
-                TerminalPhoneNo = "012345678900",
-            };
-            jT808Package.Bodies = new JT808_0x8100
-            {
-                Code="123456",
-                 JT808TerminalRegisterResult =  Enums.JT808TerminalRegisterResult.成功,
-                MsgNum = 100
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "012345678900",
+                },
+                Bodies = new JT808_0x8100
+                {
+                    Code = "123456",
+                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.成功,
+                    MsgNum = 100
+                }
             };
             //"7E 
             //81 00 
@@ -55,18 +56,20 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         [Fact]
         public void Test3()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
-                MsgNum = 10,
-                TerminalPhoneNo = "12345678900",
-            };
-            jT808Package.Bodies = new JT808_0x8100
-            {
-                Code = "123456",
-                JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.数据库中无该终端,
-                MsgNum = 100
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "12345678900",
+                },
+                Bodies = new JT808_0x8100
+                {
+                    Code = "123456",
+                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.数据库中无该终端,
+                    MsgNum = 100
+                }
             };
             //"7E 
             //81 00
@@ -100,18 +103,20 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         [Fact]
         public void Test5()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
-                MsgNum = 10,
-                TerminalPhoneNo = "12345678900",
-            };
-            jT808Package.Bodies = new JT808_0x8100
-            {
-                Code = "zssdaf23124sfdsc",
-                JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.成功,
-                MsgNum = 100
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.终端注册应答.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "12345678900",
+                },
+                Bodies = new JT808_0x8100
+                {
+                    Code = "zssdaf23124sfdsc",
+                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.成功,
+                    MsgNum = 100
+                }
             };
             //"7E 81 00 00 13 01 23 45 67 89 00 00 0A 00 64 00 7A 73 73 64 61 66 32 33 31 32 34 73 66 64 73 63 3B 7E"
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();

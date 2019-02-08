@@ -1,7 +1,6 @@
-﻿using System.Text;
-using Xunit;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -10,12 +9,14 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x0800 jT808_0X0800 = new JT808_0x0800();
-            jT808_0X0800.MultimediaId = 5569;
-            jT808_0X0800.MultimediaType = 0x01;
-            jT808_0X0800.MultimediaCodingFormat = 0x02;
-            jT808_0X0800.ChannelId = 0x06;
-            jT808_0X0800.EventItemCoding = 0x01;
+            JT808_0x0800 jT808_0X0800 = new JT808_0x0800
+            {
+                MultimediaId = 5569,
+                MultimediaType = 0x01,
+                MultimediaCodingFormat = 0x02,
+                ChannelId = 0x06,
+                EventItemCoding = 0x01
+            };
             var hex = JT808Serializer.Serialize(jT808_0X0800).ToHexString();
             Assert.Equal("000015C101020106", hex);
         }

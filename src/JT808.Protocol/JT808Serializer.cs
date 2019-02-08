@@ -37,8 +37,7 @@ namespace JT808.Protocol
         public static T Deserialize<T>(ReadOnlySpan<byte> bytes)
         {
             var formatter = JT808FormatterExtensions.GetFormatter<T>();
-            int readSize;
-            return formatter.Deserialize(bytes,out readSize);
+            return formatter.Deserialize(bytes, out int readSize);
         }
 
         /// <summary>
@@ -50,14 +49,13 @@ namespace JT808.Protocol
         public static JT808HeaderPackage HeaderDeserialize(ReadOnlySpan<byte> bytes)
         {
             var formatter = JT808FormatterExtensions.GetFormatter<JT808HeaderPackage>();
-            int readSize;
-            return formatter.Deserialize(bytes, out readSize);
+            return formatter.Deserialize(bytes, out int readSize);
         }
 
-        public static dynamic Deserialize(ReadOnlySpan<byte> bytes,Type type)
+        public static dynamic Deserialize(ReadOnlySpan<byte> bytes, Type type)
         {
             var formatter = JT808FormatterExtensions.GetFormatter(type);
-            return JT808FormatterResolverExtensions.JT808DynamicDeserialize(formatter,bytes,out int readSize);
+            return JT808FormatterResolverExtensions.JT808DynamicDeserialize(formatter, bytes, out int readSize);
         }
     }
 }

@@ -1,13 +1,10 @@
-﻿using JT808.Protocol.JT808Formatters;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace JT808.Protocol.Test.Extensions
 {
-    public class JT808EscapeTest:IDisposable
+    public class JT808EscapeTest : IDisposable
     {
         private byte[] deEscapeBytes;
         private byte[] escapeBytesPoll;

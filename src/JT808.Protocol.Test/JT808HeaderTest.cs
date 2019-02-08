@@ -1,9 +1,7 @@
 ﻿using JT808.Protocol.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
 using JT808.Protocol.Extensions;
+using System;
+using Xunit;
 
 namespace JT808.Protocol.Test
 {
@@ -26,8 +24,10 @@ namespace JT808.Protocol.Test
         [Fact]
         public void Test1()
         {
-            JT808Header jT808HeaderProperty = new JT808Header();
-            jT808HeaderProperty.TerminalPhoneNo = "13812345678";
+            JT808Header jT808HeaderProperty = new JT808Header
+            {
+                TerminalPhoneNo = "13812345678"
+            };
             jT808HeaderProperty.MessageBodyProperty.DataLength = 5;
             jT808HeaderProperty.MsgNum = 135;
             jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();

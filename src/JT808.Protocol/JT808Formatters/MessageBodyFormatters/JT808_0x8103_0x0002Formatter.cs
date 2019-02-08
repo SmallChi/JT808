@@ -1,9 +1,6 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -12,9 +9,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x8103_0x0002 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x8103_0x0002 jT808_0x8103_0x0002 = new JT808_0x8103_0x0002();
-            jT808_0x8103_0x0002.ParamLength = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0x8103_0x0002.ParamValue = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
+            JT808_0x8103_0x0002 jT808_0x8103_0x0002 = new JT808_0x8103_0x0002
+            {
+                ParamLength = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                ParamValue = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset)
+            };
             readSize = offset;
             return jT808_0x8103_0x0002;
         }

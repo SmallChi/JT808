@@ -1,23 +1,21 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using Xunit;
-using JT808.Protocol.Extensions;
-using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.Test.MessageBody
 {
-   public  class JT808_0x8302Test
+    public  class JT808_0x8302Test
     {
         [Fact]
         public void Test1()
         {
-            JT808_0x8302 jT808_0X8302 = new JT808_0x8302();
-            jT808_0X8302.AnswerId = 128;
-            jT808_0X8302.AnswerContent = "123456";
-            jT808_0X8302.Flag = 1;
-            jT808_0X8302.Issue = "sdddaff";
+            JT808_0x8302 jT808_0X8302 = new JT808_0x8302
+            {
+                AnswerId = 128,
+                AnswerContent = "123456",
+                Flag = 1,
+                Issue = "sdddaff"
+            };
             var hex = JT808Serializer.Serialize(jT808_0X8302).ToHexString();
             //01
             //07

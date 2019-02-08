@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol.JT808Properties
+﻿namespace JT808.Protocol.JT808Properties
 {
     /// <summary>
     /// 事件属性

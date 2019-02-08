@@ -1,16 +1,14 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using Xunit;
+﻿using JT808.Protocol.Attributes;
+using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Formatters;
-using JT808.Protocol.Enums;
-using Newtonsoft.Json.Linq;
-using JT808.Protocol.Attributes;
+using JT808.Protocol.MessageBody;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.IO;
-using System.Drawing;
+using Xunit;
 
 namespace JT808.Protocol.Test
 {
@@ -28,16 +26,18 @@ namespace JT808.Protocol.Test
                 TerminalPhoneNo = "123456789012"
             };
 
-            JT808_0x0200 jT808_0x0200 = new JT808_0x0200();
-            jT808_0x0200.AlarmFlag = 1;
-            jT808_0x0200.Altitude = 40;
-            jT808_0x0200.GPSTime = DateTime.Parse("2018-10-15 10:10:10");
-            jT808_0x0200.Lat = 12222222;
-            jT808_0x0200.Lng = 132444444;
-            jT808_0x0200.Speed = 60;
-            jT808_0x0200.Direction = 0;
-            jT808_0x0200.StatusFlag = 2;
-            jT808_0x0200.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            JT808_0x0200 jT808_0x0200 = new JT808_0x0200
+            {
+                AlarmFlag = 1,
+                Altitude = 40,
+                GPSTime = DateTime.Parse("2018-10-15 10:10:10"),
+                Lat = 12222222,
+                Lng = 132444444,
+                Speed = 60,
+                Direction = 0,
+                StatusFlag = 2,
+                JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
+            };
 
             jT808_0x0200.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
@@ -97,7 +97,7 @@ namespace JT808.Protocol.Test
         [Fact]
         public void Demo3()
         {
-            JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012",
+            JT808Package jT808Package = JT808MsgId.位置信息汇报.Create("123456789012",
                 new JT808_0x0200
                 {
                     AlarmFlag = 1,
@@ -146,7 +146,7 @@ namespace JT808.Protocol.Test
         {
             JT808GlobalConfig.Instance.Register_0x0200_Attach(0x81);
 
-            JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012",
+            JT808Package jT808Package = JT808MsgId.位置信息汇报.Create("123456789012",
                                                         new JT808_0x0200
                                                         {
                                                             AlarmFlag = 1,
@@ -157,7 +157,7 @@ namespace JT808.Protocol.Test
                                                             Speed = 60,
                                                             Direction = 0,
                                                             StatusFlag = 2,
-                                                             JT808CustomLocationAttachData=new Dictionary<byte, JT808_0x0200_CustomBodyBase>
+                                                            JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>
                                                              {
                                                                  {0x81,new JT808_0x0200_DT1_0x81 {
                                                                       Age=15,
@@ -212,7 +212,7 @@ namespace JT808.Protocol.Test
             byte[] bytes7 = "7e080123000138123456782039000a0007083753860d0201eb474249a431c0e3be69e0feb40c78e9cd4f6ee164e4f0c3152c09e57f2d38fbc7a553e49e7a9a48628cd205c0ed400df6a4ebc835420a3a74a0043463b5201067d453bad0310d2521852646290c6139a6e307e94018fa080a9a8afa6a330ffd06b27c5b213776f1e785889c7d015bff00b1fd2844bd8e74d2ae148dd43211785f4318eacc7fd95ff1ace9dc492b3818c92706a522e72bab101a61aa320152c270e28045eea29bde91a1e900e40ce29df4ad84181fe34bdb148017a7ad29191c1e28004523bfeb52af4a0687678a5cf03fc6900fdc4f2c72693d719a40814f34ee3191487718c78f534cfa55210527d2900528a6301d68ed4803eb49f5a43427e34879a430f6a6b71de90185a54d1c17fa9d9cce893bde3cc8acc01757c118f5e954f58b34bef10c56f2dca5b462d4349230e803bf41dc9240fc68b93ba33aef4db479c47a79b928bd65b8651bbaf450338fa9cfb53e3b3d3e1426e2de795c63ef30c1fa053fce84db1596e4332d938262b344278c3123f406b1e7016420631ed4214add080d34d32029e870c0d008be0fca28a469d0f46538a767dab6b08307ae452e79a02c3c0f6a5e280157834ef6a43428a5079e2900e5a53de90c4ce0d283400d61f5a667d29a00e293340833cd3a90013471c7340c4a3ad218d079a53eff00a5201a698719e681952fac6d2f902dd4092606031e187d0108e4571da9eed3b549618a5790441510ca7710a541c7b637629589969b14cea175962b22ae7fba8bf9722a169e763969a4fc188a6436205790e0b649fef1a8e58cc6d8241fa52b85b42134ca64853875a00bf09cc629c691a743d1507a53803bab7247f51487afad20147b529a060bc53b3f4a40283c734e1dbd6818e1c1a71a402639a00f5a0071195a85bae69218ccf3d697b5310718a39ec2801d9a09e290c4cf3d68ef498c4cf3f4a42690210f4a6e05031ae462b83f104825d5ee88c7126dff00be542ffecb40a5b1979a51419a244201a8e76dcf483a15cf5a6d3244a506802edb1fddd48c78a562d6c7a42e78152003ad6c21718a61ebc503140e79a0f5c57e".ToHexBytes();
             byte[] bytes8 = "7e08012300013812345678203a000a0008e050003d69c39148078a75030073cd2e49a402819a4ce38a100ecf1cd31c11490c8f1ef4d2714c419e697340200d9e28c8cd0302e0537713d2900b839a711523108f6a61e940d0c6e481d2bcef527126a172ebd1a7908ffbecd3265b1529b9a4412c43229938c3500f62b93494122502802dda9e08a9cfa522d6c7a4af4a7027b56cc07751cd37239a003349df02801ca29e01cd201e07ad35b9c8eded4863870296800fc6900e7d01e818ece3a8e29924c8382d4ac0425d4f3918fcf346e07bfe54c41de940e280414c7ce06290d0880f7a9028a40380e48a5268631b8ebe9519e3a5201bbb69dc7a0e4d798e7f7683fd914132129941058807cb51dce7752ea37b158d253244a050059b53f362ad1eb525ad8f4843c52b673c56e02eee314dcf6a40380cf6a728e78a02c380a7724d0324c7151b019ef48031c7b8a51db8c9a00701bbd2823029019f7b3b2f0a08acc6f3a46ea49f6a4d945eb585f6fef2ae2a63914d09ee3b1487a5315c074a303bd200e94a39a063b9141e9d290d0c272714d3d7a74a4329ea6e63d32f1c1c15b79083efb4e2bcea4c6ec0e8381411313b532820b76e3e5a86ec7cf496e53d8aa69299025140135b9c3d5c26917167a5a8c2d2119e6b604369ebc9a043a9573e940c701eb4ec60648a43149fca8efcd201a41fafd2973d38a00907e82931da9011490abff0d462dd57955c51618e031d051f8d3105250c04c668c7a50160fc29d8e3b5218a38a3ad218d34da00cbf11b32e857454e090a99f666507f426b8173f3923d6826436900e69106a4501f211d57aa838aa179feb2a22f53492b22a9eb4dab3210d1401243f7c55ea0a47a59e94bdb9ad46263238a700062801ddf9a075a063874e3a0a5038a4027d290668121738a51d7148a2651c507bfa5480da461ef4c061fc2986a84250460520003bf5cfa526da005007526979a06264fad2e38a4034e477a692690cc3f16c853485453feb27453f400b7f3515c4b0e68225b801c53e38c33804f7a4248d9b71b620a3a0e0565ea8a05c123bd4477349af74cf34dab310c5262801f1fdf15a1fc2291713d29e17e".ToHexBytes();
             byte[] bytes9 = "7e08012300013812345678203b000a000979e3a53f19c56e00571401c83e94807751477a062f7a334806939a51400ee714e51ce6900fcf6a5c8c62a4634900e05464f38a6806f4149926a8570fc281f4a00300f5147514804cf38ef4a46690d09c62973e94980c6e05373c734586735e309084b3887d01d66773f50001ff00a11ae5475a4449ea3a917a8a03a9b96e331afd05656abff1f1f854477349fc2671a6d5988525021cbf785690c14071499713d1d6a5e715b80b8a41c5031e3d7a51838a9005ce6822801b8c7ffaa9caa3a8a00514f0063ae6a406938e9c500d3189c93d29ac0d0210d3698801e334eea3fa50301411405841cd21a430f6a09348686923bd37a0c0a40723e2d918ea11467d02ea4008fab31cff00e822b0145043dc5229557914811b36ff00eac7d2b2b533998d4477349ec67914d356602514000eb5a28dfbb1499513d2e300549c56c317391d29b8a009171dea4c6471c5263136e39a69eb4806d2e71da980139e3934a091ee29580060d03b71de900a00fad35a980d6a691d85001e94a05300ed49ef4009c75c51d690c404678a2a410c6a6ee3eb40d1c4788df76b574339d9b147e083fa9359a9410c76053d00dc2902352318502b2750e6723d2a62692d8a2d4d35460211498a003bd5f888f2c50ca47a62364022a4072335b0c55c9a5c67b5218a3838e69eadf4a403b3c534f348031c51b7d2800dbcf4a52bdfad201b4ee9cd00216fad464f3c9cfd280140e39cd3714c050b498e7ad0027b671450c2e21e4534d0019f6a439a43434f4e69a4f6148a380d4dfccd46e9f76eccefce7a80c40fd00aacb4198a4e29eae030c52046ba8205635f9ff486a989a4f6291eb486a8c46d250201d6ae43f7052291e8f6d28c0c9e2ae2e36e715b8c701de9c0fd6a405e0f14a3e940c3bd2e38a4029e3147005200f4a427b50027f5a4ddda9821a7149804d031c41e9498f4033ed400e031d69ac31d29086f5a4fd6a806fe94948000a53d3148a18c31e86a3670877b7217938f41480f36e91203fdd1403c506605b1525b61a6553d09a4f61adcdf8903b2a138cfa75c77ac1d54a7db64f2d76a6e3b46738fc6b38b6b7e".ToHexBytes();
-            byte[] bytes10= "7e08012017013812345678203c000a000ad4dea2f72e50269b5a1ca251400a2ad427e5a4ca47ffd9d17e".ToHexBytes();
+            byte[] bytes10 = "7e08012017013812345678203c000a000ad4dea2f72e50269b5a1ca251400a2ad427e5a4ca47ffd9d17e".ToHexBytes();
 
             JT808Package jT808_0X0801_1 = JT808Serializer.Deserialize<JT808Package>(bytes1);
             JT808Package jT808_0X0801_2 = JT808Serializer.Deserialize<JT808Package>(bytes2);
@@ -328,8 +328,8 @@ namespace JT808.Protocol.Test
 
         public enum DeviceType
         {
-            DT1=1,
-            DT2=2
+            DT1 = 1,
+            DT2 = 2
         }
 
         public abstract class DeviceTypeBase
@@ -339,7 +339,7 @@ namespace JT808.Protocol.Test
                 public JObject Data { get; set; } = new JObject();
             }
             public virtual IExtData ExtData { get; protected set; } = new DefaultExtDataImpl();
-            public abstract  Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
+            public abstract Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
             protected DeviceTypeBase(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
             {
                 Execute(jT808CustomLocationAttachOriginalData);
@@ -359,7 +359,7 @@ namespace JT808.Protocol.Test
             protected override void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
             {
                 JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
-                foreach(var item in jT808CustomLocationAttachOriginalData)
+                foreach (var item in jT808CustomLocationAttachOriginalData)
                 {
                     try
                     {
@@ -385,9 +385,9 @@ namespace JT808.Protocol.Test
                                 break;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
-                        
+
                     }
                 }
             }
@@ -422,7 +422,7 @@ namespace JT808.Protocol.Test
                                 break;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }

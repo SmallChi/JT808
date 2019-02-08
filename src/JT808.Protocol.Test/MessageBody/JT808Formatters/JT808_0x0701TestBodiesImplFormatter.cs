@@ -2,8 +2,6 @@
 using JT808.Protocol.JT808Formatters;
 using JT808.Protocol.Test.MessageBody.JT808_0x0701BodiesImpl;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.Test.MessageBody.JT808Formatters
 {
@@ -12,9 +10,11 @@ namespace JT808.Protocol.Test.MessageBody.JT808Formatters
         public JT808_0x0701TestBodiesImpl Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0701TestBodiesImpl jT808_0X0701TestBodiesImpl = new JT808_0x0701TestBodiesImpl();
-            jT808_0X0701TestBodiesImpl.Id = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            jT808_0X0701TestBodiesImpl.UserNameLength = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
+            JT808_0x0701TestBodiesImpl jT808_0X0701TestBodiesImpl = new JT808_0x0701TestBodiesImpl
+            {
+                Id = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                UserNameLength = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset)
+            };
             jT808_0X0701TestBodiesImpl.UserName = JT808BinaryExtensions.ReadStringLittle(bytes, ref offset, jT808_0X0701TestBodiesImpl.UserNameLength);
             readSize = offset;
             return jT808_0X0701TestBodiesImpl;

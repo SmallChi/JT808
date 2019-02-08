@@ -1,13 +1,13 @@
 ﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Exceptions;
 using JT808.Protocol.Enums;
+using JT808.Protocol.Exceptions;
 using JT808.Protocol.JT808Formatters;
 using System;
 using System.Reflection;
 
 namespace JT808.Protocol.Extensions
 {
-    public  static class JT808FormatterExtensions
+    public static class JT808FormatterExtensions
     {
         public static IJT808Formatter<T> GetFormatter<T>()
         {

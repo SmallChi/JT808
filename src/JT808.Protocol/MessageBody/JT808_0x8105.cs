@@ -1,8 +1,6 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -24,7 +22,8 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 命令参数
     /// </summary>
-    public class CommandParams {
+    public class CommandParams
+    {
         /// <summary>
         /// 连接控制
         /// 0：切换到指定监管平台服务器，连接到该服务器后即进入应急状态，
@@ -97,7 +96,8 @@ namespace JT808.Protocol.MessageBody
         public void SetCommandParams(string commandValue)
         {
             var values = commandValue.Split(';');
-            if (!string.IsNullOrEmpty(values[0])) {
+            if (!string.IsNullOrEmpty(values[0]))
+            {
                 ConnectionControl = byte.Parse(values[0]);
             }
             if (!string.IsNullOrEmpty(values[1]))

@@ -1,10 +1,8 @@
-﻿using JT808.Protocol.Enums;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -13,24 +11,26 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x8606 jT808_0X8606 = new JT808_0x8606();
-            jT808_0X8606.RouteId = 9999;
-            jT808_0X8606.RouteProperty = 1268;
-            jT808_0X8606.StartTime = DateTime.Parse("2018-11-20 00:00:12");
-            jT808_0X8606.EndTime = DateTime.Parse("2018-11-21 00:00:12");
-            jT808_0X8606.InflectionPointItems = new List<JT808Properties.JT808InflectionPointProperty>();
+            JT808_0x8606 jT808_0X8606 = new JT808_0x8606
+            {
+                RouteId = 9999,
+                RouteProperty = 1268,
+                StartTime = DateTime.Parse("2018-11-20 00:00:12"),
+                EndTime = DateTime.Parse("2018-11-21 00:00:12"),
+                InflectionPointItems = new List<JT808Properties.JT808InflectionPointProperty>()
+            };
             jT808_0X8606.InflectionPointItems.Add(new JT808Properties.JT808InflectionPointProperty()
             {
-                InflectionPointId=1000,
+                InflectionPointId = 1000,
                 InflectionPointLat = 123456789,
                 InflectionPointLng = 123456788,
-                SectionDrivingUnderThreshold=123,
+                SectionDrivingUnderThreshold = 123,
                 SectionHighestSpeed = 69,
-                SectionId=1287,
-                SectionLongDrivingThreshold=50,
-                SectionOverspeedDuration=23,
-                SectionProperty=89,
-                SectionWidth=56
+                SectionId = 1287,
+                SectionLongDrivingThreshold = 50,
+                SectionOverspeedDuration = 23,
+                SectionProperty = 89,
+                SectionWidth = 56
             });
             jT808_0X8606.InflectionPointItems.Add(new JT808Properties.JT808InflectionPointProperty()
             {
@@ -73,7 +73,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "0000270F04F40002000003E800000507075BCD15075BCD1438590032007B000003E900002EE7075BCD0C075BCD0D4B32002A1A".ToHexBytes();
             JT808_0x8606 jT808_0X8606 = JT808Serializer.Deserialize<JT808_0x8606>(bytes);
-            
+
             Assert.Equal((uint)9999, jT808_0X8606.RouteId);
             Assert.Equal((uint)1268, jT808_0X8606.RouteProperty);
             //Assert.Equal(DateTime.Parse("2018-11-20 00:00:12"), jT808_0X8606.StartTime);
@@ -114,12 +114,14 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test3()
         {
-            JT808_0x8606 jT808_0X8606 = new JT808_0x8606();
-            jT808_0X8606.RouteId = 9999;
-            jT808_0X8606.RouteProperty = 51;
-            jT808_0X8606.StartTime = DateTime.Parse("2018-11-20 00:00:12");
-            jT808_0X8606.EndTime = DateTime.Parse("2018-11-21 00:00:12");
-            jT808_0X8606.InflectionPointItems = new List<JT808Properties.JT808InflectionPointProperty>();
+            JT808_0x8606 jT808_0X8606 = new JT808_0x8606
+            {
+                RouteId = 9999,
+                RouteProperty = 51,
+                StartTime = DateTime.Parse("2018-11-20 00:00:12"),
+                EndTime = DateTime.Parse("2018-11-21 00:00:12"),
+                InflectionPointItems = new List<JT808Properties.JT808InflectionPointProperty>()
+            };
             jT808_0X8606.InflectionPointItems.Add(new JT808Properties.JT808InflectionPointProperty()
             {
                 InflectionPointId = 1000,

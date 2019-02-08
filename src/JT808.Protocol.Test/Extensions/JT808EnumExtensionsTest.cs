@@ -1,7 +1,4 @@
 ﻿using JT808.Protocol.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace JT808.Protocol.Test.Extensions
@@ -11,7 +8,7 @@ namespace JT808.Protocol.Test.Extensions
         [Fact]
         public void Test1()
         {
-            var list0 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(5,32);
+            var list0 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(5, 32);
             var list1 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(16, 32);
             var list2 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(18, 32);
             var list3 = JT808EnumExtensions.GetEnumTypes<JT808.Protocol.Enums.JT808Alarm>(24, 32);

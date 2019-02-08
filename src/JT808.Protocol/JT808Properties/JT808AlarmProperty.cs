@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Properties
 {
@@ -17,9 +15,9 @@ namespace JT808.Protocol.JT808Properties
         public JT808AlarmProperty(string alarmStr)
         {
             ReadOnlySpan<char> span = alarmStr.AsSpan();
-            for (int i=0;i< span.Length;i++)
+            for (int i = 0; i < span.Length; i++)
             {
-                this.GetType().GetProperty("Bit"+i.ToString()).SetValue(this, span[i]);
+                this.GetType().GetProperty("Bit" + i.ToString()).SetValue(this, span[i]);
             }
         }
 
@@ -178,7 +176,7 @@ namespace JT808.Protocol.JT808Properties
             Span<char> span = new char[bitCount];
             for (int i = 0; i < span.Length; i++)
             {
-                span[i]=(char)this.GetType().GetProperty("Bit" + i.ToString()).GetValue(this);
+                span[i] = (char)this.GetType().GetProperty("Bit" + i.ToString()).GetValue(this);
             }
             return span.ToString();
         }

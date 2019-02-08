@@ -1,6 +1,5 @@
-﻿using System;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters;
-using JT808.Protocol.Attributes;
 
 namespace JT808.Protocol
 {
@@ -22,7 +21,7 @@ namespace JT808.Protocol
         /// <summary>
         /// 起始符
         /// </summary>
-        public byte Begin { get; set; }=  BeginFlag;
+        public byte Begin { get; set; } = BeginFlag;
 
         /// <summary>
         /// 起始符
@@ -33,16 +32,16 @@ namespace JT808.Protocol
         /// 校验码
         /// 从消息头开始，同后一字节异或，直到校验码前一个字节，占用一个字节。
         /// </summary>
-        public byte CheckCode { get;  set; }
+        public byte CheckCode { get; set; }
 
         /// <summary>
         /// 头数据
         /// </summary>
-        public JT808Header Header { get;  set; }
+        public JT808Header Header { get; set; }
 
         /// <summary>
         /// 数据体
         /// </summary>
-        public JT808Bodies Bodies { get;  set; }
+        public JT808Bodies Bodies { get; set; }
     }
 }

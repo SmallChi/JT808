@@ -4,7 +4,7 @@ using System;
 namespace JT808.Protocol.Exceptions
 {
     [Serializable]
-    public class JT808Exception:Exception
+    public class JT808Exception : Exception
     {
         public JT808Exception(JT808ErrorCode errorCode) : base(errorCode.ToString())
         {

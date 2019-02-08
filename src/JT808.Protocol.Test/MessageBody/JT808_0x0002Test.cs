@@ -6,17 +6,19 @@ using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBodyRequest
 {
-    public  class JT808_0x0002Test
+    public class JT808_0x0002Test
     {
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                 MsgId= Enums.JT808MsgId.终端心跳.ToUInt16Value(),
-                 MsgNum=10,
-                 TerminalPhoneNo="12345678900",
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.终端心跳.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "12345678900",
+                }
             };
             //"7E 00 02 00 00 01 23 45 67 89 00 00 0A 81 7E"
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();

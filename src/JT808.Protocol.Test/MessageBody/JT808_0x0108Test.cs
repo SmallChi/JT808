@@ -1,10 +1,7 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
-using JT808.Protocol.Enums;
+using JT808.Protocol.MessageBody;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBodyReply
 {
@@ -13,9 +10,11 @@ namespace JT808.Protocol.Test.MessageBodyReply
         [Fact]
         public void Test1()
         {
-            JT808_0x0108 jT808_0X0108 = new JT808_0x0108();
-            jT808_0X0108.UpgradeType = JT808UpgradeType.北斗卫星定位模块;
-            jT808_0X0108.UpgradeResult = JT808UpgradeResult.成功;
+            JT808_0x0108 jT808_0X0108 = new JT808_0x0108
+            {
+                UpgradeType = JT808UpgradeType.北斗卫星定位模块,
+                UpgradeResult = JT808UpgradeResult.成功
+            };
             string hex = JT808Serializer.Serialize(jT808_0X0108).ToHexString();
             Assert.Equal("3400", hex);
         }

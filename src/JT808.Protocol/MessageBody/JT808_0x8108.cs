@@ -1,9 +1,6 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.Enums;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -29,7 +26,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 版本号
         /// </summary>
-        public string VersionNum{ get; set; }
+        public string VersionNum { get; set; }
         /// <summary>
         /// 升级数据包长度
         /// </summary>

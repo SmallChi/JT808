@@ -1,5 +1,4 @@
-﻿using System;
-using JT808.Protocol.Attributes;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 
 
@@ -12,7 +11,7 @@ namespace JT808.Protocol.MessageBody
         /// 无线通信网络信号强度
         /// </summary>
         public byte WiFiSignalStrength { get; set; }
-        public override byte AttachInfoId { get;  set; } = 0x30;
-        public override byte AttachInfoLength { get;  set; } = 1;
+        public override byte AttachInfoId { get; set; } = 0x30;
+        public override byte AttachInfoLength { get; set; } = 1;
     }
 }

@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Buffers.Binary;
-using System.Buffers;
 
 namespace JT808.Protocol.Extensions
 {

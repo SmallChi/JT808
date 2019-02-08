@@ -1,6 +1,5 @@
-﻿using System;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters;
-using JT808.Protocol.Attributes;
 
 namespace JT808.Protocol
 {

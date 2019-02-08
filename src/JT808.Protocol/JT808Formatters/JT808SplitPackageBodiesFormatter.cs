@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
+using System;
 
 namespace JT808.Protocol.JT808Formatters
 {
@@ -9,8 +7,10 @@ namespace JT808.Protocol.JT808Formatters
     {
         public JT808SplitPackageBodies Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
-            JT808SplitPackageBodies jT808SplitPackageBodies = new JT808SplitPackageBodies();
-            jT808SplitPackageBodies.Data = bytes.ToArray();
+            JT808SplitPackageBodies jT808SplitPackageBodies = new JT808SplitPackageBodies
+            {
+                Data = bytes.ToArray()
+            };
             readSize = bytes.Length;
             return jT808SplitPackageBodies;
         }

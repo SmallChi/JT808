@@ -1,8 +1,6 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -11,12 +9,14 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x8302 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x8302 jT808_0X8302 = new JT808_0x8302();
-            jT808_0X8302.Flag = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8302.IssueContentLength = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            JT808_0x8302 jT808_0X8302 = new JT808_0x8302
+            {
+                Flag = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                IssueContentLength = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset)
+            };
             jT808_0X8302.Issue = JT808BinaryExtensions.ReadStringLittle(bytes, ref offset, jT808_0X8302.IssueContentLength);
             jT808_0X8302.AnswerId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8302.AnswerContentLength= JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
+            jT808_0X8302.AnswerContentLength = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
             jT808_0X8302.AnswerContent = JT808BinaryExtensions.ReadStringLittle(bytes, ref offset, jT808_0X8302.AnswerContentLength);
             readSize = offset;
             return jT808_0X8302;
@@ -24,7 +24,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 
         public int Serialize(ref byte[] bytes, int offset, JT808_0x8302 value)
         {
-            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.Flag);  
+            offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.Flag);
             // 先计算内容长度（汉字为两个字节）
             offset += 1;
             int byteLength1 = JT808BinaryExtensions.WriteStringLittle(bytes, offset, value.Issue);

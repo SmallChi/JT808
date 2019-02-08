@@ -2,7 +2,6 @@
 using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -11,14 +10,16 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x0805 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0805 jT808_0X0805 = new JT808_0x0805();
-            jT808_0X0805.MsgNum = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
-            jT808_0X0805.Result = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X0805.MultimediaIdCount = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
-            jT808_0X0805.MultimediaIds = new List<uint>();
-            for(var i=0;i< jT808_0X0805.MultimediaIdCount; i++)
+            JT808_0x0805 jT808_0X0805 = new JT808_0x0805
             {
-                uint id= JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
+                MsgNum = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset),
+                Result = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                MultimediaIdCount = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset),
+                MultimediaIds = new List<uint>()
+            };
+            for (var i = 0; i < jT808_0X0805.MultimediaIdCount; i++)
+            {
+                uint id = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
                 jT808_0X0805.MultimediaIds.Add(id);
             }
             readSize = offset;
@@ -29,8 +30,8 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         {
             offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, value.MsgNum);
             offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.Result);
-            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset,(ushort)value.MultimediaIds.Count);
-            foreach(var item in value.MultimediaIds)
+            offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, (ushort)value.MultimediaIds.Count);
+            foreach (var item in value.MultimediaIds)
             {
                 offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item);
             }

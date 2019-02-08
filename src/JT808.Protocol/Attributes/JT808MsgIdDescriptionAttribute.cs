@@ -11,7 +11,7 @@ namespace JT808.Protocol.Attributes
 
         public string Name { get; set; }
 
-        public JT808MsgIdDescriptionAttribute(string code,string name)
+        public JT808MsgIdDescriptionAttribute(string code, string name)
         {
             Code = code;
             Name = name;

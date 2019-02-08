@@ -1,10 +1,9 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -13,14 +12,16 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x8604 jT808_0X8604 = new JT808_0x8604();
-            jT808_0X8604.AreaId = 1234;
-            jT808_0X8604.AreaProperty= JT808SettingProperty.追加区域.ToByteValue();
-            jT808_0X8604.StartTime = DateTime.Parse("2018-11-20 00:00:12");
-            jT808_0X8604.EndTime = DateTime.Parse("2018-11-21 00:00:12");
-            jT808_0X8604.HighestSpeed = 62;
-            jT808_0X8604.OverspeedDuration = 218;
-            jT808_0X8604.PeakItems = new List<JT808Properties.JT808PeakProperty>();
+            JT808_0x8604 jT808_0X8604 = new JT808_0x8604
+            {
+                AreaId = 1234,
+                AreaProperty = JT808SettingProperty.追加区域.ToByteValue(),
+                StartTime = DateTime.Parse("2018-11-20 00:00:12"),
+                EndTime = DateTime.Parse("2018-11-21 00:00:12"),
+                HighestSpeed = 62,
+                OverspeedDuration = 218,
+                PeakItems = new List<JT808Properties.JT808PeakProperty>()
+            };
             jT808_0X8604.PeakItems.Add(new JT808Properties.JT808PeakProperty
             {
                  Lat= 123456789,
@@ -44,8 +45,6 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(JT808SettingProperty.追加区域.ToByteValue(), jT808_0X8604.AreaProperty);
             Assert.Null(jT808_0X8604.HighestSpeed);
             Assert.Null(jT808_0X8604.OverspeedDuration);
-
-
 
             Assert.Equal(DateTime.Parse("2018-11-20 00:00:12"),jT808_0X8604.StartTime);
             Assert.Equal(DateTime.Parse("2018-11-21 00:00:12"),jT808_0X8604.EndTime);

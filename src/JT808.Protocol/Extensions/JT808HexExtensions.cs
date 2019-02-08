@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace JT808.Protocol.Extensions
 {
@@ -14,7 +10,7 @@ namespace JT808.Protocol.Extensions
     {
         public static string ToHexString(this byte[] source)
         {
-            return HexUtil.DoHexDump(source,0, source.Length).ToUpper();
+            return HexUtil.DoHexDump(source, 0, source.Length).ToUpper();
         }
 
         public static int WriteHexStringLittle(byte[] bytes, int offset, string data, int len)
@@ -39,7 +35,7 @@ namespace JT808.Protocol.Extensions
             int byteIndex = 0;
             while (startIndex < data.Length && byteIndex < length)
             {
-                bytes[offset+byteIndex] = Convert.ToByte(data.Substring(startIndex, 2), 16);
+                bytes[offset + byteIndex] = Convert.ToByte(data.Substring(startIndex, 2), 16);
                 startIndex += 2;
                 byteIndex++;
             }
@@ -104,7 +100,7 @@ namespace JT808.Protocol.Extensions
                 int dstIdx = 0;
                 for (; srcIdx < endIndex; srcIdx++, dstIdx += 2)
                 {
-                    Array.Copy(HexdumpTable, buffer[srcIdx] << 1,buf, dstIdx, 2);
+                    Array.Copy(HexdumpTable, buffer[srcIdx] << 1, buf, dstIdx, 2);
                 }
                 return new string(buf);
             }
@@ -122,7 +118,7 @@ namespace JT808.Protocol.Extensions
                 for (; srcIdx < endIndex; srcIdx++, dstIdx += 2)
                 {
                     Array.Copy(HexdumpTable, (array[srcIdx] & 0xFF) << 1, buf, dstIdx, 2);
-               }
+                }
                 return new string(buf);
             }
         }

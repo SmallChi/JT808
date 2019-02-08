@@ -1,10 +1,9 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -13,9 +12,11 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x8602 jT808_0X8602 = new JT808_0x8602();
-            jT808_0X8602.SettingAreaProperty = JT808SettingProperty.追加区域.ToByteValue();
-            jT808_0X8602.AreaItems = new List<JT808Properties.JT808RectangleAreaProperty>();
+            JT808_0x8602 jT808_0X8602 = new JT808_0x8602
+            {
+                SettingAreaProperty = JT808SettingProperty.追加区域.ToByteValue(),
+                AreaItems = new List<JT808Properties.JT808RectangleAreaProperty>()
+            };
             jT808_0X8602.AreaItems.Add(new JT808Properties.JT808RectangleAreaProperty
             {
                 AreaId = 1522,

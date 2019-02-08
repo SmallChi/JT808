@@ -1,10 +1,7 @@
-﻿using JT808.Protocol.Enums;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -19,7 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
                 2838,1717,772
             };
 
-             var hex = JT808Serializer.Serialize(jT808_0X8605).ToHexString();
+            var hex = JT808Serializer.Serialize(jT808_0X8605).ToHexString();
             Assert.Equal("0300000B16000006B500000304", hex);
         }
 

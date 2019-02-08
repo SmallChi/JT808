@@ -1,5 +1,4 @@
-﻿using System;
-using JT808.Protocol.Attributes;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.Enums;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 

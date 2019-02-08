@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -44,7 +43,7 @@ namespace JT808.Protocol.MessageBody
             JT808LocationAttachMethod.Add(attachInfoId, typeof(TJT808LocationAttach));
         }
 
-        internal static void AddJT808LocationAttachMethod(byte attachInfoId,Type type)
+        internal static void AddJT808LocationAttachMethod(byte attachInfoId, Type type)
         {
             JT808LocationAttachMethod.Add(attachInfoId, type);
         }
@@ -52,12 +51,12 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 附加信息Id
         /// </summary>
-        public abstract byte AttachInfoId { get;  set; }
+        public abstract byte AttachInfoId { get; set; }
 
         /// <summary>
         /// 附加信息长度
         /// </summary>
-        public abstract byte AttachInfoLength { get;  set; }
+        public abstract byte AttachInfoLength { get; set; }
 
         public const byte AttachId0x01 = 0x01;
         public const byte AttachId0x02 = 0x02;

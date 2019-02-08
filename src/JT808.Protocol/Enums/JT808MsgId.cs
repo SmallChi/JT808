@@ -1,8 +1,5 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.Enums
 {
@@ -10,7 +7,7 @@ namespace JT808.Protocol.Enums
     /// JT808消息
     /// </summary>
     public enum JT808MsgId : ushort
-    { 
+    {
         /// <summary>
         /// 终端通用应答
         /// 0x0001
@@ -178,7 +175,7 @@ namespace JT808.Protocol.Enums
         /// </summary>
         [JT808BodiesType(typeof(JT808_0x8301))]
         [JT808MsgIdDescription("0x8301", "事件设置")]
-        事件设置 =0x8301,
+        事件设置 = 0x8301,
         /// <summary>
         /// 事件报告
         /// 0x0301

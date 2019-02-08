@@ -1,9 +1,6 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -12,9 +9,11 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x8400 jT808_0X8400 = new JT808_0x8400();
-            jT808_0X8400.CallBack = Enums.JT808CallBackType.普通通话;
-            jT808_0X8400.PhoneNumber = "12345679810";
+            JT808_0x8400 jT808_0X8400 = new JT808_0x8400
+            {
+                CallBack = Enums.JT808CallBackType.普通通话,
+                PhoneNumber = "12345679810"
+            };
             var hex = JT808Serializer.Serialize(jT808_0X8400).ToHexString();
             Assert.Equal("003132333435363739383130", hex);
         }

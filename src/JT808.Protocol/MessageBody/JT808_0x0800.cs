@@ -1,8 +1,5 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -11,7 +8,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x0800
     /// </summary>
     [JT808Formatter(typeof(JT808_0x0800Formatter))]
-    public class JT808_0x0800:JT808Bodies
+    public class JT808_0x0800 : JT808Bodies
     {
         /// <summary>
         /// 多媒体数据 ID
@@ -45,6 +42,6 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 通道 ID
         /// </summary>
-        public byte ChannelId { get; set; }    
+        public byte ChannelId { get; set; }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Runtime.Serialization;
-using JT808.Protocol.Attributes;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
+using System.Runtime.Serialization;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,8 +8,8 @@ namespace JT808.Protocol.MessageBody
     [JT808Formatter(typeof(JT808_0x0200_0x01Formatter))]
     public class JT808_0x0200_0x01 : JT808_0x0200_BodyBase
     {
-        public override byte AttachInfoId { get;  set; } = 0x01;
-        public override byte AttachInfoLength { get;  set; } = 4;
+        public override byte AttachInfoId { get; set; } = 0x01;
+        public override byte AttachInfoLength { get; set; } = 4;
         /// <summary>
         /// 里程
         /// </summary>

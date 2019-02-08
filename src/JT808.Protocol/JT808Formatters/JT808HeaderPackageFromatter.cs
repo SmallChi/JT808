@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using JT808.Protocol;
-using JT808.Protocol.Enums;
+﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Exceptions;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Internal;
+using System;
 
 namespace JT808.Protocol.JT808Formatters
 {
@@ -37,7 +34,7 @@ namespace JT808.Protocol.JT808Formatters
             // 3.初始化消息头
             try
             {
-                jT808HeaderPackage.Header = JT808FormatterExtensions.GetFormatter<JT808Header>().Deserialize(buffer.Slice(offset,13), out readSize);
+                jT808HeaderPackage.Header = JT808FormatterExtensions.GetFormatter<JT808Header>().Deserialize(buffer.Slice(offset, 13), out readSize);
             }
             catch (Exception ex)
             {

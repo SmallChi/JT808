@@ -1,9 +1,6 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -12,9 +9,11 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x8805 jT808_0X8805 = new JT808_0x8805();
-            jT808_0X8805.MultimediaId = 10000;
-            jT808_0X8805.MultimediaDeleted = Enums.JT808MultimediaDeleted.保留.ToByteValue();
+            JT808_0x8805 jT808_0X8805 = new JT808_0x8805
+            {
+                MultimediaId = 10000,
+                MultimediaDeleted = Enums.JT808MultimediaDeleted.保留.ToByteValue()
+            };
             string hex = JT808Serializer.Serialize(jT808_0X8805).ToHexString();
             Assert.Equal("0000271000", hex);
         }

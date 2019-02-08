@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 
 namespace JT808.Protocol.Extensions
@@ -171,7 +170,7 @@ namespace JT808.Protocol.Extensions
         /// <param name="digit">位数(8,16,32)</param>
         /// <param name="ignoreUnknown">是否忽略未知数据</param>
         /// <returns></returns>
-        public static IEnumerable<T> GetEnumTypes<T>(this int value, int digit, bool ignoreUnknown=false) where T : Enum
+        public static IEnumerable<T> GetEnumTypes<T>(this int value, int digit, bool ignoreUnknown = false) where T : Enum
         {
             List<T> values = new List<T>();
             for (int i = 0; i < digit; i++)

@@ -2,7 +2,6 @@
 using JT808.Protocol.JT808Properties;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Buffers;
 using System.Collections.Generic;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
@@ -12,11 +11,13 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x0200 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0200 jT808_0X0200 = new JT808_0x0200();
-            jT808_0X0200.AlarmFlag = JT808BinaryExtensions.ReadUInt32Little(bytes,ref offset);
-            jT808_0X0200.StatusFlag = JT808BinaryExtensions.ReadUInt32Little(bytes,ref offset);
-            jT808_0X0200.Lat = JT808BinaryExtensions.ReadInt32Little(bytes,ref offset);
-            jT808_0X0200.Lng = JT808BinaryExtensions.ReadInt32Little(bytes,ref offset);
+            JT808_0x0200 jT808_0X0200 = new JT808_0x0200
+            {
+                AlarmFlag = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                StatusFlag = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                Lat = JT808BinaryExtensions.ReadInt32Little(bytes, ref offset),
+                Lng = JT808BinaryExtensions.ReadInt32Little(bytes, ref offset)
+            };
             JT808StatusProperty jT808StatusProperty = new JT808StatusProperty(Convert.ToString(jT808_0X0200.StatusFlag, 2).PadLeft(32, '0'));
             if (jT808StatusProperty.Bit28 == '1')//西经
             {
@@ -26,10 +27,10 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             {
                 jT808_0X0200.Lat = -jT808_0X0200.Lat;
             }
-            jT808_0X0200.Altitude = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
-            jT808_0X0200.Speed = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
-            jT808_0X0200.Direction = JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset);
-            jT808_0X0200.GPSTime=JT808BinaryExtensions.ReadDateTime6Little(bytes,ref offset);
+            jT808_0X0200.Altitude = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
+            jT808_0X0200.Speed = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
+            jT808_0X0200.Direction = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
+            jT808_0X0200.GPSTime = JT808BinaryExtensions.ReadDateTime6Little(bytes, ref offset);
             // 位置附加信息
             jT808_0X0200.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
             jT808_0X0200.JT808CustomLocationAttachOriginalData = new Dictionary<byte, byte[]>();
@@ -51,7 +52,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                             int locationAttachTotalLen = attachId + attachLen + attachContentLen;
                             ReadOnlySpan<byte> attachBuffer = locationAttachSpan.Slice(attachOffset, locationAttachTotalLen);
                             object attachImplObj = JT808FormatterExtensions.GetFormatter(jT808LocationAttachType);
-                            dynamic attachImpl = JT808FormatterResolverExtensions.JT808DynamicDeserialize(attachImplObj, attachBuffer,out readSize);
+                            dynamic attachImpl = JT808FormatterResolverExtensions.JT808DynamicDeserialize(attachImplObj, attachBuffer, out readSize);
                             attachOffset = attachOffset + locationAttachTotalLen;
                             jT808_0X0200.JT808LocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
                         }
@@ -70,14 +71,14 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                             attachOffset = attachOffset + locationAttachTotalLen;
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         int attachContentLen = locationAttachSpan[attachOffset + 1];
                         int locationAttachTotalLen = attachId + attachLen + attachContentLen;
                         attachOffset = attachOffset + locationAttachTotalLen;
                     }
                 }
-                offset= offset + attachOffset;
+                offset = offset + attachOffset;
             }
             readSize = offset;
             return jT808_0X0200;
@@ -85,7 +86,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 
         public int Serialize(ref byte[] bytes, int offset, JT808_0x0200 value)
         {
-            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset,value.AlarmFlag);
+            offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.AlarmFlag);
             offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, value.StatusFlag);
             offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.Lat);
             offset += JT808BinaryExtensions.WriteInt32Little(bytes, offset, value.Lng);
@@ -100,9 +101,9 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                     try
                     {
                         object attachImplObj = JT808FormatterExtensions.GetFormatter(item.Value.GetType());
-                        offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(attachImplObj,ref bytes, offset, item.Value);
+                        offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(attachImplObj, ref bytes, offset, item.Value);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }
@@ -117,7 +118,7 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                         object attachImplObj = JT808FormatterExtensions.GetFormatter(item.Value.GetType());
                         offset = JT808FormatterResolverExtensions.JT808DynamicSerialize(attachImplObj, ref bytes, offset, item.Value);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }

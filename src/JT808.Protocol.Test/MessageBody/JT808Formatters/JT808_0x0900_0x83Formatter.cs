@@ -1,11 +1,7 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Formatters;
-using JT808.Protocol.MessageBody;
 using JT808.Protocol.Test.JT808_0x0900_BodiesImpl;
 using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.Test.MessageBody.JT808Formatters
 {
@@ -14,8 +10,10 @@ namespace JT808.Protocol.Test.MessageBody.JT808Formatters
         public JT808_0x0900_0x83 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0900_0x83 jT808PassthroughType0x83 = new JT808_0x0900_0x83();
-            jT808PassthroughType0x83.PassthroughContent = JT808BinaryExtensions.ReadStringLittle(bytes, ref offset);
+            JT808_0x0900_0x83 jT808PassthroughType0x83 = new JT808_0x0900_0x83
+            {
+                PassthroughContent = JT808BinaryExtensions.ReadStringLittle(bytes, ref offset)
+            };
             readSize = offset;
             return jT808PassthroughType0x83;
         }

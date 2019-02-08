@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol.Enums
+﻿namespace JT808.Protocol.Enums
 {
     /// <summary>
     /// 大陆11位 补0
@@ -14,9 +10,9 @@ namespace JT808.Protocol.Enums
     /// </summary>
     public enum JT808PhoneNumberType
     {
-        大陆=11,
-        香港=8,
-        澳门=8,
-        台湾=10
+        大陆 = 11,
+        香港 = 8,
+        澳门 = 8,
+        台湾 = 10
     }
 }

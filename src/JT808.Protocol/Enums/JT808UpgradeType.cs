@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol.Enums
+﻿namespace JT808.Protocol.Enums
 {
     /// <summary>
     /// 升级类型

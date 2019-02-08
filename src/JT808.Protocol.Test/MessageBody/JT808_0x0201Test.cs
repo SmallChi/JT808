@@ -1,10 +1,8 @@
-﻿using JT808.Protocol.MessageBody;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
-using System.Diagnostics;
 
 namespace JT808.Protocol.Test.MessageBodyReply
 {
@@ -13,25 +11,31 @@ namespace JT808.Protocol.Test.MessageBodyReply
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.位置信息查询应答.ToUInt16Value(),
-                MsgNum = 8888,
-                TerminalPhoneNo = "112233445566",
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.位置信息查询应答.ToUInt16Value(),
+                    MsgNum = 8888,
+                    TerminalPhoneNo = "112233445566",
+                }
             };
-            JT808_0x0201 jT808_0X0201 = new JT808_0x0201();
-            jT808_0X0201.MsgNum = 12345;
-            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200();
-            jT808UploadLocationRequest.AlarmFlag = 1;
-            jT808UploadLocationRequest.Altitude = 40;
-            jT808UploadLocationRequest.GPSTime = DateTime.Parse("2018-07-15 10:10:10");
-            jT808UploadLocationRequest.Lat = 12222222;
-            jT808UploadLocationRequest.Lng = 132444444;
-            jT808UploadLocationRequest.Speed = 60;
-            jT808UploadLocationRequest.Direction = 0;
-            jT808UploadLocationRequest.StatusFlag = 2;
-            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            JT808_0x0201 jT808_0X0201 = new JT808_0x0201
+            {
+                MsgNum = 12345
+            };
+            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200
+            {
+                AlarmFlag = 1,
+                Altitude = 40,
+                GPSTime = DateTime.Parse("2018-07-15 10:10:10"),
+                Lat = 12222222,
+                Lng = 132444444,
+                Speed = 60,
+                Direction = 0,
+                StatusFlag = 2,
+                JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
+            };
             jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100

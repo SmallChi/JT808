@@ -3,12 +3,10 @@ using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Environments;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Toolchains.CsProj;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using JT808.Protocol;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
+using System;
+using System.Collections.Generic;
 
 namespace JT808.Protocol.Benchmark
 {

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol.Enums
+﻿namespace JT808.Protocol.Enums
 {
     /// <summary>
     /// 方向类型
     /// </summary>
-    public enum  JT808DirectionType:byte
+    public enum JT808DirectionType : byte
     {
-        进=0,
-        出=1
+        进 = 0,
+        出 = 1
     }
 }

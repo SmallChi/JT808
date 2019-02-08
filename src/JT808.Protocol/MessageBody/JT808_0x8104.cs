@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol.MessageBody
+﻿namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 查询终端参数

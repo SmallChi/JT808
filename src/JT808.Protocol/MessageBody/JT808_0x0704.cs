@@ -28,10 +28,10 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 位置数据类型
         /// </summary>
-        public enum BatchLocationType:byte
+        public enum BatchLocationType : byte
         {
-            正常位置批量汇报=0x00,
-            盲区补报=0x01
+            正常位置批量汇报 = 0x00,
+            盲区补报 = 0x01
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -10,7 +7,7 @@ namespace JT808.Protocol.MessageBody
     /// 车辆控制
     /// </summary>
     [JT808Formatter(typeof(JT808_0x8500Formatter))]
-    public class JT808_0x8500:JT808Bodies
+    public class JT808_0x8500 : JT808Bodies
     {
         /// <summary>
         /// 控制标志 

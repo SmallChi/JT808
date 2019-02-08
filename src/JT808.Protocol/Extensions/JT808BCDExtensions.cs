@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 
 namespace JT808.Protocol.Extensions
@@ -12,7 +9,7 @@ namespace JT808.Protocol.Extensions
         {
             int count = len / 2;
             StringBuilder bcdSb = new StringBuilder(count);
-            for(int i = 0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 bcdSb.Append(buf[offset + i].ToString("X2"));
             }
@@ -20,7 +17,7 @@ namespace JT808.Protocol.Extensions
             return bcdSb.ToString().TrimStart('0');
         }
 
-        public static int WriteBCDLittle(byte[] bytes, int offset, string data,int len)
+        public static int WriteBCDLittle(byte[] bytes, int offset, string data, int len)
         {
             string bcdText = data == null ? "" : data;
             int startIndex = 0;

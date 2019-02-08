@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.Extensions
 {
@@ -21,7 +18,7 @@ namespace JT808.Protocol.Extensions
         /// <param name="offset"></param>
         /// <param name="format">D2： 10  X2：16</param>
         /// <returns></returns>
-        public static DateTime ReadDateTime6Little(ReadOnlySpan<byte> buf, ref int offset,string format= "X2")
+        public static DateTime ReadDateTime6Little(ReadOnlySpan<byte> buf, ref int offset, string format = "X2")
         {
             DateTime d = UTCBaseTime;
             try
@@ -34,8 +31,8 @@ namespace JT808.Protocol.Extensions
                 int second = Convert.ToInt32(buf[offset + 5].ToString(format));
                 d = new DateTime(year, month, day, hour, minute, second);
             }
-            catch (Exception ex)
-            { 
+            catch (Exception)
+            {
                 d = UTCBaseTime;
             }
             offset = offset + 6;
@@ -121,7 +118,7 @@ namespace JT808.Protocol.Extensions
         /// <param name="date"></param>
         /// <param name="fromBase">BCD：10  HEX：16</param>
         /// <returns></returns>
-        public static int WriteDateTime6Little(byte[] bytes, int offset, DateTime date,int fromBase=16)
+        public static int WriteDateTime6Little(byte[] bytes, int offset, DateTime date, int fromBase = 16)
         {
             bytes[offset] = Convert.ToByte(date.ToString("yy"), fromBase);
             bytes[offset + 1] = Convert.ToByte(date.ToString("MM"), fromBase);
@@ -142,7 +139,7 @@ namespace JT808.Protocol.Extensions
         /// <returns></returns>
         public static int WriteDateTime4Little(byte[] bytes, int offset, DateTime date, int fromBase = 16)
         {
-            bytes[offset] = (byte)(date.Year>>8);
+            bytes[offset] = (byte)(date.Year >> 8);
             bytes[offset + 1] = (byte)(date.Year);
             bytes[offset + 2] = Convert.ToByte(date.ToString("MM"), fromBase);
             bytes[offset + 3] = Convert.ToByte(date.ToString("dd"), fromBase);

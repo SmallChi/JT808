@@ -1,10 +1,8 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Properties;
+using JT808.Protocol.MessageBody;
+using System.Collections.Generic;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -13,8 +11,10 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x8401 jT808_0X8401 = new JT808_0x8401();
-            jT808_0X8401.SettingTelephoneBook = Enums.JT808SettingTelephoneBook.追加电话本;
+            JT808_0x8401 jT808_0X8401 = new JT808_0x8401
+            {
+                SettingTelephoneBook = Enums.JT808SettingTelephoneBook.追加电话本
+            };
             List<JT808ContactProperty> jT808ContactProperties = new List<JT808ContactProperty>();
             jT808ContactProperties.Add(new JT808ContactProperty
             {

@@ -24,7 +24,7 @@ namespace JT808.Protocol
 
         public IMsgSNDistributed MsgSNDistributed { get; private set; }
 
-        public JT808ICompress Compress { get; private set; }
+        public IJT808ICompress Compress { get; private set; }
 
         public ISplitPackageStrategy SplitPackageStrategy { get; private set; }
 
@@ -51,9 +51,9 @@ namespace JT808.Protocol
         /// <typeparam name="attachInfoId"></typeparam>
         public JT808GlobalConfig Register_0x0200_Attach(params byte[] attachInfoId)
         {
-            if(attachInfoId!=null && attachInfoId.Length > 0)
+            if (attachInfoId != null && attachInfoId.Length > 0)
             {
-                foreach(var id in attachInfoId)
+                foreach (var id in attachInfoId)
                 {
                     if (!JT808_0x0200_CustomBodyBase.CustomAttachIds.Contains(id))
                     {
@@ -69,7 +69,7 @@ namespace JT808.Protocol
         /// <see cref="typeof(JT808.Protocol.MessageBody.JT808_0x8103_BodyBase)"/>
         /// <see cref="typeof(实现JT808_0x8103_BodyBase)"/>
         /// <returns></returns>
-        public JT808GlobalConfig Register_0x8103_ParamId(uint paramId,Type type)
+        public JT808GlobalConfig Register_0x8103_ParamId(uint paramId, Type type)
         {
             JT808_0x8103_BodyBase.AddJT808_0x8103Method(paramId, type);
             return instance.Value;
@@ -130,7 +130,7 @@ namespace JT808.Protocol
         /// </summary>
         /// <param name="compressImpl"></param>
         /// <returns></returns>
-        public JT808GlobalConfig SetCompress(JT808ICompress compressImpl)
+        public JT808GlobalConfig SetCompress(IJT808ICompress compressImpl)
         {
             instance.Value.Compress = compressImpl;
             return instance.Value;
@@ -141,7 +141,7 @@ namespace JT808.Protocol
         /// </summary>
         /// <param name="splitPackageStrategy"></param>
         /// <returns></returns>
-        public JT808GlobalConfig SetSplitPackageStrategy(ISplitPackageStrategy  splitPackageStrategy)
+        public JT808GlobalConfig SetSplitPackageStrategy(ISplitPackageStrategy splitPackageStrategy)
         {
             instance.Value.SplitPackageStrategy = splitPackageStrategy;
             return instance.Value;

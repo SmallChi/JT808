@@ -1,18 +1,19 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Buffers;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
     public class JT808_0x8900Formatter : IJT808Formatter<JT808_0x8900>
     {
-        public JT808_0x8900 Deserialize(ReadOnlySpan<byte> bytes,  out int readSize)
+        public JT808_0x8900 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x8900 jT808_0X8900 = new JT808_0x8900();
-            jT808_0X8900.PassthroughType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8900.PassthroughData=bytes.Slice(offset).ToArray();
+            JT808_0x8900 jT808_0X8900 = new JT808_0x8900
+            {
+                PassthroughType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                PassthroughData = bytes.Slice(offset).ToArray()
+            };
             readSize = offset;
             return jT808_0X8900;
         }

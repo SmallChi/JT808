@@ -1,8 +1,8 @@
-﻿using System;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Exceptions;
-using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Internal;
+using System;
 
 namespace JT808.Protocol.JT808Formatters
 {
@@ -11,7 +11,7 @@ namespace JT808.Protocol.JT808Formatters
     /// </summary>
     public class JT808PackageFromatter : IJT808Formatter<JT808Package>
     {
-        public JT808Package Deserialize(ReadOnlySpan<byte> bytes,  out int readSize)
+        public JT808Package Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
             JT808Package jT808Package = new JT808Package();

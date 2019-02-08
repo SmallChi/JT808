@@ -1,9 +1,6 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.Test.MessageBody.JT808Formatters;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.Test.MessageBody.JT808_0x0701BodiesImpl
 {

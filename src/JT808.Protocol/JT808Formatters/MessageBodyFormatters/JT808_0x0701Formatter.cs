@@ -3,8 +3,6 @@ using JT808.Protocol.Exceptions;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -14,8 +12,10 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         {
             if (JT808_0x0701.JT808_0x0701Body.BodyImpl == null) throw new JT808Exception(JT808ErrorCode.NotImplType, $"Not Impl {nameof(JT808_0x0701.JT808_0x0701Body)} class");
             int offset = 0;
-            JT808_0x0701 jT808_0X0701 = new JT808_0x0701();
-            jT808_0X0701.ElectronicWaybillLength = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
+            JT808_0x0701 jT808_0X0701 = new JT808_0x0701
+            {
+                ElectronicWaybillLength = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset)
+            };
             jT808_0X0701.ElectronicContent = JT808FormatterResolverExtensions.JT808DynamicDeserialize(JT808FormatterExtensions.GetFormatter(JT808_0x0701.JT808_0x0701Body.BodyImpl), bytes.Slice(offset, (int)jT808_0X0701.ElectronicWaybillLength), out int readSubBodySize);
             readSize = readSubBodySize;
             return jT808_0X0701;

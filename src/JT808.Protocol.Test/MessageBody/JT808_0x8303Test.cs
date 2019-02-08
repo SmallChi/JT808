@@ -1,21 +1,21 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
-using JT808.Protocol.Enums;
+using JT808.Protocol.MessageBody;
+using System.Collections.Generic;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
 {
-   public  class JT808_0x8303Test
+    public  class JT808_0x8303Test
     {
         [Fact]
         public void Test1()
         {
-            JT808_0x8303 jT808_0X8303 = new JT808_0x8303();
-            jT808_0X8303.SettingType = JT808InformationSettingType.删除终端全部信息项.ToByteValue();
-            jT808_0X8303.InformationItems = new List<JT808Properties.JT808InformationItemProperty> ();
+            JT808_0x8303 jT808_0X8303 = new JT808_0x8303
+            {
+                SettingType = JT808InformationSettingType.删除终端全部信息项.ToByteValue(),
+                InformationItems = new List<JT808Properties.JT808InformationItemProperty>()
+            };
             jT808_0X8303.InformationItems.Add(new JT808Properties.JT808InformationItemProperty
             {
                   InformationType=11,

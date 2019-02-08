@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
-using JT808.Protocol.Enums;
+using System;
+using System.Collections.Generic;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -13,17 +12,19 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x0802 jT808_0X0802 = new JT808_0x0802();
-            jT808_0X0802.MsgNum = 12369;
-            jT808_0X0802.MultimediaSearchItems = new List<JT808Properties.JT808MultimediaSearchProperty>();
+            JT808_0x0802 jT808_0X0802 = new JT808_0x0802
+            {
+                MsgNum = 12369,
+                MultimediaSearchItems = new List<JT808Properties.JT808MultimediaSearchProperty>()
+            };
 
             jT808_0X0802.MultimediaSearchItems.Add(new JT808Properties.JT808MultimediaSearchProperty()
             {
                 ChannelId = 123,
-                EventItemCoding= JT808EventItemCoding.定时动作.ToByteValue(),
-                MultimediaId=258,
-                MultimediaType= JT808MultimediaType.图像.ToByteValue(),
-                Position= new JT808_0x0200()
+                EventItemCoding = JT808EventItemCoding.定时动作.ToByteValue(),
+                MultimediaId = 258,
+                MultimediaType = JT808MultimediaType.图像.ToByteValue(),
+                Position = new JT808_0x0200()
                 {
                     AlarmFlag = 1,
                     Altitude = 40,
@@ -33,7 +34,7 @@ namespace JT808.Protocol.Test.MessageBody
                     Speed = 60,
                     Direction = 0,
                     StatusFlag = 2,
-                }  
+                }
             });
 
             jT808_0X0802.MultimediaSearchItems.Add(new JT808Properties.JT808MultimediaSearchProperty()

@@ -1,11 +1,8 @@
-﻿using JT808.Protocol.Enums;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Properties;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Buffers;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -14,19 +11,23 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x8602 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x8602 jT808_0X8602 = new JT808_0x8602();
-            jT808_0X8602.SettingAreaProperty = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8602.AreaCount = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8602.AreaItems = new List<JT808RectangleAreaProperty>();
+            JT808_0x8602 jT808_0X8602 = new JT808_0x8602
+            {
+                SettingAreaProperty = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                AreaCount = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                AreaItems = new List<JT808RectangleAreaProperty>()
+            };
             for (var i = 0; i < jT808_0X8602.AreaCount; i++)
             {
-                JT808RectangleAreaProperty jT808CircleAreaProperty = new JT808RectangleAreaProperty();
-                jT808CircleAreaProperty.AreaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-                jT808CircleAreaProperty.AreaProperty = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
-                jT808CircleAreaProperty.UpLeftPointLat = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-                jT808CircleAreaProperty.UpLeftPointLng = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-                jT808CircleAreaProperty.LowRightPointLat = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-                jT808CircleAreaProperty.LowRightPointLng = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
+                JT808RectangleAreaProperty jT808CircleAreaProperty = new JT808RectangleAreaProperty
+                {
+                    AreaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                    AreaProperty = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset),
+                    UpLeftPointLat = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                    UpLeftPointLng = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                    LowRightPointLat = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                    LowRightPointLng = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset)
+                };
                 ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(jT808CircleAreaProperty.AreaProperty, 2).PadLeft(16, '0').AsSpan();
                 bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
                 if (!bit0Flag)

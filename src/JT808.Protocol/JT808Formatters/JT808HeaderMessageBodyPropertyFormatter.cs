@@ -1,7 +1,6 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
 using System;
-using System.Buffers;
 
 namespace JT808.Protocol.JT808Formatters
 {
@@ -14,7 +13,7 @@ namespace JT808.Protocol.JT808Formatters
         {
             int offset = 0;
             JT808HeaderMessageBodyProperty messageBodyProperty = new JT808HeaderMessageBodyProperty();
-            ReadOnlySpan<char> msgMethod = Convert.ToString(JT808BinaryExtensions.ReadUInt16Little(bytes,ref offset), 2).PadLeft(16, '0').AsSpan();
+            ReadOnlySpan<char> msgMethod = Convert.ToString(JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset), 2).PadLeft(16, '0').AsSpan();
             messageBodyProperty.DataLength = Convert.ToInt32(msgMethod.Slice(6, 10).ToString(), 2);
             //  2.2. 数据加密方式
             switch (msgMethod.Slice(3, 3).ToString())

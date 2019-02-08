@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol
+﻿namespace JT808.Protocol
 {
     /// <summary>
     /// 压缩接口
     /// </summary>
-    public interface JT808ICompress
+    public interface IJT808ICompress
     {
         byte[] Compress(byte[] data);
 

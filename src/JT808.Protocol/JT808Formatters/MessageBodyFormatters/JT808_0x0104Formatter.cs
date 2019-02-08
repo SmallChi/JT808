@@ -2,7 +2,6 @@
 using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -11,9 +10,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x0104 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0104 jT808_0x0104 = new JT808_0x0104();
-            jT808_0x0104.MsgNum = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
-            jT808_0x0104.AnswerParamsCount = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            JT808_0x0104 jT808_0x0104 = new JT808_0x0104
+            {
+                MsgNum = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset),
+                AnswerParamsCount = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset)
+            };
             for (int i = 0; i < jT808_0x0104.AnswerParamsCount; i++)
             {
                 var paramId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);//参数ID         

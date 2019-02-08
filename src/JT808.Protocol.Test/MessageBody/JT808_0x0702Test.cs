@@ -1,10 +1,8 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -13,9 +11,11 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x0702 jT808_0X0702 = new JT808_0x0702();
-            jT808_0X0702.IC_Card_Status = JT808ICCardStatus.从业资格证IC卡拔出_驾驶员下班;
-            jT808_0X0702.IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16");
+            JT808_0x0702 jT808_0X0702 = new JT808_0x0702
+            {
+                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡拔出_驾驶员下班,
+                IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16")
+            };
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
             Assert.Equal("02 18 08 16 09 16 16".Replace(" ", ""), hex);
         }
@@ -32,10 +32,12 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test2()
         {
-            JT808_0x0702 jT808_0X0702 = new JT808_0x0702();
-            jT808_0X0702.IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班;
-            jT808_0X0702.IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16");
-            jT808_0X0702.IC_Card_ReadResult = JT808ICCardReadResult.读卡失败_原因为卡片密钥认证未通过;
+            JT808_0x0702 jT808_0X0702 = new JT808_0x0702
+            {
+                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班,
+                IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16"),
+                IC_Card_ReadResult = JT808ICCardReadResult.读卡失败_原因为卡片密钥认证未通过
+            };
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
             Assert.Equal("01 18 08 16 09 16 16 01".Replace(" ", ""), hex);
         }
@@ -53,16 +55,18 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test3()
         {
-            JT808_0x0702 jT808_0X0702 = new JT808_0x0702();
-            jT808_0X0702.IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班;
-            jT808_0X0702.IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16");
-            jT808_0X0702.IC_Card_ReadResult = JT808ICCardReadResult.IC卡读卡成功;
-            jT808_0X0702.DriverUserName = "koike";
-            jT808_0X0702.QualificationCode = "qwe123456aaa";
-            jT808_0X0702.LicenseIssuing = "qwertx";
-            jT808_0X0702.CertificateExpiresDate= DateTime.Parse("2018-08-16");
+            JT808_0x0702 jT808_0X0702 = new JT808_0x0702
+            {
+                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班,
+                IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16"),
+                IC_Card_ReadResult = JT808ICCardReadResult.IC卡读卡成功,
+                DriverUserName = "koike",
+                QualificationCode = "qwe123456aaa",
+                LicenseIssuing = "qwertx",
+                CertificateExpiresDate = DateTime.Parse("2018-08-16")
+            };
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
-            Assert.Equal("01 18 08 16 09 16 16 00 05 6B 6F 69 6B 65 71 77 65 31 32 33 34 35 36 61 61 61 30 30 30 30 30 30 30 30 06 71 77 65 72 74 78 07 E2 08 16".Replace(" ",""), hex);
+            Assert.Equal("01 18 08 16 09 16 16 00 05 6B 6F 69 6B 65 71 77 65 31 32 33 34 35 36 61 61 61 30 30 30 30 30 30 30 30 06 71 77 65 72 74 78 07 E2 08 16".Replace(" ", ""), hex);
             //"01 18 08 16 09 16 16 00 05 6B 6F 69 6B 65 71 77 65 31 32 33 34 35 36 61 61 61 30 30 30 30 30 30 30 30 06 71 77 65 72 74 78 07 E2 08 16"
         }
 
@@ -79,6 +83,5 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal("qwertx", jT808_0X0702.LicenseIssuing);
             Assert.Equal(DateTime.Parse("2018-08-16"), jT808_0X0702.CertificateExpiresDate);
         }
-
     }
 }

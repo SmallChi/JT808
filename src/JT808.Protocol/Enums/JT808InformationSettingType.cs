@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol.Enums
+﻿namespace JT808.Protocol.Enums
 {
     /// <summary>
     /// 信息设置类型
     /// </summary>
-    public enum JT808InformationSettingType:byte
+    public enum JT808InformationSettingType : byte
     {
         /// <summary>
         /// 删除终端全部信息项

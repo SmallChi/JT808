@@ -17,7 +17,7 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         [IgnoreDataMember]
         public double ConvertSpeed => Speed / 10.0;
-        public override byte AttachInfoId { get;  set; } = 0x03;
-        public override byte AttachInfoLength { get;  set; } = 2;
+        public override byte AttachInfoId { get; set; } = 0x03;
+        public override byte AttachInfoLength { get; set; } = 2;
     }
 }

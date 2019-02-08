@@ -1,7 +1,6 @@
 ﻿using JT808.Protocol.JT808Properties;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol
 {

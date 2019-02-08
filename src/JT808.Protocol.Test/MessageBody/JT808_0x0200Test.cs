@@ -1,15 +1,10 @@
-﻿using JT808.Protocol.MessageBody;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
+using JT808.Protocol.Test.JT808LocationAttach;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
-using JT808.Protocol.Test.JT808LocationAttach;
-using System.IO;
-using JT808.Protocol.JT808Formatters;
-using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using JT808.Protocol.Test.JT808Formatters.MessageBodyFormatters.JT808LocationAttach;
-using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.Test.MessageBodyRequest
 {
@@ -18,16 +13,18 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         [Fact]
         public void Test1()
         {
-            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200();
-            jT808UploadLocationRequest.AlarmFlag = 1;
-            jT808UploadLocationRequest.Altitude = 40;
-            jT808UploadLocationRequest.GPSTime = DateTime.Parse("2018-07-15 10:10:10");
-            jT808UploadLocationRequest.Lat = 12222222;
-            jT808UploadLocationRequest.Lng = 132444444;
-            jT808UploadLocationRequest.Speed = 60;
-            jT808UploadLocationRequest.Direction = 0;
-            jT808UploadLocationRequest.StatusFlag = 2;
-            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200
+            {
+                AlarmFlag = 1,
+                Altitude = 40,
+                GPSTime = DateTime.Parse("2018-07-15 10:10:10"),
+                Lat = 12222222,
+                Lng = 132444444,
+                Speed = 60,
+                Direction = 0,
+                StatusFlag = 2,
+                JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
+            };
             jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
@@ -75,17 +72,19 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             //06
             //  0D 
             //      00 00 00 12 01 73 6D 61 6C 6C 63 68 69"
-            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200();
-            jT808UploadLocationRequest.AlarmFlag = 1;
-            jT808UploadLocationRequest.Altitude = 40;
-            jT808UploadLocationRequest.GPSTime = DateTime.Parse("2018-07-15 10:10:10");
-            jT808UploadLocationRequest.Lat = 12222222;
-            jT808UploadLocationRequest.Lng = 132444444;
-            jT808UploadLocationRequest.Speed = 60;
-            jT808UploadLocationRequest.Direction = 0;
-            jT808UploadLocationRequest.StatusFlag = 2;
-            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
-            jT808UploadLocationRequest.JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
+            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200
+            {
+                AlarmFlag = 1,
+                Altitude = 40,
+                GPSTime = DateTime.Parse("2018-07-15 10:10:10"),
+                Lat = 12222222,
+                Lng = 132444444,
+                Speed = 60,
+                Direction = 0,
+                StatusFlag = 2,
+                JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>(),
+                JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>()
+            };
             jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
@@ -123,7 +122,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
             Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808_0x0200_BodyBase.AttachId0x02]).Oil);
-            var jT808LocationAttachImpl0x06= JT808Serializer.Deserialize<JT808LocationAttachImpl0x06>(jT808UploadLocationRequest.JT808CustomLocationAttachOriginalData[0x06]);
+            var jT808LocationAttachImpl0x06 = JT808Serializer.Deserialize<JT808LocationAttachImpl0x06>(jT808UploadLocationRequest.JT808CustomLocationAttachOriginalData[0x06]);
             Assert.Equal(18, jT808LocationAttachImpl0x06.Age);
             Assert.Equal(1, jT808LocationAttachImpl0x06.Gender);
             Assert.Equal("smallchi", jT808LocationAttachImpl0x06.UserName);
@@ -135,21 +134,23 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                 MsgId= Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
-                 MsgNum=8888,
-                 TerminalPhoneNo="112233445566",
-                 //MessageBodyProperty=new JT808MessageBodyProperty(38),
+                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgNum = 8888,
+                TerminalPhoneNo = "112233445566",
+                //MessageBodyProperty=new JT808MessageBodyProperty(38),
             };
-            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200();
-            jT808UploadLocationRequest.AlarmFlag = 1;
-            jT808UploadLocationRequest.Altitude = 40;
-            jT808UploadLocationRequest.GPSTime = DateTime.Parse("2018-07-15 10:10:10");
-            jT808UploadLocationRequest.Lat = 12222222;
-            jT808UploadLocationRequest.Lng = 132444444;
-            jT808UploadLocationRequest.Speed = 60;
-            jT808UploadLocationRequest.Direction = 0;
-            jT808UploadLocationRequest.StatusFlag = 2;
-            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200
+            {
+                AlarmFlag = 1,
+                Altitude = 40,
+                GPSTime = DateTime.Parse("2018-07-15 10:10:10"),
+                Lat = 12222222,
+                Lng = 132444444,
+                Speed = 60,
+                Direction = 0,
+                StatusFlag = 2,
+                JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
+            };
             jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100
@@ -186,7 +187,7 @@ namespace JT808.Protocol.Test.MessageBodyRequest
             //     00 37 
             //42 7E
 
-           
+
             byte[] bytes = "7E 02 00 00 26 11 22 33 44 55 66 22 B8 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37 57 7E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
             Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);

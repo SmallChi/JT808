@@ -1,8 +1,6 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
@@ -12,23 +10,25 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(),
-                MsgNum = 10,
-                TerminalPhoneNo = "123456789",
-            };
-            jT808Package.Bodies = new JT808_0x0104
-            {
-                 MsgNum=20,
-                  AnswerParamsCount=1,
-                ParamList = new List<JT808_0x8103_BodyBase> {
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "123456789",
+                },
+                Bodies = new JT808_0x0104
+                {
+                    MsgNum = 20,
+                    AnswerParamsCount = 1,
+                    ParamList = new List<JT808_0x8103_BodyBase> {
                     new JT808_0x8103_0x0001() {
                          ParamId=0x0001,
                          ParamLength=4,
                          ParamValue=10
                     }
+                }
                 }
             };
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
@@ -39,7 +39,7 @@ namespace JT808.Protocol.Test.MessageBody
         public void Test1_1()
         {
             byte[] bytes = "7E0104000C000123456789000A00140100000001040000000A907E".ToHexBytes();
-            JT808Package jT808_0X8104= JT808Serializer.Deserialize<JT808Package>(bytes);
+            JT808Package jT808_0X8104 = JT808Serializer.Deserialize<JT808Package>(bytes);
             Assert.Equal(Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(), jT808_0X8104.Header.MsgId);
             Assert.Equal(10, jT808_0X8104.Header.MsgNum);
             Assert.Equal("123456789", jT808_0X8104.Header.TerminalPhoneNo);
@@ -59,18 +59,19 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test2()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(),
-                MsgNum = 10,
-                TerminalPhoneNo = "123456789",
-            };
-            jT808Package.Bodies = new JT808_0x0104
-            {
-                MsgNum = 20,
-                AnswerParamsCount = 2,
-                ParamList = new List<JT808_0x8103_BodyBase> {
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "123456789",
+                },
+                Bodies = new JT808_0x0104
+                {
+                    MsgNum = 20,
+                    AnswerParamsCount = 2,
+                    ParamList = new List<JT808_0x8103_BodyBase> {
                     new JT808_0x8103_0x0001() {
                          ParamId=0x0001,
                          ParamLength=4,
@@ -80,6 +81,7 @@ namespace JT808.Protocol.Test.MessageBody
                          ParamId=0x0013,
                          ParamValue="www.baidu.com"
                     }
+                }
                 }
             };
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();

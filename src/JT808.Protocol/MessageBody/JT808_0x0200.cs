@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using JT808.Protocol.Attributes;
-using System.Runtime.Serialization;
+using System;
+using System.Collections.Generic;
 
 namespace JT808.Protocol.MessageBody
 {

@@ -1,11 +1,8 @@
-﻿using JT808.Protocol.Enums;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Properties;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Buffers;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -14,9 +11,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x8604 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x8604 jT808_0X8604 = new JT808_0x8604();
-            jT808_0X8604.AreaId= JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            jT808_0X8604.AreaProperty = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
+            JT808_0x8604 jT808_0X8604 = new JT808_0x8604
+            {
+                AreaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                AreaProperty = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset)
+            };
             ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(jT808_0X8604.AreaProperty, 2).PadLeft(16, '0').AsSpan();
             bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
             if (!bit0Flag)
@@ -36,9 +35,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
             {
                 for (var i = 0; i < jT808_0X8604.PeakCount; i++)
                 {
-                    var item = new JT808PeakProperty();
-                    item.Lat = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-                    item.Lng = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
+                    var item = new JT808PeakProperty
+                    {
+                        Lat = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                        Lng = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset)
+                    };
                     jT808_0X8604.PeakItems.Add(item);
                 }
             }
@@ -75,10 +76,10 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
                     offset += JT808BinaryExtensions.WriteByteLittle(bytes, offset, value.OverspeedDuration.Value);
                 }
             }
-            if(value.PeakItems!=null && value.PeakItems.Count > 0)
+            if (value.PeakItems != null && value.PeakItems.Count > 0)
             {
-                offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset,(ushort)value.PeakItems.Count);
-                foreach(var item in value.PeakItems)
+                offset += JT808BinaryExtensions.WriteUInt16Little(bytes, offset, (ushort)value.PeakItems.Count);
+                foreach (var item in value.PeakItems)
                 {
                     offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.Lat);
                     offset += JT808BinaryExtensions.WriteUInt32Little(bytes, offset, item.Lng);

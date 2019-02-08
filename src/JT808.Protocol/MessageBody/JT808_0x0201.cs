@@ -1,9 +1,5 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
-using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -11,7 +7,7 @@ namespace JT808.Protocol.MessageBody
     /// 位置信息查询应答
     /// </summary>
     [JT808Formatter(typeof(JT808_0x0201Formatter))]
-    public class JT808_0x0201:JT808Bodies
+    public class JT808_0x0201 : JT808Bodies
     {
         /// <summary>
         /// 应答流水号

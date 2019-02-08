@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol.Enums
+﻿namespace JT808.Protocol.Enums
 {
     public enum JT808ErrorCode
     {
@@ -23,14 +19,14 @@ namespace JT808.Protocol.Enums
         /// 消息体解析错误
         /// </summary>
         BodiesParseError = 1004,
-        GetAttributeError=1005,
+        GetAttributeError = 1005,
         /// <summary>
         /// 没有实现对应的类型
         /// </summary>
-        NotImplType=1006,
+        NotImplType = 1006,
         /// <summary>
         /// 长度不够
         /// </summary>
-        NotEnoughLength=1007
+        NotEnoughLength = 1007
     }
 }

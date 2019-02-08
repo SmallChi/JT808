@@ -1,21 +1,21 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
+﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
-using JT808.Protocol.Enums;
+using JT808.Protocol.MessageBody;
+using System.Collections.Generic;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
 {
-   public  class JT808_0x8301Test
+    public  class JT808_0x8301Test
     {
         [Fact]
         public void Test1()
         {
-            JT808_0x8301 jT808_0X8301 = new JT808_0x8301();
-            jT808_0X8301.SettingType = JT808EventSettingType.删除终端现有所有事件_该命令后不带后继字节.ToByteValue();
-            jT808_0X8301.EventItems = new List<JT808Properties.JT808EventProperty>();
+            JT808_0x8301 jT808_0X8301 = new JT808_0x8301
+            {
+                SettingType = JT808EventSettingType.删除终端现有所有事件_该命令后不带后继字节.ToByteValue(),
+                EventItems = new List<JT808Properties.JT808EventProperty>()
+            };
             jT808_0X8301.EventItems.Add(new JT808Properties.JT808EventProperty
             {
                  EventId=1,

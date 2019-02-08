@@ -1,10 +1,7 @@
-﻿using JT808.Protocol.MessageBody;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using JT808.Protocol.Test.MessageBody.JT808_0x0701BodiesImpl;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -19,9 +16,11 @@ namespace JT808.Protocol.Test.MessageBody
         public void Test1()
         {
             JT808_0x0701 jT808_0X0701 = new JT808_0x0701();
-            var body=new JT808_0x0701TestBodiesImpl();
-            body.Id = 333;
-            body.UserName = "汉smallchi";
+            var body = new JT808_0x0701TestBodiesImpl
+            {
+                Id = 333,
+                UserName = "汉smallchi"
+            };
             jT808_0X0701.ElectronicContent = body;
             var hex = JT808Serializer.Serialize(jT808_0X0701).ToHexString();
             Assert.Equal("000000100000014D000ABABA736D616C6C636869", hex);

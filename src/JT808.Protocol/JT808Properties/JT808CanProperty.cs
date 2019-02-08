@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace JT808.Protocol.JT808Properties
+﻿namespace JT808.Protocol.JT808Properties
 {
     /// <summary>
     /// Can属性
@@ -18,6 +14,6 @@ namespace JT808.Protocol.JT808Properties
         /// CAN 数据
         /// 8
         /// </summary>
-        public byte[] CanData{ get; set; }
+        public byte[] CanData { get; set; }
     }
 }

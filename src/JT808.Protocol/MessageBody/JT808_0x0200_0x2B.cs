@@ -1,5 +1,4 @@
-﻿using System;
-using JT808.Protocol.Attributes;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 
 
@@ -12,7 +11,7 @@ namespace JT808.Protocol.MessageBody
         /// 模拟量 bit0-15，AD0；bit16-31，AD1
         /// </summary>
         public int Analog { get; set; }
-        public override byte AttachInfoId { get;  set; } = 0x2B;
-        public override byte AttachInfoLength { get;  set; } = 4;
+        public override byte AttachInfoId { get; set; } = 0x2B;
+        public override byte AttachInfoLength { get; set; } = 4;
     }
 }

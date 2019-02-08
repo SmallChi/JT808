@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.IO.Compression;
-using System.Text;
 
 namespace JT808.Protocol.JT808Internal
 {
-    internal class JT808GZipCompressImpl : JT808ICompress
+    internal class JT808GZipCompressImpl : IJT808ICompress
     {
         public byte[] Compress(byte[] data)
         {
@@ -16,7 +13,7 @@ namespace JT808.Protocol.JT808Internal
                 using (var mStream = new MemoryStream(data))
                     mStream.CopyTo(gZipStream);
                 return outStream.ToArray();
-            }    
+            }
         }
 
         public byte[] Decompress(byte[] compressData)

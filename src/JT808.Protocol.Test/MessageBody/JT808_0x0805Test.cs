@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
+using System.Collections.Generic;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
 {

@@ -1,7 +1,6 @@
-﻿using System;
+﻿using JT808.Protocol.JT808Properties;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using JT808.Protocol.JT808Properties;
 
 namespace JT808.Protocol.JT808Internal
 {
@@ -18,12 +17,14 @@ namespace JT808.Protocol.JT808Internal
             {
                 quotient = quotient + 1;
             }
-            for (int i=1;i<= quotient; i++)
+            for (int i = 1; i <= quotient; i++)
             {
-                JT808SplitPackageProperty jT808SplitPackageProperty = new JT808SplitPackageProperty();
-                jT808SplitPackageProperty.PackgeIndex = i;
-                jT808SplitPackageProperty.PackgeCount = quotient;
-                if(i == quotient)
+                JT808SplitPackageProperty jT808SplitPackageProperty = new JT808SplitPackageProperty
+                {
+                    PackgeIndex = i,
+                    PackgeCount = quotient
+                };
+                if (i == quotient)
                 {
                     jT808SplitPackageProperty.Data = bigData.Slice((i - 1) * N).ToArray();
                 }

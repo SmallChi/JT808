@@ -1,32 +1,32 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBody
 {
-   public  class JT808_0x8103Test
+    public class JT808_0x8103Test
     {
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.设置终端参数.ToUInt16Value(),
-                MsgNum = 10,
-                TerminalPhoneNo = "123456789",
-            };
-            jT808Package.Bodies = new JT808_0x8103
-            {
-                ParamList =new List<JT808_0x8103_BodyBase> {
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.设置终端参数.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "123456789",
+                },
+                Bodies = new JT808_0x8103
+                {
+                    ParamList = new List<JT808_0x8103_BodyBase> {
                     new JT808_0x8103_0x0001() {
                          ParamId=0x0001,
                          ParamLength=4,
                          ParamValue=10
                     }
+                }
                 }
             };
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
@@ -55,7 +55,7 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test2()
         {
-            var JT808_0x8103=new JT808_0x8103
+            var JT808_0x8103 = new JT808_0x8103
             {
                 ParamList = new List<JT808_0x8103_BodyBase> {
                     new JT808_0x8103_0x0001() {
@@ -79,8 +79,8 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "0200000001040000000A000000130D7777772E62616964752E636F6D".ToHexBytes();
             JT808_0x8103 jT808_0X8103 = JT808Serializer.Deserialize<JT808_0x8103>(bytes);
-            
-           foreach (var item in jT808_0X8103.ParamList)
+
+            foreach (var item in jT808_0X8103.ParamList)
             {
                 switch (item.ParamId)
                 {

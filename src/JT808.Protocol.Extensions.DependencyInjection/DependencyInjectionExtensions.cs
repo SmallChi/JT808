@@ -1,9 +1,6 @@
 ﻿using JT808.Protocol.Extensions.DependencyInjection.Options;
-using JT808.Protocol.MessageBody;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
 
 namespace JT808.Protocol.Extensions.DependencyInjection
 {
@@ -14,7 +11,7 @@ namespace JT808.Protocol.Extensions.DependencyInjection
             JT808GlobalConfig.Instance.SetSkipCRCCode(jT808Options.Value.SkipCRCCode);
             JT808GlobalConfig.Instance.Register_0x0200_Attach(jT808Options.Value.JT808LocationAttachIds.ToArray());
             JT808GlobalConfig.Instance.Register_0x0200_Attach();
-            foreach(var item in jT808Options.Value.JT808_0x8103Method)
+            foreach (var item in jT808Options.Value.JT808_0x8103Method)
             {
                 JT808GlobalConfig.Instance.Register_0x8103_ParamId(item.Key, item.Value);
             }
@@ -27,7 +24,7 @@ namespace JT808.Protocol.Extensions.DependencyInjection
             catch { }
             try
             {
-                var compressImpl = servicesProvider.GetRequiredService<JT808ICompress>();
+                var compressImpl = servicesProvider.GetRequiredService<IJT808ICompress>();
                 JT808GlobalConfig.Instance.SetCompress(compressImpl);
             }
             catch { }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Buffers.Binary;
-using System.Buffers;
 
 namespace JT808.Protocol.Extensions
 {
@@ -18,7 +15,7 @@ namespace JT808.Protocol.Extensions
 
         public static uint ReadUInt32Little(ReadOnlySpan<byte> read, ref int offset)
         {
-            uint value =(uint) ((read[offset] << 24) | (read[offset + 1] << 16) | (read[offset + 2] << 8) | read[offset + 3]);
+            uint value = (uint)((read[offset] << 24) | (read[offset + 1] << 16) | (read[offset + 2] << 8) | read[offset + 3]);
             offset = offset + 4;
             return value;
         }
@@ -37,7 +34,7 @@ namespace JT808.Protocol.Extensions
             return value;
         }
 
-        public static byte[] ReadBytesLittle(ReadOnlySpan<byte> read, ref int offset,int len)
+        public static byte[] ReadBytesLittle(ReadOnlySpan<byte> read, ref int offset, int len)
         {
             ReadOnlySpan<byte> temp = read.Slice(offset, len);
             offset = offset + len;

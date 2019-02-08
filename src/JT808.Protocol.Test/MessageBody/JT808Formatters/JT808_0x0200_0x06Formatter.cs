@@ -1,9 +1,7 @@
-﻿using JT808.Protocol.MessageBody;
-using JT808.Protocol.Test.JT808LocationAttach;
-using JT808.Protocol.Extensions;
-using System;
+﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.JT808Formatters;
-using System.Buffers;
+using JT808.Protocol.Test.JT808LocationAttach;
+using System;
 
 namespace JT808.Protocol.Test.JT808Formatters.MessageBodyFormatters.JT808LocationAttach
 {

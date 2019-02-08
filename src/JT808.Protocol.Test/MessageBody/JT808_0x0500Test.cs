@@ -1,11 +1,8 @@
-﻿using JT808.Protocol.MessageBody;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using JT808.Protocol.Extensions;
-using System.Diagnostics;
-using Xunit.Extensions;
 
 namespace JT808.Protocol.Test.MessageBodyReply
 {
@@ -14,24 +11,28 @@ namespace JT808.Protocol.Test.MessageBodyReply
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.车辆控制应答.ToUInt16Value(),
-                MsgNum = 8888,
-                TerminalPhoneNo = "112233445566",
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.车辆控制应答.ToUInt16Value(),
+                    MsgNum = 8888,
+                    TerminalPhoneNo = "112233445566",
+                }
             };
             JT808_0x0500 jT808_0X0500 = new JT808_0x0500();
-            JT808_0x0200 JT808_0x0200_1 = new JT808_0x0200();
-            JT808_0x0200_1.AlarmFlag = 1;
-            JT808_0x0200_1.Altitude = 40;
-            JT808_0x0200_1.GPSTime = DateTime.Parse("2018-07-15 10:10:10");
-            JT808_0x0200_1.Lat = 12222222;
-            JT808_0x0200_1.Lng = 132444444;
-            JT808_0x0200_1.Speed = 60;
-            JT808_0x0200_1.Direction = 0;
-            JT808_0x0200_1.StatusFlag = 2;
-            JT808_0x0200_1.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            JT808_0x0200 JT808_0x0200_1 = new JT808_0x0200
+            {
+                AlarmFlag = 1,
+                Altitude = 40,
+                GPSTime = DateTime.Parse("2018-07-15 10:10:10"),
+                Lat = 12222222,
+                Lng = 132444444,
+                Speed = 60,
+                Direction = 0,
+                StatusFlag = 2,
+                JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
+            };
             JT808_0x0200_1.JT808LocationAttachData.Add(JT808_0x0200_BodyBase.AttachId0x01, new JT808_0x0200_0x01
             {
                 Mileage = 100

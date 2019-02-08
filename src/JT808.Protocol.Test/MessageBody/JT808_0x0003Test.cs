@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using JT808.Protocol.Extensions;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBodyRequest
 {
@@ -11,12 +8,14 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = new JT808Package();
-            jT808Package.Header = new JT808Header
+            JT808Package jT808Package = new JT808Package
             {
-                 MsgId= Enums.JT808MsgId.终端注销.ToUInt16Value(),
-                 MsgNum=1,
-                 TerminalPhoneNo="12345678900",
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.终端注销.ToUInt16Value(),
+                    MsgNum = 1,
+                    TerminalPhoneNo = "12345678900",
+                }
             };
             //"7E 00 03 00 00 01 23 45 67 89 00 00 01 8B 7E"
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();

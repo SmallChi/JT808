@@ -8,7 +8,7 @@ namespace JT808.Protocol.Enums
     /// 报警标志
     /// </summary>
     [Flags]
-    public enum JT808Alarm:uint
+    public enum JT808Alarm : uint
     {
         /// <summary>
         /// 紧急报警_触动报警开关后触发
@@ -34,7 +34,7 @@ namespace JT808.Protocol.Enums
         /// GNSS模块发生故障
         /// 标志维持至报警条件解除
         /// </summary>
-        GNSS模块发生故障=16,
+        GNSS模块发生故障 = 16,
         /// <summary>
         /// GNSS天线未接或被剪断
         /// 标志维持至报警条件解除
@@ -85,9 +85,9 @@ namespace JT808.Protocol.Enums
         /// 标志维持至报警条件解除
         /// </summary>
         疲劳驾驶预警 = 16384,
-        保留1=32768,
-        保留2=65536,
-        保留3=131072,
+        保留1 = 32768,
+        保留2 = 65536,
+        保留3 = 131072,
         /// <summary>
         /// 当天累计驾驶超时
         /// 标志维持至报警条件解除
@@ -112,7 +112,7 @@ namespace JT808.Protocol.Enums
         /// 路段行驶时间不足或过长
         /// 收到应答后清零
         /// </summary>
-        路段行驶时间不足或过长= 4194304,
+        路段行驶时间不足或过长 = 4194304,
         /// <summary>
         /// 路线偏离报警
         /// 标志维持至报警条件解除
@@ -122,7 +122,7 @@ namespace JT808.Protocol.Enums
         /// 车辆VSS故障
         /// 标志维持至报警条件解除
         /// </summary>
-        车辆VSS故障= 16777216,
+        车辆VSS故障 = 16777216,
         /// <summary>
         /// 车辆油量异常
         /// 标志维持至报警条件解除

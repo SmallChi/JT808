@@ -2,8 +2,6 @@
 using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -12,9 +10,11 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x0A00 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0A00 jT808_0X0A00 = new JT808_0x0A00();
-            jT808_0X0A00.E = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            jT808_0X0A00.N = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset, 128);
+            JT808_0x0A00 jT808_0X0A00 = new JT808_0x0A00
+            {
+                E = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                N = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset, 128)
+            };
             if (jT808_0X0A00.N.Length != 128)
             {
                 throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(jT808_0X0A00.N)}->128");

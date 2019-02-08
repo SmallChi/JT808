@@ -1,18 +1,19 @@
-﻿
-using Xunit;
+﻿using Xunit;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBodyRequest
 {
-    public class JT808_0x0102Test: JT808PackageBase
+    public class JT808_0x0102Test : JT808PackageBase
     {
         [Fact]
         public void Test1()
         {
-            JT808_0x0102 jT808LoginRequestProperty = new JT808_0x0102();
-            jT808LoginRequestProperty.Code = "45612";
-            string hex= JT808Serializer.Serialize(jT808LoginRequestProperty) .ToHexString();
+            JT808_0x0102 jT808LoginRequestProperty = new JT808_0x0102
+            {
+                Code = "45612"
+            };
+            string hex = JT808Serializer.Serialize(jT808LoginRequestProperty).ToHexString();
             Assert.Equal("3435363132", hex);
         }
 
@@ -27,16 +28,18 @@ namespace JT808.Protocol.Test.MessageBodyRequest
         [Fact]
         public void Test3()
         {
-            JT808Package jT808LoginRequest = new JT808Package();
-            jT808LoginRequest.Header = new JT808Header
+            JT808Package jT808LoginRequest = new JT808Package
             {
-                 MsgId= Enums.JT808MsgId.终端鉴权.ToUInt16Value(),
-                 MsgNum=12345,
-                 TerminalPhoneNo="12345678900",
-            };
-            jT808LoginRequest.Bodies = new JT808_0x0102
-            {
-                 Code= "456121111"
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.终端鉴权.ToUInt16Value(),
+                    MsgNum = 12345,
+                    TerminalPhoneNo = "12345678900",
+                },
+                Bodies = new JT808_0x0102
+                {
+                    Code = "456121111"
+                }
             };
             string hex = JT808Serializer.Serialize(jT808LoginRequest).ToHexString();
             Assert.Equal("7E010200090123456789003039343536313231313131BE7E", hex);

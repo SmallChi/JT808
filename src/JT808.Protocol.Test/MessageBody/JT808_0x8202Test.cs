@@ -1,9 +1,6 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using Xunit;
-using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.Test.MessageBodySend
 {
@@ -12,9 +9,11 @@ namespace JT808.Protocol.Test.MessageBodySend
         [Fact]
         public void Test1()
         {
-            JT808_0x8202 jT808_0X8202 = new JT808_0x8202();
-            jT808_0X8202.Interval = 69;
-            jT808_0X8202.LocationTrackingValidity = 123;
+            JT808_0x8202 jT808_0X8202 = new JT808_0x8202
+            {
+                Interval = 69,
+                LocationTrackingValidity = 123
+            };
             string hex = JT808Serializer.Serialize(jT808_0X8202).ToHexString();
             Assert.Equal("00450000007B", hex);
         }

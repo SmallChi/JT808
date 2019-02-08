@@ -1,10 +1,7 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using JT808.Protocol.Test.JT808_0x0900_BodiesImpl;
+using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -13,17 +10,19 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808Package jT808_0X0900 = new JT808Package();
-            jT808_0X0900.Header = new JT808Header
+            JT808Package jT808_0X0900 = new JT808Package
             {
-                MsgId = Enums.JT808MsgId.数据上行透传.ToUInt16Value(),
-                MsgNum = 10,
-                TerminalPhoneNo = "123456789",
-            };
-            jT808_0X0900.Bodies = new JT808_0x0900
-            {
-                JT808_0x0900_BodyBase = new JT808_0x0900_0x83() { PassthroughContent = "smallchi" },
-                PassthroughType = 0x83
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.数据上行透传.ToUInt16Value(),
+                    MsgNum = 10,
+                    TerminalPhoneNo = "123456789",
+                },
+                Bodies = new JT808_0x0900
+                {
+                    JT808_0x0900_BodyBase = new JT808_0x0900_0x83() { PassthroughContent = "smallchi" },
+                    PassthroughType = 0x83
+                }
             };
             var hex = JT808Serializer.Serialize(jT808_0X0900).ToHexString();
             Assert.Equal("7E09000009000123456789000A83736D616C6C6368691D7E", hex);

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.Extensions.DependencyInjection.Options
 {

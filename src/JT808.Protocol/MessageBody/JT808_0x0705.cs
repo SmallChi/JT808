@@ -3,7 +3,6 @@ using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 using JT808.Protocol.JT808Properties;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -12,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x0705
     /// </summary>
     [JT808Formatter(typeof(JT808_0x0705Formatter))]
-    public class JT808_0x0705:JT808Bodies
+    public class JT808_0x0705 : JT808Bodies
     {
         /// <summary>
         /// 数据项个数

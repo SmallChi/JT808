@@ -1,21 +1,19 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.MessageBody;
 using Xunit;
-using JT808.Protocol.Extensions;
-using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.Test.MessageBody
 {
-   public  class JT808_0x8304Test
+    public  class JT808_0x8304Test
     {
         [Fact]
         public void Test1()
         {
-            JT808_0x8304 jT808_0X8304 = new JT808_0x8304();
-            jT808_0X8304.InformationType = 123;
-            jT808_0X8304.InformationContent = "信息内容";
+            JT808_0x8304 jT808_0X8304 = new JT808_0x8304
+            {
+                InformationType = 123,
+                InformationContent = "信息内容"
+            };
             var hex = JT808Serializer.Serialize(jT808_0X8304).ToHexString();
             Assert.Equal("7B0008D0C5CFA2C4DAC8DD", hex);
         }

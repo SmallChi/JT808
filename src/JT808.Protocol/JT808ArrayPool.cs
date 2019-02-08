@@ -1,7 +1,4 @@
-﻿using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Buffers;
 
 namespace JT808.Protocol
 {
@@ -21,7 +18,7 @@ namespace JT808.Protocol
 
         public static void Return(byte[] array, bool clearArray = false)
         {
-             ArrayPool.Return(array, clearArray);
+            ArrayPool.Return(array, clearArray);
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
@@ -12,8 +9,10 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test1()
         {
-            JT808_0x0301 jT808_0X0301 = new JT808_0x0301();
-            jT808_0X0301.EventId = 123;
+            JT808_0x0301 jT808_0X0301 = new JT808_0x0301
+            {
+                EventId = 123
+            };
             var hex = JT808Serializer.Serialize(jT808_0X0301).ToHexString();
             Assert.Equal("7B", hex);
         }

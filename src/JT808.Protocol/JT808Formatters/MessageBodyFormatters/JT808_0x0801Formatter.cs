@@ -1,8 +1,6 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -11,13 +9,15 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x0801 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x0801 jT808_0X0801 = new JT808_0x0801();
-            jT808_0X0801.MultimediaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            jT808_0X0801.MultimediaType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X0801.MultimediaCodingFormat = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X0801.EventItemCoding = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X0801.ChannelId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset); 
-            jT808_0X0801.Position = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Deserialize(bytes.Slice(offset,28), out int bufReadSize);
+            JT808_0x0801 jT808_0X0801 = new JT808_0x0801
+            {
+                MultimediaId = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                MultimediaType = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                MultimediaCodingFormat = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                EventItemCoding = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                ChannelId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                Position = JT808FormatterExtensions.GetFormatter<JT808_0x0200>().Deserialize(bytes.Slice(offset, 28), out int bufReadSize)
+            };
             offset += 28;
             jT808_0X0801.MultimediaDataPackage = JT808BinaryExtensions.ReadBytesLittle(bytes, ref offset);
             readSize = offset;

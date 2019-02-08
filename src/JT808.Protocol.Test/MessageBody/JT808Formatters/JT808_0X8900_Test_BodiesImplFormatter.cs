@@ -2,8 +2,6 @@
 using JT808.Protocol.JT808Formatters;
 using JT808.Protocol.Test.MessageBody.JT808_0X8900_BodiesImpl;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.Test.MessageBody.JT808Formatters
 {
@@ -12,10 +10,12 @@ namespace JT808.Protocol.Test.MessageBody.JT808Formatters
         public JT808_0X8900_Test_BodiesImpl Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0X8900_Test_BodiesImpl jT808_0X8900_Test_BodiesImpl = new JT808_0X8900_Test_BodiesImpl();
-            jT808_0X8900_Test_BodiesImpl.Id = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset);
-            jT808_0X8900_Test_BodiesImpl.Sex = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            
+            JT808_0X8900_Test_BodiesImpl jT808_0X8900_Test_BodiesImpl = new JT808_0X8900_Test_BodiesImpl
+            {
+                Id = JT808BinaryExtensions.ReadUInt32Little(bytes, ref offset),
+                Sex = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset)
+            };
+
             readSize = offset;
             return jT808_0X8900_Test_BodiesImpl;
         }

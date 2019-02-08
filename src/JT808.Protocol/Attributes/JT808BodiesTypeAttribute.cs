@@ -9,6 +9,6 @@ namespace JT808.Protocol.Attributes
         {
             JT808BodiesType = jT808BodiesType;
         }
-        public Type JT808BodiesType { get;}
+        public Type JT808BodiesType { get; }
     }
 }

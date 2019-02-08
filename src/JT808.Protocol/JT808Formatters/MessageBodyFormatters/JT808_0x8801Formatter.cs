@@ -1,8 +1,6 @@
 ﻿using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
 {
@@ -11,17 +9,19 @@ namespace JT808.Protocol.JT808Formatters.MessageBodyFormatters
         public JT808_0x8801 Deserialize(ReadOnlySpan<byte> bytes, out int readSize)
         {
             int offset = 0;
-            JT808_0x8801 jT808_0X8801 = new JT808_0x8801();
-            jT808_0X8801.ChannelId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8801.ShootingCommand = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
-            jT808_0X8801.VideoTime = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset);
-            jT808_0X8801.SaveFlag = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8801.Resolution = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8801.VideoQuality = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8801.Lighting = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8801.Contrast = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8801.Saturability = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
-            jT808_0X8801.Chroma = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset);
+            JT808_0x8801 jT808_0X8801 = new JT808_0x8801
+            {
+                ChannelId = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                ShootingCommand = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset),
+                VideoTime = JT808BinaryExtensions.ReadUInt16Little(bytes, ref offset),
+                SaveFlag = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                Resolution = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                VideoQuality = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                Lighting = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                Contrast = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                Saturability = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset),
+                Chroma = JT808BinaryExtensions.ReadByteLittle(bytes, ref offset)
+            };
             readSize = offset;
             return jT808_0X8801;
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using JT808.Protocol.Attributes;
+﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.Enums;
 using JT808.Protocol.JT808Formatters.MessageBodyFormatters;
 
@@ -28,7 +27,7 @@ namespace JT808.Protocol.MessageBody
         /// 1：出
         /// </summary>
         public JT808DirectionType Direction { get; set; }
-        public override byte AttachInfoId { get;  set; } = 0x12;
-        public override byte AttachInfoLength { get;  set; } = 6;
+        public override byte AttachInfoId { get; set; } = 0x12;
+        public override byte AttachInfoLength { get; set; } = 6;
     }
 }
