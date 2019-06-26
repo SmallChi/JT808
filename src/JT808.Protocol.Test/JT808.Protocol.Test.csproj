@@ -1,0 +1,126 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="MessageBody\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="MessageBody\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="MessageBody\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="JT808GlobalConfigTest.cs" />
+    <Compile Remove="JT808UtilsTest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Extensions\JT808EnumExtensionsTest.cs" />
+    <Compile Include="Extensions\JT808PackageExtensionsTest.cs" />
+    <Compile Include="MessageBody\JT808Formatters\JT808_0x0200_0x06Formatter.cs" />
+    <Compile Include="MessageBody\JT808Formatters\JT808_0x0701TestBodiesImplFormatter.cs" />
+    <Compile Include="MessageBody\JT808Formatters\JT808_0x0900_0x83Formatter.cs" />
+    <Compile Include="MessageBody\JT808Formatters\JT808_0X8900_Test_BodiesImplFormatter.cs" />
+    <Compile Include="MessageBody\JT808LocationAttachExtensions\JT808LocationAttachImpl0x06.cs" />
+    <Compile Include="MessageBody\JT808_0x0001Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0002Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0003Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0100Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0102Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0104Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0107Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0108Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0200Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0201Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0301Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0302Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0303Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0500Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0701BodiesImpl\JT808_0x0701TestBodiesImpl.cs" />
+    <Compile Include="MessageBody\JT808_0x0701Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0702Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0704Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0705Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0800Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0801Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0802Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0805Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0900Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0900_BodiesImpl\JT808_0x0900_0x83.cs" />
+    <Compile Include="MessageBody\JT808_0x0901Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0A00Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8001Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8003Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8100Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8103Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8104Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8105Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8106Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8108Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8202Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8203Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8300Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8301Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8302Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8303Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8304Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8400Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8401Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8500Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8600Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8601Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8602Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8603Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8604Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8605Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8606Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8800Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8801Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8802Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8803Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8804Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8805Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8900Test.cs" />
+    <Compile Include="MessageBody\JT808_0X8900_BodiesImpl\JT808_0X8900_Test_BodiesImpl.cs" />
+    <Compile Include="MessageBody\JT808_0x8A00Test.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.console" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JT808.Protocol\JT808.Protocol.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Files\test.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

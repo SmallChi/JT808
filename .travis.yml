@@ -1,0 +1,15 @@
+language: csharp
+solution: JT808.Protocol.sln
+dotnet: 2.2.101
+os: linux
+mono: none
+dist: trusty2
+script:
+ - dotnet restore src/JT808.Protocol.sln
+ - dotnet build src/JT808.Protocol.Test/JT808.Protocol.Test.csproj
+ - dotnet test src/JT808.Protocol.Test/JT808.Protocol.Test.csproj
+after_success:
+ - echo successful build!
+branches:
+  only:
+    - master

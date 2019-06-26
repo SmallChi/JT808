@@ -1,0 +1,70 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Copyright>Copyright 2018.</Copyright>
+    <Authors>SmallChi</Authors>
+    <PackageId>JT808</PackageId>
+    <Product>JT808</Product>
+    <Description>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议</Description>
+    <PackageReleaseNotes>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryUrl>https://github.com/SmallChi/JT808</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/SmallChi/JT808</PackageProjectUrl>
+    <licenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</licenseUrl>
+    <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.0.0</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\JT808.Protocol.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Metadata\JT808LocationAttachProperties\**" />
+    <EmbeddedResource Remove="Metadata\JT808LocationAttachProperties\**" />
+    <None Remove="Metadata\JT808LocationAttachProperties\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="IJT808BufferedEntity.cs" />
+    <Compile Remove="IJT808Properties.cs" />
+    <Compile Remove="JT808BufferedEntityBase.cs" />
+    <Compile Remove="JT808GlobalConfig.cs" />
+    <Compile Remove="JT808MessageBodyFactory.cs" />
+    <Compile Remove="Metadata\JT808TerminalLoginRequestProperty.cs" />
+    <Compile Remove="Metadata\JT808UploadLocationRequestProperty.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="System.Buffers" Version="4.5.0" />
+    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
+    <PackageReference Include="System.Memory" Version="4.5.3" />
+    <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Extensions\JT808PackageExtensionsTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>JT808PackageExtensionsTemplate.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Extensions\JT808PackageExtensionsTemplate.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>JT808PackageExtensionsTemplate.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

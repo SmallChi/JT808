@@ -1,0 +1,53 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="netstandard" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System" #>
+<#@ assembly name="$(TargetPath)" #>
+<#@ import namespace="JT808.Protocol" #>
+<#@ import namespace="JT808.Protocol.Enums" #>
+<#@ import namespace="JT808.Protocol.Extensions" #>
+<#@ import namespace="JT808.Protocol.Attributes" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ output extension=".cs" #>
+<#
+	var types=Enum.GetNames(typeof(JT808MsgId));
+#>
+using JT808.Protocol.Enums;
+
+namespace JT808.Protocol.Extensions
+{
+	public static partial class JT808PackageExtensions
+	{
+<#
+	foreach (var item in types)
+    {
+		JT808MsgId msgId = item.ToEnum<JT808MsgId>();
+		JT808BodiesTypeAttribute jT808BodiesTypeAttribute = msgId.GetAttribute<JT808BodiesTypeAttribute>();
+		JT808MsgIdDescriptionAttribute jT808MsgIdDescriptionAttribute = msgId.GetAttribute<JT808MsgIdDescriptionAttribute>();
+
+#>
+		/// <summary>
+		/// <#= jT808MsgIdDescriptionAttribute.Code #> - <#= jT808MsgIdDescriptionAttribute.Name #>
+		/// auto-generated
+		/// </summary>
+	    public static JT808Package Create_<#= jT808MsgIdDescriptionAttribute.Name #>(this JT808MsgId msgId, string terminalPhoneNo,<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName #> bodies)
+		{
+			return Create<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
+		}
+
+		/// <summary>
+		/// <#= jT808MsgIdDescriptionAttribute.Code #> - <#= jT808MsgIdDescriptionAttribute.Name #>
+		/// auto-generated
+		/// </summary>
+	    public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName #> bodies)
+		{
+			return Create<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
+		}
+<#
+    }
+#>
+	}
+}

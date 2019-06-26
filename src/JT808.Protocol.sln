@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol", "JT808.Protocol\JT808.Protocol.csproj", "{6259F511-97FF-4E8D-99EB-C5BB6F2B1069}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Test", "JT808.Protocol.Test\JT808.Protocol.Test.csproj", "{51E98B6A-E350-4E2C-A9C5-78C8B400DA72}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E6296ADE-B239-4A4B-ACDA-B80C0A61399B}"
+	ProjectSection(SolutionItems) = preProject
+		..\.travis.yml = ..\.travis.yml
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Benchmark", "JT808.Protocol.Benchmark\JT808.Protocol.Benchmark.csproj", "{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Extensions.DependencyInjection", "JT808.Protocol.Extensions.DependencyInjection\JT808.Protocol.Extensions.DependencyInjection.csproj", "{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Extensions.DependencyInjection.Test", "JT808.Protocol.Extensions.DependencyInjection.Test\JT808.Protocol.Extensions.DependencyInjection.Test.csproj", "{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6259F511-97FF-4E8D-99EB-C5BB6F2B1069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6259F511-97FF-4E8D-99EB-C5BB6F2B1069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6259F511-97FF-4E8D-99EB-C5BB6F2B1069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6259F511-97FF-4E8D-99EB-C5BB6F2B1069}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51E98B6A-E350-4E2C-A9C5-78C8B400DA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E98B6A-E350-4E2C-A9C5-78C8B400DA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E98B6A-E350-4E2C-A9C5-78C8B400DA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E98B6A-E350-4E2C-A9C5-78C8B400DA72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D58CCAA8-ED94-4048-A6DE-55A84814DF17}
+	EndGlobalSection
+EndGlobal
