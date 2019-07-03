@@ -261,7 +261,6 @@ JT808Serializer JT808Serializer = new JT808Serializer(jT808Coonfig);
 | Package Name          | Version                                            | Downloads                                           |
 | --------------------- | -------------------------------------------------- | --------------------------------------------------- |
 | Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.svg) |
-| Install-Package JT808.Extensions.DependencyInjection | ![JT808](https://img.shields.io/nuget/v/JT808.Extensions.DependencyInjection.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Extensions.DependencyInjection.svg) |
 
 ## 使用BenchmarkDotNet性能测试报告（只是玩玩，不能当真）
 

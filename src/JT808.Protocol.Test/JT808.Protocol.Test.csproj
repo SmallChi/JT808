@@ -30,6 +30,7 @@
     <Compile Include="MessageBody\JT808Formatters\JT808_0x0200_0x06Formatter.cs" />
     <Compile Include="MessageBody\JT808Formatters\JT808_0x0701TestBodiesImplFormatter.cs" />
     <Compile Include="MessageBody\JT808Formatters\JT808_0x0900_0x83Formatter.cs" />
+    <Compile Include="MessageBody\JT808Formatters\JT808_0x8103_0x0075_Formatter.cs" />
     <Compile Include="MessageBody\JT808Formatters\JT808_0X8900_Test_BodiesImplFormatter.cs" />
     <Compile Include="MessageBody\JT808LocationAttachExtensions\JT808LocationAttachImpl0x06.cs" />
     <Compile Include="MessageBody\JT808_0x0001Test.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="MessageBody\JT808_0x8001Test.cs" />
     <Compile Include="MessageBody\JT808_0x8003Test.cs" />
     <Compile Include="MessageBody\JT808_0x8100Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8103CustomIdExtensions\JT808_0x8103_0x0075.cs" />
     <Compile Include="MessageBody\JT808_0x8103Test.cs" />
     <Compile Include="MessageBody\JT808_0x8104Test.cs" />
     <Compile Include="MessageBody\JT808_0x8105Test.cs" />

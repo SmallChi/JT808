@@ -32,7 +32,7 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
                     {
                         object attachImplObj = config.GetMessagePackFormatterByType(customType);
                         dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(attachImplObj, ref reader, config);
-                        jT808_0x8103.ParamList.Add(attachImpl);
+                        jT808_0x8103.CustomParamList.Add(attachImpl);
                     }
                 }
             }

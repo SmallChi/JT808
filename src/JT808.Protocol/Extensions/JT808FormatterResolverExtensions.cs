@@ -105,8 +105,8 @@ namespace JT808.Protocol.Extensions
         {
             Type type = value.GetType();
             var ti = type.GetTypeInfo();
-            (object Value, JT808SerializeMethod SerializeMethod) formatterAndDelegate;
-            if (!jT808Serializers.TryGetValue(type, out formatterAndDelegate))
+          //  (object Value, JT808SerializeMethod SerializeMethod) formatterAndDelegate;
+            if (!jT808Serializers.TryGetValue(type, out var formatterAndDelegate))
             {
                 var t = type;
                 {
@@ -132,8 +132,8 @@ namespace JT808.Protocol.Extensions
         public static dynamic JT808DynamicDeserialize(object objFormatter, ref JT808MessagePackReader reader, IJT808Config config)
         {
             var type = objFormatter.GetType();
-            (object Value, JT808DeserializeMethod DeserializeMethod) formatterAndDelegate;
-            if (!jT808Deserializes.TryGetValue(type, out formatterAndDelegate))
+         //   (object Value, JT808DeserializeMethod DeserializeMethod) formatterAndDelegate;
+            if (!jT808Deserializes.TryGetValue(type, out var formatterAndDelegate))
             {
                 var t = type;
                 {

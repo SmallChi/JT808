@@ -2,6 +2,7 @@
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
 using JT808.Protocol.MessageBody;
+using JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions;
 using System.Collections.Generic;
 using System.Reflection;
 using Xunit;
@@ -119,8 +120,47 @@ namespace JT808.Protocol.Test.MessageBody
                     default:
                         break;
                 }
-
             }
+        }
+
+        [Fact]
+        public void Test3()
+        {
+            var JT808_0x8103 = new JT808_0x8103
+            {
+                 ParamList=new List<JT808_0x8103_BodyBase>(),
+                 CustomParamList = new List<JT808_0x8103_CustomBodyBase> {
+                    new JT808_0x8103_0x0075() {
+                            AudioOutputEnabled=1,
+                               OSD=2,
+                                RTS_EncodeMode=3,
+                                 RTS_KF_Interval=4,
+                                  RTS_Resolution=5,
+                                   RTS_Target_CodeRate=6,
+                                    RTS_Target_FPS=7,
+                                     StreamStore_EncodeMode=8,
+                                      StreamStore_KF_Interval=9,
+                                       StreamStore_Resolution=10,
+                                        StreamStore_Target_CodeRate=11,
+                                         StreamStore_Target_FPS=12
+                    }
+                }
+            };
+            var customParams = Newtonsoft.Json.JsonConvert.SerializeObject(JT808_0x8103.CustomParamList);
+            //"[{\"ParamId\":117,\"ParamLength\":21,\"RTS_EncodeMode\":3,\"RTS_Resolution\":5,\"RTS_KF_Interval\":4,\"RTS_Target_FPS\":7,\"RTS_Target_CodeRate\":6,\"StreamStore_EncodeMode\":8,\"StreamStore_Resolution\":10,\"StreamStore_KF_Interval\":9,\"StreamStore_Target_FPS\":12,\"StreamStore_Target_CodeRate\":11,\"OSD\":2,\"AudioOutputEnabled\":1}]"
+            var hex = JT808Serializer.Serialize(JT808_0x8103).ToHexString();
+            //"010000007515030500040700000006080A00090C0000000B000201"
+            Assert.Equal("010000007515030500040700000006080A00090C0000000B000201", hex);
+        }
+
+        [Fact]
+        public void Test3_1()
+        {
+            var customParams = "[{\"ParamId\":117,\"ParamLength\":21,\"RTS_EncodeMode\":3,\"RTS_Resolution\":5,\"RTS_KF_Interval\":4,\"RTS_Target_FPS\":7,\"RTS_Target_CodeRate\":6,\"StreamStore_EncodeMode\":8,\"StreamStore_Resolution\":10,\"StreamStore_KF_Interval\":9,\"StreamStore_Target_FPS\":12,\"StreamStore_Target_CodeRate\":11,\"OSD\":2,\"AudioOutputEnabled\":1}]";
+            byte[] bytes = "010000007515030500040700000006080A00090C0000000B000201".ToHexBytes();
+            JT808_0x8103 jT808_0X8103 = JT808Serializer.Deserialize<JT808_0x8103>(bytes);
+
+            Assert.Equal(customParams, Newtonsoft.Json.JsonConvert.SerializeObject(jT808_0X8103.CustomParamList));
         }
     }
 }

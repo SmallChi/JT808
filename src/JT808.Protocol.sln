@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Benchmark", "JT808.Protocol.Benchmark\JT808.Protocol.Benchmark.csproj", "{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Extensions.DependencyInjection", "JT808.Protocol.Extensions.DependencyInjection\JT808.Protocol.Extensions.DependencyInjection.csproj", "{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Extensions.DependencyInjection.Test", "JT808.Protocol.Extensions.DependencyInjection.Test\JT808.Protocol.Extensions.DependencyInjection.Test.csproj", "{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}"
 EndProject
 Global
@@ -37,10 +35,6 @@ Global
 		{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04966672-8FC4-42F2-BF0F-9E367A8FC5AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5F627C8-D3EF-4DE2-B2F0-249595D170E1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5B337C9-5C40-4DFD-BC8D-B0EA7F2F2F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
