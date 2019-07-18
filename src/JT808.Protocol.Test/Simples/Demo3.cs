@@ -37,8 +37,8 @@ namespace JT808.Protocol.Test.Simples
                     StatusFlag = 2,
                     JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>
                     {
-                        { JT808_0x0200_BodyBase.AttachId0x01,new JT808_0x0200_0x01{Mileage = 100}},
-                        { JT808_0x0200_BodyBase.AttachId0x02,new JT808_0x0200_0x02{Oil = 125}}
+                        { JT808Constants.JT808_0x0200_0x01,new JT808_0x0200_0x01{Mileage = 100}},
+                        { JT808Constants.JT808_0x0200_0x02,new JT808_0x0200_0x02{Oil = 125}}
                     }
                 });
             jT808Package.Header.MsgNum = 1;

@@ -22,7 +22,7 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
                 for (int i = 0; i < paramCount; i++)
                 {
                     var paramId = reader.ReadVirtualUInt32();//参数ID         
-                    if (JT808_0x8103_BodyBase.JT808_0x8103Method.TryGetValue(paramId, out Type type))
+                    if (config.JT808_0X8103_Factory.ParamMethods.TryGetValue(paramId, out Type type))
                     {
                         object attachImplObj = config.GetMessagePackFormatterByType(type);
                         dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(attachImplObj, ref reader, config);

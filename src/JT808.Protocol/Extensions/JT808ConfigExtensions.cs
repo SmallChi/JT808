@@ -4,10 +4,8 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Text;
 
-namespace JT808.Protocol.Extensions
+namespace JT808.Protocol
 {
     public static class JT808ConfigExtensions
     {

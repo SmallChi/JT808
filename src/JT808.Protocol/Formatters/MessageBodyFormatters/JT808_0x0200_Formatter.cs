@@ -41,7 +41,7 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
                     ReadOnlySpan<byte> attachSpan= reader.GetVirtualReadOnlySpan(2);
                     byte attachId = attachSpan[0];
                     byte attachLen = attachSpan[1];
-                    if (JT808_0x0200_BodyBase.JT808LocationAttachMethod.TryGetValue(attachId, out Type jT808LocationAttachType))
+                    if (config.JT808_0X0200_Factory.JT808LocationAttachMethod.TryGetValue(attachId, out Type jT808LocationAttachType))
                     {
                         object attachImplObj = config.GetMessagePackFormatterByType(jT808LocationAttachType);
                         dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(attachImplObj,ref reader, config);

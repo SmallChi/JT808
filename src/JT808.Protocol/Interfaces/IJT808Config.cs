@@ -36,9 +36,17 @@ namespace JT808.Protocol.Interfaces
         /// </summary>
         IJT808_0x0200_Custom_Factory JT808_0X0200_Custom_Factory { get; set; }
         /// <summary>
+        /// 附加信息工厂
+        /// </summary>
+        IJT808_0x0200_Factory JT808_0X0200_Factory { get; set; }
+        /// <summary>
         ///自定义设置终端参数工厂
         /// </summary>
         IJT808_0x8103_Custom_Factory JT808_0X8103_Custom_Factory { get; set; }
+        /// <summary>
+        ///设置终端参数工厂
+        /// </summary>
+        IJT808_0x8103_Factory JT808_0X8103_Factory { get; set; }
         /// <summary>
         /// 统一编码
         /// </summary>

@@ -17,7 +17,7 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
             for (int i = 0; i < jT808_0x0104.AnswerParamsCount; i++)
             {
                 var paramId = reader.ReadVirtualUInt32();//参数ID         
-                if (JT808_0x8103_BodyBase.JT808_0x8103Method.TryGetValue(paramId, out Type type))
+                if (config.JT808_0X8103_Factory.ParamMethods.TryGetValue(paramId, out Type type))
                 {
                     if (jT808_0x0104.ParamList != null)
                     {

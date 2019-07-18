@@ -8,13 +8,14 @@
     <Product>JT808</Product>
     <Description>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议</Description>
     <PackageReleaseNotes>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议</PackageReleaseNotes>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/SmallChi/JT808</RepositoryUrl>
     <PackageProjectUrl>https://github.com/SmallChi/JT808</PackageProjectUrl>
     <licenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</licenseUrl>
     <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>2.1.0</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>2.1.1</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\JT808.Protocol.xml</DocumentationFile>
@@ -27,6 +28,10 @@
     <Compile Remove="Metadata\JT808LocationAttachProperties\**" />
     <EmbeddedResource Remove="Metadata\JT808LocationAttachProperties\**" />
     <None Remove="Metadata\JT808LocationAttachProperties\**" />
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
