@@ -7,6 +7,6 @@ namespace JT808.Protocol.Interfaces
 {
     public interface IJT808_0x8103_Factory
     {
-        ConcurrentDictionary<uint, Type> ParamMethods { get; set; }
+        IDictionary<uint, Type> ParamMethods { get; set; }
     }
 }

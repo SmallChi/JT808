@@ -14,7 +14,7 @@ namespace JT808.Protocol.Formatters
             // 1. 验证校验和
             if (!config.SkipCRCCode)
             {
-                if (reader.CheckXorCodeVali)
+                if (!reader.CheckXorCodeVali)
                 {
                     throw new JT808Exception(JT808ErrorCode.CheckCodeNotEqual, $"{reader.RealCheckXorCode}!={reader.CalculateCheckXorCode}");
                 }
