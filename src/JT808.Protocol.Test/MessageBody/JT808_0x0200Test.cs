@@ -276,10 +276,9 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
             Assert.Equal(8888, jT808Package.Header.MsgNum);
             Assert.Equal("112233445566", jT808Package.Header.TerminalPhoneNo);
-            //Assert.Equal(1, jT808Package.Header.MessageBodyProperty.DataLength);
-            Assert.False(jT808Package.Header.MessageBodyProperty.IsPackge);
-            Assert.Equal(0, jT808Package.Header.MessageBodyProperty.PackageIndex);
-            Assert.Equal(0, jT808Package.Header.MessageBodyProperty.PackgeCount);
+            Assert.False(jT808Package.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(0, jT808Package.Header.PackageIndex);
+            Assert.Equal(0, jT808Package.Header.PackgeCount);
             Assert.Equal(JT808EncryptMethod.None, jT808Package.Header.MessageBodyProperty.Encrypt);
 
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;

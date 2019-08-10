@@ -1,11 +1,12 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace JT808.Protocol.Interfaces
+namespace JT808.Protocol
 {
     public interface IJT808Config
     {

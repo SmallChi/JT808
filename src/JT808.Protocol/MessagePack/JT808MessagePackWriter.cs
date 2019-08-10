@@ -57,40 +57,22 @@ namespace JT808.Protocol.MessagePack
         }
         public void WriteUInt16(ushort value)
         {
-            var span = writer.Free;
-            span[0] = (byte)(value >> 8);
-            span[1] = (byte)value;
+            BinaryPrimitives.WriteUInt16BigEndian(writer.Free, value);
             writer.Advance(2);
         }
         public void WriteInt32(int value)
         {
-            var span = writer.Free;
-            span[0] = (byte)(value >> 24);
-            span[1] = (byte)(value >> 16);
-            span[2] = (byte)(value >> 8);
-            span[3] = (byte)value;
+            BinaryPrimitives.WriteInt32BigEndian(writer.Free, value);
             writer.Advance(4);
         }
         public void WriteUInt64(ulong value)
         {
-            var span = writer.Free;
-            span[0] = (byte)(value >> 56);
-            span[1] = (byte)(value >> 48);
-            span[2] = (byte)(value >> 40);
-            span[3] = (byte)(value >> 32);
-            span[4] = (byte)(value >> 24);
-            span[5] = (byte)(value >> 16);
-            span[6] = (byte)(value >> 8);
-            span[7] = (byte)value;
+            BinaryPrimitives.WriteUInt64BigEndian(writer.Free, value);
             writer.Advance(8);
         }
         public void WriteUInt32(uint value)
         {
-            var span = writer.Free;
-            span[0] = (byte)(value >> 24);
-            span[1] = (byte)(value >> 16);
-            span[2] = (byte)(value >> 8);
-            span[3] = (byte)value;
+            BinaryPrimitives.WriteUInt32BigEndian(writer.Free, value);
             writer.Advance(4);
         }
         public void WriteString(string value)
@@ -106,22 +88,15 @@ namespace JT808.Protocol.MessagePack
         }
         public void WriteUInt16Return(ushort value, int position)
         {
-            writer.Written[position] = (byte)(value >> 8);
-            writer.Written[position + 1] = (byte)value;
+            BinaryPrimitives.WriteUInt16BigEndian(writer.Written.Slice(position, 2), value);
         }
         public void WriteInt32Return(int value, int position)
         {
-            writer.Written[position] = (byte)(value >> 24);
-            writer.Written[position + 1] = (byte)(value >> 16);
-            writer.Written[position + 2] = (byte)(value >> 8);
-            writer.Written[position + 3] = (byte)value;
+            BinaryPrimitives.WriteInt32BigEndian(writer.Written.Slice(position, 4), value);
         }
         public void WriteUInt32Return(uint value, int position)
         {
-            writer.Written[position] = (byte)(value >> 24);
-            writer.Written[position + 1] = (byte)(value >> 16);
-            writer.Written[position + 2] = (byte)(value >> 8);
-            writer.Written[position + 3] = (byte)value;
+            BinaryPrimitives.WriteUInt32BigEndian(writer.Written.Slice(position, 4), value);
         }
         public void WriteByteReturn(byte value, int position)
         {
@@ -147,19 +122,12 @@ namespace JT808.Protocol.MessagePack
         }
         public void WriteStringReturn(string value, int position)
         {
-            byte[] codeBytes = JT808Constants.Encoding.GetBytes(value);
-            for (var i = 0; i < codeBytes.Length; i++)
-            {
-                writer.Written[position + i] = codeBytes[i];
-            }
+            Span<byte> codeBytes = JT808Constants.Encoding.GetBytes(value);
+            codeBytes.CopyTo(writer.Written.Slice(position));
         }
         public void WriteArrayReturn(ReadOnlySpan<byte> src, int position)
         {
-            foreach (var item in src)
-            {
-                writer.Written[position] = item;
-                position++;
-            }
+            src.CopyTo(writer.Written.Slice(position));
         }
         /// <summary>
         /// yyMMddHHmmss

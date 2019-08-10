@@ -17,7 +17,7 @@ namespace JT808.Protocol.Test.Extensions
         {
            var package= JT808MsgId.终端心跳.Create_终端心跳("123456789", new Protocol.MessageBody.JT808_0x0002 {
                  
-            });
+           });
         }
 
 

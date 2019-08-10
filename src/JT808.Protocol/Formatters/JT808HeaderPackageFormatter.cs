@@ -28,21 +28,20 @@ namespace JT808.Protocol.Formatters
             //  3.1.读取消息Id
             jT808Package.Header.MsgId = reader.ReadUInt16();
             //  3.2.读取消息体属性
-            jT808Package.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty();
             ushort messageBodyPropertyValue = reader.ReadUInt16();
             //    3.2.1.解包消息体属性
-            jT808Package.Header.MessageBodyProperty.Unwrap(messageBodyPropertyValue, config);
+            jT808Package.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty(messageBodyPropertyValue);
             // 3.3.读取终端手机号 
             jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength);
             // 3.4.读取消息流水号
             jT808Package.Header.MsgNum = reader.ReadUInt16();
             // 3.5.判断有无分包
-            if (jT808Package.Header.MessageBodyProperty.IsPackge)
+            if (jT808Package.Header.MessageBodyProperty.IsPackage)
             {
                 //3.5.1.读取消息包总数
-                jT808Package.Header.MessageBodyProperty.PackgeCount = reader.ReadUInt16();
+                jT808Package.PackgeCount = reader.ReadUInt16();
                 //3.5.2.读取消息包序号
-                jT808Package.Header.MessageBodyProperty.PackageIndex = reader.ReadUInt16();
+                jT808Package.PackageIndex = reader.ReadUInt16();
             }
             // 4.处理数据体
             //  4.1.判断有无数据体

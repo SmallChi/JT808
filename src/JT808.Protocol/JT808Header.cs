@@ -14,7 +14,7 @@ namespace JT808.Protocol
         /// <see cref="JT808.Protocol.Enums.JT808MsgId"/>
         /// </summary>
         public ushort MsgId { get; set; }
-        public JT808HeaderMessageBodyProperty MessageBodyProperty { get; set; } = new JT808HeaderMessageBodyProperty();
+        public JT808HeaderMessageBodyProperty MessageBodyProperty { get; set; }
         /// <summary>
         /// 终端手机号
         /// 根据安装后终端自身的手机号转换。手机号不足 12 位，则在前补充数字，大陆手机号补充数字 0，港澳台则根据其区号进行位数补充
@@ -27,5 +27,13 @@ namespace JT808.Protocol
         /// 程序开始运行时等于零，发送第一帧数据时开始计数，到最大数后自动归零
         /// </summary>
         public ushort MsgNum { get;  set; }
+        /// <summary>
+        /// 消息总包数
+        /// </summary>
+        public ushort PackgeCount { get; set; }
+        /// <summary>
+        /// 报序号 从1开始
+        /// </summary>
+        public ushort PackageIndex { get; set; }
     }
 }

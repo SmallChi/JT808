@@ -56,15 +56,46 @@ namespace JT808.Protocol.Test.Simples
             byte[] bytes10 = "7e08012017013812345678203c000a000ad4dea2f72e50269b5a1ca251400a2ad427e5a4ca47ffd9d17e".ToHexBytes();
 
             JT808Package jT808_0X0801_1 = JT808Serializer.Deserialize<JT808Package>(bytes1);
+            Assert.True(jT808_0X0801_1.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(1, jT808_0X0801_1.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_1.Header.PackgeCount);
             JT808Package jT808_0X0801_2 = JT808Serializer.Deserialize<JT808Package>(bytes2);
+            Assert.True(jT808_0X0801_2.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(2, jT808_0X0801_2.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_2.Header.PackgeCount);
             JT808Package jT808_0X0801_3 = JT808Serializer.Deserialize<JT808Package>(bytes3);
+            Assert.True(jT808_0X0801_3.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(3, jT808_0X0801_3.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_3.Header.PackgeCount);
             JT808Package jT808_0X0801_4 = JT808Serializer.Deserialize<JT808Package>(bytes4);
+            Assert.True(jT808_0X0801_4.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(4, jT808_0X0801_4.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_4.Header.PackgeCount);
             JT808Package jT808_0X0801_5 = JT808Serializer.Deserialize<JT808Package>(bytes5);
+            Assert.True(jT808_0X0801_5.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(5, jT808_0X0801_5.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_5.Header.PackgeCount);
             JT808Package jT808_0X0801_6 = JT808Serializer.Deserialize<JT808Package>(bytes6);
+            Assert.True(jT808_0X0801_6.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(6, jT808_0X0801_6.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_6.Header.PackgeCount);
             JT808Package jT808_0X0801_7 = JT808Serializer.Deserialize<JT808Package>(bytes7);
+            Assert.True(jT808_0X0801_7.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(7, jT808_0X0801_7.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_7.Header.PackgeCount);
             JT808Package jT808_0X0801_8 = JT808Serializer.Deserialize<JT808Package>(bytes8);
+            Assert.True(jT808_0X0801_8.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(8, jT808_0X0801_8.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_8.Header.PackgeCount);
             JT808Package jT808_0X0801_9 = JT808Serializer.Deserialize<JT808Package>(bytes9);
+            Assert.True(jT808_0X0801_9.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(9, jT808_0X0801_9.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_9.Header.PackgeCount);
             JT808Package jT808_0X0801_10 = JT808Serializer.Deserialize<JT808Package>(bytes10);
+            Assert.True(jT808_0X0801_10.Header.MessageBodyProperty.IsPackage);
+            Assert.Equal(10, jT808_0X0801_10.Header.PackageIndex);
+            Assert.Equal(10, jT808_0X0801_10.Header.PackgeCount);
+
 
             var jT808_0X0801_body_1 = jT808_0X0801_1.Bodies as JT808_0x0801;
             var jT808_0X0801_body_2 = jT808_0X0801_2.Bodies as JT808SplitPackageBodies;

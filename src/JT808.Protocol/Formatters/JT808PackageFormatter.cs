@@ -32,21 +32,18 @@ namespace JT808.Protocol.Formatters
             //  3.1.读取消息Id
             jT808Package.Header.MsgId = reader.ReadUInt16();
             //  3.2.读取消息体属性
-            jT808Package.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty();
-            ushort messageBodyPropertyValue= reader.ReadUInt16();
-            //    3.2.1.解包消息体属性
-            jT808Package.Header.MessageBodyProperty.Unwrap(messageBodyPropertyValue, config);
+            jT808Package.Header.MessageBodyProperty=new JT808HeaderMessageBodyProperty(reader.ReadUInt16());
             // 3.3.读取终端手机号 
             jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength);
             // 3.4.读取消息流水号
             jT808Package.Header.MsgNum= reader.ReadUInt16();
             // 3.5.判断有无分包
-            if (jT808Package.Header.MessageBodyProperty.IsPackge)
+            if (jT808Package.Header.MessageBodyProperty.IsPackage)
             {
                 //3.5.1.读取消息包总数
-                jT808Package.Header.MessageBodyProperty.PackgeCount = reader.ReadUInt16();
+                jT808Package.Header.PackgeCount = reader.ReadUInt16();
                 //3.5.2.读取消息包序号
-                jT808Package.Header.MessageBodyProperty.PackageIndex = reader.ReadUInt16();
+                jT808Package.Header.PackageIndex = reader.ReadUInt16();
             }
             // 4.处理数据体
             //  4.1.判断有无数据体
@@ -55,9 +52,9 @@ namespace JT808.Protocol.Formatters
                 Type jT808BodiesImplType = config.MsgIdFactory.GetBodiesImplTypeByMsgId(jT808Package.Header.MsgId, jT808Package.Header.TerminalPhoneNo);
                 if (jT808BodiesImplType != null)
                 {
-                    if (jT808Package.Header.MessageBodyProperty.IsPackge)
+                    if (jT808Package.Header.MessageBodyProperty.IsPackage)
                     {
-                        if (jT808Package.Header.MessageBodyProperty.PackageIndex > 1)
+                        if (jT808Package.Header.PackageIndex > 1)
                         {
                             try
                             {
@@ -124,12 +121,12 @@ namespace JT808.Protocol.Formatters
             //  2.4.消息流水号
             writer.WriteUInt16(value.Header.MsgNum);
             //  2.5.判断是否分包
-            if (value.Header.MessageBodyProperty.IsPackge)
+            if (value.Header.MessageBodyProperty.IsPackage)
             {
                 // 2.5.1.消息包总数
-                writer.WriteUInt16(value.Header.MessageBodyProperty.PackgeCount);
+                writer.WriteUInt16(value.Header.PackgeCount);
                 // 2.5.2.消息包序号
-                writer.WriteUInt16(value.Header.MessageBodyProperty.PackageIndex);
+                writer.WriteUInt16(value.Header.PackageIndex);
             }
             int headerLength = writer.GetCurrentPosition();
             // 3.处理数据体部分
@@ -144,10 +141,9 @@ namespace JT808.Protocol.Formatters
                 }
             }
             //  3.1.处理数据体长度
-            value.Header.MessageBodyProperty.DataLength = writer.GetCurrentPosition() - headerLength;
-            ushort msgBodiesPropertyValue = value.Header.MessageBodyProperty.Wrap(config);
+            value.Header.MessageBodyProperty=new JT808HeaderMessageBodyProperty((ushort)(writer.GetCurrentPosition() - headerLength));
             // 2.2.回写消息体属性
-            writer.WriteUInt16Return(msgBodiesPropertyValue, msgBodiesPropertyPosition);
+            writer.WriteUInt16Return(value.Header.MessageBodyProperty.Wrap(), msgBodiesPropertyPosition);
             // 4.校验码
             writer.WriteXor();
             // 5.终止符

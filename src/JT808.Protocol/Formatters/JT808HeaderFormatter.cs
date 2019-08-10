@@ -18,10 +18,18 @@ namespace JT808.Protocol.Formatters
             // 1.消息ID
             jT808Header.MsgId = reader.ReadUInt16();
             // 2.消息体属性
-            jT808Header.MessageBodyProperty = JT808HeaderMessageBodyPropertyFormatter.Instance.Deserialize(ref reader, config);
+            jT808Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty(reader.ReadUInt16());
             // 3.终端手机号
             jT808Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength);
             jT808Header.MsgNum = reader.ReadUInt16();
+            // 4.判断有无分包
+            if (jT808Header.MessageBodyProperty.IsPackage)
+            {
+                //5.读取消息包总数
+                jT808Header.PackgeCount = reader.ReadUInt16();
+                //6.读取消息包序号
+                jT808Header.PackageIndex = reader.ReadUInt16();
+            }
             return jT808Header;
         }
 
@@ -30,11 +38,19 @@ namespace JT808.Protocol.Formatters
             // 1.消息ID
             writer.WriteUInt16(value.MsgId);
             // 2.消息体属性
-            JT808HeaderMessageBodyPropertyFormatter.Instance.Serialize(ref writer,value.MessageBodyProperty, config);
+            writer.WriteUInt16(value.MessageBodyProperty.Wrap());
             // 3.终端手机号
             writer.WriteBCD(value.TerminalPhoneNo, config.TerminalPhoneNoLength);
             // 4.消息流水号
             writer.WriteUInt16(value.MsgNum);
+            // 5.判断是否分包
+            if (value.MessageBodyProperty.IsPackage)
+            {
+                // 6.消息包总数
+                writer.WriteUInt16(value.PackgeCount);
+                // 7.消息包序号
+                writer.WriteUInt16(value.PackageIndex);
+            }
         }
     }
 }

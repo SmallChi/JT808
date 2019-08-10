@@ -16,22 +16,22 @@
 
 ### 数据包[JT808Package]
 
-| 头标识 | 数据头      | 数据体      | 校验码    | 尾标识 |
-| :----: | :---------: | :---------: | :-------: | :----: |
-| Begin  | JT808Header | JT808Bodies | CheckCode | End    |
+| 头标识 | 数据头       | 数据体      | 校验码    | 尾标识 |
+| :----: | :---------: |  :---------: | :----------: | :----: |
+| Begin  | JT808Header |  JT808Bodies |CheckCode | End    |
 | 7E     | -           | -           | -         | 7E     |
 
 ### 数据头[JT808Header]
 
-| 消息ID | 消息体属性                     | 终端手机号      | 消息流水号 |
-| :----: | :----------------------------: | :-------------: | :--------: |
-| MsgId  | JT808HeaderMessageBodyProperty | TerminalPhoneNo | MsgNum     |
+| 消息ID | 消息体属性                     | 终端手机号      | 消息流水号 | 消息总包数(依赖是否分包)  | 包序号(依赖是否分包)   |
+| :----: | :----------------------------: | :-------------: | :--------: |:---------: | :-------:|
+| MsgId  | JT808HeaderMessageBodyProperty | TerminalPhoneNo | MsgNum     |PackgeCount | PackageIndex |
 
 #### 数据头-消息体属性[JT808HeaderMessageBodyProperty]
 
-| 是否分包 | 加密标识 | 消息体长度 | 消息总包数  | 包序号       |
-| :------: | :------: | :--------: | :---------: | :----------: |
-| IsPackge | Encrypt  | DataLength | PackgeCount | PackageIndex |
+| 是否分包 | 加密标识 | 消息体长度 |
+| :------: | :------: | :--------: |
+| IsPackge | Encrypt  | DataLength |
 
 #### 消息体属性[JT808Bodies]
 
@@ -145,8 +145,8 @@ Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
 Assert.Equal(126, jT808Package.Header.MsgNum);
 Assert.Equal("123456789012", jT808Package.Header.TerminalPhoneNo);
 Assert.False(jT808Package.Header.MessageBodyProperty.IsPackge);
-Assert.Equal(0, jT808Package.Header.MessageBodyProperty.PackageIndex);
-Assert.Equal(0, jT808Package.Header.MessageBodyProperty.PackgeCount);
+Assert.Equal(0, jT808Package.Header.PackageIndex);
+Assert.Equal(0, jT808Package.Header.PackgeCount);
 Assert.Equal(JT808EncryptMethod.None, jT808Package.Header.MessageBodyProperty.Encrypt);
 
 //4.数据包体
@@ -181,8 +181,8 @@ JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("12345678
         StatusFlag = 2,
         JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>
         {
-            { JT808_0x0200_BodyBase.AttachId0x01,new JT808_0x0200_0x01{Mileage = 100}},
-            { JT808_0x0200_BodyBase.AttachId0x02,new JT808_0x0200_0x02{Oil = 125}}
+            { JT808Constants.JT808_0x0200_0x01,new JT808_0x0200_0x01{Mileage = 100}},
+            { JT808Constants.JT808_0x0200_0x02,new JT808_0x0200_0x02{Oil = 125}}
         }
 });
 

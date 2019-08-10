@@ -29,7 +29,7 @@ namespace JT808.Protocol.Test
             {
                 TerminalPhoneNo = "13812345678"
             };
-            jT808HeaderProperty.MessageBodyProperty.DataLength = 5;
+            jT808HeaderProperty.MessageBodyProperty=new JT808HeaderMessageBodyProperty(5);
             jT808HeaderProperty.MsgNum = 135;
             jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();
 
@@ -45,7 +45,7 @@ namespace JT808.Protocol.Test
             JT808Header jT808Header = JT808Serializer.Deserialize<JT808Header>(headerBytes);
             Assert.Equal(135, jT808Header.MsgNum);
             Assert.Equal("13812345678", jT808Header.TerminalPhoneNo);
-            Assert.False(jT808Header.MessageBodyProperty.IsPackge);
+            Assert.False(jT808Header.MessageBodyProperty.IsPackage);
             Assert.Equal(JT808MsgId.终端鉴权.ToValue(), jT808Header.MsgId);
             Assert.Equal(5, jT808Header.MessageBodyProperty.DataLength);
         }
@@ -55,7 +55,7 @@ namespace JT808.Protocol.Test
         {
             JT808Header jT808HeaderProperty = new JT808Header();
             jT808HeaderProperty.TerminalPhoneNo = "13812345678";
-            jT808HeaderProperty.MessageBodyProperty.DataLength = 5;
+            jT808HeaderProperty.MessageBodyProperty=new JT808HeaderMessageBodyProperty(5);
             jT808HeaderProperty.MsgNum = 135;
             jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();
             //"01 02 00 05 01 38 12 34 56 78 00 87"
@@ -71,7 +71,7 @@ namespace JT808.Protocol.Test
             JT808Header jT808Header = JT808Serializer.Deserialize<JT808Header>(headerBytes);
             Assert.Equal(135, jT808Header.MsgNum);
             Assert.Equal("13812345678", jT808Header.TerminalPhoneNo);
-            Assert.False(jT808Header.MessageBodyProperty.IsPackge);
+            Assert.False(jT808Header.MessageBodyProperty.IsPackage);
             Assert.Equal(JT808MsgId.终端鉴权.ToValue(), jT808Header.MsgId);
             Assert.Equal(5, jT808Header.MessageBodyProperty.DataLength);
         }

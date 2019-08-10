@@ -126,70 +126,56 @@ namespace JT808.Protocol.MessagePack
         public byte ReadEnd()=> ReadByte();
         public ushort ReadUInt16()
         {
-            var readOnlySpan = GetReadOnlySpan(2);
-            ushort value = (ushort)((readOnlySpan[0] << 8) | (readOnlySpan[1]));
-            return value;
+            return BinaryPrimitives.ReadUInt16BigEndian(GetReadOnlySpan(2)); 
         }
         public uint ReadUInt32()
         {
-            var readOnlySpan = GetReadOnlySpan(4);
-            uint value = (uint)((readOnlySpan[0] << 24) | (readOnlySpan[1] << 16) | (readOnlySpan[2] << 8) | readOnlySpan[3]);
-            return value;
+            return BinaryPrimitives.ReadUInt32BigEndian(GetReadOnlySpan(4));
         }
         public int ReadInt32()
         {
-            var readOnlySpan = GetReadOnlySpan(4);
-            int value = (int)((readOnlySpan[0] << 24) | (readOnlySpan[1] << 16) | (readOnlySpan[2] << 8) | readOnlySpan[3]);
-            return value;
+            return BinaryPrimitives.ReadInt32BigEndian(GetReadOnlySpan(4));
         }
         public ulong ReadUInt64()
         {
-            var readOnlySpan = GetReadOnlySpan(8);
-            ulong value = (ulong)(
-                (readOnlySpan[0] << 56) |
-                (readOnlySpan[1] << 48) |
-                (readOnlySpan[2] << 40) |
-                (readOnlySpan[3] << 32) |
-                (readOnlySpan[4] << 24) |
-                (readOnlySpan[5] << 16) |
-                (readOnlySpan[6] << 8) |
-                 readOnlySpan[7]);
-            return value;
+            return BinaryPrimitives.ReadUInt64BigEndian(GetReadOnlySpan(8));
+        }
+        public long ReadInt64()
+        {
+            return BinaryPrimitives.ReadInt64BigEndian(GetReadOnlySpan(8));
         }
         public byte ReadByte()
         {
-            var readOnlySpan = GetReadOnlySpan(1);
-            return readOnlySpan[0];
+            return GetReadOnlySpan(1)[0];
         }
         public byte ReadVirtualByte()
         {
-            var readOnlySpan = GetVirtualReadOnlySpan(1);
-            return readOnlySpan[0];
+            return GetVirtualReadOnlySpan(1)[0];
         }
         public ushort ReadVirtualUInt16()
         {
-            var readOnlySpan = GetVirtualReadOnlySpan(2);
-            return (ushort)((readOnlySpan[0] << 8) | (readOnlySpan[1]));
+            return BinaryPrimitives.ReadUInt16BigEndian(GetVirtualReadOnlySpan(2));
+        }
+        public short ReadVirtualInt16()
+        {
+            return BinaryPrimitives.ReadInt16BigEndian(GetVirtualReadOnlySpan(2));
         }
         public uint ReadVirtualUInt32()
         {
-            var readOnlySpan = GetVirtualReadOnlySpan(4);
-            return (uint)((readOnlySpan[0] << 24) | (readOnlySpan[1] << 16) | (readOnlySpan[2] << 8) | readOnlySpan[3]);
+            return BinaryPrimitives.ReadUInt32BigEndian(GetVirtualReadOnlySpan(4));
+        }
+        public int ReadVirtualInt32()
+        {
+            return BinaryPrimitives.ReadInt32BigEndian(GetVirtualReadOnlySpan(4));
         }
         public ulong ReadVirtualUInt64()
         {
-            var readOnlySpan = GetVirtualReadOnlySpan(8);
-            return (ulong)(
-                (readOnlySpan[0] << 56) |
-                (readOnlySpan[1] << 48) |
-                (readOnlySpan[2] << 40) |
-                (readOnlySpan[3] << 32) |
-                (readOnlySpan[4] << 24) |
-                (readOnlySpan[5] << 16) |
-                (readOnlySpan[6] << 8) |
-                 readOnlySpan[7]);
+            return BinaryPrimitives.ReadUInt64BigEndian(GetVirtualReadOnlySpan(8));
         }
-
+        public long ReadVirtualInt64()
+        {
+            return BinaryPrimitives.ReadInt64BigEndian(GetVirtualReadOnlySpan(8));
+        }
         /// <summary>
         /// 数字编码 大端模式、高位在前
         /// </summary>
@@ -207,8 +193,7 @@ namespace JT808.Protocol.MessagePack
         }
         public ReadOnlySpan<byte> ReadArray(int len)
         {
-            var readOnlySpan = GetReadOnlySpan(len);
-            return readOnlySpan.Slice(0, len);
+            return GetReadOnlySpan(len).Slice(0, len);
         }
         public ReadOnlySpan<byte> ReadArray(int start,int end)
         {
