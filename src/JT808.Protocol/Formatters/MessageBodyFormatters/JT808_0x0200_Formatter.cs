@@ -15,16 +15,21 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
             JT808_0x0200 jT808_0X0200 = new JT808_0x0200();
             jT808_0X0200.AlarmFlag = reader.ReadUInt32();
             jT808_0X0200.StatusFlag = reader.ReadUInt32();
-            jT808_0X0200.Lat = reader.ReadInt32();
             jT808_0X0200.Lng = reader.ReadInt32();
-            JT808StatusProperty jT808StatusProperty = new JT808StatusProperty(Convert.ToString(jT808_0X0200.StatusFlag, 2).PadLeft(32, '0'));
-            if (jT808StatusProperty.Bit28 == '1')//西经
+            jT808_0X0200.Lng = reader.ReadInt32();
+#warning 反解析的时候  负数
+            switch (jT808_0X0200.StatusFlag)
             {
-                jT808_0X0200.Lng = -jT808_0X0200.Lng;
-            }
-            if (jT808StatusProperty.Bit29 == '1')//南纬
-            {
-                jT808_0X0200.Lat = -jT808_0X0200.Lat;
+                case 0x8000000: //西经 ‭134217728‬
+                    //jT808_0X0200.Lng  = -lng;
+                    break;
+                case 0x10000000: //南纬 268435456
+                    //jT808_0X0200.Lat = -lat;
+                    break;
+                case 0x18000000: //西经-南纬 ‭402653184‬
+                    //jT808_0X0200.Lat = -lat;
+                    //jT808_0X0200.Lng = -lng;
+                    break;
             }
             jT808_0X0200.Altitude = reader.ReadUInt16();
             jT808_0X0200.Speed = reader.ReadUInt16();
@@ -82,6 +87,20 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
         {
             writer.WriteUInt32(value.AlarmFlag);
             writer.WriteUInt32(value.StatusFlag);
+#warning 反解析的时候  负数
+            switch (value.StatusFlag)
+            {
+                case 0x8000000: //西经 ‭134217728‬
+                    value.Lat = -value.Lat;
+                    break;
+                case 0x10000000: //南纬 268435456
+                    value.Lng = -value.Lng;
+                    break;
+                case 0x18000000: //西经-南纬 ‭402653184‬
+                    value.Lat = -value.Lat;
+                    value.Lng = -value.Lng;
+                    break;
+            }
             writer.WriteInt32(value.Lat);
             writer.WriteInt32(value.Lng);
             writer.WriteUInt16(value.Altitude);
