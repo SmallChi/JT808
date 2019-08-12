@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using JT808.Protocol.Exceptions;
+using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.Formatters.MessageBodyFormatters
 {
@@ -15,21 +17,21 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
             JT808_0x0200 jT808_0X0200 = new JT808_0x0200();
             jT808_0X0200.AlarmFlag = reader.ReadUInt32();
             jT808_0X0200.StatusFlag = reader.ReadUInt32();
-            jT808_0X0200.Lng = reader.ReadInt32();
-            jT808_0X0200.Lng = reader.ReadInt32();
-#warning 反解析的时候  负数
-            switch (jT808_0X0200.StatusFlag)
+            if (((jT808_0X0200.StatusFlag >> 28) & 1) == 1)
+            {   //南纬 268435456 0x10000000
+                jT808_0X0200.Lat = (int)reader.ReadUInt32();
+            }
+            else
             {
-                case 0x8000000: //西经 ‭134217728‬
-                    //jT808_0X0200.Lng  = -lng;
-                    break;
-                case 0x10000000: //南纬 268435456
-                    //jT808_0X0200.Lat = -lat;
-                    break;
-                case 0x18000000: //西经-南纬 ‭402653184‬
-                    //jT808_0X0200.Lat = -lat;
-                    //jT808_0X0200.Lng = -lng;
-                    break;
+                jT808_0X0200.Lat = reader.ReadInt32();
+            }
+            if (((jT808_0X0200.StatusFlag >> 27) & 1) == 1)
+            {   //西经 ‭134217728‬ 0x8000000
+                jT808_0X0200.Lng = (int)reader.ReadUInt32();
+            }
+            else
+            {
+                jT808_0X0200.Lng = reader.ReadInt32();
             }
             jT808_0X0200.Altitude = reader.ReadUInt16();
             jT808_0X0200.Speed = reader.ReadUInt16();
@@ -87,22 +89,35 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
         {
             writer.WriteUInt32(value.AlarmFlag);
             writer.WriteUInt32(value.StatusFlag);
-#warning 反解析的时候  负数
-            switch (value.StatusFlag)
+            //0x10000000 南纬 134217728
+            //0x8000000  西经 ‭‬268435456
+            //0x18000000 南纬-西经 134217728+268435456
+            if (((value.StatusFlag >> 28) & 1) == 1)
             {
-                case 0x8000000: //西经 ‭134217728‬
-                    value.Lat = -value.Lat;
-                    break;
-                case 0x10000000: //南纬 268435456
-                    value.Lng = -value.Lng;
-                    break;
-                case 0x18000000: //西经-南纬 ‭402653184‬
-                    value.Lat = -value.Lat;
-                    value.Lng = -value.Lng;
-                    break;
+                uint lat=(uint)value.Lat;
+                writer.WriteUInt32(lat);
             }
-            writer.WriteInt32(value.Lat);
-            writer.WriteInt32(value.Lng);
+            else
+            {
+                if (value.Lat < 0)
+                {
+                    throw new JT808Exception(JT808ErrorCode.LatOrLngError, $"Lat {nameof(JT808_0x0200.StatusFlag)} ({value.StatusFlag}>>28) !=1");
+                }
+                writer.WriteInt32(value.Lat);
+            }
+            if (((value.StatusFlag >> 27) & 1) == 1)
+            {
+                uint lng = (uint)value.Lng;
+                writer.WriteUInt32(lng);
+            }
+            else
+            {
+                if (value.Lng < 0)
+                {
+                    throw new JT808Exception(JT808ErrorCode.LatOrLngError, $"Lng {nameof(JT808_0x0200.StatusFlag)} ({value.StatusFlag}>>29) !=1");
+                }
+                writer.WriteInt32(value.Lng);
+            }
             writer.WriteUInt16(value.Altitude);
             writer.WriteUInt16(value.Speed);
             writer.WriteUInt16(value.Direction);

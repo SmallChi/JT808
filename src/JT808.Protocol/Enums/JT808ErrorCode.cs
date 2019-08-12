@@ -32,6 +32,10 @@
         /// 没有全局注册格式化器
         /// <see cref="JT808.Protocol.Formatters.IJT808MessagePackFormatter<T>"/>
         /// </summary>
-        NotGlobalRegisterFormatterAssembly = 1008
+        NotGlobalRegisterFormatterAssembly = 1008,        
+        /// <summary>
+        /// 经纬度错误
+        /// </summary>
+        LatOrLngError = 1009
     }
 }
