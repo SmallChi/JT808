@@ -59,6 +59,12 @@ namespace JT808.Protocol
         /// </summary>
         bool SkipCRCCode { get; set; }
         /// <summary>
+        /// ReadBCD是否需要去0操作
+        /// 默认是去0
+        /// 注意:有时候对协议来说是有意义的0
+        /// </summary>
+        bool Trim { get; set; }
+        /// <summary>
         /// 设备终端号(默认12位)
         /// </summary>
         int TerminalPhoneNoLength { get; set; }

@@ -25,8 +25,8 @@ namespace JT808.Protocol.MessagePack
         /// 主要用来一次性读取所有数据体内容操作
         /// </summary>
         private bool _decoded;
-        private static byte[] decode7d01 = new byte[] { 0x7d, 0x01 };
-        private static byte[] decode7d02 = new byte[] { 0x7d, 0x02 };
+        private static readonly byte[] decode7d01 = new byte[] { 0x7d, 0x01 };
+        private static readonly byte[] decode7d02 = new byte[] { 0x7d, 0x02 };
         /// <summary>
         /// 解码（转义还原）,计算校验和
         /// </summary>
@@ -308,7 +308,7 @@ namespace JT808.Protocol.MessagePack
             }
             return d;
         }
-        public string ReadBCD(int len)
+        public string ReadBCD(int len , bool trim = true)
         {
             int count = len / 2;
             var readOnlySpan = GetReadOnlySpan(count);
@@ -317,8 +317,14 @@ namespace JT808.Protocol.MessagePack
             {
                 bcdSb.Append(readOnlySpan[i].ToString("X2"));
             }
-            // todo:对于协议来说这个0是有意义的，下个版本在去掉
-            return bcdSb.ToString().TrimStart('0');
+            if (trim)
+            {
+                return bcdSb.ToString().TrimStart('0');
+            }
+            else
+            {
+                return bcdSb.ToString();
+            }  
         }
         private ReadOnlySpan<byte> GetReadOnlySpan(int count)
         {

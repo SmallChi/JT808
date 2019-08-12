@@ -34,7 +34,7 @@ namespace JT808.Protocol.Formatters
             //  3.2.读取消息体属性
             jT808Package.Header.MessageBodyProperty=new JT808HeaderMessageBodyProperty(reader.ReadUInt16());
             // 3.3.读取终端手机号 
-            jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength);
+            jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
             // 3.4.读取消息流水号
             jT808Package.Header.MsgNum= reader.ReadUInt16();
             // 3.5.判断有无分包

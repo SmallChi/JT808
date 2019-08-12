@@ -23,6 +23,7 @@ namespace JT808.Protocol.Interfaces
             JT808_0X8103_Custom_Factory = new JT808_0x8103_Custom_Factory();
             JT808_0X8103_Factory = new JT808_0x8103_Factory();
             TerminalPhoneNoLength = 12;
+            Trim = true;
         }
         public abstract string ConfigId { get; }
         public virtual IJT808MsgSNDistributed MsgSNDistributed { get; set; }
@@ -37,6 +38,7 @@ namespace JT808.Protocol.Interfaces
         public virtual IJT808_0x8103_Custom_Factory JT808_0X8103_Custom_Factory { get; set; }
         public virtual IJT808_0x8103_Factory JT808_0X8103_Factory { get; set; }
         public virtual int TerminalPhoneNoLength { get; set; }
+        public virtual bool Trim { get; set; }
         public virtual IJT808Config Register(params Assembly[] externalAssemblies)
         {
             if (externalAssemblies != null)

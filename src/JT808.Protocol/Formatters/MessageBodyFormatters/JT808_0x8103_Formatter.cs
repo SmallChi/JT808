@@ -36,7 +36,10 @@ namespace JT808.Protocol.Formatters.MessageBodyFormatters
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex)
+            {
+                
+            }
             return jT808_0x8103;
         }
 

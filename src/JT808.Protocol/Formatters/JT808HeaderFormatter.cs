@@ -20,7 +20,7 @@ namespace JT808.Protocol.Formatters
             // 2.消息体属性
             jT808Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty(reader.ReadUInt16());
             // 3.终端手机号
-            jT808Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength);
+            jT808Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
             jT808Header.MsgNum = reader.ReadUInt16();
             // 4.判断有无分包
             if (jT808Header.MessageBodyProperty.IsPackage)

@@ -51,12 +51,12 @@ namespace JT808.Protocol
         {
             //  1.是否分包
             int tmpIsPacke = 0;
-            //  2.是否加密
-            int tmpEncrypt = 0;
             if (IsPackage)
             {
                 tmpIsPacke = 1 << 13;
             }
+            //  2.是否加密
+            int tmpEncrypt;
             //  2.3.数据加密方式
             switch (Encrypt)
             {
@@ -64,7 +64,7 @@ namespace JT808.Protocol
                     tmpEncrypt = 0;
                     break;
                 case JT808EncryptMethod.RSA:
-                    tmpEncrypt=1 << 10;
+                    tmpEncrypt = 1 << 10;
                     break;
                 default:
                     tmpEncrypt = 0;
