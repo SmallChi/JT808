@@ -9,9 +9,7 @@ namespace JT808.Protocol.Internal
     class DefaultBuilder : IJT808Builder
     {
         public IServiceCollection Services { get; }
-
         public IJT808Config Config { get; }
-
         public DefaultBuilder(IServiceCollection services, IJT808Config config)
         {
             Services = services;

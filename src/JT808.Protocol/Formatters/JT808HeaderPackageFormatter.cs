@@ -39,9 +39,9 @@ namespace JT808.Protocol.Formatters
             if (jT808Package.Header.MessageBodyProperty.IsPackage)
             {
                 //3.5.1.读取消息包总数
-                jT808Package.PackgeCount = reader.ReadUInt16();
+                jT808Package.Header.PackgeCount = reader.ReadUInt16();
                 //3.5.2.读取消息包序号
-                jT808Package.PackageIndex = reader.ReadUInt16();
+                jT808Package.Header.PackageIndex = reader.ReadUInt16();
             }
             // 4.处理数据体
             //  4.1.判断有无数据体

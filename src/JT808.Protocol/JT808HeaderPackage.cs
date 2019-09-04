@@ -30,13 +30,5 @@ namespace JT808.Protocol
         /// 终止符
         /// </summary>
         public byte End { get; set; }
-        /// <summary>
-        /// 消息总包数
-        /// </summary>
-        public ushort PackgeCount { get; set; }
-        /// <summary>
-        /// 报序号 从1开始
-        /// </summary>
-        public ushort PackageIndex { get; set; }
     }
 }

@@ -8,8 +8,7 @@ namespace JT808.Protocol
 {
     public interface IJT808Builder
     {
-        IServiceCollection Services { get; }
-
         IJT808Config Config { get; }
+        IServiceCollection Services { get; }
     }
 }
