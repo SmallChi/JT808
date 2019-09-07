@@ -2,6 +2,7 @@
 using System;
 using System.Buffers;
 using System.Buffers.Binary;
+using System.Text;
 
 namespace JT808.Protocol.MessagePack
 {
@@ -284,6 +285,13 @@ namespace JT808.Protocol.MessagePack
                 startIndex += 2;
             }
             writer.Advance(byteIndex);
+        }
+        public void WirteASCII(string value)
+        {
+            var spanFree = writer.Free;
+            var bytes = Encoding.ASCII.GetBytes(value).AsSpan();
+            bytes.CopyTo(spanFree);
+            writer.Advance(bytes.Length);
         }
         public void WriteFullEncode()
         {

@@ -205,6 +205,12 @@ namespace JT808.Protocol.MessagePack
             string value = JT808Constants.Encoding.GetString(readOnlySpan.Slice(0, len).ToArray());
             return value.Trim('\0');
         }
+        public string ReadASCII(int len)
+        {
+            var readOnlySpan = GetReadOnlySpan(len);
+            string value = Encoding.ASCII.GetString(readOnlySpan.Slice(0, len).ToArray());
+            return value;
+        }
         public string ReadRemainStringContent()
         {
             var readOnlySpan = ReadContent(0);

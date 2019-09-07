@@ -83,6 +83,14 @@ namespace JT808.Protocol.Test.MessagePack
             Assert.Equal(JT808Package.EndFlag, jT808MessagePackReader.ReadEnd());
         }
 
+        [Fact]
+        public void ReadASCIITest()
+        {
+            byte[] array1 = new byte[] { 0x53, 0x56, 0x31, 0x2E, 0x31, 0x2E, 0x30 };
+            JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(array1);
+            Assert.Equal("SV1.1.0", jT808MessagePackReader.ReadASCII(7));
+        }
+
         [Theory]
         [InlineData("0000000000000000000000ABCDEF1234")]
         public void ReadHexTest(string hexStr)
