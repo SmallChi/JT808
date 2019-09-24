@@ -24,7 +24,7 @@ namespace JT808.Protocol.Test.MessageBody
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                Assert.Equal("0000001F1F8B080000000000000B2BCE4DCCC949CEC82CA6320D0027F897E258000000", hex);
+                Assert.Equal("0000001F1F8B080000000000000A2BCE4DCCC949CEC82CA6320D0027F897E258000000", hex);
             }
 
         }
