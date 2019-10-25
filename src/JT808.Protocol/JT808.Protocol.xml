@@ -4837,18 +4837,23 @@
             问题文本，经 GBK 编码，长度为 N
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8302.AnswerId">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8302.Answers">
+            <summary>
+            候选答案列表 
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8302.Answer.Id">
             <summary>
             答案 ID
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8302.AnswerContentLength">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8302.Answer.ContentLength">
             <summary>
             答案内容长度
             答案内容字段字节长度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8302.AnswerContent">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8302.Answer.Content">
             <summary>
             答案内容 
             答案内容，经 GBK 编码

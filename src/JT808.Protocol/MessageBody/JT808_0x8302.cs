@@ -1,5 +1,6 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.Formatters.MessageBodyFormatters;
+using System.Collections.Generic;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -25,18 +26,26 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string Issue { get; set; }
         /// <summary>
-        /// 答案 ID
+        /// 候选答案列表 
         /// </summary>
-        public byte AnswerId { get; set; }
-        /// <summary>
-        /// 答案内容长度
-        /// 答案内容字段字节长度
-        /// </summary>
-        public ushort AnswerContentLength { get; set; }
-        /// <summary>
-        /// 答案内容 
-        /// 答案内容，经 GBK 编码
-        /// </summary>
-        public string AnswerContent { get; set; }
+        public List<Answer> Answers { get; set; }
+
+        public class Answer
+        {
+            /// <summary>
+            /// 答案 ID
+            /// </summary>
+            public byte Id { get; set; }
+            /// <summary>
+            /// 答案内容长度
+            /// 答案内容字段字节长度
+            /// </summary>
+            public ushort ContentLength { get; set; }
+            /// <summary>
+            /// 答案内容 
+            /// 答案内容，经 GBK 编码
+            /// </summary>
+            public string Content { get; set; }
+        }
     }
 }
