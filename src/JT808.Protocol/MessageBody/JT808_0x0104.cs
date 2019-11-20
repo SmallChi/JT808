@@ -1,5 +1,9 @@
 ﻿using JT808.Protocol.Attributes;
+using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Formatters.MessageBodyFormatters;
+using JT808.Protocol.MessagePack;
+using System;
 using System.Collections.Generic;
 
 namespace JT808.Protocol.MessageBody
@@ -8,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     /// 查询终端参数应答
     /// </summary>
     [JT808Formatter(typeof(JT808_0x0104_Formatter))]
-    public class JT808_0x0104 : JT808Bodies
+    public class JT808_0x0104 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0104>
     {
         /// <summary>
         /// 应答流水号
@@ -23,5 +27,41 @@ namespace JT808.Protocol.MessageBody
         /// 参数列表
         /// </summary>
         public IList<JT808_0x8103_BodyBase> ParamList { get; set; }
+
+        public JT808_0x0104 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        {
+            JT808_0x0104 jT808_0x0104 = new JT808_0x0104();
+            jT808_0x0104.MsgNum = reader.ReadUInt16();
+            jT808_0x0104.AnswerParamsCount = reader.ReadByte();
+            for (int i = 0; i < jT808_0x0104.AnswerParamsCount; i++)
+            {
+                var paramId = reader.ReadVirtualUInt32();//参数ID         
+                if (config.JT808_0X8103_Factory.ParamMethods.TryGetValue(paramId, out Type type))
+                {
+                    if (jT808_0x0104.ParamList != null)
+                    {
+                        jT808_0x0104.ParamList.Add(JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(
+                            config.GetMessagePackFormatterByType(type), ref reader, config));
+                    }
+                    else
+                    {
+                        jT808_0x0104.ParamList = new List<JT808_0x8103_BodyBase> { JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(
+                            config.GetMessagePackFormatterByType(type),  ref reader,  config) };
+                    }
+                }
+            }
+            return jT808_0x0104;
+        }
+
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0104 value, IJT808Config config)
+        {
+            writer.WriteUInt16(value.MsgNum);
+            writer.WriteByte(value.AnswerParamsCount);
+            foreach (var item in value.ParamList)
+            {
+                object obj = config.GetMessagePackFormatterByType(item.GetType());
+                JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(obj, ref writer, item, config);
+            }
+        }
     }
 }

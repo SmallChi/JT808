@@ -1,5 +1,7 @@
 ﻿using JT808.Protocol.Attributes;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Formatters.MessageBodyFormatters;
+using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x0801
     /// </summary>
     [JT808Formatter(typeof(JT808_0x0801_Formatter))]
-    public class JT808_0x0801 : JT808Bodies
+    public class JT808_0x0801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0801>
     {
         /// <summary>
         /// 多媒体 ID
@@ -43,5 +45,30 @@ namespace JT808.Protocol.MessageBody
         /// 多媒体数据包
         /// </summary>
         public byte[] MultimediaDataPackage { get; set; }
+
+        public JT808_0x0801 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        {
+            JT808_0x0801 jT808_0X0801 = new JT808_0x0801();
+            jT808_0X0801.MultimediaId = reader.ReadUInt32();
+            jT808_0X0801.MultimediaType = reader.ReadByte();
+            jT808_0X0801.MultimediaCodingFormat = reader.ReadByte();
+            jT808_0X0801.EventItemCoding = reader.ReadByte();
+            jT808_0X0801.ChannelId = reader.ReadByte();
+            JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28));
+            jT808_0X0801.Position = config.GetMessagePackFormatter<JT808_0x0200>().Deserialize(ref positionReader, config);
+            jT808_0X0801.MultimediaDataPackage = reader.ReadContent().ToArray();
+            return jT808_0X0801;
+        }
+
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0801 value, IJT808Config config)
+        {
+            writer.WriteUInt32(value.MultimediaId);
+            writer.WriteByte(value.MultimediaType);
+            writer.WriteByte(value.MultimediaCodingFormat);
+            writer.WriteByte(value.EventItemCoding);
+            writer.WriteByte(value.ChannelId);
+            config.GetMessagePackFormatter<JT808_0x0200>().Serialize(ref writer, value.Position, config);
+            writer.WriteArray(value.MultimediaDataPackage);
+        }
     }
 }

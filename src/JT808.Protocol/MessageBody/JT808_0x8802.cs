@@ -1,5 +1,7 @@
 ﻿using JT808.Protocol.Attributes;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Formatters.MessageBodyFormatters;
+using JT808.Protocol.MessagePack;
 using System;
 
 namespace JT808.Protocol.MessageBody
@@ -9,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x8802
     /// </summary>
     [JT808Formatter(typeof(JT808_0x8802_Formatter))]
-    public class JT808_0x8802 : JT808Bodies
+    public class JT808_0x8802 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8802>
     {
         /// <summary>
         /// 多媒体类型
@@ -36,5 +38,24 @@ namespace JT808.Protocol.MessageBody
         /// YY-MM-DD-hh-mm-ss
         /// </summary>
         public DateTime EndTime { get; set; }
+        public JT808_0x8802 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        {
+            JT808_0x8802 jT808_0X8802 = new JT808_0x8802();
+            jT808_0X8802.MultimediaType = reader.ReadByte();
+            jT808_0X8802.ChannelId = reader.ReadByte();
+            jT808_0X8802.EventItemCoding = reader.ReadByte();
+            jT808_0X8802.StartTime = reader.ReadDateTime6();
+            jT808_0X8802.EndTime = reader.ReadDateTime6();
+            return jT808_0X8802;
+        }
+
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8802 value, IJT808Config config)
+        {
+            writer.WriteByte(value.MultimediaType);
+            writer.WriteByte(value.ChannelId);
+            writer.WriteByte(value.EventItemCoding);
+            writer.WriteDateTime6(value.StartTime);
+            writer.WriteDateTime6(value.EndTime);
+        }
     }
 }

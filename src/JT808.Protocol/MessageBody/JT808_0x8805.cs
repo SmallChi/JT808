@@ -1,5 +1,7 @@
 ﻿using JT808.Protocol.Attributes;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Formatters.MessageBodyFormatters;
+using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -7,7 +9,7 @@ namespace JT808.Protocol.MessageBody
     /// 单条存储多媒体数据检索上传命令
     /// </summary>
     [JT808Formatter(typeof(JT808_0x8805_Formatter))]
-    public class JT808_0x8805 : JT808Bodies
+    public class JT808_0x8805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8805>
     {
         /// <summary>
         /// 多媒体ID
@@ -18,5 +20,18 @@ namespace JT808.Protocol.MessageBody
         /// <see cref="JT808.Protocol.Enums.JT808MultimediaDeleted"/>
         /// </summary>
         public byte MultimediaDeleted { get; set; }
+        public JT808_0x8805 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        {
+            JT808_0x8805 jT808_0X8805 = new JT808_0x8805();
+            jT808_0X8805.MultimediaId = reader.ReadUInt32();
+            jT808_0X8805.MultimediaDeleted = reader.ReadByte();
+            return jT808_0X8805;
+        }
+
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8805 value, IJT808Config config)
+        {
+            writer.WriteUInt32(value.MultimediaId);
+            writer.WriteByte(value.MultimediaDeleted);
+        }
     }
 }
