@@ -1,13 +1,13 @@
 ﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 定时拍照控制，见 表 13
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x8103_0x0064_Formatter))]
-    public class JT808_0x8103_0x0064 : JT808_0x8103_BodyBase
+    public class JT808_0x8103_0x0064 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0064>
     {
         public override uint ParamId { get; set; } = 0x0064;
         /// <summary>
@@ -18,5 +18,20 @@ namespace JT808.Protocol.MessageBody
         /// 定时拍照控制，见 表 13
         /// </summary>
         public uint ParamValue { get; set; }
+        public JT808_0x8103_0x0064 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        {
+            JT808_0x8103_0x0064 jT808_0x8103_0x0064 = new JT808_0x8103_0x0064();
+            jT808_0x8103_0x0064.ParamId = reader.ReadUInt32();
+            jT808_0x8103_0x0064.ParamLength = reader.ReadByte();
+            jT808_0x8103_0x0064.ParamValue = reader.ReadUInt32();
+            return jT808_0x8103_0x0064;
+        }
+
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0064 value, IJT808Config config)
+        {
+            writer.WriteUInt32(value.ParamId);
+            writer.WriteByte(value.ParamLength);
+            writer.WriteUInt32(value.ParamValue);
+        }
     }
 }

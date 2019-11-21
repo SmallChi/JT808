@@ -99,7 +99,7 @@ namespace JT808.Protocol.Extensions
         /// <summary>
         /// 获取DescriptionAttribute特性枚举及描述
         /// </summary>
-        /// <param name="type"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
         public static Dictionary<string, string> GetDescriptionAttributeDictionary(this Enum value)
         {
