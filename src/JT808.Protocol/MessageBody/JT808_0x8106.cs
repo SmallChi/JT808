@@ -1,6 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 using System;
 
@@ -10,7 +8,6 @@ namespace JT808.Protocol.MessageBody
     /// 查询指定终端参数
     /// 0x8106
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x8106_Formatter))]
     public class JT808_0x8106 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8106>
     {
         /// <summary>

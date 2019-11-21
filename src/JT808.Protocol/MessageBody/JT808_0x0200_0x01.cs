@@ -1,13 +1,9 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 using System.Runtime.Serialization;
 
 namespace JT808.Protocol.MessageBody
 {
-
-    [JT808Formatter(typeof(JT808_0x0200_0x01_Formatter))]
     public class JT808_0x0200_0x01 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x01>
     {
         public override byte AttachInfoId { get; set; } = 0x01;

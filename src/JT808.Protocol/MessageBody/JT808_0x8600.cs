@@ -1,6 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
@@ -13,7 +11,6 @@ namespace JT808.Protocol.MessageBody
     /// 0x8600
     /// 注：本条消息协议支持周期时间范围，如要限制每天的8:30-18:00，起始/结束时间设为：00-00-00-08-30-00/00-00-00-18-00-00，其他以此类推
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x8600_Formatter))]
     public class JT808_0x8600 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8600>
     {
         /// <summary>

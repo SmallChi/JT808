@@ -1,6 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System.Collections.Generic;
@@ -11,7 +9,6 @@ namespace JT808.Protocol.MessageBody
     /// 信息点播菜单设置
     /// 0x8303
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x8303_Formatter))]
     public class JT808_0x8303 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8303>
     {
         /// <summary>

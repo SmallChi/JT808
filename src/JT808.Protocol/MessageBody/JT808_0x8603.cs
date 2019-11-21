@@ -1,6 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 using System.Collections.Generic;
 
@@ -10,7 +8,6 @@ namespace JT808.Protocol.MessageBody
     /// 删除矩形区域
     /// 0x8603
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x8603_Formatter))]
     public class JT808_0x8603 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8603>
     {
         /// <summary>

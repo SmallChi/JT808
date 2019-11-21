@@ -9,6 +9,10 @@ namespace JT808.Protocol
 {
     public  class JT808Serializer
     {
+        private readonly static JT808HeaderPackage jT808HeaderPackage = new JT808HeaderPackage();
+
+        private readonly static JT808Package jT808Package = new JT808Package();
+
         public JT808Serializer(IJT808Config jT808Config)
         {
             this.jT808Config = jT808Config;
@@ -29,7 +33,7 @@ namespace JT808.Protocol
             try
             {
                 JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer);
-                JT808PackageFormatter.Instance.Serialize(ref jT808MessagePackWriter, jT808Package, jT808Config);
+                jT808Package.Serialize(ref jT808MessagePackWriter, jT808Package, jT808Config);
                 return jT808MessagePackWriter.FlushAndGetEncodingArray();
             }
             finally
@@ -45,7 +49,7 @@ namespace JT808.Protocol
             {
                 JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes);
                 jT808MessagePackReader.Decode(buffer);
-                return JT808PackageFormatter.Instance.Deserialize(ref jT808MessagePackReader, jT808Config);
+                return jT808Package.Deserialize(ref jT808MessagePackReader, jT808Config);
             }
             finally
             {
@@ -104,7 +108,7 @@ namespace JT808.Protocol
             {
                 JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes);
                 jT808MessagePackReader.Decode(buffer);
-                return JT808HeaderPackageFormatter.Instance.Deserialize(ref jT808MessagePackReader,jT808Config);
+                return jT808HeaderPackage.Deserialize(ref jT808MessagePackReader,jT808Config);
             }
             finally
             {

@@ -1,5 +1,4 @@
 ﻿using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
 using JT808.Protocol.MessageBody;

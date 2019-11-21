@@ -1,6 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 using System.Collections.Generic;
 
@@ -10,7 +8,6 @@ namespace JT808.Protocol.MessageBody
     /// 摄像头立即拍摄命令应答
     /// 0x0805
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x0805_Formatter))]
     public class JT808_0x0805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0805>
     {
         /// <summary>

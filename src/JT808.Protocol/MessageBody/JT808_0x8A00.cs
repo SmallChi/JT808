@@ -1,7 +1,5 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Exceptions;
+﻿using JT808.Protocol.Exceptions;
 using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -10,7 +8,6 @@ namespace JT808.Protocol.MessageBody
     /// 平台RSA公钥
     /// 0x8A00
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x8A00_Formatter))]
     public class JT808_0x8A00 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8A00>
     {
         /// <summary>

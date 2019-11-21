@@ -1,11 +1,8 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
 {
-    [JT808Formatter(typeof(JT808_0x0200_0x2A_Formatter))]
     public class JT808_0x0200_0x2A : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x2A>
     {
         /// <summary>

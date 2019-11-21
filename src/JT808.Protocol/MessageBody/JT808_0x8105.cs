@@ -1,6 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 using System;
 
@@ -9,7 +7,6 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 终端控制
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x8105_Formatter))]
     public class JT808_0x8105 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8105>
     {
         /// <summary>

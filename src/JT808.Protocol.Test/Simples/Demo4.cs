@@ -251,42 +251,14 @@ namespace JT808.Protocol.Test.Simples
     /// <summary>
     /// 设备类型1-对应消息协议0x81
     /// </summary>
-    [JT808Formatter(typeof(JT808_0x0200_DT1_0x81Formatter))]
-    public class JT808_0x0200_DT1_0x81 : JT808_0x0200_CustomBodyBase
+    public class JT808_0x0200_DT1_0x81 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_DT1_0x81>
     {
         public override byte AttachInfoId { get; set; } = 0x81;
         public override byte AttachInfoLength { get; set; } = 13;
         public uint Age { get; set; }
         public byte Gender { get; set; }
         public string UserName { get; set; }
-    }
-    /// <summary>
-    /// 设备类型1-对应消息协议0x82
-    /// </summary>
-    [JT808Formatter(typeof(JT808_0x0200_DT1_0x82Formatter))]
-    public class JT808_0x0200_DT1_0x82 : JT808_0x0200_CustomBodyBase
-    {
-        public override byte AttachInfoId { get; set; } = 0x82;
-        public override byte AttachInfoLength { get; set; } = 1;
-        public byte Gender1 { get; set; }
-    }
-    /// <summary>
-    /// 设备类型2-对应消息协议0x81
-    /// </summary>
-    [JT808Formatter(typeof(JT808_0x0200_DT2_0x81Formatter))]
-    public class JT808_0x0200_DT2_0x81 : JT808_0x0200_CustomBodyBase
-    {
-        public override byte AttachInfoId { get; set; } = 0x81;
-        public override byte AttachInfoLength { get; set; } = 7;
-        public uint Age { get; set; }
-        public byte Gender { get; set; }
-        public ushort MsgNum { get; set; }
-    }
-    /// <summary>
-    /// 设备类型1-对应消息协议序列化器 0x81
-    /// </summary>
-    public class JT808_0x0200_DT1_0x81Formatter : IJT808MessagePackFormatter<JT808_0x0200_DT1_0x81>
-    {
+
         public JT808_0x0200_DT1_0x81 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_DT1_0x81 jT808_0X0200_DT1_0X81 = new JT808_0x0200_DT1_0x81();
@@ -307,10 +279,13 @@ namespace JT808.Protocol.Test.Simples
         }
     }
     /// <summary>
-    /// 设备类型1-对应消息协议序列化器 0x82
+    /// 设备类型1-对应消息协议0x82
     /// </summary>
-    public class JT808_0x0200_DT1_0x82Formatter : IJT808MessagePackFormatter<JT808_0x0200_DT1_0x82>
+    public class JT808_0x0200_DT1_0x82 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_DT1_0x82>
     {
+        public override byte AttachInfoId { get; set; } = 0x82;
+        public override byte AttachInfoLength { get; set; } = 1;
+        public byte Gender1 { get; set; }
         public JT808_0x0200_DT1_0x82 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_DT1_0x82 jT808_0X0200_DT1_0X82 = new JT808_0x0200_DT1_0x82();
@@ -328,10 +303,15 @@ namespace JT808.Protocol.Test.Simples
         }
     }
     /// <summary>
-    /// 设备类型2-对应消息协议序列化器 0x81
+    /// 设备类型2-对应消息协议0x81
     /// </summary>
-    public class JT808_0x0200_DT2_0x81Formatter : IJT808MessagePackFormatter<JT808_0x0200_DT2_0x81>
+    public class JT808_0x0200_DT2_0x81 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_DT2_0x81>
     {
+        public override byte AttachInfoId { get; set; } = 0x81;
+        public override byte AttachInfoLength { get; set; } = 7;
+        public uint Age { get; set; }
+        public byte Gender { get; set; }
+        public ushort MsgNum { get; set; }
         public JT808_0x0200_DT2_0x81 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_DT2_0x81 jT808_0X0200_DT2_0X81 = new JT808_0x0200_DT2_0x81();

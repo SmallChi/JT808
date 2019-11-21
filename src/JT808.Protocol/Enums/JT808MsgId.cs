@@ -64,25 +64,26 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x0102))]
         [JT808MsgIdDescription("0x0102", "终端鉴权")]
         终端鉴权 = 0x0102,
+#warning 设置终端参数 查询终端参数 查询终端参数应答
         /// <summary>
         /// 设置终端参数
         /// 0x8103
         /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8103))]
+        //[JT808BodiesType(typeof(JT808_0x8103))]
         [JT808MsgIdDescription("0x8103", "设置终端参数")]
         设置终端参数 = 0x8103,
         /// <summary>
         /// 查询终端参数
         /// 0x8104
         /// </summary>
-        [JT808BodiesType(typeof(JT808_0x8104))]
+        //[JT808BodiesType(typeof(JT808_0x8104))]
         [JT808MsgIdDescription("0x8104", "查询终端参数")]
         查询终端参数 = 0x8104,
         /// <summary>
         /// 查询终端参数应答
         /// 0x0104
         /// </summary>
-        [JT808BodiesType(typeof(JT808_0x0104))]
+        //[JT808BodiesType(typeof(JT808_0x0104))]
         [JT808MsgIdDescription("0x0104", "查询终端参数应答")]
         查询终端参数应答 = 0x0104,
         /// <summary>
@@ -302,7 +303,6 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x8607))]
         [JT808MsgIdDescription("0x8607", "删除路线")]
         删除路线 = 0x8607,
-
         ///// <summary>
         ///// 行驶记录仪数据采集命令
         ///// 0x8700

@@ -89,23 +89,23 @@ namespace JT808.Protocol.Extensions
 		{
 			return Create<JT808.Protocol.MessageBody.JT808_0x0102>(msgId,terminalPhoneNo,bodies);
 		}
-		/// <summary>
-		/// 0x0104 - 查询终端参数应答
-		/// auto-generated
-		/// </summary>
-	    public static JT808Package Create_查询终端参数应答(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x0104 bodies)
-		{
-			return Create<JT808.Protocol.MessageBody.JT808_0x0104>(msgId,terminalPhoneNo,bodies);
-		}
+		///// <summary>
+		///// 0x0104 - 查询终端参数应答
+		///// auto-generated
+		///// </summary>
+	 //   public static JT808Package Create_查询终端参数应答(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x0104 bodies)
+		//{
+		//	return Create<JT808.Protocol.MessageBody.JT808_0x0104>(msgId,terminalPhoneNo,bodies);
+		//}
 
 		/// <summary>
 		/// 0x0104 - 查询终端参数应答
 		/// auto-generated
 		/// </summary>
-	    public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x0104 bodies)
-		{
-			return Create<JT808.Protocol.MessageBody.JT808_0x0104>(msgId,terminalPhoneNo,bodies);
-		}
+	 //   public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x0104 bodies)
+		//{
+		//	return Create<JT808.Protocol.MessageBody.JT808_0x0104>(msgId,terminalPhoneNo,bodies);
+		//}
 		/// <summary>
 		/// 0x0107 - 查询终端属性应答
 		/// auto-generated
@@ -464,39 +464,22 @@ namespace JT808.Protocol.Extensions
 			return Create<JT808.Protocol.MessageBody.JT808_0x8100>(msgId,terminalPhoneNo,bodies);
 		}
 		/// <summary>
-		/// 0x8103 - 设置终端参数
-		/// auto-generated
-		/// </summary>
-	    public static JT808Package Create_设置终端参数(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x8103 bodies)
-		{
-			return Create<JT808.Protocol.MessageBody.JT808_0x8103>(msgId,terminalPhoneNo,bodies);
-		}
-
-		/// <summary>
-		/// 0x8103 - 设置终端参数
-		/// auto-generated
-		/// </summary>
-	    public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x8103 bodies)
-		{
-			return Create<JT808.Protocol.MessageBody.JT808_0x8103>(msgId,terminalPhoneNo,bodies);
-		}
-		/// <summary>
 		/// 0x8104 - 查询终端参数
 		/// auto-generated
 		/// </summary>
-	    public static JT808Package Create_查询终端参数(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x8104 bodies)
-		{
-			return Create<JT808.Protocol.MessageBody.JT808_0x8104>(msgId,terminalPhoneNo,bodies);
-		}
+	 //   public static JT808Package Create_查询终端参数(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x8104 bodies)
+		//{
+		//	return Create<JT808.Protocol.MessageBody.JT808_0x8104>(msgId,terminalPhoneNo,bodies);
+		//}
 
 		/// <summary>
 		/// 0x8104 - 查询终端参数
 		/// auto-generated
 		/// </summary>
-	    public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x8104 bodies)
-		{
-			return Create<JT808.Protocol.MessageBody.JT808_0x8104>(msgId,terminalPhoneNo,bodies);
-		}
+	 //   public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x8104 bodies)
+		//{
+		//	return Create<JT808.Protocol.MessageBody.JT808_0x8104>(msgId,terminalPhoneNo,bodies);
+		//}
 		/// <summary>
 		/// 0x8105 - 终端控制
 		/// auto-generated

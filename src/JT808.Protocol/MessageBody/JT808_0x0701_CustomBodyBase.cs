@@ -1,6 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters.MessageBodyFormatters;
-using System;
+﻿using System;
 
 namespace JT808.Protocol.MessageBody
 {

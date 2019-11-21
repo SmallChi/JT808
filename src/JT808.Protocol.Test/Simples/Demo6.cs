@@ -83,22 +83,11 @@ namespace JT808.Protocol.Test.Simples
         }
     }
 
-    [JT808Formatter(typeof(DT1Demo6_Formatter))]
-    public class DT1Demo6 : JT808Bodies
+    public class DT1Demo6 : JT808Bodies, IJT808MessagePackFormatter<DT1Demo6>
     {
         public byte Sex1 { get; set; }
 
         public ushort Age1 { get; set; }
-    }
-    [JT808Formatter(typeof(DT2Demo6_Formatter))]
-    public class DT2Demo6 : JT808Bodies
-    {
-        public byte Sex2 { get; set; }
-
-        public ushort Age2 { get; set; }
-    }
-    public class DT1Demo6_Formatter : IJT808MessagePackFormatter<DT1Demo6>
-    {
         public DT1Demo6 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             DT1Demo6 dT1Demo6 = new DT1Demo6();
@@ -113,8 +102,12 @@ namespace JT808.Protocol.Test.Simples
             writer.WriteUInt16(value.Age1);
         }
     }
-    public class DT2Demo6_Formatter : IJT808MessagePackFormatter<DT2Demo6>
+
+    public class DT2Demo6 : JT808Bodies, IJT808MessagePackFormatter<DT2Demo6>
     {
+        public byte Sex2 { get; set; }
+
+        public ushort Age2 { get; set; }
         public DT2Demo6 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             DT2Demo6 dT2Demo6 = new DT2Demo6();
