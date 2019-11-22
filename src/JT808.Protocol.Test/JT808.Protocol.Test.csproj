@@ -33,6 +33,7 @@
     <Compile Include="MessageBody\JT808_0x0003Test.cs" />
     <Compile Include="MessageBody\JT808_0x0100Test.cs" />
     <Compile Include="MessageBody\JT808_0x0102Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0104Test.cs" />
     <Compile Include="MessageBody\JT808_0x0107Test.cs" />
     <Compile Include="MessageBody\JT808_0x0108Test.cs" />
     <Compile Include="MessageBody\JT808_0x0200Test.cs" />
@@ -57,6 +58,8 @@
     <Compile Include="MessageBody\JT808_0x8001Test.cs" />
     <Compile Include="MessageBody\JT808_0x8003Test.cs" />
     <Compile Include="MessageBody\JT808_0x8100Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8103CustomIdExtensions\JT808_0x8103_0x0075.cs" />
+    <Compile Include="MessageBody\JT808_0x8103Test.cs" />
     <Compile Include="MessageBody\JT808_0x8104Test.cs" />
     <Compile Include="MessageBody\JT808_0x8105Test.cs" />
     <Compile Include="MessageBody\JT808_0x8106Test.cs" />

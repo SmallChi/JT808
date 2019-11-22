@@ -20,8 +20,8 @@ namespace JT808.Protocol.Interfaces
             FormatterFactory = new JT808FormatterFactory();
             JT808_0X0200_Custom_Factory = new JT808_0x0200_Custom_Factory();
             JT808_0X0200_Factory = new JT808_0x0200_Factory();
-            //JT808_0X8103_Custom_Factory = new JT808_0x8103_Custom_Factory();
-            //JT808_0X8103_Factory = new JT808_0x8103_Factory();
+            JT808_0X8103_Custom_Factory = new JT808_0x8103_Custom_Factory();
+            JT808_0X8103_Factory = new JT808_0x8103_Factory();
             TerminalPhoneNoLength = 12;
             Trim = true;
         }
@@ -46,8 +46,8 @@ namespace JT808.Protocol.Interfaces
                 foreach (var easb in externalAssemblies)
                 {
                     FormatterFactory.Register(easb);
-                    JT808_0X0200_Custom_Factory?.Register(easb);
-                    JT808_0X8103_Custom_Factory?.Register(easb);
+                    JT808_0X0200_Custom_Factory.Register(easb);
+                    JT808_0X8103_Custom_Factory.Register(easb);
                 }
             }
             return this;

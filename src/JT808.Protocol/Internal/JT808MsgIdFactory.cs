@@ -1,6 +1,7 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,14 @@ namespace JT808.Protocol.Internal
 {
     internal class JT808MsgIdFactory: IJT808MsgIdFactory
     {
-        private Dictionary<ushort, Type> map;
+        private Dictionary<ushort, object> map;
 
-        private Dictionary<string, Dictionary<ushort, Type>> customMap;
+        private Dictionary<string, Dictionary<ushort, object>> customMap;
 
         internal JT808MsgIdFactory()
         {
-            map = new Dictionary<ushort, Type>();
-            customMap = new Dictionary<string, Dictionary<ushort, Type>>(StringComparer.OrdinalIgnoreCase);
+            map = new Dictionary<ushort, object>();
+            customMap = new Dictionary<string, Dictionary<ushort, object>>(StringComparer.OrdinalIgnoreCase);
             InitMap();
         }
 
@@ -30,23 +31,23 @@ namespace JT808.Protocol.Internal
                     JT808BodiesTypeAttribute jT808BodiesTypeAttribute = msgId.GetAttribute<JT808BodiesTypeAttribute>();
                     if (jT808BodiesTypeAttribute != null)
                     {                
-                        map.Add((ushort)msgId, jT808BodiesTypeAttribute.JT808BodiesType);
+                        map.Add((ushort)msgId, Activator.CreateInstance(jT808BodiesTypeAttribute.JT808BodiesType));
                     }
                 }
             }
         }
 
-        public Type GetBodiesImplTypeByMsgId(ushort msgId, string terminalPhoneNo)
+        public object GetBodiesImplInstanceByMsgId(ushort msgId, string terminalPhoneNo)
         {
             //判断有无自定义消息Id类型
             if (customMap.TryGetValue(terminalPhoneNo, out var dict))
             {
                 if (dict != null)
                 {
-                    return dict.TryGetValue(msgId, out Type bodiesImptType)? bodiesImptType:null;
+                    return dict.TryGetValue(msgId, out object bodiesImptType) ? bodiesImptType : null;
                 }
             }
-            return map.TryGetValue(msgId, out Type type) ? type : null;
+            return map.TryGetValue(msgId, out dynamic type) ? type : null;
         }
 
         public IJT808MsgIdFactory SetMap<TJT808Bodies>(ushort msgId, string terminalPhoneNo) 
@@ -54,7 +55,7 @@ namespace JT808.Protocol.Internal
         {
             if (!map.ContainsKey(msgId))
             {
-                map.Add(msgId, typeof(TJT808Bodies));
+                map.Add(msgId, Activator.CreateInstance(typeof(TJT808Bodies)));
             }
             return this;
         }
@@ -63,7 +64,7 @@ namespace JT808.Protocol.Internal
         {
             if (!map.ContainsKey(msgId))
             {
-                map.Add(msgId, bodiesImplType);
+                map.Add(msgId, Activator.CreateInstance(bodiesImplType));
             }
             return this;
         }
@@ -72,11 +73,11 @@ namespace JT808.Protocol.Internal
         {
             if (!map.ContainsKey(msgId))
             {
-                map.Add(msgId, typeof(TJT808Bodies));
+                map.Add(msgId, Activator.CreateInstance(typeof(TJT808Bodies)));
             }
             else
             {
-                map[msgId] = typeof(TJT808Bodies);
+                map[msgId] = Activator.CreateInstance(typeof(TJT808Bodies));
             }
             return this;
         }
@@ -89,15 +90,15 @@ namespace JT808.Protocol.Internal
                 {
                     if (dict == null)
                     {
-                        Dictionary<ushort, Type> tmp = new Dictionary<ushort, Type>();
-                        tmp.Add(msgId, typeof(TJT808Bodies));
+                        Dictionary<ushort, dynamic> tmp = new Dictionary<ushort, dynamic>();
+                        tmp.Add(msgId, Activator.CreateInstance(typeof(TJT808Bodies)));
                         customMap.Add(terminalPhoneNo, tmp);
                     }
                     else
                     {
                         if (!dict.ContainsKey(msgId))
                         {
-                            dict.Add(msgId, typeof(TJT808Bodies));
+                            dict.Add(msgId, Activator.CreateInstance(typeof(TJT808Bodies)));
                         }
                     }
                 }
@@ -113,8 +114,8 @@ namespace JT808.Protocol.Internal
                 {
                     if (dict == null)
                     {
-                        Dictionary<ushort, Type> tmp = new Dictionary<ushort, Type>();
-                        tmp.Add(msgId, bodiesImplType);
+                        Dictionary<ushort, object> tmp = new Dictionary<ushort, object>();
+                        tmp.Add(msgId, Activator.CreateInstance(bodiesImplType));
                         customMap.Add(terminalPhoneNo, tmp);
                         return this;
                     }
@@ -122,7 +123,7 @@ namespace JT808.Protocol.Internal
                     {
                         if (!dict.ContainsKey(msgId))
                         {
-                            dict.Add(msgId, bodiesImplType);
+                            dict.Add(msgId, Activator.CreateInstance(bodiesImplType));
                         }
                     }
                 }

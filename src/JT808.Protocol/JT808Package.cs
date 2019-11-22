@@ -22,10 +22,6 @@ namespace JT808.Protocol
         /// </summary>
         public const byte EndFlag = 0x7e;
         /// <summary>
-        /// 头部固定长度
-        /// </summary>
-        public const int FixedHeaderLength = 12;
-        /// <summary>
         /// 起始符
         /// </summary>
         public byte Begin { get; set; } = BeginFlag;
@@ -87,8 +83,8 @@ namespace JT808.Protocol
             //  4.1.判断有无数据体
             if (jT808Package.Header.MessageBodyProperty.DataLength > 0)
             {
-                Type jT808BodiesImplType = config.MsgIdFactory.GetBodiesImplTypeByMsgId(jT808Package.Header.MsgId, jT808Package.Header.TerminalPhoneNo);
-                if (jT808BodiesImplType != null)
+                object instance = config.MsgIdFactory.GetBodiesImplInstanceByMsgId(jT808Package.Header.MsgId, jT808Package.Header.TerminalPhoneNo);
+                if (instance != null)
                 {
                     if (jT808Package.Header.MessageBodyProperty.IsPackage)
                     {
@@ -97,7 +93,6 @@ namespace JT808.Protocol
                             try
                             {
                                 //4.2处理第二包之后的分包数据消息体
-#warning 2处理第二包之后的分包数据消息体
                                 JT808SplitPackageBodies jT808SplitPackageBodies = new JT808SplitPackageBodies();
                                 jT808Package.Bodies = jT808SplitPackageBodies.Deserialize(ref reader, config);
                             }
@@ -112,7 +107,7 @@ namespace JT808.Protocol
                             {
                                 //4.2.处理消息体
                                 jT808Package.Bodies = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(
-                                    config.GetMessagePackFormatterByType(jT808BodiesImplType),
+                                    instance,
                                     ref reader, config);
                             }
                             catch (Exception ex)
@@ -127,7 +122,7 @@ namespace JT808.Protocol
                         {
                             //4.2.处理消息体
                             jT808Package.Bodies = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(
-                                config.GetMessagePackFormatterByType(jT808BodiesImplType),
+                                instance,
                                 ref reader, config);
                         }
                         catch (Exception ex)
@@ -174,8 +169,7 @@ namespace JT808.Protocol
             {
                 if (!value.Bodies.SkipSerialization)
                 {
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(
-                        config.GetMessagePackFormatterByType(value.Bodies.GetType()),
+                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(value.Bodies,
                         ref writer, value.Bodies,
                         config);
                 }

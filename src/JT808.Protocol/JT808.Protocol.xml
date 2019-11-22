@@ -984,6 +984,18 @@
             auto-generated
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_查询终端参数应答(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0104)">
+            <summary>
+            0x0104 - 查询终端参数应答
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0104)">
+            <summary>
+            0x0104 - 查询终端参数应答
+            auto-generated
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_查询终端属性应答(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0107)">
             <summary>
             0x0107 - 查询终端属性应答
@@ -1233,6 +1245,30 @@
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8100)">
             <summary>
             0x8100 - 终端注册应答
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_设置终端参数(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8103)">
+            <summary>
+            0x8103 - 设置终端参数
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8103)">
+            <summary>
+            0x8103 - 设置终端参数
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_查询终端参数(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8104)">
+            <summary>
+            0x8104 - 查询终端参数
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8104)">
+            <summary>
+            0x8104 - 查询终端参数
             auto-generated
             </summary>
         </member>
@@ -2249,11 +2285,6 @@
         <member name="F:JT808.Protocol.JT808Package.EndFlag">
             <summary>
             终止符
-            </summary>
-        </member>
-        <member name="F:JT808.Protocol.JT808Package.FixedHeaderLength">
-            <summary>
-            头部固定长度
             </summary>
         </member>
         <member name="P:JT808.Protocol.JT808Package.Begin">

@@ -27,6 +27,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
     <OutputPath />
+    <NoWarn>1701;1702;CS1591;CS1572;CS1573;CS1574;CS1570;</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Formatters\MessageBodyFormatters\**" />
@@ -48,8 +49,6 @@
     <Compile Remove="Formatters\JT808SplitPackageBodiesFormatter.cs" />
     <Compile Remove="IJT808BufferedEntity.cs" />
     <Compile Remove="IJT808Properties.cs" />
-    <Compile Remove="Internal\JT808_0x8103_Custom_Factory.cs" />
-    <Compile Remove="Internal\JT808_0x8103_Factory.cs" />
     <Compile Remove="JT808BufferedEntityBase.cs" />
     <Compile Remove="JT808GlobalConfig.cs" />
     <Compile Remove="JT808MessageBodyFactory.cs" />

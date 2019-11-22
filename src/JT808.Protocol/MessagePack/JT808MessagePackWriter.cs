@@ -17,6 +17,17 @@ namespace JT808.Protocol.MessagePack
         {
             return writer.Written.Slice(writer.BeforeCodingWrittenPosition).ToArray();
         }
+
+        public ReadOnlySpan<byte> FlushAndGetEncodingReadOnlySpan()
+        {
+            return writer.Written.Slice(writer.BeforeCodingWrittenPosition);
+        }
+
+        public ReadOnlySpan<byte> FlushAndGetRealReadOnlySpan()
+        {
+            return writer.Written;
+        }
+
         public byte[] FlushAndGetRealArray()
         {
             return writer.Written.ToArray();

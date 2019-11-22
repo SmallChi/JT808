@@ -64,7 +64,6 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x0102))]
         [JT808MsgIdDescription("0x0102", "终端鉴权")]
         终端鉴权 = 0x0102,
-#warning 设置终端参数 查询终端参数 查询终端参数应答
         /// <summary>
         /// 设置终端参数
         /// 0x8103

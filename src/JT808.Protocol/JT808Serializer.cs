@@ -42,6 +42,21 @@ namespace JT808.Protocol
             }
         }
 
+        public ReadOnlySpan<byte> SerializeReadOnlySpan(JT808Package jT808Package, int minBufferSize = 4096)
+        {
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
+            try
+            {
+                JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer);
+                jT808Package.Serialize(ref jT808MessagePackWriter, jT808Package, jT808Config);
+                return jT808MessagePackWriter.FlushAndGetEncodingReadOnlySpan();
+            }
+            finally
+            {
+                JT808ArrayPool.Return(buffer);
+            }
+        }
+
         public JT808Package Deserialize(ReadOnlySpan<byte> bytes, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -66,6 +81,22 @@ namespace JT808.Protocol
                 JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer);
                 formatter.Serialize(ref jT808MessagePackWriter, obj, jT808Config);
                 return jT808MessagePackWriter.FlushAndGetEncodingArray();
+            }
+            finally
+            {
+                JT808ArrayPool.Return(buffer);
+            }
+        }
+
+        public ReadOnlySpan<byte> SerializeReadOnlySpan<T>(T obj, int minBufferSize = 4096)
+        {
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
+            try
+            {
+                var formatter = jT808Config.GetMessagePackFormatter<T>();
+                JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer);
+                formatter.Serialize(ref jT808MessagePackWriter, obj, jT808Config);
+                return jT808MessagePackWriter.FlushAndGetEncodingReadOnlySpan();
             }
             finally
             {

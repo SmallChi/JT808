@@ -4,7 +4,7 @@ namespace JT808.Protocol.Interfaces
 {
     public interface IJT808MsgIdFactory
     {
-        Type GetBodiesImplTypeByMsgId(ushort msgId, string terminalPhoneNo);
+        object GetBodiesImplInstanceByMsgId(ushort msgId, string terminalPhoneNo);
         IJT808MsgIdFactory SetMap<TJT808Bodies>(ushort msgId, string terminalPhoneNo) 
             where TJT808Bodies : JT808Bodies;
         IJT808MsgIdFactory SetMap(ushort msgId, string terminalPhoneNo, Type bodiesImplType);
