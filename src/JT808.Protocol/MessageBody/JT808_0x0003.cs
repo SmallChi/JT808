@@ -9,5 +9,7 @@
         /// 跳过数据体序列化
         /// </summary>
         public override bool SkipSerialization { get; set; } = true;
+
+        public override ushort MsgId { get; } = 0x0003;
     }
 }

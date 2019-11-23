@@ -8,6 +8,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8202 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8202>
     {
+        public override ushort MsgId { get; } = 0x8202;
         /// <summary>
         /// 时间间隔
         /// 单位为秒（s），0 则停止跟踪。停止跟踪无需带后继字段

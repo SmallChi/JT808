@@ -10,11 +10,12 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0805>
     {
+        public override ushort MsgId { get; } = 0x0805;
         /// <summary>
         /// 应答流水号
         /// 对应平台摄像头立即拍摄命令的消息流水号
         /// </summary>
-        public ushort MsgNum { get; set; }
+        public ushort ReplyMsgNum { get; set; }
         /// <summary>
         /// 结果
         /// 0：成功；1：失败；2：通道不支持。以下字段在结果=0 时才有效。
@@ -33,7 +34,7 @@ namespace JT808.Protocol.MessageBody
         public JT808_0x0805 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0805 jT808_0X0805 = new JT808_0x0805();
-            jT808_0X0805.MsgNum = reader.ReadUInt16();
+            jT808_0X0805.ReplyMsgNum = reader.ReadUInt16();
             jT808_0X0805.Result = reader.ReadByte();
             jT808_0X0805.MultimediaIdCount = reader.ReadUInt16();
             jT808_0X0805.MultimediaIds = new List<uint>();
@@ -47,7 +48,7 @@ namespace JT808.Protocol.MessageBody
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0805 value, IJT808Config config)
         {
-            writer.WriteUInt16(value.MsgNum);
+            writer.WriteUInt16(value.ReplyMsgNum);
             writer.WriteByte(value.Result);
             writer.WriteUInt16((ushort)value.MultimediaIds.Count);
             foreach (var item in value.MultimediaIds)

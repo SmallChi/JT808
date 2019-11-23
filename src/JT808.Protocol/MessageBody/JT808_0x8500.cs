@@ -8,6 +8,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8500 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8500>
     {
+        public override ushort MsgId { get; } = 0x8500;
         /// <summary>
         /// 控制标志 
         /// 控制指令标志位数据格式

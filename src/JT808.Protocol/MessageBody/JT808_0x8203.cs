@@ -9,6 +9,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8203 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8203>
     {
+        public override ushort MsgId { get; } = 0x8203;
         /// <summary>
         /// 报警消息流水号
         /// 需人工确认的报警消息流水号，0 表示该报警类型所有消息

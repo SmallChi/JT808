@@ -8,6 +8,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0100 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0100>
     {
+        public override ushort MsgId { get; } = 0x0100;
         /// <summary>
         /// 省域 ID
         /// 标示终端安装车辆所在的省域，0 保留，由平台取默

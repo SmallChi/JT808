@@ -23,7 +23,7 @@ namespace JT808.Protocol.Test.MessageBody
             };
             JT808_0x0201 jT808_0X0201 = new JT808_0x0201
             {
-                MsgNum = 12345
+                ReplyMsgNum = 12345
             };
             JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200
             {
@@ -58,7 +58,7 @@ namespace JT808.Protocol.Test.MessageBody
             byte[] bytes = "7E0201002811223344556622B83039000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037517E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize(bytes);
             JT808_0x0201 jT808_0X0201 = (JT808_0x0201) jT808Package.Bodies;
-            Assert.Equal(12345, jT808_0X0201.MsgNum);
+            Assert.Equal(12345, jT808_0X0201.ReplyMsgNum);
             Assert.Equal((uint)1, jT808_0X0201.Position.AlarmFlag);
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808_0X0201.Position.GPSTime);
             Assert.Equal(12222222, jT808_0X0201.Position.Lat);

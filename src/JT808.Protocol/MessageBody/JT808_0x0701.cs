@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0701 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0701>
     {
+        public override ushort MsgId { get; } = 0x0701;
         /// <summary>
         /// 电子运单长度
         /// </summary>

@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0302 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0302>
     {
+        public override ushort MsgId { get; } = 0x0302;
         /// <summary>
         /// 应答流水号
         /// 对应的提问下发消息的流水号

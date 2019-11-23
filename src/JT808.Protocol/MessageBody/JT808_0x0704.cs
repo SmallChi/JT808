@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0704 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0704>
     {
+        public override ushort MsgId { get; } = 0x0704;
         /// <summary>
         /// 数据项个数
         /// </summary>

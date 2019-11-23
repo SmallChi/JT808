@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8A00 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8A00>
     {
+        public override ushort MsgId { get; } = 0x8A00;
         /// <summary>
         /// e
         /// 平台 RSA 公钥{e,n}中的 e

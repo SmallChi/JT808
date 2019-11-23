@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8302 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8302>
     {
+        public override ushort MsgId { get; } = 0x8302;
         /// <summary>
         /// 标志
         /// 提问下发标志位定义

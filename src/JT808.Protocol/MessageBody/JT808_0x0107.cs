@@ -8,6 +8,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0107 : JT808Bodies,IJT808MessagePackFormatter<JT808_0x0107>
     {
+        public override ushort MsgId { get; } = 0x0107;
         /// <summary>
         /// 终端类型
         /// bit0，0：不适用客运车辆，1：适用客运车辆；

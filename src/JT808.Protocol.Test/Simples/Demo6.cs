@@ -88,6 +88,9 @@ namespace JT808.Protocol.Test.Simples
         public byte Sex1 { get; set; }
 
         public ushort Age1 { get; set; }
+
+        public override ushort MsgId => 0x91;
+
         public DT1Demo6 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             DT1Demo6 dT1Demo6 = new DT1Demo6();
@@ -105,6 +108,7 @@ namespace JT808.Protocol.Test.Simples
 
     public class DT2Demo6 : JT808Bodies, IJT808MessagePackFormatter<DT2Demo6>
     {
+        public override ushort MsgId => 0x91;
         public byte Sex2 { get; set; }
 
         public ushort Age2 { get; set; }

@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0901 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0901>
     {
+        public override ushort MsgId { get; } = 0x0901;
         /// <summary>
         /// 未压缩消息长度 
         /// </summary>

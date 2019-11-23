@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8803 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8803>
     {
+        public override ushort MsgId { get; } = 0x8803;
         /// <summary>
         /// 多媒体类型 
         /// <see cref="JT808.Protocol.Enums.JT808MultimediaType"/>

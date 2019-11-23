@@ -9,11 +9,12 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8100 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8100>
     {
+        public override ushort MsgId { get; } = 0x8100;
         /// <summary>
         /// 应答流水号
         /// 对应的终端注册消息的流水号
         /// </summary>
-        public ushort MsgNum { get; set; }
+        public ushort AckMsgNum { get; set; }
 
         /// <summary>
         /// 结果
@@ -29,7 +30,7 @@ namespace JT808.Protocol.MessageBody
         public JT808_0x8100 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8100 jT808_0X8100 = new JT808_0x8100();
-            jT808_0X8100.MsgNum = reader.ReadUInt16();
+            jT808_0X8100.AckMsgNum = reader.ReadUInt16();
             jT808_0X8100.JT808TerminalRegisterResult = (JT808TerminalRegisterResult)reader.ReadByte();
             // 只有在成功后才有该字段
             if (jT808_0X8100.JT808TerminalRegisterResult == JT808TerminalRegisterResult.成功)
@@ -41,7 +42,7 @@ namespace JT808.Protocol.MessageBody
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8100 value, IJT808Config config)
         {
-            writer.WriteUInt16(value.MsgNum);
+            writer.WriteUInt16(value.AckMsgNum);
             writer.WriteByte((byte)value.JT808TerminalRegisterResult);
             // 只有在成功后才有该字段
             if (value.JT808TerminalRegisterResult == JT808TerminalRegisterResult.成功)

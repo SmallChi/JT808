@@ -9,7 +9,10 @@ namespace JT808.Protocol
     /// </summary>
     public class JT808SplitPackageBodies : JT808Bodies,  IJT808MessagePackFormatter<JT808SplitPackageBodies>
     {
+
         public byte[] Data { get; set; }
+
+        public override ushort MsgId => throw new System.NotImplementedException();
 
         public JT808SplitPackageBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {

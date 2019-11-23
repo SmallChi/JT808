@@ -21,8 +21,8 @@ namespace JT808.Protocol.Test.MessageBody
                 },
                 Bodies = new JT808_0x0001
                 {
-                    MsgId = Enums.JT808MsgId.终端心跳.ToUInt16Value(),
-                    MsgNum = 1000,
+                    ReplyMsgId = Enums.JT808MsgId.终端心跳.ToUInt16Value(),
+                    ReplyMsgNum = 1000,
                     JT808TerminalResult = Enums.JT808TerminalResult.Success
                 }
             };
@@ -40,8 +40,8 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(1203, jT808Package.Header.MsgNum);
 
             JT808_0x0001 JT808Bodies = (JT808_0x0001)jT808Package.Bodies;
-            Assert.Equal(Enums.JT808MsgId.终端心跳.ToUInt16Value(), JT808Bodies.MsgId);
-            Assert.Equal(1000, JT808Bodies.MsgNum);
+            Assert.Equal(Enums.JT808MsgId.终端心跳.ToUInt16Value(), JT808Bodies.ReplyMsgId);
+            Assert.Equal(1000, JT808Bodies.ReplyMsgNum);
             Assert.Equal(Enums.JT808TerminalResult.Success, JT808Bodies.JT808TerminalResult);
         }
     }

@@ -9,6 +9,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8801>
     {
+        public override ushort MsgId { get; } = 0x8801;
         /// <summary>
         /// 通道 ID
         /// </summary>

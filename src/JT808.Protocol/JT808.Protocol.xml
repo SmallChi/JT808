@@ -2331,13 +2331,13 @@
             终端通用应答
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.MsgNum">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.ReplyMsgNum">
             <summary>
             应答流水号
             对应的平台消息的流水号
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.MsgId">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.ReplyMsgId">
             <summary>
             应答 ID
             对应的平台消息的 ID
@@ -2774,7 +2774,7 @@
             位置信息查询应答
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0201.MsgNum">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0201.ReplyMsgNum">
             <summary>
             应答流水号
             对应的终端注册消息的流水号
@@ -3097,7 +3097,7 @@
             0x0805
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0805.MsgNum">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0805.ReplyMsgNum">
             <summary>
             应答流水号
             对应平台摄像头立即拍摄命令的消息流水号
@@ -3186,7 +3186,7 @@
             平台通用应答
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8001.MsgId">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8001.AckMsgId">
             <summary>
             <see cref="T:JT808.Protocol.Enums.JT808MsgId"/>
             </summary>
@@ -3221,7 +3221,7 @@
             终端注册应答
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8100.MsgNum">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8100.AckMsgNum">
             <summary>
             应答流水号
             对应的终端注册消息的流水号

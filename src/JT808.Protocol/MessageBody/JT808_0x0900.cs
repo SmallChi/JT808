@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0900 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0900>
     {
+        public override ushort MsgId { get; } = 0x0900;
         /// <summary>
         /// 透传消息类型
         /// </summary>

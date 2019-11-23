@@ -13,6 +13,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0200 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0200>
     {
+        public override ushort MsgId { get; } = 0x0200;
         /// <summary>
         /// 报警标志 
         /// </summary>

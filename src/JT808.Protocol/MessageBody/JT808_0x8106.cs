@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8106 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8106>
     {
+        public override ushort MsgId { get; } = 0x8106;
         /// <summary>
         /// 参数总数
         /// 参数总数为 n

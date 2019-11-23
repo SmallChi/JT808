@@ -6,5 +6,6 @@
     public class JT808_0x0002 : JT808Bodies
     {
         public override bool SkipSerialization { get; set; } = true;
+        public override ushort MsgId { get; } = 0x0002;
     }
 }

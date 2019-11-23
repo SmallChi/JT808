@@ -5,6 +5,7 @@
     /// </summary>
     public class JT808_0x8201: JT808Bodies
     {
+        public override ushort MsgId { get; } = 0x8201;
         /// <summary>
         /// 跳过数据体序列化
         /// </summary>

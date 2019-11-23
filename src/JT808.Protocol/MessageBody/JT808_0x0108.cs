@@ -9,6 +9,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0108 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0108>
     {
+        public override ushort MsgId { get; } = 0x0108;
         /// <summary>
         /// 升级类型
         /// 0：终端，12：道路运输证 IC 卡读卡器，52：北斗卫星定位模块

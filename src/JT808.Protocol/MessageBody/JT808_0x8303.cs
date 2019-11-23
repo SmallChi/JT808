@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8303 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8303>
     {
+        public override ushort MsgId { get; } = 0x8303;
         /// <summary>
         /// 设置类型
         /// <see cref="JT808.Protocol.Enums.JT808InformationSettingType"/>
