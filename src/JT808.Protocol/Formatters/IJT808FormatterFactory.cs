@@ -8,8 +8,8 @@ namespace JT808.Protocol.Formatters
 {
     public interface IJT808FormatterFactory: IJT808ExternalRegister
     {
-        Dictionary<Guid,object> FormatterDict { get;}
-        IJT808FormatterFactory SetMap<TJT808Bodies>()
-                    where TJT808Bodies : JT808Bodies;
+        IDictionary<Guid,object> FormatterDict { get;}
+        IJT808FormatterFactory SetMap<TIJT808Formatter>()
+                    where TIJT808Formatter : IJT808Formatter;
     }
 }

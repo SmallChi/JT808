@@ -17,7 +17,6 @@ namespace JT808.Protocol.Test
             var result = Parallel.For(0, 100, new ParallelOptions { MaxDegreeOfParallelism = 2 }, (i) => 
             {
                 IJT808Config jT808Config = new DefaultGlobalConfig();
-                jT808Config.Register(Assembly.GetExecutingAssembly());
                 JT808Serializer jT808Serializer = new JT808Serializer(jT808Config);
             });
             if (result.IsCompleted)

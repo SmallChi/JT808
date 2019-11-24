@@ -17,7 +17,6 @@ namespace JT808.Protocol.Test.MessageBody
         public JT808_0x0801Test()
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
-            jT808Config.Register(Assembly.GetExecutingAssembly());
             jT808Config.SkipCRCCode = true;
             JT808Serializer = new JT808Serializer(jT808Config);
         }

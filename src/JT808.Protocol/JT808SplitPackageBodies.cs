@@ -12,7 +12,7 @@ namespace JT808.Protocol
 
         public byte[] Data { get; set; }
 
-        public override ushort MsgId => throw new System.NotImplementedException();
+        public override ushort MsgId => throw new System.NotImplementedException("JT808SplitPackageBodies");
 
         public JT808SplitPackageBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {

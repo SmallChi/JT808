@@ -16,15 +16,18 @@ namespace JT808.Protocol.Test.Simples
 {
     public class Demo6
     {
-        public JT808Serializer JT808Serializer;
+        public JT808Serializer DT1JT808Serializer;
+        public JT808Serializer DT2JT808Serializer;
         public Demo6()
         {
-            IJT808Config jT808Config = new DefaultGlobalConfig();
-            jT808Config.Register(Assembly.GetExecutingAssembly());
+            IJT808Config DT1JT808Config = new DefaultGlobalConfig();
+            IJT808Config DT2JT808Config = new DefaultGlobalConfig();
+
             //根据不同的设备终端号，添加自定义消息Id
-            jT808Config.MsgIdFactory.CustomSetMap<DT1Demo6>(0x91, "1234567891");
-            jT808Config.MsgIdFactory.CustomSetMap<DT2Demo6>(0x91, "1234567892");
-            JT808Serializer = new JT808Serializer(jT808Config);
+            DT1JT808Config.MsgIdFactory.SetMap<DT1Demo6>();
+            DT2JT808Config.MsgIdFactory.SetMap<DT2Demo6>();
+            DT1JT808Serializer = new JT808Serializer(DT1JT808Config);
+            DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
         }
 
         /// <summary>
@@ -56,16 +59,16 @@ namespace JT808.Protocol.Test.Simples
             dT2Demo6.Age2 = 18;
             dT2Demo6.Sex2 = 2;
             dt2Package.Bodies = dT2Demo6;
-            byte[] dt1Data = JT808Serializer.Serialize(dt1Package);
+            byte[] dt1Data = DT1JT808Serializer.Serialize(dt1Package);
             var dt1Hex = dt1Data.ToHexString();
             //7E00910003001234567891007D02020012657E
-            byte[] dt2Data = JT808Serializer.Serialize(dt2Package);
+            byte[] dt2Data = DT2JT808Serializer.Serialize(dt2Package);
             var dt2Hex = dt2Data.ToHexString();
             //7E00910003001234567892007D02020012667E
             Assert.Equal("7E00910003001234567891007D02020012657E", dt1Hex);
             Assert.Equal("7E00910003001234567892007D02020012667E", dt2Hex);
 
-            JT808Package dt1Package1 = JT808Serializer.Deserialize(dt1Data);
+            JT808Package dt1Package1 = DT1JT808Serializer.Deserialize(dt1Data);
             Assert.Equal(0x91, dt1Package1.Header.MsgId);
             Assert.Equal(126, dt1Package1.Header.MsgNum);
             Assert.Equal("1234567891", dt1Package1.Header.TerminalPhoneNo);
@@ -73,7 +76,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal((ushort)18, dt1Bodies.Age1);
             Assert.Equal(2, dt1Bodies.Sex1);
 
-            JT808Package dt2Package1 = JT808Serializer.Deserialize(dt2Data);
+            JT808Package dt2Package1 = DT2JT808Serializer.Deserialize(dt2Data);
             Assert.Equal(0x91, dt2Package1.Header.MsgId);
             Assert.Equal(126, dt2Package1.Header.MsgNum);
             Assert.Equal("1234567892", dt2Package1.Header.TerminalPhoneNo);

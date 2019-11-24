@@ -12,7 +12,7 @@ namespace JT808.Protocol.Internal
 {
    internal class JT808FormatterFactory : IJT808FormatterFactory
     {
-        public Dictionary<Guid, object> FormatterDict { get; }
+        public IDictionary<Guid, object> FormatterDict { get; }
 
         public JT808FormatterFactory()
         {
@@ -40,20 +40,19 @@ namespace JT808.Protocol.Internal
             }
         }
 
-        public IJT808FormatterFactory SetMap<TJT808Bodies>() 
-            where TJT808Bodies:JT808Bodies
+        public void Register(Assembly externalAssembly)
         {
-            Type type = typeof(TJT808Bodies);
+            Init(externalAssembly);
+        }
+
+        public IJT808FormatterFactory SetMap<TIJT808Formatter>() where TIJT808Formatter : IJT808Formatter
+        {
+            Type type = typeof(TIJT808Formatter);
             if (!FormatterDict.ContainsKey(type.GUID))
             {
                 FormatterDict.Add(type.GUID, Activator.CreateInstance(type));
             }
             return this;
-        }
-
-        public void Register(Assembly externalAssembly)
-        {
-            Init(externalAssembly);
         }
     }
 }

@@ -49,16 +49,14 @@ namespace JT808.Protocol.MessageBody
                 for (int i = 0; i < paramCount; i++)
                 {
                     var paramId = reader.ReadVirtualUInt32();//参数ID         
-                    if (config.JT808_0X8103_Factory.ParamMethods.TryGetValue(paramId, out Type type))
+                    if (config.JT808_0X8103_Factory.Map.TryGetValue(paramId, out object instance))
                     {
-                        object attachImplObj = config.GetMessagePackFormatterByType(type);
-                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(attachImplObj, ref reader, config);
+                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
                         jT808_0x8103.ParamList.Add(attachImpl);
                     }
-                    else if (config.JT808_0X8103_Custom_Factory.ParamMethods.TryGetValue(paramId, out Type customType))
+                    else if (config.JT808_0X8103_Custom_Factory.Map.TryGetValue(paramId, out object customInstance))
                     {
-                        object attachImplObj = config.GetMessagePackFormatterByType(customType);
-                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(attachImplObj, ref reader, config);
+                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customInstance, ref reader, config);
                         jT808_0x8103.CustomParamList.Add(attachImpl);
                     }
                 }
@@ -77,15 +75,13 @@ namespace JT808.Protocol.MessageBody
             {
                 foreach (var item in value.ParamList)
                 {
-                    object attachImplObj = config.GetMessagePackFormatterByType(item.GetType());
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(attachImplObj, ref writer, item, config);
+                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
                 }
                 if (value.CustomParamList != null)
                 {
                     foreach (var item in value.CustomParamList)
                     {
-                        object attachImplObj = config.GetMessagePackFormatterByType(item.GetType());
-                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(attachImplObj, ref writer, item, config);
+                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
                     }
                 }
             }

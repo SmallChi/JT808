@@ -34,17 +34,15 @@ namespace JT808.Protocol.MessageBody
             for (int i = 0; i < jT808_0x0104.AnswerParamsCount; i++)
             {
                 var paramId = reader.ReadVirtualUInt32();//参数ID         
-                if (config.JT808_0X8103_Factory.ParamMethods.TryGetValue(paramId, out Type type))
+                if (config.JT808_0X8103_Factory.Map.TryGetValue(paramId, out object instance))
                 {
                     if (jT808_0x0104.ParamList != null)
                     {
-                        jT808_0x0104.ParamList.Add(JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(
-                            config.GetMessagePackFormatterByType(type), ref reader, config));
+                        jT808_0x0104.ParamList.Add(JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config));
                     }
                     else
                     {
-                        jT808_0x0104.ParamList = new List<JT808_0x8103_BodyBase> { JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(
-                            config.GetMessagePackFormatterByType(type),  ref reader,  config) };
+                        jT808_0x0104.ParamList = new List<JT808_0x8103_BodyBase> { JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance,  ref reader,  config) };
                     }
                 }
             }

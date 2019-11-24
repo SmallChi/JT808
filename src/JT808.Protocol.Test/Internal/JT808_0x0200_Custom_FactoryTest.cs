@@ -12,7 +12,10 @@ namespace JT808.Protocol.Test.Internal
         [Fact]
         public void Test1()
         {
-            new JT808_0x0200_Custom_Factory().Register(Assembly.GetExecutingAssembly());
+            Assert.Throws<ArgumentException>(()=> 
+            {
+                new JT808_0x0200_Custom_Factory().Register(Assembly.GetExecutingAssembly());
+            });
         }
     }
 }

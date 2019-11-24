@@ -1,17 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JT808.Protocol.Interfaces
 {
-    public interface IJT808MsgIdFactory
+    public interface IJT808MsgIdFactory:IJT808ExternalRegister
     {
-        object GetBodiesImplInstanceByMsgId(ushort msgId, string terminalPhoneNo);
-        IJT808MsgIdFactory SetMap<TJT808Bodies>(ushort msgId, string terminalPhoneNo) 
-            where TJT808Bodies : JT808Bodies;
-        IJT808MsgIdFactory SetMap(ushort msgId, string terminalPhoneNo, Type bodiesImplType);
-        IJT808MsgIdFactory ReplaceMap<TJT808Bodies>(ushort msgId, string terminalPhoneNo)
-            where TJT808Bodies : JT808Bodies;
-        IJT808MsgIdFactory CustomSetMap<TJT808Bodies>(ushort msgId, string terminalPhoneNo)
-            where TJT808Bodies : JT808Bodies;
-        IJT808MsgIdFactory CustomSetMap(ushort msgId, string terminalPhoneNo, Type bodiesImplType);
+        IDictionary<ushort, object> Map { get; }
+        bool TryGetValue(ushort msgId, out object instance);
+        IJT808MsgIdFactory SetMap<TJT808Bodies>() where TJT808Bodies : JT808Bodies;
     }
 }

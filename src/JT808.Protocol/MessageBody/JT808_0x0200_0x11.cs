@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody
         /// 区域或路段 ID
         /// 若位置类型为 0，无该字段
         /// </summary>
-        public int AreaId { get; set; }
+        public uint AreaId { get; set; }
         public override byte AttachInfoId { get; set; } = 0x11;
         public override byte AttachInfoLength
         {
@@ -46,7 +46,7 @@ namespace JT808.Protocol.MessageBody
             jT808LocationAttachImpl0x11.JT808PositionType = (JT808PositionType)reader.ReadByte();
             if (jT808LocationAttachImpl0x11.JT808PositionType != JT808PositionType.无特定位置)
             {
-                jT808LocationAttachImpl0x11.AreaId = reader.ReadInt32();
+                jT808LocationAttachImpl0x11.AreaId = reader.ReadUInt32();
             }
             return jT808LocationAttachImpl0x11;
         }
@@ -58,7 +58,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte((byte)value.JT808PositionType);
             if (value.JT808PositionType != JT808PositionType.无特定位置)
             {
-                writer.WriteInt32(value.AreaId);
+                writer.WriteUInt32(value.AreaId);
             }
         }
     }

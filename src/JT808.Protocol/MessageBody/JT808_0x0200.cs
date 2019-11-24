@@ -100,7 +100,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0200.GPSTime = reader.ReadDateTime6();
             // 位置附加信息
             jT808_0X0200.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
-            jT808_0X0200.JT808CustomLocationAttachOriginalData = new Dictionary<byte, byte[]>();
+            jT808_0X0200.JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
             jT808_0X0200.JT808UnknownLocationAttachOriginalData = new Dictionary<byte, byte[]>();
             while (reader.ReadCurrentRemainContentLength() > 0)
             {
@@ -109,17 +109,15 @@ namespace JT808.Protocol.MessageBody
                     ReadOnlySpan<byte> attachSpan = reader.GetVirtualReadOnlySpan(2);
                     byte attachId = attachSpan[0];
                     byte attachLen = attachSpan[1];
-                    if (config.JT808_0X0200_Factory.JT808LocationAttachMethod.TryGetValue(attachId, out Type jT808LocationAttachType))
+                    if (config.JT808_0X0200_Factory.Map.TryGetValue(attachId, out object jT808LocationAttachInstance))
                     {
-                        object attachImplObj = config.GetMessagePackFormatterByType(jT808LocationAttachType);
-                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(attachImplObj, ref reader, config);
+                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(jT808LocationAttachInstance, ref reader, config);
                         jT808_0X0200.JT808LocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
                     }
-                    else if (config.JT808_0X0200_Custom_Factory.AttachIds.Contains(attachId))
+                    else if (config.JT808_0X0200_Custom_Factory.Map.TryGetValue(attachId,out object customAttachInstance))
                     {
-                        reader.Skip(2);
-                        jT808_0X0200.JT808CustomLocationAttachOriginalData.Add(attachId, reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
-                        reader.Skip(attachLen);
+                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance, ref reader, config);
+                        jT808_0X0200.JT808CustomLocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
                     }
                     else
                     {
@@ -189,10 +187,9 @@ namespace JT808.Protocol.MessageBody
                 {
                     try
                     {
-                        object attachImplObj = config.GetMessagePackFormatterByType(item.Value.GetType());
-                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(attachImplObj, ref writer, item.Value, config);
+                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
                     }
-                    catch
+                    catch(Exception ex)
                     {
 
                     }
@@ -202,8 +199,7 @@ namespace JT808.Protocol.MessageBody
             {
                 foreach (var item in value.JT808CustomLocationAttachData)
                 {
-                    object attachImplObj = config.GetMessagePackFormatterByType(item.Value.GetType());
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(attachImplObj, ref writer, item.Value, config);
+                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
                 }
             }
         }

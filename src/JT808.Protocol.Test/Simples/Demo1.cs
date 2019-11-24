@@ -16,7 +16,6 @@ namespace JT808.Protocol.Test.Simples
         public Demo1()
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
-            jT808Config.Register(Assembly.GetExecutingAssembly());
             JT808Serializer = new JT808Serializer(jT808Config);
         }
 

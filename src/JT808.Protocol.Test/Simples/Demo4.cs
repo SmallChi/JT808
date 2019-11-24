@@ -18,12 +18,9 @@ namespace JT808.Protocol.Test.Simples
 {
     public class Demo4
     {
-        public JT808Serializer JT808Serializer;
         public Demo4()
         {
-            IJT808Config jT808Config = new DefaultGlobalConfig();
-            jT808Config.Register(Assembly.GetExecutingAssembly());
-            JT808Serializer = new JT808Serializer(jT808Config);
+
         }
         private Dictionary<string, DeviceType> cache = new Dictionary<string, DeviceType>
         {
@@ -37,34 +34,35 @@ namespace JT808.Protocol.Test.Simples
         public void Test1()
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
-            jT808Config.Register(Assembly.GetExecutingAssembly());
+            jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT1_0x81>();
             JT808Serializer demo5JT808Serializer = new JT808Serializer(jT808Config);
 
             JT808Package jT808Package = JT808MsgId.位置信息汇报.Create("123456789012",
-                                                        new JT808_0x0200
-                                                        {
-                                                            AlarmFlag = 1,
-                                                            Altitude = 40,
-                                                            GPSTime = DateTime.Parse("2018-12-20 20:10:10"),
-                                                            Lat = 12222222,
-                                                            Lng = 132444444,
-                                                            Speed = 60,
-                                                            Direction = 0,
-                                                            StatusFlag = 2,
-                                                            JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>
-                                                             {
-                                                                 {0x81,new JT808_0x0200_DT1_0x81 {
-                                                                      Age=15,
-                                                                      Gender=1,
-                                                                      UserName="smallchi"
-                                                                 } }
-                                                             }
-                                                        });
+                                        new JT808_0x0200
+                                        {
+                                            AlarmFlag = 1,
+                                            Altitude = 40,
+                                            GPSTime = DateTime.Parse("2018-12-20 20:10:10"),
+                                            Lat = 12222222,
+                                            Lng = 132444444,
+                                            Speed = 60,
+                                            Direction = 0,
+                                            StatusFlag = 2,
+                                            JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>
+                                                {
+                                                    {0x81,new JT808_0x0200_DT1_0x81 {
+                                                        Age=15,
+                                                        Gender=1,
+                                                        UserName="smallchi"
+                                                    } }
+                                                }
+                                        });
 
             byte[] data = demo5JT808Serializer.Serialize(jT808Package);
             var jT808PackageResult = demo5JT808Serializer.Deserialize<JT808Package>(data);
             JT808_0x0200 jT808_0X0200 = jT808PackageResult.Bodies as JT808_0x0200;
-            var attach = DeviceTypeFactory.Create(cache[jT808PackageResult.Header.TerminalPhoneNo], jT808_0X0200.JT808CustomLocationAttachOriginalData);
+
+            var attach = DeviceTypeFactory.Create(cache[jT808PackageResult.Header.TerminalPhoneNo], jT808_0X0200.JT808CustomLocationAttachData);
             var extJson = attach.ExtData.Data.ToString(Formatting.None);
             var attachinfo81 = (JT808_0x0200_DT1_0x81)attach.JT808CustomLocationAttachData[0x81];
             Assert.Equal((uint)15, attachinfo81.Age);
@@ -128,14 +126,14 @@ namespace JT808.Protocol.Test.Simples
 
     public class DeviceTypeFactory
     {
-        public static DeviceTypeBase Create(DeviceType deviceType, Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
+        public static DeviceTypeBase Create(DeviceType deviceType, Dictionary<byte, JT808_0x0200_CustomBodyBase> jT808CustomLocationAttachData)
         {
             switch (deviceType)
             {
                 case DeviceType.DT1:
-                    return new DeviceType1(jT808CustomLocationAttachOriginalData);
+                    return new DeviceType1(jT808CustomLocationAttachData);
                 case DeviceType.DT2:
-                    return new DeviceType2(jT808CustomLocationAttachOriginalData);
+                    return new DeviceType2(jT808CustomLocationAttachData);
                 default:
                     return default;
             }
@@ -157,50 +155,46 @@ namespace JT808.Protocol.Test.Simples
         }
         public virtual IExtData ExtData { get; protected set; } = new DefaultExtDataImpl();
         public abstract Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
-        protected DeviceTypeBase(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
+        protected DeviceTypeBase(Dictionary<byte, JT808_0x0200_CustomBodyBase> jT808CustomLocationAttachData)
         {
-            IJT808Config jT808Config = new DefaultGlobalConfig();
-            jT808Config.Register(Assembly.GetExecutingAssembly());
-            JT808Serializer = new JT808Serializer(jT808Config);
-            Execute(jT808CustomLocationAttachOriginalData);
+            Execute(jT808CustomLocationAttachData);
         }
-        protected abstract void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData);
+        protected abstract void Execute(Dictionary<byte, JT808_0x0200_CustomBodyBase> jT808CustomLocationAttachData);
     }
 
     public class DeviceType1 : DeviceTypeBase
     {
         private const byte dt1_0x81 = 0x81;
         private const byte dt1_0x82 = 0x82;
-        public DeviceType1(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData) : base(jT808CustomLocationAttachOriginalData)
+        public DeviceType1(Dictionary<byte, JT808_0x0200_CustomBodyBase> jT808CustomLocationAttachData) : base(jT808CustomLocationAttachData)
         {
+            IJT808Config jT808Config = new DefaultGlobalConfig();
+            jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT1_0x81>();
+            jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT1_0x82>();
+            JT808Serializer = new JT808Serializer(jT808Config);
         }
         public override Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
-        protected override void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
+        protected override void Execute(Dictionary<byte, JT808_0x0200_CustomBodyBase> jT808CustomLocationAttachData)
         {
             JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
-            foreach (var item in jT808CustomLocationAttachOriginalData)
+            foreach (var item in jT808CustomLocationAttachData)
             {
                 try
                 {
                     switch (item.Key)
                     {
                         case dt1_0x81:
-                            var info81 = JT808Serializer.Deserialize<JT808_0x0200_DT1_0x81>(item.Value);
-                            if (info81 != null)
-                            {
-                                IExtDataProcessor extDataProcessor = new JT808_0x0200_DT1_0x81_ExtDataProcessor(info81);
-                                extDataProcessor.Processor(ExtData);
-                                JT808CustomLocationAttachData.Add(dt1_0x81, info81);
-                            }
+                            var info81 = (JT808_0x0200_DT1_0x81)item.Value;
+                            IExtDataProcessor extDataProcessor81 = new JT808_0x0200_DT1_0x81_ExtDataProcessor(info81);
+                            extDataProcessor81.Processor(ExtData);
+                            JT808CustomLocationAttachData.Add(dt1_0x81, info81);
+                            
                             break;
                         case dt1_0x82:
-                            var info82 = JT808Serializer.Deserialize<JT808_0x0200_DT1_0x82>(item.Value);
-                            if (info82 != null)
-                            {
-                                IExtDataProcessor extDataProcessor = new JT808_0x0200_DT1_0x82_ExtDataProcessor(info82);
-                                extDataProcessor.Processor(ExtData);
-                                JT808CustomLocationAttachData.Add(dt1_0x82, info82);
-                            }
+                            var info82 = (JT808_0x0200_DT1_0x82)item.Value;
+                            IExtDataProcessor extDataProcessor82 = new JT808_0x0200_DT1_0x82_ExtDataProcessor(info82);
+                            extDataProcessor82.Processor(ExtData);
+                            JT808CustomLocationAttachData.Add(dt1_0x82, info82);
                             break;
                     }
                 }
@@ -214,13 +208,16 @@ namespace JT808.Protocol.Test.Simples
 
     public class DeviceType2 : DeviceTypeBase
     {
-        public DeviceType2(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData) : base(jT808CustomLocationAttachOriginalData)
+        public DeviceType2(Dictionary<byte, JT808_0x0200_CustomBodyBase> jT808CustomLocationAttachData) : base(jT808CustomLocationAttachData)
         {
+            IJT808Config jT808Config = new DefaultGlobalConfig();
+            jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT2_0x81>();
+            JT808Serializer = new JT808Serializer(jT808Config);
         }
         public override Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
 
         private const byte dt2_0x81 = 0x81;
-        protected override void Execute(Dictionary<byte, byte[]> jT808CustomLocationAttachOriginalData)
+        protected override void Execute(Dictionary<byte, JT808_0x0200_CustomBodyBase> jT808CustomLocationAttachOriginalData)
         {
             JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
             foreach (var item in jT808CustomLocationAttachOriginalData)
@@ -230,13 +227,10 @@ namespace JT808.Protocol.Test.Simples
                     switch (item.Key)
                     {
                         case dt2_0x81:
-                            var info81 = JT808Serializer.Deserialize<JT808_0x0200_DT2_0x81>(item.Value);
-                            if (info81 != null)
-                            {
-                                IExtDataProcessor extDataProcessor = new JT808_0x0200_DT2_0x81_ExtDataProcessor(info81);
-                                extDataProcessor.Processor(ExtData);
-                                JT808CustomLocationAttachData.Add(dt2_0x81, info81);
-                            }
+                            var info81 = (JT808_0x0200_DT2_0x81)item.Value;
+                            IExtDataProcessor extDataProcessor = new JT808_0x0200_DT2_0x81_ExtDataProcessor(info81);
+                            extDataProcessor.Processor(ExtData);
+                            JT808CustomLocationAttachData.Add(dt2_0x81, info81);        
                             break;
                     }
                 }

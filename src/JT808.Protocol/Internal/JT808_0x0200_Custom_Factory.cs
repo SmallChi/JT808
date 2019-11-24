@@ -10,11 +10,11 @@ namespace JT808.Protocol.Internal
 {
     class JT808_0x0200_Custom_Factory : IJT808_0x0200_Custom_Factory
     {
-        public HashSet<byte> AttachIds { get; }
+        public IDictionary<byte, object> Map { get; }
 
         public JT808_0x0200_Custom_Factory()
         {
-            AttachIds = new HashSet<byte>();
+            Map = new Dictionary<byte, object>();
         }
 
         public void Register(Assembly externalAssembly)
@@ -22,12 +22,33 @@ namespace JT808.Protocol.Internal
             var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x0200_CustomBodyBase)).ToList();
             foreach(var type in types)
             {
-                var attachid = (byte)type.GetProperty(nameof(JT808_0x0200_CustomBodyBase.AttachInfoId)).GetValue(Activator.CreateInstance(type));
-                if (!AttachIds.Contains(attachid))
+                var instance = Activator.CreateInstance(type);
+                var attachid = (byte)type.GetProperty(nameof(JT808_0x0200_CustomBodyBase.AttachInfoId)).GetValue(instance);
+                if (Map.ContainsKey(attachid))
                 {
-                    AttachIds.Add(attachid);
+                    throw new ArgumentException($"{type.FullName} {attachid} An element with the same key already exists.");
+                }
+                else
+                {
+                    Map.Add(attachid, instance);
                 }
             }
+        }
+
+        public IJT808_0x0200_Custom_Factory SetMap<TJT808_0x0200_CustomBody>() where TJT808_0x0200_CustomBody : JT808_0x0200_CustomBodyBase
+        {
+            Type type = typeof(TJT808_0x0200_CustomBody);
+            var instance = Activator.CreateInstance(type);
+            var attachInfoId = (byte)type.GetProperty(nameof(JT808_0x0200_CustomBodyBase.AttachInfoId)).GetValue(instance);
+            if (Map.ContainsKey(attachInfoId))
+            {
+                throw new ArgumentException($"{type.FullName} {attachInfoId} An element with the same key already exists.");
+            }
+            else
+            {
+                Map.Add(attachInfoId, instance);
+            }
+            return this;
         }
     }
 }

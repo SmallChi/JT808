@@ -37,8 +37,7 @@ namespace JT808.Protocol.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8900 value, IJT808Config config)
         {
             writer.WriteByte(value.PassthroughType);
-            object obj = config.GetMessagePackFormatterByType(value.JT808_0X8900_BodyBase.GetType());
-            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(obj, ref writer, value.JT808_0X8900_BodyBase, config);
+            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(value.JT808_0X8900_BodyBase, ref writer, value.JT808_0X8900_BodyBase, config);
         }
     }
 }

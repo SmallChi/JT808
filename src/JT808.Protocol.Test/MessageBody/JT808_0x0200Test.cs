@@ -22,7 +22,7 @@ namespace JT808.Protocol.Test.MessageBody
         public JT808_0x0200Test()
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
-            jT808Config.Register(Assembly.GetExecutingAssembly());
+            jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808LocationAttachImpl0x06>();
             JT808Serializer = new JT808Serializer(jT808Config);
         }
         [Fact]
@@ -204,7 +204,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
             Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
-            var jT808LocationAttachImpl0x06 = JT808Serializer.Deserialize<JT808LocationAttachImpl0x06>(jT808UploadLocationRequest.JT808CustomLocationAttachOriginalData[0x06]);
+            var jT808LocationAttachImpl0x06 = (JT808LocationAttachImpl0x06)jT808UploadLocationRequest.JT808CustomLocationAttachData[0x06];
             Assert.Equal(18, jT808LocationAttachImpl0x06.Age);
             Assert.Equal(1, jT808LocationAttachImpl0x06.Gender);
             Assert.Equal("smallchi", jT808LocationAttachImpl0x06.UserName);
@@ -370,6 +370,58 @@ namespace JT808.Protocol.Test.MessageBody
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
             Assert.Equal("7E0200005C11223344556622B8000000010000000200BA7F0E07E4F11C0028003C00001807151010100104000000640202003703020038040200011105010000000112060100000001011307000000020022012504000000172A0200F42B04000000F2300102310105167E", hex);
             //7E0200005C11223344556622B8000000010000000200BA7F0E07E4F11C0028003C00001807151010100104000000640202003703020038040200011105010000000112060100000001011307000000020022012504000000172A0200F42B04000000F2300102310105167E
+
+            //7E
+            //02 00
+            //00 5C
+            //11 22 33 44 55 66
+            //22 B8
+            //00 00 00 01
+            //00 00 00 02
+            //00 BA 7F 0E
+            //07 E4 F1 1C
+            //00 28 
+            //00 3C
+            //00 00
+            //18 07 15 10 10 10
+            //01
+            //  04
+            //      00 00 00 64
+            //02
+            //  02
+            //      00 37
+            //03
+            //  02
+            //      00 38
+            //04
+            //  02
+            //      00 01
+            //11
+            //  05
+            //      01 00 00 00 01 
+            //12
+            //  06
+            //      01 00 00 00 01 01 
+            //13
+            //  07
+            //      00 00 00 02 00 22 01
+            //25
+            //  04
+            //      00 00 00 17
+            //2A
+            //  02
+            //      00 F4 
+            //2B
+            //  04
+            //      00 00 00 F2 
+            //30
+            //  01
+            //      02
+            //31
+            //  01
+            //      05
+            //16
+            //7E
         }
         [Fact]
         public void LatLngTest1_1()

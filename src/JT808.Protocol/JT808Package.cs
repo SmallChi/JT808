@@ -83,8 +83,7 @@ namespace JT808.Protocol
             //  4.1.判断有无数据体
             if (jT808Package.Header.MessageBodyProperty.DataLength > 0)
             {
-                object instance = config.MsgIdFactory.GetBodiesImplInstanceByMsgId(jT808Package.Header.MsgId, jT808Package.Header.TerminalPhoneNo);
-                if (instance != null)
+                if(config.MsgIdFactory.TryGetValue(jT808Package.Header.MsgId,out object instance))
                 {
                     if (jT808Package.Header.MessageBodyProperty.IsPackage)
                     {
@@ -132,6 +131,9 @@ namespace JT808.Protocol
                     }
                 }
             }
+
+
+            
             // 5.读取校验码
             jT808Package.CheckCode = reader.ReadByte();
             // 6.读取终止位置

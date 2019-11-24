@@ -213,9 +213,7 @@ namespace JT808.Protocol.MessagePack
         }
         public string ReadRemainStringContent()
         {
-            var readOnlySpan = ReadContent(0);
-            string value = JT808Constants.Encoding.GetString(readOnlySpan.ToArray());
-            return value.Trim('\0');
+            return ReadString(ReadCurrentRemainContentLength());
         }
         public string ReadHex(int len)
         {
