@@ -197,17 +197,21 @@ var hex = data.ToHexString();
 
 ``` config
 // 初始化配置
-IJT808Config jT808Config = DefaultGlobalConfig.Create();
+IJT808Config DT1JT808Config = new DefaultGlobalConfig();
+IJT808Config DT2JT808Config = new DefaultGlobalConfig();
 // 注册自定义消息外部程序集
-jT808Config.Register(Assembly.GetExecutingAssembly());
+DT1JT808Config.Register(Assembly.GetExecutingAssembly());
 // 跳过校验和验证
-jT808Config.SkipCRCCode = true;
+DT1JT808Config.SkipCRCCode = true;
 // 根据不同的设备终端号，添加自定义消息Id
-jT808Config.MsgIdFactory.CustomSetMap<DT1Demo6>(0x91, "1234567891");
-jT808Config.MsgIdFactory.CustomSetMap<DT2Demo6>(0x91, "1234567892");
+DT1JT808Config.MsgIdFactory.SetMap<DT1Demo6>();
+DT2JT808Config.MsgIdFactory.SetMap<DT2Demo6>();
 // 初始化序列化实例
-JT808Serializer JT808Serializer = new JT808Serializer(jT808Coonfig);
+JT808Serializer DT1JT808Serializer = new JT808Serializer(DT1JT808Config);
+JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 ```
+
+[可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 
 ### 举个栗子4
 
@@ -226,6 +230,8 @@ JT808Serializer JT808Serializer = new JT808Serializer(jT808Coonfig);
 协议解析器。**
 
 [可以参考Simples的Demo4](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo4.cs)
+
+[可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 
 > 要是哪位大佬还有其他的解决方式，请您告知我下，谢谢您了。
 
