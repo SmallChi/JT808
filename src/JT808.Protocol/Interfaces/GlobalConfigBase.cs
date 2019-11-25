@@ -49,7 +49,9 @@ namespace JT808.Protocol.Interfaces
                 foreach (var easb in externalAssemblies)
                 {
                     FormatterFactory.Register(easb);
+                    JT808_0X0200_Factory.Register(easb);
                     JT808_0X0200_Custom_Factory.Register(easb);
+                    JT808_0X8103_Factory.Register(easb);
                     JT808_0X8103_Custom_Factory.Register(easb);
                 }
             }
