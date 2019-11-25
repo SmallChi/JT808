@@ -222,6 +222,9 @@ JT808Serializer JT808Serializer = new JT808Serializer(jT808Coonfig);
 
 2.可以根据设备类型做个工厂，解耦对公共序列化器的依赖。
 
+**3.(推荐): 可以根据设备类型进行初始化DefaultGlobalConfig，根据不同的DefaultGlobalConfig实例去绑定对应
+协议解析器。**
+
 [可以参考Simples的Demo4](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo4.cs)
 
 > 要是哪位大佬还有其他的解决方式，请您告知我下，谢谢您了。
@@ -252,7 +255,10 @@ JT808Serializer JT808Serializer = new JT808Serializer(jT808Coonfig);
 
 ***解决方式：***
 
-对于设备来说，设备终端号是唯一标识，可以通过使用设备终端号和消息ID去查询对应的序列化器。
+方式1: 对于设备来说，设备终端号是唯一标识，可以通过使用设备终端号和消息ID去查询对应的序列化器。
+
+**方式2(推荐): 可以根据设备类型进行初始化DefaultGlobalConfig，根据不同的DefaultGlobalConfig实例去绑定对应
+协议解析器。**
 
 [可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 
@@ -267,43 +273,30 @@ JT808Serializer JT808Serializer = new JT808Serializer(jT808Coonfig);
 
 ``` ini
 
-BenchmarkDotNet=v0.11.5, OS=Windows 10.0.18362
+BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
 Intel Core i7-8700K CPU 3.70GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
-  [Host]     : .NET Framework 4.7.2 (CLR 4.0.30319.42000), 64bit RyuJIT-v4.8.4010.0
-  Job-LGLQDK : .NET Core 2.2.7 (CoreCLR 4.6.28008.02, CoreFX 4.6.28008.03), 64bit RyuJIT
-  Job-ZHZJMS : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), 64bit RyuJIT
+.NET Core SDK=3.0.100
+  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+  Job-ROHSDP : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
 
-Platform=AnyCpu  Server=False  
+Platform=AnyCpu  Server=False  Toolchain=.NET Core 3.0  
 
 ```
-
-|                          Method |     Toolchain |       Categories |      N |           Mean |         Error |        StdDev |      Gen 0 | Gen 1 | Gen 2 |    Allocated |
-|-------------------------------- |-------------- |----------------- |------- |---------------:|--------------:|--------------:|-----------:|------:|------:|-------------:|
-|   **0x0200_All_AttachId_Serialize** | **.NET Core 2.2** | **0x0200Serializer** |    **100** |     **2,481.6 us** |     **48.900 us** |     **48.026 us** |    **31.2500** |     **-** |     **-** |    **193.75 KB** |
-| 0x0200_All_AttachId_Deserialize | .NET Core 2.2 | 0x0200Serializer |    100 |     3,325.1 us |     51.965 us |     48.608 us |    78.1250 |     - |     - |    493.75 KB |
-|   0x0200_All_AttachId_Serialize | .NET Core 3.0 | 0x0200Serializer |    100 |     2,385.7 us |     46.285 us |     67.843 us |    31.2500 |     - |     - |    192.97 KB |
-| 0x0200_All_AttachId_Deserialize | .NET Core 3.0 | 0x0200Serializer |    100 |     3,054.6 us |     25.435 us |     21.239 us |    78.1250 |     - |     - |     487.5 KB |
-|   **0x0200_All_AttachId_Serialize** | **.NET Core 2.2** | **0x0200Serializer** |  **10000** |   **243,678.2 us** |  **4,693.810 us** |  **4,160.941 us** |  **3000.0000** |     **-** |     **-** |     **19375 KB** |
-| 0x0200_All_AttachId_Deserialize | .NET Core 2.2 | 0x0200Serializer |  10000 |   326,335.0 us |  3,298.498 us |  2,754.396 us |  8000.0000 |     - |     - |     49375 KB |
-|   0x0200_All_AttachId_Serialize | .NET Core 3.0 | 0x0200Serializer |  10000 |   230,732.4 us |  2,339.207 us |  2,073.646 us |  3000.0000 |     - |     - |  19296.88 KB |
-| 0x0200_All_AttachId_Deserialize | .NET Core 3.0 | 0x0200Serializer |  10000 |   301,096.7 us |  5,182.683 us |  4,847.885 us |  7000.0000 |     - |     - |     48750 KB |
-|   **0x0200_All_AttachId_Serialize** | **.NET Core 2.2** | **0x0200Serializer** | **100000** | **2,444,504.1 us** | **44,917.512 us** | **39,818.204 us** | **31000.0000** |     **-** |     **-** |    **193750 KB** |
-| 0x0200_All_AttachId_Deserialize | .NET Core 2.2 | 0x0200Serializer | 100000 | 3,312,997.6 us | 62,270.110 us | 55,200.831 us | 80000.0000 |     - |     - |    493750 KB |
-|   0x0200_All_AttachId_Serialize | .NET Core 3.0 | 0x0200Serializer | 100000 | 2,325,997.7 us | 46,265.141 us | 43,276.442 us | 31000.0000 |     - |     - | 192968.75 KB |
-| 0x0200_All_AttachId_Deserialize | .NET Core 3.0 | 0x0200Serializer | 100000 | 3,118,972.3 us | 60,591.451 us | 72,129.813 us | 79000.0000 |     - |     - |    487500 KB |
-|                                 |               |                  |        |                |               |               |            |       |       |              |
-|                 **0x0100Serialize** | **.NET Core 2.2** | **0x0100Serializer** |    **100** |       **249.1 us** |      **4.022 us** |      **3.565 us** |    **10.2539** |     **-** |     **-** |     **63.28 KB** |
-|               0x0100Deserialize | .NET Core 2.2 | 0x0100Serializer |    100 |       278.2 us |      5.353 us |      7.147 us |    17.5781 |     - |     - |    108.59 KB |
-|                 0x0100Serialize | .NET Core 3.0 | 0x0100Serializer |    100 |       235.4 us |      4.582 us |      4.062 us |     9.7656 |     - |     - |      62.5 KB |
-|               0x0100Deserialize | .NET Core 3.0 | 0x0100Serializer |    100 |       236.1 us |      1.417 us |      1.256 us |    14.6484 |     - |     - |     89.84 KB |
-|                 **0x0100Serialize** | **.NET Core 2.2** | **0x0100Serializer** |  **10000** |    **25,587.8 us** |    **795.384 us** |    **816.801 us** |  **1000.0000** |     **-** |     **-** |   **6328.13 KB** |
-|               0x0100Deserialize | .NET Core 2.2 | 0x0100Serializer |  10000 |    26,166.2 us |    308.810 us |    273.752 us |  1750.0000 |     - |     - |  10859.38 KB |
-|                 0x0100Serialize | .NET Core 3.0 | 0x0100Serializer |  10000 |    23,668.4 us |    483.884 us |    517.751 us |  1000.0000 |     - |     - |      6250 KB |
-|               0x0100Deserialize | .NET Core 3.0 | 0x0100Serializer |  10000 |    23,899.1 us |    400.562 us |    374.686 us |  1437.5000 |     - |     - |   8984.38 KB |
-|                 **0x0100Serialize** | **.NET Core 2.2** | **0x0100Serializer** | **100000** |   **250,100.0 us** |  **3,182.496 us** |  **2,821.200 us** | **10000.0000** |     **-** |     **-** |  **63281.25 KB** |
-|               0x0100Deserialize | .NET Core 2.2 | 0x0100Serializer | 100000 |   258,726.8 us |  2,116.900 us |  1,876.577 us | 17000.0000 |     - |     - | 108593.75 KB |
-|                 0x0100Serialize | .NET Core 3.0 | 0x0100Serializer | 100000 |   237,334.9 us |  3,793.161 us |  3,548.125 us | 10000.0000 |     - |     - |     62500 KB |
-|               0x0100Deserialize | .NET Core 3.0 | 0x0100Serializer | 100000 |   242,108.4 us |  3,433.333 us |  3,211.541 us | 14000.0000 |     - |     - |  89843.75 KB |
+|                          Method |       Categories |      N |          Mean |        Error |       StdDev |      Gen 0 | Gen 1 | Gen 2 |    Allocated |
+|-------------------------------- |----------------- |------- |--------------:|-------------:|-------------:|-----------:|------:|------:|-------------:|
+|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** |    **100** |     **259.55 us** |     **4.617 us** |     **4.319 us** |    **31.2500** |     **-** |     **-** |    **192.97 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer |    100 |     821.35 us |    10.732 us |     9.514 us |    79.1016 |     - |     - |     487.5 KB |
+|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** |  **10000** |  **26,448.35 us** |   **478.895 us** |   **399.899 us** |  **3125.0000** |     **-** |     **-** |  **19296.88 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer |  10000 |  81,776.05 us | 1,405.214 us | 1,245.686 us |  7857.1429 |     - |     - |   48751.2 KB |
+|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** | **100000** | **261,073.61 us** | **2,592.782 us** | **2,298.434 us** | **31000.0000** |     **-** |     **-** | **192969.15 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer | 100000 | 806,869.44 us | 7,921.093 us | 7,409.395 us | 79000.0000 |     - |     - |    487500 KB |
+|                                 |                  |        |               |              |              |            |       |       |              |
+|                 **0x0100Serialize** | **0x0100Serializer** |    **100** |      **76.62 us** |     **0.866 us** |     **0.810 us** |    **10.1318** |     **-** |     **-** |      **62.5 KB** |
+|               0x0100Deserialize | 0x0100Serializer |    100 |      77.80 us |     0.607 us |     0.568 us |    14.6484 |     - |     - |     89.84 KB |
+|                 **0x0100Serialize** | **0x0100Serializer** |  **10000** |   **7,608.31 us** |    **69.958 us** |    **65.439 us** |  **1015.6250** |     **-** |     **-** |      **6250 KB** |
+|               0x0100Deserialize | 0x0100Serializer |  10000 |   7,852.84 us |    54.138 us |    45.208 us |  1460.9375 |     - |     - |   8984.38 KB |
+|                 **0x0100Serialize** | **0x0100Serializer** | **100000** |  **76,993.50 us** |   **544.867 us** |   **509.669 us** | **10142.8571** |     **-** |     **-** |  **62500.28 KB** |
+|               0x0100Deserialize | 0x0100Serializer | 100000 |  78,382.88 us |   791.432 us |   740.306 us | 14571.4286 |     - |     - |     89845 KB |
 
 ## JT808终端通讯协议消息对照表
 

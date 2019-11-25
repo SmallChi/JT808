@@ -10,6 +10,7 @@ namespace JT808.Protocol
 {
     public interface IJT808Config
     {
+        JT808Version Version { get;}
         string ConfigId { get; }
         /// <summary>
         /// 消息流水号

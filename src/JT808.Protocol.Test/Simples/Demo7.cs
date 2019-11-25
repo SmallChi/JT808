@@ -63,7 +63,7 @@ namespace JT808.Protocol.Test.Simples
 
         public class DefaultConfig : GlobalConfigBase
         {
-            public override string ConfigId => "test";
+            public override string ConfigId { get; protected set; } = "test";
 
             public string Test()
             {
@@ -73,12 +73,12 @@ namespace JT808.Protocol.Test.Simples
 
         public class Config1 : GlobalConfigBase
         {
-            public override string ConfigId => "Config1";
+             public override string ConfigId { get; protected set; } = "Config1";
         }
 
         public class Config2 : GlobalConfigBase
         {
-            public override string ConfigId => "Config2";
+            public override string ConfigId { get; protected set; } = "Config2";
         }
     }
 }
