@@ -56,6 +56,8 @@
     <Compile Include="MessageBody\JT808_0x0901Test.cs" />
     <Compile Include="MessageBody\JT808_0x0A00Test.cs" />
     <Compile Include="MessageBody\JT808_0x8001Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0005Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8004Test.cs" />
     <Compile Include="MessageBody\JT808_0x8003Test.cs" />
     <Compile Include="MessageBody\JT808_0x8100Test.cs" />
     <Compile Include="MessageBody\JT808_0x8103CustomIdExtensions\JT808_0x8103_0x0075.cs" />
@@ -94,6 +96,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />

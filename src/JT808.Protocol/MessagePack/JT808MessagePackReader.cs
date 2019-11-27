@@ -1,5 +1,7 @@
 ﻿using JT808.Protocol.Buffers;
+using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
+using JT808.Protocol.Interfaces;
 using System;
 using System.Buffers;
 using System.Buffers.Binary;
@@ -15,6 +17,7 @@ namespace JT808.Protocol.MessagePack
         public ReadOnlySpan<byte> Reader { get; private set; }
         public ReadOnlySpan<byte> SrcBuffer { get; }
         public int ReaderCount { get; private set; }
+        public JT808Version Version { get; set; }
         private byte _calculateCheckXorCode;
         private byte _realCheckXorCode;
         private bool _checkXorCodeVali;
@@ -31,7 +34,7 @@ namespace JT808.Protocol.MessagePack
         /// 解码（转义还原）,计算校验和
         /// </summary>
         /// <param name="buffer"></param>
-        public JT808MessagePackReader(ReadOnlySpan<byte> srcBuffer)
+        public JT808MessagePackReader(ReadOnlySpan<byte> srcBuffer, JT808Version version = JT808Version.JTT2013)
         {
             SrcBuffer = srcBuffer;
             ReaderCount = 0;
@@ -39,6 +42,7 @@ namespace JT808.Protocol.MessagePack
             _calculateCheckXorCode = 0x00;
             _checkXorCodeVali = false;
             _decoded = false;
+            Version = version;
             Reader = srcBuffer;
         }
         /// <summary>

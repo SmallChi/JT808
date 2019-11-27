@@ -34,6 +34,34 @@ namespace JT808.Protocol
         /// </summary>
         public byte End { get; set; }
 
+        public JT808Version Version 
+        { 
+            get {
+                if (Header != null)
+                {
+                    try
+                    {
+                        if (Header.MessageBodyProperty.VersionFlag)
+                        {
+                            return JT808Version.JTT2019;
+                        }
+                        else
+                        {
+                            return JT808Version.JTT2013;
+                        }
+                    }
+                    catch
+                    {
+                        return JT808Version.JTT2013;
+                    }
+                }
+                else
+                {
+                    return JT808Version.JTT2013;
+                }
+            } 
+        }
+
         public JT808HeaderPackage Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             // 1. 验证校验和
@@ -56,8 +84,21 @@ namespace JT808.Protocol
             ushort messageBodyPropertyValue = reader.ReadUInt16();
             //    3.2.1.解包消息体属性
             jT808Package.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty(messageBodyPropertyValue);
-            // 3.3.读取终端手机号 
-            jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+            if (jT808Package.Header.MessageBodyProperty.VersionFlag)
+            {
+                //2019版本
+                //  3.3.读取协议版本号 
+                jT808Package.Header.ProtocolVersion = reader.ReadByte();
+                //  3.4.读取终端手机号 
+                jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(20, config.Trim);
+                reader.Version = JT808Version.JTT2019;
+            }
+            else
+            {
+                //2013版本
+                //  3.3.读取终端手机号 
+                jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+            }
             // 3.4.读取消息流水号
             jT808Package.Header.MsgNum = reader.ReadUInt16();
             // 3.5.判断有无分包

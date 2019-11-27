@@ -8,6 +8,7 @@ using System.Buffers;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
+using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.Test.MessagePack
 {
@@ -227,6 +228,16 @@ namespace JT808.Protocol.Test.MessagePack
                     count--;
                 }
             }
+        }
+
+        [Fact]
+        public void VersionTest1()
+        {
+            byte[] array = new byte[4096];
+            var reader = new JT808MessagePackReader(array);
+            Assert.Equal(JT808Version.JTT2013, reader.Version);
+            reader.Version = JT808Version.JTT2019;
+            Assert.Equal(JT808Version.JTT2019, reader.Version);
         }
     }
 }

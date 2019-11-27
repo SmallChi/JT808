@@ -8,6 +8,7 @@ namespace JT808.Protocol.Test
     public class JT808HeaderTest
     {
         JT808Serializer JT808Serializer = new JT808Serializer();
+
         [Fact]
         public void Test3()
         {
@@ -34,7 +35,7 @@ namespace JT808.Protocol.Test
             jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();
 
             var hex = JT808Serializer.Serialize(jT808HeaderProperty).ToHexString();
-            Assert.Equal("01 02 00 05 01 38 12 34 56 78 00 87".Replace(" ",""), hex);
+            Assert.Equal("01 02 00 05 01 38 12 34 56 78 00 87".Replace(" ", ""), hex);
         }
 
         [Fact]
@@ -74,6 +75,40 @@ namespace JT808.Protocol.Test
             Assert.False(jT808Header.MessageBodyProperty.IsPackage);
             Assert.Equal(JT808MsgId.终端鉴权.ToValue(), jT808Header.MsgId);
             Assert.Equal(5, jT808Header.MessageBodyProperty.DataLength);
+        }
+
+        [Fact]
+        public void JT808Header_2019Test1()
+        {
+            JT808Header jT808HeaderProperty = new JT808Header
+            {
+                TerminalPhoneNo = "13812345678"
+            };
+            JT808HeaderMessageBodyProperty jT808HeaderMessageBodyProperty = new JT808HeaderMessageBodyProperty();
+            jT808HeaderMessageBodyProperty.DataLength = 255;
+            jT808HeaderMessageBodyProperty.IsPackage = true;
+            jT808HeaderMessageBodyProperty.Encrypt = JT808EncryptMethod.RSA;
+            jT808HeaderMessageBodyProperty.VersionFlag = true;
+            jT808HeaderProperty.MessageBodyProperty = jT808HeaderMessageBodyProperty;
+            jT808HeaderProperty.MsgNum = 135;
+            jT808HeaderProperty.MsgId = JT808MsgId.终端鉴权.ToUInt16Value();
+            jT808HeaderProperty.ProtocolVersion = 2;
+            var hex = JT808Serializer.Serialize(jT808HeaderProperty).ToHexString();
+            Assert.Equal("010264FF0200000000013812345678008700000000", hex);
+        }
+
+        [Fact]
+        public void JT808Header_2019Test2()
+        {
+            byte[] headerBytes = "010264FF0200000000013812345678008700000000".ToHexBytes();
+            JT808Header jT808Header = JT808Serializer.Deserialize<JT808Header>(headerBytes);
+            Assert.Equal(135, jT808Header.MsgNum);
+            Assert.Equal(2, jT808Header.ProtocolVersion);
+            Assert.Equal("13812345678", jT808Header.TerminalPhoneNo);
+            Assert.True(jT808Header.MessageBodyProperty.IsPackage);
+            Assert.True(jT808Header.MessageBodyProperty.VersionFlag);
+            Assert.Equal(JT808MsgId.终端鉴权.ToValue(), jT808Header.MsgId);
+            Assert.Equal(255, jT808Header.MessageBodyProperty.DataLength);
         }
     }
 }

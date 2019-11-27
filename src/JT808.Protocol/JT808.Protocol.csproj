@@ -14,7 +14,7 @@
     <licenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</licenseUrl>
     <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>2.2.0-preview1</Version>
+    <Version>2.2.0-preview3</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -65,6 +65,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.6.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />

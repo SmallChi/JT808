@@ -7,15 +7,34 @@ namespace JT808.Protocol
 {
     public struct JT808HeaderMessageBodyProperty
     {
-        public JT808HeaderMessageBodyProperty(int dataLength,bool isPackage, JT808EncryptMethod jT808EncryptMethod= JT808EncryptMethod.None)
+        public JT808HeaderMessageBodyProperty(int dataLength,bool isPackage, bool versionFlag= false, JT808EncryptMethod jT808EncryptMethod= JT808EncryptMethod.None)
         {
             IsPackage = isPackage;
             Encrypt = jT808EncryptMethod;
             DataLength = dataLength;
+            VersionFlag = versionFlag;
         }
+
+        public JT808HeaderMessageBodyProperty(bool isPackage, bool versionFlag, JT808EncryptMethod jT808EncryptMethod = JT808EncryptMethod.None)
+        {
+            IsPackage = isPackage;
+            Encrypt = jT808EncryptMethod;
+            DataLength = 0;
+            VersionFlag = versionFlag;
+        }
+
+        public JT808HeaderMessageBodyProperty(bool versionFlag, JT808EncryptMethod jT808EncryptMethod = JT808EncryptMethod.None)
+        {
+            IsPackage = false;
+            Encrypt = jT808EncryptMethod;
+            DataLength = 0;
+            VersionFlag = versionFlag;
+        }
+
         public JT808HeaderMessageBodyProperty(ushort value)
         {
-            IsPackage = (value >> 13) == 1;
+            VersionFlag = (value >> 14 & 0x01) == 1;
+            IsPackage = ((value >> 13) & 0x001) == 1;
             switch ((value & 0x400) >> 10)
             {
                 case 0:
@@ -30,6 +49,10 @@ namespace JT808.Protocol
             }
             DataLength = value & 0x3FF;
         }
+        /// <summary>
+        /// 版本标识（默认为1=true）
+        /// </summary>
+        public bool VersionFlag { get; set; }
         /// <summary>
         /// 是否分包
         ///  true-1  表示消息体为长消息，进行分包发送处理
@@ -49,6 +72,7 @@ namespace JT808.Protocol
         public int DataLength { get; set; }
         public ushort Wrap()
         {
+
             //  1.是否分包
             int tmpIsPacke = 0;
             if (IsPackage)
@@ -75,8 +99,53 @@ namespace JT808.Protocol
             {
                 // 判断有无数据体长度
                 DataLength = 0;
-            }       
-            return (ushort)(tmpIsPacke | tmpEncrypt | DataLength);
+            }
+            //  3.是否分包
+            int versionFlag = 0;
+            if (VersionFlag)
+            {
+                versionFlag = 1 << 14;
+            }
+            return (ushort)(versionFlag|tmpIsPacke | tmpEncrypt | DataLength);
+        }
+
+        public ushort Wrap(int dataLength)
+        {
+            //  1.是否分包
+            int tmpIsPacke = 0;
+            if (IsPackage)
+            {
+                tmpIsPacke = 1 << 13;
+            }
+            //  2.是否加密
+            int tmpEncrypt;
+            //  2.3.数据加密方式
+            switch (Encrypt)
+            {
+                case JT808EncryptMethod.None:
+                    tmpEncrypt = 0;
+                    break;
+                case JT808EncryptMethod.RSA:
+                    tmpEncrypt = 1 << 10;
+                    break;
+                default:
+                    tmpEncrypt = 0;
+                    break;
+            }
+            //  2.4.数据长度
+            DataLength = dataLength;
+            if (dataLength <= 0)
+            {
+                // 判断有无数据体长度
+                dataLength = 0;
+            }
+            //  3.是否分包
+            int versionFlag = 0;
+            if (VersionFlag)
+            {
+                versionFlag = 1 << 14;
+            }
+            return (ushort)(versionFlag | tmpIsPacke | tmpEncrypt | dataLength);
         }
     }
 }

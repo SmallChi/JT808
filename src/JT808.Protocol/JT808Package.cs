@@ -25,27 +25,54 @@ namespace JT808.Protocol
         /// 起始符
         /// </summary>
         public byte Begin { get; set; } = BeginFlag;
-
         /// <summary>
-        /// 终止符
+        /// 头数据
         /// </summary>
-        public byte End { get; set; } = EndFlag;
-
+        public JT808Header Header { get; set; }
+        /// <summary>
+        /// 数据体
+        /// </summary>
+        public JT808Bodies Bodies { get; set; }
         /// <summary>
         /// 校验码
         /// 从消息头开始，同后一字节异或，直到校验码前一个字节，占用一个字节。
         /// </summary>
         public byte CheckCode { get; set; }
-
         /// <summary>
-        /// 头数据
+        /// 终止符
         /// </summary>
-        public JT808Header Header { get; set; }
-
+        public byte End { get; set; } = EndFlag;
         /// <summary>
-        /// 数据体
+        /// 808版本号
         /// </summary>
-        public JT808Bodies Bodies { get; set; }
+        public JT808Version Version
+        {
+            get
+            {
+                if (Header != null)
+                {
+                    try
+                    {
+                        if (Header.MessageBodyProperty.VersionFlag)
+                        {
+                            return JT808Version.JTT2019;
+                        }
+                        else
+                        {
+                            return JT808Version.JTT2013;
+                        }
+                    }
+                    catch
+                    {
+                        return JT808Version.JTT2013;
+                    }
+                }
+                else
+                {
+                    return JT808Version.JTT2013;
+                }
+            }
+        }
 
         public JT808Package Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
@@ -67,11 +94,23 @@ namespace JT808.Protocol
             jT808Package.Header.MsgId = reader.ReadUInt16();
             //  3.2.读取消息体属性
             jT808Package.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty(reader.ReadUInt16());
-            // 3.3.读取终端手机号 
-            jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
-            // 3.4.读取消息流水号
+            if (jT808Package.Header.MessageBodyProperty.VersionFlag)
+            {
+                //2019版本
+                jT808Package.Header.ProtocolVersion = reader.ReadByte();
+                //  3.4.读取终端手机号 
+                jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(20, config.Trim);
+                reader.Version = JT808Version.JTT2019;
+            }
+            else
+            {
+                //2013版本
+                //  3.3.读取终端手机号 
+                jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+            }
+            //  3.4.读取消息流水号
             jT808Package.Header.MsgNum = reader.ReadUInt16();
-            // 3.5.判断有无分包
+            //  3.5.判断有无分包
             if (jT808Package.Header.MessageBodyProperty.IsPackage)
             {
                 //3.5.1.读取消息包总数
@@ -131,9 +170,7 @@ namespace JT808.Protocol
                     }
                 }
             }
-
-
-            
+ 
             // 5.读取校验码
             jT808Package.CheckCode = reader.ReadByte();
             // 6.读取终止位置
@@ -152,8 +189,21 @@ namespace JT808.Protocol
             writer.WriteUInt16(value.Header.MsgId);
             //  2.2.消息体属性(包含消息体长度所以先跳过)
             writer.Skip(2, out int msgBodiesPropertyPosition);
-            //  2.3.终端手机号 (写死大陆手机号码)
-            writer.WriteBCD(value.Header.TerminalPhoneNo, config.TerminalPhoneNoLength);
+            if (value.Header.MessageBodyProperty.VersionFlag)
+            {
+                //2019版本
+                //  2.3.协议版本号
+                writer.WriteByte(value.Header.ProtocolVersion);
+                //  2.4.终端手机号
+                writer.WriteBCD(value.Header.TerminalPhoneNo, 20);
+                writer.Version = JT808Version.JTT2019;
+            }
+            else
+            {
+                //2013版本
+                //  2.3.终端手机号 (写死大陆手机号码)
+                writer.WriteBCD(value.Header.TerminalPhoneNo, config.TerminalPhoneNoLength);
+            }
             value.Header.MsgNum = value.Header.MsgNum > 0 ? value.Header.MsgNum : config.MsgSNDistributed.Increment();
             //  2.4.消息流水号
             writer.WriteUInt16(value.Header.MsgNum);
@@ -177,9 +227,8 @@ namespace JT808.Protocol
                 }
             }
             //  3.1.处理数据体长度
-            value.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty((ushort)(writer.GetCurrentPosition() - headerLength));
             // 2.2.回写消息体属性
-            writer.WriteUInt16Return(value.Header.MessageBodyProperty.Wrap(), msgBodiesPropertyPosition);
+            writer.WriteUInt16Return(value.Header.MessageBodyProperty.Wrap((writer.GetCurrentPosition() - headerLength)), msgBodiesPropertyPosition);
             // 4.校验码
             writer.WriteXor();
             // 5.终止符

@@ -213,12 +213,6 @@
             校验和不相等
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808ErrorCode.GetFormatterAttributeError">
-            <summary>
-            没有标记
-            <see cref="T:JT808.Protocol.Attributes.JT808FormatterAttribute"/>
-            </summary>
-        </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.HeaderParseError">
             <summary>
             消息头解析错误
@@ -2197,10 +2191,21 @@
             <see cref="T:JT808.Protocol.Enums.JT808MsgId"/>
             </summary>
         </member>
+        <member name="P:JT808.Protocol.JT808Header.MessageBodyProperty">
+            <summary>
+            消息体属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Header.ProtocolVersion">
+            <summary>
+            协议版本号(2019版本)
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.JT808Header.TerminalPhoneNo">
             <summary>
             终端手机号
             根据安装后终端自身的手机号转换。手机号不足 12 位，则在前补充数字，大陆手机号补充数字 0，港澳台则根据其区号进行位数补充
+            (2019版本)手机号不足 20 位，则在前补充数字 0
             </summary>
         </member>
         <member name="P:JT808.Protocol.JT808Header.MsgNum">
@@ -2219,6 +2224,11 @@
         <member name="P:JT808.Protocol.JT808Header.PackageIndex">
             <summary>
             报序号 从1开始
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.VersionFlag">
+            <summary>
+            版本标识（默认为1=true）
             </summary>
         </member>
         <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.IsPackage">
@@ -2292,17 +2302,6 @@
             起始符
             </summary>
         </member>
-        <member name="P:JT808.Protocol.JT808Package.End">
-            <summary>
-            终止符
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.JT808Package.CheckCode">
-            <summary>
-            校验码
-            从消息头开始，同后一字节异或，直到校验码前一个字节，占用一个字节。
-            </summary>
-        </member>
         <member name="P:JT808.Protocol.JT808Package.Header">
             <summary>
             头数据
@@ -2313,7 +2312,23 @@
             数据体
             </summary>
         </member>
-        <member name="M:JT808.Protocol.JT808Serializer.HeaderDeserialize(System.ReadOnlySpan{System.Byte},System.Int32)">
+        <member name="P:JT808.Protocol.JT808Package.CheckCode">
+            <summary>
+            校验码
+            从消息头开始，同后一字节异或，直到校验码前一个字节，占用一个字节。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Package.End">
+            <summary>
+            终止符
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Package.Version">
+            <summary>
+            808版本号
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808Serializer.HeaderDeserialize(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Int32)">
             <summary>
             用于负载或者分布式的时候，在网关只需要解到头部。
             根据头部的消息Id进行分发处理，可以防止小部分性能损耗。
@@ -2365,6 +2380,42 @@
             跳过数据体序列化
             </summary>
         </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0004">
+            <summary>
+            查询服务器时间请求
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0004.SkipSerialization">
+            <summary>
+            跳过数据体序列化
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0005">
+            <summary>
+            终端补传分包请求
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0005.OriginalMsgNum">
+            <summary>
+            原始消息流水号
+            对应要求补传的原始消息第一包的消息流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0005.AgainPackageCount">
+            <summary>
+            重传包总数
+            n
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0005.AgainPackageData">
+            <summary>
+            重传包 ID 列表
+            BYTE[2*n]
+            重传包序号顺序排列，如“包 ID1 包 ID2......包 IDn”。
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0100">
             <summary>
             终端注册
@@ -2389,21 +2440,22 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.MakerId">
             <summary>
             制造商 ID
-            5 个字节，终端制造商编码
+            2013版本 5 个字节，终端制造商编码
+            2019版本 11 个字节，终端制造商编码
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.TerminalModel">
             <summary>
             终端型号
-            20 个字节，此终端型号由制造商自行定义，位数不
-            足时，后补“0X00”。
+            2013版本   20 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
+            2019版本   30 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.TerminalId">
             <summary>
             终端 ID
-            7 个字节，由大写字母和数字组成，此终端 ID 由制
-            造商自行定义，位数不足时，后补“0X00”。
+            2013版本  7个字节，由大写字母和数字组成，此终端 ID 由制造商自行定义，位数不足时，后补“0X00”。
+            2019版本  30个字节，由大写字母和数字组成，此终端 ID 由制造商自行定义，位数不足时，后补“0X00”。
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.PlateColor">
@@ -2428,6 +2480,22 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0102.Code">
             <summary>
             鉴权码
+            鉴权码内容 2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0102.CodeLength">
+            <summary>
+            鉴权码长度 2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0102.IMEI">
+            <summary>
+            终端IMEI  长度15 2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0102.SoftwareVersion">
+            <summary>
+            软件版本号 长度20 后补 "0x00" 2019版本
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0104">
@@ -3214,6 +3282,12 @@
             重传包 ID 列表
             BYTE[2*n]
             重传包序号顺序排列，如“包 ID1 包 ID2......包 IDn”。
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8004">
+            <summary>
+            查询服务器时间应答
+            2019版本
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8100">
@@ -5420,7 +5494,7 @@
             主要用来一次性读取所有数据体内容操作
             </summary>
         </member>
-        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.#ctor(System.ReadOnlySpan{System.Byte})">
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.#ctor(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version)">
             <summary>
             解码（转义还原）,计算校验和
             </summary>

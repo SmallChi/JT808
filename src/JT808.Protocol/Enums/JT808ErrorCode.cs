@@ -7,11 +7,6 @@
         /// </summary>
         CheckCodeNotEqual = 1001,
         /// <summary>
-        /// 没有标记
-        /// <see cref="JT808.Protocol.Attributes.JT808FormatterAttribute"/>
-        /// </summary>
-        GetFormatterAttributeError = 1002,
-        /// <summary>
         /// 消息头解析错误
         /// </summary>
         HeaderParseError = 1003,

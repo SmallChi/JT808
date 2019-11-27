@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using System.Buffers;
+using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.Test.MessagePack
 {
@@ -456,6 +457,16 @@ namespace JT808.Protocol.Test.MessagePack
             Assert.Equal("7E 01 7D 02 00 7D 01 01 23 45 67 89 00 00 00 00 00 7E".Replace(" ", ""), encodeBytes);
             var realBytes = msgpackWriter.FlushAndGetRealArray().ToHexString();
             Assert.Equal("7E 01 7E 00 7D 01 23 45 67 89 00 00 00 00 00 7E 7E 01 7D 02 00 7D 01 01 23 45 67 89 00 00 00 00 00 7E".Replace(" ", ""), realBytes);
+        }
+
+        [Fact]
+        public void VersionTest1()
+        {
+            byte[] array = new byte[4096];
+            var msgpackWriter = new JT808MessagePackWriter(array);
+            Assert.Equal(JT808Version.JTT2013, msgpackWriter.Version);
+            msgpackWriter.Version = JT808Version.JTT2019;
+            Assert.Equal(JT808Version.JTT2019, msgpackWriter.Version);
         }
     }
 }

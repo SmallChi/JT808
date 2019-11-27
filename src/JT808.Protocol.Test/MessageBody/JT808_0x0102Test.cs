@@ -1,6 +1,7 @@
 ﻿using Xunit;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.Extensions;
+using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -24,6 +25,30 @@ namespace JT808.Protocol.Test.MessageBody
             byte[] bodys = "34 35 36 31 32".ToHexBytes();
             JT808_0x0102 jT808LoginRequest = JT808Serializer.Deserialize<JT808_0x0102>(bodys);
             Assert.Equal("45612", jT808LoginRequest.Code);
+        }
+
+        [Fact]
+        public void Test2019_1()
+        {
+            JT808_0x0102 jT808LoginRequestProperty = new JT808_0x0102
+            {
+                Code = "45612",
+                IMEI="1234567890abcde",
+                SoftwareVersion="v2.0.0"
+            };
+            string hex = JT808Serializer.Serialize(jT808LoginRequestProperty,JT808Version.JTT2019).ToHexString();
+            Assert.Equal("05343536313231323334353637383930616263646576322E302E303030303030303030303030303030", hex);
+        }
+
+        [Fact]
+        public void Test2019_2()
+        {
+            byte[] bodys = "05343536313231323334353637383930616263646576322E302E303030303030303030303030303030".ToHexBytes();
+            JT808_0x0102 jT808LoginRequest = JT808Serializer.Deserialize<JT808_0x0102>(bodys, JT808Version.JTT2019);
+            Assert.Equal("45612", jT808LoginRequest.Code);
+            Assert.Equal(5, jT808LoginRequest.CodeLength);
+            Assert.Equal("1234567890abcde", jT808LoginRequest.IMEI);
+            Assert.Equal("v2.0.0".PadRight(20,'0'), jT808LoginRequest.SoftwareVersion);
         }
 
         [Fact]

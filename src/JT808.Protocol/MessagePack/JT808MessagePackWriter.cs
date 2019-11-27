@@ -1,4 +1,5 @@
 ﻿using JT808.Protocol.Buffers;
+using JT808.Protocol.Enums;
 using System;
 using System.Buffers;
 using System.Buffers.Binary;
@@ -9,9 +10,11 @@ namespace JT808.Protocol.MessagePack
     public ref struct JT808MessagePackWriter
     {
         private JT808BufferWriter writer;
-        public JT808MessagePackWriter(Span<byte> buffer)
+        public JT808Version Version { get; set; }
+        public JT808MessagePackWriter(Span<byte> buffer, JT808Version version= JT808Version.JTT2013)
         {
             this.writer = new JT808BufferWriter(buffer);
+            Version = version;
         }
         public byte[] FlushAndGetEncodingArray()
         {

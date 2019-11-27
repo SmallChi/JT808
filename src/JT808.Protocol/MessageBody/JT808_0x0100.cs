@@ -1,4 +1,5 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -27,21 +28,22 @@ namespace JT808.Protocol.MessageBody
 
         /// <summary>
         /// 制造商 ID
-        /// 5 个字节，终端制造商编码
+        /// 2013版本 5 个字节，终端制造商编码
+        /// 2019版本 11 个字节，终端制造商编码
         /// </summary>
         public string MakerId { get; set; }
 
         /// <summary>
         /// 终端型号
-        /// 20 个字节，此终端型号由制造商自行定义，位数不
-        /// 足时，后补“0X00”。
+        /// 2013版本   20 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
+        /// 2019版本   30 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
         /// </summary>
         public string TerminalModel { get; set; }
 
         /// <summary>
         /// 终端 ID
-        /// 7 个字节，由大写字母和数字组成，此终端 ID 由制
-        /// 造商自行定义，位数不足时，后补“0X00”。
+        /// 2013版本  7个字节，由大写字母和数字组成，此终端 ID 由制造商自行定义，位数不足时，后补“0X00”。
+        /// 2019版本  30个字节，由大写字母和数字组成，此终端 ID 由制造商自行定义，位数不足时，后补“0X00”。
         /// </summary>
         public string TerminalId { get; set; }
 
@@ -64,9 +66,18 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0100 jT808_0X0100 = new JT808_0x0100();
             jT808_0X0100.AreaID = reader.ReadUInt16();
             jT808_0X0100.CityOrCountyId = reader.ReadUInt16();
-            jT808_0X0100.MakerId = reader.ReadString(5);
-            jT808_0X0100.TerminalModel = reader.ReadString(20);
-            jT808_0X0100.TerminalId = reader.ReadString(7);
+            if(reader.Version== JT808Version.JTT2019)
+            {
+                jT808_0X0100.MakerId = reader.ReadString(11);
+                jT808_0X0100.TerminalModel = reader.ReadString(30);
+                jT808_0X0100.TerminalId = reader.ReadString(30);
+            }
+            else
+            {
+                jT808_0X0100.MakerId = reader.ReadString(5);
+                jT808_0X0100.TerminalModel = reader.ReadString(20);
+                jT808_0X0100.TerminalId = reader.ReadString(7);
+            }
             jT808_0X0100.PlateColor = reader.ReadByte();
             jT808_0X0100.PlateNo = reader.ReadRemainStringContent();
             return jT808_0X0100;
@@ -76,9 +87,18 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteUInt16(value.AreaID);
             writer.WriteUInt16(value.CityOrCountyId);
-            writer.WriteString(value.MakerId.PadRight(5, '0'));
-            writer.WriteString(value.TerminalModel.PadRight(20, '0'));
-            writer.WriteString(value.TerminalId.PadRight(7, '0'));
+            if (writer.Version == JT808Version.JTT2019)
+            {
+                writer.WriteString(value.MakerId.PadLeft(11, '0'));
+                writer.WriteString(value.TerminalModel.PadLeft(30, '0'));
+                writer.WriteString(value.TerminalId.PadLeft(30, '0'));
+            }
+            else
+            {
+                writer.WriteString(value.MakerId.PadRight(5, '0'));
+                writer.WriteString(value.TerminalModel.PadRight(20, '0'));
+                writer.WriteString(value.TerminalId.PadRight(7, '0'));
+            }
             writer.WriteByte(value.PlateColor);
             writer.WriteString(value.PlateNo);
         }
