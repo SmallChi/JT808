@@ -1661,6 +1661,11 @@
             注意:处理808的分包读取完流需要先进行转义在进行分包
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Interfaces.IJT808_2019_Version">
+            <summary>
+            只用来标识2019版本增删改情况
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.IJT808Config.MsgSNDistributed">
             <summary>
             消息流水号
@@ -2538,26 +2543,29 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.MakerId">
             <summary>
             制造商 ID
-            5 个字节，终端制造商编码
+            2013版本 5 个字节，终端制造商编码
+            2019版本 11 个字节，终端制造商编码
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.TerminalModel">
             <summary>
             终端型号
-            BYTE[20]
-            20 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
+            BYTE[20] 20 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
+            2019版本
+            BYTE[30] 30 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.TerminalId">
             <summary>
             终端ID 
-            BYTE[7]
-            7 个字节，由大写字母和数字组成，此终端 ID 由制造商自行定义，位数不足时，后补“0X00”
+            BYTE[7]  7 个字节，由大写字母和数字组成，此终端 ID 由制造商自行定义，位数不足时，后补“0X00”
+            2019版本
+            BYTE[30]  30 个字节，由大写字母和数字组成，此终端 ID 由制造商自行定义，位数不足时，后补“0X00”
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.Terminal_SIM_ICCID">
             <summary>
-            终端 SIM 卡 ICCID 
+            终端 SIM 卡 ICCID
             BCD[10]
             </summary>
         </member>
@@ -2727,6 +2735,28 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x04.EventId">
             <summary>
             需要人工确认报警事件的 ID，从 1 开始计数
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_0x05">
+            <summary>
+            胎压
+             2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x05.TirePressure">
+            <summary>
+            胎压
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_0x06">
+            <summary>
+            胎压
+             2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x06.CarTemperature">
+            <summary>
+            车厢温度
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x11.JT808PositionType">
@@ -3694,6 +3724,70 @@
             驾驶员未登录汇报时间间隔，单位为秒（s），>0
             </summary>
         </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0023">
+            <summary>
+            从服务器APN。该值为空时，终端应使用主服务器相同配置
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0023.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0023.ParamValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0024">
+            <summary>
+            从服务器无线通信拨号用户名。该值为空时，终端应使用主服务器相同配置
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0024.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0024.ParamValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0025">
+            <summary>
+            从服务器无线通信拨号密码。该值为空，终端应使用主服务器相同配置
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0025.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0025.ParamValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0026">
+            <summary>
+            从服务器无线通信拨号密码。该值为空，终端应使用主服务器相同配置
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0026.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0026.ParamValue">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0027">
             <summary>
             休眠时汇报时间间隔，单位为秒（s），>0
@@ -3817,6 +3911,21 @@
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0031.ParamValue">
+            <summary>
+            电子围栏半径（非法位移阈值），单位为米
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0032">
+            <summary>
+            违规行驶时段范围
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0032.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0032.ParamValue">
             <summary>
             电子围栏半径（非法位移阈值），单位为米
             </summary>
@@ -4768,7 +4877,8 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8108.MakerId">
             <summary>
             制造商 ID
-            5 个字节，终端制造商编码
+            2013版本 5 个字节，终端制造商编码
+            2019版本 11 个字节，终端制造商编码
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8108.VersionNumLength">
@@ -4833,6 +4943,12 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8203.ManualConfirmAlarmType">
             <summary>
             人工确认报警类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8204">
+            <summary>
+            链路检测
+            2019版本
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8300">

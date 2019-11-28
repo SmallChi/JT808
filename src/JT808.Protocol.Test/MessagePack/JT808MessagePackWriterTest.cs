@@ -6,6 +6,7 @@ using System.Text;
 using Xunit;
 using System.Buffers;
 using JT808.Protocol.Enums;
+using System.Buffers.Binary;
 
 namespace JT808.Protocol.Test.MessagePack
 {
@@ -467,6 +468,17 @@ namespace JT808.Protocol.Test.MessagePack
             Assert.Equal(JT808Version.JTT2013, msgpackWriter.Version);
             msgpackWriter.Version = JT808Version.JTT2019;
             Assert.Equal(JT808Version.JTT2019, msgpackWriter.Version);
+        }
+
+        [Fact]
+        public void WriteInt16Test1()
+        {
+            byte[] array1 = new byte[2];
+            byte[] array2= new byte[2];
+            BinaryPrimitives.WriteInt16BigEndian(array1, -1233);
+            short a = -1233;
+            BinaryPrimitives.WriteUInt16BigEndian(array2, (ushort)a);
+            Assert.Equal(array1, array2);
         }
     }
 }

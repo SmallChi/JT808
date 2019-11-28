@@ -70,6 +70,11 @@ namespace JT808.Protocol.MessagePack
             span[0] = value;
             writer.Advance(1);
         }
+        public void WriteInt16(short value)
+        {
+            BinaryPrimitives.WriteInt16BigEndian(writer.Free, value);
+            writer.Advance(2);
+        }
         public void WriteUInt16(ushort value)
         {
             BinaryPrimitives.WriteUInt16BigEndian(writer.Free, value);

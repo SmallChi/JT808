@@ -1,5 +1,6 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -7,7 +8,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 车牌颜色，按照 JT/T415-2006 的 5.4.12
     /// </summary>
-    public class JT808_0x8103_0x0084 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0084>
+    public class JT808_0x8103_0x0084 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0084>, IJT808_2019_Version
     {
         public override uint ParamId { get; set; } = 0x0084;
         /// <summary>

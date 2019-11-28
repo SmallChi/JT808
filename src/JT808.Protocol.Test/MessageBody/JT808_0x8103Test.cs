@@ -162,5 +162,7 @@ namespace JT808.Protocol.Test.MessageBody
 
             Assert.Equal(customParams, Newtonsoft.Json.JsonConvert.SerializeObject(jT808_0X8103.CustomParamList));
         }
+
+
     }
 }

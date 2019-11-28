@@ -1,5 +1,7 @@
 ﻿using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -7,7 +9,8 @@ namespace JT808.Protocol.MessageBody
     /// 事件报告
     /// 0x0301
     /// </summary>
-    public class JT808_0x0301 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0301>
+    [Obsolete("2019版本已作删除")]
+    public class JT808_0x0301 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0301>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0301;
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
 
@@ -7,7 +8,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 终端控制
     /// </summary>
-    public class JT808_0x8105 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8105>
+    public class JT808_0x8105 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8105>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8105;
         /// <summary>

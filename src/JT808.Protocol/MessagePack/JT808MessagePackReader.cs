@@ -128,6 +128,10 @@ namespace JT808.Protocol.MessagePack
         public bool CheckXorCodeVali => _checkXorCodeVali;
         public byte ReadStart()=> ReadByte();
         public byte ReadEnd()=> ReadByte();
+        public short ReadInt16()
+        {
+            return BinaryPrimitives.ReadInt16BigEndian(GetReadOnlySpan(2));
+        }
         public ushort ReadUInt16()
         {
             return BinaryPrimitives.ReadUInt16BigEndian(GetReadOnlySpan(2)); 
