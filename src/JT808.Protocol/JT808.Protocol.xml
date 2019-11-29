@@ -4961,6 +4961,13 @@
             文本信息标志位含义见 表 38
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8300.TextType">
+            <summary>
+            文本类型
+            1=通知,2=服务
+            2019版本
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8300.TextInfo">
             <summary>
             文本信息
@@ -5126,6 +5133,31 @@
             控制指令标志位数据格式
             0：车门解锁；1：车门加锁
             1-7 保留
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8500.ControlTypeCount">
+            <summary>
+            控制类型数量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8500.ControlTypeBuffer">
+            <summary>
+            用于反序列化的时候,由于厂家自定义类型比较多，所以直接用byte数组存储
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8500.ControlTypes">
+            <summary>
+            用于序列化的时候,由于厂家自定义类型比较多，所以直接用JT808_0x8500_ControlType
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8500_0x0001">
+            <summary>
+            控制类型
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8500_ControlType">
+            <summary>
+            控制类型
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8600">
