@@ -104,5 +104,54 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((byte)200, item2.OverspeedDuration);
 
         }
+
+        [Fact]
+        public void Test_2019_1()
+        {
+            JT808_0x8600 jT808_0X8600 = new JT808_0x8600
+            {
+                SettingAreaProperty = JT808SettingProperty.追加区域.ToByteValue(),
+                AreaItems = new List<JT808CircleAreaProperty>()
+            };
+            jT808_0X8600.AreaItems.Add(new JT808CircleAreaProperty
+            {
+                AreaId = 1522,
+                AreaProperty = 222,
+                CenterPointLat = 123456789,
+                CenterPointLng = 123456789,
+                Radius = 200,
+                StartTime = DateTime.Parse("2019-11-30 00:00:12"),
+                EndTime = DateTime.Parse("2019-11-30 00:00:12"),
+                HighestSpeed = 60,
+                OverspeedDuration = 200,
+                NightMaximumSpeed=666,
+                AreaName="SmallChi"
+            });
+            var hex = JT808Serializer.Serialize(jT808_0X8600,JT808Version.JTT2019).ToHexString();
+            
+            Assert.Equal("0101000005F200DE075BCD15075BCD15000000C8003CC8029A0008536D616C6C436869", hex);
+        }
+
+        [Fact]
+        public void Test_2019_2()
+        {
+            byte[] bytes = "0101000005F200DE075BCD15075BCD15000000C8003CC8029A0008536D616C6C436869".ToHexBytes();
+            JT808_0x8600 jT808_0X8600 = JT808Serializer.Deserialize<JT808_0x8600>(bytes, JT808Version.JTT2019);
+
+            Assert.Equal(JT808SettingProperty.追加区域.ToByteValue(), jT808_0X8600.SettingAreaProperty);
+            Assert.Equal(1, jT808_0X8600.AreaCount);
+            var item0 = jT808_0X8600.AreaItems[0];
+            Assert.Equal((uint)1522, item0.AreaId);
+            Assert.Equal((ushort)222, item0.AreaProperty);
+            Assert.Equal((uint)123456789, item0.CenterPointLat);
+            Assert.Equal((uint)123456789, item0.CenterPointLng);
+            Assert.Equal((uint)200, item0.Radius);
+            Assert.Null(item0.StartTime);
+            Assert.Null(item0.EndTime);
+            Assert.Equal((ushort)60, item0.HighestSpeed);
+            Assert.Equal((byte)200, item0.OverspeedDuration);
+            Assert.Equal(666, item0.NightMaximumSpeed);
+            Assert.Equal("SmallChi", item0.AreaName);
+        }
     }
 }

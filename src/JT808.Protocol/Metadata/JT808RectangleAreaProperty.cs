@@ -1,11 +1,12 @@
-﻿using System;
+﻿using JT808.Protocol.Interfaces;
+using System;
 
 namespace JT808.Protocol.Metadata
 {
     /// <summary>
     /// 矩形区域属性
     /// </summary>
-    public struct JT808RectangleAreaProperty
+    public struct JT808RectangleAreaProperty : IJT808_2019_Version
     {
         /// <summary>
         /// 区域 ID
@@ -55,5 +56,20 @@ namespace JT808.Protocol.Metadata
         /// 单位为秒（s）（类似表述，同前修改），若区域属性 1 位为 0 则没有该字段
         /// </summary>
         public byte? OverspeedDuration { get; set; }
+        /// <summary>
+        /// 夜间最高速度
+        /// 2019版本
+        /// </summary>
+        public ushort NightMaximumSpeed { get; set; }
+        /// <summary>
+        /// 名称长度
+        /// 2019版本
+        /// </summary>
+        public ushort NameLength { get; set; }
+        /// <summary>
+        /// 区域名称
+        /// 2019版本
+        /// </summary>
+        public string AreaName { get; set; }
     }
 }

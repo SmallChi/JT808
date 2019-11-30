@@ -1,4 +1,6 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
@@ -11,7 +13,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x8600
     /// 注：本条消息协议支持周期时间范围，如要限制每天的8:30-18:00，起始/结束时间设为：00-00-00-08-30-00/00-00-00-18-00-00，其他以此类推
     /// </summary>
-    public class JT808_0x8600 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8600>
+    public class JT808_0x8600 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8600>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8600;
         /// <summary>
@@ -54,6 +56,15 @@ namespace JT808.Protocol.MessageBody
                 {
                     jT808CircleAreaProperty.HighestSpeed = reader.ReadUInt16();
                     jT808CircleAreaProperty.OverspeedDuration = reader.ReadByte();
+                    if (reader.Version == JT808Version.JTT2019)
+                    {
+                        jT808CircleAreaProperty.NightMaximumSpeed = reader.ReadUInt16();
+                    }
+                }
+                if(reader.Version== JT808Version.JTT2019)
+                {
+                    jT808CircleAreaProperty.NameLength = reader.ReadUInt16();
+                    jT808CircleAreaProperty.AreaName = reader.ReadString(jT808CircleAreaProperty.NameLength);
                 }
                 jT808_0X8600.AreaItems.Add(jT808CircleAreaProperty);
             }
@@ -97,6 +108,16 @@ namespace JT808.Protocol.MessageBody
                         {
                             writer.WriteByte(item.OverspeedDuration.Value);
                         }
+                        if (writer.Version == JT808Version.JTT2019)
+                        {
+                            writer.WriteUInt16(item.NightMaximumSpeed);
+                        }
+                    }
+                    if (writer.Version == JT808Version.JTT2019)
+                    {
+                        writer.Skip(2, out int AreaNameLengthPosition);
+                        writer.WriteString(item.AreaName);
+                        writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition()- AreaNameLengthPosition-2), AreaNameLengthPosition);
                     }
                 }
             }

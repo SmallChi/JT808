@@ -1,4 +1,6 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
@@ -10,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     /// 设置多边形区域
     /// 0x8604
     /// </summary>
-    public class JT808_0x8604 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8604>
+    public class JT808_0x8604 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8604>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8604;
         /// <summary>
@@ -50,6 +52,21 @@ namespace JT808.Protocol.MessageBody
         /// 顶点项
         /// </summary>
         public List<JT808PeakProperty> PeakItems { get; set; }
+        /// <summary>
+        /// 夜间最高速度
+        /// 2019版本
+        /// </summary>
+        public ushort NightMaximumSpeed { get; set; }
+        /// <summary>
+        /// 名称长度
+        /// 2019版本
+        /// </summary>
+        public ushort NameLength { get; set; }
+        /// <summary>
+        /// 区域名称
+        /// 2019版本
+        /// </summary>
+        public string AreaName { get; set; }
 
         public JT808_0x8604 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
@@ -77,6 +94,15 @@ namespace JT808.Protocol.MessageBody
                 item.Lat = reader.ReadUInt32();
                 item.Lng = reader.ReadUInt32();
                 jT808_0X8604.PeakItems.Add(item);
+            }
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                if (!bit1Flag) 
+                {
+                    jT808_0X8604.NightMaximumSpeed = reader.ReadUInt16();
+                }
+                jT808_0X8604.NameLength = reader.ReadUInt16();
+                jT808_0X8604.AreaName = reader.ReadString(jT808_0X8604.NameLength);
             }
             return jT808_0X8604;
         }
@@ -118,6 +144,16 @@ namespace JT808.Protocol.MessageBody
                     writer.WriteUInt32(item.Lat);
                     writer.WriteUInt32(item.Lng);
                 }
+            }
+            if (writer.Version == JT808Version.JTT2019)
+            {
+                if (!bit1Flag)
+                {
+                    writer.WriteUInt16(value.NightMaximumSpeed);
+                }
+                writer.Skip(2, out int AreaNameLengthPosition);
+                writer.WriteString(value.AreaName);
+                writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - AreaNameLengthPosition - 2), AreaNameLengthPosition);
             }
         }
     }

@@ -5290,6 +5290,24 @@
             顶点项
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.NightMaximumSpeed">
+            <summary>
+            夜间最高速度
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.NameLength">
+            <summary>
+            名称长度
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8604.AreaName">
+            <summary>
+            区域名称
+            2019版本
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8605">
             <summary>
             删除多边形区域
@@ -5344,6 +5362,16 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.InflectionPointItems">
             <summary>
             拐点项
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.RouteNameLength">
+            <summary>
+            名称长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8606.RouteName">
+            <summary>
+            路线名称
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8607">
@@ -5788,6 +5816,24 @@
             单位为秒（s）（类似表述，同前修改），若区域属性 1 位为 0 则没有该字段
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Metadata.JT808CircleAreaProperty.NightMaximumSpeed">
+            <summary>
+            夜间最高速度
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Metadata.JT808CircleAreaProperty.NameLength">
+            <summary>
+            名称长度
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Metadata.JT808CircleAreaProperty.AreaName">
+            <summary>
+            区域名称
+            2019版本
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Metadata.JT808ContactProperty">
             <summary>
             电话本联系人项数据
@@ -6037,6 +6083,24 @@
             <summary>
             超速持续时间 
             单位为秒（s）（类似表述，同前修改），若区域属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Metadata.JT808RectangleAreaProperty.NightMaximumSpeed">
+            <summary>
+            夜间最高速度
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Metadata.JT808RectangleAreaProperty.NameLength">
+            <summary>
+            名称长度
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Metadata.JT808RectangleAreaProperty.AreaName">
+            <summary>
+            区域名称
+            2019版本
             </summary>
         </member>
         <member name="T:JT808.Protocol.Metadata.JT808SplitPackageProperty">

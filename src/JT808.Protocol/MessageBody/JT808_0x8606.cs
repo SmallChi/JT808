@@ -1,4 +1,6 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
@@ -10,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     /// 设置路线
     /// 0x8606
     /// </summary>
-    public class JT808_0x8606 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8606>
+    public class JT808_0x8606 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8606>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8606;
         /// <summary>
@@ -40,6 +42,14 @@ namespace JT808.Protocol.MessageBody
         /// 拐点项
         /// </summary>
         public List<JT808InflectionPointProperty> InflectionPointItems { get; set; }
+        /// <summary>
+        /// 名称长度
+        /// </summary>
+        public ushort RouteNameLength { get; set; }
+        /// <summary>
+        /// 路线名称
+        /// </summary>
+        public string RouteName { get; set; }
 
         public JT808_0x8606 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
@@ -78,6 +88,11 @@ namespace JT808.Protocol.MessageBody
                     jT808InflectionPointProperty.SectionOverspeedDuration = reader.ReadByte();
                 }
                 jT808_0X8606.InflectionPointItems.Add(jT808InflectionPointProperty);
+                if (reader.Version == JT808Version.JTT2019)
+                {
+                    jT808_0X8606.RouteNameLength = reader.ReadUInt16();
+                    jT808_0X8606.RouteName = reader.ReadString(jT808_0X8606.RouteNameLength);
+                }
             }
             return jT808_0X8606;
         }
@@ -127,6 +142,12 @@ namespace JT808.Protocol.MessageBody
                             writer.WriteByte(item.SectionOverspeedDuration.Value);
                     }
                 }
+            }
+            if (writer.Version == JT808Version.JTT2019)
+            {
+                writer.Skip(2, out int RouteNameLengthPosition);
+                writer.WriteString(value.RouteName);
+                writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - RouteNameLengthPosition - 2), RouteNameLengthPosition);
             }
         }
     }

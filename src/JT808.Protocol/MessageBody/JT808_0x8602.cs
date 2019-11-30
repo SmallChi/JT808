@@ -1,4 +1,6 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
@@ -10,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     /// 设置矩形区域
     /// 0x8602
     /// </summary>
-    public class JT808_0x8602 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8602>
+    public class JT808_0x8602 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8602>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8602;
         /// <summary>
@@ -35,27 +37,36 @@ namespace JT808.Protocol.MessageBody
             jT808_0X8602.AreaItems = new List<JT808RectangleAreaProperty>();
             for (var i = 0; i < jT808_0X8602.AreaCount; i++)
             {
-                JT808RectangleAreaProperty jT808CircleAreaProperty = new JT808RectangleAreaProperty();
-                jT808CircleAreaProperty.AreaId = reader.ReadUInt32();
-                jT808CircleAreaProperty.AreaProperty = reader.ReadUInt16();
-                jT808CircleAreaProperty.UpLeftPointLat = reader.ReadUInt32();
-                jT808CircleAreaProperty.UpLeftPointLng = reader.ReadUInt32();
-                jT808CircleAreaProperty.LowRightPointLat = reader.ReadUInt32();
-                jT808CircleAreaProperty.LowRightPointLng = reader.ReadUInt32();
-                ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(jT808CircleAreaProperty.AreaProperty, 2).PadLeft(16, '0').AsSpan();
+                JT808RectangleAreaProperty areaProperty = new JT808RectangleAreaProperty();
+                areaProperty.AreaId = reader.ReadUInt32();
+                areaProperty.AreaProperty = reader.ReadUInt16();
+                areaProperty.UpLeftPointLat = reader.ReadUInt32();
+                areaProperty.UpLeftPointLng = reader.ReadUInt32();
+                areaProperty.LowRightPointLat = reader.ReadUInt32();
+                areaProperty.LowRightPointLng = reader.ReadUInt32();
+                ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(areaProperty.AreaProperty, 2).PadLeft(16, '0').AsSpan();
                 bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
                 if (!bit0Flag)
                 {
-                    jT808CircleAreaProperty.StartTime = reader.ReadDateTime6();
-                    jT808CircleAreaProperty.EndTime = reader.ReadDateTime6();
+                    areaProperty.StartTime = reader.ReadDateTime6();
+                    areaProperty.EndTime = reader.ReadDateTime6();
                 }
                 bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2, 1).ToString().Equals("0");
                 if (!bit1Flag)
                 {
-                    jT808CircleAreaProperty.HighestSpeed = reader.ReadUInt16();
-                    jT808CircleAreaProperty.OverspeedDuration = reader.ReadByte();
+                    areaProperty.HighestSpeed = reader.ReadUInt16();
+                    areaProperty.OverspeedDuration = reader.ReadByte();
+                    if (reader.Version == JT808Version.JTT2019)
+                    {
+                        areaProperty.NightMaximumSpeed = reader.ReadUInt16();
+                    }
                 }
-                jT808_0X8602.AreaItems.Add(jT808CircleAreaProperty);
+                if (reader.Version == JT808Version.JTT2019)
+                {
+                    areaProperty.NameLength = reader.ReadUInt16();
+                    areaProperty.AreaName = reader.ReadString(areaProperty.NameLength);
+                }
+                jT808_0X8602.AreaItems.Add(areaProperty);
             }
             return jT808_0X8602;
         }
@@ -98,6 +109,16 @@ namespace JT808.Protocol.MessageBody
                         {
                             writer.WriteByte(item.OverspeedDuration.Value);
                         }
+                        if (writer.Version == JT808Version.JTT2019)
+                        {
+                            writer.WriteUInt16(item.NightMaximumSpeed);
+                        }
+                    }
+                    if (writer.Version == JT808Version.JTT2019)
+                    {
+                        writer.Skip(2, out int AreaNameLengthPosition);
+                        writer.WriteString(item.AreaName);
+                        writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - AreaNameLengthPosition - 2), AreaNameLengthPosition);
                     }
                 }
             }
