@@ -1,4 +1,5 @@
 ﻿using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ namespace JT808.Protocol.MessageBody
     /// 摄像头立即拍摄命令应答
     /// 0x0805
     /// </summary>
-    public class JT808_0x0805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0805>
+    public class JT808_0x0805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0805>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0805;
         /// <summary>
@@ -36,12 +37,15 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0805 jT808_0X0805 = new JT808_0x0805();
             jT808_0X0805.ReplyMsgNum = reader.ReadUInt16();
             jT808_0X0805.Result = reader.ReadByte();
-            jT808_0X0805.MultimediaIdCount = reader.ReadUInt16();
-            jT808_0X0805.MultimediaIds = new List<uint>();
-            for (var i = 0; i < jT808_0X0805.MultimediaIdCount; i++)
+            if (jT808_0X0805.Result == 0)
             {
-                uint id = reader.ReadUInt32();
-                jT808_0X0805.MultimediaIds.Add(id);
+                jT808_0X0805.MultimediaIdCount = reader.ReadUInt16();
+                jT808_0X0805.MultimediaIds = new List<uint>();
+                for (var i = 0; i < jT808_0X0805.MultimediaIdCount; i++)
+                {
+                    uint id = reader.ReadUInt32();
+                    jT808_0X0805.MultimediaIds.Add(id);
+                }
             }
             return jT808_0X0805;
         }
@@ -50,10 +54,13 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteUInt16(value.ReplyMsgNum);
             writer.WriteByte(value.Result);
-            writer.WriteUInt16((ushort)value.MultimediaIds.Count);
-            foreach (var item in value.MultimediaIds)
+            if (value.Result == 0)
             {
-                writer.WriteUInt32(item);
+                writer.WriteUInt16((ushort)value.MultimediaIds.Count);
+                foreach (var item in value.MultimediaIds)
+                {
+                    writer.WriteUInt32(item);
+                }
             }
         }
     }

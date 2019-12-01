@@ -82,6 +82,8 @@
     <Compile Include="MessageBody\JT808_0x8603Test.cs" />
     <Compile Include="MessageBody\JT808_0x8604Test.cs" />
     <Compile Include="MessageBody\JT808_0x8605Test.cs" />
+    <Compile Include="MessageBody\JT808_0x0608Test.cs" />
+    <Compile Include="MessageBody\JT808_0x8608Test.cs" />
     <Compile Include="MessageBody\JT808_0x8606Test.cs" />
     <Compile Include="MessageBody\JT808_0x8800Test.cs" />
     <Compile Include="MessageBody\JT808_0x8801Test.cs" />

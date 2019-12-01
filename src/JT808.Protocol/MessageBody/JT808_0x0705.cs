@@ -1,5 +1,6 @@
 ﻿using JT808.Protocol.Exceptions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
@@ -11,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     /// CAN 总线数据上传
     /// 0x0705
     /// </summary>
-    public class JT808_0x0705 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0705>
+    public class JT808_0x0705 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0705>,IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0705;
         /// <summary>
@@ -38,11 +39,7 @@ namespace JT808.Protocol.MessageBody
             for (var i = 0; i < jT808_0X0705.CanItemCount; i++)
             {
                 JT808CanProperty jT808CanProperty = new JT808CanProperty();
-                jT808CanProperty.CanId = reader.ReadArray(4).ToArray();
-                if (jT808CanProperty.CanId.Length != 4)
-                {
-                    throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(jT808CanProperty.CanId)}->4");
-                }
+                jT808CanProperty.CanId = reader.ReadUInt32();
                 jT808CanProperty.CanData = reader.ReadArray(8).ToArray();
                 if (jT808CanProperty.CanData.Length != 8)
                 {
@@ -61,11 +58,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteDateTime5(value.FirstCanReceiveTime);
                 foreach (var item in value.CanItems)
                 {
-                    if (item.CanId.Length != 4)
-                    {
-                        throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(item.CanId)}->4");
-                    }
-                    writer.WriteArray(item.CanId);
+                    writer.WriteUInt32(item.CanId);
                     if (item.CanData.Length != 8)
                     {
                         throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(item.CanData)}->8");

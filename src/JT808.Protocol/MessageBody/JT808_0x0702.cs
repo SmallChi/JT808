@@ -1,5 +1,6 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
 
@@ -8,7 +9,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 驾驶员身份信息采集上报
     /// </summary>
-    public class JT808_0x0702 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0702>
+    public class JT808_0x0702 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0702>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0702;
         /// <summary>
@@ -58,6 +59,11 @@ namespace JT808.Protocol.MessageBody
         /// 证件有效期 BCD[4]
         /// </summary>
         public DateTime CertificateExpiresDate { get; set; }
+        /// <summary>
+        /// 驾驶员身份证号 长度20 不足补0
+        /// 2019版本
+        /// </summary>
+        public string DriverIdentityCard { get; set; }
         public JT808_0x0702 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0702 jT808_0X0702 = new JT808_0x0702();
@@ -74,6 +80,10 @@ namespace JT808.Protocol.MessageBody
                     jT808_0X0702.LicenseIssuingLength = reader.ReadByte();
                     jT808_0X0702.LicenseIssuing = reader.ReadString(jT808_0X0702.LicenseIssuingLength);
                     jT808_0X0702.CertificateExpiresDate = reader.ReadDateTime4();
+                    if(reader.Version== JT808Version.JTT2019)
+                    {
+                        jT808_0X0702.DriverIdentityCard = reader.ReadString(20);
+                    }
                 }
             }
             return jT808_0X0702;
@@ -94,6 +104,10 @@ namespace JT808.Protocol.MessageBody
                     writer.WriteByte((byte)value.LicenseIssuing.Length);
                     writer.WriteString(value.LicenseIssuing);
                     writer.WriteDateTime4(value.CertificateExpiresDate);
+                    if (writer.Version == JT808Version.JTT2019)
+                    {
+                        writer.WriteString(value.DriverIdentityCard.PadRight(20,'0'));
+                    }
                 }
             }
         }

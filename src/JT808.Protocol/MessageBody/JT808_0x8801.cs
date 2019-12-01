@@ -1,4 +1,5 @@
 ﻿using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -7,7 +8,7 @@ namespace JT808.Protocol.MessageBody
     /// 摄像头立即拍摄命令
     /// 0x8801
     /// </summary>
-    public class JT808_0x8801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8801>
+    public class JT808_0x8801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8801>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8801;
         /// <summary>
