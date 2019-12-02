@@ -228,7 +228,8 @@ namespace JT808.Protocol
             }
             //  3.1.处理数据体长度
             // 2.2.回写消息体属性
-            writer.WriteUInt16Return(value.Header.MessageBodyProperty.Wrap((writer.GetCurrentPosition() - headerLength)), msgBodiesPropertyPosition);
+            value.Header.MessageBodyProperty.DataLength = (writer.GetCurrentPosition() - headerLength);
+            writer.WriteUInt16Return(value.Header.MessageBodyProperty.Wrap(), msgBodiesPropertyPosition);
             // 4.校验码
             writer.WriteXor();
             // 5.终止符

@@ -11,11 +11,9 @@ namespace JT808.Protocol.Internal
     class DefaultGlobalConfig : GlobalConfigBase
     {
         public override string ConfigId { get; protected set; }
-        public override JT808Version Version { get ; protected set; }
-        public DefaultGlobalConfig(string configId= "Default", JT808Version jT808Version= JT808Version.JTT2013) 
+        public DefaultGlobalConfig(string configId= "Default") 
         {
             ConfigId = configId;
-            Version = jT808Version;
         }
     }
 }

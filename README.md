@@ -268,6 +268,18 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 
+### 举个栗子7
+
+如何兼容2019版本
+
+> 最新协议文档已经写好了如何做兼容，就是在消息体属性中第14位为版本标识。
+
+1. 当第14位为0时，标识协议为2011年的版本；
+
+2. 当第14位为1时，标识协议为2019年的版本。
+
+[可以参考Simples的Demo7](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo7.cs)
+
 ## NuGet安装
 
 | Package Name          | Version                                            | Downloads                                           |
@@ -367,9 +379,9 @@ Platform=AnyCpu  Server=False  Toolchain=.NET Core 3.0
 | 57    | 0x0802        | √        | √        | 存储多媒体数据检索应答         |
 | 58    | 0x8803        | √        | √        | 存储多媒体数据上传             |
 | 59    | 0x8804        | √        | √        | 录音开始命令                   |
-| 60    | 0x8805        | √        | √        | 单条存储多媒体数据检索上传命令 |
-| 61    | 0x8900        | √        | √        | 数据下行透传                   |
-| 62    | 0x0900        | √        | √        | 数据上行透传                   |
+| 60    | 0x8805        | √        | √        | 单条存储多媒体数据检索上传命令 |修改|
+| 61    | 0x8900        | √        | √        | 数据下行透传                   |修改|
+| 62    | 0x0900        | √        | √        | 数据上行透传                   |修改|
 | 63    | 0x0901        | √        | √        | 数据压缩上报                   |
 | 64    | 0x8A00        | √        | √        | 平台 RSA 公钥                  |
 | 65    | 0x0A00        | √        | √        | 终端 RSA 公钥                  |
@@ -381,3 +393,5 @@ Platform=AnyCpu  Server=False  Toolchain=.NET Core 3.0
 | 71    | 0x8204 | √     | √     | 链路检测               |新增|
 | 72    | 0x8608 | √     | √     | 查询区域或线路数据      |新增|
 | 73    | 0x0608 | √     | √     | 查询区域或线路数据应答  |新增|
+| 74    | 0xE000~0xEFFF | 保留     | 保留     | 厂商自定义上行消息      |新增|
+| 75    | 0xF000~0xFFFF | 保留     | 保留     | 厂商自定义下行消息  |新增|

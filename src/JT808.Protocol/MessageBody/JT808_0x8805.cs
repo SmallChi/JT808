@@ -1,4 +1,5 @@
 ﻿using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -6,7 +7,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 单条存储多媒体数据检索上传命令
     /// </summary>
-    public class JT808_0x8805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8805>
+    public class JT808_0x8805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8805>,IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8805;
         /// <summary>

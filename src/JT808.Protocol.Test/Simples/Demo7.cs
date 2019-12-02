@@ -1,84 +1,48 @@
-﻿using JT808.Protocol.Interfaces;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Interfaces;
+using JT808.Protocol.Internal;
+using JT808.Protocol.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using JT808.Protocol.MessageBody;
 
 namespace JT808.Protocol.Test.Simples
 {
     public class Demo7
     {
-        /// <summary>
-        /// 单个
-        /// </summary>
+        public JT808Serializer JT808Serializer;
+        public Demo7()
+        {
+            IJT808Config jT808Config = new DefaultGlobalConfig();
+            JT808Serializer = new JT808Serializer(jT808Config);
+        }
+
         [Fact]
         public void Test1()
         {
-            IServiceCollection serviceDescriptors1 = new ServiceCollection();
-            serviceDescriptors1.AddJT808Configure(new DefaultConfig());
-            var serviceProvider1 = serviceDescriptors1.BuildServiceProvider();
-            var config = serviceProvider1.GetRequiredService<IJT808Config>();
-            var defaultConfig = (DefaultConfig)config;
-            Assert.Equal("test", defaultConfig.ConfigId);
-            Assert.Equal("smallchi", defaultConfig.Test());
+            JT808Package jT808Package = JT808MsgId.查询服务器时间应答.Create_查询服务器时间应答_2019("123456789012",
+            new JT808_0x8004
+            {
+                Time = DateTime.Parse("2019-12-02 10:10:10"),
+            });
+            jT808Package.Header.MsgNum = 1;
+            byte[] data = JT808Serializer.Serialize(jT808Package);
+            var hex = data.ToHexString();
+            Assert.Equal("7E8004400601000000001234567890120001191202101010517E", hex);
         }
 
-        /// <summary>
-        /// 多个
-        /// </summary>
         [Fact]
         public void Test2()
         {
-            IServiceCollection serviceDescriptors2 = new ServiceCollection();
-            serviceDescriptors2.AddJT808Configure(new Config1());
-            serviceDescriptors2.AddJT808Configure(new Config2());
-            serviceDescriptors2.AddSingleton(factory =>
-            {
-                Func<string, IJT808Config> accesor = key =>
-                {
-                    if (key.Equals("Config1"))
-                    {
-                        return factory.GetService<Config1>();
-                    }
-                    else if (key.Equals("Config2"))
-                    {
-                        return factory.GetService<Config2>();
-                    }
-                    else
-                    {
-                        throw new ArgumentException($"Not Support key : {key}");
-                    }
-                };
-                return accesor;
-            });
-            var ServiceProvider2 = serviceDescriptors2.BuildServiceProvider();
-            var config1 = ServiceProvider2.GetRequiredService<Func<string, IJT808Config>>()("Config1");
-            Assert.Equal("Config1", config1.ConfigId);
-            Assert.Equal("Config1", config1.GetSerializer().SerializerId);
-            var config2 = ServiceProvider2.GetRequiredService<Func<string, IJT808Config>>()("Config2");
-            Assert.Equal("Config2", config2.ConfigId);
-            Assert.Equal("Config2", config2.GetSerializer().SerializerId);
-        }
-
-        public class DefaultConfig : GlobalConfigBase
-        {
-            public override string ConfigId { get; protected set; } = "test";
-
-            public string Test()
-            {
-                return "smallchi";
-            }
-        }
-
-        public class Config1 : GlobalConfigBase
-        {
-             public override string ConfigId { get; protected set; } = "Config1";
-        }
-
-        public class Config2 : GlobalConfigBase
-        {
-            public override string ConfigId { get; protected set; } = "Config2";
+            var data = "7E8004400601000000001234567890120001191202101010517E".ToHexBytes();
+            JT808Package jT808Package = JT808Serializer.Deserialize(data);
+            Assert.Equal(JT808MsgId.查询服务器时间应答.ToUInt16Value(), jT808Package.Header.MsgId);
+            Assert.Equal(JT808Version.JTT2019, jT808Package.Version);
+            Assert.True(jT808Package.Header.MessageBodyProperty.VersionFlag);
+            Assert.Equal(DateTime.Parse("2019-12-02 10:10:10"), ((JT808_0x8004)jT808Package.Bodies).Time);
         }
     }
 }

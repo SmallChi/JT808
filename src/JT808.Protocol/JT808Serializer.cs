@@ -10,8 +10,6 @@ namespace JT808.Protocol
 {
     public  class JT808Serializer
     {
-        private readonly static JT808HeaderPackage jT808HeaderPackage = new JT808HeaderPackage();
-
         private readonly static JT808Package jT808Package = new JT808Package();
 
         public JT808Serializer(IJT808Config jT808Config)
@@ -140,7 +138,7 @@ namespace JT808.Protocol
             {
                 JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
                 jT808MessagePackReader.Decode(buffer);
-                return jT808HeaderPackage.Deserialize(ref jT808MessagePackReader,jT808Config);
+                return new JT808HeaderPackage(ref jT808MessagePackReader,jT808Config);
             }
             finally
             {

@@ -16,7 +16,7 @@ namespace JT808.Protocol
         /// <summary>
         /// 消息体属性
         /// </summary>
-        public JT808HeaderMessageBodyProperty MessageBodyProperty { get; set; }
+        public JT808HeaderMessageBodyProperty MessageBodyProperty { get; set; } = new JT808HeaderMessageBodyProperty();
         /// <summary>
         /// 协议版本号(2019版本)
         /// </summary>

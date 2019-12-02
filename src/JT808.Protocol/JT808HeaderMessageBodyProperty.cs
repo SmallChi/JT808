@@ -5,7 +5,7 @@ using System;
 
 namespace JT808.Protocol
 {
-    public struct JT808HeaderMessageBodyProperty
+    public class JT808HeaderMessageBodyProperty
     {
         public JT808HeaderMessageBodyProperty(int dataLength,bool isPackage, bool versionFlag= false, JT808EncryptMethod jT808EncryptMethod= JT808EncryptMethod.None)
         {
@@ -30,7 +30,7 @@ namespace JT808.Protocol
             DataLength = 0;
             VersionFlag = versionFlag;
         }
-
+        public JT808HeaderMessageBodyProperty(){}
         public JT808HeaderMessageBodyProperty(ushort value)
         {
             VersionFlag = (value >> 14 & 0x01) == 1;
@@ -52,27 +52,26 @@ namespace JT808.Protocol
         /// <summary>
         /// 版本标识（默认为1=true）
         /// </summary>
-        public bool VersionFlag { get; set; }
+        public bool VersionFlag { get; set; } = false;
         /// <summary>
         /// 是否分包
         ///  true-1  表示消息体为长消息，进行分包发送处理
         ///  false-0 消息头中无消息包封装项字段。
         /// </summary>
-        public bool IsPackage { get; set; }
+        public bool IsPackage { get; set; } = false;
         /// <summary>
         /// 加密标识，0为不加密
         /// 当此三位都为 0，表示消息体不加密；
         /// 当第 10 位为 1，表示消息体经过 RSA 算法加密；
         /// todo:没有涉及到加密先不考虑
         /// </summary>
-        public JT808EncryptMethod Encrypt { get; set; }
+        public JT808EncryptMethod Encrypt { get; set; } = JT808EncryptMethod.None;
         /// <summary>
         /// 消息体长度
         /// </summary>
-        public int DataLength { get; set; }
+        public int DataLength { get; set; } = 0;
         public ushort Wrap()
         {
-
             //  1.是否分包
             int tmpIsPacke = 0;
             if (IsPackage)
@@ -100,52 +99,13 @@ namespace JT808.Protocol
                 // 判断有无数据体长度
                 DataLength = 0;
             }
-            //  3.是否分包
+            //  3.版本标识
             int versionFlag = 0;
             if (VersionFlag)
             {
                 versionFlag = 1 << 14;
             }
             return (ushort)(versionFlag|tmpIsPacke | tmpEncrypt | DataLength);
-        }
-
-        public ushort Wrap(int dataLength)
-        {
-            //  1.是否分包
-            int tmpIsPacke = 0;
-            if (IsPackage)
-            {
-                tmpIsPacke = 1 << 13;
-            }
-            //  2.是否加密
-            int tmpEncrypt;
-            //  2.3.数据加密方式
-            switch (Encrypt)
-            {
-                case JT808EncryptMethod.None:
-                    tmpEncrypt = 0;
-                    break;
-                case JT808EncryptMethod.RSA:
-                    tmpEncrypt = 1 << 10;
-                    break;
-                default:
-                    tmpEncrypt = 0;
-                    break;
-            }
-            //  2.4.数据长度
-            DataLength = dataLength;
-            if (dataLength <= 0)
-            {
-                // 判断有无数据体长度
-                dataLength = 0;
-            }
-            //  3.是否分包
-            int versionFlag = 0;
-            if (VersionFlag)
-            {
-                versionFlag = 1 << 14;
-            }
-            return (ushort)(versionFlag | tmpIsPacke | tmpEncrypt | dataLength);
         }
     }
 }

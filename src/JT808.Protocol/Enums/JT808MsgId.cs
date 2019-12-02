@@ -456,5 +456,47 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x0A00))]
         [JT808MsgIdDescription("0x0A00", "终端RSA公钥")]
         终端RSA公钥 = 0x0A00,
+        /// <summary>
+        ///  查询服务器时间请求 
+        ///  0x0004
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0004))]
+        [JT808MsgIdDescription("0x0004", "查询服务器时间请求")]
+        查询服务器时间请求 = 0x0004,
+        /// <summary>
+        ///  查询服务器时间应答 
+        ///  0x8004
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8004))]
+        [JT808MsgIdDescription("0x8004", "查询服务器时间应答")]
+        查询服务器时间应答 = 0x8004,
+        /// <summary>
+        ///  终端补传分包请求 
+        ///  0x0005
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0005))]
+        [JT808MsgIdDescription("0x0005", "终端补传分包请求")]
+        终端补传分包请求 = 0x0005,
+        /// <summary>
+        ///  链路检测 
+        ///  0x8204
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8204))]
+        [JT808MsgIdDescription("0x8204", "链路检测")]
+        链路检测 = 0x8204,
+        /// <summary>
+        ///  查询区域或线路数据 
+        ///  0x8608
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x8608))]
+        [JT808MsgIdDescription("0x8608", "查询区域或线路数据")]
+        查询区域或线路数据 = 0x8608,
+        /// <summary>
+        ///  查询区域或线路数据应答 
+        ///  0x0608
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0608))]
+        [JT808MsgIdDescription("0x0608", "查询区域或线路数据应答")]
+        查询区域或线路数据应答 = 0x0608,
     }
 }

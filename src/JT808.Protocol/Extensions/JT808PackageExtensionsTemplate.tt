@@ -46,6 +46,24 @@ namespace JT808.Protocol.Extensions
 		{
 			return Create<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
 		}
+
+		/// <summary>
+		/// <#= jT808MsgIdDescriptionAttribute.Code #> - <#= jT808MsgIdDescriptionAttribute.Name #>
+		/// auto-generated 2019 version
+		/// </summary>
+	    public static JT808Package Create_<#= jT808MsgIdDescriptionAttribute.Name #>_2019(this JT808MsgId msgId, string terminalPhoneNo,<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName #> bodies)
+		{
+			return Create2019<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
+		}
+
+		/// <summary>
+		/// <#= jT808MsgIdDescriptionAttribute.Code #> - <#= jT808MsgIdDescriptionAttribute.Name #>
+		/// auto-generated 2019 version
+		/// </summary>
+	    public static JT808Package Create2019(this JT808MsgId msgId, string terminalPhoneNo,<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName #> bodies)
+		{
+			return Create2019<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
+		}
 <#
     }
 #>

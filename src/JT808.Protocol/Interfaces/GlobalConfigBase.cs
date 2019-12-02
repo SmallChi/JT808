@@ -25,10 +25,8 @@ namespace JT808.Protocol.Interfaces
             JT808_0X8103_Factory = new JT808_0x8103_Factory();
             TerminalPhoneNoLength = 12;
             Trim = true;
-            Version = JT808Version.JTT2013;
         }
         public abstract string ConfigId { get; protected set; }
-        public virtual JT808Version Version { get; protected set; }
         public virtual IJT808MsgSNDistributed MsgSNDistributed { get; set; }
         public virtual IJT808Compress Compress { get; set; }
         public virtual IJT808SplitPackageStrategy SplitPackageStrategy { get; set; }

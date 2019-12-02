@@ -40,7 +40,8 @@ namespace JT808.Protocol.Test
                 {
                     MsgId = Enums.JT808MsgId.终端通用应答.ToUInt16Value(),
                     MsgNum = 1203,
-                    TerminalPhoneNo = "012345678900"
+                    TerminalPhoneNo = "012345678900",
+                    MessageBodyProperty=new JT808HeaderMessageBodyProperty()
                 },
                 Bodies = new JT808_0x0001
                 {
@@ -61,7 +62,7 @@ namespace JT808.Protocol.Test
             {
                 if (i % 2 == 0)
                 {
-                    defaultGlobalConfigs.Add(new DefaultGlobalConfig(i.ToString(), JT808Version.JTT2019));
+                    defaultGlobalConfigs.Add(new DefaultGlobalConfig(i.ToString()));
                 }
                 else
                 {

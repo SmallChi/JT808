@@ -10,8 +10,6 @@ namespace JT808.Protocol
 {
     public interface IJT808Config
     {
-        [Obsolete("目前没用")]
-        JT808Version Version { get;}
         string ConfigId { get; }
         /// <summary>
         /// 消息流水号
