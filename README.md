@@ -286,35 +286,36 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 | --------------------- | -------------------------------------------------- | --------------------------------------------------- |
 | Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.svg) |
 | Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |
+| Install-Package JT808.Protocol.Extensions.JTActiveSafety| ![JT808.Protocol.Extensions.JTActiveSafety](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JTActiveSafety.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JTActiveSafety.svg) |
 
 ## 使用BenchmarkDotNet性能测试报告（只是玩玩，不能当真）
 
 ``` ini
 
-BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18362
+BenchmarkDotNet=v0.12.0, OS=Windows 10.0.18363
 Intel Core i7-8700K CPU 3.70GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
-.NET Core SDK=3.0.100
-  [Host]     : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
-  Job-ROHSDP : .NET Core 3.0.0 (CoreCLR 4.700.19.46205, CoreFX 4.700.19.46214), X64 RyuJIT
+.NET Core SDK=3.1.100
+  [Host]     : .NET Core 3.1.0 (CoreCLR 4.700.19.56402, CoreFX 4.700.19.56404), X64 RyuJIT
+  Job-DSNYYA : .NET Core 3.1.0 (CoreCLR 4.700.19.56402, CoreFX 4.700.19.56404), X64 RyuJIT
 
-Platform=AnyCpu  Server=False  Toolchain=.NET Core 3.0  
+Platform=AnyCpu  Server=False  Toolchain=.NET Core 3.1  
 
 ```
-|                          Method |       Categories |      N |          Mean |        Error |       StdDev |      Gen 0 | Gen 1 | Gen 2 |    Allocated |
-|-------------------------------- |----------------- |------- |--------------:|-------------:|-------------:|-----------:|------:|------:|-------------:|
-|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** |    **100** |     **259.55 us** |     **4.617 us** |     **4.319 us** |    **31.2500** |     **-** |     **-** |    **192.97 KB** |
-| 0x0200_All_AttachId_Deserialize | 0x0200Serializer |    100 |     821.35 us |    10.732 us |     9.514 us |    79.1016 |     - |     - |     487.5 KB |
-|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** |  **10000** |  **26,448.35 us** |   **478.895 us** |   **399.899 us** |  **3125.0000** |     **-** |     **-** |  **19296.88 KB** |
-| 0x0200_All_AttachId_Deserialize | 0x0200Serializer |  10000 |  81,776.05 us | 1,405.214 us | 1,245.686 us |  7857.1429 |     - |     - |   48751.2 KB |
-|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** | **100000** | **261,073.61 us** | **2,592.782 us** | **2,298.434 us** | **31000.0000** |     **-** |     **-** | **192969.15 KB** |
-| 0x0200_All_AttachId_Deserialize | 0x0200Serializer | 100000 | 806,869.44 us | 7,921.093 us | 7,409.395 us | 79000.0000 |     - |     - |    487500 KB |
-|                                 |                  |        |               |              |              |            |       |       |              |
-|                 **0x0100Serialize** | **0x0100Serializer** |    **100** |      **76.62 us** |     **0.866 us** |     **0.810 us** |    **10.1318** |     **-** |     **-** |      **62.5 KB** |
-|               0x0100Deserialize | 0x0100Serializer |    100 |      77.80 us |     0.607 us |     0.568 us |    14.6484 |     - |     - |     89.84 KB |
-|                 **0x0100Serialize** | **0x0100Serializer** |  **10000** |   **7,608.31 us** |    **69.958 us** |    **65.439 us** |  **1015.6250** |     **-** |     **-** |      **6250 KB** |
-|               0x0100Deserialize | 0x0100Serializer |  10000 |   7,852.84 us |    54.138 us |    45.208 us |  1460.9375 |     - |     - |   8984.38 KB |
-|                 **0x0100Serialize** | **0x0100Serializer** | **100000** |  **76,993.50 us** |   **544.867 us** |   **509.669 us** | **10142.8571** |     **-** |     **-** |  **62500.28 KB** |
-|               0x0100Deserialize | 0x0100Serializer | 100000 |  78,382.88 us |   791.432 us |   740.306 us | 14571.4286 |     - |     - |     89845 KB |
+|                          Method |       Categories |      N |          Mean |         Error |        StdDev |      Gen 0 | Gen 1 | Gen 2 |    Allocated |
+|-------------------------------- |----------------- |------- |--------------:|--------------:|--------------:|-----------:|------:|------:|-------------:|
+|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** |    **100** |     **262.46 us** |      **3.178 us** |      **2.654 us** |    **31.7383** |     **-** |     **-** |    **196.09 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer |    100 |     812.97 us |      3.537 us |      2.953 us |    80.0781 |     - |     - |    493.75 KB |
+|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** |  **10000** |  **26,537.30 us** |    **382.221 us** |    **319.172 us** |  **3187.5000** |     **-** |     **-** |  **19609.38 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer |  10000 |  82,939.55 us |  1,133.599 us |  1,060.370 us |  8000.0000 |     - |     - |  49376.19 KB |
+|   **0x0200_All_AttachId_Serialize** | **0x0200Serializer** | **100000** | **261,695.51 us** |  **5,005.517 us** |  **5,355.847 us** | **32000.0000** |     **-** |     **-** | **196093.75 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer | 100000 | 824,904.93 us | 16,325.230 us | 15,270.630 us | 80000.0000 |     - |     - |    493750 KB |
+|                                 |                  |        |               |               |               |            |       |       |              |
+|                 **0x0100Serialize** | **0x0100Serializer** |    **100** |      **78.05 us** |      **0.984 us** |      **0.920 us** |    **10.6201** |     **-** |     **-** |     **65.63 KB** |
+|               0x0100Deserialize | 0x0100Serializer |    100 |      81.54 us |      1.618 us |      1.798 us |    15.6250 |     - |     - |     96.09 KB |
+|                 **0x0100Serialize** | **0x0100Serializer** |  **10000** |   **8,007.65 us** |     **97.177 us** |     **86.145 us** |  **1062.5000** |     **-** |     **-** |    **6562.5 KB** |
+|               0x0100Deserialize | 0x0100Serializer |  10000 |   8,028.20 us |    123.340 us |    115.372 us |  1562.5000 |     - |     - |   9609.44 KB |
+|                 **0x0100Serialize** | **0x0100Serializer** | **100000** |  **80,765.75 us** |  **1,016.904 us** |    **901.459 us** | **10571.4286** |     **-** |     **-** |  **65625.28 KB** |
+|               0x0100Deserialize | 0x0100Serializer | 100000 |  80,955.97 us |    958.045 us |    849.282 us | 15571.4286 |     - |     - |  96093.87 KB |
 
 ## JT808终端通讯协议消息对照表
 
