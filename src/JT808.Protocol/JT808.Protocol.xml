@@ -3597,11 +3597,6 @@
             位置附加信息
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.JT808CustomLocationAttachOriginalData">
-            <summary>
-            存储自定义附加信息源数据
-            </summary>
-        </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.JT808UnknownLocationAttachOriginalData">
             <summary>
             存储未知的附加信息源数据
