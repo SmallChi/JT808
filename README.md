@@ -222,12 +222,9 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 ***解决方式：***
 
-1.凡是解析自定义附加信息Id协议的，先进行分割存储，然后在根据外部的设备类型进行统一处理;
+1.可以根据设备类型做个工厂，解耦对公共序列化器的依赖。
 
-2.可以根据设备类型做个工厂，解耦对公共序列化器的依赖。
-
-**3.(推荐): 可以根据设备类型进行初始化DefaultGlobalConfig，根据不同的DefaultGlobalConfig实例去绑定对应
-协议解析器。**
+2.可以根据设备类型去实现(GlobalConfigBase)对应的配置，根据不同的GlobalConfigBase实例去绑定对应协议解析器。
 
 [可以参考Simples的Demo4](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo4.cs)
 
@@ -261,10 +258,8 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 ***解决方式：***
 
-方式1: 对于设备来说，设备终端号是唯一标识，可以通过使用设备终端号和消息ID去查询对应的序列化器。
-
-**方式2(推荐): 可以根据设备类型进行初始化DefaultGlobalConfig，根据不同的DefaultGlobalConfig实例去绑定对应
-协议解析器。**
+可以根据设备类型去实现(GlobalConfigBase)对应的配置，根据不同的GlobalConfigBase实例去绑定对应
+协议解析器。
 
 [可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 
