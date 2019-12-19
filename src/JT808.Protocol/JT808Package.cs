@@ -204,9 +204,17 @@ namespace JT808.Protocol
                 //  2.3.终端手机号 (写死大陆手机号码)
                 writer.WriteBCD(value.Header.TerminalPhoneNo, config.TerminalPhoneNoLength);
             }
-            value.Header.MsgNum = value.Header.MsgNum > 0 ? value.Header.MsgNum : config.MsgSNDistributed.Increment();
-            //  2.4.消息流水号
-            writer.WriteUInt16(value.Header.MsgNum);
+            if (value.Header.ManualMsgNum.HasValue)
+            {
+                //  2.4.消息流水号
+                writer.WriteUInt16(value.Header.ManualMsgNum.Value);
+            }
+            else
+            {
+                //  2.4.消息流水号
+                value.Header.MsgNum = config.MsgSNDistributed.Increment(value.Header.TerminalPhoneNo);
+                writer.WriteUInt16(value.Header.MsgNum);
+            }
             //  2.5.判断是否分包
             if (value.Header.MessageBodyProperty.IsPackage)
             {

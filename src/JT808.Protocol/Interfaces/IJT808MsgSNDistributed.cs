@@ -2,6 +2,6 @@
 {
     public interface IJT808MsgSNDistributed
     {
-        ushort Increment();
+        ushort Increment(string terminalPhoneNo);
     }
 }

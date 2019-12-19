@@ -16,7 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Header = new JT808Header
                 {
                     MsgId = Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(),
-                    MsgNum = 10,
+                    ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
                 Bodies = new JT808_0x0104
@@ -65,7 +65,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Header = new JT808Header
                 {
                     MsgId = Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(),
-                    MsgNum = 10,
+                    ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
                 Bodies = new JT808_0x0104

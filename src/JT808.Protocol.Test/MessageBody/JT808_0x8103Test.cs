@@ -27,7 +27,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Header = new JT808Header
                 {
                     MsgId = Enums.JT808MsgId.设置终端参数.ToUInt16Value(),
-                    MsgNum = 10,
+                    ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
                 Bodies = new JT808_0x8103

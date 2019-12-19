@@ -16,7 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Header = new JT808Header
                 {
                     MsgId = Enums.JT808MsgId.文本信息下发.ToUInt16Value(),
-                    MsgNum = 1,
+                    ManualMsgNum = 1,
                     TerminalPhoneNo = "012345678900",
                 }
             };
@@ -51,7 +51,7 @@ namespace JT808.Protocol.Test.MessageBody
                 {
                     MessageBodyProperty = jT808HeaderMessageBodyProperty,
                     MsgId = Enums.JT808MsgId.文本信息下发.ToUInt16Value(),
-                    MsgNum = 1,
+                    ManualMsgNum = 1,
                     TerminalPhoneNo = "012345678900",
                 }
             };

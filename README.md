@@ -59,7 +59,7 @@ JT808Package jT808Package = new JT808Package();
 jT808Package.Header = new JT808Header
 {
     MsgId = Enums.JT808MsgId.位置信息汇报,
-    MsgNum = 126,
+    ManualMsgNum = 126,
     TerminalPhoneNo = "123456789012"
 };
 
@@ -197,8 +197,8 @@ var hex = data.ToHexString();
 
 ``` config
 // 初始化配置
-IJT808Config DT1JT808Config = new DefaultGlobalConfig();
-IJT808Config DT2JT808Config = new DefaultGlobalConfig();
+IJT808Config DT1JT808Config = new DT1Config();
+IJT808Config DT2JT808Config = new DT2Config();
 // 注册自定义消息外部程序集
 DT1JT808Config.Register(Assembly.GetExecutingAssembly());
 // 跳过校验和验证

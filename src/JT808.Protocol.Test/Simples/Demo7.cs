@@ -28,7 +28,7 @@ namespace JT808.Protocol.Test.Simples
             {
                 Time = DateTime.Parse("2019-12-02 10:10:10"),
             });
-            jT808Package.Header.MsgNum = 1;
+            jT808Package.Header.ManualMsgNum = 1;
             byte[] data = JT808Serializer.Serialize(jT808Package);
             var hex = data.ToHexString();
             Assert.Equal("7E8004400601000000001234567890120001191202101010517E", hex);

@@ -94,7 +94,7 @@ namespace JT808.Protocol.Test.Simples
             dt1Package.Header = new JT808Header
             {
                 MsgId = 0x91,
-                MsgNum = 126,
+                ManualMsgNum = 126,
                 TerminalPhoneNo = "1234567891"
             };
             DT1Demo6 dT1Demo6 = new DT1Demo6();
@@ -106,7 +106,7 @@ namespace JT808.Protocol.Test.Simples
             dt2Package.Header = new JT808Header
             {
                 MsgId = 0x91,
-                MsgNum = 126,
+                ManualMsgNum = 126,
                 TerminalPhoneNo = "1234567892"
             };
             DT2Demo6 dT2Demo6 = new DT2Demo6();

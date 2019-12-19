@@ -40,7 +40,7 @@ namespace JT808.Protocol.Test.Simples
                         { JT808Constants.JT808_0x0200_0x02,new JT808_0x0200_0x02{Oil = 125}}
                     }
                 });
-            jT808Package.Header.MsgNum = 1;
+            jT808Package.Header.ManualMsgNum = 1;
             byte[] data = JT808Serializer.Serialize(jT808Package);
             var hex = data.ToHexString();
             //输出结果Hex：

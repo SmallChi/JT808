@@ -27,7 +27,7 @@ namespace JT808.Protocol.Test.Simples
             jT808Package.Header = new JT808Header
             {
                 MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
-                MsgNum = 126,
+                ManualMsgNum = 126,
                 TerminalPhoneNo = "123456789012"
             };
 

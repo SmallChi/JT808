@@ -65,7 +65,7 @@ namespace JT808.Protocol.Test.MessageBody
                 jT808Package.Header = new JT808Header
                 {
                     MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
-                    MsgNum = (ushort)i,
+                    ManualMsgNum = (ushort)i,
                     TerminalPhoneNo = "1122334455"+i.ToString(),
                 };
                 JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200
@@ -300,7 +300,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808Package.Header = new JT808Header
             {
                 MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
-                MsgNum = 8888,
+                ManualMsgNum = 8888,
                 TerminalPhoneNo = "112233445566",
             };
             JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200();
