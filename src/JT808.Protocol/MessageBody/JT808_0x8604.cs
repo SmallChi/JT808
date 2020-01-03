@@ -15,6 +15,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8604 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8604>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8604;
+        public override string Description => "设置多边形区域";
         /// <summary>
         /// 区域 ID
         /// </summary>

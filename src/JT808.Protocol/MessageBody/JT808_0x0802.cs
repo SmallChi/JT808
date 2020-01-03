@@ -13,6 +13,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0802 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0802>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0802;
+        public override string Description => "存储多媒体数据检索应答";
         /// <summary>
         /// 应答流水号
         /// 对应的多媒体数据检索消息的流水号

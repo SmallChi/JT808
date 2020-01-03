@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8803 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8803>
     {
         public override ushort MsgId { get; } = 0x8803;
+        public override string Description => "存储多媒体数据上传命令";
         /// <summary>
         /// 多媒体类型 
         /// <see cref="JT808.Protocol.Enums.JT808MultimediaType"/>

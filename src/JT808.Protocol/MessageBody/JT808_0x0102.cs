@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0102 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0102>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0102;
+        public override string Description => "终端鉴权";
         /// <summary>
         /// 鉴权码
         /// 鉴权码内容 2019版本

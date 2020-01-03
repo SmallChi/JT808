@@ -15,6 +15,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0705 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0705>,IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0705;
+        public override string Description => "CAN总线数据上传";
         /// <summary>
         /// 数据项个数
         /// 包含的 CAN 总线数据项个数，>0

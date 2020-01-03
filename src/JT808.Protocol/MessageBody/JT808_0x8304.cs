@@ -13,6 +13,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8304 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8304>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8304;
+        public override string Description => "信息服务";
         /// <summary>
         /// 信息类型
         /// </summary>

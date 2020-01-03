@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8601 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8601>
     {
         public override ushort MsgId { get; } = 0x8601;
+        public override string Description => "删除圆形区域";
         /// <summary>
         /// 区域数
         /// 本条消息中包含的区域数，不超过 125 个，多于 125个建议用多条消息，0 为删除所有圆形区域

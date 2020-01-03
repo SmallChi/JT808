@@ -1,6 +1,8 @@
-﻿namespace JT808.Protocol
+﻿using JT808.Protocol.Interfaces;
+
+namespace JT808.Protocol
 {
-    public abstract class JT808Bodies
+    public abstract class JT808Bodies: IJT808Description
     {
         /// <summary>
         /// 跳过数据体序列化
@@ -10,5 +12,7 @@
         public virtual bool SkipSerialization { get; set; } = false;
 
         public abstract ushort MsgId { get;}
+
+        public abstract string Description { get; }
     }
 }

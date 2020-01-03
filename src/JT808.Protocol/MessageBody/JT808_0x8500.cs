@@ -13,6 +13,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8500 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8500>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8500;
+        public override string Description => "车辆控制";
         /// <summary>
         /// 控制标志 
         /// 控制指令标志位数据格式

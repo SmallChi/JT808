@@ -12,6 +12,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0702 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0702>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0702;
+        public override string Description => "驾驶员身份信息采集上报";
         /// <summary>
         /// 状态
         /// 0x01：从业资格证 IC 卡插入（驾驶员上班）；

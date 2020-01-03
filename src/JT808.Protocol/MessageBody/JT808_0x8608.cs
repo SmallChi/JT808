@@ -13,6 +13,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8608 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8608>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8608;
+        public override string Description => "查询区域或线路数据";
         /// <summary>
         /// 查询类型
         /// </summary>

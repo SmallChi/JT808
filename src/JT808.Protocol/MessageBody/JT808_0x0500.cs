@@ -9,6 +9,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0500 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0500>
     {
         public override ushort MsgId { get; } = 0x0500;
+        public override string Description => "车辆控制应答";
         /// <summary>
         /// 应答流水号
         /// 对应的终端注册消息的流水号

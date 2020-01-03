@@ -10,5 +10,7 @@
         /// 跳过数据体序列化
         /// </summary>
         public override bool SkipSerialization { get; set; } = true;
+
+        public override string Description => "位置信息查询";
     }
 }

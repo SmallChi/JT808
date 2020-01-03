@@ -1,5 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
@@ -12,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0801>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0801;
+        public override string Description => "多媒体数据上传";
         /// <summary>
         /// 多媒体 ID
         /// </summary>

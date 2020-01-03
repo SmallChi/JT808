@@ -1,15 +1,19 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
+using System.Text.Json;
+using JT808.Protocol.Extensions;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 终端通用应答
     /// </summary>
-    public class JT808_0x0001 : JT808Bodies,IJT808MessagePackFormatter<JT808_0x0001>
+    public class JT808_0x0001 : JT808Bodies,IJT808MessagePackFormatter<JT808_0x0001>, IJT808Analyze
     {
-        public override ushort MsgId { get; } = 0x0001;
+        public override ushort MsgId => 0x0001;
+        public override string Description => "终端通用应答";
         /// <summary>
         /// 应答流水号
         /// 对应的平台消息的流水号
@@ -42,6 +46,16 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt16(value.ReplyMsgNum);
             writer.WriteUInt16(value.ReplyMsgId);
             writer.WriteByte((byte)value.JT808TerminalResult);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            var replyMsgNum = reader.ReadUInt16();
+            var replyMsgId = reader.ReadUInt16();
+            var terminalResult = reader.ReadByte();
+            writer.WriteNumber($"[{replyMsgNum.ReadNumber()}]应答流水号", replyMsgNum);
+            writer.WriteNumber($"[{replyMsgId.ReadNumber()}]应答消息Id", replyMsgId);
+            writer.WriteString($"[{terminalResult.ReadNumber()}]结果", ((JT808TerminalResult)terminalResult).ToString());
         }
     }
 }

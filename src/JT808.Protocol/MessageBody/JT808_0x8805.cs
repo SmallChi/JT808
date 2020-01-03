@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8805>,IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8805;
+        public override string Description => "单条存储多媒体数据检索上传命令";
         /// <summary>
         /// 多媒体ID
         /// </summary>

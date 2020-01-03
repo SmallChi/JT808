@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0704 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0704>
     {
         public override ushort MsgId { get; } = 0x0704;
+        public override string Description => "定位数据批量上传";
         /// <summary>
         /// 数据项个数
         /// </summary>

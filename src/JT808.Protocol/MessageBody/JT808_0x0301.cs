@@ -13,6 +13,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0301 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0301>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0301;
+        public override string Description => "事件报告";
         /// <summary>
         /// 事件 ID 
         /// </summary>

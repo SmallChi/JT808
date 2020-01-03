@@ -14,6 +14,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0302 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0302>,IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0302;
+        public override string Description => "提问应答";
         /// <summary>
         /// 应答流水号
         /// 对应的提问下发消息的流水号

@@ -13,6 +13,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0303 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0303>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0303;
+        public override string Description => "信息点播_取消";
         /// <summary>
         /// 信息类型
         /// </summary>

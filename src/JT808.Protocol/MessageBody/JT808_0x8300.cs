@@ -12,6 +12,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8300 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8300>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8300;
+        public override string Description => "文本信息下发";
         /// <summary>
         /// 文本信息标志位含义见 表 38
         /// </summary>

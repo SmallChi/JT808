@@ -14,7 +14,7 @@
     <licenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</licenseUrl>
     <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>2.2.3</Version>
+    <Version>2.3.0-preview1</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -57,7 +57,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Buffers" Version="4.5.0" />
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Memory" Version="4.5.3" />
@@ -72,6 +72,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.0" />
+    <PackageReference Include="System.Text.Json" Version="4.7.0" />
   </ItemGroup>
   
   <ItemGroup>

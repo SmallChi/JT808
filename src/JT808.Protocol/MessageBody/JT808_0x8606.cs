@@ -15,6 +15,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8606 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8606>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8606;
+        public override string Description => "设置路线";
         /// <summary>
         /// 路线 ID
         /// </summary>

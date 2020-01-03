@@ -1,5 +1,4 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Enums;
+﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
 
@@ -11,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8001 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8001>
     {
         public override ushort MsgId { get; } = 0x8001;
+        public override string Description => "平台通用应答";
         public ushort MsgNum { get; set; }
         /// <summary>
         /// <see cref="JT808.Protocol.Enums.JT808MsgId"/>

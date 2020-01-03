@@ -13,5 +13,7 @@ namespace JT808.Protocol.MessageBody
         public override ushort MsgId { get; } = 0x8204;
 
         public override bool SkipSerialization { get; set; } = true;
+
+        public override string Description => "链路检测";
     }
 }

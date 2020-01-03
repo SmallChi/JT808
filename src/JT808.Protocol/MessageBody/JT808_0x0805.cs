@@ -12,6 +12,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0805>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0805;
+        public override string Description => "摄像头立即拍摄命令应答";
         /// <summary>
         /// 应答流水号
         /// 对应平台摄像头立即拍摄命令的消息流水号

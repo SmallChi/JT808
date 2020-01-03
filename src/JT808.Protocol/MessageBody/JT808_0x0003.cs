@@ -11,5 +11,7 @@
         public override bool SkipSerialization { get; set; } = true;
 
         public override ushort MsgId { get; } = 0x0003;
+
+        public override string Description => "终端注销请求";
     }
 }

@@ -10,6 +10,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8804 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8804>
     {
         public override ushort MsgId { get; } = 0x8804;
+        public override string Description => "录音开始命令";
         /// <summary>
         /// 录音命令
         /// 0：停止录音；0x01：开始录音；

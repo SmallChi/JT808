@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8900 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8900>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8900;
+        public override string Description => "数据下行透传";
         /// <summary>
         /// 透传消息类型
         /// 透传消息类型定义见 表 93

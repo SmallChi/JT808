@@ -12,6 +12,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x0104 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0104>
     {
         public override ushort MsgId { get; } = 0x0104;
+        public override string Description => "查询终端参数应答";
         /// <summary>
         /// 应答流水号
         /// 查询指定终端参数的流水号

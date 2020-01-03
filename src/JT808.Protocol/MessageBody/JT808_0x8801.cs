@@ -11,6 +11,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8801>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8801;
+        public override string Description => "摄像头立即拍摄命令";
         /// <summary>
         /// 通道 ID
         /// </summary>

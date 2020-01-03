@@ -5,6 +5,9 @@ using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
 using JT808.Protocol.MessagePack;
 using System;
+using System.IO;
+using System.Text;
+using System.Text.Json;
 
 namespace JT808.Protocol
 {
@@ -155,6 +158,98 @@ namespace JT808.Protocol
                 if (CheckPackageType(type))
                     jT808MessagePackReader.Decode(buffer);
                 return JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(formatter,ref jT808MessagePackReader, jT808Config);
+            }
+            finally
+            {
+                JT808ArrayPool.Return(buffer);
+            }
+        }
+
+        public string Analyze(ReadOnlySpan<byte> bytes,  JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
+        {
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
+            try
+            {
+                JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
+                jT808MessagePackReader.Decode(buffer);
+                using(MemoryStream memoryStream = new MemoryStream())
+                using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
+                {
+                    jT808Package.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                    utf8JsonWriter.Flush();
+                    string value = Encoding.UTF8.GetString(memoryStream.ToArray());
+                    return value; 
+                }
+            }
+            finally
+            {
+                JT808ArrayPool.Return(buffer);
+            }       
+        }
+
+        public string Analyze<T>(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
+        {
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
+            byte[] buffer1 = JT808ArrayPool.Rent(minBufferSize);
+            try
+            {
+
+                JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
+                if (CheckPackageType(typeof(T)))
+                    jT808MessagePackReader.Decode(buffer);
+                var analyze = jT808Config.GetAnalyze<T>();
+                using (MemoryStream memoryStream = new MemoryStream(buffer1))
+                using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
+                {
+                    analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                    utf8JsonWriter.Flush();
+                    return utf8JsonWriter.ToString();
+                }
+            }
+            finally
+            {
+                JT808ArrayPool.Return(buffer);
+                JT808ArrayPool.Return(buffer1);
+            }
+        }
+
+        public byte[] AnalyzeJsonBuffer(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
+        {
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
+            try
+            {
+                JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
+                jT808MessagePackReader.Decode(buffer);
+                using (MemoryStream memoryStream = new MemoryStream())
+                using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
+                {
+                    jT808Package.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                    utf8JsonWriter.Flush();
+                    return memoryStream.ToArray();
+                }
+            }
+            finally
+            {
+                JT808ArrayPool.Return(buffer);
+            }
+        }
+
+        public byte[] AnalyzeJsonBuffer<T>(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
+        {
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
+            try
+            {
+                JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
+                if (CheckPackageType(typeof(T)))
+                    jT808MessagePackReader.Decode(buffer);
+                var analyze = jT808Config.GetAnalyze<T>();
+                using (MemoryStream memoryStream = new MemoryStream())
+                using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
+                {
+                    analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                    utf8JsonWriter.Flush();
+                    return memoryStream.ToArray();
+                }
             }
             finally
             {

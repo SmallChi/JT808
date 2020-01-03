@@ -16,6 +16,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8600 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8600>, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8600;
+        public override string Description => "设置圆形区域";
         /// <summary>
         /// 设置属性
         /// <see cref="JT808.Protocol.Enums.JT808SettingProperty"/>

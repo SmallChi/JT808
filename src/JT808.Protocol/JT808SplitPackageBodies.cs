@@ -14,6 +14,8 @@ namespace JT808.Protocol
 
         public override ushort MsgId => 0xFFFF;
 
+        public override string Description => "统一分包数据体";
+
         public JT808SplitPackageBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808SplitPackageBodies jT808SplitPackageBodies = new JT808SplitPackageBodies

@@ -12,6 +12,8 @@ namespace JT808.Protocol.Test.MessageBody
 
         public override ushort MsgId => 0x9999;
 
+        public override string Description => "自定义消息";
+
         public JT808_0x9999 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x9999 jT808_0X9999 = new JT808_0x9999();

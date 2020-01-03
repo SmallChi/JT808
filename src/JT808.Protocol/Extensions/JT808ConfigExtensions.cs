@@ -18,9 +18,21 @@ namespace JT808.Protocol
             }
             return formatter;
         }
+        public static object GetAnalyzeByType(this IJT808Config jT808Config, Type type)
+        {
+            if (!jT808Config.FormatterFactory.FormatterDict.TryGetValue(type.GUID, out var analyze))
+            {
+                throw new JT808Exception(JT808ErrorCode.NotGlobalRegisterFormatterAssembly, type.FullName);
+            }
+            return analyze;
+        }
         public static IJT808MessagePackFormatter<T> GetMessagePackFormatter<T>(this IJT808Config jT808Config)
         {
             return (IJT808MessagePackFormatter<T>)GetMessagePackFormatterByType(jT808Config,typeof(T));
+        }
+        public static IJT808Analyze GetAnalyze<T>(this IJT808Config jT808Config)
+        {
+            return (IJT808Analyze)GetAnalyzeByType(jT808Config, typeof(T));
         }
         public static JT808Serializer GetSerializer(this IJT808Config jT808Config)
         {

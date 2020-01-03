@@ -14,6 +14,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8103 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8103>
     {
         public override ushort MsgId { get; } = 0x8103;
+        public override string Description => "设置终端参数";
         /// <summary>
         /// 参数总数
         /// </summary>

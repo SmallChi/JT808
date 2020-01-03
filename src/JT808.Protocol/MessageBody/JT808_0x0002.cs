@@ -7,5 +7,7 @@
     {
         public override bool SkipSerialization { get; set; } = true;
         public override ushort MsgId { get; } = 0x0002;
+
+        public override string Description => "终端心跳";
     }
 }

@@ -160,6 +160,10 @@ namespace JT808.Protocol.MessagePack
         {
             return GetVirtualReadOnlySpan(1)[0];
         }
+        public ReadOnlySpan<byte> ReadVirtualArray(int count)
+        {
+            return GetVirtualReadOnlySpan(count);
+        }
         public ushort ReadVirtualUInt16()
         {
             return BinaryPrimitives.ReadUInt16BigEndian(GetVirtualReadOnlySpan(2));
@@ -229,6 +233,7 @@ namespace JT808.Protocol.MessagePack
             string hex = HexUtil.DoHexDump(readOnlySpan, 0, len);
             return hex;
         }
+
         /// <summary>
         /// yyMMddHHmmss
         /// </summary>

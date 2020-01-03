@@ -12,6 +12,7 @@ namespace JT808.Protocol.MessageBody
     public class JT808_0x8401 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8401>
     {
         public override ushort MsgId { get; } = 0x8401;
+        public override string Description => "设置电话本";
         /// <summary>
         /// 设置类型
         /// </summary>

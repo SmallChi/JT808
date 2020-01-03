@@ -71,12 +71,54 @@ namespace JT808.Protocol.Extensions
             return hex;
         }
 
-        /// <summary>
-        /// Copyright (c) Microsoft. All rights reserved.
-        /// Licensed under the MIT license. See LICENSE file in the project root for full license information.
-        /// <see cref="DotNetty.Buffers.ByteBufferUtil"/>
-        /// </summary>
-
+        public static string ReadNumber(this byte value, string format = "X1")
+        {
+            return value.ToString(format);
+        }
+        public static string ReadNumber(this int value, string format = "X8")
+        {
+            return value.ToString(format);
+        }
+        public static string ReadNumber(this uint value, string format = "X8")
+        {
+            return value.ToString(format);
+        }
+        public static string ReadNumber(this long value, string format = "X16")
+        {
+            return value.ToString(format);
+        }
+        public static string ReadNumber(this ulong value, string format="X16")
+        {
+            return value.ToString(format);
+        }
+        public static string ReadNumber(this short value, string format = "X4")
+        {
+            return value.ToString(format);
+        }
+        public static string ReadNumber(this ushort value, string format = "X4")
+        {
+            return value.ToString(format);
+        }
+        public static ReadOnlySpan<char> ReadBinary(this ushort value)
+        {
+            return System.Convert.ToString(value, 2).PadLeft(16, '0').AsSpan();
+        }
+        public static ReadOnlySpan<char> ReadBinary(this short value)
+        {
+            return System.Convert.ToString(value, 2).PadLeft(16, '0').AsSpan();
+        }
+        public static ReadOnlySpan<char> ReadBinary(this uint value)
+        {
+            return System.Convert.ToString(value, 2).PadLeft(32, '0').AsSpan();
+        }
+        public static ReadOnlySpan<char> ReadBinary(this int value)
+        {
+            return System.Convert.ToString(value, 2).PadLeft(32, '0').AsSpan();
+        }
+        public static ReadOnlySpan<char> ReadBinary(this byte value)
+        {
+            return System.Convert.ToString(value, 2).PadLeft(8, '0').AsSpan();
+        }
     }
 
     public static class HexUtil
