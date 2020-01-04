@@ -87,13 +87,15 @@ namespace JT808.Protocol.MessageBody
                 {
                     jT808InflectionPointProperty.SectionHighestSpeed = reader.ReadUInt16();
                     jT808InflectionPointProperty.SectionOverspeedDuration = reader.ReadByte();
+                    if (reader.Version == JT808Version.JTT2019)
+                        jT808InflectionPointProperty.NightMaximumSpeed = reader.ReadUInt16();
                 }
                 jT808_0X8606.InflectionPointItems.Add(jT808InflectionPointProperty);
-                if (reader.Version == JT808Version.JTT2019)
-                {
-                    jT808_0X8606.RouteNameLength = reader.ReadUInt16();
-                    jT808_0X8606.RouteName = reader.ReadString(jT808_0X8606.RouteNameLength);
-                }
+            }
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                jT808_0X8606.RouteNameLength = reader.ReadUInt16();
+                jT808_0X8606.RouteName = reader.ReadString(jT808_0X8606.RouteNameLength);
             }
             return jT808_0X8606;
         }
@@ -141,6 +143,11 @@ namespace JT808.Protocol.MessageBody
                             writer.WriteUInt16(item.SectionHighestSpeed.Value);
                         if (item.SectionOverspeedDuration.HasValue)
                             writer.WriteByte(item.SectionOverspeedDuration.Value);
+                        if (writer.Version == JT808Version.JTT2019)
+                        {
+                            if (item.NightMaximumSpeed.HasValue)
+                                writer.WriteUInt16(item.NightMaximumSpeed.Value);
+                        }
                     }
                 }
             }

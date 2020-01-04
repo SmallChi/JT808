@@ -10,7 +10,7 @@ namespace JT808.Protocol.MessageBody
         /// 需要人工确认报警事件的 ID，从 1 开始计数
         /// </summary>
         public ushort EventId { get; set; }
-        public override byte AttachInfoId { get; set; } = 0x04;
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x04;
         public override byte AttachInfoLength { get; set; } = 2;
 
         public JT808_0x0200_0x04 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

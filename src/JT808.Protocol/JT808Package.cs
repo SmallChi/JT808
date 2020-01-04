@@ -269,11 +269,11 @@ namespace JT808.Protocol
             writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan.ToString()}]消息体属性", messageBodyPropertyValue);
             if (headerMessageBodyProperty.VersionFlag)
             {
-                writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan[0]}]保留", 0);
-                writer.WriteBoolean($"[{messageBodyPropertyReadOnlySpan[1]}]协议版本标识", headerMessageBodyProperty.VersionFlag);
-                writer.WriteBoolean($"[{messageBodyPropertyReadOnlySpan.Slice(2,1).ToString()}]是否分包", headerMessageBodyProperty.IsPackage);
-                writer.WriteString($"[{messageBodyPropertyReadOnlySpan.Slice(3,3).ToString()}]数据加密", headerMessageBodyProperty.Encrypt.ToString());
-                writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan.Slice(7).ToString()}]消息体长度", headerMessageBodyProperty.DataLength);
+                writer.WriteNumber( "[bit15]保留", 0);
+                writer.WriteBoolean("[bit14]协议版本标识", headerMessageBodyProperty.VersionFlag);
+                writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
+                writer.WriteString("[bit10~bit12]数据加密", headerMessageBodyProperty.Encrypt.ToString());
+                writer.WriteNumber("[bit0~bit9]消息体长度", headerMessageBodyProperty.DataLength);
                 //消息体属性对象 结束
                 writer.WriteEndObject();
                 //2019版本
@@ -285,11 +285,11 @@ namespace JT808.Protocol
             }
             else
             {
-                writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan[0]}]保留", 0);
-                writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan[1]}]保留", 0);
-                writer.WriteBoolean($"[{messageBodyPropertyReadOnlySpan.Slice(2, 1).ToString()}]是否分包", headerMessageBodyProperty.IsPackage);
-                writer.WriteString($"[{messageBodyPropertyReadOnlySpan.Slice(3, 3).ToString()}]数据加密", headerMessageBodyProperty.Encrypt.ToString());
-                writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan.Slice(7).ToString()}]消息体长度", headerMessageBodyProperty.DataLength);
+                writer.WriteNumber("[bit15]保留", 0);
+                writer.WriteNumber("[bit14]保留", 0);
+                writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
+                writer.WriteString("[bit10~bit12]数据加密", headerMessageBodyProperty.Encrypt.ToString());
+                writer.WriteNumber("[bit0~bit9]消息体长度", headerMessageBodyProperty.DataLength);
                 writer.WriteEndObject();
                 //2013版本
                 //  3.3.读取终端手机号 
@@ -374,6 +374,10 @@ namespace JT808.Protocol
                     }
                     //数据体属性对象 结束
                     writer.WriteEndObject();
+                }
+                else
+                {
+                    writer.WriteNull($"[Null]数据体");
                 }
             }
             else

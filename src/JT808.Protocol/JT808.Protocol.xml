@@ -6918,6 +6918,11 @@
             单位为秒（s），若路段属性 1 位为 0 则没有该字段
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Metadata.JT808InflectionPointProperty.NightMaximumSpeed">
+            <summary>
+            单位为千米每小时(km/h),若路段属性 1 位为 0 则没有该字段
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Metadata.JT808InformationItemProperty">
             <summary>
             信息点播属性

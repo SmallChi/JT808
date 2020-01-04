@@ -1,6 +1,8 @@
 ﻿using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using JT808.Protocol.Extensions;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// 终端补传分包请求
     /// 2019版本
     /// </summary>
-    public class JT808_0x0005 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0005>, IJT808_2019_Version
+    public class JT808_0x0005 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0005>, IJT808_2019_Version, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0005;
         public override string Description => "终端补传分包请求";
@@ -28,6 +30,7 @@ namespace JT808.Protocol.MessageBody
         /// 重传包序号顺序排列，如“包 ID1 包 ID2......包 IDn”。
         /// </summary>
         public byte[] AgainPackageData { get; set; }
+
         public JT808_0x0005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0005 value = new JT808_0x0005();
@@ -41,6 +44,22 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt16(value.OriginalMsgNum);
             writer.WriteByte((byte)(value.AgainPackageData.Length / 2));
             writer.WriteArray(value.AgainPackageData);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            var originalMsgNum = reader.ReadUInt16();
+            var againPackageCount = reader.ReadByte();
+            var againPackageData = reader.ReadArray(againPackageCount * 2);
+            writer.WriteNumber($"[{originalMsgNum.ReadNumber()}]原始消息流水号", originalMsgNum);
+            writer.WriteNumber($"[{againPackageCount.ReadNumber()}]重传包总数", againPackageCount);
+            writer.WriteString("重传包ID", string.Join(",", againPackageData.ToArray()));
+            writer.WriteStartArray("重传包ID列表");
+            for (var i=0;i< againPackageCount; i++)
+            {
+                writer.WriteStringValue(string.Join(",",againPackageData.Slice(i*2,2).ToArray()));
+            }
+            writer.WriteEndArray();
         }
     }
 }

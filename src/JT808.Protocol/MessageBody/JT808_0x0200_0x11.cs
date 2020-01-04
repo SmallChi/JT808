@@ -21,7 +21,7 @@ namespace JT808.Protocol.MessageBody
         /// 若位置类型为 0，无该字段
         /// </summary>
         public uint AreaId { get; set; }
-        public override byte AttachInfoId { get; set; } = 0x11;
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x11;
         public override byte AttachInfoLength
         {
             get

@@ -190,26 +190,26 @@ namespace JT808.Protocol
         public string Analyze<T>(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
-            byte[] buffer1 = JT808ArrayPool.Rent(minBufferSize);
             try
             {
-
                 JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
                 if (CheckPackageType(typeof(T)))
                     jT808MessagePackReader.Decode(buffer);
                 var analyze = jT808Config.GetAnalyze<T>();
-                using (MemoryStream memoryStream = new MemoryStream(buffer1))
+                using (MemoryStream memoryStream = new MemoryStream())
                 using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
                 {
+                    if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteStartObject();
                     analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                    if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteEndObject();
                     utf8JsonWriter.Flush();
-                    return utf8JsonWriter.ToString();
+                    string value = Encoding.UTF8.GetString(memoryStream.ToArray());
+                    return value;
                 }
             }
             finally
             {
                 JT808ArrayPool.Return(buffer);
-                JT808ArrayPool.Return(buffer1);
             }
         }
 
@@ -246,7 +246,9 @@ namespace JT808.Protocol
                 using (MemoryStream memoryStream = new MemoryStream())
                 using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
                 {
+                    if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteStartObject();
                     analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                    if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteEndObject();
                     utf8JsonWriter.Flush();
                     return memoryStream.ToArray();
                 }

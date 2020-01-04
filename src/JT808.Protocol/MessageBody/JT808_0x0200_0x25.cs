@@ -9,7 +9,7 @@ namespace JT808.Protocol.MessageBody
         /// 扩展车辆信号状态位
         /// </summary>
         public int CarSignalStatus { get; set; }
-        public override byte AttachInfoId { get; set; } = 0x25;
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x25;
         public override byte AttachInfoLength { get; set; } = 4;
         public JT808_0x0200_0x25 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {

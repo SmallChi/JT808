@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody
         /// 车厢温度
         /// </summary>
         public short CarTemperature { get; set; }
-        public override byte AttachInfoId { get; set; } = 0x05;
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x06;
         public override byte AttachInfoLength { get; set; } = 2;
 
         public JT808_0x0200_0x06 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

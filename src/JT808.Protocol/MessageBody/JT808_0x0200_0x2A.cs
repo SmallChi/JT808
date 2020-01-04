@@ -9,7 +9,7 @@ namespace JT808.Protocol.MessageBody
         /// IO状态位
         /// </summary>
         public ushort IOStatus { get; set; }
-        public override byte AttachInfoId { get; set; } = 0x2A;
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x2A;
         public override byte AttachInfoLength { get; set; } = 2;
 
         public JT808_0x0200_0x2A Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

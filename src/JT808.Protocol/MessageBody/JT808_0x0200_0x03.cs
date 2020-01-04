@@ -16,7 +16,7 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         [IgnoreDataMember]
         public double ConvertSpeed => Speed / 10.0;
-        public override byte AttachInfoId { get; set; } = 0x03;
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x03;
         public override byte AttachInfoLength { get; set; } = 2;
         public JT808_0x0200_0x03 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {

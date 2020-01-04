@@ -6,7 +6,7 @@ namespace JT808.Protocol.MessageBody
 {
     public class JT808_0x0200_0x13 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x13>
     {
-        public override byte AttachInfoId { get; set; } = 0x13;
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x13;
         public override byte AttachInfoLength { get; set; } = 7;
 
         /// <summary>

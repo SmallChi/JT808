@@ -26,7 +26,7 @@ namespace JT808.Protocol.MessageBody
         /// 1：出
         /// </summary>
         public JT808DirectionType Direction { get; set; }
-        public override byte AttachInfoId { get; set; } = 0x12;
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x12;
         public override byte AttachInfoLength { get; set; } = 6;
 
         public JT808_0x0200_0x12 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

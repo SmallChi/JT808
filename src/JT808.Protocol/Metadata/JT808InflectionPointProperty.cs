@@ -52,5 +52,9 @@
         /// 单位为秒（s），若路段属性 1 位为 0 则没有该字段
         /// </summary>
         public byte? SectionOverspeedDuration { get; set; }
+        /// <summary>
+        /// 单位为千米每小时(km/h),若路段属性 1 位为 0 则没有该字段
+        /// </summary>
+        public ushort? NightMaximumSpeed { get; set; }
     }
 }

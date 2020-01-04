@@ -14,8 +14,8 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 胎压
         /// </summary>
-        public string TirePressure { get; set; }
-        public override byte AttachInfoId { get; set; } = 0x05;
+        public byte[] TirePressure { get; set; }
+        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x05;
         public override byte AttachInfoLength { get; set; } = 30;
 
         public JT808_0x0200_0x05 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
@@ -23,7 +23,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0200_0x05 value = new JT808_0x0200_0x05();
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
-            value.TirePressure = reader.ReadString(value.AttachInfoLength);
+            value.TirePressure = reader.ReadArray(value.AttachInfoLength).ToArray();
             return value;
         }
 
@@ -31,7 +31,7 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);
-            writer.WriteString(value.TirePressure);
+            writer.WriteArray(value.TirePressure);
         }
     }
 }
