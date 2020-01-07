@@ -716,6 +716,12 @@
              0x0608
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.存储多媒体数据检索应答">
+            <summary>
+             存储多媒体数据检索应答 
+             0x0802
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808MultimediaCodingFormat">
             <summary>
             多媒体格式编码
@@ -1503,6 +1509,30 @@
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0801)">
             <summary>
             0x0801 - 多媒体数据上传
+            auto-generated 2019 version
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_存储多媒体数据检索应答(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0802)">
+            <summary>
+            0x0802 - 存储多媒体数据检索应答
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0802)">
+            <summary>
+            0x0802 - 存储多媒体数据检索应答
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_存储多媒体数据检索应答_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0802)">
+            <summary>
+            0x0802 - 存储多媒体数据检索应答
+            auto-generated 2019 version
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0802)">
+            <summary>
+            0x0802 - 存储多媒体数据检索应答
             auto-generated 2019 version
             </summary>
         </member>
@@ -3882,6 +3912,30 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0608.Ids">
             <summary>
             查询的区域或线路的ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0608.JT808_0x8600s">
+            <summary>
+            设置圆形区域 
+            查询类型为1
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0608.JT808_0x8602s">
+            <summary>
+            设置矩形区域
+            查询类型为2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0608.JT808_0x8604s">
+            <summary>
+            设置多边形区域
+            查询类型为3
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0608.JT808_0x8606s">
+            <summary>
+            设置路线
+            查询类型为4
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0701">

@@ -498,5 +498,12 @@ namespace JT808.Protocol.Enums
         [JT808BodiesType(typeof(JT808_0x0608))]
         [JT808MsgIdDescription("0x0608", "查询区域或线路数据应答")]
         查询区域或线路数据应答 = 0x0608,
+        /// <summary>
+        ///  存储多媒体数据检索应答 
+        ///  0x0802
+        /// </summary>
+        [JT808BodiesType(typeof(JT808_0x0802))]
+        [JT808MsgIdDescription("0x0802", "存储多媒体数据检索应答")]
+        存储多媒体数据检索应答 = 0x0802,
     }
 }

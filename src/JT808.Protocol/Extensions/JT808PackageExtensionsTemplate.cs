@@ -810,6 +810,41 @@ namespace JT808.Protocol.Extensions
 			return Create2019<JT808.Protocol.MessageBody.JT808_0x0801>(msgId,terminalPhoneNo,bodies);
 		}
 		/// <summary>
+		/// 0x0802 - 存储多媒体数据检索应答
+		/// auto-generated
+		/// </summary>
+	    public static JT808Package Create_存储多媒体数据检索应答(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x0802 bodies)
+		{
+			return Create<JT808.Protocol.MessageBody.JT808_0x0802>(msgId,terminalPhoneNo,bodies);
+		}
+
+		/// <summary>
+		/// 0x0802 - 存储多媒体数据检索应答
+		/// auto-generated
+		/// </summary>
+	    public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x0802 bodies)
+		{
+			return Create<JT808.Protocol.MessageBody.JT808_0x0802>(msgId,terminalPhoneNo,bodies);
+		}
+
+		/// <summary>
+		/// 0x0802 - 存储多媒体数据检索应答
+		/// auto-generated 2019 version
+		/// </summary>
+	    public static JT808Package Create_存储多媒体数据检索应答_2019(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x0802 bodies)
+		{
+			return Create2019<JT808.Protocol.MessageBody.JT808_0x0802>(msgId,terminalPhoneNo,bodies);
+		}
+
+		/// <summary>
+		/// 0x0802 - 存储多媒体数据检索应答
+		/// auto-generated 2019 version
+		/// </summary>
+	    public static JT808Package Create2019(this JT808MsgId msgId, string terminalPhoneNo,JT808.Protocol.MessageBody.JT808_0x0802 bodies)
+		{
+			return Create2019<JT808.Protocol.MessageBody.JT808_0x0802>(msgId,terminalPhoneNo,bodies);
+		}
+		/// <summary>
 		/// 0x0805 - 摄像头立即拍摄命令应答
 		/// auto-generated
 		/// </summary>
