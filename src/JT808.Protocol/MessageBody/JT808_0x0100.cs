@@ -1,14 +1,18 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
+using System.Buffers;
+using System;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 终端注册
     /// </summary>
-    public class JT808_0x0100 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0100>, IJT808_2019_Version
+    public class JT808_0x0100 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0100>, IJT808_2019_Version,IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0100;
         public override string Description => "终端注册";
@@ -103,6 +107,43 @@ namespace JT808.Protocol.MessageBody
             }
             writer.WriteByte(value.PlateColor);
             writer.WriteString(value.PlateNo);
+        }
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0100 jT808_0X0100 = new JT808_0x0100();
+            jT808_0X0100.AreaID = reader.ReadUInt16();
+            writer.WriteNumber($"[{jT808_0X0100.AreaID.ReadNumber()}]省域ID", jT808_0X0100.AreaID);
+            jT808_0X0100.CityOrCountyId = reader.ReadUInt16();
+            writer.WriteNumber($"[{jT808_0X0100.CityOrCountyId.ReadNumber()}]市县域ID", jT808_0X0100.CityOrCountyId);
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                ReadOnlySpan<byte> midSpan = reader.ReadVirtualArray(11);
+                jT808_0X0100.MakerId = reader.ReadString(11);
+                writer.WriteString($"[{midSpan.ToArray().ToHexString()}]制造商ID(11)", jT808_0X0100.MakerId);
+                ReadOnlySpan<byte> tmSpan = reader.ReadVirtualArray(30);
+                jT808_0X0100.TerminalModel = reader.ReadString(30);
+                writer.WriteString($"[{tmSpan.ToArray().ToHexString()}]终端型号(30)", jT808_0X0100.TerminalModel);
+                ReadOnlySpan<byte> tidSpan = reader.ReadVirtualArray(30);
+                jT808_0X0100.TerminalId = reader.ReadString(30);
+                writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端型号(30)", jT808_0X0100.TerminalId);
+            }
+            else
+            {
+                ReadOnlySpan<byte> midSpan = reader.ReadVirtualArray(5);
+                jT808_0X0100.MakerId = reader.ReadString(5);
+                writer.WriteString($"[{midSpan.ToArray().ToHexString()}]制造商ID(5)", jT808_0X0100.MakerId);
+                ReadOnlySpan<byte> tmSpan = reader.ReadVirtualArray(20);
+                jT808_0X0100.TerminalModel = reader.ReadString(20);
+                writer.WriteString($"[{tmSpan.ToArray().ToHexString()}]终端型号(20)", jT808_0X0100.TerminalModel);
+                ReadOnlySpan<byte> tidSpan = reader.ReadVirtualArray(7);
+                jT808_0X0100.TerminalId = reader.ReadString(7);
+                writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端型号(7)", jT808_0X0100.TerminalId);
+            }
+            jT808_0X0100.PlateColor = reader.ReadByte();
+            writer.WriteNumber($"[{jT808_0X0100.PlateColor.ReadNumber()}]车牌颜色", jT808_0X0100.PlateColor);
+            ReadOnlySpan<byte> vnoSpan = reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength());
+            jT808_0X0100.PlateNo = reader.ReadRemainStringContent();
+            writer.WriteString($"[{vnoSpan.ToArray().ToHexString()}]车牌颜色", jT808_0X0100.PlateNo);
         }
     }
 }

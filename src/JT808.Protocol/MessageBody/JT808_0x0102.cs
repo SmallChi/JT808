@@ -1,14 +1,17 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 终端鉴权
     /// </summary>
-    public class JT808_0x0102 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0102>, IJT808_2019_Version
+    public class JT808_0x0102 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0102>, IJT808_2019_Version, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0102;
         public override string Description => "终端鉴权";
@@ -61,6 +64,31 @@ namespace JT808.Protocol.MessageBody
             else
             {
                 writer.WriteString(value.Code);
+            }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0102 jT808_0X0102 = new JT808_0x0102();
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                jT808_0X0102.CodeLength = reader.ReadByte();
+                writer.WriteNumber($"[{ jT808_0X0102.CodeLength.ReadNumber()}]鉴权码长度", jT808_0X0102.CodeLength);
+                ReadOnlySpan<byte> codeSpan = reader.ReadVirtualArray(jT808_0X0102.CodeLength);
+                jT808_0X0102.Code = reader.ReadString(jT808_0X0102.CodeLength);
+                writer.WriteString($"[{codeSpan.ToArray().ToHexString()}]鉴权码", jT808_0X0102.Code);
+                ReadOnlySpan<byte> imeiSpan = reader.ReadVirtualArray(15);
+                jT808_0X0102.IMEI = reader.ReadString(15);
+                writer.WriteString($"[{imeiSpan.ToArray().ToHexString()}]IMEI", jT808_0X0102.IMEI);
+                ReadOnlySpan<byte> svSpan = reader.ReadVirtualArray(20);
+                jT808_0X0102.SoftwareVersion = reader.ReadString(20);
+                writer.WriteString($"[{svSpan.ToArray().ToHexString()}]软件版本号", jT808_0X0102.SoftwareVersion);
+            }
+            else
+            {
+                ReadOnlySpan<byte> codeSpan = reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength());
+                jT808_0X0102.Code = reader.ReadRemainStringContent();
+                writer.WriteString($"[{codeSpan.ToArray().ToHexString()}]鉴权码", jT808_0X0102.Code);
             }
         }
     }
