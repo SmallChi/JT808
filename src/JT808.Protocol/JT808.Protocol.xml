@@ -6754,6 +6754,8 @@
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime4(System.DateTime,System.Int32)">
             <summary>
             YYYYMMDD
+            BCD[4]
+            数据形如：20200101
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>

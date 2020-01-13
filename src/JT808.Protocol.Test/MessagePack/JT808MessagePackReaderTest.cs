@@ -64,7 +64,7 @@ namespace JT808.Protocol.Test.MessagePack
         [Fact]
         public void ReadDateTimeTest()
         {
-            byte[] bytes = "7E 07 E3 06 19 23 23 23 00 7B 19 06 19 23 23 23 7E".ToHexBytes();
+            byte[] bytes = "7E2019061923232301231906192323237E".ToHexBytes();
             JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes);
             Assert.Equal(JT808Package.BeginFlag, jT808MessagePackReader.ReadStart());
             Assert.Equal(DateTime.Parse("2019-06-19"), jT808MessagePackReader.ReadDateTime4());

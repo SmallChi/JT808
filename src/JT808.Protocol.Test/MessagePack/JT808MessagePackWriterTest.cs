@@ -64,17 +64,17 @@ namespace JT808.Protocol.Test.MessagePack
             msgpackWriter.WriteEnd();
             msgpackWriter.WriteEncode();
             //===========output=========
-            //WriteDateTime4=>YYYYMMDD=>07 E3 06 19
-            //WriteDateTime5=>HH-mm-ss-fff|HH-mm-ss-msms=>23 23 23 00 7B
+            //WriteDateTime4=>YYYYMMDD=>20 19 06 19
+            //WriteDateTime5=>HH-mm-ss-fff|HH-mm-ss-msms=>23 23 23 01 23
             //WriteDateTime6=>yyMMddHHmmss=>19 23 23 23
             //Unencode:
-            //7E 07 E3 06 19 23 23 23 00 7B 19 06 19 23 23 23 7E
+            //7E2019061923232312301906192323237E
             //Encode
-            //7E 07 E3 06 19 23 23 23 00 7B 19 06 19 23 23 23 7E
+            //7E 20 19 06 19 23 23 23 01 23 19 06 19 23 23 23 7E
             var encodeBytes = msgpackWriter.FlushAndGetEncodingArray().ToHexString();
-            Assert.Equal("7E07E30619232323007B1906192323237E".Replace(" ", ""), encodeBytes);
+            Assert.Equal("7E2019061923232301231906192323237E".Replace(" ", ""), encodeBytes);
             var realBytes = msgpackWriter.FlushAndGetRealArray().ToHexString();
-            Assert.Equal("7E07E30619232323007B1906192323237E7E07E30619232323007B1906192323237E", realBytes);
+            Assert.Equal("7E2019061923232301231906192323237E7E2019061923232301231906192323237E", realBytes);
         }
 
         [Fact]

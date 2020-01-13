@@ -6,6 +6,7 @@ using System;
 using System.Buffers;
 using System.Buffers.Binary;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -269,6 +270,9 @@ namespace JT808.Protocol.MessagePack
             try
             {
                 var readOnlySpan = GetReadOnlySpan(5);
+                StringBuilder sb = new StringBuilder(4);
+                sb.Append(readOnlySpan[3].ToString("X2"));
+                sb.Append(readOnlySpan[4].ToString("X2"));
                 d = new DateTime(
                 DateTime.Now.Year,
                 DateTime.Now.Month,
@@ -276,7 +280,7 @@ namespace JT808.Protocol.MessagePack
                 Convert.ToInt32(readOnlySpan[0].ToString(format)),
                 Convert.ToInt32(readOnlySpan[1].ToString(format)),
                 Convert.ToInt32(readOnlySpan[2].ToString(format)),
-                Convert.ToInt32(((readOnlySpan[3] << 8) + readOnlySpan[4])));
+                Convert.ToInt32(sb.ToString().TrimStart()));
             }
             catch
             {
@@ -294,8 +298,11 @@ namespace JT808.Protocol.MessagePack
             try
             {
                 var readOnlySpan = GetReadOnlySpan(4);
+                StringBuilder sb = new StringBuilder(4);
+                sb.Append(readOnlySpan[0].ToString("X2"));
+                sb.Append(readOnlySpan[1].ToString("X2"));
                 d = new DateTime(
-               (Convert.ToInt32(readOnlySpan[0].ToString(format)) << 8) + Convert.ToByte(readOnlySpan[1]),
+                Convert.ToInt32(sb.ToString()),
                 Convert.ToInt32(readOnlySpan[2].ToString(format)),
                 Convert.ToInt32(readOnlySpan[3].ToString(format)));
             }
