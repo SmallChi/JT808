@@ -100,7 +100,7 @@ namespace JT808.Protocol.MessageBody
                 jT808_0X0107.TerminalModel = reader.ReadString(20);
                 jT808_0X0107.TerminalId = reader.ReadString(7);
             }
-            jT808_0X0107.Terminal_SIM_ICCID = reader.ReadBCD(10, config.Trim);
+            jT808_0X0107.Terminal_SIM_ICCID = reader.ReadBCD(20, config.Trim);
             jT808_0X0107.Terminal_Hardware_Version_Length = reader.ReadByte();
             jT808_0X0107.Terminal_Hardware_Version_Num = reader.ReadString(jT808_0X0107.Terminal_Hardware_Version_Length);
             jT808_0X0107.Terminal_Firmware_Version_Length = reader.ReadByte();
@@ -125,7 +125,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString(value.TerminalModel.PadRight(20, '0'));
                 writer.WriteString(value.TerminalId.PadRight(7, '0'));
             }
-            writer.WriteBCD(value.Terminal_SIM_ICCID, 10);
+            writer.WriteBCD(value.Terminal_SIM_ICCID, 20);
             writer.WriteByte((byte)value.Terminal_Hardware_Version_Num.Length);
             writer.WriteString(value.Terminal_Hardware_Version_Num);
             writer.WriteByte((byte)value.Terminal_Firmware_Version_Num.Length);
