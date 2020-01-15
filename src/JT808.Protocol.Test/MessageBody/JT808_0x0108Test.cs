@@ -28,5 +28,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(JT808UpgradeResult.成功, jT808_0X0108.UpgradeResult);
             Assert.Equal(JT808UpgradeType.北斗卫星定位模块, jT808_0X0108.UpgradeType);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "34 00".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0108>(bytes);
+        }
     }
 }

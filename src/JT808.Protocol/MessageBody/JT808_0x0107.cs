@@ -1,14 +1,18 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System;
+using System.Collections;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 查询终端属性应答
     /// </summary>
-    public class JT808_0x0107 : JT808Bodies,IJT808MessagePackFormatter<JT808_0x0107>, IJT808_2019_Version
+    public class JT808_0x0107 : JT808Bodies,IJT808MessagePackFormatter<JT808_0x0107>, IJT808_2019_Version,IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0107;
 
@@ -132,6 +136,81 @@ namespace JT808.Protocol.MessageBody
             writer.WriteString(value.Terminal_Firmware_Version_Num);
             writer.WriteByte(value.GNSSModule);
             writer.WriteByte(value.CommunicationModule);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0107 jT808_0X0107 = new JT808_0x0107();
+            jT808_0X0107.TerminalType = reader.ReadUInt16();
+            writer.WriteNumber($"[{jT808_0X0107.TerminalType.ReadNumber()}]终端类型", jT808_0X0107.TerminalType);
+            ReadOnlySpan<char> terminalTypeBits = Convert.ToString(jT808_0X0107.TerminalType, 2).PadLeft(16, '0').AsSpan();
+            writer.WriteStartObject("终端类型");
+            writer.WriteString("bit0", terminalTypeBits[0] == '0' ? "不适用客运车辆" : "适用客运车辆");
+            writer.WriteString("bit1", terminalTypeBits[1] == '0' ? "不适用危险品车辆" : "适用危险品车辆");
+            writer.WriteString("bit2", terminalTypeBits[2] == '0' ? "不适用普通货运车辆" : "适用普通货运车辆");
+            writer.WriteString("bit3", terminalTypeBits[3] == '0' ? "不适用出租车辆" : "适用出租车辆");
+            writer.WriteString("bit6", terminalTypeBits[6] == '0' ? "不支持硬盘录像" : "支持硬盘录像");
+            writer.WriteString("bit7", terminalTypeBits[7] == '0' ? "一体机" : "分体机");
+            writer.WriteEndObject();
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                ReadOnlySpan<byte> makerIdSpan = reader.ReadVirtualArray(11);
+                jT808_0X0107.MakerId = reader.ReadString(11);
+                writer.WriteString($"[{makerIdSpan.ToArray().ToHexString()}]制造商ID", jT808_0X0107.MakerId);
+                ReadOnlySpan<byte> terminalModelSpan = reader.ReadVirtualArray(30);
+                jT808_0X0107.TerminalModel = reader.ReadString(30);
+                writer.WriteString($"[{terminalModelSpan.ToArray().ToHexString()}]终端型号", jT808_0X0107.TerminalModel);
+                ReadOnlySpan<byte> terminalIdSpan = reader.ReadVirtualArray(30);
+                jT808_0X0107.TerminalId = reader.ReadString(30);
+                writer.WriteString($"[{terminalIdSpan.ToArray().ToHexString()}]终端ID", jT808_0X0107.TerminalId);
+            }
+            else
+            {
+                ReadOnlySpan<byte> makerIdSpan = reader.ReadVirtualArray(5);
+                jT808_0X0107.MakerId = reader.ReadString(5);
+                writer.WriteString($"[{makerIdSpan.ToArray().ToHexString()}]制造商ID", jT808_0X0107.MakerId);
+                ReadOnlySpan<byte> terminalModelSpan = reader.ReadVirtualArray(20);
+                jT808_0X0107.TerminalModel = reader.ReadString(20);
+                writer.WriteString($"[{terminalModelSpan.ToArray().ToHexString()}]终端型号", jT808_0X0107.TerminalModel);
+                ReadOnlySpan<byte> terminalIdSpan = reader.ReadVirtualArray(7);
+                jT808_0X0107.TerminalId = reader.ReadString(7);
+                writer.WriteString($"[{terminalIdSpan.ToArray().ToHexString()}]终端ID", jT808_0X0107.TerminalId);
+            }
+            ReadOnlySpan<byte> iccidSpan = reader.ReadVirtualArray(20);
+            jT808_0X0107.Terminal_SIM_ICCID = reader.ReadBCD(20, config.Trim);
+            writer.WriteString($"[{iccidSpan.ToArray().ToHexString()}]终端SIM卡ICCID", jT808_0X0107.Terminal_SIM_ICCID);
+            jT808_0X0107.Terminal_Hardware_Version_Length = reader.ReadByte();
+            writer.WriteNumber($"[{jT808_0X0107.Terminal_Hardware_Version_Length.ReadNumber()}]终端硬件版本号长度", jT808_0X0107.Terminal_Hardware_Version_Length);
+            ReadOnlySpan<byte> hardwareVersionNumSpan = reader.ReadVirtualArray(jT808_0X0107.Terminal_Hardware_Version_Length);
+            jT808_0X0107.Terminal_Hardware_Version_Num = reader.ReadString(jT808_0X0107.Terminal_Hardware_Version_Length);
+            writer.WriteString($"[{hardwareVersionNumSpan.ToArray().ToHexString()}]终端硬件版本号", jT808_0X0107.Terminal_Hardware_Version_Num);
+            jT808_0X0107.Terminal_Firmware_Version_Length = reader.ReadByte();
+            writer.WriteNumber($"[{jT808_0X0107.Terminal_Firmware_Version_Length.ReadNumber()}]终端硬件版本号长度", jT808_0X0107.Terminal_Firmware_Version_Length);
+            ReadOnlySpan<byte> firmwareVersionNumSpan = reader.ReadVirtualArray(jT808_0X0107.Terminal_Firmware_Version_Length);
+            jT808_0X0107.Terminal_Firmware_Version_Num = reader.ReadString(jT808_0X0107.Terminal_Firmware_Version_Length);
+            writer.WriteString($"[{firmwareVersionNumSpan.ToArray().ToHexString()}]终端固件版本号", jT808_0X0107.Terminal_Firmware_Version_Num);
+            jT808_0X0107.GNSSModule = reader.ReadByte();
+            ReadOnlySpan<char> gNSSModuleBits = Convert.ToString(jT808_0X0107.GNSSModule, 2).PadLeft(8,'0').AsSpan();
+            writer.WriteNumber($"[{jT808_0X0107.GNSSModule.ReadNumber()}]GNSS模块属性", jT808_0X0107.GNSSModule);
+            writer.WriteStartObject("GNSS模块属性");
+            writer.WriteString("bit0", gNSSModuleBits[0] == '0' ? "不支持GPS定位" : "支持GPS定位");
+            writer.WriteString("bit1", gNSSModuleBits[1] == '0' ? "不支持北斗定位" : "支持北斗定位");
+            writer.WriteString("bit2", gNSSModuleBits[2] == '0' ? "不支持GLONASS定位" : "支持GLONASS定位");
+            writer.WriteString("bit3", gNSSModuleBits[3] == '0' ? "不支持Galileo定位" : "支持Galileo定位");
+            writer.WriteEndObject();
+            jT808_0X0107.CommunicationModule = reader.ReadByte();
+            ReadOnlySpan<char> communicationModuleBits=Convert.ToString(jT808_0X0107.CommunicationModule, 2).PadLeft(8, '0').AsSpan();
+            writer.WriteNumber($"[{jT808_0X0107.CommunicationModule.ReadNumber()}]通信模块属性", jT808_0X0107.CommunicationModule);
+            writer.WriteStartObject("通信模块属性");
+            writer.WriteString("bit0", communicationModuleBits[0] == '0' ? "不支持GPRS通信" : "支持GPRS通信");
+            writer.WriteString("bit1", communicationModuleBits[1] == '0' ? "不支持CDMA通信" : "支持CDMA通信");
+            writer.WriteString("bit2", communicationModuleBits[2] == '0' ? "不支持TD-SCDMA通信" : "支持TD-SCDMA通信");
+            writer.WriteString("bit3", communicationModuleBits[3] == '0' ? "不支持WCDMA通信" : "支持WCDMA通信");
+            writer.WriteString("bit4", communicationModuleBits[4] == '0' ? "不支持CDMA2000通信" : "支持CDMA2000通信");
+            writer.WriteString("bit5", communicationModuleBits[5] == '0' ? "不支持TD-LTE通信" : "支持TD-LTE通信");
+            writer.WriteString("bit6", "保留");
+            writer.WriteString("bit7", communicationModuleBits[7] == '0' ? "不支持其他通信方式" : "不支持其他通信方式");
+            writer.WriteEndObject();
         }
     }
 }

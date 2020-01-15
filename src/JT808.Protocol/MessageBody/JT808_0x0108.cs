@@ -1,13 +1,16 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 终端升级结果通知
     /// </summary>
-    public class JT808_0x0108 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0108>
+    public class JT808_0x0108 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0108>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0108;
         public override string Description => "终端升级结果通知";
@@ -22,6 +25,7 @@ namespace JT808.Protocol.MessageBody
         /// 0：成功，1：失败，2：取消
         /// </summary>
         public JT808UpgradeResult UpgradeResult { get; set; }
+
         public JT808_0x0108 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0108 jT808_0X0108 = new JT808_0x0108();
@@ -34,6 +38,15 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteByte((byte)value.UpgradeType);
             writer.WriteByte((byte)value.UpgradeResult);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0108 jT808_0X0108 = new JT808_0x0108();
+            jT808_0X0108.UpgradeType = (JT808UpgradeType)reader.ReadByte();
+            jT808_0X0108.UpgradeResult = (JT808UpgradeResult)reader.ReadByte();
+            writer.WriteString($"[{((byte)jT808_0X0108.UpgradeType).ReadNumber()}]升级类型", jT808_0X0108.UpgradeType.ToString());
+            writer.WriteString($"[{((byte)jT808_0X0108.UpgradeResult).ReadNumber()}]升级结果", jT808_0X0108.UpgradeResult.ToString());
         }
     }
 }

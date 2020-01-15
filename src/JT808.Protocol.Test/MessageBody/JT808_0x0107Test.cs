@@ -59,5 +59,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(7, jT808_0X0107.GNSSModule);
             Assert.Equal(9, jT808_0X0107.CommunicationModule);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "7E0107004111223344556622B8000531303630313130343535353435393535313033303030303030346436613133301234567890123456789007616263646566670A706F69757974726577710709DA7E".ToHexBytes();
+            string json = JT808Serializer.Analyze(bytes); 
+        }
     }
 }
