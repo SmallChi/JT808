@@ -115,7 +115,7 @@ namespace JT808.Protocol.MessageBody
            value.Saturability = reader.ReadByte();
            value.Chroma = reader.ReadByte();
 
-            writer.WriteNumber($"[{ value.ChannelId.ReadNumber()}]通道ID", value.ChannelId.);
+            writer.WriteNumber($"[{ value.ChannelId.ReadNumber()}]通道ID", value.ChannelId);
             writer.WriteNumber($"[{ value.ShootingCommand.ReadNumber()}]拍摄命令", value.ShootingCommand);
             writer.WriteNumber($"[{ value.VideoTime.ReadNumber()}]拍照间隔_录像时间", value.VideoTime);
             writer.WriteNumber($"[{ value.SaveFlag.ReadNumber()}]保存标志", value.SaveFlag);

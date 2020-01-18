@@ -70,9 +70,9 @@ namespace JT808.Protocol.MessageBody
             value.StartTime = reader.ReadDateTime6();
             value.EndTime = reader.ReadDateTime6();
 
-            writer.WriteNumber($"[{ value.MultimediaType.ReadNumber()}]多媒体类型", value.MultimediaType.);
-            writer.WriteNumber($"[{ value.ChannelId.ReadNumber()}]通道ID", value.ChannelId.);
-            writer.WriteNumber($"[{ value.EventItemCoding.ReadNumber()}]事件项编码", value.EventItemCoding.);
+            writer.WriteNumber($"[{ value.MultimediaType.ReadNumber()}]多媒体类型", value.MultimediaType);
+            writer.WriteNumber($"[{ value.ChannelId.ReadNumber()}]通道ID", value.ChannelId);
+            writer.WriteNumber($"[{ value.EventItemCoding.ReadNumber()}]事件项编码", value.EventItemCoding);
             writer.WriteString($"[{ value.StartTime.ToString("yyMMddHHmmss")}]起始时间", value.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
             writer.WriteString($"[{ value.EndTime.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
         }

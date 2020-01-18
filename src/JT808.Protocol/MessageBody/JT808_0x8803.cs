@@ -79,12 +79,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0X8803.EndTime = reader.ReadDateTime6();
             jT808_0X8803.MultimediaDeleted = reader.ReadByte();
 
-            writer.WriteNumber($"[{ jT808_0X8803.MultimediaType.ReadNumber()}]多媒体类型", jT808_0X8803.MultimediaType.);
-            writer.WriteNumber($"[{ jT808_0X8803.ChannelId.ReadNumber()}]通道ID", jT808_0X8803.ChannelId.);
-            writer.WriteNumber($"[{ jT808_0X8803.EventItemCoding.ReadNumber()}]事件项编码", jT808_0X8803.EventItemCoding.);
+            writer.WriteNumber($"[{ jT808_0X8803.MultimediaType.ReadNumber()}]多媒体类型", jT808_0X8803.MultimediaType);
+            writer.WriteNumber($"[{ jT808_0X8803.ChannelId.ReadNumber()}]通道ID", jT808_0X8803.ChannelId);
+            writer.WriteNumber($"[{ jT808_0X8803.EventItemCoding.ReadNumber()}]事件项编码", jT808_0X8803.EventItemCoding);
             writer.WriteString($"[{ jT808_0X8803.StartTime.ToString("yyMMddHHmmss")}]起始时间", jT808_0X8803.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
             writer.WriteString($"[{ jT808_0X8803.EndTime.ToString("yyMMddHHmmss")}]结束时间", jT808_0X8803.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            writer.WriteNumber($"[{ jT808_0X8803.MultimediaDeleted.ReadNumber()}]删除标志", jT808_0X8803.MultimediaDeleted.);
+            writer.WriteNumber($"[{ jT808_0X8803.MultimediaDeleted.ReadNumber()}]删除标志", jT808_0X8803.MultimediaDeleted);
         }
     }
 }
