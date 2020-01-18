@@ -1,13 +1,16 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 录音开始命令
     /// </summary>
-    public class JT808_0x8804 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8804>
+    public class JT808_0x8804 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8804>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8804;
         public override string Description => "录音开始命令";
@@ -46,6 +49,19 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt16(value.RecordTime);
             writer.WriteByte((byte)value.RecordSave);
             writer.WriteByte(value.AudioSampleRate);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8804 jT808_0X8804 = new JT808_0x8804();
+            jT808_0X8804.RecordCmd = (JT808RecordCmd)reader.ReadByte();
+            jT808_0X8804.RecordTime = reader.ReadUInt16();
+            jT808_0X8804.RecordSave = (JT808RecordSave)reader.ReadByte();
+            jT808_0X8804.AudioSampleRate = reader.ReadByte();
+            writer.WriteNumber($"[{ ((byte)(jT808_0X8804.RecordCmd)).ReadNumber()}]录音命令", (byte)jT808_0X8804.RecordCmd);
+            writer.WriteNumber($"[{jT808_0X8804.RecordTime.ReadNumber()}]单位为秒(s)", jT808_0X8804.RecordTime);
+            writer.WriteNumber($"[{((byte)jT808_0X8804.RecordSave).ReadNumber()}]保存标志", (byte)jT808_0X8804.RecordSave);
+            writer.WriteNumber($"[{jT808_0X8804.AudioSampleRate.ReadNumber()}]音频采样率", jT808_0X8804.AudioSampleRate);
         }
     }
 }

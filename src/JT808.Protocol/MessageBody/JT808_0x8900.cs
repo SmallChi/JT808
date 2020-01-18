@@ -2,13 +2,14 @@
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 数据下行透传
     /// </summary>
-    public class JT808_0x8900 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8900>, IJT808_2019_Version
+    public class JT808_0x8900 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8900>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8900;
         public override string Description => "数据下行透传";
@@ -40,6 +41,15 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteByte(value.PassthroughType);
             JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(value.JT808_0X8900_BodyBase, ref writer, value.JT808_0X8900_BodyBase, config);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8900 jT808_0X8900 = new JT808_0x8900();
+            jT808_0X8900.PassthroughType = reader.ReadByte();
+            jT808_0X8900.PassthroughData = reader.ReadContent().ToArray();
+            writer.WriteNumber($"[{jT808_0X8900.PassthroughType.ReadNumber()}]透传消息类型", jT808_0X8900.PassthroughType);
+            writer.WriteString($"透传消息内容", jT808_0X8900.PassthroughData.ToHexString());
         }
     }
 }

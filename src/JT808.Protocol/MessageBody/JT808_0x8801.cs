@@ -1,6 +1,8 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// 摄像头立即拍摄命令
     /// 0x8801
     /// </summary>
-    public class JT808_0x8801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8801>, IJT808_2019_Version
+    public class JT808_0x8801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8801>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8801;
         public override string Description => "摄像头立即拍摄命令";
@@ -68,6 +70,7 @@ namespace JT808.Protocol.MessageBody
         /// 0-255
         /// </summary>
         public byte Chroma { get; set; }
+
         public JT808_0x8801 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8801 jT808_0X8801 = new JT808_0x8801();
@@ -96,6 +99,32 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte(value.Contrast);
             writer.WriteByte(value.Saturability);
             writer.WriteByte(value.Chroma);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8801 value = new JT808_0x8801();
+           value.ChannelId = reader.ReadByte();
+           value.ShootingCommand = reader.ReadUInt16();
+           value.VideoTime = reader.ReadUInt16();
+           value.SaveFlag = reader.ReadByte();
+           value.Resolution = reader.ReadByte();
+           value.VideoQuality = reader.ReadByte();
+           value.Lighting = reader.ReadByte();
+           value.Contrast = reader.ReadByte();
+           value.Saturability = reader.ReadByte();
+           value.Chroma = reader.ReadByte();
+
+            writer.WriteNumber($"[{ value.ChannelId.ReadNumber()}]通道ID", value.ChannelId.);
+            writer.WriteNumber($"[{ value.ShootingCommand.ReadNumber()}]拍摄命令", value.ShootingCommand);
+            writer.WriteNumber($"[{ value.VideoTime.ReadNumber()}]拍照间隔_录像时间", value.VideoTime);
+            writer.WriteNumber($"[{ value.SaveFlag.ReadNumber()}]保存标志", value.SaveFlag);
+            writer.WriteNumber($"[{ value.Resolution.ReadNumber()}]分辨率", value.Resolution);
+            writer.WriteNumber($"[{ value.VideoQuality.ReadNumber()}]图像_视频质量", value.VideoQuality);
+            writer.WriteNumber($"[{ value.Lighting.ReadNumber()}]亮度", value.Lighting);
+            writer.WriteNumber($"[{ value.Contrast.ReadNumber()}]对比度", value.Contrast);
+            writer.WriteNumber($"[{ value.Saturability.ReadNumber()}]饱和度", value.Saturability);
+            writer.WriteNumber($"[{ value.Chroma.ReadNumber()}]色度", value.Chroma);
         }
     }
 }

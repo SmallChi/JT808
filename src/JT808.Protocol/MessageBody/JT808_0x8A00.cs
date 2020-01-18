@@ -1,6 +1,9 @@
 ﻿using JT808.Protocol.Exceptions;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 平台RSA公钥
     /// 0x8A00
     /// </summary>
-    public class JT808_0x8A00 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8A00>
+    public class JT808_0x8A00 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8A00>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8A00;
         public override string Description => "平台RSA公钥";
@@ -39,6 +42,15 @@ namespace JT808.Protocol.MessageBody
                 throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(value.N)}->128");
             }
             writer.WriteArray(value.N);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8A00 jT808_0X8A00 = new JT808_0x8A00();
+            jT808_0X8A00.E = reader.ReadUInt32();
+            jT808_0X8A00.N = reader.ReadArray(128).ToArray();
+            writer.WriteNumber($"[{jT808_0X8A00.E.ReadNumber()}]RSA公钥e", jT808_0X8A00.E);
+            writer.WriteString($"RSA公钥n", jT808_0X8A00.N.ToHexString());
         }
     }
 }

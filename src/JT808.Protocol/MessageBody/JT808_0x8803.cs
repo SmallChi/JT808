@@ -1,6 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 存储多媒体数据上传命令
     /// 0x8803
     /// </summary>
-    public class JT808_0x8803 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8803>
+    public class JT808_0x8803 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8803>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8803;
         public override string Description => "存储多媒体数据上传命令";
@@ -43,6 +46,7 @@ namespace JT808.Protocol.MessageBody
         /// <see cref="JT808.Protocol.Enums.JT808MultimediaDeleted"/>
         /// </summary>
         public byte MultimediaDeleted { get; set; }
+
         public JT808_0x8803 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8803 jT808_0X8803 = new JT808_0x8803();
@@ -63,6 +67,24 @@ namespace JT808.Protocol.MessageBody
             writer.WriteDateTime6(value.StartTime);
             writer.WriteDateTime6(value.EndTime);
             writer.WriteByte(value.MultimediaDeleted);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8803 jT808_0X8803 = new JT808_0x8803();
+            jT808_0X8803.MultimediaType = reader.ReadByte();
+            jT808_0X8803.ChannelId = reader.ReadByte();
+            jT808_0X8803.EventItemCoding = reader.ReadByte();
+            jT808_0X8803.StartTime = reader.ReadDateTime6();
+            jT808_0X8803.EndTime = reader.ReadDateTime6();
+            jT808_0X8803.MultimediaDeleted = reader.ReadByte();
+
+            writer.WriteNumber($"[{ jT808_0X8803.MultimediaType.ReadNumber()}]多媒体类型", jT808_0X8803.MultimediaType.);
+            writer.WriteNumber($"[{ jT808_0X8803.ChannelId.ReadNumber()}]通道ID", jT808_0X8803.ChannelId.);
+            writer.WriteNumber($"[{ jT808_0X8803.EventItemCoding.ReadNumber()}]事件项编码", jT808_0X8803.EventItemCoding.);
+            writer.WriteString($"[{ jT808_0X8803.StartTime.ToString("yyMMddHHmmss")}]起始时间", jT808_0X8803.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            writer.WriteString($"[{ jT808_0X8803.EndTime.ToString("yyMMddHHmmss")}]结束时间", jT808_0X8803.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            writer.WriteNumber($"[{ jT808_0X8803.MultimediaDeleted.ReadNumber()}]删除标志", jT808_0X8803.MultimediaDeleted.);
         }
     }
 }

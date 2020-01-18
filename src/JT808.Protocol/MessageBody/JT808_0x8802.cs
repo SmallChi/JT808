@@ -1,6 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 存储多媒体数据检索
     /// 0x8802
     /// </summary>
-    public class JT808_0x8802 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8802>
+    public class JT808_0x8802 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8802>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8802;
         public override string Description => "存储多媒体数据检索";
@@ -37,6 +40,7 @@ namespace JT808.Protocol.MessageBody
         /// YY-MM-DD-hh-mm-ss
         /// </summary>
         public DateTime EndTime { get; set; }
+
         public JT808_0x8802 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8802 jT808_0X8802 = new JT808_0x8802();
@@ -55,6 +59,22 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte(value.EventItemCoding);
             writer.WriteDateTime6(value.StartTime);
             writer.WriteDateTime6(value.EndTime);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8802 value = new JT808_0x8802();
+            value.MultimediaType = reader.ReadByte();
+            value.ChannelId = reader.ReadByte();
+            value.EventItemCoding = reader.ReadByte();
+            value.StartTime = reader.ReadDateTime6();
+            value.EndTime = reader.ReadDateTime6();
+
+            writer.WriteNumber($"[{ value.MultimediaType.ReadNumber()}]多媒体类型", value.MultimediaType.);
+            writer.WriteNumber($"[{ value.ChannelId.ReadNumber()}]通道ID", value.ChannelId.);
+            writer.WriteNumber($"[{ value.EventItemCoding.ReadNumber()}]事件项编码", value.EventItemCoding.);
+            writer.WriteString($"[{ value.StartTime.ToString("yyMMddHHmmss")}]起始时间", value.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            writer.WriteString($"[{ value.EndTime.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
         }
     }
 }

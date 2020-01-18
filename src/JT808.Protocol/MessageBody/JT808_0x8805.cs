@@ -1,13 +1,15 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 单条存储多媒体数据检索上传命令
     /// </summary>
-    public class JT808_0x8805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8805>,IJT808_2019_Version
+    public class JT808_0x8805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8805>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8805;
         public override string Description => "单条存储多媒体数据检索上传命令";
@@ -20,6 +22,7 @@ namespace JT808.Protocol.MessageBody
         /// <see cref="JT808.Protocol.Enums.JT808MultimediaDeleted"/>
         /// </summary>
         public byte MultimediaDeleted { get; set; }
+
         public JT808_0x8805 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8805 jT808_0X8805 = new JT808_0x8805();
@@ -32,6 +35,15 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteUInt32(value.MultimediaId);
             writer.WriteByte(value.MultimediaDeleted);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8805 jT808_0X8805 = new JT808_0x8805();
+            jT808_0X8805.MultimediaId = reader.ReadUInt32();
+            jT808_0X8805.MultimediaDeleted = reader.ReadByte();
+            writer.WriteNumber($"[{jT808_0X8805.MultimediaId.ReadNumber()}]多媒体ID", jT808_0X8805.MultimediaId);
+            writer.WriteNumber($"[{jT808_0X8805.MultimediaId.ReadNumber()}]删除标志", jT808_0X8805.MultimediaDeleted);
         }
     }
 }
