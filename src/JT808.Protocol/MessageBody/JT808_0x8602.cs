@@ -1,10 +1,12 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -12,7 +14,7 @@ namespace JT808.Protocol.MessageBody
     /// 设置矩形区域
     /// 0x8602
     /// </summary>
-    public class JT808_0x8602 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8602>, IJT808_2019_Version
+    public class JT808_0x8602 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8602>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8602;
         public override string Description => "设置矩形区域";
@@ -123,6 +125,65 @@ namespace JT808.Protocol.MessageBody
                     }
                 }
             }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8602 value = new JT808_0x8602();
+            value.SettingAreaProperty = reader.ReadByte();
+            writer.WriteNumber($"[{ value.SettingAreaProperty.ReadNumber()}]设置属性", value.SettingAreaProperty);
+            value.AreaCount = reader.ReadByte();
+            writer.WriteNumber($"[{ value.AreaCount.ReadNumber()}]区域总数", value.AreaCount);
+            writer.WriteStartArray("区域项");
+            for (var i = 0; i < value.AreaCount; i++)
+            {
+                writer.WriteStartObject();
+                JT808RectangleAreaProperty areaProperty = new JT808RectangleAreaProperty();
+                areaProperty.AreaId = reader.ReadUInt32();
+                writer.WriteNumber($"[{areaProperty.AreaId.ReadNumber()}]区域ID", areaProperty.AreaId);
+                areaProperty.AreaProperty = reader.ReadUInt16();
+                writer.WriteNumber($"[{areaProperty.AreaProperty.ReadNumber()}]区域属性", areaProperty.AreaProperty);
+                areaProperty.UpLeftPointLat = reader.ReadUInt32();
+                writer.WriteNumber($"[{areaProperty.UpLeftPointLat.ReadNumber()}]左上点纬度", areaProperty.UpLeftPointLat);
+                areaProperty.UpLeftPointLng = reader.ReadUInt32();
+                writer.WriteNumber($"[{areaProperty.UpLeftPointLng.ReadNumber()}]左上点经度", areaProperty.UpLeftPointLng);
+                areaProperty.LowRightPointLat = reader.ReadUInt32();
+                writer.WriteNumber($"[{areaProperty.LowRightPointLat.ReadNumber()}]右下点纬度", areaProperty.LowRightPointLat);
+                areaProperty.LowRightPointLng = reader.ReadUInt32();
+                writer.WriteNumber($"[{areaProperty.LowRightPointLng.ReadNumber()}]右下点经度", areaProperty.LowRightPointLng);
+                ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(areaProperty.AreaProperty, 2).PadLeft(16, '0').AsSpan();
+                bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
+                if (!bit0Flag)
+                {
+                    areaProperty.StartTime = reader.ReadDateTime6();
+                    writer.WriteString($"[{ areaProperty.StartTime.Value.ToString("yyMMddHHmmss")}]起始时间", areaProperty.StartTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                    areaProperty.EndTime = reader.ReadDateTime6();
+                    writer.WriteString($"[{ areaProperty.EndTime.Value.ToString("yyMMddHHmmss")}]起始时间", areaProperty.EndTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                }
+                bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2, 1).ToString().Equals("0");
+                if (!bit1Flag)
+                {
+                    areaProperty.HighestSpeed = reader.ReadUInt16();
+                    writer.WriteNumber($"[{areaProperty.HighestSpeed.Value.ReadNumber()}]最高速度", areaProperty.HighestSpeed.Value);
+                    areaProperty.OverspeedDuration = reader.ReadByte();
+                    writer.WriteNumber($"[{areaProperty.OverspeedDuration.Value.ReadNumber()}]超速持续时间", areaProperty.OverspeedDuration.Value);
+                    if (reader.Version == JT808Version.JTT2019)
+                    {
+                        areaProperty.NightMaximumSpeed = reader.ReadUInt16();
+                        writer.WriteNumber($"[{areaProperty.NightMaximumSpeed.ReadNumber()}]夜间最高速度", areaProperty.NightMaximumSpeed);
+                    }
+                }
+                if (reader.Version == JT808Version.JTT2019)
+                {
+                    areaProperty.NameLength = reader.ReadUInt16();
+                    writer.WriteNumber($"[{areaProperty.NameLength.ReadNumber()}]夜间最高速度", areaProperty.NameLength);
+                    var areaNameBuffer = reader.ReadVirtualArray(areaProperty.NameLength);
+                    areaProperty.AreaName = reader.ReadString(areaProperty.NameLength);
+                    writer.WriteString($"[{ areaNameBuffer.ToArray().ToHexString()}]区域名称", areaProperty.AreaName);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
     }
 }

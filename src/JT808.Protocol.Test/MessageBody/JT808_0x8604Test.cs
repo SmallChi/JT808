@@ -56,5 +56,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)123456700, jT808_0X8604.PeakItems[1].Lat);
             Assert.Equal((uint)123456701, jT808_0X8604.PeakItems[1].Lng);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "000004D200011811200000121811210000120002075BCD15075BCD14075BCCBC075BCCBD".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8604>(bytes);
+        }
     }
 }

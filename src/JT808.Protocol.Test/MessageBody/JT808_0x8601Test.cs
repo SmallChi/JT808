@@ -29,5 +29,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)1, jT808_0X8601.AreaIds[0]);
             Assert.Equal((uint)2, jT808_0X8601.AreaIds[1]);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            var bytes = "020000000100000002".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8601>(bytes);
+        }
     }
 }

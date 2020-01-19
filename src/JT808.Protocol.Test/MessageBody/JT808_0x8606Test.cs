@@ -234,7 +234,7 @@ namespace JT808.Protocol.Test.MessageBody
                 SectionOverspeedDuration = 23,
                 SectionProperty = 3,
                 SectionWidth = 56,
-                NightMaximumSpeed=80
+                NightMaximumSpeed = 80
             });
             jT808_0X8606.InflectionPointItems.Add(new JT808InflectionPointProperty()
             {
@@ -251,7 +251,7 @@ namespace JT808.Protocol.Test.MessageBody
                 NightMaximumSpeed = 66
             });
             jT808_0X8606.RouteName = "koike518";
-            var hex = JT808Serializer.Serialize(jT808_0X8606,JT808Version.JTT2019).ToHexString();
+            var hex = JT808Serializer.Serialize(jT808_0X8606, JT808Version.JTT2019).ToHexString();
             Assert.Equal("0000270F00332001040000122001040000120002000003E800000507075BCD15075BCD1438030032007B0045170050000003E900002EE7075BCD0C075BCD0D4B03003A007C002A1A004200086B6F696B65353138", hex);
         }
 
@@ -294,6 +294,13 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(66, jT808_0X8606.InflectionPointItems[1].NightMaximumSpeed.Value);
 
             Assert.Equal("koike518", jT808_0X8606.RouteName);
+        }
+
+        [Fact]
+        public void Test6_2019_1()
+        {
+            byte[] bytes = "0000270F00332001040000122001040000120002000003E800000507075BCD15075BCD1438030032007B0045170050000003E900002EE7075BCD0C075BCD0D4B03003A007C002A1A004200086B6F696B65353138".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8606>(bytes, JT808Version.JTT2019);
         }
     }
 }
