@@ -71,7 +71,7 @@ namespace JT808.Protocol.Extensions
             return hex;
         }
 
-        public static string ReadNumber(this byte value, string format = "X1")
+        public static string ReadNumber(this byte value, string format = "X2")
         {
             return value.ToString(format);
         }

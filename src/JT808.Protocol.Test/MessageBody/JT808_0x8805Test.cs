@@ -27,5 +27,11 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(Enums.JT808MultimediaDeleted.保留.ToByteValue(), jT808_0X8805.MultimediaDeleted);
             Assert.Equal((uint)10000, jT808_0X8805.MultimediaId);
         }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "0000271000".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8805>(bytes);
+        }
     }
 }

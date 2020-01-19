@@ -44,5 +44,11 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)12345, jT808_0X8900_Test_BodiesImpl.Id);
             Assert.Equal(0x01, jT808_0X8900_Test_BodiesImpl.Sex);
         }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "0B0000303901".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8900>(bytes);
+        }
     }
 }

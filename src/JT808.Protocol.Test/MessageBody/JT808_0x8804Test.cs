@@ -33,5 +33,11 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(JT808RecordSave.实时上传, jT808_0X8804.RecordSave);
             Assert.Equal(1, jT808_0X8804.AudioSampleRate);
         }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "00001E0001".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8804>(bytes);
+        }
     }
 }

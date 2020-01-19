@@ -59,7 +59,7 @@ namespace JT808.Protocol.MessageBody
             ReadOnlySpan<byte> tmp = value.RetransmitPackageIds;
             for(int i=0; i< value.RetransmitPackageCount; i++)
             {
-                writer.WriteString($"ID{i+1}", tmp.Slice(i * 2, 2).ToArray().ToHexString());
+                writer.WriteStringValue($"{tmp.Slice(i*2 , 2).ToArray().ToHexString()}");
             }
             writer.WriteEndArray();
         }

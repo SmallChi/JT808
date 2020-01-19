@@ -50,7 +50,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0X8A00.E = reader.ReadUInt32();
             jT808_0X8A00.N = reader.ReadArray(128).ToArray();
             writer.WriteNumber($"[{jT808_0X8A00.E.ReadNumber()}]RSA公钥e", jT808_0X8A00.E);
-            writer.WriteString($"RSA公钥n", jT808_0X8A00.N.ToHexString());
+            writer.WriteString($"RSA公钥N", jT808_0X8A00.N.ToHexString());
         }
     }
 }

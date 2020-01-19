@@ -43,5 +43,11 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(9, jT808_0X8801.VideoQuality);
             Assert.Equal(2686, jT808_0X8801.VideoTime);
         }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "8000000A7E010809EB7E78F5".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8801>(bytes);
+        }
     }
 }

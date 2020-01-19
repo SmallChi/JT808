@@ -37,5 +37,11 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2018-11-16 22:00:21"), jT808_0X8803.StartTime);
             Assert.Equal(DateTime.Parse("2018-11-16 23:00:21"), jT808_0X8803.EndTime);
         }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "00800018111622002118111623002101".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8803>(bytes);
+        }
     }
 }
