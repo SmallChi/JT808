@@ -1,15 +1,18 @@
-﻿using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 查询终端参数应答
     /// </summary>
-    public class JT808_0x0104 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0104>
+    public class JT808_0x0104 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0104>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0104;
         public override string Description => "查询终端参数应答";
@@ -59,6 +62,29 @@ namespace JT808.Protocol.MessageBody
                 object obj = config.GetMessagePackFormatterByType(item.GetType());
                 JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(obj, ref writer, item, config);
             }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0104 jT808_0x0104 = new JT808_0x0104();
+            jT808_0x0104.MsgNum = reader.ReadUInt16();
+            jT808_0x0104.AnswerParamsCount = reader.ReadByte();
+            writer.WriteNumber($"[{jT808_0x0104.MsgNum.ReadNumber()}]应答流水号", jT808_0x0104.MsgNum);
+            writer.WriteNumber($"[{ jT808_0x0104.AnswerParamsCount.ReadNumber()}]应答参数个数", jT808_0x0104.AnswerParamsCount);
+            writer.WriteStartArray($"参数列表");
+            for (int i = 0; i < jT808_0x0104.AnswerParamsCount; i++)
+            {
+                writer.WriteStartObject();
+                var paramId = reader.ReadVirtualUInt32();//参数ID         
+                if (config.JT808_0X8103_Factory.Map.TryGetValue(paramId, out object instance))
+                {
+                    if (instance is IJT808Analyze  analyze) {
+                        analyze.Analyze(ref reader, writer, config);
+                    }
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
     }
 }

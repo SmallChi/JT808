@@ -1,5 +1,8 @@
-﻿using JT808.Protocol.Attributes;
+﻿using System.Text.Json;
+using JT808.Protocol.Attributes;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -7,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 道路运输证 IC 卡认证主服务器 IP 地址或域名
     /// </summary>
-    public class JT808_0x8103_0x001A : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x001A>
+    public class JT808_0x8103_0x001A : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x001A>, IJT808Analyze
     {
         public override uint ParamId { get; set; } = 0x001A;
         /// <summary>
@@ -18,6 +21,19 @@ namespace JT808.Protocol.MessageBody
         /// 道路运输证 IC 卡认证主服务器 IP 地址或域名
         /// </summary>
         public string ParamValue { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8103_0x001A jT808_0x8103_0x001A = new JT808_0x8103_0x001A();
+            jT808_0x8103_0x001A.ParamId = reader.ReadUInt32();
+            jT808_0x8103_0x001A.ParamLength = reader.ReadByte();
+            var paramValue = reader.ReadVirtualArray(jT808_0x8103_0x001A.ParamLength);
+            jT808_0x8103_0x001A.ParamValue = reader.ReadString(jT808_0x8103_0x001A.ParamLength);
+            writer.WriteNumber($"[{ jT808_0x8103_0x001A.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x001A.ParamId);
+            writer.WriteNumber($"[{jT808_0x8103_0x001A.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x001A.ParamLength);
+            writer.WriteString($"[{paramValue.ToArray().ToHexString()}]参数值", jT808_0x8103_0x001A.ParamValue);
+        }
+
         public JT808_0x8103_0x001A Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x001A jT808_0x8103_0x001A = new JT808_0x8103_0x001A();

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using JT808.Protocol.Interfaces;
+using JT808.Protocol.MessagePack;
+using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {

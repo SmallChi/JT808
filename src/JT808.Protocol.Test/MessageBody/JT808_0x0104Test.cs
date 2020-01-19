@@ -85,10 +85,32 @@ namespace JT808.Protocol.Test.MessageBody
                 }
                 }
             };
+            var hex0x0104 = JT808Serializer.Serialize(new JT808_0x0104
+            {
+                MsgNum = 20,
+                AnswerParamsCount = 2,
+                ParamList = new List<JT808_0x8103_BodyBase> {
+                    new JT808_0x8103_0x0001() {
+                         ParamId=0x0001,
+                         ParamLength=4,
+                         ParamValue=10
+                    },
+                    new JT808_0x8103_0x0013(){
+                         ParamId=0x0013,
+                         ParamValue="www.baidu.com"
+                    }
+                }
+            }).ToHexString();
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
             //7E0104001E000123456789000A00140200000001040000000A000000130F7777772E62616964752E636F6DF07E
             //7E0104001E000123456789000A00140200000001040000000A000000130D7777772E62616964752E636F6DF27E
             Assert.Equal("7E0104001E000123456789000A00140200000001040000000A000000130D7777772E62616964752E636F6DF27E", hex);
+        }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bodys = "00140200000001040000000A000000130D7777772E62616964752E636F6D".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0104>(bodys);
         }
 
         [Fact]
