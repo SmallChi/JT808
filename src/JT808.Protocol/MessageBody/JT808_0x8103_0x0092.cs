@@ -1,5 +1,8 @@
-﻿using JT808.Protocol.Attributes;
+﻿using System.Text.Json;
+using JT808.Protocol.Attributes;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -10,7 +13,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x02：2000ms；0x03：3000ms；
     /// 0x04：4000ms。
     /// </summary>
-    public class JT808_0x8103_0x0092 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0092>
+    public class JT808_0x8103_0x0092 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0092>, IJT808Analyze
     {
         public override uint ParamId { get; set; } = 0x0092;
         /// <summary>
@@ -24,6 +27,18 @@ namespace JT808.Protocol.MessageBody
         /// 0x04：4000ms。
         /// </summary>
         public byte ParamValue { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8103_0x0092 jT808_0x8103_0x0092 = new JT808_0x8103_0x0092();
+            jT808_0x8103_0x0092.ParamId = reader.ReadUInt32();
+            jT808_0x8103_0x0092.ParamLength = reader.ReadByte();
+            jT808_0x8103_0x0092.ParamValue = reader.ReadByte();
+            writer.WriteNumber($"[{ jT808_0x8103_0x0092.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0092.ParamId);
+            writer.WriteNumber($"[{jT808_0x8103_0x0092.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0092.ParamLength);
+            writer.WriteNumber($"[{ jT808_0x8103_0x0092.ParamValue.ReadNumber()}]GNSS模块详细定位数据输出频率ms", jT808_0x8103_0x0092.ParamValue==0?500: jT808_0x8103_0x0092.ParamValue*1000);
+        }
+
         public JT808_0x8103_0x0092 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0092 jT808_0x8103_0x0092 = new JT808_0x8103_0x0092();

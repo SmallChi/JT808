@@ -1,4 +1,6 @@
-﻿using JT808.Protocol.Attributes;
+﻿using System.Text.Json;
+using JT808.Protocol.Attributes;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
@@ -8,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 车牌颜色，按照 JT/T415-2006 的 5.4.12
     /// </summary>
-    public class JT808_0x8103_0x0084 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0084>, IJT808_2019_Version
+    public class JT808_0x8103_0x0084 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0084>, IJT808_2019_Version, IJT808Analyze
     {
         public override uint ParamId { get; set; } = 0x0084;
         /// <summary>
@@ -19,6 +21,18 @@ namespace JT808.Protocol.MessageBody
         /// 车牌颜色，按照 JT/T415-2006 的 5.4.12
         /// </summary>
         public byte ParamValue { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8103_0x0084 jT808_0x8103_0x0084 = new JT808_0x8103_0x0084();
+            jT808_0x8103_0x0084.ParamId = reader.ReadUInt32();
+            jT808_0x8103_0x0084.ParamLength = reader.ReadByte();
+            jT808_0x8103_0x0084.ParamValue = reader.ReadByte();
+            writer.WriteNumber($"[{ jT808_0x8103_0x0084.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0084.ParamId);
+            writer.WriteNumber($"[{jT808_0x8103_0x0084.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0084.ParamLength);
+            writer.WriteNumber($"[{ jT808_0x8103_0x0084.ParamValue.ReadNumber()}]参数值[车牌颜色,按照 JT/T415-2006 的 5.4.12]", jT808_0x8103_0x0084.ParamValue);
+        }
+
         public JT808_0x8103_0x0084 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0084 jT808_0x8103_0x0084 = new JT808_0x8103_0x0084();

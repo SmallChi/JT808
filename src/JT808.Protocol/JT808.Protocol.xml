@@ -4616,7 +4616,7 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0019.ParamValue">
              <summary>
-            服务器 TCP 端口
+            服务器 UDP 端口
              </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x001A">
@@ -4774,7 +4774,7 @@
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0026">
             <summary>
-            从服务器无线通信拨号密码。该值为空，终端应使用主服务器相同配置
+            从服务器备份地址IP。该值为空，终端应使用主服务器相同配置
             2019版本
             </summary>
         </member>
@@ -4927,7 +4927,7 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0032.ParamValue">
             <summary>
-            电子围栏半径（非法位移阈值），单位为米
+            违规行驶时段范围（非法位移阈值），单位为米
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0040">
@@ -5290,7 +5290,7 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x005D.ParamValue">
             <summary>
             碰撞报警参数设置
-            b7-b0： 碰撞时间，单位 4ms；
+            b7-b0： 碰撞时间，单位4ms；
             b15-b8：碰撞加速度，单位 0.1g，设置范围在：0-79 之间，默认为10。
             </summary>
         </member>
@@ -5313,7 +5313,7 @@
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0064">
             <summary>
-            定时拍照控制，见 表 13
+            定时拍照控制，见 表 14
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0064.ParamLength">
@@ -5323,12 +5323,12 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0064.ParamValue">
             <summary>
-            定时拍照控制，见 表 13
+            定时拍照控制，见 表 14
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0065">
             <summary>
-            定距拍照控制，见 表 14
+            定距拍照控制，见 表 15
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0065.ParamLength">
@@ -5338,7 +5338,7 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0065.ParamValue">
             <summary>
-            定距拍照控制，见 表 14
+            定距拍照控制，见 表 15
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0070">
@@ -5413,7 +5413,7 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0074.ParamValue">
             <summary>
-            饱和度，0-127
+            色度，0-255
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0080">

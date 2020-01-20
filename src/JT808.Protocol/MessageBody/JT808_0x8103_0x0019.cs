@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public override byte ParamLength { get; set; } = 4;
         /// <summary>
-        ///服务器 TCP 端口
+        ///服务器 UDP 端口
         /// </summary>
         public uint ParamValue { get; set; }
 
@@ -32,7 +32,7 @@ namespace JT808.Protocol.MessageBody
             value.ParamValue = reader.ReadUInt32();
             writer.WriteNumber($"[{ value.ParamId.ReadNumber()}]参数ID", value.ParamId);
             writer.WriteNumber($"[{value.ParamLength.ReadNumber()}]参数长度", value.ParamLength);
-            writer.WriteNumber($"[{ value.ParamValue.ReadNumber()}]参数值", value.ParamValue);
+            writer.WriteNumber($"[{ value.ParamValue.ReadNumber()}]参数值[服务器UDP端口]", value.ParamValue);
         }
 
         public JT808_0x8103_0x0019 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

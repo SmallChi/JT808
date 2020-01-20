@@ -32,7 +32,7 @@ namespace JT808.Protocol.MessageBody
             value.ParamValue = reader.ReadString(value.ParamLength);
             writer.WriteNumber($"[{ value.ParamId.ReadNumber()}]参数ID", value.ParamId);
             writer.WriteNumber($"[{value.ParamLength.ReadNumber()}]参数长度", value.ParamLength);
-            writer.WriteString($"[{paramValue.ToArray().ToHexString()}]参数值", value.ParamValue);
+            writer.WriteString($"[{paramValue.ToArray().ToHexString()}]参数值[从服务器APN]", value.ParamValue);
         }
 
         public JT808_0x8103_0x0023 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

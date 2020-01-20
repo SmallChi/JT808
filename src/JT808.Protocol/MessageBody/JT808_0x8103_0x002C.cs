@@ -30,7 +30,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x002C.ParamValue = reader.ReadUInt32();
             writer.WriteNumber($"[{ jT808_0x8103_0x002C.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x002C.ParamId);
             writer.WriteNumber($"[{jT808_0x8103_0x002C.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x002C.ParamLength);
-            writer.WriteNumber($"[{ jT808_0x8103_0x002C.ParamValue.ReadNumber()}]参数值", jT808_0x8103_0x002C.ParamValue);
+            writer.WriteNumber($"[{ jT808_0x8103_0x002C.ParamValue.ReadNumber()}]参数值[缺省距离汇报间隔m]", jT808_0x8103_0x002C.ParamValue);
         }
 
         public JT808_0x8103_0x002C Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

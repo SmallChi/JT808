@@ -1,5 +1,8 @@
-﻿using JT808.Protocol.Attributes;
+﻿using System.Text.Json;
+using JT808.Protocol.Attributes;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -7,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 关键标志，与位置信息汇报消息中的报警标志相对应，相应位为 1 则对相应报警为关键报警
     /// </summary>
-    public class JT808_0x8103_0x0054 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0054>
+    public class JT808_0x8103_0x0054 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0054>, IJT808Analyze
     {
         public override uint ParamId { get; set; } = 0x0054;
         /// <summary>
@@ -18,6 +21,18 @@ namespace JT808.Protocol.MessageBody
         /// 关键标志，与位置信息汇报消息中的报警标志相对应，相应位为 1 则对相应报警为关键报警
         /// </summary>
         public uint ParamValue { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8103_0x0054 jT808_0x8103_0x0054 = new JT808_0x8103_0x0054();
+            jT808_0x8103_0x0054.ParamId = reader.ReadUInt32();
+            jT808_0x8103_0x0054.ParamLength = reader.ReadByte();
+            jT808_0x8103_0x0054.ParamValue = reader.ReadUInt32();
+            writer.WriteNumber($"[{ jT808_0x8103_0x0054.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0054.ParamId);
+            writer.WriteNumber($"[{jT808_0x8103_0x0054.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0054.ParamLength);
+            writer.WriteNumber($"[{ jT808_0x8103_0x0054.ParamValue.ReadNumber()}]参数值[关键标志]", jT808_0x8103_0x0054.ParamValue);
+        }
+
         public JT808_0x8103_0x0054 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0054 jT808_0x8103_0x0054 = new JT808_0x8103_0x0054();

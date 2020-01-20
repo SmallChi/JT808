@@ -1,5 +1,8 @@
-﻿using JT808.Protocol.Attributes;
+﻿using System.Text.Json;
+using JT808.Protocol.Attributes;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -7,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 终端电话接听策略，0：自动接听；1：ACC ON 时自动接听，OFF 时手动接听
     /// </summary>
-    public class JT808_0x8103_0x0045 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0045>
+    public class JT808_0x8103_0x0045 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0045>, IJT808Analyze
     {
         public override uint ParamId { get; set; } = 0x0045;
         /// <summary>
@@ -18,6 +21,18 @@ namespace JT808.Protocol.MessageBody
         /// 终端电话接听策略，0：自动接听；1：ACC ON 时自动接听，OFF 时手动接听
         /// </summary>
         public uint ParamValue { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8103_0x0045 jT808_0x8103_0x0045 = new JT808_0x8103_0x0045();
+            jT808_0x8103_0x0045.ParamId = reader.ReadUInt32();
+            jT808_0x8103_0x0045.ParamLength = reader.ReadByte();
+            jT808_0x8103_0x0045.ParamValue = reader.ReadUInt32();
+            writer.WriteNumber($"[{ jT808_0x8103_0x0045.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0045.ParamId);
+            writer.WriteNumber($"[{jT808_0x8103_0x0045.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0045.ParamLength);
+            writer.WriteNumber($"[{ jT808_0x8103_0x0045.ParamValue.ReadNumber()}]参数值[终端电话接听策略，0：自动接听；1：ACC ON 时自动接听，OFF 时手动接听]", jT808_0x8103_0x0045.ParamValue);
+        }
+
         public JT808_0x8103_0x0045 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0045 jT808_0x8103_0x0045 = new JT808_0x8103_0x0045();

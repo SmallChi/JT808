@@ -30,7 +30,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x0027.ParamValue = reader.ReadUInt32();
             writer.WriteNumber($"[{ jT808_0x8103_0x0027.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0027.ParamId);
             writer.WriteNumber($"[{jT808_0x8103_0x0027.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0027.ParamLength);
-            writer.WriteNumber($"[{ jT808_0x8103_0x0027.ParamValue.ReadNumber()}]参数值", jT808_0x8103_0x0027.ParamValue);
+            writer.WriteNumber($"[{ jT808_0x8103_0x0027.ParamValue.ReadNumber()}]参数值[休眠时汇报时间间隔s]", jT808_0x8103_0x0027.ParamValue);
         }
 
         public JT808_0x8103_0x0027 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

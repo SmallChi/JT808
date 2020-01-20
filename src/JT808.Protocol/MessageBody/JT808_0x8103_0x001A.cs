@@ -31,7 +31,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x001A.ParamValue = reader.ReadString(jT808_0x8103_0x001A.ParamLength);
             writer.WriteNumber($"[{ jT808_0x8103_0x001A.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x001A.ParamId);
             writer.WriteNumber($"[{jT808_0x8103_0x001A.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x001A.ParamLength);
-            writer.WriteString($"[{paramValue.ToArray().ToHexString()}]参数值", jT808_0x8103_0x001A.ParamValue);
+            writer.WriteString($"[{paramValue.ToArray().ToHexString()}]参数值[道路运输证IC卡认证主服务器 IP]", jT808_0x8103_0x001A.ParamValue);
         }
 
         public JT808_0x8103_0x001A Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

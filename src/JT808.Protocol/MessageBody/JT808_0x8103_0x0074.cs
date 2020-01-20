@@ -1,5 +1,8 @@
-﻿using JT808.Protocol.Attributes;
+﻿using System.Text.Json;
+using JT808.Protocol.Attributes;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 
 namespace JT808.Protocol.MessageBody
@@ -7,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 色度，0-255
     /// </summary>
-    public class JT808_0x8103_0x0074 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0074>
+    public class JT808_0x8103_0x0074 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0074>, IJT808Analyze
     {
         public override uint ParamId { get; set; } = 0x0074;
         /// <summary>
@@ -15,9 +18,21 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public override byte ParamLength { get; set; } = 4;
         /// <summary>
-        /// 饱和度，0-127
+        /// 色度，0-255
         /// </summary>
         public uint ParamValue { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8103_0x0074 jT808_0x8103_0x0074 = new JT808_0x8103_0x0074();
+            jT808_0x8103_0x0074.ParamId = reader.ReadUInt32();
+            jT808_0x8103_0x0074.ParamLength = reader.ReadByte();
+            jT808_0x8103_0x0074.ParamValue = reader.ReadUInt32();
+            writer.WriteNumber($"[{ jT808_0x8103_0x0074.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0074.ParamId);
+            writer.WriteNumber($"[{jT808_0x8103_0x0074.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0074.ParamLength);
+            writer.WriteNumber($"[{ jT808_0x8103_0x0074.ParamValue.ReadNumber()}]参数值[色度]", jT808_0x8103_0x0074.ParamValue);
+        }
+
         public JT808_0x8103_0x0074 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0074 jT808_0x8103_0x0074 = new JT808_0x8103_0x0074();

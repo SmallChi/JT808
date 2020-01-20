@@ -31,7 +31,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x0012.ParamValue = reader.ReadString(jT808_0x8103_0x0012.ParamLength);
             writer.WriteNumber($"[{ jT808_0x8103_0x0012.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0012.ParamId);
             writer.WriteNumber($"[{jT808_0x8103_0x0012.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0012.ParamLength);
-            writer.WriteString($"[{paramValue.ToArray().ToHexString()}]参数值", jT808_0x8103_0x0012.ParamValue);
+            writer.WriteString($"[{paramValue.ToArray().ToHexString()}]参数值[主服务器无线通信拨号密码]", jT808_0x8103_0x0012.ParamValue);
         }
 
         public JT808_0x8103_0x0012 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

@@ -30,7 +30,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x0021.ParamValue = reader.ReadUInt32();
             writer.WriteNumber($"[{ jT808_0x8103_0x0021.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0021.ParamId);
             writer.WriteNumber($"[{jT808_0x8103_0x0021.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0021.ParamLength);
-            writer.WriteNumber($"[{ jT808_0x8103_0x0021.ParamValue.ReadNumber()}]参数值", jT808_0x8103_0x0021.ParamValue);
+            writer.WriteNumber($"[{ jT808_0x8103_0x0021.ParamValue.ReadNumber()}]参数值[位置汇报方案，0：根据 ACC 状态； 1：根据登录状态和 ACC 状态]", jT808_0x8103_0x0021.ParamValue);
         }
 
         public JT808_0x8103_0x0021 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

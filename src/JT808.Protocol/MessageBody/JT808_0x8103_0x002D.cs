@@ -30,7 +30,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x002D.ParamValue = reader.ReadUInt32();
             writer.WriteNumber($"[{ jT808_0x8103_0x002D.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x002D.ParamId);
             writer.WriteNumber($"[{jT808_0x8103_0x002D.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x002D.ParamLength);
-            writer.WriteNumber($"[{ jT808_0x8103_0x002D.ParamValue.ReadNumber()}]参数值", jT808_0x8103_0x002D.ParamValue);
+            writer.WriteNumber($"[{ jT808_0x8103_0x002D.ParamValue.ReadNumber()}]参数值[驾驶员未登录汇报距离间隔m]", jT808_0x8103_0x002D.ParamValue);
         }
         public JT808_0x8103_0x002D Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {

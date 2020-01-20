@@ -31,7 +31,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x0005.ParamValue = reader.ReadUInt32();
             writer.WriteNumber($"[{ jT808_0x8103_0x0005.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0005.ParamId);
             writer.WriteNumber($"[{jT808_0x8103_0x0005.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0005.ParamLength);
-            writer.WriteNumber($"[{ jT808_0x8103_0x0005.ParamValue.ReadNumber()}]参数值", jT808_0x8103_0x0005.ParamValue);
+            writer.WriteNumber($"[{ jT808_0x8103_0x0005.ParamValue.ReadNumber()}]参数值[UDP消息重传次数]", jT808_0x8103_0x0005.ParamValue);
         }
 
         public JT808_0x8103_0x0005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
