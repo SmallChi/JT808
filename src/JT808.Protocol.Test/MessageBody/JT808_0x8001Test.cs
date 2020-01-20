@@ -53,5 +53,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(100, JT808Bodies.MsgNum);
             Assert.Equal(Enums.JT808PlatformResult.成功, JT808Bodies.JT808PlatformResult);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            var bytes = "7E 80 01 00 05 01 23 45 67 89 00 00 0A 00 64 02 00 00 61 7E".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808Package>(bytes);
+        }
     }
 }

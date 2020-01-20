@@ -48,5 +48,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(6, jT808_0X8301.EventItems[1].EventContentLength);
             Assert.Equal("789456", jT808_0X8301.EventItems[1].EventContent);
         }
+
+        [Fact]
+        public void Test1_2()
+        {
+            byte[] bytes = "000201063132333435360206373839343536".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8301>(bytes);
+        }
     }
 }

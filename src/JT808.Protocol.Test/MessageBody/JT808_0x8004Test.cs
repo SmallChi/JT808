@@ -27,5 +27,12 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x8004 jT808_0X8004 = JT808Serializer.Deserialize<JT808_0x8004>(bytes);
             Assert.Equal(DateTime.Parse("2019-11-26 15:58:50"), jT808_0X8004.Time);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            var bytes = "191126155850".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8004>(bytes);
+        }
     }
 }

@@ -1,6 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 查询指定终端参数
     /// 0x8106
     /// </summary>
-    public class JT808_0x8106 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8106>
+    public class JT808_0x8106 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8106>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8106;
         public override string Description => "查询指定终端参数";
@@ -43,6 +46,20 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteUInt32(value.Parameters[i]);
             }
         }
-
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8106 value = new JT808_0x8106();
+            value.ParameterCount = reader.ReadByte();
+            writer.WriteNumber($"[{ value.ParameterCount.ReadNumber()}]参数总数", value.ParameterCount);
+            writer.WriteStartArray("参数ID列表");
+            for (int i = 0; i < value.ParameterCount; i++)
+            {
+                writer.WriteStartObject();
+                uint parameterId = reader.ReadUInt32();
+                writer.WriteNumber($"[{parameterId.ReadNumber()}]Id{i+1}",parameterId);
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+        }
     }
 }

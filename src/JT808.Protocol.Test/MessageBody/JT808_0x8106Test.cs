@@ -28,5 +28,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(2, jT808_0X8106.ParameterCount);
             Assert.Equal(new uint[] { 0x0001, 0x0002 }, jT808_0X8106.Parameters);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "020000000100000002".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8106>(bytes);
+        }
     }
 }

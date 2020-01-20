@@ -1,9 +1,11 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -12,7 +14,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x8303
     /// </summary>
     [Obsolete("2019版本已作删除")]
-    public class JT808_0x8303 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8303>, IJT808_2019_Version
+    public class JT808_0x8303 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8303>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8303;
         public override string Description => "信息点播菜单设置";
@@ -30,6 +32,7 @@ namespace JT808.Protocol.MessageBody
         /// 信息项列表
         /// </summary>
         public List<JT808InformationItemProperty> InformationItems { get; set; }
+
         public JT808_0x8303 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8303 jT808_0X8303 = new JT808_0x8303();
@@ -60,6 +63,30 @@ namespace JT808.Protocol.MessageBody
                 ushort length = (ushort)(writer.GetCurrentPosition() - position - 2);
                 writer.WriteUInt16Return(length, position);
             }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8303 value = new JT808_0x8303();
+            value.SettingType = reader.ReadByte();
+            writer.WriteNumber($"[{value.SettingType.ReadNumber()}]设置类型", value.SettingType);
+            value.InformationItemCount = reader.ReadByte();
+            writer.WriteNumber($"[{value.InformationItemCount.ReadNumber()}]信息项总数", value.InformationItemCount);
+            writer.WriteStartArray("信息项列表");
+            for (var i = 0; i < value.InformationItemCount; i++)
+            {
+                writer.WriteStartObject();
+                JT808InformationItemProperty jT808InformationItemProperty = new JT808InformationItemProperty();
+                jT808InformationItemProperty.InformationType = reader.ReadByte();
+                writer.WriteNumber($"[{jT808InformationItemProperty.InformationType.ReadNumber()}]信息类型", jT808InformationItemProperty.InformationType);
+                jT808InformationItemProperty.InformationLength = reader.ReadUInt16();
+                writer.WriteNumber($"[{jT808InformationItemProperty.InformationLength.ReadNumber()}]信息名称长度", jT808InformationItemProperty.InformationLength);
+                var infoBuffer = reader.ReadVirtualArray(jT808InformationItemProperty.InformationLength).ToArray();
+                jT808InformationItemProperty.InformationName = reader.ReadString(jT808InformationItemProperty.InformationLength);
+                writer.WriteString($"[{infoBuffer.ToHexString()}]信息名称", jT808InformationItemProperty.InformationName);
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
     }
 }

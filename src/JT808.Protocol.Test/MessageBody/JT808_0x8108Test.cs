@@ -33,5 +33,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal("qscvhiuytrew", jT808_0X8108.VersionNum);
             Assert.Equal(new byte[] { 1, 2, 3, 4, 5 }, jT808_0X8108.UpgradePackage);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "34 61 73 64 66 67 0C 71 73 63 76 68 69 75 79 74 72 65 77 00 00 00 05 01 02 03 04 05".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8108>(bytes);
+        }
     }
 }

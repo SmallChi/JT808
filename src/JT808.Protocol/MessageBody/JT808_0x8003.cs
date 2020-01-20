@@ -1,5 +1,8 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -7,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// 补传分包请求
     /// 0x8003
     /// </summary>
-    public class JT808_0x8003 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8003>
+    public class JT808_0x8003 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8003>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8003;
         public override string Description => "补传分包请求";
@@ -27,13 +30,32 @@ namespace JT808.Protocol.MessageBody
         /// 重传包序号顺序排列，如“包 ID1 包 ID2......包 IDn”。
         /// </summary>
         public byte[] AgainPackageData { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8003 value = new JT808_0x8003();
+            value.OriginalMsgNum = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.OriginalMsgNum.ReadNumber()}]原始消息流水号", value.OriginalMsgNum);
+            value.AgainPackageCount = reader.ReadByte();
+            writer.WriteNumber($"[{value.AgainPackageCount.ReadNumber()}]重传包总数", value.AgainPackageCount);
+            writer.WriteStartArray("重传包ID列表");
+            for(int i=0;i< value.AgainPackageCount; i++)
+            {
+                writer.WriteStartObject();
+                var idBuffer=reader.ReadArray(2).ToArray();
+                writer.WriteString($"Id{i+1}", idBuffer.ToHexString());
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+        }
+
         public JT808_0x8003 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x8003 jT808_0X8003 = new JT808_0x8003();
-            jT808_0X8003.OriginalMsgNum = reader.ReadUInt16();
-            jT808_0X8003.AgainPackageCount = reader.ReadByte();
-            jT808_0X8003.AgainPackageData = reader.ReadArray(jT808_0X8003.AgainPackageCount * 2).ToArray();
-            return jT808_0X8003;
+            JT808_0x8003 value = new JT808_0x8003();
+            value.OriginalMsgNum = reader.ReadUInt16();
+            value.AgainPackageCount = reader.ReadByte();
+            value.AgainPackageData = reader.ReadArray(value.AgainPackageCount * 2).ToArray();
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8003 value, IJT808Config config)

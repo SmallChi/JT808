@@ -1,8 +1,10 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -11,7 +13,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x8302
     /// </summary>
     [Obsolete("2019版本已作删除")]
-    public class JT808_0x8302 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8302>, IJT808_2019_Version
+    public class JT808_0x8302 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8302>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8302;
         public override string Description => "提问下发";
@@ -96,6 +98,33 @@ namespace JT808.Protocol.MessageBody
                     writer.WriteUInt16Return(answerLength, answerPosition);
                 }
             }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8302 value = new JT808_0x8302();
+            value.Flag = reader.ReadByte();
+            writer.WriteNumber($"[{value.Flag.ReadNumber()}]标志", value.Flag);
+            value.IssueContentLength = reader.ReadByte();
+            writer.WriteNumber($"[{value.IssueContentLength.ReadNumber()}]问题内容长度", value.IssueContentLength);
+            var issueBuffer= reader.ReadVirtualArray(value.IssueContentLength).ToArray();
+            value.Issue = reader.ReadString(value.IssueContentLength);
+            writer.WriteString($"[{issueBuffer.ToHexString()}]问题文本", value.Issue);
+            writer.WriteStartArray("候选答案列表");
+            while (reader.ReadCurrentRemainContentLength() > 0)
+            {
+                writer.WriteStartObject();
+                JT808_0x8302.Answer answer = new JT808_0x8302.Answer();
+                answer.Id = reader.ReadByte();
+                writer.WriteNumber($"[{answer.Id.ReadNumber()}]答案ID", answer.Id);
+                answer.ContentLength = reader.ReadUInt16();
+                writer.WriteNumber($"[{answer.ContentLength.ReadNumber()}]答案内容长度", answer.ContentLength);
+                var answerBuffer = reader.ReadVirtualArray(answer.ContentLength).ToArray();
+                answer.Content = reader.ReadString(answer.ContentLength);
+                writer.WriteString($"[{answerBuffer.ToHexString()}]答案内容", answer.Content);
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
     }
 }

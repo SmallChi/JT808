@@ -1,9 +1,11 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -12,7 +14,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x8301
     /// </summary>
     [Obsolete("2019版本已作删除")]
-    public class JT808_0x8301 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8301>,IJT808_2019_Version
+    public class JT808_0x8301 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8301>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8301;
         public override string Description => "事件设置";
@@ -64,5 +66,30 @@ namespace JT808.Protocol.MessageBody
                 }
             }
         }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8301 value = new JT808_0x8301();
+            value.SettingType = reader.ReadByte();
+            writer.WriteNumber($"[{value.SettingType.ReadNumber()}]设置类型", value.SettingType);
+            value.SettingCount = reader.ReadByte();
+            writer.WriteNumber($"[{value.SettingCount.ReadNumber()}]设置总数", value.SettingCount);
+            writer.WriteStartArray("事件项");
+            for (var i = 0; i < value.SettingCount; i++)
+            {
+                writer.WriteStartObject();
+                JT808EventProperty jT808EventProperty = new JT808EventProperty();
+                jT808EventProperty.EventId = reader.ReadByte();
+                writer.WriteNumber($"[{jT808EventProperty.EventId.ReadNumber()}]事件ID ", jT808EventProperty.EventId);
+                jT808EventProperty.EventContentLength = reader.ReadByte();
+                writer.WriteNumber($"[{jT808EventProperty.EventContentLength.ReadNumber()}]事件内容长度", jT808EventProperty.EventContentLength);
+                var eventContenBuffer = reader.ReadVirtualArray(jT808EventProperty.EventContentLength).ToArray();
+                jT808EventProperty.EventContent = reader.ReadString(jT808EventProperty.EventContentLength);
+                writer.WriteString($"[{eventContenBuffer.ToHexString()}]事件内容", jT808EventProperty.EventContent);
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+        }
+
     }
 }

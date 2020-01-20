@@ -28,5 +28,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal("信息内容", jT808_0X8304.InformationContent);
             Assert.Equal(8, jT808_0X8304.InformationLength);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "7B0008D0C5CFA2C4DAC8DD".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8304>(bytes);
+        }
     }
 }

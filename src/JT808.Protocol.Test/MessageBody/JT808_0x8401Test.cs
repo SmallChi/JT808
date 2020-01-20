@@ -52,5 +52,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal("koike", jT808_0X8401.JT808ContactProperties[1].Contact);
 
         }
+
+        [Fact]
+        public void Test3()
+        {
+            var bytes = "02 02 01 0C 31 33 34 35 36 73 6D 61 6C 6C 63 68 08 73 6D 61 6C 6C 63 68 69 03 0B 6B 6F 69 6B 65 31 32 33 34 35 36 05 6B 6F 69 6B 65".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8401>(bytes);
+        }
     }
 }

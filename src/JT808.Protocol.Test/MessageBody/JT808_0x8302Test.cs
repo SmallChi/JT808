@@ -59,5 +59,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(127, jT808_0X8302.Answers[1].Id);
             Assert.Equal("123457", jT808_0X8302.Answers[1].Content);
         }
+
+        [Fact]
+        public void Test1_2()
+        {
+            byte[] bytes = "0107736464646166668000063132333435367F0006313233343537".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8302>(bytes);
+        }
     }
 }

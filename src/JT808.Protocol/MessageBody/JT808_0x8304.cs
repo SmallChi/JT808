@@ -1,7 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -10,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x8304
     /// </summary>
     [Obsolete("2019版本已作删除")]
-    public class JT808_0x8304 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8304>, IJT808_2019_Version
+    public class JT808_0x8304 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8304>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8304;
         public override string Description => "信息服务";
@@ -45,6 +47,16 @@ namespace JT808.Protocol.MessageBody
             ushort length = (ushort)(writer.GetCurrentPosition() - position - 2);
             writer.WriteUInt16Return(length, position);
         }
-
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8304 value = new JT808_0x8304();
+            value.InformationType = reader.ReadByte();
+            writer.WriteNumber($"[{value.InformationType.ReadNumber()}]信息类型", value.InformationType);
+            value.InformationLength = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.InformationLength.ReadNumber()}]信息长度", value.InformationLength);
+            var infoBuffer = reader.ReadVirtualArray(value.InformationLength).ToArray();
+            value.InformationContent = reader.ReadString(value.InformationLength);
+            writer.WriteString($"[{infoBuffer.ToHexString()}]信息内容", value.InformationContent);
+        }
     }
 }

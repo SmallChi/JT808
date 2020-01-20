@@ -4284,9 +4284,20 @@
             平台通用应答
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8001.MsgNum">
+            <summary>
+            应答消息流水号
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8001.AckMsgId">
             <summary>
+            应答消息Id
             <see cref="T:JT808.Protocol.Enums.JT808MsgId"/>
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8001.JT808PlatformResult">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8003">
@@ -5753,12 +5764,12 @@
             命令参数
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CommandParams">
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams">
             <summary>
             命令参数
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.ConnectionControl">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.ConnectionControl">
              <summary>
              连接控制
              0：切换到指定监管平台服务器，连接到该服务器后即进入应急状态，
@@ -5766,70 +5777,70 @@
             1：切换回原缺省监控平台服务器，并恢复正常状态。
              </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.DialPointName">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.DialPointName">
             <summary>
             拨号点名称
             一般为服务器 APN，无线通信拨号访问点，若网络制式为 CDMA，则该值为 PPP 连接拨号号码
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.DialUserName">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.DialUserName">
             <summary>
             拨号用户名
             服务器无线通信拨号用户名
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.DialPwd">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.DialPwd">
             <summary>
             拨号密码
             服务器无线通信拨号密码
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.ServerUrl">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.ServerUrl">
             <summary>
             服务器地址
             服务器地址;IP 或域名
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.TCPPort">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.TCPPort">
             <summary>
             TCP端口
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.UDPPort">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.UDPPort">
             <summary>
             UDP端口
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.ManufacturerCode">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.ManufacturerCode">
             <summary>
-            制造商 ID  BYTE[5] 
+            制造商ID
             终端制造商编码
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.MonitoringPlatformAuthenticationCode">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.MonitoringPlatformAuthenticationCode">
             <summary>
             监管平台鉴权码
             监管平台下发的鉴权码，仅用于终端连接到监管平台之后的鉴权，终端连接回原监控平台还用原鉴权码
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.HardwareVersion">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.HardwareVersion">
             <summary>
             硬件版本
             终端的硬件版本号，由制造商自定
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.FirmwareVersion">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.FirmwareVersion">
             <summary>
             固件版本
              终端的固件版本号，由制造商自定
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.URL">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.URL">
             <summary>
             URL 地址 完整 URL 地址
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CommandParams.ConnectTimeLimit">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.ConnectTimeLimit">
             <summary>
             连接到指定服务器时限
             单位：分（min），值非 0 后的有效期截止前，终端应连回原地址。
@@ -6886,7 +6897,7 @@
         </member>
         <member name="P:JT808.Protocol.Metadata.JT808ContactProperty.Contact">
             <summary>
-            经 GBK 编码
+            联系人 经 GBK 编码
             </summary>
         </member>
         <member name="T:JT808.Protocol.Metadata.JT808EventProperty">

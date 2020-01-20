@@ -24,7 +24,7 @@ namespace JT808.Protocol.Metadata
         /// </summary>
         public byte ContactLength { get; set; }
         /// <summary>
-        /// 经 GBK 编码
+        /// 联系人 经 GBK 编码
         /// </summary>
         public string Contact { get; set; }
     }

@@ -1,14 +1,16 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 下发终端升级包
     /// </summary>
-    public class JT808_0x8108 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8108>, IJT808_2019_Version
+    public class JT808_0x8108 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8108>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8108;
 
@@ -74,6 +76,34 @@ namespace JT808.Protocol.MessageBody
             writer.WriteString(value.VersionNum);
             writer.WriteInt32(value.UpgradePackage.Length);
             writer.WriteArray(value.UpgradePackage);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8108 value = new JT808_0x8108();
+            value.UpgradeType = (JT808UpgradeType)reader.ReadByte();
+            writer.WriteNumber($"[{ ((byte)value.UpgradeType).ReadNumber()}]升级类型-{value.UpgradeType.ToString()}", (byte)value.UpgradeType);
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                var makerIdBuffer = reader.ReadVirtualArray(11).ToArray();
+                value.MakerId = reader.ReadString(11);
+                writer.WriteString($"[{makerIdBuffer.ToHexString()}]制造商ID", value.MakerId);
+            }
+            else
+            {
+                var makerIdBuffer = reader.ReadVirtualArray(5).ToArray();
+                value.MakerId = reader.ReadString(5);
+                writer.WriteString($"[{makerIdBuffer.ToHexString()}]制造商ID", value.MakerId);
+            }
+            value.VersionNumLength = reader.ReadByte();
+            writer.WriteNumber($"[{value.VersionNumLength.ReadNumber()}]版本号长度",value.VersionNumLength);
+            var versionNumBuffer = reader.ReadVirtualArray(value.VersionNumLength).ToArray();
+            value.VersionNum = reader.ReadString(value.VersionNumLength);
+            writer.WriteString($"[{versionNumBuffer.ToHexString()}]版本号", value.VersionNum);
+            value.UpgradePackageLength = reader.ReadInt32();
+            writer.WriteNumber($"[{value.UpgradePackageLength.ReadNumber()}]升级数据包长度", value.UpgradePackageLength);
+            value.UpgradePackage = reader.ReadArray(value.UpgradePackageLength).ToArray();
+            writer.WriteString($"升级数据包", value.UpgradePackage.ToHexString());
         }
     }
 }

@@ -29,5 +29,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(new byte[] { 0x01, 0x02, 0x02, 0x03 }, jT808_0X8003.AgainPackageData);
             Assert.Equal(2, jT808_0X8003.AgainPackageCount);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            var bytes = "04D20201020203".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8003>(bytes);
+        }
     }
 }

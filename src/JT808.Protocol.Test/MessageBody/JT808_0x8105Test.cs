@@ -2,6 +2,7 @@
 using JT808.Protocol.MessageBody;
 using System;
 using Xunit;
+using static JT808.Protocol.MessageBody.JT808_0x8105;
 
 namespace JT808.Protocol.Test.MessageBody
 {
@@ -70,6 +71,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(60, (UInt16)JT808_0x8105.CommandValue.ConnectTimeLimit);
         }
 
+        [Fact]
+        public void Test1_2()
+        {
+            var bytes = "7E8105004B012345678900000101313B544B4E616D653B544B3B544B3132333B7777772E62616964752E636F6D3B383830363B333330363B31323334353B636F64653B322E303B312E303B7777772E544B2E636F6D3B3630227E".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808Package>(bytes);
+        }
 
         [Fact]
         public void Test2()

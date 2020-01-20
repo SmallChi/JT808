@@ -27,5 +27,11 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(69, jT808_0X8108.Interval);
             Assert.Equal(123, jT808_0X8108.LocationTrackingValidity);
         }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "00 45 00 00 00 7B".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8202>(bytes);
+        }
     }
 }

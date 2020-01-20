@@ -80,6 +80,13 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(0xF001, jT808_0x8500_0xF001.ControlTypeId);
             Assert.Equal(1, jT808_0x8500_0xF001.ControlTypeParameter);
         }
+
+        [Fact]
+        public void Test_2019_3()
+        {
+            var bytes = "0002000100F00101".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8500>(bytes, JT808Version.JTT2019);
+        }
     }
 
     /// <summary>

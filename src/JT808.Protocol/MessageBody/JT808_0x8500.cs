@@ -4,13 +4,14 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 车辆控制
     /// </summary>
-    public class JT808_0x8500 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8500>, IJT808_2019_Version
+    public class JT808_0x8500 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8500>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8500;
         public override string Description => "车辆控制";
@@ -33,6 +34,24 @@ namespace JT808.Protocol.MessageBody
         /// 用于序列化的时候,由于厂家自定义类型比较多，所以直接用JT808_0x8500_ControlType
         /// </summary>
         public List<JT808_0x8500_ControlType> ControlTypes { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8500 value = new JT808_0x8500();
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                value.ControlTypeCount = reader.ReadUInt16();
+                writer.WriteNumber($"[{ value.ControlTypeCount.ReadNumber()}]控制类型数量", value.ControlTypeCount);
+                //todo:待完善
+                value.ControlTypeBuffer = reader.ReadArray(reader.ReadCurrentRemainContentLength()).ToArray();
+                writer.WriteString($"控制类型", value.ControlTypeBuffer.ToHexString());
+            }
+            else
+            {
+                value.ControlFlag = reader.ReadByte();
+                writer.WriteNumber($"[{ value.ControlFlag.ReadNumber()}]控制标志", value.ControlFlag);
+            }
+        }
 
         public JT808_0x8500 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {

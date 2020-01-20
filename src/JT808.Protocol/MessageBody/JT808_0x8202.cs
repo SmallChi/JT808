@@ -1,12 +1,15 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 临时位置跟踪控制
     /// </summary>
-    public class JT808_0x8202 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8202>
+    public class JT808_0x8202 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8202>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8202;
 
@@ -22,6 +25,7 @@ namespace JT808.Protocol.MessageBody
         /// 单位为秒（s），终端在接收到位置跟踪控制消息后，在有效期截止时间之前，依据消息中的时间间隔发送位置汇报
         /// </summary>
         public int LocationTrackingValidity { get; set; }
+
         public JT808_0x8202 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8202 jT808_0X8202 = new JT808_0x8202();
@@ -34,6 +38,15 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteUInt16(value.Interval);
             writer.WriteInt32(value.LocationTrackingValidity);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8202 value = new JT808_0x8202();
+            value.Interval = reader.ReadUInt16();
+            writer.WriteNumber($"[{ value.Interval.ReadNumber()}]时间间隔", value.Interval);
+            value.LocationTrackingValidity = reader.ReadInt32();
+            writer.WriteNumber($"[{ value.LocationTrackingValidity.ReadNumber()}]位置跟踪有效期", value.LocationTrackingValidity);
         }
     }
 }

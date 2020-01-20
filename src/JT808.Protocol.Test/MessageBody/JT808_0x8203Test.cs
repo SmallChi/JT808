@@ -27,5 +27,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(5554, jT808_0X8203.AlarmMsgNum);
             Assert.Equal((uint)123, jT808_0X8203.ManualConfirmAlarmType);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "15B20000007B".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8203>(bytes);
+        }
     }
 }

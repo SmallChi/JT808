@@ -76,5 +76,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(5, jT808TextSend.TextFlag);
             Assert.Equal(1, jT808TextSend.TextType);
         }
+
+        [Fact]
+        public void Test_2019_3()
+        {
+            byte[] bytes = "7E8300400E010000000001234567890000010501736D616C6C63686920353138417E".ToHexBytes();
+            string json = JT808Serializer.Analyze(bytes);
+        }
     }
 }

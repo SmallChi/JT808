@@ -1,5 +1,8 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -7,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// 人工确认报警消息
     /// 0x8203
     /// </summary>
-    public class JT808_0x8203 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8203>
+    public class JT808_0x8203 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8203>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8203;
         public override string Description => "人工确认报警消息";
@@ -33,6 +36,15 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteUInt16(value.AlarmMsgNum);
             writer.WriteUInt32(value.ManualConfirmAlarmType);
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8203 value = new JT808_0x8203();
+            value.AlarmMsgNum = reader.ReadUInt16();
+            writer.WriteNumber($"[{ value.AlarmMsgNum.ReadNumber()}]报警消息流水号", value.AlarmMsgNum);
+            value.ManualConfirmAlarmType = reader.ReadUInt32();
+            writer.WriteNumber($"[{ value.ManualConfirmAlarmType.ReadNumber()}]人工确认报警类型", value.ManualConfirmAlarmType);
         }
     }
 }

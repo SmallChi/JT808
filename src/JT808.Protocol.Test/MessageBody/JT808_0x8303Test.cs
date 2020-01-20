@@ -47,5 +47,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal("smallchi2", jT808_0X8303.InformationItems[1].InformationName);
             Assert.Equal(9, jT808_0X8303.InformationItems[1].InformationLength);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "00020B0009736D616C6C63686931160009736D616C6C63686932".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8303>(bytes);
+        }
     }
 }

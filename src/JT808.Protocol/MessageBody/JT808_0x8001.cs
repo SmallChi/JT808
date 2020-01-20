@@ -1,29 +1,51 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 平台通用应答
     /// </summary>
-    public class JT808_0x8001 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8001>
+    public class JT808_0x8001 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8001>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8001;
         public override string Description => "平台通用应答";
+        /// <summary>
+        /// 应答消息流水号
+        /// </summary>
         public ushort MsgNum { get; set; }
         /// <summary>
+        /// 应答消息Id
         /// <see cref="JT808.Protocol.Enums.JT808MsgId"/>
         /// </summary>
         public ushort AckMsgId { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public JT808PlatformResult JT808PlatformResult { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8001 value = new JT808_0x8001();
+            value.MsgNum = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.MsgNum.ReadNumber()}]应答消息流水号", value.MsgNum);
+            value.AckMsgId = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.AckMsgId.ReadNumber()}]应答消息Id", value.AckMsgId);
+            value.JT808PlatformResult = (JT808PlatformResult)reader.ReadByte();
+            writer.WriteNumber($"[{((byte)value.JT808PlatformResult).ReadNumber()}]结果-{value.JT808PlatformResult.ToString()}", (byte)value.JT808PlatformResult);
+        }
+
         public JT808_0x8001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x8001 jT808_0X8001 = new JT808_0x8001();
-            jT808_0X8001.MsgNum = reader.ReadUInt16();
-            jT808_0X8001.AckMsgId = reader.ReadUInt16();
-            jT808_0X8001.JT808PlatformResult = (JT808PlatformResult)reader.ReadByte();
-            return jT808_0X8001;
+            JT808_0x8001 value = new JT808_0x8001();
+            value.MsgNum = reader.ReadUInt16();
+            value.AckMsgId = reader.ReadUInt16();
+            value.JT808PlatformResult = (JT808PlatformResult)reader.ReadByte();
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8001 value, IJT808Config config)

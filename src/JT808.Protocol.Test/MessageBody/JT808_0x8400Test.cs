@@ -27,5 +27,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(Enums.JT808CallBackType.普通通话, jT808_0X8400.CallBack);
             Assert.Equal("12345679810", jT808_0X8400.PhoneNumber);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            var bytes = "00 31 32 33 34 35 36 37 39 38 31 30".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8400>(bytes);
+        }
     }
 }
