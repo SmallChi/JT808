@@ -54,5 +54,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(1, value.QueryType);
             Assert.Equal(0u, value.Count);
         }
+
+        [Fact]
+        public void Test5()
+        {
+            byte[] bytes = "0000000003000000010000000200000003".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8608>(bytes);
+        }
     }
 }

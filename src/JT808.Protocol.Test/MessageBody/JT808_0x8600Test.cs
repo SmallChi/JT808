@@ -153,5 +153,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(666, item0.NightMaximumSpeed);
             Assert.Equal("SmallChi", item0.AreaName);
         }
+
+        [Fact]
+        public void Test_2019_3()
+        {
+            byte[] bytes = "0101000005F200DE075BCD15075BCD15000000C8003CC8029A0008536D616C6C436869".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8600>(bytes, JT808Version.JTT2019);
+        }
     }
 }

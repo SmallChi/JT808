@@ -1,7 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -10,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     /// 0x8608
     /// 2019版本
     /// </summary>
-    public class JT808_0x8608 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8608>, IJT808_2019_Version
+    public class JT808_0x8608 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8608>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8608;
         public override string Description => "查询区域或线路数据";
@@ -59,6 +61,27 @@ namespace JT808.Protocol.MessageBody
             else
             {
                 writer.WriteUInt32(0);
+            }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8608 value = new JT808_0x8608();
+            value.QueryType = reader.ReadByte();
+            value.Count = reader.ReadUInt32();
+            writer.WriteNumber($"[{ value.QueryType.ReadNumber()}]查询类型", value.QueryType);
+            writer.WriteNumber($"[{ value.Count.ReadNumber()}]查询的区域或线路的ID数量", value.Count);
+            if (value.Count > 0)
+            {
+                writer.WriteStartArray("Id列表");
+                for (int i = 0; i < value.Count; i++)
+                {
+                    writer.WriteStartObject();
+                    uint id = reader.ReadUInt32();
+                    writer.WriteNumber($"[{id.ReadNumber()}]Id{i+1}", id);
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
             }
         }
     }

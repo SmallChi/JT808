@@ -1,10 +1,12 @@
 ﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -12,7 +14,7 @@ namespace JT808.Protocol.MessageBody
     /// 设置多边形区域
     /// 0x8604
     /// </summary>
-    public class JT808_0x8604 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8604>, IJT808_2019_Version
+    public class JT808_0x8604 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8604>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8604;
         public override string Description => "设置多边形区域";
@@ -155,6 +157,59 @@ namespace JT808.Protocol.MessageBody
                 writer.Skip(2, out int AreaNameLengthPosition);
                 writer.WriteString(value.AreaName);
                 writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - AreaNameLengthPosition - 2), AreaNameLengthPosition);
+            }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8604 value = new JT808_0x8604();
+            value.AreaId = reader.ReadUInt32();
+            writer.WriteNumber($"[{ value.AreaId.ReadNumber()}]区域ID", value.AreaId);
+            value.AreaProperty = reader.ReadUInt16();
+            writer.WriteNumber($"[{ value.AreaProperty.ReadNumber()}]区域属性", value.AreaProperty);
+            ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(value.AreaProperty, 2).PadLeft(16, '0').AsSpan();
+            bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
+            if (!bit0Flag)
+            {
+                value.StartTime = reader.ReadDateTime6();
+                writer.WriteString($"[{ value.StartTime.Value.ToString("yyMMddHHmmss")}]起始时间", value.StartTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+                value.EndTime = reader.ReadDateTime6();
+                writer.WriteString($"[{ value.EndTime.Value.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2, 1).ToString().Equals("0");
+            if (!bit1Flag)
+            {
+                value.HighestSpeed = reader.ReadUInt16();
+                writer.WriteNumber($"[{ value.HighestSpeed.Value.ReadNumber()}]最高速度", value.HighestSpeed.Value);
+                value.OverspeedDuration = reader.ReadByte();
+                writer.WriteNumber($"[{ value.OverspeedDuration.Value.ReadNumber()}]超速持续时间", value.OverspeedDuration.Value);
+            }
+            value.PeakCount = reader.ReadUInt16();
+            writer.WriteNumber($"[{ value.PeakCount.ReadNumber()}]区域总顶点数", value.PeakCount);
+            writer.WriteStartArray("区域顶");
+            for (var i = 0; i < value.PeakCount; i++)
+            {
+                writer.WriteStartObject();
+                var item = new JT808PeakProperty();
+                item.Lat = reader.ReadUInt32();
+                writer.WriteNumber($"[{item.Lat.ReadNumber()}]顶点纬度", item.Lat);
+                item.Lng = reader.ReadUInt32();
+                writer.WriteNumber($"[{item.Lng.ReadNumber()}]顶点经度", item.Lng);
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                if (!bit1Flag)
+                {
+                    value.NightMaximumSpeed = reader.ReadUInt16();
+                    writer.WriteNumber($"[{value.NightMaximumSpeed .ReadNumber()}]夜间最高速度", value.NightMaximumSpeed);
+                }
+                value.NameLength = reader.ReadUInt16();
+                writer.WriteNumber($"[{value.NameLength.ReadNumber()}]名称长度", value.NameLength);
+                var nameBuffer = reader.ReadVirtualArray(value.NameLength);
+                value.AreaName = reader.ReadString(value.NameLength);
+                writer.WriteString($"[{ nameBuffer.ToArray().ToHexString()}]区域名称", value.AreaName);
             }
         }
     }

@@ -86,5 +86,11 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((ushort)60, item1.HighestSpeed);
             Assert.Equal((byte)200, item1.OverspeedDuration);
         }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "0102000005F200DE075BCD13075BCD12075BCD15075BCD14003CC8000005F3000A075BCCBE075BCCBF075BCCBC075BCCBD003CC8".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8602>(bytes);
+        }
     }
 }

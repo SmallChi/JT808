@@ -1,6 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 删除圆形区域
     /// 0x8601
     /// </summary>
-    public class JT808_0x8601 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8601>
+    public class JT808_0x8601 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8601>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x8601;
         public override string Description => "删除圆形区域";
@@ -44,6 +47,22 @@ namespace JT808.Protocol.MessageBody
                     writer.WriteUInt32(item);
                 }
             }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8601 value = new JT808_0x8601();
+            value.AreaCount = reader.ReadByte();
+            writer.WriteNumber($"[{ value.AreaCount.ReadNumber()}]区域数", value.AreaCount);
+            writer.WriteStartArray("区域ID集合");
+            for (var i = 0; i < value.AreaCount; i++)
+            {
+                writer.WriteStartObject();
+                var areaId = reader.ReadUInt32();
+                writer.WriteNumber($"[{areaId.ReadNumber()}]Id{i + 1}", areaId);
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
     }
 }
