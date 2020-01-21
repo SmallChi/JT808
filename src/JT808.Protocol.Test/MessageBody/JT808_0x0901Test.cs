@@ -37,5 +37,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)88, jT808_0X8600.UnCompressMessageLength);
             Assert.Equal(Encoding.UTF8.GetBytes(UserName), jT808_0X8600.UnCompressMessage);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "0000001F1F8B080000000000000B2BCE4DCCC949CEC82CA6320D0027F897E258000000".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0901>(bytes);
+        }
     }
 }

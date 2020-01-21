@@ -32,7 +32,7 @@ namespace JT808.Protocol.Test.MessageBody
                         FirmwareVersion = "1.0",
                         HardwareVersion = "2.0",
                         ConnectTimeLimit = 60,
-                        ManufacturerCode = 12345,
+                        MakerId = "12345",
                         MonitoringPlatformAuthenticationCode = "code",
                         ServerUrl = "www.baidu.com",
                         TCPPort = 8806,
@@ -61,7 +61,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(8806, (int)JT808_0x8105.CommandValue.TCPPort);
             Assert.Equal("www.baidu.com", JT808_0x8105.CommandValue.ServerUrl);
             Assert.Equal("code", JT808_0x8105.CommandValue.MonitoringPlatformAuthenticationCode);
-            Assert.Equal(12345, JT808_0x8105.CommandValue.ManufacturerCode);
+            Assert.Equal("12345", JT808_0x8105.CommandValue.MakerId);
             Assert.Equal("2.0", JT808_0x8105.CommandValue.HardwareVersion);
             Assert.Equal("1.0", JT808_0x8105.CommandValue.FirmwareVersion);
             Assert.Equal("TK", JT808_0x8105.CommandValue.DialUserName);

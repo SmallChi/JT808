@@ -37,6 +37,13 @@ namespace JT808.Protocol.Test.MessageBody
         }
 
         [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "0500000003000000010000000200000003".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0608>(bytes);
+        }
+
+        [Fact]
         public void Test_JT808_0X8600s_1()
         {
             JT808_0x0608 value = new JT808_0x0608
@@ -93,6 +100,13 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((byte)200, item0.OverspeedDuration);
             Assert.Equal(666, item0.NightMaximumSpeed);
             Assert.Equal("SmallChi", item0.AreaName);
+        }
+
+        [Fact]
+        public void Test_JT808_0X8600s_3()
+        {
+            byte[] bytes = "01000000010101000005F200DE075BCD15075BCD15000000C8003CC8029A0008536D616C6C436869".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0608>(bytes, JT808Version.JTT2019);
         }
 
         [Fact]
@@ -156,6 +170,13 @@ namespace JT808.Protocol.Test.MessageBody
         }
 
         [Fact]
+        public void Test_JT808_0X8602s_3()
+        {
+            byte[] bytes = "02000000010101000005F200DE075BCD13075BCD12075BCD15075BCD14003CC800000008736D616C6C636869".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0608>(bytes, JT808Version.JTT2019);
+        }
+
+        [Fact]
         public void Test_JT808_0x8604s_1()
         {
             JT808_0x0608 value = new JT808_0x0608
@@ -214,6 +235,13 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(0, jT808_0X8604.NightMaximumSpeed);
             Assert.Equal("smallchi", jT808_0X8604.AreaName);
          }
+
+        [Fact]
+        public void Test_JT808_0X8604s_3()
+        {
+            byte[] bytes = "0300000001000004D200012001070000122001070000130002075BCD15075BCD14075BCCBC075BCCBD0008736D616C6C636869".ToHexBytes();
+            string value = JT808Serializer.Analyze<JT808_0x0608>(bytes, JT808Version.JTT2019);
+        }
 
         [Fact]
         public void Test_JT808_0x8606s_1()
@@ -283,6 +311,13 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(80, jT808_0X8606.InflectionPointItems[0].NightMaximumSpeed.Value);
 
             Assert.Equal("koike518", jT808_0X8606.RouteName);
+        }
+
+        [Fact]
+        public void Test_JT808_0X8606s_3()
+        {
+            byte[] bytes = "04000000010000270F00332001070000122001070000120001000003E800000507075BCD15075BCD1438030032007B004517005000086B6F696B65353138".ToHexBytes();
+            string value = JT808Serializer.Analyze<JT808_0x0608>(bytes, JT808Version.JTT2019);
         }
     }
 }

@@ -1,7 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -9,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 摄像头立即拍摄命令应答
     /// 0x0805
     /// </summary>
-    public class JT808_0x0805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0805>, IJT808_2019_Version
+    public class JT808_0x0805 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0805>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0805;
         public override string Description => "摄像头立即拍摄命令应答";
@@ -33,22 +35,55 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public List<uint> MultimediaIds { get; set; }
 
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0805 value = new JT808_0x0805();
+            value.ReplyMsgNum = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.ReplyMsgNum.ReadNumber()}]应答流水号", value.ReplyMsgNum);
+            value.Result = reader.ReadByte();
+            string result = "成功";
+            switch (value.Result)
+            {
+                case 1:
+                    result = "失败";
+                    break;
+                case 2:
+                    result = "通道不支持";
+                    break;
+            }
+            writer.WriteNumber($"[{value.Result.ReadNumber()}]结果-{result}", value.Result);
+            if (value.Result == 0)
+            {
+                value.MultimediaIdCount = reader.ReadUInt16();
+                writer.WriteNumber($"[{value.MultimediaIdCount.ReadNumber()}]多媒体ID个数", value.MultimediaIdCount);
+                writer.WriteStartArray("多媒体ID列表");
+                for (var i = 0; i < value.MultimediaIdCount; i++)
+                {
+                    writer.WriteStartObject();
+                    uint id = reader.ReadUInt32();
+                    writer.WriteNumber($"[{id.ReadNumber()}]ID{i+1}", id);
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+            }
+        }
+
         public JT808_0x0805 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x0805 jT808_0X0805 = new JT808_0x0805();
-            jT808_0X0805.ReplyMsgNum = reader.ReadUInt16();
-            jT808_0X0805.Result = reader.ReadByte();
-            if (jT808_0X0805.Result == 0)
+            JT808_0x0805 value = new JT808_0x0805();
+            value.ReplyMsgNum = reader.ReadUInt16();
+            value.Result = reader.ReadByte();
+            if (value.Result == 0)
             {
-                jT808_0X0805.MultimediaIdCount = reader.ReadUInt16();
-                jT808_0X0805.MultimediaIds = new List<uint>();
-                for (var i = 0; i < jT808_0X0805.MultimediaIdCount; i++)
+                value.MultimediaIdCount = reader.ReadUInt16();
+                value.MultimediaIds = new List<uint>();
+                for (var i = 0; i < value.MultimediaIdCount; i++)
                 {
                     uint id = reader.ReadUInt32();
-                    jT808_0X0805.MultimediaIds.Add(id);
+                    value.MultimediaIds.Add(id);
                 }
             }
-            return jT808_0X0805;
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0805 value, IJT808Config config)

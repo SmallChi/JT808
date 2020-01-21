@@ -99,5 +99,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((ushort)0, jT808_0X0802.MultimediaSearchItems[1].Position.Direction);
             Assert.Equal((uint)2, jT808_0X0802.MultimediaSearchItems[1].Position.StatusFlag);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "3051000200000102007B01000000010000000200BA7F0E07E4F11C0028003C000018111620202000000103027C00000000010000000200BA7F0E07E4F11C0028003C0000181116222222".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0802>(bytes);
+        }
     }
 }

@@ -1,12 +1,15 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 位置信息查询应答
     /// </summary>
-    public class JT808_0x0201 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0201>
+    public class JT808_0x0201 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0201>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0201;
         public override string Description => "位置信息查询应答";
@@ -20,6 +23,17 @@ namespace JT808.Protocol.MessageBody
         /// 位置信息汇报见 8.12
         /// </summary>
         public JT808_0x0200 Position { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0201 value = new JT808_0x0201();
+            value.ReplyMsgNum = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.ReplyMsgNum.ReadNumber()}]", value.ReplyMsgNum);
+            writer.WriteStartObject("位置基本信息");
+            config.GetAnalyze<JT808_0x0200>().Analyze(ref reader, writer, config);
+            writer.WriteEndObject();
+        }
+
         public JT808_0x0201 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0201 jT808_0X0201 = new JT808_0x0201();

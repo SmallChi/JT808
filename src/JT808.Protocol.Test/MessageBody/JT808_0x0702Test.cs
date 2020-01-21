@@ -118,5 +118,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2019-12-01"), jT808_0X0702.CertificateExpiresDate);
             Assert.Equal("12345678901234567000", jT808_0X0702.DriverIdentityCard);
         }
+
+        [Fact]
+        public void Test_2019_3()
+        {
+            byte[] bytes = "0119120111111100056B6F696B65717765313233343536616161303030303030303006717765727478201912013132333435363738393031323334353637303030".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0702>(bytes, JT808Version.JTT2019);
+        }
     }
 }

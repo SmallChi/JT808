@@ -2,16 +2,18 @@
 using JT808.Protocol.Exceptions;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 位置信息汇报
     /// </summary>
-    public class JT808_0x0200 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0200>
+    public class JT808_0x0200 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0200>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0200;
         public override string Description => "位置信息汇报";
@@ -199,6 +201,98 @@ namespace JT808.Protocol.MessageBody
                     JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
                 }
             }
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0200 value = new JT808_0x0200();
+            value.AlarmFlag = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.AlarmFlag.ReadNumber()}]报警标志", value.AlarmFlag);
+            value.StatusFlag = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.StatusFlag.ReadNumber()}]状态位标志", value.StatusFlag);
+            if (((value.StatusFlag >> 28) & 1) == 1)
+            {   //南纬 268435456 0x10000000
+                value.Lat = (int)reader.ReadUInt32();
+                writer.WriteNumber($"[{value.Lat.ReadNumber()}]纬度", value.Lat);
+            }
+            else
+            {
+                value.Lat = reader.ReadInt32();
+                writer.WriteNumber($"[{value.Lat.ReadNumber()}]纬度", value.Lat);
+            }
+            if (((value.StatusFlag >> 27) & 1) == 1)
+            {   //西经 ‭134217728‬ 0x8000000
+                value.Lng = (int)reader.ReadUInt32();
+                writer.WriteNumber($"[{value.Lng.ReadNumber()}]经度", value.Lng);
+            }
+            else
+            {
+                value.Lng = reader.ReadInt32();
+                writer.WriteNumber($"[{value.Lng.ReadNumber()}]经度", value.Lng);
+            }
+            value.Altitude = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.Altitude.ReadNumber()}]高程", value.Altitude);
+            value.Speed = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.Speed.ReadNumber()}]速度", value.Speed);
+            value.Direction = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.Direction.ReadNumber()}]方向", value.Direction);
+            value.GPSTime = reader.ReadDateTime6();
+            writer.WriteString($"[{value.GPSTime.ToString("yyMMddHHmmss")}]定位时间", value.GPSTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            // 位置附加信息
+            writer.WriteStartArray("附加信息列表");
+            while (reader.ReadCurrentRemainContentLength() > 0)
+            {
+                try
+                {
+                    ReadOnlySpan<byte> attachSpan = reader.GetVirtualReadOnlySpan(2);
+                    byte attachId = attachSpan[0];
+                    byte attachLen = attachSpan[1];
+                    if (config.JT808_0X0200_Factory.Map.TryGetValue(attachId, out object jT808LocationAttachInstance))
+                    {
+                        writer.WriteStartObject();
+                        jT808LocationAttachInstance.Analyze(ref reader, writer, config);
+                        writer.WriteEndObject();
+                    }
+                    else if (config.JT808_0X0200_Custom_Factory.Map.TryGetValue(attachId, out object customAttachInstance))
+                    {
+                        writer.WriteStartObject();
+                        customAttachInstance.Analyze(ref reader, writer, config);
+                        writer.WriteEndObject();
+                    }
+                    else
+                    {
+                        writer.WriteStartObject();
+                        reader.Skip(2);
+                        writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
+                        writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
+                        writer.WriteString($"未知附加信息", reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray().ToHexString());
+                        reader.Skip(attachLen);
+                        writer.WriteEndObject();
+                    }
+                }
+                catch
+                {
+                    writer.WriteStartObject();
+                    try
+                    {
+                        byte attachId = reader.ReadByte();
+                        byte attachLen = reader.ReadByte();
+                        writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
+                        writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
+                        writer.WriteString($"未知附加信息", reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray().ToHexString());   
+                        reader.Skip(attachLen);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        writer.WriteEndObject();
+                    }
+                }
+            }
+            writer.WriteEndArray();
         }
     }
 }

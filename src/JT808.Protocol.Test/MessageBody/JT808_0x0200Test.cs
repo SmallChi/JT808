@@ -139,6 +139,13 @@ namespace JT808.Protocol.Test.MessageBody
         }
 
         [Fact]
+        public void Test2_1()
+        {
+            byte[] bodys = "00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0200>(bodys);
+        }
+
+        [Fact]
         public void Test3()
         {
 

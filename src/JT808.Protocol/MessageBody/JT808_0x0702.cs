@@ -2,14 +2,16 @@
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using JT808.Protocol.Extensions;
 using System;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 驾驶员身份信息采集上报
     /// </summary>
-    public class JT808_0x0702 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0702>, IJT808_2019_Version
+    public class JT808_0x0702 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0702>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0702;
         public override string Description => "驾驶员身份信息采集上报";
@@ -53,7 +55,7 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public byte LicenseIssuingLength { get; set; }
         /// <summary>
-        /// 发证机构名称长度
+        /// 发证机构名称
         /// </summary>
         public string LicenseIssuing { get; set; }
         /// <summary>
@@ -65,29 +67,68 @@ namespace JT808.Protocol.MessageBody
         /// 2019版本
         /// </summary>
         public string DriverIdentityCard { get; set; }
-        public JT808_0x0702 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            JT808_0x0702 jT808_0X0702 = new JT808_0x0702();
-            jT808_0X0702.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
-            jT808_0X0702.IC_Card_PlugDateTime = reader.ReadDateTime6();
-            if (jT808_0X0702.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
+            JT808_0x0702 value = new JT808_0x0702();
+            value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
+            writer.WriteNumber($"[{((byte)value.IC_Card_Status).ReadNumber()}]状态-{value.IC_Card_Status.ToString()}", (byte)value.IC_Card_Status);
+            value.IC_Card_PlugDateTime = reader.ReadDateTime6();
+            writer.WriteString($"[{value.IC_Card_PlugDateTime.ToString("yyMMddHHmmss")}]插拔卡时间", value.IC_Card_PlugDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (value.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
             {
-                jT808_0X0702.IC_Card_ReadResult = (JT808ICCardReadResult)reader.ReadByte();
-                if (jT808_0X0702.IC_Card_ReadResult == JT808ICCardReadResult.IC卡读卡成功)
+                value.IC_Card_ReadResult = (JT808ICCardReadResult)reader.ReadByte();
+                writer.WriteNumber($"[{((byte)value.IC_Card_ReadResult).ReadNumber()}]IC卡读取结果-{value.IC_Card_ReadResult.ToString()}", (byte)value.IC_Card_ReadResult);
+                if (value.IC_Card_ReadResult == JT808ICCardReadResult.IC卡读卡成功)
                 {
-                    jT808_0X0702.DriverUserNameLength = reader.ReadByte();
-                    jT808_0X0702.DriverUserName = reader.ReadString(jT808_0X0702.DriverUserNameLength);
-                    jT808_0X0702.QualificationCode = reader.ReadString(20);
-                    jT808_0X0702.LicenseIssuingLength = reader.ReadByte();
-                    jT808_0X0702.LicenseIssuing = reader.ReadString(jT808_0X0702.LicenseIssuingLength);
-                    jT808_0X0702.CertificateExpiresDate = reader.ReadDateTime4();
-                    if(reader.Version== JT808Version.JTT2019)
+                    value.DriverUserNameLength = reader.ReadByte();
+                    writer.WriteNumber($"[{value.DriverUserNameLength.ReadNumber()}]驾驶员姓名长度", value.DriverUserNameLength);
+                    var driverUserNameBuffer= reader.ReadVirtualArray(value.DriverUserNameLength);
+                    value.DriverUserName = reader.ReadString(value.DriverUserNameLength);
+                    writer.WriteString($"[{driverUserNameBuffer.ToArray().ToHexString()}]驾驶员姓名", value.DriverUserName);
+                    var qualificationCodeBuffer = reader.ReadVirtualArray(20);
+                    value.QualificationCode = reader.ReadString(20);
+                    writer.WriteString($"[{qualificationCodeBuffer.ToArray().ToHexString()}]从业资格证编码", value.QualificationCode);
+                    value.LicenseIssuingLength = reader.ReadByte();
+                    writer.WriteNumber($"[{value.LicenseIssuingLength.ReadNumber()}]发证机构名称长度", value.LicenseIssuingLength);
+                    var licenseIssuingLengtheBuffer = reader.ReadVirtualArray(value.LicenseIssuingLength);
+                    value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
+                    writer.WriteString($"[{licenseIssuingLengtheBuffer.ToArray().ToHexString()}]发证机构名称", value.LicenseIssuing);
+                    value.CertificateExpiresDate = reader.ReadDateTime4();
+                    writer.WriteString($"[{value.CertificateExpiresDate.ToString("yyMMdd")}]插拔卡时间", value.CertificateExpiresDate.ToString("yyyy-MM-dd"));
+                    if (reader.Version == JT808Version.JTT2019)
                     {
-                        jT808_0X0702.DriverIdentityCard = reader.ReadString(20);
+                        var driverIdentityCardBuffer = reader.ReadVirtualArray(20);
+                        value.DriverIdentityCard = reader.ReadString(20);
+                        writer.WriteString($"[{driverIdentityCardBuffer.ToArray().ToHexString()}]驾驶员身份证号", value.DriverIdentityCard);
                     }
                 }
             }
-            return jT808_0X0702;
+        }
+
+        public JT808_0x0702 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        {
+            JT808_0x0702 value = new JT808_0x0702();
+            value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
+            value.IC_Card_PlugDateTime = reader.ReadDateTime6();
+            if (value.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
+            {
+                value.IC_Card_ReadResult = (JT808ICCardReadResult)reader.ReadByte();
+                if (value.IC_Card_ReadResult == JT808ICCardReadResult.IC卡读卡成功)
+                {
+                    value.DriverUserNameLength = reader.ReadByte();
+                    value.DriverUserName = reader.ReadString(value.DriverUserNameLength);
+                    value.QualificationCode = reader.ReadString(20);
+                    value.LicenseIssuingLength = reader.ReadByte();
+                    value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
+                    value.CertificateExpiresDate = reader.ReadDateTime4();
+                    if(reader.Version== JT808Version.JTT2019)
+                    {
+                        value.DriverIdentityCard = reader.ReadString(20);
+                    }
+                }
+            }
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0702 value, IJT808Config config)

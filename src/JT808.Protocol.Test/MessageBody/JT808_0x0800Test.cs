@@ -33,5 +33,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(0x06, jT808_0X0800.ChannelId);
             Assert.Equal(0x01, jT808_0X0800.EventItemCoding);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            var bytes = "000015C101020106".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0800>(bytes);
+        }
     }
 }

@@ -3,13 +3,14 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System.Collections.Generic;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 查询区域或线路数据应答
     /// </summary>
-    public class JT808_0x0608 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0608>, IJT808_2019_Version
+    public class JT808_0x0608 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0608>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0608;
         public override string Description => "查询区域或线路数据应答";
@@ -45,6 +46,85 @@ namespace JT808.Protocol.MessageBody
         /// 查询类型为4
         /// </summary>
         public List<JT808_0x8606> JT808_0x8606s { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0608 value = new JT808_0x0608();
+            value.QueryType = reader.ReadByte();
+            writer.WriteNumber($"[{value.QueryType.ReadNumber()}]查询类型", value.QueryType);
+            value.Count = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.Count.ReadNumber()}]查询的区域或线路的ID数量", value.Count);
+            if (value.Count > 0)
+            {
+                switch (value.QueryType)
+                {
+                    case 1:
+                        writer.WriteStartArray("设置圆形区域");
+                        for (int i = 0; i < value.Count; i++)
+                        {
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8600).GUID, out object instance))
+                            {
+                                writer.WriteStartObject();
+                                instance.Analyze(ref reader, writer, config);
+                                writer.WriteEndObject();
+                            }
+                        }
+                        writer.WriteEndArray();
+                        break;
+                    case 2:
+                        writer.WriteStartArray("设置矩形区域");
+                        for (int i = 0; i < value.Count; i++)
+                        {
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8602).GUID, out object instance))
+                            {
+                                writer.WriteStartObject();
+                                instance.Analyze(ref reader, writer, config);
+                                writer.WriteEndObject();
+                            }
+                        }
+                        writer.WriteEndArray();
+                        break;
+                    case 3:
+                        writer.WriteStartArray("设置多边形区域");
+                        for (int i = 0; i < value.Count; i++)
+                        {
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8604).GUID, out object instance))
+                            {
+                                writer.WriteStartObject();
+                                instance.Analyze(ref reader, writer, config);
+                                writer.WriteEndObject();
+                            }
+                        }
+                        writer.WriteEndArray();
+                        break;
+                    case 4:
+                        writer.WriteStartArray("设置路线");
+                        for (int i = 0; i < value.Count; i++)
+                        {
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8606).GUID, out object instance))
+                            {
+                                writer.WriteStartObject();
+                                instance.Analyze(ref reader, writer, config);
+                                writer.WriteEndObject();
+                            }
+                        }
+                        writer.WriteEndArray();
+                        break;
+                    default:
+                        writer.WriteStartArray("线路Id集合");
+                        for (int i = 0; i < value.Count; i++)
+                        {
+                            writer.WriteStartObject();
+                            var routeId = reader.ReadUInt32();
+                            writer.WriteNumber($"[{routeId.ReadNumber()}]Id{i+1}", routeId);
+                            writer.WriteEndObject();
+                        }
+                        writer.WriteEndArray();
+                        break;
+                }
+            }
+        }
+
         public JT808_0x0608 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0608 value = new JT808_0x0608();

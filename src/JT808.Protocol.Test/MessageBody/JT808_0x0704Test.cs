@@ -151,5 +151,11 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(96, ((JT808_0x0200_0x01)JT808Bodies.Positions[1].JT808LocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(66, ((JT808_0x0200_0x02)JT808Bodies.Positions[1].JT808LocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
         }
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "7E 07 04 00 53 11 22 33 44 55 66 22 B8 00 02 00 00 26 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37 00 26 00 00 00 02 00 00 00 01 00 CB 73 55 07 E6 A3 23 00 29 00 36 00 78 18 07 15 10 10 30 01 04 00 00 00 60 02 02 00 42 D4 7E".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808Package>(bytes);
+        }
     }
 }

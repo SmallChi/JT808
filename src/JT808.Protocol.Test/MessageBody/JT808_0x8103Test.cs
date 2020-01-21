@@ -75,7 +75,6 @@ namespace JT808.Protocol.Test.MessageBody
             }
         }
 
-
         [Fact]
         public void Test2()
         {
@@ -124,6 +123,13 @@ namespace JT808.Protocol.Test.MessageBody
         }
 
         [Fact]
+        public void Test2_2()
+        {
+            byte[] bytes = "0200000001040000000A000000130D7777772E62616964752E636F6D".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8103>(bytes);
+        }
+
+        [Fact]
         public void Test3()
         {
             var JT808_0x8103 = new JT808_0x8103
@@ -163,6 +169,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(customParams, Newtonsoft.Json.JsonConvert.SerializeObject(jT808_0X8103.CustomParamList));
         }
 
+        [Fact]
+        public void Test3_2()
+        {
+            byte[] bytes = "010000007515030500040700000006080A00090C0000000B000201".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8103>(bytes);
+        }
 
     }
 }

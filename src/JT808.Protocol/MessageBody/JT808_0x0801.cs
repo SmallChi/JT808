@@ -1,6 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 多媒体数据上传
     /// 0x0801
     /// </summary>
-    public class JT808_0x0801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0801>, IJT808_2019_Version
+    public class JT808_0x0801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0801>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x0801;
         public override string Description => "多媒体数据上传";
@@ -46,18 +49,39 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public byte[] MultimediaDataPackage { get; set; }
 
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0801 value = new JT808_0x0801();
+            value.MultimediaId = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.MultimediaId.ReadNumber()}]多媒体ID", value.MultimediaId);
+            value.MultimediaType = reader.ReadByte();
+            writer.WriteNumber($"[{value.MultimediaType.ReadNumber()}]多媒体类型-{((JT808MultimediaType)value.MultimediaType).ToString()}", value.MultimediaType);
+            value.MultimediaCodingFormat = reader.ReadByte();
+            writer.WriteNumber($"[{value.MultimediaCodingFormat.ReadNumber()}]多媒体格式编码-{((JT808MultimediaCodingFormat)value.MultimediaCodingFormat).ToString()}", value.MultimediaCodingFormat);
+            value.EventItemCoding = reader.ReadByte();
+            writer.WriteNumber($"[{value.EventItemCoding.ReadNumber()}]事件项编码-{((JT808EventItemCoding)value.EventItemCoding).ToString()}", value.MultimediaCodingFormat);
+            value.ChannelId = reader.ReadByte();
+            writer.WriteNumber($"[{value.ChannelId.ReadNumber()}]通道ID", value.ChannelId);
+            JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28));
+            writer.WriteStartObject("位置基本信息");
+            config.GetAnalyze<JT808_0x0200>().Analyze(ref positionReader, writer, config);
+            writer.WriteEndObject();
+            value.MultimediaDataPackage = reader.ReadContent().ToArray();
+            writer.WriteString($"多媒体数据包", value.MultimediaDataPackage.ToHexString());
+        }
+
         public JT808_0x0801 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x0801 jT808_0X0801 = new JT808_0x0801();
-            jT808_0X0801.MultimediaId = reader.ReadUInt32();
-            jT808_0X0801.MultimediaType = reader.ReadByte();
-            jT808_0X0801.MultimediaCodingFormat = reader.ReadByte();
-            jT808_0X0801.EventItemCoding = reader.ReadByte();
-            jT808_0X0801.ChannelId = reader.ReadByte();
+            JT808_0x0801 value = new JT808_0x0801();
+            value.MultimediaId = reader.ReadUInt32();
+            value.MultimediaType = reader.ReadByte();
+            value.MultimediaCodingFormat = reader.ReadByte();
+            value.EventItemCoding = reader.ReadByte();
+            value.ChannelId = reader.ReadByte();
             JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28));
-            jT808_0X0801.Position = config.GetMessagePackFormatter<JT808_0x0200>().Deserialize(ref positionReader, config);
-            jT808_0X0801.MultimediaDataPackage = reader.ReadContent().ToArray();
-            return jT808_0X0801;
+            value.Position = config.GetMessagePackFormatter<JT808_0x0200>().Deserialize(ref positionReader, config);
+            value.MultimediaDataPackage = reader.ReadContent().ToArray();
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0801 value, IJT808Config config)

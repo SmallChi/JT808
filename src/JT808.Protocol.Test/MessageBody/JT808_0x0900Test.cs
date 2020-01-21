@@ -52,5 +52,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal("smallchi", jT808_0x0900_0x83.PassthroughContent);
             Assert.Equal(0x83, JT808Bodies.PassthroughType);
         }
+
+        [Fact]
+        public void Test1_2()
+        {
+            byte[] bytes = "7E 09 00 00 09 00 01 23 45 67 89 00 0A 83 73 6D 61 6C 6C 63 68 69 1D 7E".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808Package>(bytes);
+        }
     }
 }

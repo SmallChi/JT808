@@ -27,19 +27,19 @@ namespace JT808.Protocol.MessageBody
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            JT808_0x0303 jT808_0X0303 = new JT808_0x0303();
-            jT808_0X0303.InformationType = reader.ReadByte();
-            jT808_0X0303.Flag = reader.ReadByte();
-            writer.WriteNumber($"[{jT808_0X0303.InformationType.ReadNumber()}]信息类型", jT808_0X0303.InformationType);
-            writer.WriteNumber($"[{jT808_0X0303.Flag.ReadNumber()}]{(jT808_0X0303.Flag==1? "点播" : "取消")}", jT808_0X0303.Flag);
+            JT808_0x0303 value = new JT808_0x0303();
+            value.InformationType = reader.ReadByte();
+            value.Flag = reader.ReadByte();
+            writer.WriteNumber($"[{value.InformationType.ReadNumber()}]信息类型", value.InformationType);
+            writer.WriteNumber($"[{value.Flag.ReadNumber()}]{(value.Flag==1? "点播" : "取消")}", value.Flag);
         }
 
         public JT808_0x0303 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x0303 jT808_0X0303 = new JT808_0x0303();
-            jT808_0X0303.InformationType = reader.ReadByte();
-            jT808_0X0303.Flag = reader.ReadByte();
-            return jT808_0X0303;
+            JT808_0x0303 value = new JT808_0x0303();
+            value.InformationType = reader.ReadByte();
+            value.Flag = reader.ReadByte();
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0303 value, IJT808Config config)

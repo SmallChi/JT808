@@ -70,5 +70,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(100, ((JT808_0x0200_0x01)JT808Bodies.JT808_0x0200.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)JT808Bodies.JT808_0x0200.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "7E0500002811223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037B57E".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808Package>(bytes);
+        }
     }
 }

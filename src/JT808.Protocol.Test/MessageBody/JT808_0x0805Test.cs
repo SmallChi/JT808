@@ -37,5 +37,12 @@ namespace JT808.Protocol.Test.MessageBody
                 12580
             }, jT808_0X0805.MultimediaIds);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "30A80000020000301200003124".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0805>(bytes);
+        }
     }
 }

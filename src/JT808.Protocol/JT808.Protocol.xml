@@ -4014,7 +4014,7 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.LicenseIssuing">
             <summary>
-            发证机构名称长度
+            发证机构名称
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.CertificateExpiresDate">
@@ -5811,7 +5811,7 @@
             UDP端口
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.ManufacturerCode">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.MakerId">
             <summary>
             制造商ID
             终端制造商编码

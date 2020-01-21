@@ -226,7 +226,7 @@ namespace JT808.Protocol.MessageBody
             /// 制造商ID
             /// 终端制造商编码
             /// </summary>
-            public long? ManufacturerCode { get; set; }
+            public string MakerId { get; set; }
             /// <summary>
             /// 监管平台鉴权码
             /// 监管平台下发的鉴权码，仅用于终端连接到监管平台之后的鉴权，终端连接回原监控平台还用原鉴权码
@@ -254,7 +254,7 @@ namespace JT808.Protocol.MessageBody
             public ushort? ConnectTimeLimit { get; set; }
             public override string ToString()
             {
-                return $"{ConnectionControl};{DialPointName};{DialUserName};{DialPwd};{ServerUrl};{TCPPort};{UDPPort};{ManufacturerCode};{MonitoringPlatformAuthenticationCode};{HardwareVersion};{FirmwareVersion};{URL};{ConnectTimeLimit}";
+                return $"{ConnectionControl};{DialPointName};{DialUserName};{DialPwd};{ServerUrl};{TCPPort};{UDPPort};{MakerId};{MonitoringPlatformAuthenticationCode};{HardwareVersion};{FirmwareVersion};{URL};{ConnectTimeLimit}";
             }
             public void SetCommandParams(string commandValue)
             {
@@ -289,7 +289,7 @@ namespace JT808.Protocol.MessageBody
                 }
                 if (!string.IsNullOrEmpty(values[7]))
                 {
-                    ManufacturerCode = long.Parse(values[7]);
+                    MakerId = values[7];
                 }
                 if (!string.IsNullOrEmpty(values[8]))
                 {

@@ -43,5 +43,12 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal("汉smallchi", jT808_0X0701_content.UserName);
             Assert.Equal(10, jT808_0X0701_content.UserNameLength);
         }
+
+        [Fact]
+        public void Test3()
+        {
+            byte[] bytes = "000000100000014D000ABABA736D616C6C636869".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0701>(bytes);
+        }
     }
 }

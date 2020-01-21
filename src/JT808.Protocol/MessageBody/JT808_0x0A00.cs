@@ -1,6 +1,9 @@
 ﻿using JT808.Protocol.Exceptions;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -8,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 终端 RSA 公钥
     /// 0x0A00
     /// </summary>
-    public class JT808_0x0A00 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0A00>
+    public class JT808_0x0A00 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0A00>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0A00;
         public override string Description => "终端RSA公钥";
@@ -22,18 +25,32 @@ namespace JT808.Protocol.MessageBody
         /// RSA 公钥{e,n}中的 n
         /// </summary>
         public byte[] N { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0A00 value = new JT808_0x0A00();
+            value.E = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.E.ReadNumber()}]终端RSA公钥e", value.E);
+            value.N = reader.ReadArray(128).ToArray();
+            writer.WriteString($"终端RSA公钥n", value.N.ToHexString());
+            if (value.N.Length != 128)
+            {
+                throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(value.N)}->128");
+            }
+        }
+
         public JT808_0x0A00 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x0A00 jT808_0X0A00 = new JT808_0x0A00
+            JT808_0x0A00 value = new JT808_0x0A00
             {
                 E = reader.ReadUInt32(),
                 N = reader.ReadArray(128).ToArray()
             };
-            if (jT808_0X0A00.N.Length != 128)
+            if (value.N.Length != 128)
             {
-                throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(jT808_0X0A00.N)}->128");
+                throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(value.N)}->128");
             }
-            return jT808_0X0A00;
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0A00 value, IJT808Config config)

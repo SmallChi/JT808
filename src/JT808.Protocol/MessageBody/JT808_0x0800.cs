@@ -1,5 +1,9 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
+using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -7,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 多媒体事件信息上传
     /// 0x0800
     /// </summary>
-    public class JT808_0x0800 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0800>
+    public class JT808_0x0800 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0800>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0800;
         public override string Description => "多媒体事件信息上传";
@@ -44,15 +48,31 @@ namespace JT808.Protocol.MessageBody
         /// 通道 ID
         /// </summary>
         public byte ChannelId { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x0800 value = new JT808_0x0800();
+            value.MultimediaId = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.MultimediaId.ReadNumber()}]多媒体ID", value.MultimediaId);
+            value.MultimediaType = reader.ReadByte();
+            writer.WriteNumber($"[{value.MultimediaType.ReadNumber()}]多媒体类型-{((JT808MultimediaType)value.MultimediaType).ToString()}", value.MultimediaType);
+            value.MultimediaCodingFormat = reader.ReadByte();
+            writer.WriteNumber($"[{value.MultimediaCodingFormat.ReadNumber()}]多媒体格式编码-{((JT808MultimediaCodingFormat)value.MultimediaCodingFormat).ToString()}", value.MultimediaCodingFormat);
+            value.EventItemCoding = reader.ReadByte();
+            writer.WriteNumber($"[{value.EventItemCoding.ReadNumber()}]事件项编码-{((JT808EventItemCoding)value.EventItemCoding).ToString()}", value.MultimediaCodingFormat);
+            value.ChannelId = reader.ReadByte();
+            writer.WriteNumber($"[{value.ChannelId.ReadNumber()}]通道ID", value.ChannelId);
+        }
+
         public JT808_0x0800 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x0800 jT808_0X0800 = new JT808_0x0800();
-            jT808_0X0800.MultimediaId = reader.ReadUInt32();
-            jT808_0X0800.MultimediaType = reader.ReadByte();
-            jT808_0X0800.MultimediaCodingFormat = reader.ReadByte();
-            jT808_0X0800.EventItemCoding = reader.ReadByte();
-            jT808_0X0800.ChannelId = reader.ReadByte();
-            return jT808_0X0800;
+            JT808_0x0800 value = new JT808_0x0800();
+            value.MultimediaId = reader.ReadUInt32();
+            value.MultimediaType = reader.ReadByte();
+            value.MultimediaCodingFormat = reader.ReadByte();
+            value.EventItemCoding = reader.ReadByte();
+            value.ChannelId = reader.ReadByte();
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0800 value, IJT808Config config)

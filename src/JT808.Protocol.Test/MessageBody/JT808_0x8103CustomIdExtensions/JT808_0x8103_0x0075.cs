@@ -1,10 +1,13 @@
 ﻿using JT808.Protocol.Attributes;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions
 {
@@ -12,7 +15,7 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions
     /// 音视频参数设置
     /// 0x8103_0x0075
     /// </summary>
-    public class JT808_0x8103_0x0075 : JT808_0x8103_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0075>
+    public class JT808_0x8103_0x0075 : JT808_0x8103_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0075>,IJT808Analyze
     {
         public override uint ParamId { get; set; } = 0x0075;
         /// <summary>
@@ -73,6 +76,39 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions
         ///1：启用
         /// </summary>
         public byte AudioOutputEnabled { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8103_0x0075 value = new JT808_0x8103_0x0075();
+            value.ParamId = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.ParamId.ReadNumber()}]参数Id", value.ParamId);
+            value.ParamLength = reader.ReadByte();
+            writer.WriteNumber($"[{value.ParamLength.ReadNumber()}]数据长度", value.ParamLength);
+            value.RTS_EncodeMode = reader.ReadByte();
+            writer.WriteNumber($"[{value.RTS_EncodeMode.ReadNumber()}]实时流编码模式", value.RTS_EncodeMode);
+            value.RTS_Resolution = reader.ReadByte();
+            writer.WriteNumber($"[{value.RTS_Resolution.ReadNumber()}]实时流分辨率", value.RTS_Resolution);
+            value.RTS_KF_Interval = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.RTS_KF_Interval.ReadNumber()}]实时流关键帧间隔", value.RTS_KF_Interval);
+            value.RTS_Target_FPS = reader.ReadByte();
+            writer.WriteNumber($"[{value.RTS_Target_FPS.ReadNumber()}]实时流目标帧率", value.RTS_Target_FPS);
+            value.RTS_Target_CodeRate = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.RTS_Target_CodeRate.ReadNumber()}]实时流目标码率", value.RTS_Target_CodeRate);
+            value.StreamStore_EncodeMode = reader.ReadByte();
+            writer.WriteNumber($"[{value.StreamStore_EncodeMode.ReadNumber()}]存储流编码模式", value.StreamStore_EncodeMode);
+            value.StreamStore_Resolution = reader.ReadByte();
+            writer.WriteNumber($"[{value.StreamStore_Resolution.ReadNumber()}]存储流分辨率", value.StreamStore_Resolution);
+            value.StreamStore_KF_Interval = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.StreamStore_KF_Interval.ReadNumber()}]存储流关键帧间隔", value.StreamStore_KF_Interval);
+            value.StreamStore_Target_FPS = reader.ReadByte();
+            writer.WriteNumber($"[{value.StreamStore_Target_FPS.ReadNumber()}]存储流目标帧率", value.StreamStore_Target_FPS);
+            value.StreamStore_Target_CodeRate = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.StreamStore_Target_CodeRate.ReadNumber()}]存储流目标码率", value.StreamStore_Target_CodeRate);
+            value.OSD = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.OSD.ReadNumber()}]OSD字幕叠加设置", value.OSD);
+            value.AudioOutputEnabled = reader.ReadByte();
+            writer.WriteNumber($"[{value.AudioOutputEnabled.ReadNumber()}]是否启用音频输出", value.AudioOutputEnabled);
+        }
 
         public JT808_0x8103_0x0075 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
