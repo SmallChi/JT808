@@ -6,6 +6,7 @@ using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -208,8 +209,28 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0200 value = new JT808_0x0200();
             value.AlarmFlag = reader.ReadUInt32();
             writer.WriteNumber($"[{value.AlarmFlag.ReadNumber()}]报警标志", value.AlarmFlag);
+            var alarmFlags = JT808EnumExtensions.GetEnumTypes<JT808Alarm>((int)value.AlarmFlag, 32);
+            if (alarmFlags.Any())
+            {
+                writer.WriteStartArray("报警标志集合");
+                foreach(var item in alarmFlags)
+                {
+                    writer.WriteStringValue(item.ToString());
+                }
+                writer.WriteEndArray();
+            }
             value.StatusFlag = reader.ReadUInt32();
             writer.WriteNumber($"[{value.StatusFlag.ReadNumber()}]状态位标志", value.StatusFlag);
+            var status = JT808EnumExtensions.GetEnumTypes<JT808Status>((int)value.StatusFlag, 32);
+            if (status.Any())
+            {
+                writer.WriteStartArray("状态标志集合");
+                foreach (var item in status)
+                {
+                    writer.WriteStringValue(item.ToString());
+                }
+                writer.WriteEndArray();
+            }
             if (((value.StatusFlag >> 28) & 1) == 1)
             {   //南纬 268435456 0x10000000
                 value.Lat = (int)reader.ReadUInt32();

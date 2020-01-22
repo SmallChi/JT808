@@ -276,6 +276,12 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo7](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo7.cs)
 
+### 举个栗子8
+
+协议分析器在数据出现异常和纠错的时候也是挺有用的，总不能凭借24K氪金眼去观察数据，那么可以在开发协议的同时就把协议分析器给写好，这样方便技术或者技术支持排查问题，提高效率。
+
+[可以参考Simples的Demo8](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo8.cs)
+
 ## NuGet安装
 
 | Package Name          | Version                                            | Downloads                                           |
