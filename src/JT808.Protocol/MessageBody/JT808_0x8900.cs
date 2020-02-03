@@ -31,10 +31,17 @@ namespace JT808.Protocol.MessageBody
 
         public JT808_0x8900 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x8900 jT808_0X8900 = new JT808_0x8900();
-            jT808_0X8900.PassthroughType = reader.ReadByte();
-            jT808_0X8900.PassthroughData = reader.ReadContent().ToArray();
-            return jT808_0X8900;
+            JT808_0x8900 value = new JT808_0x8900();
+            value.PassthroughType = reader.ReadByte();
+            if (config.JT808_0x8900_Custom_Factory.Map.TryGetValue(value.PassthroughType, out var instance))
+            {
+                value.JT808_0X8900_BodyBase = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
+            }
+            else
+            {
+                value.PassthroughData = reader.ReadContent().ToArray();
+            }
+            return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8900 value, IJT808Config config)
@@ -45,11 +52,26 @@ namespace JT808.Protocol.MessageBody
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            JT808_0x8900 jT808_0X8900 = new JT808_0x8900();
-            jT808_0X8900.PassthroughType = reader.ReadByte();
-            jT808_0X8900.PassthroughData = reader.ReadContent().ToArray();
-            writer.WriteNumber($"[{jT808_0X8900.PassthroughType.ReadNumber()}]透传消息类型", jT808_0X8900.PassthroughType);
-            writer.WriteString($"透传消息内容", jT808_0X8900.PassthroughData.ToHexString());
+            JT808_0x8900 value = new JT808_0x8900();
+            value.PassthroughType = reader.ReadByte();
+            if (config.JT808_0x8900_Custom_Factory.Map.TryGetValue(value.PassthroughType, out var instance))
+            {
+                writer.WriteStartObject("数据下行对象");
+                try
+                {
+                    instance.Analyze(ref reader, writer, config);
+                }
+                catch (System.Exception ex)
+                {
+                    writer.WriteString("错误信息", $"{ex.Message}-{ex.StackTrace}");
+                }
+                writer.WriteEndObject();
+            }
+            else
+            {
+                value.PassthroughData = reader.ReadContent().ToArray();
+                writer.WriteString("透传消息内容", value.PassthroughData.ToHexString());
+            }
         }
     }
 }

@@ -31,19 +31,41 @@ namespace JT808.Protocol.MessageBody
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            //todo:待扩展完善
             JT808_0x0900 value = new JT808_0x0900();
             value.PassthroughType = reader.ReadByte();
             writer.WriteNumber($"[{value.PassthroughType.ReadNumber()}]透传消息类型", value.PassthroughType);
-            value.PassthroughData = reader.ReadContent().ToArray();
-            writer.WriteString("透传消息内容", value.PassthroughData.ToHexString());
+            if (config.JT808_0x0900_Custom_Factory.Map.TryGetValue(value.PassthroughType, out var instance))
+            {
+                writer.WriteStartObject("数据上行对象");
+                try
+                {
+                    instance.Analyze(ref reader, writer, config);
+                }
+                catch (System.Exception ex)
+                {
+                    writer.WriteString("错误信息", $"{ex.Message}-{ex.StackTrace}");
+                }
+                writer.WriteEndObject();
+            }
+            else
+            {
+                value.PassthroughData = reader.ReadContent().ToArray();
+                writer.WriteString("透传消息内容", value.PassthroughData.ToHexString());
+            }
         }
 
         public JT808_0x0900 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0900 value = new JT808_0x0900();
             value.PassthroughType = reader.ReadByte();
-            value.PassthroughData = reader.ReadContent().ToArray();
+            if(config.JT808_0x0900_Custom_Factory.Map.TryGetValue(value.PassthroughType,out var instance))
+            {
+                value.JT808_0x0900_BodyBase = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
+            }
+            else
+            {
+                value.PassthroughData = reader.ReadContent().ToArray();
+            }
             return value;
         }
 

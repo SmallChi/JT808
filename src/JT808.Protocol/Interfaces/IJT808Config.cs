@@ -49,6 +49,14 @@ namespace JT808.Protocol
         /// </summary>
         IJT808_0x8103_Factory JT808_0X8103_Factory { get; set; }
         /// <summary>
+        ///数据上行透传工厂
+        /// </summary>
+        IJT808_0x0900_Custom_Factory JT808_0x0900_Custom_Factory { get; set; }
+        /// <summary>
+        ///数据下行透传工厂
+        /// </summary>
+        IJT808_0x8900_Custom_Factory JT808_0x8900_Custom_Factory { get; set; }
+        /// <summary>
         /// 统一编码
         /// </summary>
         Encoding Encoding { get; set; }

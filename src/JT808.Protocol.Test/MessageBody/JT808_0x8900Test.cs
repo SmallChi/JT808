@@ -16,6 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
             jT808Config.FormatterFactory.SetMap<JT808_0X8900_Test_BodiesImpl>();
+            jT808Config.JT808_0x8900_Custom_Factory.SetMap<JT808_0X8900_Test_BodiesImpl>();
             JT808Serializer = new JT808Serializer(jT808Config);
         }
         [Fact]
@@ -39,7 +40,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "0B0000303901".ToHexBytes();
             JT808_0x8900 jT808_0X8900 = JT808Serializer.Deserialize<JT808_0x8900>(bytes);
-            JT808_0X8900_Test_BodiesImpl jT808_0X8900_Test_BodiesImpl = JT808Serializer.Deserialize<JT808_0X8900_Test_BodiesImpl>(jT808_0X8900.PassthroughData);
+            JT808_0X8900_Test_BodiesImpl jT808_0X8900_Test_BodiesImpl = (JT808_0X8900_Test_BodiesImpl)jT808_0X8900.JT808_0X8900_BodyBase;
             Assert.Equal(0x0B, jT808_0X8900.PassthroughType);
             Assert.Equal((uint)12345, jT808_0X8900_Test_BodiesImpl.Id);
             Assert.Equal(0x01, jT808_0X8900_Test_BodiesImpl.Sex);

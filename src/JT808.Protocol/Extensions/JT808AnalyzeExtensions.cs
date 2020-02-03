@@ -17,7 +17,7 @@ namespace JT808.Protocol.Extensions
             }
             else
             {
-                throw new NotImplementedException($"{instance.GetType().FullName} {nameof(IJT808Analyze)}");
+                throw new NotImplementedException($"Not Implemented {instance.GetType().FullName} {nameof(IJT808Analyze)}");
             }
         }
     }

@@ -2654,6 +2654,16 @@
             设置终端参数工厂
              </summary>
         </member>
+        <member name="P:JT808.Protocol.IJT808Config.JT808_0x0900_Custom_Factory">
+             <summary>
+            数据上行透传工厂
+             </summary>
+        </member>
+        <member name="P:JT808.Protocol.IJT808Config.JT808_0x8900_Custom_Factory">
+             <summary>
+            数据下行透传工厂
+             </summary>
+        </member>
         <member name="P:JT808.Protocol.IJT808Config.Encoding">
             <summary>
             统一编码
@@ -4241,6 +4251,11 @@
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0900_BodyBase">
             <summary>
             数据上行透传
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0900_BodyBase.PassthroughType">
+            <summary>
+            透传消息类型
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0901">
@@ -6676,6 +6691,12 @@
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8900_BodyBase">
             <summary>
             数据下行透传
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8900_BodyBase.PassthroughType">
+            <summary>
+            透传消息类型
+            透传消息类型定义见 表 93
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8A00">
