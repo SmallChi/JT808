@@ -3600,11 +3600,13 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.AlarmFlag">
             <summary>
             报警标志 
+            <see cref="T:JT808.Protocol.Enums.JT808Alarm"/>
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.StatusFlag">
             <summary>
             状态位标志
+            <see cref="T:JT808.Protocol.Enums.JT808Status"/>
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.Lat">

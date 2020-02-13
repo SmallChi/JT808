@@ -1,6 +1,6 @@
 ﻿# JT808协议
 
-[![MIT Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/SmallChi/JT808/blob/master/LICENSE)[![Github Build status](https://github.com/SmallChi/JT808/workflows/.NET%20Core/badge.svg)]()
+[![MIT Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/SmallChi/JT808/blob/master/LICENSE)![.NET Core](https://github.com/SmallChi/JT808/workflows/.NET%20Core/badge.svg?branch=master)
 
 ## 前提条件
 
@@ -365,9 +365,9 @@ Platform=AnyCpu  Server=False  Toolchain=.NET Core 3.1
 | 40    | 0x8605        | √        | √        | 删除多边形区域                 |
 | 41    | 0x8606        | √        | √        | 设置路线                       |修改|
 | 42    | 0x8607        | √        | √        | 删除路线                       |
-| 43    | 0x8700        | x        | 不开发  | 行驶记录仪数据采集命令         |不开发
-| 44    | 0x0700        | x        | 不开发  | 行驶记录仪数据上传             |不开发
-| 45    | 0x8701        | x        | 不开发  | 行驶记录仪参数下传命令         |不开发
+| 43    | 0x8700        | x        | x      | 行驶记录仪数据采集命令         |待开发
+| 44    | 0x0700        | x        | x      | 行驶记录仪数据上传             |待开发
+| 45    | 0x8701        | x        | x      | 行驶记录仪参数下传命令         |待开发
 | 46    | 0x0701        | √        | √        | 电子运单上报                   |
 | 47    | 0x0702        | √        | √        | 驾驶员身份信息采集上报         |修改|
 | 48    | 0x8702        | √        | 消息体为空| 上报驾驶员身份信息请求         |

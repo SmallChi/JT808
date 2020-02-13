@@ -20,10 +20,12 @@ namespace JT808.Protocol.MessageBody
         public override string Description => "位置信息汇报";
         /// <summary>
         /// 报警标志 
+        /// <see cref="JT808.Protocol.Enums.JT808Alarm"/>
         /// </summary>
         public uint AlarmFlag { get; set; }
         /// <summary>
         /// 状态位标志
+        /// <see cref="JT808.Protocol.Enums.JT808Status"/>
         /// </summary>
         public uint StatusFlag { get; set; }
         /// <summary>
@@ -209,28 +211,104 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0200 value = new JT808_0x0200();
             value.AlarmFlag = reader.ReadUInt32();
             writer.WriteNumber($"[{value.AlarmFlag.ReadNumber()}]报警标志", value.AlarmFlag);
-            var alarmFlags = JT808EnumExtensions.GetEnumTypes<JT808Alarm>((int)value.AlarmFlag, 32);
-            if (alarmFlags.Any())
-            {
-                writer.WriteStartArray("报警标志集合");
-                foreach(var item in alarmFlags)
-                {
-                    writer.WriteStringValue(item.ToString());
-                }
-                writer.WriteEndArray();
-            }
             value.StatusFlag = reader.ReadUInt32();
-            writer.WriteNumber($"[{value.StatusFlag.ReadNumber()}]状态位标志", value.StatusFlag);
-            var status = JT808EnumExtensions.GetEnumTypes<JT808Status>((int)value.StatusFlag, 32);
-            if (status.Any())
+            var alarmFlagBits = Convert.ToString(value.AlarmFlag, 2).PadLeft(32, '0').AsSpan();
+            writer.WriteStartObject("报警标志对象");
+            if (reader.Version == JT808Version.JTT2019)
             {
-                writer.WriteStartArray("状态标志集合");
-                foreach (var item in status)
-                {
-                    writer.WriteStringValue(item.ToString());
-                }
-                writer.WriteEndArray();
+                writer.WriteString($"[bit31]保留", $"{alarmFlagBits[31]}");
             }
+            else
+            {
+                writer.WriteString($"[bit31]非法开门报警", $"{alarmFlagBits[31]}");
+            }
+            writer.WriteString($"[bit30]侧翻预警", $"{alarmFlagBits[30]}");
+            writer.WriteString($"[bit29]碰撞预警", $"{alarmFlagBits[29]}");
+            writer.WriteString($"[bit28]车辆非法位移", $"{alarmFlagBits[28]}");
+            writer.WriteString($"[bit27]车辆非法点火", $"{alarmFlagBits[27]}");
+            writer.WriteString($"[bit26]车辆被盗(通过车辆防盗器)", $"{alarmFlagBits[26]}");
+            writer.WriteString($"[bit25]车辆油量异常", $"{alarmFlagBits[25]}");
+            writer.WriteString($"[bit24]车辆VSS故障", $"{alarmFlagBits[24]}");
+            writer.WriteString($"[bit23]路线偏离报警", $"{alarmFlagBits[23]}");
+            writer.WriteString($"[bit22]路段行驶时间不足/过长", $"{alarmFlagBits[22]}");
+            writer.WriteString($"[bit21]进出路线", $"{alarmFlagBits[21]}");
+            writer.WriteString($"[bit20]进出区域", $"{alarmFlagBits[20]}");
+            writer.WriteString($"[bit19]超时停车", $"{alarmFlagBits[19]}");
+            writer.WriteString($"[bit18]当天累计驾驶超时", $"{alarmFlagBits[18]}");
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                writer.WriteString($"[bit17]右转盲区异常报警", $"{alarmFlagBits[17]}");
+                writer.WriteString($"[bit16]胎压预警", $"{alarmFlagBits[16]}");
+                writer.WriteString($"[bit15]违规行驶报警", $"{alarmFlagBits[15]}");
+            }
+            else
+            {
+                writer.WriteString($"[bit15~bit17]保留", alarmFlagBits.Slice(15, 3).ToString());
+            }
+            writer.WriteString($"[bit14]疲劳驾驶预警", $"{alarmFlagBits[14]}");
+            writer.WriteString($"[bit13]超速预警", $"{alarmFlagBits[13]}");
+            writer.WriteString($"[bit12]道路运输证IC卡模块故障", $"{alarmFlagBits[12]}");
+            writer.WriteString($"[bit11]摄像头故障", $"{alarmFlagBits[11]}");
+            writer.WriteString($"[bit10]TTS模块故障", $"{alarmFlagBits[10]}");
+            writer.WriteString($"[bit9]终端LCD或显示器故障", $"{alarmFlagBits[9]}");
+            writer.WriteString($"[bit8]终端主电源掉电", $"{alarmFlagBits[8]}");
+            writer.WriteString($"[bit7]终端主电源欠压", $"{alarmFlagBits[7]}");
+            writer.WriteString($"[bit6]GNSS天线短路", $"{alarmFlagBits[6]}");
+            writer.WriteString($"[bit5]GNSS天线未接或被剪断", $"{alarmFlagBits[5]}");
+            writer.WriteString($"[bit4]GNSS模块发生故障", $"{alarmFlagBits[4]}");
+            writer.WriteString($"[bit3]危险预警", $"{alarmFlagBits[3]}");
+            writer.WriteString($"[bit2]疲劳驾驶", $"{alarmFlagBits[2]}");
+            writer.WriteString($"[bit1]超速报警", $"{alarmFlagBits[1]}");
+            writer.WriteString($"[bit0]紧急报警,触动报警开关后触发", $"{alarmFlagBits[0]}");
+            writer.WriteEndObject();
+            writer.WriteNumber($"[{value.StatusFlag.ReadNumber()}]状态位标志", value.StatusFlag);
+            var StatusFlagBits = Convert.ToString(value.StatusFlag, 2).PadLeft(32, '0').AsSpan();
+            writer.WriteStartObject("状态标志对象");
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                writer.WriteString($"[bit23~bit31]保留", StatusFlagBits.Slice(23, 9).ToString());
+                writer.WriteString($"[{StatusFlagBits[22]}]bit22", StatusFlagBits[22] == '0' ? "车辆处于停止状态" : "车辆处于行驶状态");
+            }
+            else
+            {
+                writer.WriteString($"[bit22~bit31]保留", StatusFlagBits.Slice(22, 10).ToString());
+            }
+            writer.WriteString($"[{StatusFlagBits[21]}]bit21", StatusFlagBits[21] == '0' ? "未使用Galileo卫星进行定位" : "使用Galileo卫星进行定位");
+            writer.WriteString($"[{StatusFlagBits[20]}]bit20", StatusFlagBits[20] == '0' ? "未使用GLONASS卫星进行定位" : "使用GLONASS卫星进行定位");
+            writer.WriteString($"[{StatusFlagBits[19]}]bit19", StatusFlagBits[19] == '0' ? "未使用北斗卫星进行定位" : "使用北斗卫星进行定位");
+            writer.WriteString($"[{StatusFlagBits[18]}]bit18", StatusFlagBits[18] == '0' ? "未使用GPS卫星进行定位" : "使用GPS卫星进行定位");
+            writer.WriteString($"[{StatusFlagBits[17]}]bit17", StatusFlagBits[17] == '0' ? "门5关" : "门5开");
+            writer.WriteString($"[{StatusFlagBits[16]}]bit16", StatusFlagBits[16] == '0' ? "门4关" : "门4开");
+            writer.WriteString($"[{StatusFlagBits[15]}]bit15", StatusFlagBits[15] == '0' ? "门3关" : "门3开");
+            writer.WriteString($"[{StatusFlagBits[14]}]bit14", StatusFlagBits[14] == '0' ? "门2关" : "门2开");
+            writer.WriteString($"[{StatusFlagBits[13]}]bit13", StatusFlagBits[13] == '0' ? "门1关" : "门1开");
+            writer.WriteString($"[{StatusFlagBits[12]}]bit12", StatusFlagBits[12] == '0' ? "车门解锁" : "车门加锁");
+            writer.WriteString($"[{StatusFlagBits[11]}]bit11", StatusFlagBits[11] == '0' ? "车辆电路正常" : "车辆电路断开");
+            writer.WriteString($"[{StatusFlagBits[10]}]bit10", StatusFlagBits[10] == '0' ? "车辆油路正常" : "车辆油路断开");
+            var bit8And9 = StatusFlagBits.Slice(8, 2).ToString();
+            switch (bit8And9)
+            {
+                case "00":
+                    writer.WriteString($"[{bit8And9}]bit8~bit9", "空车");
+                    break;
+                case "01":
+                    writer.WriteString($"[{bit8And9}]bit8~bit9", "半载");
+                    break;
+                case "10":
+                    writer.WriteString($"[{bit8And9}]bit8~bit9", "保留");
+                    break;
+                case "11":
+                    writer.WriteString($"[{bit8And9}]bit8~bit9", "满载");
+                    break;
+            }
+            writer.WriteString($"[bit6~bit7]保留", StatusFlagBits.Slice(6, 2).ToString());
+            writer.WriteString($"[{StatusFlagBits[5]}]bit5", StatusFlagBits[5] == '0' ? "经纬度未经保密插件加密" : "经纬度已经保密插件加密");
+            writer.WriteString($"[{StatusFlagBits[4]}]bit4", StatusFlagBits[4] == '0' ? "运营状态" : "停运状态");
+            writer.WriteString($"[{StatusFlagBits[3]}]bit3", StatusFlagBits[3] == '0' ? "东经" : "西经");
+            writer.WriteString($"[{StatusFlagBits[2]}]bit2", StatusFlagBits[2] == '0' ? "北纬" : "南纬");
+            writer.WriteString($"[{StatusFlagBits[1]}]bit1", StatusFlagBits[1] == '0' ? "未定位" : "定位");
+            writer.WriteString($"[{StatusFlagBits[0]}]bit0", StatusFlagBits[0] == '0' ? "ACC关" : "ACC开");
+            writer.WriteEndObject();
             if (((value.StatusFlag >> 28) & 1) == 1)
             {   //南纬 268435456 0x10000000
                 value.Lat = (int)reader.ReadUInt32();
