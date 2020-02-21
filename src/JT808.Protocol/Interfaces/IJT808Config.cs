@@ -57,6 +57,10 @@ namespace JT808.Protocol
         /// </summary>
         IJT808_0x8900_Custom_Factory JT808_0x8900_Custom_Factory { get; set; }
         /// <summary>
+        /// 控制类型工厂
+        /// </summary>
+        IJT808_0x8500_2019_Factory JT808_0x8500_2019_Factory { get; set; }
+        /// <summary>
         /// 统一编码
         /// </summary>
         Encoding Encoding { get; set; }

@@ -2,6 +2,7 @@
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -45,6 +46,20 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{ value.AlarmMsgNum.ReadNumber()}]报警消息流水号", value.AlarmMsgNum);
             value.ManualConfirmAlarmType = reader.ReadUInt32();
             writer.WriteNumber($"[{ value.ManualConfirmAlarmType.ReadNumber()}]人工确认报警类型", value.ManualConfirmAlarmType);
+            ReadOnlySpan<char> manualConfirmAlarmTypeBits = Convert.ToString(value.ManualConfirmAlarmType, 2).PadLeft(32, '0').AsSpan();
+            writer.WriteStartObject($"人工确认报警对象[{manualConfirmAlarmTypeBits.ToString()}]");
+            writer.WriteString("[bit29~bit31]保留", manualConfirmAlarmTypeBits.Slice(29,3).ToString());
+            writer.WriteString($"[bit28]{manualConfirmAlarmTypeBits[28]}","确认车辆非法位移报警");
+            writer.WriteString($"[bit27]{manualConfirmAlarmTypeBits[27]}", "确认车辆非法点火报警");
+            writer.WriteString($"[bit23~bit26]保留", manualConfirmAlarmTypeBits.Slice(23, 4).ToString());
+            writer.WriteString($"[bit22]{manualConfirmAlarmTypeBits[22]}", "确认路段行驶时间不足/过长报警");
+            writer.WriteString($"[bit21]{manualConfirmAlarmTypeBits[21]}", "确认进出路线报警");
+            writer.WriteString($"[bit20]{manualConfirmAlarmTypeBits[20]}", "确认进出区域报警");
+            writer.WriteString($"[bit4~bit19]保留", manualConfirmAlarmTypeBits.Slice(4, 16).ToString());
+            writer.WriteString($"[bit3]{manualConfirmAlarmTypeBits[3]}", "确认危险预警");
+            writer.WriteString($"[bit1~bit2]保留", manualConfirmAlarmTypeBits.Slice(1, 2).ToString());
+            writer.WriteString($"[bit0]{manualConfirmAlarmTypeBits[0]}", "确认紧急报警");
+            writer.WriteEndObject();
         }
     }
 }

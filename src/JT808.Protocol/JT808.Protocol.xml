@@ -2664,6 +2664,11 @@
             数据下行透传工厂
              </summary>
         </member>
+        <member name="P:JT808.Protocol.IJT808Config.JT808_0x8500_2019_Factory">
+            <summary>
+            控制类型工厂
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.IJT808Config.Encoding">
             <summary>
             统一编码

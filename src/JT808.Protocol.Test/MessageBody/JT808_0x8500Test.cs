@@ -1,11 +1,13 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
@@ -17,7 +19,10 @@ namespace JT808.Protocol.Test.MessageBody
         public JT808_0x8500Test()
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
+            jT808Config.JT808_0x8500_2019_Factory.SetMap<JT808_0x8500_0xF001>();
+            jT808Config.JT808_0x8500_2019_Factory.SetMap<JT808_0x8500_0x0001>();
             jT808Config.FormatterFactory.SetMap<JT808_0x8500_0xF001>();
+            jT808Config.FormatterFactory.SetMap<JT808_0x8500_0x0001>();
             JT808Serializer = new JT808Serializer(jT808Config);
         }
         [Fact]
@@ -71,12 +76,11 @@ namespace JT808.Protocol.Test.MessageBody
             Dictionary<ushort, int> keys = new Dictionary<ushort, int>();
             keys.Add(0x0001, 1);
             keys.Add(0xF001, 1);
-            var span = jT808_0X8500.ControlTypeBuffer.AsSpan();
-            JT808_0x8500_0x0001 jT808_0x8500_0x0001 = JT808Serializer.Deserialize<JT808_0x8500_0x0001>(span.Slice(0,3), JT808Version.JTT2019);
+            JT808_0x8500_0x0001 jT808_0x8500_0x0001 = (JT808_0x8500_0x0001)jT808_0X8500.ControlTypes[0];
             Assert.Equal(0x0001, jT808_0x8500_0x0001.ControlTypeId);
             Assert.Equal(0, jT808_0x8500_0x0001.ControlTypeParameter);
 
-            JT808_0x8500_0xF001 jT808_0x8500_0xF001 = JT808Serializer.Deserialize<JT808_0x8500_0xF001>(span.Slice(3,3), JT808Version.JTT2019);
+            JT808_0x8500_0xF001 jT808_0x8500_0xF001 = (JT808_0x8500_0xF001)jT808_0X8500.ControlTypes[1];
             Assert.Equal(0xF001, jT808_0x8500_0xF001.ControlTypeId);
             Assert.Equal(1, jT808_0x8500_0xF001.ControlTypeParameter);
         }
@@ -92,11 +96,20 @@ namespace JT808.Protocol.Test.MessageBody
     /// <summary>
     /// 自定义控制类型
     /// </summary>
-    public class JT808_0x8500_0xF001 : JT808_0x8500_ControlType, IJT808MessagePackFormatter<JT808_0x8500_0xF001>
+    public class JT808_0x8500_0xF001 : JT808_0x8500_ControlType, IJT808MessagePackFormatter<JT808_0x8500_0xF001>, IJT808Analyze
     {
         public override ushort ControlTypeId { get; set; } = 0xF001;
 
         public byte ControlTypeParameter { get; set; }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_0x8500_0xF001 value = new JT808_0x8500_0xF001();
+            value.ControlTypeId = reader.ReadUInt16();
+            writer.WriteNumber($"[{ value.ControlTypeId.ReadNumber()}]控制类型Id", value.ControlTypeId);
+            value.ControlTypeParameter = reader.ReadByte();
+            writer.WriteNumber($"[{ value.ControlTypeParameter.ReadNumber()}]控制类型参数", value.ControlTypeParameter);
+        }
 
         public JT808_0x8500_0xF001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
