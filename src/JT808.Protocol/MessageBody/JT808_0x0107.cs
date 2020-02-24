@@ -151,6 +151,10 @@ namespace JT808.Protocol.MessageBody
             writer.WriteString("bit3", terminalTypeBits[3] == '0' ? "不适用出租车辆" : "适用出租车辆");
             writer.WriteString("bit6", terminalTypeBits[6] == '0' ? "不支持硬盘录像" : "支持硬盘录像");
             writer.WriteString("bit7", terminalTypeBits[7] == '0' ? "一体机" : "分体机");
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                writer.WriteString("bit8", terminalTypeBits[8] == '0' ? "不适用挂车" : "适用挂车");
+            }
             writer.WriteEndObject();
             if (reader.Version == JT808Version.JTT2019)
             {

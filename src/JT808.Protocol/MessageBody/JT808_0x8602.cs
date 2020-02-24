@@ -142,6 +142,40 @@ namespace JT808.Protocol.MessageBody
                 areaProperty.AreaId = reader.ReadUInt32();
                 writer.WriteNumber($"[{areaProperty.AreaId.ReadNumber()}]区域ID", areaProperty.AreaId);
                 areaProperty.AreaProperty = reader.ReadUInt16();
+                ReadOnlySpan<char> areaPropertyBits = Convert.ToString(areaProperty.AreaProperty, 2).PadLeft(16, '0').AsSpan();
+                writer.WriteStartObject($"区域属性对象[{areaPropertyBits.ToString()}]");
+                if (reader.Version == JT808Version.JTT2019)
+                {
+                    writer.WriteString($"[bit15]{areaPropertyBits[15]}", areaPropertyBits[15] == '0' ? "进区域不采集GNSS详细定位数据" : "进区域采集GNSS详细定位数据");
+                    writer.WriteString($"[bit14]{areaPropertyBits[14]}", areaPropertyBits[14] == '0' ? "进区域开启通信模块" : "进区域关闭通信模块");
+                    writer.WriteString("[bit9~bit13]保留", areaPropertyBits.Slice(9, 5));
+                    writer.WriteString($"[bit8]{areaPropertyBits[8]}", areaPropertyBits[8] == '0' ? "允许开门" : "禁止开门");
+                    writer.WriteString($"[bit7]{areaPropertyBits[7]}", areaPropertyBits[7] == '0' ? "东经" : "西经");
+                    writer.WriteString($"[bit6]{areaPropertyBits[6]}", areaPropertyBits[6] == '0' ? "北纬" : "南纬");
+                    writer.WriteString($"[bit5]出区域是否报警给平台-{areaPropertyBits[5]}", areaPropertyBits[5] == '0' ? "否" : "是");
+                    writer.WriteString($"[bit4]出区域是否报警给平驾驶员-{areaPropertyBits[4]}", areaPropertyBits[4] == '0' ? "否" : "是");
+                    writer.WriteString($"[bit3]进区域是否报警给平台-{areaPropertyBits[3]}", areaPropertyBits[3] == '0' ? "否" : "是");
+                    writer.WriteString($"[bit2]进区域是否报警给驾驶员-{areaPropertyBits[2]}", areaPropertyBits[2] == '0' ? "否" : "是");
+                    writer.WriteString($"[bit1]是否启用最高速度、超速持续时间和夜间最高速度的判断规则-{areaPropertyBits[1]}", areaPropertyBits[1] == '0' ? "否" : "是");
+                    writer.WriteString($"[bit0]是否启用起始时间与结束时间的判断规则-{areaPropertyBits[0]}", areaPropertyBits[0] == '0' ? "否" : "是");
+                }
+                else
+                {
+                    writer.WriteString($"[bit15]{areaPropertyBits[15]}", areaPropertyBits[15] == '0' ? "进区域不采集GNSS详细定位数据" : "进区域采集GNSS详细定位数据");
+                    writer.WriteString($"[bit14]{areaPropertyBits[14]}", areaPropertyBits[14] == '0' ? "进区域开启通信模块" : "进区域关闭通信模块");
+                    writer.WriteString("[bit9~bit13]保留", areaPropertyBits.Slice(9, 5));
+                    writer.WriteString($"[bit8]{areaPropertyBits[8]}", areaPropertyBits[8] == '0' ? "允许开门" : "禁止开门");
+                    writer.WriteString($"[bit7]{areaPropertyBits[7]}", areaPropertyBits[7] == '0' ? "东经" : "西经");
+                    writer.WriteString($"[bit6]{areaPropertyBits[6]}", areaPropertyBits[6] == '0' ? "北纬" : "南纬");
+                    writer.WriteString($"[bit5]{areaPropertyBits[5]}", areaPropertyBits[5] == '1' ? "出区域报警给平台" : "无");
+                    writer.WriteString($"[bit4]{areaPropertyBits[4]}", areaPropertyBits[4] == '1' ? "出区域报警给驾驶员" : "无");
+                    writer.WriteString($"[bit3]{areaPropertyBits[3]}", areaPropertyBits[3] == '1' ? "进区域报警给平台" : "无");
+                    writer.WriteString($"[bit2]{areaPropertyBits[2]}", areaPropertyBits[2] == '1' ? "进区域报警给驾驶员" : "无");
+                    writer.WriteString($"[bit1]{areaPropertyBits[1]}", areaPropertyBits[1] == '1' ? "限速" : "无");
+                    writer.WriteString($"[bit0]{areaPropertyBits[0]}", areaPropertyBits[0] == '1' ? "根据时间" : "无");
+                }
+                writer.WriteEndObject();
+
                 writer.WriteNumber($"[{areaProperty.AreaProperty.ReadNumber()}]区域属性", areaProperty.AreaProperty);
                 areaProperty.UpLeftPointLat = reader.ReadUInt32();
                 writer.WriteNumber($"[{areaProperty.UpLeftPointLat.ReadNumber()}]左上点纬度", areaProperty.UpLeftPointLat);
