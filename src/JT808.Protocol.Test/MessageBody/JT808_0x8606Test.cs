@@ -212,6 +212,13 @@ namespace JT808.Protocol.Test.MessageBody
         }
 
         [Fact]
+        public void Test5()
+        {
+            byte[] bytes = "0000270F00331811200000121811210000120002000003E800000507075BCD15075BCD1438030032007B004517000003E900002EE7075BCD0C075BCD0D4B03003A007C002A1A".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8606>(bytes);
+        }
+
+        [Fact]
         public void Test5_2019()
         {
             JT808_0x8606 jT808_0X8606 = new JT808_0x8606
