@@ -1,4 +1,5 @@
-﻿using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
@@ -39,11 +40,12 @@ namespace JT808.Protocol.MessageBody
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            JT808_0x8805 jT808_0X8805 = new JT808_0x8805();
-            jT808_0X8805.MultimediaId = reader.ReadUInt32();
-            jT808_0X8805.MultimediaDeleted = reader.ReadByte();
-            writer.WriteNumber($"[{jT808_0X8805.MultimediaId.ReadNumber()}]多媒体ID", jT808_0X8805.MultimediaId);
-            writer.WriteNumber($"[{jT808_0X8805.MultimediaDeleted.ReadNumber()}]删除标志", jT808_0X8805.MultimediaDeleted);
+            JT808_0x8805 value = new JT808_0x8805();
+            value.MultimediaId = reader.ReadUInt32();
+            value.MultimediaDeleted = reader.ReadByte();
+            JT808MultimediaDeleted multimediaDeleted = (JT808MultimediaDeleted)value.MultimediaDeleted;
+            writer.WriteNumber($"[{value.MultimediaId.ReadNumber()}]多媒体ID", value.MultimediaId);
+            writer.WriteNumber($"[{value.MultimediaDeleted.ReadNumber()}]删除标志-{multimediaDeleted}", value.MultimediaDeleted);
         }
     }
 }

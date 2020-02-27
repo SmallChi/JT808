@@ -198,6 +198,11 @@
             电话回拨类型
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Enums.JT808CameraResolutionType">
+            <summary>
+            摄像头分辨率
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808DirectionType">
             <summary>
             方向类型
@@ -6511,14 +6516,7 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8801.Resolution">
             <summary>
             分辨率
-            0x01:320*240；
-            0x02:640*480；
-            0x03:800*600；
-            0x04:1024*768;
-            0x05:176*144;[Qcif];
-            0x06:352*288;[Cif];
-            0x07:704*288;[HALF D1];
-            0x08:704*576;[D1];
+            <see cref="T:JT808.Protocol.Enums.JT808CameraResolutionType"/>
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8801.VideoQuality">

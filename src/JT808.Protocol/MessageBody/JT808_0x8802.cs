@@ -1,4 +1,5 @@
-﻿using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
@@ -69,10 +70,11 @@ namespace JT808.Protocol.MessageBody
             value.EventItemCoding = reader.ReadByte();
             value.StartTime = reader.ReadDateTime6();
             value.EndTime = reader.ReadDateTime6();
-
-            writer.WriteNumber($"[{ value.MultimediaType.ReadNumber()}]多媒体类型", value.MultimediaType);
+            JT808MultimediaType multimediaType = (JT808MultimediaType)value.MultimediaType;
+            JT808EventItemCoding eventItemCoding = (JT808EventItemCoding)value.EventItemCoding;
+            writer.WriteNumber($"[{ value.MultimediaType.ReadNumber()}]多媒体类型-{multimediaType.ToString()}", value.MultimediaType);
             writer.WriteNumber($"[{ value.ChannelId.ReadNumber()}]通道ID", value.ChannelId);
-            writer.WriteNumber($"[{ value.EventItemCoding.ReadNumber()}]事件项编码", value.EventItemCoding);
+            writer.WriteNumber($"[{ value.EventItemCoding.ReadNumber()}]事件项编码-{eventItemCoding.ToString()}", value.EventItemCoding);
             writer.WriteString($"[{ value.StartTime.ToString("yyMMddHHmmss")}]起始时间", value.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
             writer.WriteString($"[{ value.EndTime.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
         }
