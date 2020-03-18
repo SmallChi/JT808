@@ -61,6 +61,10 @@ namespace JT808.Protocol
         /// </summary>
         IJT808_0x8500_2019_Factory JT808_0x8500_2019_Factory { get; set; }
         /// <summary>
+        /// 记录仪工厂
+        /// </summary>
+        IJT808_Recorder_Factory IJT808_Recorder_Factory { get; set; }
+        /// <summary>
         /// 统一编码
         /// </summary>
         Encoding Encoding { get; set; }
