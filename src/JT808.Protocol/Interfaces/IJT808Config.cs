@@ -63,7 +63,7 @@ namespace JT808.Protocol
         /// <summary>
         /// 记录仪工厂
         /// </summary>
-        IJT808_Recorder_Factory IJT808_Recorder_Factory { get; set; }
+        IJT808_Recorder_Factory JT808_Recorder_Factory { get; set; }
         /// <summary>
         /// 统一编码
         /// </summary>

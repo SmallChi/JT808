@@ -2613,6 +2613,11 @@
             只用来标识2019版本增删改情况
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Interfaces.IJT808_Recorder_Factory">
+            <summary>
+            记录仪工厂
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.IJT808Config.MsgSNDistributed">
             <summary>
             消息流水号
@@ -2674,6 +2679,11 @@
             控制类型工厂
             </summary>
         </member>
+        <member name="P:JT808.Protocol.IJT808Config.JT808_Recorder_Factory">
+            <summary>
+            记录仪工厂
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.IJT808Config.Encoding">
             <summary>
             统一编码
@@ -2710,6 +2720,105 @@
             跳过数据体序列化
             默认不跳过
             当数据体为空的时候，使用null作为空包感觉不适合，所以就算使用空包也需要new一下来表达意思。
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808CarDVRDownBodies">
+            <summary>
+            记录仪上行数据体
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRDownBodies.CommandId">
+            <summary>
+            命令字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRDownBodies.SkipSerialization">
+            <summary>
+            跳过数据体序列化
+            默认不跳过
+            当数据体为空的时候，使用null作为空包感觉不适合，所以就算使用空包也需要new一下来表达意思。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRDownPackage.Begin">
+            <summary>
+            起始字头
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRDownPackage.CommandId">
+            <summary>
+            命令字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRDownPackage.KeepFields">
+            <summary>
+            保留字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRDownPackage.DataLength">
+            <summary>
+            数据块长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRDownPackage.Bodies">
+            <summary>
+            记录仪体下行数据体
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRDownPackage.CheckCode">
+            <summary>
+            校验字
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808CarDVRUpBodies">
+            <summary>
+            记录仪上行数据体
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpBodies.CommandId">
+            <summary>
+            命令字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpBodies.SkipSerialization">
+            <summary>
+            跳过数据体序列化
+            默认不跳过
+            当数据体为空的时候，使用null作为空包感觉不适合，所以就算使用空包也需要new一下来表达意思。
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808CarDVRUpPackage">
+            <summary>
+            行车记录仪上行数据包
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpPackage.Begin">
+            <summary>
+            起始字头
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpPackage.CommandId">
+            <summary>
+            命令字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpPackage.DataLength">
+            <summary>
+            数据块长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpPackage.KeepFields">
+            <summary>
+            保留字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpPackage.Bodies">
+            <summary>
+            记录仪体上行数据体
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpPackage.CheckCode">
+            <summary>
+            校验字
             </summary>
         </member>
         <member name="F:JT808.Protocol.JT808Constants.DateLimitYear">
@@ -6720,6 +6829,113 @@
             <summary>
             n
             RSA 公钥{e,n}中的 n
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.Recorder.JT808_RecorderBody">
+            <summary>
+            记录仪数据体
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderBody.CommandId">
+            <summary>
+            命令字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderBody.SkipSerialization">
+            <summary>
+            跳过数据体序列化
+            默认不跳过
+            当数据体为空的时候，使用null作为空包感觉不适合，所以就算使用空包也需要new一下来表达意思。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderHeader.CommandId">
+            <summary>
+            命令字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderHeader.DataLength">
+            <summary>
+            数据块长度
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage">
+            <summary>
+            记录仪
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.Begin">
+            <summary>
+            起始字头
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.JT808_RecorderHeader">
+            <summary>
+            记录仪头部
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.KeepFields">
+            <summary>
+            保留字段
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.JT808_RecorderBody">
+            <summary>
+            记录仪体
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.CheckCode">
+            <summary>
+            校验字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.CalculateCheckXorCode">
+            <summary>
+            计算的异或校验码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.SkipSerialization">
+            <summary>
+            跳过数据体序列化
+            默认不跳过
+            当数据体为空的时候，使用null作为空包感觉不适合，所以就算使用空包也需要new一下来表达意思。
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.CalculateXorCheckCode(JT808.Protocol.MessagePack.JT808MessagePackReader)">
+            <summary>
+            计算校验码
+            </summary>
+            <param name="readOnlySpan"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.Recorder.JT808_RecorderPackage.CalculateXorCheckCode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            计算校验码
+            </summary>
+            <param name="xorReadOnlySpan"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.Recorder.JT808_Recorder_Down_0x00">
+            <summary>
+            采集记录仪执行标准版本
+            返回：记录仪执行标准的年号及修改单号
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.Recorder.JT808_Recorder_Up_0x00">
+            <summary>
+            采集记录仪执行标准版本
+            返回：记录仪执行标准的年号及修改单号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_Recorder_Up_0x00.StandardYear">
+            <summary>
+            记录仪执行标准年号后 2 位  BCD 码
+            无应答则默认为 03
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.Recorder.JT808_Recorder_Up_0x00.ModifyNumber">
+            <summary>
+            修改单号
+            无修改单或无应答则默认为 00H
             </summary>
         </member>
         <member name="F:JT808.Protocol.MessagePack.JT808MessagePackReader._decoded">

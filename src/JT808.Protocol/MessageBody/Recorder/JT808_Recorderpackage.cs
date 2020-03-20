@@ -61,7 +61,7 @@ namespace JT808.Protocol.MessageBody.Recorder
             value.KeepFields = reader.ReadByte();
             if (value.JT808_RecorderHeader.DataLength > 0)
             {
-                if (config.IJT808_Recorder_Factory.Map.TryGetValue(value.JT808_RecorderHeader.CommandId, out var instance))
+                if (config.JT808_Recorder_Factory.Map.TryGetValue(value.JT808_RecorderHeader.CommandId, out var instance))
                 {
                     //4.2.处理消息体
                     value.JT808_RecorderBody = instance.Deserialize(ref reader, config);
@@ -78,7 +78,7 @@ namespace JT808.Protocol.MessageBody.Recorder
             value.JT808_RecorderHeader.Serialize(ref writer, value.JT808_RecorderHeader, config);
             writer.WriteByte(value.KeepFields);
             if (value.JT808_RecorderHeader.DataLength > 0) {
-                if (config.IJT808_Recorder_Factory.Map.TryGetValue(value.JT808_RecorderHeader.CommandId, out var instance))
+                if (config.JT808_Recorder_Factory.Map.TryGetValue(value.JT808_RecorderHeader.CommandId, out var instance))
                 {
                     if (!instance.SkipSerialization)
                     {

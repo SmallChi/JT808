@@ -235,6 +235,20 @@ namespace JT808.Protocol.MessagePack
             return hex;
         }
 
+        public (byte CalculateXorCheckCode, byte RealXorCheckCode) ReadCarDVRCheckCode(int currentPosition, int bodyLength)
+        {
+            //头+ 命令字 + 数据块长度+保留字
+            //2 + 1 + 2 + 1
+            var reader =Reader.Slice(currentPosition, currentPosition+ (2 + 1 + 2 + 1) +bodyLength);
+            byte calculateXorCheckCode = 0;
+            foreach (var item in reader)
+            {
+                calculateXorCheckCode = (byte)(calculateXorCheckCode ^ item);
+            }
+            var realXorCheckCode = Reader.Slice(currentPosition, currentPosition + (2 + 1 + 2 + 1) + bodyLength + 1)[0];
+            return (calculateXorCheckCode, realXorCheckCode);
+        }
+
         /// <summary>
         /// yyMMddHHmmss
         /// </summary>
