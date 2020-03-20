@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JT808.Protocol.MessagePack;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -21,5 +22,7 @@ namespace JT808.Protocol
         public virtual bool SkipSerialization { get; set; } = false;
 
         public abstract string Description { get; }
+        public abstract JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config);
+        public abstract void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies value, IJT808Config config);
     }
 }

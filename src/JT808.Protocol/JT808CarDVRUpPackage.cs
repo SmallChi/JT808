@@ -1,4 +1,6 @@
-﻿using JT808.Protocol.Formatters;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Exceptions;
+using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
@@ -51,19 +53,42 @@ namespace JT808.Protocol
             value.Begin = reader.ReadUInt16();
             value.CommandId = reader.ReadByte();
             value.DataLength = reader.ReadUInt16();
-            var carDVRCheckCode = reader.ReadCarDVRCheckCode(currentPosition, value.DataLength);
-            //todo:定义一个行车记录仪的异常和跳过校验的配置属性
-            //比如:config.SkipCRCCode
-            //if (carDVRCheckCode.RealXorCheckCode != carDVRCheckCode.CalculateXorCheckCode)
             value.KeepFields = reader.ReadByte();
-            //todo:数据体
+            if (value.DataLength > 0)
+            {
+                if (config.JT808_CarDVR_Up_Factory.Map.TryGetValue(value.CommandId, out var instance))
+                {
+                    //4.2.处理消息体
+                    value.Bodies = instance.Deserialize(ref reader, config);
+                }
+            }
+            var carDVRCheckCode = reader.ReadCarDVRCheckCode(currentPosition);
+            if (!config.SkipCarDVRCRCCode)
+            {
+                if (carDVRCheckCode.RealXorCheckCode != carDVRCheckCode.CalculateXorCheckCode)
+                    throw new JT808Exception(JT808ErrorCode.CarDVRCheckCodeNotEqual, $"{reader.RealCheckXorCode}!={reader.CalculateCheckXorCode}");
+            }
             value.CheckCode = reader.ReadByte();
             return value;
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpPackage value, IJT808Config config)
         {
-            throw new NotImplementedException();
+            var currentPosition = writer.GetCurrentPosition();
+            writer.WriteUInt16(value.Begin);
+            writer.WriteByte(value.CommandId);
+            writer.Skip(2, out var datalengthPosition);
+            writer.WriteByte(value.KeepFields);
+            if (config.JT808_CarDVR_Up_Factory.Map.TryGetValue(value.CommandId, out var instance))
+            {
+                if (!instance.SkipSerialization)
+                {
+                    //4.2.处理消息体
+                    instance.Serialize(ref writer, value.Bodies, config);
+                }
+            }
+            writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - datalengthPosition + 1), datalengthPosition);
+            writer.WriteCarDVRCheckCode(currentPosition);
         }
     }
 }

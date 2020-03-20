@@ -7,6 +7,10 @@
         /// </summary>
         CheckCodeNotEqual = 1001,
         /// <summary>
+        /// 校验和不相等
+        /// </summary>
+        CarDVRCheckCodeNotEqual = 1002,
+        /// <summary>
         /// 消息头解析错误
         /// </summary>
         HeaderParseError = 1003,

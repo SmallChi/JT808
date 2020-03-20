@@ -46,7 +46,9 @@ namespace JT808.Protocol.Interfaces
         public virtual IJT808_0x0900_Custom_Factory JT808_0x0900_Custom_Factory { get; set; }
         public virtual IJT808_0x8900_Custom_Factory JT808_0x8900_Custom_Factory { get; set; }
         public virtual IJT808_0x8500_2019_Factory JT808_0x8500_2019_Factory { get; set; }
-        public IJT808_Recorder_Factory JT808_Recorder_Factory { get; set; }
+        public IJT808_CarDVR_Up_Factory JT808_CarDVR_Up_Factory { get; set; }
+        public IJT808_CarDVR_Down_Factory JT808_CarDVR_Down_Factory { get; set; }
+        public bool SkipCarDVRCRCCode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public virtual IJT808Config Register(params Assembly[] externalAssemblies)
         {

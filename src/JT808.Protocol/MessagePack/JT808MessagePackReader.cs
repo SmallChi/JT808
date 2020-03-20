@@ -234,21 +234,6 @@ namespace JT808.Protocol.MessagePack
             string hex = HexUtil.DoHexDump(readOnlySpan, 0, len);
             return hex;
         }
-
-        public (byte CalculateXorCheckCode, byte RealXorCheckCode) ReadCarDVRCheckCode(int currentPosition, int bodyLength)
-        {
-            //头+ 命令字 + 数据块长度+保留字
-            //2 + 1 + 2 + 1
-            var reader =Reader.Slice(currentPosition, currentPosition+ (2 + 1 + 2 + 1) +bodyLength);
-            byte calculateXorCheckCode = 0;
-            foreach (var item in reader)
-            {
-                calculateXorCheckCode = (byte)(calculateXorCheckCode ^ item);
-            }
-            var realXorCheckCode = Reader.Slice(currentPosition, currentPosition + (2 + 1 + 2 + 1) + bodyLength + 1)[0];
-            return (calculateXorCheckCode, realXorCheckCode);
-        }
-
         /// <summary>
         /// yyMMddHHmmss
         /// </summary>
@@ -325,6 +310,27 @@ namespace JT808.Protocol.MessagePack
                 d = JT808Constants.UTCBaseTime;
             }
             return d;   
+        }
+        /// <summary>
+        /// YYMMDD
+        /// </summary>
+        /// <param name="format">D2： 10  X2：16</param>
+        public DateTime ReadDateTime3(string format = "X2")
+        {
+            DateTime d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(3);
+                d = new DateTime(
+                Convert.ToInt32(readOnlySpan[0].ToString(format)) + JT808Constants.DateLimitYear,
+                Convert.ToInt32(readOnlySpan[1].ToString(format)),
+                Convert.ToInt32(readOnlySpan[2].ToString(format)));
+            }
+            catch (Exception)
+            {
+                d = JT808Constants.UTCBaseTime;
+            }
+            return d;
         }
         public DateTime ReadUTCDateTime()
         {
@@ -405,6 +411,17 @@ namespace JT808.Protocol.MessagePack
         public void Skip(int count=1)
         {
             ReaderCount += count;
+        }
+        public (byte CalculateXorCheckCode, byte RealXorCheckCode) ReadCarDVRCheckCode(int currentPosition)
+        {
+            var reader = Reader.Slice(currentPosition, ReaderCount - currentPosition);
+            byte calculateXorCheckCode = 0;
+            foreach (var item in reader)
+            {
+                calculateXorCheckCode = (byte)(calculateXorCheckCode ^ item);
+            }
+            var realXorCheckCode = Reader.Slice(ReaderCount + 1)[0];
+            return (calculateXorCheckCode, realXorCheckCode);
         }
     }
 }

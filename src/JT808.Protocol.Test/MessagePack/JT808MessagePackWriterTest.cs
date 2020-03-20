@@ -410,7 +410,7 @@ namespace JT808.Protocol.Test.MessagePack
             byte[] array = new byte[4096];
             byte[] array1 = new byte[] { 0x53,0x56,0x31,0x2E,0x31,0x2E,0x30 };
             var msgpackWriter = new JT808MessagePackWriter(array);
-            msgpackWriter.WirteASCII("SV1.1.0");
+            msgpackWriter.WriteASCII("SV1.1.0");
             var writeRealBytes = msgpackWriter.FlushAndGetRealArray();
             Assert.Equal(array1, writeRealBytes);
         }
