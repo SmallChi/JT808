@@ -15,10 +15,13 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 设置记录仪时间
     /// 返回：北京时间的日期、时钟
     /// </summary>
-    public class JT808_CarDVR_Down_0xC2 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Down_0xC2 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0xC2>, IJT808Analyze
     {
         public override byte CommandId => JT808CarDVRCommandID.设置记录仪时间.ToByteValue();
-
+        /// <summary>
+        /// 实时时间
+        /// </summary>
+        public DateTime RealTime { get; set; }
         public override string Description => "北京时间的日期、时钟";
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
@@ -26,16 +29,17 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC2 value, IJT808Config config)
         {
-            JT808_CarDVR_Up_0xC2 value = new JT808_CarDVR_Up_0xC2();
-            return value;
+            writer.WriteDateTime6(value.RealTime);
         }
 
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
+        public JT808_CarDVR_Down_0xC2 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_CarDVR_Up_0xC2 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0xC2;
-
+            JT808_CarDVR_Down_0xC2 value = new JT808_CarDVR_Down_0xC2();
+            value.RealTime = reader.ReadDateTime6();
+            return value;
         }
     }
 }

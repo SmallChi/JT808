@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace JT808.Protocol.MessageBody.CarDVR
 {
     /// <summary>
-    /// 设置记录仪脉冲系数
-    /// 返回：记录仪脉冲系数
+    /// 返回正常工作状态
+    /// 返回：返回正常工作状态
     /// </summary>
-    public class JT808_CarDVR_Up_0xC3 : JT808CarDVRUpBodies
+    public class JT808_CarDVR_Down_0xE4 : JT808CarDVRDownBodies
     {
-        public override byte CommandId =>  JT808CarDVRCommandID.设置记录仪脉冲系数.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.返回正常工作状态.ToByteValue();
+        public override string Description => "返回正常工作状态";
 
-        public override string Description => "记录仪脉冲系数";
         public override bool SkipSerialization { get; set; } = true;
     }
 }

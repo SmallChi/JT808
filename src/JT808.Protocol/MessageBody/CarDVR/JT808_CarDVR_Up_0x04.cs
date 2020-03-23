@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集记录仪脉冲系数
     /// 返回：实时时间及设定的脉冲系数
     /// </summary>
-    public class JT808_CarDVR_Up_0x04 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x04 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x04>, IJT808Analyze
     {
         public override byte CommandId =>  JT808CarDVRCommandID.采集记录仪脉冲系数.ToByteValue();
         /// <summary>
@@ -25,11 +25,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 脉冲系数高字节
         /// </summary>
-        public byte PulseCoefficientHighByte { get; set; }
-        /// <summary>
-        /// 仪脉冲系数低字节
-        /// </summary>
-        public byte PulseCoefficientLowByte { get; set; }
+        public ushort PulseCoefficient { get; set; }
 
         public override string Description => "实时时间及设定的脉冲系数";
 
@@ -38,21 +34,18 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x04 value, IJT808Config config)
         {
-            JT808_CarDVR_Up_0x04 value = new JT808_CarDVR_Up_0x04();
-            value.RealTime= reader.ReadDateTime6();
-            value.PulseCoefficientHighByte = reader.ReadByte();
-            value.PulseCoefficientLowByte = reader.ReadByte();
-            return value;
+            writer.WriteDateTime6(value.RealTime);
+            writer.WriteUInt16(value.PulseCoefficient);
         }
 
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
+        public JT808_CarDVR_Up_0x04 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_CarDVR_Up_0x04 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x04;
-            writer.WriteDateTime6(value.RealTime);
-            writer.WriteByte(value.PulseCoefficientHighByte);
-            writer.WriteByte(value.PulseCoefficientLowByte);
+            JT808_CarDVR_Up_0x04 value = new JT808_CarDVR_Up_0x04();
+            value.RealTime = reader.ReadDateTime6();
+            value.PulseCoefficient = reader.ReadUInt16();
+            return value;
         }
     }
 }

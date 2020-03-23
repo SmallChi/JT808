@@ -21,15 +21,5 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public override string Description => "车辆识别代号、机动车号牌号码和机动车号牌分类";
 
         public override bool SkipSerialization { get; set; } = true;
-
-        public override JT808CarDVRDownBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRDownBodies value, IJT808Config config)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

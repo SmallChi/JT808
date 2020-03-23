@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集累计行驶里程
     /// 返回：实时时间、安装时的初始里程及安装后的累计行驶里程
     /// </summary>
-    public class JT808_CarDVR_Up_0x03 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x03 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x03>, IJT808Analyze
     {
         public override byte CommandId => JT808CarDVRCommandID.采集累计行驶里程.ToByteValue();
         /// <summary>
@@ -41,7 +41,15 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x03 value, IJT808Config config)
+        {
+            writer.WriteDateTime6(value.RealTime);
+            writer.WriteDateTime6(value.FirstInstallTime);
+            writer.WriteBCD(value.FirstMileage, 8);
+            writer.WriteBCD(value.TotalMilage, 8);
+        }
+
+        public JT808_CarDVR_Up_0x03 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x03 value = new JT808_CarDVR_Up_0x03();
             value.RealTime = reader.ReadDateTime6();
@@ -49,15 +57,6 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.FirstMileage = reader.ReadBCD(8);
             value.TotalMilage = reader.ReadBCD(8);
             return value;
-        }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0x03 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x03;
-            writer.WriteDateTime6(value.RealTime);
-            writer.WriteDateTime6(value.FirstInstallTime);
-            writer.WriteBCD(value.FirstMileage, 8);
-            writer.WriteBCD(value.TotalMilage, 8);
         }
     }
 }

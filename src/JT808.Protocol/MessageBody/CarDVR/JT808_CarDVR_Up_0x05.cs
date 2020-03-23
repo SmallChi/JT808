@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集车辆信息
     /// 返回：车辆识别代号、机动车号牌号码和机动车号牌分类
     /// </summary>
-    public class JT808_CarDVR_Up_0x05 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x05 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x05>, IJT808Analyze
     {
         public override byte CommandId =>  JT808CarDVRCommandID.采集车辆信息.ToByteValue();
         /// <summary>
@@ -39,25 +39,26 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x05 value, IJT808Config config)
         {
-            JT808_CarDVR_Up_0x05 value = new JT808_CarDVR_Up_0x05();
-            value.Vin= reader.ReadASCII(17);
-            value.VehicleNo = reader.ReadASCII(9);
-            reader.Skip(3);
-            value.VehicleType = reader.ReadString(6);
-            reader.Skip(4);
-            return value;
+            var currentPosition = writer.GetCurrentPosition();
+            writer.WriteASCII(value.Vin);
+            writer.Skip(17 - (writer.GetCurrentPosition()- currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.VehicleNo);
+            writer.Skip(12 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.VehicleType);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
         }
 
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
+        public JT808_CarDVR_Up_0x05 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_CarDVR_Up_0x05 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x05;
-            writer.WriteASCII(value.Vin.PadRight(17,'0'));
-            writer.WriteASCII(value.VehicleNo);
-            writer.Skip(12 - value.VehicleNo.Length, out var vehicleNo);
-            writer.WriteString(value.VehicleType);
-            writer.Skip(10 - value.VehicleType.Length, out var vehicleType);
+            JT808_CarDVR_Up_0x05 value = new JT808_CarDVR_Up_0x05();
+            value.Vin = reader.ReadASCII(17);
+            value.VehicleNo = reader.ReadString(12);
+            value.VehicleType = reader.ReadString(10);
+            return value;
         }
     }
 }

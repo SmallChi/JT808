@@ -14,27 +14,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// <summary>
     /// 进入或保持检定状态
     /// 返回：进入或保持检定状态
+    /// 在检定状态下，检定装置以不大于2秒的时间间隔发送包含本命令字的命令帧，记录仪在6秒内未收到该命令帧，则自动返回正常工作状态。
     /// </summary>
-    public class JT808_CarDVR_Up_0xE0 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0xE0 : JT808CarDVRUpBodies
     {
         public override byte CommandId =>  JT808CarDVRCommandID.进入或保持检定状态.ToByteValue();
-
         public override string Description => "进入或保持检定状态";
-
-        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
-        {
-
-        }
-
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0xE0 value = new JT808_CarDVR_Up_0xE0();
-            return value;
-        }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0xE0 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0xE0;
-        }
+        public override bool SkipSerialization { get; set; } = true;
     }
 }

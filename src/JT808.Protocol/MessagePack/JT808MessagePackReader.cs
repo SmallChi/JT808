@@ -420,7 +420,7 @@ namespace JT808.Protocol.MessagePack
             {
                 calculateXorCheckCode = (byte)(calculateXorCheckCode ^ item);
             }
-            var realXorCheckCode = Reader.Slice(ReaderCount + 1)[0];
+            var realXorCheckCode = Reader.Slice(ReaderCount)[0];
             return (calculateXorCheckCode, realXorCheckCode);
         }
     }

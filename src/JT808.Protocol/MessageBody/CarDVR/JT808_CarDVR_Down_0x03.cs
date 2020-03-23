@@ -21,15 +21,5 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public override string Description => "实时时间、安装时的初始里程及安装后的累计行驶里程";
 
         public override bool SkipSerialization { get; set; } = true;
-
-        public override JT808CarDVRDownBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRDownBodies value, IJT808Config config)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

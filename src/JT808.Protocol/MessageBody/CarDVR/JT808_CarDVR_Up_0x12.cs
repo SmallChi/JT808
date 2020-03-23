@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集指定的驾驶人身份记录
     /// 返回：符合条件的驾驶人登录退出记录
     /// </summary>
-    public class JT808_CarDVR_Up_0x12 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x12 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x12>, IJT808Analyze
     {
         public override byte CommandId => JT808CarDVRCommandID.采集指定的驾驶人身份记录.ToByteValue();
         /// <summary>
@@ -29,11 +29,21 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x12 value, IJT808Config config)
+        {
+            foreach (var driveLogin in value.JT808_CarDVR_Up_0x12_DriveLogins)
+            {
+                writer.WriteDateTime6(driveLogin.LoginTime);
+                writer.WriteASCII(driveLogin.DriverLicenseNo.PadRight(18, '0'));
+                writer.WriteByte(driveLogin.LoginType);
+            }
+        }
+
+        public JT808_CarDVR_Up_0x12 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x12 value = new JT808_CarDVR_Up_0x12();
-            value.JT808_CarDVR_Up_0x12_DriveLogins= new List<JT808_CarDVR_Up_0x12_DriveLogin>();
-            var count = (reader.ReadCurrentRemainContentLength() - 1 - 1) / 25;//记录块个数, -1 去掉808校验位，-1去掉808尾部标志
+            value.JT808_CarDVR_Up_0x12_DriveLogins = new List<JT808_CarDVR_Up_0x12_DriveLogin>();
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 25;//记录块个数, -1 去掉校验位
             for (int i = 0; i < count; i++)
             {
                 JT808_CarDVR_Up_0x12_DriveLogin jT808_CarDVR_Up_0x12_DriveLogin = new JT808_CarDVR_Up_0x12_DriveLogin();
@@ -44,34 +54,23 @@ namespace JT808.Protocol.MessageBody.CarDVR
             }
             return value;
         }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0x12 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x12;
-            foreach (var driveLogin in value.JT808_CarDVR_Up_0x12_DriveLogins)
-            {
-                writer.WriteDateTime6(driveLogin.LoginTime);
-                writer.WriteASCII(driveLogin.DriverLicenseNo.PadRight(18, '0'));
-                writer.WriteByte(driveLogin.LoginType);
-            }
-        }
+    }
+    /// <summary>
+    /// 单位驾驶人身份记录数据块格式
+    /// </summary>
+    public class JT808_CarDVR_Up_0x12_DriveLogin
+    {
         /// <summary>
-        /// 单位驾驶人身份记录数据块格式
+        /// 登入登出时间发生时间
         /// </summary>
-        public class JT808_CarDVR_Up_0x12_DriveLogin
-        {
-            /// <summary>
-            /// 登入登出时间发生时间
-            /// </summary>
-            public DateTime LoginTime { get; set; }
-            /// <summary>
-            /// 机动车驾驶证号码 18位
-            /// </summary>
-            public string DriverLicenseNo { get; set; }
-            /// <summary>
-            /// 事件类型
-            /// </summary>
-            public byte LoginType { get; set; }
-        }
+        public DateTime LoginTime { get; set; }
+        /// <summary>
+        /// 机动车驾驶证号码 18位
+        /// </summary>
+        public string DriverLicenseNo { get; set; }
+        /// <summary>
+        /// 事件类型
+        /// </summary>
+        public byte LoginType { get; set; }
     }
 }

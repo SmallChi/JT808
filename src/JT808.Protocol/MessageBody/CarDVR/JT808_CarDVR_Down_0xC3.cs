@@ -15,10 +15,21 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 设置记录仪脉冲系数
     /// 返回：记录仪脉冲系数
     /// </summary>
-    public class JT808_CarDVR_Down_0xC3 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Down_0xC3 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0xC3>, IJT808Analyze
     {
         public override byte CommandId =>  JT808CarDVRCommandID.设置记录仪脉冲系数.ToByteValue();
-
+        /// <summary>
+        /// 当前时间
+        /// </summary>
+        public DateTime RealTime { get; set; }
+        /// <summary>
+        /// 脉冲系数高字节
+        /// </summary>
+        public byte PulseCoefficientHighByte { get; set; }
+        /// <summary>
+        /// 仪脉冲系数低字节
+        /// </summary>
+        public byte PulseCoefficientLowByte { get; set; }
         public override string Description => "记录仪脉冲系数";
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
@@ -26,16 +37,21 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC3 value, IJT808Config config)
         {
-            JT808_CarDVR_Up_0xC3 value = new JT808_CarDVR_Up_0xC3();
-            return value;
+            writer.WriteDateTime6(value.RealTime);
+            writer.WriteByte(value.PulseCoefficientHighByte);
+            writer.WriteByte(value.PulseCoefficientLowByte);
         }
 
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
+        public JT808_CarDVR_Down_0xC3 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_CarDVR_Up_0xC3 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0xC3;
-
+            JT808_CarDVR_Down_0xC3 value = new JT808_CarDVR_Down_0xC3();
+            value.RealTime = reader.ReadDateTime6();
+            value.PulseCoefficientHighByte = reader.ReadByte();
+            value.PulseCoefficientLowByte = reader.ReadByte();
+            return value;
         }
     }
 }

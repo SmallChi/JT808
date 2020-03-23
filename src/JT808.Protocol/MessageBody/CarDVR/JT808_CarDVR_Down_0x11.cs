@@ -14,7 +14,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集指定的超时驾驶记录
     /// 返回：符合条件的超时驾驶记录
     /// </summary>
-    public class JT808_CarDVR_Down_0x11 : JT808CarDVRDownBodies
+    public class JT808_CarDVR_Down_0x11 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0x11>
     {
         public override byte CommandId => JT808CarDVRCommandID.采集指定的超时驾驶记录.ToByteValue();
 
@@ -32,21 +32,20 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public ushort Count { get; set; }
 
-        public override JT808CarDVRDownBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x11 value, IJT808Config config)
+        {
+            writer.WriteDateTime6(value.StartTime);
+            writer.WriteDateTime6(value.EndTime);
+            writer.WriteUInt16(value.Count);
+        }
+
+        public JT808_CarDVR_Down_0x11 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0x11 value = new JT808_CarDVR_Down_0x11();
             value.StartTime = reader.ReadDateTime6();
             value.EndTime = reader.ReadDateTime6();
             value.Count = reader.ReadUInt16();
             return value;
-        }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRDownBodies jT808CarDVRDownBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Down_0x11 value = jT808CarDVRDownBodies as JT808_CarDVR_Down_0x11;
-            writer.WriteDateTime6(value.StartTime);
-            writer.WriteDateTime6(value.EndTime);
-            writer.WriteUInt16(value.Count);
         }
     }
 }

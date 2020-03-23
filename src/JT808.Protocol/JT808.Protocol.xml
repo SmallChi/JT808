@@ -2633,6 +2633,16 @@
             记录仪工厂
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Interfaces.JT808_CarDVR_Down_Factory">
+            <summary>
+            记录仪工厂
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Interfaces.JT808_CarDVR_Up_Factory">
+            <summary>
+            记录仪工厂
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.IJT808Config.MsgSNDistributed">
             <summary>
             消息流水号
@@ -3682,10 +3692,32 @@
             返回：车辆信息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.Vin">
+            <summary>
+            车辆识别代号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.VehicleNo">
+            <summary>
+            机动车号牌号码
+            后 3 个字节为备用字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.VehicleType">
+            <summary>
+            机动车号牌分类
+            后 4 个字节为备用字
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83">
             <summary>
             设置记录仪初次安装日期
             返回：初次安装日期
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83.RealTime">
+            <summary>
+            实时时间
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84">
@@ -3694,10 +3726,61 @@
             返回：状态量配置信息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.RealTime">
+            <summary>
+            实时时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.SignalOperate">
+            <summary>
+            信号字节个数
+            单位字节的 D7～D0（由高到低）分别对应 8 个状态信号， 1 表示有操作，0表示无操作
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.D0">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.NearLight">
+            <summary>
+            近光 D3
+            10个字节，未使用或不足时，补0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.FarLight">
+            <summary>
+            远光 D4
+            10个字节，未使用或不足时，补0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.RightTurn">
+            <summary>
+            右转向 D5
+            10个字节，未使用或不足时，补0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.LeftTurn">
+            <summary>
+            左转向 D6
+            10个字节，未使用或不足时，补0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.Brake">
+            <summary>
+            制动 D7
+            10个字节，未使用或不足时，补0
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2">
             <summary>
             设置记录仪时间
             返回：北京时间的日期、时钟
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2.RealTime">
+            <summary>
+            实时时间
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3">
@@ -3706,10 +3789,101 @@
             返回：记录仪脉冲系数
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.RealTime">
+            <summary>
+            当前时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.PulseCoefficientHighByte">
+            <summary>
+            脉冲系数高字节
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.PulseCoefficientLowByte">
+            <summary>
+            仪脉冲系数低字节
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4">
             <summary>
             设置初始里程
             返回：记录仪初次安装时车辆已行驶的总里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.RealTime">
+            <summary>
+            实时时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.FirstInstallTime">
+            <summary>
+            初次安装时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.FirstMileage">
+            <summary>
+            初始里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.TotalMilage">
+            <summary>
+            累计里程
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE0">
+            <summary>
+            进入或保持检定状态
+            返回：进入或保持检定状态
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1">
+            <summary>
+            进入里程误差测量
+            返回：通过 DB9 的 7 脚接收标准速度脉冲测量信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.UniqueNumber">
+            <summary>
+            记录仪唯一性编号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.PulseCoefficient">
+            <summary>
+            脉冲系数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.Speed">
+            <summary>
+            当前速度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.TotalMileage">
+            <summary>
+            累计里程  单位为米
+            单位为 0.1 千米每小时
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.StatusSignal">
+            <summary>
+            状态信号
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE2">
+            <summary>
+            进入脉冲系数误差测量
+            返回：通过 DB9 的 7 脚输出车速传感器信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE3">
+            <summary>
+            进入实时时间误差测量
+            返回：通过 DB9 的 7 脚输出实时时钟的秒脉冲信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE4">
+            <summary>
+            返回正常工作状态
+            返回：返回正常工作状态
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00">
@@ -3790,14 +3964,9 @@
             当前时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.PulseCoefficientHighByte">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.PulseCoefficient">
             <summary>
             脉冲系数高字节
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.PulseCoefficientLowByte">
-            <summary>
-            仪脉冲系数低字节
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05">
@@ -3918,34 +4087,34 @@
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.JT808_CarDVR_Up_0x08_SpeedPerMinute">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08_SpeedPerMinute">
             <summary>
             单位分钟行驶速度记录数据块格式
             1.本数据块总长度为 126 个字节，不足部分以 FFH补齐；
             2.如单位分钟内无数据记录，则本数据块无效，数据长度为0，数据为空
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.JT808_CarDVR_Up_0x08_SpeedPerMinute.StartTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08_SpeedPerMinute.StartTime">
             <summary>
             开始时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.JT808_CarDVR_Up_0x08_SpeedPerMinute.JT808_CarDVR_Up_0x08_SpeedPerSeconds">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08_SpeedPerMinute.JT808_CarDVR_Up_0x08_SpeedPerSeconds">
             <summary>
             60s钟，每秒的信息
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.JT808_CarDVR_Up_0x08_SpeedPerSecond">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08_SpeedPerSecond">
             <summary>
             开始时间之后每秒钟的平均速度和状态信号
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.JT808_CarDVR_Up_0x08_SpeedPerSecond.AvgSpeedAfterStartTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08_SpeedPerSecond.AvgSpeedAfterStartTime">
             <summary>
             开始时间之后每秒钟的平均速度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.JT808_CarDVR_Up_0x08_SpeedPerSecond.StatusSignalAfterStartTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08_SpeedPerSecond.StatusSignalAfterStartTime">
             <summary>
             开始时间之后每秒钟的状态信号
             </summary>
@@ -3962,44 +4131,44 @@
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerHour">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerHour">
             <summary>
             指定的结束时间之前最近的每 小时的位置信息记录
             1.本数据块总长度为 666 个字节，不足部分以 FFH补齐；
             2.如单位分钟内无数据记录，则本数据块无效，数据长度为0，数据为空
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerHour.StartTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerHour.StartTime">
             <summary>
             开始时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerHour.JT808_CarDVR_Up_0x09_PositionPerMinutes">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerHour.JT808_CarDVR_Up_0x09_PositionPerMinutes">
             <summary>
             60s钟，每秒的信息
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerMinute">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerMinute">
             <summary>
             开始时间之后每分钟的平均速度和位置信息
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerMinute.GpsLng">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerMinute.GpsLng">
             <summary>
             经度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerMinute.GpsLat">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerMinute.GpsLat">
             <summary>
             纬度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerMinute.Height">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerMinute.Height">
             <summary>
             高度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerMinute.AvgSpeedAfterStartTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerMinute.AvgSpeedAfterStartTime">
             <summary>
             开始时间之后每分钟的平均速度
             </summary>
@@ -4016,54 +4185,54 @@
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_AccidentSuspectin">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin">
             <summary>
             指定的结束时间之前最近的每条事故疑点记录
             1.本数据块总长度为 234 个字节;
             2.如单位分钟内无数据记录，则本数据块无效，数据长度为0，数据为空
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_AccidentSuspectin.EndTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin.EndTime">
             <summary>
             行驶结束时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_AccidentSuspectin.DriverLicenseNo">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin.DriverLicenseNo">
             <summary>
             机动车驾驶证号码
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_AccidentSuspectin.JT808_CarDVR_Up_0x09_DrivingStatuss">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin.JT808_CarDVR_Up_0x09_DrivingStatuss">
             <summary>
             每 0.2s 间隔采集 1 次，共 100组 20s 的事故疑点记录，按时间倒序排列
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_AccidentSuspectin.GpsLng">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin.GpsLng">
             <summary>
             经度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_AccidentSuspectin.GpsLat">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin.GpsLat">
             <summary>
             纬度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_AccidentSuspectin.Height">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin.Height">
             <summary>
             高度
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_DrivingStatus">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_DrivingStatus">
             <summary>
             行驶结束时间前的状态
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_DrivingStatus.Speed">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_DrivingStatus.Speed">
             <summary>
             速度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_DrivingStatus.StatusSignal">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_DrivingStatus.StatusSignal">
             <summary>
             状态信号
             </summary>
@@ -4079,52 +4248,52 @@
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime">
             <summary>
             单位超时驾驶记录数据块
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.DriverLicenseNo">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.DriverLicenseNo">
             <summary>
             机动车驾驶证号码 18位
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime">
             <summary>
             连续驾驶开始时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime">
             <summary>
             连续驾驶结束时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLng">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLng">
             <summary>
             经度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLat">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLat">
             <summary>
             纬度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.StartHeight">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.StartHeight">
             <summary>
             高度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLng">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLng">
             <summary>
             经度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLat">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLat">
             <summary>
             纬度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTime.EndHeight">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime.EndHeight">
             <summary>
             高度
             </summary>
@@ -4140,22 +4309,22 @@
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.JT808_CarDVR_Up_0x12_DriveLogin">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12_DriveLogin">
             <summary>
             单位驾驶人身份记录数据块格式
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.JT808_CarDVR_Up_0x12_DriveLogin.LoginTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12_DriveLogin.LoginTime">
             <summary>
             登入登出时间发生时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.JT808_CarDVR_Up_0x12_DriveLogin.DriverLicenseNo">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12_DriveLogin.DriverLicenseNo">
             <summary>
             机动车驾驶证号码 18位
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.JT808_CarDVR_Up_0x12_DriveLogin.LoginType">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12_DriveLogin.LoginType">
             <summary>
             事件类型
             </summary>
@@ -4171,17 +4340,17 @@
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.JT808_CarDVR_Up_0x13_ExternalPowerSupply">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13_ExternalPowerSupply">
             <summary>
             单位记录仪外部供电记录数据块格式
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.JT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime">
             <summary>
              事件发生时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.JT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType">
             <summary>
             事件类型
             </summary>
@@ -4197,17 +4366,17 @@
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.JT808_CarDVR_Up_0x14_ParameterModify">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14_ParameterModify">
             <summary>
-            单位记录仪外部供电记录数据块格式
+            单位参数修改记录数据块格式
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.JT808_CarDVR_Up_0x14_ParameterModify.EventTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14_ParameterModify.EventTime">
             <summary>
              事件发生时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.JT808_CarDVR_Up_0x14_ParameterModify.EventType">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14_ParameterModify.EventType">
             <summary>
             事件类型
             </summary>
@@ -4223,42 +4392,42 @@
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedStatusLog">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedStatusLog">
             <summary>
              单位速度状态日志数据块格式
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatus">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatus">
             <summary>
              记录仪的速度状态
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatusStartTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatusStartTime">
             <summary>
             速度状态判定的开始时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatusEndTime">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatusEndTime">
             <summary>
             速度状态判定的结束时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedStatusLog.JT808_CarDVR_Up_0x15_SpeedPerSeconds">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedStatusLog.JT808_CarDVR_Up_0x15_SpeedPerSeconds">
             <summary>
             60组
             </summary>
         </member>
-        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedPerSecond">
+        <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedPerSecond">
             <summary>
             每秒速度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedPerSecond.RecordSpeed">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedPerSecond.RecordSpeed">
             <summary>
              记录速度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedPerSecond.ReferenceSpeed">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedPerSecond.ReferenceSpeed">
             <summary>
             参考速度
             </summary>
@@ -4303,6 +4472,7 @@
             <summary>
             进入或保持检定状态
             返回：进入或保持检定状态
+            在检定状态下，检定装置以不大于2秒的时间间隔发送包含本命令字的命令帧，记录仪在6秒内未收到该命令帧，则自动返回正常工作状态。
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE1">
@@ -4966,6 +5136,22 @@
             <summary>
             设置路线
             查询类型为4
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0700">
+            <summary>
+            行驶记录数据上传
+            0x0700
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0700.ReplyMsgNum">
+            <summary>
+            应答流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0700.CommandId">
+            <summary>
+            命令字
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0701">
@@ -7461,6 +7647,16 @@
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8700.CommandId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8701">
+            <summary>
+            行驶记录参数下传命令
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8701.CommandId">
             <summary>
             
             </summary>

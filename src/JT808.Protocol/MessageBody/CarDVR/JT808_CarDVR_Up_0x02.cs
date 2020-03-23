@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集记录仪实时时间
     /// 返回：实时时间
     /// </summary>
-    public class JT808_CarDVR_Up_0x02 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x02 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x02>, IJT808Analyze
     {
         public override byte CommandId =>  JT808CarDVRCommandID.采集记录仪实时时间.ToByteValue();
         /// <summary>
@@ -29,17 +29,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x02 value, IJT808Config config)
+        {
+            writer.WriteDateTime6(value.RealTime);
+        }
+
+        public JT808_CarDVR_Up_0x02 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x02 value = new JT808_CarDVR_Up_0x02();
             value.RealTime = reader.ReadDateTime6();
             return value;
-        }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0x02 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x02;
-            writer.WriteDateTime6(value.RealTime);
         }
     }
 }

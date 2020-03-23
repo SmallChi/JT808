@@ -26,6 +26,8 @@ namespace JT808.Protocol.Interfaces
             JT808_0x0900_Custom_Factory = new JT808_0x0900_Custom_Factory();
             JT808_0x8900_Custom_Factory = new JT808_0x8900_Custom_Factory();
             JT808_0x8500_2019_Factory = new JT808_0x8500_2019_Factory();
+            JT808_CarDVR_Up_Factory = new JT808_CarDVR_Up_Factory();
+            JT808_CarDVR_Down_Factory = new JT808_CarDVR_Down_Factory();
             TerminalPhoneNoLength = 12;
             Trim = true;
         }
@@ -48,7 +50,7 @@ namespace JT808.Protocol.Interfaces
         public virtual IJT808_0x8500_2019_Factory JT808_0x8500_2019_Factory { get; set; }
         public IJT808_CarDVR_Up_Factory JT808_CarDVR_Up_Factory { get; set; }
         public IJT808_CarDVR_Down_Factory JT808_CarDVR_Down_Factory { get; set; }
-        public bool SkipCarDVRCRCCode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool SkipCarDVRCRCCode { get; set; }
 
         public virtual IJT808Config Register(params Assembly[] externalAssemblies)
         {
@@ -65,6 +67,8 @@ namespace JT808.Protocol.Interfaces
                     JT808_0x0900_Custom_Factory.Register(easb);
                     JT808_0x8900_Custom_Factory.Register(easb);
                     JT808_0x8500_2019_Factory.Register(easb);
+                    JT808_CarDVR_Up_Factory.Register(easb);
+                    JT808_CarDVR_Down_Factory.Register(easb);
                 }
             }
             return this;

@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集记录仪执行标准版本
     /// 返回：记录仪执行标准的年号及修改单号
     /// </summary>
-    public class JT808_CarDVR_Up_0x00 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x00 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x00>, IJT808Analyze
     {
         public override byte CommandId => JT808CarDVRCommandID.采集记录仪执行标准版本.ToByteValue();
         /// <summary>
@@ -35,20 +35,18 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x00 value, IJT808Config config)
+        {
+            writer.WriteBCD(value.StandardYear, 2);
+            writer.WriteByte(value.ModifyNumber);
+        }
+
+        public JT808_CarDVR_Up_0x00 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x00 value = new JT808_CarDVR_Up_0x00();
             value.StandardYear = reader.ReadBCD(2);
             value.ModifyNumber = reader.ReadByte();
             return value;
         }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0x00 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x00;
-            writer.WriteBCD(value.StandardYear, 2);
-            writer.WriteByte(value.ModifyNumber);
-        }
-
     }
 }

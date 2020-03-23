@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集指定的外部供电记录
     /// 返回：符合条件的供电记录
     /// </summary>
-    public class JT808_CarDVR_Up_0x13 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x13 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x13>, IJT808Analyze
     {
         public override byte CommandId =>  JT808CarDVRCommandID.采集指定的外部供电记录.ToByteValue();
         /// <summary>
@@ -28,12 +28,20 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
 
         }
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x13 value, IJT808Config config)
+        {
+            foreach (var externalPowerSupply in value.JT808_CarDVR_Up_0x13_ExternalPowerSupplys)
+            {
+                writer.WriteDateTime6(externalPowerSupply.EventTime);
+                writer.WriteByte(externalPowerSupply.EventType);
+            }
+        }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public JT808_CarDVR_Up_0x13 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x13 value = new JT808_CarDVR_Up_0x13();
             value.JT808_CarDVR_Up_0x13_ExternalPowerSupplys = new List<JT808_CarDVR_Up_0x13_ExternalPowerSupply>();
-            var count = (reader.ReadCurrentRemainContentLength() - 1 - 1) / 7;//记录块个数, -1 去掉808校验位，-1去掉808尾部标志
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 7;//记录块个数, -1 去掉校验位
             for (int i = 0; i < count; i++)
             {
                 JT808_CarDVR_Up_0x13_ExternalPowerSupply jT808_CarDVR_Up_0x13_ExternalPowerSupply = new JT808_CarDVR_Up_0x13_ExternalPowerSupply();
@@ -43,29 +51,19 @@ namespace JT808.Protocol.MessageBody.CarDVR
             }
             return value;
         }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0x13 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x13;
-            foreach (var externalPowerSupply in value.JT808_CarDVR_Up_0x13_ExternalPowerSupplys)
-            {
-                writer.WriteDateTime6(externalPowerSupply.EventTime);
-                writer.WriteByte(externalPowerSupply.EventType);
-            }
-        }
+    }
+    /// <summary>
+    /// 单位记录仪外部供电记录数据块格式
+    /// </summary>
+    public class JT808_CarDVR_Up_0x13_ExternalPowerSupply
+    {
         /// <summary>
-        /// 单位记录仪外部供电记录数据块格式
+        ///  事件发生时间
         /// </summary>
-        public class JT808_CarDVR_Up_0x13_ExternalPowerSupply
-        {
-            /// <summary>
-            ///  事件发生时间
-            /// </summary>
-            public DateTime EventTime { get; set; }
-            /// <summary>
-            /// 事件类型
-            /// </summary>
-            public byte EventType { get; set; }
-        }
+        public DateTime EventTime { get; set; }
+        /// <summary>
+        /// 事件类型
+        /// </summary>
+        public byte EventType { get; set; }
     }
 }

@@ -22,7 +22,5 @@ namespace JT808.Protocol
         public virtual bool SkipSerialization { get; set; } = false;
 
         public abstract string Description { get; }
-        public abstract JT808CarDVRDownBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config);
-        public abstract void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRDownBodies value, IJT808Config config);
     }
 }

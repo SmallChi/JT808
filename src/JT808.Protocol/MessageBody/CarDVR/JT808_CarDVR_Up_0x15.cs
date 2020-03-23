@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集指定的速度状态日志
     /// 返回：符合条件的速度状态日志
     /// </summary>
-    public class JT808_CarDVR_Up_0x15 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x15 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x15>, IJT808Analyze
     {
         public override byte CommandId =>  JT808CarDVRCommandID.采集指定的速度状态日志.ToByteValue();
         /// <summary>
@@ -29,11 +29,26 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x15 value, IJT808Config config)
+        {
+            foreach (var speedStatusLog in value.JT808_CarDVR_Up_0x15_SpeedStatusLogs)
+            {
+                writer.WriteByte(speedStatusLog.SpeedStatus);
+                writer.WriteDateTime6(speedStatusLog.SpeedStatusStartTime);
+                writer.WriteDateTime6(speedStatusLog.SpeedStatusEndTime);
+                foreach (var speedPerSecond in speedStatusLog.JT808_CarDVR_Up_0x15_SpeedPerSeconds)
+                {
+                    writer.WriteByte(speedPerSecond.RecordSpeed);
+                    writer.WriteByte(speedPerSecond.ReferenceSpeed);
+                }
+            }
+        }
+
+        public JT808_CarDVR_Up_0x15 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x15 value = new JT808_CarDVR_Up_0x15();
             value.JT808_CarDVR_Up_0x15_SpeedStatusLogs = new List<JT808_CarDVR_Up_0x15_SpeedStatusLog>();
-            var count = (reader.ReadCurrentRemainContentLength() - 1 - 1) / 133;//记录块个数, -1 去掉808校验位，-1去掉808尾部标志
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 133;//记录块个数, -1 去掉校验位
             for (int i = 0; i < count; i++)
             {
                 JT808_CarDVR_Up_0x15_SpeedStatusLog jT808_CarDVR_Up_0x15_SpeedStatusLog = new JT808_CarDVR_Up_0x15_SpeedStatusLog();
@@ -52,57 +67,41 @@ namespace JT808.Protocol.MessageBody.CarDVR
             }
             return value;
         }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0x15 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x15;
-            foreach (var speedStatusLog in value.JT808_CarDVR_Up_0x15_SpeedStatusLogs)
-            {
-                writer.WriteByte(speedStatusLog.SpeedStatus);
-                writer.WriteDateTime6(speedStatusLog.SpeedStatusStartTime);
-                writer.WriteDateTime6(speedStatusLog.SpeedStatusEndTime);
-                foreach (var speedPerSecond in speedStatusLog.JT808_CarDVR_Up_0x15_SpeedPerSeconds)
-                {
-                    writer.WriteByte(speedPerSecond.RecordSpeed);
-                    writer.WriteByte(speedPerSecond.ReferenceSpeed);
-                }
-            }
-        }
+    }
+    /// <summary>
+    ///  单位速度状态日志数据块格式
+    /// </summary>
+    public class JT808_CarDVR_Up_0x15_SpeedStatusLog
+    {
         /// <summary>
-        ///  单位速度状态日志数据块格式
+        ///  记录仪的速度状态
         /// </summary>
-        public class JT808_CarDVR_Up_0x15_SpeedStatusLog
-        {
-            /// <summary>
-            ///  记录仪的速度状态
-            /// </summary>
-            public byte SpeedStatus { get; set; }
-            /// <summary>
-            /// 速度状态判定的开始时间
-            /// </summary>
-            public DateTime SpeedStatusStartTime { get; set; }
-            /// <summary>
-            /// 速度状态判定的结束时间
-            /// </summary>
-            public DateTime SpeedStatusEndTime { get; set; }
-            /// <summary>
-            /// 60组
-            /// </summary>
-            public List<JT808_CarDVR_Up_0x15_SpeedPerSecond> JT808_CarDVR_Up_0x15_SpeedPerSeconds { get; set; }
-        }
+        public byte SpeedStatus { get; set; }
         /// <summary>
-        /// 每秒速度
+        /// 速度状态判定的开始时间
         /// </summary>
-        public class JT808_CarDVR_Up_0x15_SpeedPerSecond
-        {
-            /// <summary>
-            ///  记录速度
-            /// </summary>
-            public byte RecordSpeed { get; set; }
-            /// <summary>
-            /// 参考速度
-            /// </summary>
-            public byte ReferenceSpeed  { get; set; }
-        }
+        public DateTime SpeedStatusStartTime { get; set; }
+        /// <summary>
+        /// 速度状态判定的结束时间
+        /// </summary>
+        public DateTime SpeedStatusEndTime { get; set; }
+        /// <summary>
+        /// 60组
+        /// </summary>
+        public List<JT808_CarDVR_Up_0x15_SpeedPerSecond> JT808_CarDVR_Up_0x15_SpeedPerSeconds { get; set; }
+    }
+    /// <summary>
+    /// 每秒速度
+    /// </summary>
+    public class JT808_CarDVR_Up_0x15_SpeedPerSecond
+    {
+        /// <summary>
+        ///  记录速度
+        /// </summary>
+        public byte RecordSpeed { get; set; }
+        /// <summary>
+        /// 参考速度
+        /// </summary>
+        public byte ReferenceSpeed { get; set; }
     }
 }

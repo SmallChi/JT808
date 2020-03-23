@@ -1,5 +1,6 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Exceptions;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
@@ -59,7 +60,8 @@ namespace JT808.Protocol
                 if (config.JT808_CarDVR_Up_Factory.Map.TryGetValue(value.CommandId, out var instance))
                 {
                     //4.2.处理消息体
-                    value.Bodies = instance.Deserialize(ref reader, config);
+                    dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
+                    value.Bodies = attachImpl;
                 }
             }
             var carDVRCheckCode = reader.ReadCarDVRCheckCode(currentPosition);
@@ -81,13 +83,13 @@ namespace JT808.Protocol
             writer.WriteByte(value.KeepFields);
             if (config.JT808_CarDVR_Up_Factory.Map.TryGetValue(value.CommandId, out var instance))
             {
-                if (!instance.SkipSerialization)
+                if (!value.Bodies.SkipSerialization)
                 {
                     //4.2.处理消息体
-                    instance.Serialize(ref writer, value.Bodies, config);
+                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(instance, ref writer, value.Bodies, config);
                 }
             }
-            writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - datalengthPosition + 1), datalengthPosition);
+            writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() -2-1- datalengthPosition), datalengthPosition);//此处-2：减去数据长度字段2位，-1：减去保留字长度
             writer.WriteCarDVRCheckCode(currentPosition);
         }
     }

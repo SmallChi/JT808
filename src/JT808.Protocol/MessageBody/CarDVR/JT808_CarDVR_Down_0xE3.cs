@@ -12,14 +12,14 @@ using System.Text.Json;
 namespace JT808.Protocol.MessageBody.CarDVR
 {
     /// <summary>
-    /// 设置记录仪脉冲系数
-    /// 返回：记录仪脉冲系数
+    /// 进入实时时间误差测量
+    /// 返回：通过 DB9 的 7 脚输出实时时钟的秒脉冲信号（TTL 电平）
     /// </summary>
-    public class JT808_CarDVR_Up_0xC3 : JT808CarDVRUpBodies
+    public class JT808_CarDVR_Down_0xE3 : JT808CarDVRDownBodies
     {
-        public override byte CommandId =>  JT808CarDVRCommandID.设置记录仪脉冲系数.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.进入实时时间误差测量.ToByteValue();
 
-        public override string Description => "记录仪脉冲系数";
+        public override string Description => "通过 DB9 的 7 脚输出实时时钟的秒脉冲信号（TTL 电平）";
         public override bool SkipSerialization { get; set; } = true;
     }
 }

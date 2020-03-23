@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集记录仪唯一性编号
     /// 返回：唯一性编号及初次安装日期
     /// </summary>
-    public class JT808_CarDVR_Up_0x07 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x07 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x07>, IJT808Analyze
     {
         public override byte CommandId => JT808CarDVRCommandID.采集记录仪唯一性编号.ToByteValue();
         /// <summary>
@@ -45,25 +45,32 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x07 value, IJT808Config config)
+        {
+            var currentPosition = writer.GetCurrentPosition();
+            writer.WriteASCII(value.ProductionPlantCCCCertificationCode);
+            writer.Skip(7 - (writer.GetCurrentPosition()- currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteASCII(value.CertifiedProductModels);
+            writer.Skip(16 - (writer.GetCurrentPosition()- currentPosition), out var _);
+            writer.WriteDateTime3(value.ProductionDate);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.ProductProductionFlowNumber);
+            writer.Skip(4 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.Reversed);
+            writer.Skip(5 - (writer.GetCurrentPosition() - currentPosition), out var _);
+        }
+
+        public JT808_CarDVR_Up_0x07 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x07 value = new JT808_CarDVR_Up_0x07();
             value.ProductionPlantCCCCertificationCode = reader.ReadASCII(7);
             value.CertifiedProductModels = reader.ReadASCII(16);
             value.ProductionDate = reader.ReadDateTime3();
-            value.ProductProductionFlowNumber = reader.ReadASCII(4);
-            value.Reversed = reader.ReadASCII(5);
+            value.ProductProductionFlowNumber = reader.ReadString(4);
+            value.Reversed = reader.ReadString(5);
             return value;
-        }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0x07 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x07;
-            writer.WriteASCII(value.ProductionPlantCCCCertificationCode.PadRight(7,'0'));
-            writer.WriteASCII(value.CertifiedProductModels.PadRight(16, '0'));
-            writer.WriteDateTime3(value.ProductionDate);
-            writer.WriteASCII(value.ProductProductionFlowNumber.PadRight(4,'0'));
-            writer.WriteASCII(value.Reversed.PadRight(5, '0'));
         }
     }
 }

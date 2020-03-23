@@ -15,9 +15,25 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 设置初始里程
     /// 返回：记录仪初次安装时车辆已行驶的总里程
     /// </summary>
-    public class JT808_CarDVR_Down_0xC4 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Down_0xC4 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0xC4>, IJT808Analyze
     {
         public override byte CommandId =>  JT808CarDVRCommandID.设置初始里程.ToByteValue();
+        /// <summary>
+        /// 实时时间
+        /// </summary>
+        public DateTime RealTime { get; set; }
+        /// <summary>
+        /// 初次安装时间
+        /// </summary>
+        public DateTime FirstInstallTime { get; set; }
+        /// <summary>
+        /// 初始里程
+        /// </summary>
+        public string FirstMileage { get; set; }
+        /// <summary>
+        /// 累计里程
+        /// </summary>
+        public string TotalMilage { get; set; }
         public override string Description => "车辆识别代号、机动车号牌号码和机动车号牌分类";
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
@@ -25,15 +41,22 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC4 value, IJT808Config config)
         {
-            JT808_CarDVR_Up_0xC4 value = new JT808_CarDVR_Up_0xC4();
-            return value;
+            writer.WriteDateTime6(value.RealTime);
+            writer.WriteDateTime6(value.FirstInstallTime);
+            writer.WriteBCD(value.FirstMileage, 8);
+            writer.WriteBCD(value.TotalMilage, 8);
         }
 
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
+        public JT808_CarDVR_Down_0xC4 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_CarDVR_Up_0xC4 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0xC4;
+            JT808_CarDVR_Down_0xC4 value = new JT808_CarDVR_Down_0xC4();
+            value.RealTime = reader.ReadDateTime6();
+            value.FirstInstallTime = reader.ReadDateTime6();
+            value.FirstMileage = reader.ReadBCD(8);
+            value.TotalMilage = reader.ReadBCD(8);
+            return value;
         }
     }
 }

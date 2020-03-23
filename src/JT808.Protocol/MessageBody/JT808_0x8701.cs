@@ -9,11 +9,14 @@ using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
-    public class JT808_0x8700 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8700>, IJT808_2019_Version, IJT808Analyze
+    /// <summary>
+    /// 行驶记录参数下传命令
+    /// </summary>
+    public class JT808_0x8701: JT808Bodies, IJT808MessagePackFormatter<JT808_0x8701>, IJT808_2019_Version, IJT808Analyze
     {
-        public override ushort MsgId => 0x8700;
+        public override ushort MsgId => 0x8701;
 
-        public override string Description => "行驶记录数据采集命令";
+        public override string Description => "行驶记录参数下传命令";
         /// <summary>
         /// 
         /// </summary>
@@ -26,16 +29,16 @@ namespace JT808.Protocol.MessageBody
             throw new NotImplementedException();
         }
 
-        public JT808_0x8700 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public JT808_0x8701 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x8700 value = new JT808_0x8700();
+            JT808_0x8701 value = new JT808_0x8701();
             value.CommandId = reader.ReadByte();
             object obj = config.GetMessagePackFormatterByType(value.JT808CarDVRDownPackage.GetType());
             value.JT808CarDVRDownPackage = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(obj, ref reader, config);
             return value;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8700 value, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8701 value, IJT808Config config)
         {
             writer.WriteByte(value.CommandId);
             object obj = config.GetMessagePackFormatterByType(value.JT808CarDVRDownPackage.GetType());

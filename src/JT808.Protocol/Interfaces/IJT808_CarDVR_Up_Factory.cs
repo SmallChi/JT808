@@ -9,7 +9,7 @@ namespace JT808.Protocol.Interfaces
     /// </summary>
    public  interface IJT808_CarDVR_Up_Factory : IJT808ExternalRegister
     {
-        IDictionary<byte, JT808CarDVRUpBodies> Map { get; }
-        IJT808_CarDVR_Up_Factory SetMap<JT808CarDVRUpBodies>() ;
+        IDictionary<byte, object> Map { get; }
+        IJT808_CarDVR_Up_Factory SetMap<TJT808CarDVRUpBodies>() where TJT808CarDVRUpBodies : JT808CarDVRUpBodies;
     }
 }

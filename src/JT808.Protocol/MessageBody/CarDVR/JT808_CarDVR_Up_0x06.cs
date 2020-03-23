@@ -15,7 +15,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集记录仪状态信号配置信息
     /// 返回：状态信号配置信息
     /// </summary>
-    public class JT808_CarDVR_Up_0x06 : JT808CarDVRUpBodies, IJT808Analyze
+    public class JT808_CarDVR_Up_0x06 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x06>, IJT808Analyze
     {
         public override byte CommandId => JT808CarDVRCommandID.采集记录仪状态信号配置信息.ToByteValue();
         /// <summary>
@@ -68,35 +68,50 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         }
 
-        public override JT808CarDVRUpBodies Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x06 value, IJT808Config config)
+        {
+            writer.WriteDateTime6(value.RealTime);
+            writer.WriteByte(value.SignalOperate);
+            var currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.D0);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.D1);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.D2);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.NearLight);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.FarLight);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.RightTurn);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.LeftTurn);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.Brake);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+        }
+
+        public JT808_CarDVR_Up_0x06 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x06 value = new JT808_CarDVR_Up_0x06();
             value.RealTime = reader.ReadDateTime6();
             value.SignalOperate = reader.ReadByte();
-            value.D0 = reader.ReadASCII(10);
-            value.D1 = reader.ReadASCII(10);
-            value.D2 = reader.ReadASCII(10);
-            value.NearLight = reader.ReadASCII(10);
-            value.FarLight = reader.ReadASCII(10);
-            value.RightTurn = reader.ReadASCII(10);
-            value.LeftTurn = reader.ReadASCII(10);
-            value.Brake = reader.ReadASCII(10);
+            value.D0 = reader.ReadString(10);
+            value.D1 = reader.ReadString(10);
+            value.D2 = reader.ReadString(10);
+            value.NearLight = reader.ReadString(10);
+            value.FarLight = reader.ReadString(10);
+            value.RightTurn = reader.ReadString(10);
+            value.LeftTurn = reader.ReadString(10);
+            value.Brake = reader.ReadString(10);
             return value;
-        }
-
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpBodies jT808CarDVRUpBodies, IJT808Config config)
-        {
-            JT808_CarDVR_Up_0x06 value = jT808CarDVRUpBodies as JT808_CarDVR_Up_0x06;
-            writer.WriteDateTime6(value.RealTime);
-            writer.WriteByte(value.SignalOperate);
-            writer.WriteASCII(value.D0.PadRight(0));
-            writer.WriteASCII(value.D1.PadRight(0));
-            writer.WriteASCII(value.D2.PadRight(0));
-            writer.WriteASCII(value.NearLight.PadRight(0));
-            writer.WriteASCII(value.FarLight.PadRight(0));
-            writer.WriteASCII(value.RightTurn.PadRight(0));
-            writer.WriteASCII(value.LeftTurn.PadRight(0));
-            writer.WriteASCII(value.Brake.PadRight(0));
         }
     }
 }

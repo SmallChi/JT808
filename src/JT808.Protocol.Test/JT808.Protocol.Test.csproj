@@ -48,6 +48,7 @@
     <Compile Include="MessageBody\JT808_0x0303Test.cs" />
     <Compile Include="MessageBody\JT808_0x0500Test.cs" />
     <Compile Include="MessageBody\JT808_0x0701BodiesImpl\JT808_0x0701TestBodiesImpl.cs" />
+    <Compile Include="MessageBody\JT808_0x0700Test.cs" />
     <Compile Include="MessageBody\JT808_0x0701Test.cs" />
     <Compile Include="MessageBody\JT808_0x0702Test.cs" />
     <Compile Include="MessageBody\JT808_0x0704Test.cs" />
