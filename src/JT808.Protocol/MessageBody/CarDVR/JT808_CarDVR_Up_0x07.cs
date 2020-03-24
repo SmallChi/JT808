@@ -42,7 +42,22 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x07 value = new JT808_CarDVR_Up_0x07();
+            var hex = reader.ReadVirtualArray(7);
+            value.ProductionPlantCCCCertificationCode = reader.ReadASCII(7);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]生产厂 CCC 认证代码", value.ProductionPlantCCCCertificationCode);
+            hex = reader.ReadVirtualArray(16);
+            value.CertifiedProductModels = reader.ReadASCII(16);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]认证产品型号", value.CertifiedProductModels);
+            hex = reader.ReadVirtualArray(3);
+            value.ProductionDate = reader.ReadDateTime3();
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]生产日期", value.ProductionDate);
+            hex = reader.ReadVirtualArray(4);
+            value.ProductProductionFlowNumber = reader.ReadString(4);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]产品生产流水号", value.ProductProductionFlowNumber);
+            hex = reader.ReadVirtualArray(5);
+            value.Reversed = reader.ReadString(5);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]备用", value.Reversed);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x07 value, IJT808Config config)

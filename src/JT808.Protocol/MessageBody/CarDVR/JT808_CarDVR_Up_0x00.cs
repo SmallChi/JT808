@@ -32,7 +32,11 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x00 value = new JT808_CarDVR_Up_0x00();
+            value.StandardYear = reader.ReadBCD(2);
+            writer.WriteString($"[{value.StandardYear}]记录仪执行标准年号", value.StandardYear);
+            value.ModifyNumber = reader.ReadByte();
+            writer.WriteNumber($"[{value.ModifyNumber.ReadNumber()}]修改单号", value.ModifyNumber);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x00 value, IJT808Config config)

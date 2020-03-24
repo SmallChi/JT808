@@ -26,7 +26,61 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x15 value = new JT808_CarDVR_Up_0x15();
+            writer.WriteStartArray("请求发送指定的时间范围内 N 个单位数据块的数据");
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 133;//记录块个数, -1 去掉校验位
+            for (int i = 0; i < count; i++)
+            {
+                JT808_CarDVR_Up_0x15_SpeedStatusLog jT808_CarDVR_Up_0x15_SpeedStatusLog = new JT808_CarDVR_Up_0x15_SpeedStatusLog();
+                writer.WriteStartObject();
+                writer.WriteStartObject($"指定的结束时间之前最近的第{i+1} 条速度状态日志");
+                jT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatus = reader.ReadByte();
+                writer.WriteString($"[{ jT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatus.ReadNumber()}]速度状态", SpeedStatusDisplay(jT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatus));
+                var hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatusStartTime = reader.ReadDateTime6();
+                writer.WriteString($"[{ hex.ToArray().ToHexString()}]速度状态判定的开始时间", jT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatusStartTime);
+                hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatusEndTime = reader.ReadDateTime6();
+                writer.WriteString($"[{ hex.ToArray().ToHexString()}]速度状态判定的结束时间", jT808_CarDVR_Up_0x15_SpeedStatusLog.SpeedStatusEndTime);
+                writer.WriteStartArray("前60s速度状态日志");
+                for (int j = 0; j < 60; j++)//60组
+                {
+                    writer.WriteStartObject();
+                    JT808_CarDVR_Up_0x15_SpeedPerSecond jT808_CarDVR_Up_0X15_SpeedPerSecond = new JT808_CarDVR_Up_0x15_SpeedPerSecond();
+                    if (j == 0)
+                    {
+                        jT808_CarDVR_Up_0X15_SpeedPerSecond.RecordSpeed = reader.ReadByte();
+                        writer.WriteNumber($"[{ jT808_CarDVR_Up_0X15_SpeedPerSecond.RecordSpeed.ReadNumber()}]开始时间对应的记录速度", jT808_CarDVR_Up_0X15_SpeedPerSecond.RecordSpeed);
+                        jT808_CarDVR_Up_0X15_SpeedPerSecond.ReferenceSpeed = reader.ReadByte();
+                        writer.WriteNumber($"[{ jT808_CarDVR_Up_0X15_SpeedPerSecond.ReferenceSpeed.ReadNumber()}]开始时间对应的参考速度", jT808_CarDVR_Up_0X15_SpeedPerSecond.ReferenceSpeed);
+                    }
+                    else
+                    {
+                        jT808_CarDVR_Up_0X15_SpeedPerSecond.RecordSpeed = reader.ReadByte();
+                        writer.WriteNumber($"[{ jT808_CarDVR_Up_0X15_SpeedPerSecond.RecordSpeed.ReadNumber()}]开始时间后第{j}秒对应的记录速度", jT808_CarDVR_Up_0X15_SpeedPerSecond.RecordSpeed);
+                        jT808_CarDVR_Up_0X15_SpeedPerSecond.ReferenceSpeed = reader.ReadByte();
+                        writer.WriteNumber($"[{ jT808_CarDVR_Up_0X15_SpeedPerSecond.ReferenceSpeed.ReadNumber()}]开始时间后第{j}秒对应的参考速度", jT808_CarDVR_Up_0X15_SpeedPerSecond.ReferenceSpeed);
+                    }
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndArray();
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+            string SpeedStatusDisplay(byte speedStatus) {
+                if (speedStatus == 0x01)
+                {
+                    return "正常";
+                }
+                else if (speedStatus == 0x02)
+                {
+                    return "异常";
+                }
+                else {
+                    return "未知";
+                }
+            }
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x15 value, IJT808Config config)
@@ -36,10 +90,17 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 writer.WriteByte(speedStatusLog.SpeedStatus);
                 writer.WriteDateTime6(speedStatusLog.SpeedStatusStartTime);
                 writer.WriteDateTime6(speedStatusLog.SpeedStatusEndTime);
-                foreach (var speedPerSecond in speedStatusLog.JT808_CarDVR_Up_0x15_SpeedPerSeconds)
+                for (int i = 0; i < 60; i++)
                 {
-                    writer.WriteByte(speedPerSecond.RecordSpeed);
-                    writer.WriteByte(speedPerSecond.ReferenceSpeed);
+                    if (i < speedStatusLog.JT808_CarDVR_Up_0x15_SpeedPerSeconds.Count)
+                    {
+                        writer.WriteByte(speedStatusLog.JT808_CarDVR_Up_0x15_SpeedPerSeconds[i].RecordSpeed);
+                        writer.WriteByte(speedStatusLog.JT808_CarDVR_Up_0x15_SpeedPerSeconds[i].ReferenceSpeed);
+                    }
+                    else {
+                        writer.WriteByte(0xFF);
+                        writer.WriteByte(0xFF);
+                    }
                 }
             }
         }

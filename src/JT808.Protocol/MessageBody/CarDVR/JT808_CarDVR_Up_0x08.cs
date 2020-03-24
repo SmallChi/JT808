@@ -27,7 +27,32 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
+            JT808_CarDVR_Up_0x08 value = new JT808_CarDVR_Up_0x08();
+            writer.WriteStartArray("请求发送指定的时间范围内 N 个单位数据块的数据");
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 126;//记录块个数, -1 去掉校验位
+            for (int i = 0; i < count; i++)
+            {
+                JT808_CarDVR_Up_0x08_SpeedPerMinute jT808_CarDVR_Up_0X08_SpeedPerMinute = new JT808_CarDVR_Up_0x08_SpeedPerMinute();
+                writer.WriteStartObject();
+                writer.WriteStartObject($"第{i+1}分钟行驶速度记录数据块格式");
+                var hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0X08_SpeedPerMinute.StartTime = reader.ReadDateTime6();
+                writer.WriteString($"[{hex.ToArray().ToHexString()}]开始时间", jT808_CarDVR_Up_0X08_SpeedPerMinute.StartTime);
+                for (int j = 0; j < 60; j++)//60秒
+                {
+                    JT808_CarDVR_Up_0x08_SpeedPerSecond jT808_CarDVR_Up_0X08_SpeedPerSecond = new JT808_CarDVR_Up_0x08_SpeedPerSecond();
+                    writer.WriteStartObject($"开始时间之后第{j+1}秒钟的平均速度和状态信号");
+                    jT808_CarDVR_Up_0X08_SpeedPerSecond.AvgSpeedAfterStartTime = reader.ReadByte();
+                    writer.WriteNumber($"[{jT808_CarDVR_Up_0X08_SpeedPerSecond.AvgSpeedAfterStartTime.ReadNumber()}]平均速度", jT808_CarDVR_Up_0X08_SpeedPerSecond.AvgSpeedAfterStartTime);
+                    jT808_CarDVR_Up_0X08_SpeedPerSecond.StatusSignalAfterStartTime = reader.ReadByte();
+                    writer.WriteNumber($"[{jT808_CarDVR_Up_0X08_SpeedPerSecond.StatusSignalAfterStartTime.ReadNumber()}]状态信号", jT808_CarDVR_Up_0X08_SpeedPerSecond.StatusSignalAfterStartTime);
+                    writer.WriteEndObject();
 
+                }
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x08 value, IJT808Config config)

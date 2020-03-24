@@ -36,26 +36,37 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Down_0x82 value = new JT808_CarDVR_Down_0x82();
+            var vinHex = reader.ReadVirtualArray(17);
+            value.Vin = reader.ReadASCII(17);
+            writer.WriteString($"[{vinHex.ToArray().ToHexString()}]车辆识别代号", value.Vin);
+            var vehicleNoHex = reader.ReadVirtualArray(12);
+            value.VehicleNo = reader.ReadString(12);
+            writer.WriteString($"[{vehicleNoHex.ToArray().ToHexString()}]机动车号牌号码", value.VehicleNo);
+            var vehicleTypeHex = reader.ReadVirtualArray(10);
+            value.VehicleType = reader.ReadString(10);
+            writer.WriteString($"[{vehicleTypeHex.ToArray().ToHexString()}]机动车号牌分类", value.VehicleType);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x82 value, IJT808Config config)
         {
-            writer.WriteASCII(value.Vin.PadRight(17, '0'));
-            writer.WriteASCII(value.VehicleNo.PadRight(9, '0'));
-            writer.Skip(3, out var reversed1);
-            writer.WriteString(value.VehicleType.PadRight(6, '0'));
-            writer.Skip(4, out var reversed2);
+            var currentPosition = writer.GetCurrentPosition();
+            writer.WriteASCII(value.Vin);
+            writer.Skip(17 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.VehicleNo);
+            writer.Skip(12 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.VehicleType);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
         }
 
         public JT808_CarDVR_Down_0x82 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0x82 value = new JT808_CarDVR_Down_0x82();
             value.Vin = reader.ReadASCII(17);
-            value.VehicleNo = reader.ReadASCII(9);
-            reader.Skip(3);
-            value.VehicleType = reader.ReadString(6);
-            reader.Skip(4);
+            value.VehicleNo = reader.ReadString(12);
+            value.VehicleType = reader.ReadString(10);
             return value;
         }
     }

@@ -26,7 +26,32 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x13 value = new JT808_CarDVR_Up_0x13();
+            writer.WriteStartArray("请求发送指定的时间范围内 N 个单位数据块的数据");
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 7;//记录块个数, -1 去掉校验位
+            for (int i = 0; i < count; i++)
+            {
+                JT808_CarDVR_Up_0x13_ExternalPowerSupply jT808_CarDVR_Up_0x13_ExternalPowerSupply = new JT808_CarDVR_Up_0x13_ExternalPowerSupply();
+                writer.WriteStartObject();
+                writer.WriteStartObject($"从指定的结束时间之前最近的第{i+1}条外部电源记录");
+                var hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime = reader.ReadDateTime6();
+                writer.WriteString($"[{hex.ToArray().ToHexString()}]事件发生时间", jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime);
+                jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType = reader.ReadByte();
+                writer.WriteString($"[{  jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType.ReadNumber()}]事件类型", EventTypeDisplay(jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType));
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+            string EventTypeDisplay(byte eventType) {
+                if (eventType == 1)
+                {
+                    return "供电";
+                }
+                else {
+                    return "断电";
+                }
+            }
         }
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x13 value, IJT808Config config)
         {

@@ -64,21 +64,65 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Down_0x84 value = new JT808_CarDVR_Down_0x84();
+            value.RealTime = reader.ReadDateTime6();
+            writer.WriteString($"[{value.RealTime.ToString("yyMMddHHmmss")}]实时时间", value.RealTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            value.SignalOperate = reader.ReadByte();
+            writer.WriteNumber($"[{value.SignalOperate.ReadNumber()}]信号个数", value.SignalOperate);
+            var display = reader.ReadVirtualArray(10);
+            value.D0 = reader.ReadString(10);
+            writer.WriteString($"[{display.ToArray().ToHexString()}]D0", value.D0);
+            display = reader.ReadVirtualArray(10);
+            value.D1 = reader.ReadString(10);
+            writer.WriteString($"[{display.ToArray().ToHexString()}]D1", value.D1);
+            display = reader.ReadVirtualArray(10);
+            value.D2 = reader.ReadString(10);
+            writer.WriteString($"[{display.ToArray().ToHexString()}]D2", value.D2);
+            display = reader.ReadVirtualArray(10);
+            value.NearLight = reader.ReadString(10);
+            writer.WriteString($"[{display.ToArray().ToHexString()}]近光灯", value.NearLight);
+            display = reader.ReadVirtualArray(10);
+            value.FarLight = reader.ReadString(10);
+            writer.WriteString($"[{display.ToArray().ToHexString()}]远光灯", value.FarLight);
+            display = reader.ReadVirtualArray(10);
+            value.RightTurn = reader.ReadString(10);
+            writer.WriteString($"[{display.ToArray().ToHexString()}]右转向", value.RightTurn);
+            display = reader.ReadVirtualArray(10);
+            value.LeftTurn = reader.ReadString(10);
+            writer.WriteString($"[{display.ToArray().ToHexString()}]左转向", value.LeftTurn);
+            display = reader.ReadVirtualArray(10);
+            value.Brake = reader.ReadString(10);
+            writer.WriteString($"[{display.ToArray().ToHexString()}]制动", value.Brake);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x84 value, IJT808Config config)
         {
             writer.WriteDateTime6(value.RealTime);
             writer.WriteByte(value.SignalOperate);
-            writer.WriteASCII(value.D0.PadRight(0));
-            writer.WriteASCII(value.D1.PadRight(0));
-            writer.WriteASCII(value.D2.PadRight(0));
-            writer.WriteASCII(value.NearLight.PadRight(0));
-            writer.WriteASCII(value.FarLight.PadRight(0));
-            writer.WriteASCII(value.RightTurn.PadRight(0));
-            writer.WriteASCII(value.LeftTurn.PadRight(0));
-            writer.WriteASCII(value.Brake.PadRight(0));
+            var currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.D0);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.D1);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.D2);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.NearLight);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.FarLight);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.RightTurn);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.LeftTurn);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            currentPosition = writer.GetCurrentPosition();
+            writer.WriteString(value.Brake);
+            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
         }
 
         public JT808_CarDVR_Down_0x84 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
@@ -86,14 +130,14 @@ namespace JT808.Protocol.MessageBody.CarDVR
             JT808_CarDVR_Down_0x84 value = new JT808_CarDVR_Down_0x84();
             value.RealTime = reader.ReadDateTime6();
             value.SignalOperate = reader.ReadByte();
-            value.D0 = reader.ReadASCII(10);
-            value.D1 = reader.ReadASCII(10);
-            value.D2 = reader.ReadASCII(10);
-            value.NearLight = reader.ReadASCII(10);
-            value.FarLight = reader.ReadASCII(10);
-            value.RightTurn = reader.ReadASCII(10);
-            value.LeftTurn = reader.ReadASCII(10);
-            value.Brake = reader.ReadASCII(10);
+            value.D0 = reader.ReadString(10);
+            value.D1 = reader.ReadString(10);
+            value.D2 = reader.ReadString(10);
+            value.NearLight = reader.ReadString(10);
+            value.FarLight = reader.ReadString(10);
+            value.RightTurn = reader.ReadString(10);
+            value.LeftTurn = reader.ReadString(10);
+            value.Brake = reader.ReadString(10);
             return value;
         }
     }

@@ -26,21 +26,59 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x11 value = new JT808_CarDVR_Up_0x11();
+            writer.WriteStartArray("请求发送指定的时间范围内 N 个单位数据块的数据");
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 50;//记录块个数, -1 去掉校验位
+            for (int i = 0; i < count; i++)
+            {
+                JT808_CarDVR_Up_0x11_DriveOverTime jT808_CarDVR_Up_0x11_DriveOverTime = new JT808_CarDVR_Up_0x11_DriveOverTime();
+                writer.WriteStartObject();
+                writer.WriteStartObject($"指定的结束时间前最近的第 {i+1}条超时驾驶记录");
+                var hex = reader.ReadVirtualArray(18);
+                jT808_CarDVR_Up_0x11_DriveOverTime.DriverLicenseNo = reader.ReadASCII(18);
+                writer.WriteString($"[{hex.ToArray().ToHexString()}机动车驾驶证号码]", jT808_CarDVR_Up_0x11_DriveOverTime.DriverLicenseNo);
+                hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime = reader.ReadDateTime6();
+                writer.WriteString($"[{hex.ToArray().ToHexString()}连续驾驶开始时间]", jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime);
+                hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime = reader.ReadDateTime6();
+                writer.WriteString($"[{hex.ToArray().ToHexString()}连续驾驶结束时间]", jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime);
+                writer.WriteStartObject("连续驾驶开始时间所在的最近一次有效位置信息");
+                jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLng = reader.ReadInt32();
+                writer.WriteNumber($"[{ jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLng.ReadNumber()}]经度", jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLng);
+                jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLat = reader.ReadInt32();
+                writer.WriteNumber($"[{ jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLat.ReadNumber()}纬度", jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLat);
+                jT808_CarDVR_Up_0x11_DriveOverTime.StartHeight = reader.ReadInt16();
+                writer.WriteNumber($"[{ jT808_CarDVR_Up_0x11_DriveOverTime.StartHeight.ReadNumber()}]高度", jT808_CarDVR_Up_0x11_DriveOverTime.StartHeight);
+                writer.WriteEndObject();
+                writer.WriteStartObject("连续驾驶结束时间所在的最近一次有效位置信息");
+                jT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLng = reader.ReadInt32();
+                writer.WriteNumber($"[{ jT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLng.ReadNumber()}]经度", jT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLng);
+                jT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLat = reader.ReadInt32();
+                writer.WriteNumber($"[{ jT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLat.ReadNumber()}]纬度", jT808_CarDVR_Up_0x11_DriveOverTime.GpsEndLat);
+                jT808_CarDVR_Up_0x11_DriveOverTime.EndHeight = reader.ReadInt16();
+                writer.WriteNumber($"[{ jT808_CarDVR_Up_0x11_DriveOverTime.EndHeight.ReadNumber()}]高度", jT808_CarDVR_Up_0x11_DriveOverTime.EndHeight);
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x11 value, IJT808Config config)
         {
             foreach (var driveOverTime in value.JT808_CarDVR_Up_0x11_DriveOverTimes)
             {
-                writer.WriteASCII(driveOverTime.DriverLicenseNo.PadRight(18, '0'));
+                var currentPosition = writer.GetCurrentPosition();
+                writer.WriteASCII(driveOverTime.DriverLicenseNo);
+                writer.Skip(18 - (writer.GetCurrentPosition() - currentPosition), out var _);
                 writer.WriteDateTime6(driveOverTime.ContinueDrivingStartTime);
                 writer.WriteDateTime6(driveOverTime.ContinueDrivingEndTime);
                 writer.WriteInt32(driveOverTime.GpsStartLng);
                 writer.WriteInt32(driveOverTime.GpsStartLat);
                 writer.WriteInt16(driveOverTime.StartHeight);
                 writer.WriteInt32(driveOverTime.GpsEndLng);
-                writer.WriteInt32(driveOverTime.GpsStartLat);
+                writer.WriteInt32(driveOverTime.GpsEndLat);
                 writer.WriteInt16(driveOverTime.EndHeight);
             }
         }

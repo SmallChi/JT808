@@ -26,7 +26,23 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x14 value = new JT808_CarDVR_Up_0x14();
+            writer.WriteStartArray("请求发送指定的时间范围内 N 个单位数据块的数据");
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 7;//记录块个数, -1 去掉校验位
+            for (int i = 0; i < count; i++)
+            {
+                JT808_CarDVR_Up_0x14_ParameterModify jT808_CarDVR_Up_0x14_ParameterModify = new JT808_CarDVR_Up_0x14_ParameterModify();
+                writer.WriteStartObject();
+                writer.WriteStartObject($"指定的结束时间之前最近的第{i+1}条参数修改记录");
+                var hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0x14_ParameterModify.EventTime = reader.ReadDateTime6();
+                writer.WriteString($"[{hex.ToArray().ToHexString()}]事件发生时间", jT808_CarDVR_Up_0x14_ParameterModify.EventTime);
+                jT808_CarDVR_Up_0x14_ParameterModify.EventType = reader.ReadByte();
+                writer.WriteString($"[{  jT808_CarDVR_Up_0x14_ParameterModify.EventType.ReadNumber()}]事件类型", ((JT808CarDVRCommandID)jT808_CarDVR_Up_0x14_ParameterModify.EventType).ToString());
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x14 value, IJT808Config config)

@@ -38,7 +38,19 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x03 value = new JT808_CarDVR_Up_0x03();
+            var hex = reader.ReadVirtualArray(6);
+            value.RealTime = reader.ReadDateTime6();
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]实时时间", value.RealTime);
+            hex = reader.ReadVirtualArray(6);
+            value.FirstInstallTime = reader.ReadDateTime6();
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]初次安装时间", value.RealTime);
+            hex = reader.ReadVirtualArray(4);
+            value.FirstMileage = reader.ReadBCD(8);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]初始里程", value.FirstMileage);
+            hex = reader.ReadVirtualArray(4);
+            value.TotalMilage = reader.ReadBCD(8);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]累计里程", value.TotalMilage);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x03 value, IJT808Config config)

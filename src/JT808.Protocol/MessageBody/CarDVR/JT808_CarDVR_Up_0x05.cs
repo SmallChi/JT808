@@ -36,7 +36,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x05 value = new JT808_CarDVR_Up_0x05();
+            var hex = reader.ReadVirtualArray(17);
+            value.Vin = reader.ReadASCII(17);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]车辆识别代号", value.Vin);
+            hex = reader.ReadVirtualArray(12);
+            value.VehicleNo = reader.ReadString(12);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]机动车号牌号码", value.VehicleNo);
+            hex = reader.ReadVirtualArray(10);
+            value.VehicleType = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]机动车号牌分类", value.VehicleType);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x05 value, IJT808Config config)

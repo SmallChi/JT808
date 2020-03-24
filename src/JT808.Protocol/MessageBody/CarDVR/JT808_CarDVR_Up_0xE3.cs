@@ -20,5 +20,6 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public override byte CommandId =>  JT808CarDVRCommandID.进入实时时间误差测量.ToByteValue();
 
         public override string Description => "通过 DB9 的 7 脚输出实时时钟的秒脉冲信号（TTL 电平）";
+        public override bool SkipSerialization { get; set; } = true;
     }
 }

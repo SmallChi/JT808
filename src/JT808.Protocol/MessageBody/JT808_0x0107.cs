@@ -180,7 +180,7 @@ namespace JT808.Protocol.MessageBody
                 jT808_0X0107.TerminalId = reader.ReadString(7);
                 writer.WriteString($"[{terminalIdSpan.ToArray().ToHexString()}]终端ID", jT808_0X0107.TerminalId);
             }
-            ReadOnlySpan<byte> iccidSpan = reader.ReadVirtualArray(20);
+            ReadOnlySpan<byte> iccidSpan = reader.ReadVirtualArray(10);
             jT808_0X0107.Terminal_SIM_ICCID = reader.ReadBCD(20, config.Trim);
             writer.WriteString($"[{iccidSpan.ToArray().ToHexString()}]终端SIM卡ICCID", jT808_0X0107.Terminal_SIM_ICCID);
             jT808_0X0107.Terminal_Hardware_Version_Length = reader.ReadByte();

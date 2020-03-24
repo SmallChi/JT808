@@ -26,7 +26,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Down_0xC2 value = new JT808_CarDVR_Down_0xC2();
+            value.RealTime = reader.ReadDateTime6();
+            writer.WriteString($"[{value.RealTime.ToString("yyMMddHHmmss")}]实时时间", value.RealTime.ToString("yyyy-MM-dd HH:mm:ss"));
         }
 
 

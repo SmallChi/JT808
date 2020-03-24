@@ -65,7 +65,36 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x06 value = new JT808_CarDVR_Up_0x06();
+            var hex = reader.ReadVirtualArray(6);
+            value.RealTime = reader.ReadDateTime6();
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]实时时间", value.RealTime);
+            value.SignalOperate = reader.ReadByte();
+            writer.WriteNumber($"[{value.SignalOperate.ReadNumber()}]信号个数", value.SignalOperate) ;
+            hex = reader.ReadVirtualArray(10);
+            value.D0 = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]D0", value.D0);
+            hex = reader.ReadVirtualArray(10);
+            value.D1 = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]D1", value.D1);
+            hex = reader.ReadVirtualArray(10);
+            value.D2 = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]D2", value.D2);
+            hex = reader.ReadVirtualArray(10);
+            value.NearLight = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]近光灯", value.NearLight);
+            hex = reader.ReadVirtualArray(10);
+            value.FarLight = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]远光灯", value.FarLight);
+            hex = reader.ReadVirtualArray(10);
+            value.RightTurn = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]右转向", value.RightTurn);
+            hex = reader.ReadVirtualArray(10);
+            value.LeftTurn = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]左转向", value.LeftTurn);
+            hex = reader.ReadVirtualArray(10);
+            value.Brake = reader.ReadString(10);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]制动", value.Brake);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x06 value, IJT808Config config)

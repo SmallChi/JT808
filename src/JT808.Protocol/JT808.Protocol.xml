@@ -2706,12 +2706,22 @@
         </member>
         <member name="P:JT808.Protocol.IJT808Config.JT808_CarDVR_Up_Factory">
             <summary>
-            记录仪上行工厂
+            记录仪上行命令字工厂
             </summary>
         </member>
         <member name="P:JT808.Protocol.IJT808Config.JT808_CarDVR_Down_Factory">
             <summary>
-            记录仪下行工厂
+            记录仪下行命令字工厂
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.IJT808Config.IJT808_CarDVR_Up_Package">
+            <summary>
+            记录仪上行包
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.IJT808Config.IJT808_CarDVR_Down_Package">
+            <summary>
+            记录仪下行包
             </summary>
         </member>
         <member name="P:JT808.Protocol.IJT808Config.Encoding">
@@ -3794,14 +3804,9 @@
             当前时间
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.PulseCoefficientHighByte">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.PulseCoefficient">
             <summary>
-            脉冲系数高字节
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.PulseCoefficientLowByte">
-            <summary>
-            仪脉冲系数低字节
+            脉冲系数
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4">
@@ -3966,7 +3971,7 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.PulseCoefficient">
             <summary>
-            脉冲系数高字节
+            脉冲系数
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05">
@@ -4202,7 +4207,7 @@
             机动车驾驶证号码
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin.JT808_CarDVR_Up_0x09_DrivingStatuss">
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin.JT808_CarDVR_Up_0x10_DrivingStatuss">
             <summary>
             每 0.2s 间隔采集 1 次，共 100组 20s 的事故疑点记录，按时间倒序排列
             </summary>

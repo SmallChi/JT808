@@ -14,7 +14,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集指定的超时驾驶记录
     /// 返回：符合条件的超时驾驶记录
     /// </summary>
-    public class JT808_CarDVR_Down_0x11 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0x11>
+    public class JT808_CarDVR_Down_0x11 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0x11>, IJT808Analyze
     {
         public override byte CommandId => JT808CarDVRCommandID.采集指定的超时驾驶记录.ToByteValue();
 
@@ -46,6 +46,17 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.EndTime = reader.ReadDateTime6();
             value.Count = reader.ReadUInt16();
             return value;
+        }
+
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        {
+            JT808_CarDVR_Down_0x11 value = new JT808_CarDVR_Down_0x11();
+            value.StartTime = reader.ReadDateTime6();
+            writer.WriteString($"[{value.StartTime.ToString("yyMMddHHmmss")}]开始时间", value.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            value.EndTime = reader.ReadDateTime6();
+            writer.WriteString($"[{value.EndTime.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            value.Count = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.Count.ReadNumber()}]最大单位数据块个数", value.Count);
         }
     }
 }

@@ -26,7 +26,39 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x12 value = new JT808_CarDVR_Up_0x12();
+            writer.WriteStartArray("请求发送指定的时间范围内 N 个单位数据块的数据");
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 25;//记录块个数, -1 去掉校验位
+            for (int i = 0; i < count; i++)
+            {
+                JT808_CarDVR_Up_0x12_DriveLogin jT808_CarDVR_Up_0x12_DriveLogin = new JT808_CarDVR_Up_0x12_DriveLogin();
+                writer.WriteStartObject();
+                writer.WriteStartObject($"指定的结束时间之前最近的第 {i+1}条驾驶人登录退出记录");
+                var hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0x12_DriveLogin.LoginTime = reader.ReadDateTime6();
+                writer.WriteString($"[{hex.ToArray().ToHexString()}]登录/登出发生时间", jT808_CarDVR_Up_0x12_DriveLogin.LoginTime);
+                hex = reader.ReadVirtualArray(18);
+                jT808_CarDVR_Up_0x12_DriveLogin.DriverLicenseNo = reader.ReadASCII(18);
+                writer.WriteString($"[{hex.ToArray().ToHexString()}]机动车驾驶证号码", jT808_CarDVR_Up_0x12_DriveLogin.DriverLicenseNo);
+                jT808_CarDVR_Up_0x12_DriveLogin.LoginType = reader.ReadByte();
+                writer.WriteString($"[{ jT808_CarDVR_Up_0x12_DriveLogin.LoginType.ReadNumber()}]登录/登出事件", LoginTypeDisplay(jT808_CarDVR_Up_0x12_DriveLogin.LoginType));
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
+            string LoginTypeDisplay(byte loginType){
+                if (loginType == 1)
+                {
+                    return "登录";
+                }
+                else if(loginType == 2)
+                {
+                    return "退出";
+                }
+                else {
+                    return "保留";
+                }
+            }
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x12 value, IJT808Config config)
@@ -34,7 +66,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
             foreach (var driveLogin in value.JT808_CarDVR_Up_0x12_DriveLogins)
             {
                 writer.WriteDateTime6(driveLogin.LoginTime);
-                writer.WriteASCII(driveLogin.DriverLicenseNo.PadRight(18, '0'));
+                var currentPosition = writer.GetCurrentPosition();
+                writer.WriteASCII(driveLogin.DriverLicenseNo);
+                writer.Skip(18 - (writer.GetCurrentPosition() - currentPosition), out var _);
                 writer.WriteByte(driveLogin.LoginType);
             }
         }

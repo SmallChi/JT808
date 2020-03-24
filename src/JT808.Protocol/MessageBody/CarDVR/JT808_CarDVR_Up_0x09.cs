@@ -27,7 +27,35 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x09 value = new JT808_CarDVR_Up_0x09();
+            writer.WriteStartArray("请求发送指定的时间范围内 N 个单位数据块的数据");
+            var count = (reader.ReadCurrentRemainContentLength() - 1) / 666;//记录块个数, -1 去掉校验位
+            for (int i = 0; i < count; i++)
+            {
+                JT808_CarDVR_Up_0x09_PositionPerHour jT808_CarDVR_Up_0x09_PositionPerHour = new JT808_CarDVR_Up_0x09_PositionPerHour();
+                writer.WriteStartObject();
+                writer.WriteStartObject($"指定的结束时间之前最近的第{i+1}小时的位置信息记录");
+                var hex = reader.ReadVirtualArray(6);
+                jT808_CarDVR_Up_0x09_PositionPerHour.StartTime = reader.ReadDateTime6();
+                writer.WriteString($"[{hex.ToArray().ToHexString()}]开始时间", jT808_CarDVR_Up_0x09_PositionPerHour.StartTime);
+                for (int j = 0; j < 60; j++)//60钟
+                {
+                    JT808_CarDVR_Up_0x09_PositionPerMinute jT808_CarDVR_Up_0X09_PositionPerMinute = new JT808_CarDVR_Up_0x09_PositionPerMinute();
+                    writer.WriteStartObject($"开始时间之后第{j+1}分钟的平均速度和位置信息");
+                    jT808_CarDVR_Up_0X09_PositionPerMinute.GpsLng = reader.ReadInt32();
+                    writer.WriteNumber($"[{jT808_CarDVR_Up_0X09_PositionPerMinute.GpsLng.ReadNumber()}]经度", jT808_CarDVR_Up_0X09_PositionPerMinute.GpsLng);
+                    jT808_CarDVR_Up_0X09_PositionPerMinute.GpsLat = reader.ReadInt32();
+                    writer.WriteNumber($"[{jT808_CarDVR_Up_0X09_PositionPerMinute.GpsLat.ReadNumber()}]纬度", jT808_CarDVR_Up_0X09_PositionPerMinute.GpsLat);
+                    jT808_CarDVR_Up_0X09_PositionPerMinute.Height = reader.ReadInt16();
+                    writer.WriteNumber($"[{jT808_CarDVR_Up_0X09_PositionPerMinute.Height.ReadNumber()}]高度", jT808_CarDVR_Up_0X09_PositionPerMinute.Height);
+                    jT808_CarDVR_Up_0X09_PositionPerMinute.AvgSpeedAfterStartTime = reader.ReadByte();
+                    writer.WriteNumber($"[{jT808_CarDVR_Up_0X09_PositionPerMinute.AvgSpeedAfterStartTime.ReadNumber()}]平均速度", jT808_CarDVR_Up_0X09_PositionPerMinute.AvgSpeedAfterStartTime);
+                    writer.WriteEndObject();
+                }
+                writer.WriteEndObject();
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
         }
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x09 value, IJT808Config config)
         {

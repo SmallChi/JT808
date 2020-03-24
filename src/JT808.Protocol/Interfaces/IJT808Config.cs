@@ -61,13 +61,21 @@ namespace JT808.Protocol
         /// </summary>
         IJT808_0x8500_2019_Factory JT808_0x8500_2019_Factory { get; set; }
         /// <summary>
-        /// 记录仪上行工厂
+        /// 记录仪上行命令字工厂
         /// </summary>
         IJT808_CarDVR_Up_Factory JT808_CarDVR_Up_Factory { get; set; }
         /// <summary>
-        /// 记录仪下行工厂
+        /// 记录仪下行命令字工厂
         /// </summary>
         IJT808_CarDVR_Down_Factory JT808_CarDVR_Down_Factory { get; set; }
+        /// <summary>
+        /// 记录仪上行包
+        /// </summary>
+        public IJT808_CarDVR_Up_Package IJT808_CarDVR_Up_Package { get; set; }
+        /// <summary>
+        /// 记录仪下行包
+        /// </summary>
+        public IJT808_CarDVR_Down_Package IJT808_CarDVR_Down_Package { get; set; }
         /// <summary>
         /// 统一编码
         /// </summary>

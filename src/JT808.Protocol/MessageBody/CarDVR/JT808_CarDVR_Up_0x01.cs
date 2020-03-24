@@ -27,7 +27,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Up_0x01 value = new JT808_CarDVR_Up_0x01();
+            var hex = reader.ReadVirtualArray(18);
+            value.DriverLicenseNo = reader.ReadASCII(18);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]当前驾驶人的机动车驾驶证号码", value.DriverLicenseNo);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x01 value, IJT808Config config)

@@ -43,12 +43,25 @@ namespace JT808.Protocol.MessageBody.CarDVR
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-
+            JT808_CarDVR_Down_0xE1 value = new JT808_CarDVR_Down_0xE1();
+            var hex = reader.ReadVirtualArray(35);
+            value.UniqueNumber = reader.ReadASCII(35);
+            writer.WriteString($"[{hex.ToArray().ToHexString()}]记录仪唯一性编号", value.UniqueNumber);
+            value.PulseCoefficient = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.PulseCoefficient.ReadNumber()}]脉冲系数", value.PulseCoefficient);
+            value.Speed = reader.ReadUInt16();
+            writer.WriteNumber($"[{value.Speed.ReadNumber()}]当前速度", value.Speed);
+            value.TotalMileage = reader.ReadUInt32();
+            writer.WriteNumber($"[{value.TotalMileage.ReadNumber()}]累计里程", value.TotalMileage);
+            value.StatusSignal = reader.ReadByte();
+            writer.WriteNumber($"[{value.StatusSignal.ReadNumber()}]状态信号", value.StatusSignal);
         }
 
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xE1 value, IJT808Config config)
         {
-            writer.WriteASCII(value.UniqueNumber.PadRight(35, '0'));
+            var currentPosition = writer.GetCurrentPosition();
+            writer.WriteASCII(value.UniqueNumber);
+            writer.Skip(35 - (writer.GetCurrentPosition() - currentPosition), out var _);
             writer.WriteUInt16(value.PulseCoefficient);
             writer.WriteUInt16(value.Speed);
             writer.WriteUInt32(value.TotalMileage);
