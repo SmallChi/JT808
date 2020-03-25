@@ -1,4 +1,5 @@
-﻿using JT808.Protocol.Extensions;
+﻿using JT808.Protocol.Enums;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
@@ -10,7 +11,7 @@ namespace JT808.Protocol.MessageBody
     /// 补传分包请求
     /// 0x8003
     /// </summary>
-    public class JT808_0x8003 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8003>, IJT808Analyze
+    public class JT808_0x8003 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8003>, IJT808Analyze, IJT808_2019_Version
     {
         public override ushort MsgId { get; } = 0x8003;
         public override string Description => "补传分包请求";
@@ -21,9 +22,10 @@ namespace JT808.Protocol.MessageBody
         public ushort OriginalMsgNum { get; set; }
         /// <summary>
         /// 重传包总数
-        /// n
+        /// 2013 byte
+        /// 2019 ushort
         /// </summary>
-        public byte AgainPackageCount { get; set; }
+        public ushort AgainPackageCount { get; set; }
         /// <summary>
         /// 重传包 ID 列表
         /// BYTE[2*n]
@@ -36,7 +38,14 @@ namespace JT808.Protocol.MessageBody
             JT808_0x8003 value = new JT808_0x8003();
             value.OriginalMsgNum = reader.ReadUInt16();
             writer.WriteNumber($"[{value.OriginalMsgNum.ReadNumber()}]原始消息流水号", value.OriginalMsgNum);
-            value.AgainPackageCount = reader.ReadByte();
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                value.AgainPackageCount = reader.ReadUInt16();
+            }
+            else {
+                value.AgainPackageCount = reader.ReadByte();
+            }
+
             writer.WriteNumber($"[{value.AgainPackageCount.ReadNumber()}]重传包总数", value.AgainPackageCount);
             writer.WriteStartArray("重传包ID列表");
             for(int i=0;i< value.AgainPackageCount; i++)
@@ -53,7 +62,14 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x8003 value = new JT808_0x8003();
             value.OriginalMsgNum = reader.ReadUInt16();
-            value.AgainPackageCount = reader.ReadByte();
+            if (reader.Version == JT808Version.JTT2019)
+            {
+                value.AgainPackageCount = reader.ReadUInt16();
+            }
+            else
+            {
+                value.AgainPackageCount = reader.ReadByte();
+            }
             value.AgainPackageData = reader.ReadArray(value.AgainPackageCount * 2).ToArray();
             return value;
         }
@@ -61,7 +77,14 @@ namespace JT808.Protocol.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8003 value, IJT808Config config)
         {
             writer.WriteUInt16(value.OriginalMsgNum);
-            writer.WriteByte((byte)(value.AgainPackageData.Length / 2));
+            if (writer.Version == JT808Version.JTT2019)
+            {
+                writer.WriteUInt16((byte)(value.AgainPackageData.Length / 2));
+            }
+            else {
+                writer.WriteByte((byte)(value.AgainPackageData.Length / 2));
+            }
+
             writer.WriteArray(value.AgainPackageData);
         }
     }
