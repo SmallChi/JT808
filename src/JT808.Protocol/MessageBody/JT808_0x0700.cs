@@ -36,7 +36,7 @@ namespace JT808.Protocol.MessageBody
             value.CommandId = reader.ReadByte();
             writer.WriteString($"[{value.CommandId.ReadNumber()}]命令字", ((JT808CarDVRCommandID)value.CommandId).ToString());
             writer.WriteStartObject(((JT808CarDVRCommandID)value.CommandId).ToString());
-            config.IJT808_CarDVR_Up_Package.Analyze(ref reader, writer, config);
+            JT808CarDVRSerializer.JT808CarDVRUpPackage.Analyze(ref reader, writer, config);
             writer.WriteEndObject();
             writer.WriteEndObject();
         }
@@ -46,8 +46,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0700 value = new JT808_0x0700();
             value.ReplyMsgNum = reader.ReadUInt16();
             value.CommandId = reader.ReadByte();
-            object obj = config.GetMessagePackFormatterByType(config.IJT808_CarDVR_Up_Package.GetType());
-            value.JT808CarDVRUpPackage = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(obj, ref reader, config);
+            value.JT808CarDVRUpPackage = JT808CarDVRSerializer.JT808CarDVRUpPackage.Deserialize(ref reader, config);
             return value;
         }
 
@@ -55,9 +54,7 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteUInt16(value.ReplyMsgNum);
             writer.WriteByte(value.CommandId);
-            object obj = config.GetMessagePackFormatterByType(config.IJT808_CarDVR_Up_Package.GetType());
-            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(obj, ref writer, value.JT808CarDVRUpPackage, config);
-
+            JT808CarDVRSerializer.JT808CarDVRUpPackage.Serialize(ref writer, value.JT808CarDVRUpPackage, config);
         }
     }
 }

@@ -69,14 +69,6 @@ namespace JT808.Protocol
         /// </summary>
         IJT808_CarDVR_Down_Factory JT808_CarDVR_Down_Factory { get; set; }
         /// <summary>
-        /// 记录仪上行包
-        /// </summary>
-        public IJT808_CarDVR_Up_Package IJT808_CarDVR_Up_Package { get; set; }
-        /// <summary>
-        /// 记录仪下行包
-        /// </summary>
-        public IJT808_CarDVR_Down_Package IJT808_CarDVR_Down_Package { get; set; }
-        /// <summary>
         /// 统一编码
         /// </summary>
         Encoding Encoding { get; set; }

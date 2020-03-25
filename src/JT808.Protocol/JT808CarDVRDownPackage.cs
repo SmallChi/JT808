@@ -109,13 +109,15 @@ namespace JT808.Protocol
                 }
             }
             var carDVRCheckCode = reader.ReadCarDVRCheckCode(currentPosition);
-            if (!config.SkipCarDVRCRCCode)
-            {
-                if (carDVRCheckCode.RealXorCheckCode != carDVRCheckCode.CalculateXorCheckCode)
-                    throw new JT808Exception(JT808ErrorCode.CarDVRCheckCodeNotEqual, $"{reader.RealCheckXorCode}!={reader.CalculateCheckXorCode}");
-            }
             value.CheckCode = reader.ReadByte();
-            writer.WriteNumber($"[{value.CheckCode.ReadNumber()}]校验位", value.CheckCode);
+            if (carDVRCheckCode.RealXorCheckCode != carDVRCheckCode.CalculateXorCheckCode)
+            {
+                writer.WriteString($"[{value.CheckCode.ReadNumber()}]校验位错误", $"{reader.RealCheckXorCode}!={reader.CalculateCheckXorCode}");
+            }
+            else
+            {
+                writer.WriteNumber($"[{value.CheckCode.ReadNumber()}]校验位", value.CheckCode);
+            }
             writer.WriteEndObject();
         }
     }

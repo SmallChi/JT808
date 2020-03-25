@@ -10,6 +10,7 @@ namespace JT808.Protocol
     public static class JT808ConfigExtensions
     {
         private readonly static ConcurrentDictionary<string, JT808Serializer> jT808SerializerDict = new ConcurrentDictionary<string, JT808Serializer>(StringComparer.OrdinalIgnoreCase);
+        private readonly static ConcurrentDictionary<string, JT808CarDVRSerializer> jT808CarDVRSerializer = new ConcurrentDictionary<string, JT808CarDVRSerializer>(StringComparer.OrdinalIgnoreCase);
         public static object GetMessagePackFormatterByType(this IJT808Config jT808Config,Type type)
         {
             if (!jT808Config.FormatterFactory.FormatterDict.TryGetValue(type.GUID, out var formatter))
@@ -34,6 +35,15 @@ namespace JT808.Protocol
         {
             return (IJT808Analyze)GetAnalyzeByType(jT808Config, typeof(T));
         }
+        public static JT808CarDVRSerializer GetCarDVRSerializer(this IJT808Config jT808Config)
+        {
+            if(!jT808CarDVRSerializer.TryGetValue(jT808Config.ConfigId,out var serializer))
+            {
+                serializer = new JT808CarDVRSerializer(jT808Config);
+                jT808CarDVRSerializer.TryAdd(jT808Config.ConfigId, serializer);
+            }
+            return serializer;
+        }       
         public static JT808Serializer GetSerializer(this IJT808Config jT808Config)
         {
             if(!jT808SerializerDict.TryGetValue(jT808Config.ConfigId,out var serializer))

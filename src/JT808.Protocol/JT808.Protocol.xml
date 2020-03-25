@@ -2714,16 +2714,6 @@
             记录仪下行命令字工厂
             </summary>
         </member>
-        <member name="P:JT808.Protocol.IJT808Config.IJT808_CarDVR_Up_Package">
-            <summary>
-            记录仪上行包
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.IJT808Config.IJT808_CarDVR_Down_Package">
-            <summary>
-            记录仪下行包
-            </summary>
-        </member>
         <member name="P:JT808.Protocol.IJT808Config.Encoding">
             <summary>
             统一编码
@@ -5541,7 +5531,8 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8003.AgainPackageCount">
             <summary>
             重传包总数
-            n
+            2013 byte
+            2019 ushort
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8003.AgainPackageData">

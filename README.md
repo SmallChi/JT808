@@ -282,6 +282,12 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo8](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo8.cs)
 
+### 举个栗子9
+
+增加行车记录仪序列化器，既可以单独的存在，也可以组装在808的数据包当中。
+
+[可以参考Simples的Demo9](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo9.cs)
+
 ## NuGet安装
 
 | Package Name          | Version                                            | Downloads                                           |
