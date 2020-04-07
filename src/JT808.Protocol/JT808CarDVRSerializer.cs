@@ -155,7 +155,9 @@ namespace JT808.Protocol
             using(MemoryStream memoryStream = new MemoryStream())
             using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
             {
+                utf8JsonWriter.WriteStartObject();
                 JT808CarDVRUpPackage.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                utf8JsonWriter.WriteEndObject();
                 utf8JsonWriter.Flush();
                 string value = Encoding.UTF8.GetString(memoryStream.ToArray());
                 return value; 
@@ -168,7 +170,9 @@ namespace JT808.Protocol
             using (MemoryStream memoryStream = new MemoryStream())
             using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
             {
+                utf8JsonWriter.WriteStartObject();
                 JT808CarDVRDownPackage.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                utf8JsonWriter.WriteEndObject();
                 utf8JsonWriter.Flush();
                 string value = Encoding.UTF8.GetString(memoryStream.ToArray());
                 return value;
@@ -182,9 +186,9 @@ namespace JT808.Protocol
             using (MemoryStream memoryStream = new MemoryStream())
             using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
             {
-                if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteStartObject();
+                utf8JsonWriter.WriteStartObject();
                 analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
-                if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteEndObject();
+                utf8JsonWriter.WriteEndObject();
                 utf8JsonWriter.Flush();
                 string value = Encoding.UTF8.GetString(memoryStream.ToArray());
                 return value;
@@ -197,7 +201,9 @@ namespace JT808.Protocol
             using (MemoryStream memoryStream = new MemoryStream())
             using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
             {
+                utf8JsonWriter.WriteStartObject();
                 JT808CarDVRUpPackage.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                utf8JsonWriter.WriteEndObject();
                 utf8JsonWriter.Flush();
                 return memoryStream.ToArray();
             }
@@ -209,7 +215,9 @@ namespace JT808.Protocol
             using (MemoryStream memoryStream = new MemoryStream())
             using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
             {
+                utf8JsonWriter.WriteStartObject();
                 JT808CarDVRDownPackage.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                utf8JsonWriter.WriteEndObject();
                 utf8JsonWriter.Flush();
                 return memoryStream.ToArray();
             }
@@ -222,17 +230,12 @@ namespace JT808.Protocol
             using (MemoryStream memoryStream = new MemoryStream())
             using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
             {
-                if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteStartObject();
+                utf8JsonWriter.WriteStartObject();
                 analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
-                if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteEndObject();
+                utf8JsonWriter.WriteEndObject();
                 utf8JsonWriter.Flush();
                 return memoryStream.ToArray();
             }
-        }
-
-        private static bool CheckPackageType(Type type)
-        {
-            return type == typeof(JT808CarDVRUpPackage) || type == typeof(JT808CarDVRDownPackage);
         }
     }
 }

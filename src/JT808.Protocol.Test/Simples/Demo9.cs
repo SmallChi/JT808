@@ -54,14 +54,26 @@ namespace JT808.Protocol.Test.Simples
         [Fact]
         public void Test3()
         {
+            JT808CarDVRDownPackage jT808CarDVRDownPackage = new JT808CarDVRDownPackage();
+            jT808CarDVRDownPackage.CommandId = JT808CarDVRCommandID.设置初始里程.ToByteValue();
+            jT808CarDVRDownPackage.Bodies = new JT808_CarDVR_Down_0xC4()
+            {
+                FirstInstallTime = DateTime.Parse("2020-03-25 10:26:01"),
+                FirstMileage = "1234",
+                RealTime = DateTime.Parse("2020-03-25 10:26:01"),
+                TotalMilage = "123456"
+            };
+            byte[] downData = JT808CarDVRSerializer.Serialize(jT808CarDVRDownPackage);
+            var downHex = downData.ToHexString();
+            Assert.Equal("557AC40014002003251026012003251026010000123400123456A9", downHex);
+        }
+
+        [Fact]
+        public void Test3_1()
+        {
             var data = "557AC40014002003251026012003251026010000123400123456A9".ToHexBytes();
-            JT808CarDVRDownPackage jT808CarDVRDownPackage = JT808CarDVRSerializer.DownDeserialize(data);
-            Assert.Equal(JT808CarDVRCommandID.设置初始里程.ToByteValue(), jT808CarDVRDownPackage.CommandId);
-            var value = jT808CarDVRDownPackage.Bodies as JT808_CarDVR_Down_0xC4;    
-            Assert.Equal(DateTime.Parse("2020-03-25 10:26:01"), value.FirstInstallTime);
-            Assert.Equal(DateTime.Parse("2020-03-25 10:26:01"), value.RealTime);
-            Assert.Equal("1234", value.FirstMileage);
-            Assert.Equal("123456", value.TotalMilage);
+            string json1 = JT808CarDVRSerializer.Analyze<JT808CarDVRDownPackage>(data);
+            string json2 = JT808CarDVRSerializer.DownAnalyze(data);
         }
 
         [Fact]
@@ -80,6 +92,14 @@ namespace JT808.Protocol.Test.Simples
 
         [Fact]
         public void Test5()
+        {
+            var data = "557AC4000000EB".ToHexBytes();
+            string json1 = JT808CarDVRSerializer.Analyze<JT808CarDVRUpPackage>(data);
+            string json2 = JT808CarDVRSerializer.UpAnalyze(data);
+        }
+
+        [Fact]
+        public void Test5_1()
         {
             var data = "557AC4000000EB".ToHexBytes();
             JT808CarDVRUpPackage package = JT808CarDVRSerializer.UpDeserialize(data);

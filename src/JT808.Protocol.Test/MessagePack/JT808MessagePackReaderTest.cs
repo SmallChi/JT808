@@ -238,6 +238,26 @@ namespace JT808.Protocol.Test.MessagePack
             Assert.Equal(JT808Version.JTT2013, reader.Version);
             reader.Version = JT808Version.JTT2019;
             Assert.Equal(JT808Version.JTT2019, reader.Version);
+        }       
+
+        [Fact]
+        public void ReadStringEndChar0Test1()
+        {
+            byte[] array = "736D616C6C636869286B6F696B652900".ToHexBytes();
+            var reader = new JT808MessagePackReader(array);
+            var str = reader.ReadStringEndChar0();
+            Assert.Equal("smallchi(koike)", str);
+            Assert.Equal(16, reader.ReaderCount);
+        }        
+
+        [Fact]
+        public void ReadVirtualArrayEndChar0Test1()
+        {
+            byte[] array = "736D616C6C636869286B6F696B652900".ToHexBytes();
+            var reader = new JT808MessagePackReader(array);
+            var str = reader.ReadVirtualStringEndChar0();
+            Assert.Equal("smallchi(koike)", str);
+            Assert.Equal(0, reader.ReaderCount);
         }
     }
 }

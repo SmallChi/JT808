@@ -157,6 +157,10 @@ namespace JT808.Protocol.MessagePack
         {
             return GetReadOnlySpan(1)[0];
         }
+        public char ReadChar()
+        {
+            return (char)GetReadOnlySpan(1)[0];
+        }
         public byte ReadVirtualByte()
         {
             return GetVirtualReadOnlySpan(1)[0];
@@ -395,6 +399,19 @@ namespace JT808.Protocol.MessagePack
             {
                 return Reader.Slice(ReaderCount);
             }
+        }
+        public string ReadStringEndChar0()
+        {
+            var remainSpans = Reader.Slice(ReaderCount, ReadCurrentRemainContentLength());
+            int length = remainSpans.IndexOf((byte)'\0') + 1;
+            string value = JT808Constants.Encoding.GetString(ReadArray(length).ToArray());
+            return value.Trim('\0');
+        }
+        public string ReadVirtualStringEndChar0()
+        {
+            var remainSpans = Reader.Slice(ReaderCount);
+            string value = JT808Constants.Encoding.GetString(GetVirtualReadOnlySpan(remainSpans.IndexOf((byte)'\0') + 1).ToArray());
+            return value.Trim('\0');
         }
         public int ReadCurrentRemainContentLength()
         {

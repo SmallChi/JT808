@@ -480,5 +480,15 @@ namespace JT808.Protocol.Test.MessagePack
             BinaryPrimitives.WriteUInt16BigEndian(array2, (ushort)a);
             Assert.Equal(array1, array2);
         }
+
+        [Fact]
+        public void WriteStringEndChar0Test()
+        {
+            byte[] array = new byte[22];
+            var msgpackWriter = new JT808MessagePackWriter(array);
+            msgpackWriter.WriteStringEndChar0("smallchi(koike)");
+            var hex = msgpackWriter.FlushAndGetEncodingArray().ToHexString();
+            Assert.Equal("736D616C6C636869286B6F696B652900", hex);
+        }
     }
 }

@@ -64,6 +64,12 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(count);
         }
+        public void WriteChar(char value)
+        {
+            var span = writer.Free;
+            span[0] = (byte)value;
+            writer.Advance(1);
+        }
         public void WriteByte(byte value)
         {
             var span = writer.Free;
@@ -399,11 +405,18 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(len);
         }
+
+        public void WriteStringEndChar0(string value)
+        {
+            WriteString(value);
+            WriteChar('\0');
+        }
+
         public int GetCurrentPosition()
         {
             return writer.WrittenCount;
         }
-        public void  WriteCarDVRCheckCode(int currentPosition)
+        public void WriteCarDVRCheckCode(int currentPosition)
         {
             var carDVRPackage = writer.Written.Slice(currentPosition, writer.WrittenCount- currentPosition);
             byte calculateXorCheckCode = 0;
