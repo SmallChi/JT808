@@ -3,6 +3,7 @@ using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using JT808.Protocol.Extensions;
 using System.Text.Json;
+using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -23,7 +24,7 @@ namespace JT808.Protocol.MessageBody
         /// 重传包总数
         /// n
         /// </summary>
-        public byte AgainPackageCount { get; set; }
+        public ushort AgainPackageCount { get; set; }
         /// <summary>
         /// 重传包 ID 列表
         /// BYTE[2*n]
@@ -35,21 +36,43 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x0005 value = new JT808_0x0005();
             value.OriginalMsgNum = reader.ReadUInt16();
-            value.AgainPackageCount = reader.ReadByte();
+            if(reader.Version== JT808Version.JTT2013)
+            {
+                value.AgainPackageCount = reader.ReadByte();
+            }
+            else
+            {
+                value.AgainPackageCount = reader.ReadUInt16();
+            }
             value.AgainPackageData = reader.ReadArray(value.AgainPackageCount * 2).ToArray();
             return value;
         }
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0005 value, IJT808Config config)
         {
             writer.WriteUInt16(value.OriginalMsgNum);
-            writer.WriteByte((byte)(value.AgainPackageData.Length / 2));
+            if(writer.Version== JT808Version.JTT2013)
+            {
+                writer.WriteByte((byte)(value.AgainPackageData.Length / 2));
+            }
+            else
+            {
+                writer.WriteUInt16((ushort)(value.AgainPackageData.Length / 2));
+            }
             writer.WriteArray(value.AgainPackageData);
         }
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             var originalMsgNum = reader.ReadUInt16();
-            var againPackageCount = reader.ReadByte();
+            ushort againPackageCount;
+            if (reader.Version == JT808Version.JTT2013)
+            {
+                againPackageCount = reader.ReadByte();
+            }
+            else
+            {
+                againPackageCount = reader.ReadUInt16();
+            }
             var againPackageData = reader.ReadArray(againPackageCount * 2);
             writer.WriteNumber($"[{originalMsgNum.ReadNumber()}]原始消息流水号", originalMsgNum);
             writer.WriteNumber($"[{againPackageCount.ReadNumber()}]重传包总数", againPackageCount);
