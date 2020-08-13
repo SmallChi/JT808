@@ -269,6 +269,7 @@ namespace JT808.Protocol
             writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan.ToString()}]消息体属性", messageBodyPropertyValue);
             if (headerMessageBodyProperty.VersionFlag)
             {
+                reader.Version = JT808Version.JTT2019;
                 writer.WriteNumber( "[bit15]保留", 0);
                 writer.WriteBoolean("[bit14]协议版本标识", headerMessageBodyProperty.VersionFlag);
                 writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
@@ -285,6 +286,7 @@ namespace JT808.Protocol
             }
             else
             {
+                reader.Version = JT808Version.JTT2013;
                 writer.WriteNumber("[bit15]保留", 0);
                 writer.WriteNumber("[bit14]保留", 0);
                 writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);

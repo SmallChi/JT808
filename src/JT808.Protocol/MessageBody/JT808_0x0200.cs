@@ -210,7 +210,7 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x0200 value = new JT808_0x0200();
             value.AlarmFlag = reader.ReadUInt32();
-            writer.WriteNumber($"[{value.AlarmFlag.ReadNumber()}]报警标志", value.AlarmFlag);
+            writer.WriteNumber($"[{value.AlarmFlag.ReadBinary().ToString()}]报警标志", value.AlarmFlag);
             value.StatusFlag = reader.ReadUInt32();
             var alarmFlagBits = Convert.ToString(value.AlarmFlag, 2).PadLeft(32, '0').AsSpan();
             writer.WriteStartObject("报警标志对象");
@@ -261,7 +261,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteString($"[bit1]超速报警", $"{alarmFlagBits[1]}");
             writer.WriteString($"[bit0]紧急报警,触动报警开关后触发", $"{alarmFlagBits[0]}");
             writer.WriteEndObject();
-            writer.WriteNumber($"[{value.StatusFlag.ReadNumber()}]状态位标志", value.StatusFlag);
+            writer.WriteNumber($"[{value.StatusFlag.ReadBinary().ToString()}]状态位标志", value.StatusFlag);
             var StatusFlagBits = Convert.ToString(value.StatusFlag, 2).PadLeft(32, '0').AsSpan();
             writer.WriteStartObject("状态标志对象");
             if (reader.Version == JT808Version.JTT2019)

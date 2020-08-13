@@ -110,6 +110,48 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "7E010040540100000000000123456789000A00280032303030303030303132333430303030303030303030303030303030303030736D616C6C63686931323330303030303030303030303030303030303030303030303043484931323301D4C1413132333435B27E".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808Package>(bytes);
+        }    
+        [Fact]
+        public void Test2019_4_1()
+        {
+            var package = JT808MsgId.终端注册.Create2019("22222222222", new JT808_0x0100()
+            {
+                PlateNo = "粤A12346",
+                PlateColor = 2,
+                AreaID = 0,
+                CityOrCountyId = 0,
+                MakerId = "Koike002",
+                TerminalId = "Koike002",
+                TerminalModel = "Koike002"
+            });
+            var data = JT808Serializer.Serialize(package);
+            var hex = data.ToHexString();
+            Assert.Equal("7e0100405401000000000222222222220001000000003030304b6f696b65303032303030303030303030303030303030303030303030304b6f696b65303032303030303030303030303030303030303030303030304b6f696b6530303202d4c1413132333436107e".ToUpper(), hex);
+        }
+
+        [Fact]
+        public void Test2019_4_2()
+        {
+            byte[] bytes = "7e0100405401000000000222222222220001000000003030304b6f696b65303032303030303030303030303030303030303030303030304b6f696b65303032303030303030303030303030303030303030303030304b6f696b6530303202d4c1413132333436107e".ToHexBytes();
+            JT808Package jT808_0X0100 = JT808Serializer.Deserialize<JT808Package>(bytes);
+            Assert.Equal("22222222222", jT808_0X0100.Header.TerminalPhoneNo);
+            Assert.Equal(1, jT808_0X0100.Header.ProtocolVersion);
+            Assert.NotNull(jT808_0X0100.Bodies);
+            JT808_0x0100 body = jT808_0X0100.Bodies as JT808_0x0100;
+            Assert.Equal(0, body.AreaID);
+            Assert.Equal(2, body.PlateColor);
+            Assert.Equal(0, body.CityOrCountyId);
+            Assert.Equal("粤A12346", body.PlateNo.TrimStart());
+            Assert.Equal("Koike002", body.MakerId.TrimStart('0'));
+            Assert.Equal("Koike002", body.TerminalId.TrimStart('0'));
+            Assert.Equal("Koike002", body.TerminalModel.TrimStart('0'));
+        }
+
+        [Fact]
+        public void Test2019_4_3()
+        {
+            byte[] bytes = "7e0100405401000000000222222222220001000000003030304b6f696b65303032303030303030303030303030303030303030303030304b6f696b65303032303030303030303030303030303030303030303030304b6f696b6530303202d4c1413132333436107e".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808Package>(bytes);
         }
     }
 }
