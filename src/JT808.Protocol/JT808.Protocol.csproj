@@ -14,7 +14,7 @@
     <licenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</licenseUrl>
     <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>2.2.11</Version>
+    <Version>2.2.12</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -24,7 +24,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
+    <OutputPath />
+    <NoWarn>1701;1702;CS1591;CS1572;CS1573;CS1574;CS1570;</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|Release|netstandard2.1|AnyCPU'">
     <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
     <OutputPath />
     <NoWarn>1701;1702;CS1591;CS1572;CS1573;CS1574;CS1570;</NoWarn>
