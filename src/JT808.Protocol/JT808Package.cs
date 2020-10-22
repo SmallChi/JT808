@@ -295,7 +295,7 @@ namespace JT808.Protocol
                 writer.WriteEndObject();
                 //2013版本
                 //  3.3.读取终端手机号 
-                var terminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+                var terminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, false);
                 //消息体属性对象 结束
                 writer.WriteString($"[{terminalPhoneNo}]终端手机号", terminalPhoneNo);
             }
@@ -345,7 +345,7 @@ namespace JT808.Protocol
                         {
                             try
                             {
-                                writer.WriteString($"[分包]{description}", reader.ReadVirtualArray(headerMessageBodyProperty.DataLength).ToArray().ToHexString());
+                                writer.WriteString($"[分包]{description}", reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength()).ToArray().ToHexString());
                                 if (instance is IJT808Analyze analyze)
                                 {
                                     //4.2.处理消息体
@@ -362,7 +362,7 @@ namespace JT808.Protocol
                     {
                         try
                         {
-                            writer.WriteString($"{description}", reader.ReadVirtualArray(headerMessageBodyProperty.DataLength).ToArray().ToHexString());
+                            writer.WriteString($"{description}", reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength()).ToArray().ToHexString());
                             if (instance is IJT808Analyze analyze)
                             {
                                 //4.2.处理消息体
