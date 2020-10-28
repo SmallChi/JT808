@@ -5,6 +5,7 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 
 namespace JT808.Protocol
@@ -12,7 +13,7 @@ namespace JT808.Protocol
     /// <summary>
     /// JT808数据包
     /// </summary>
-    public class JT808Package:IJT808MessagePackFormatter<JT808Package>, IJT808Analyze
+    public class JT808Package : IJT808MessagePackFormatter<JT808Package>, IJT808Analyze
     {
         /// <summary>
         /// 起始符
@@ -123,7 +124,7 @@ namespace JT808.Protocol
             //  4.1.判断有无数据体
             if (jT808Package.Header.MessageBodyProperty.DataLength > 0)
             {
-                if(config.MsgIdFactory.TryGetValue(jT808Package.Header.MsgId,out object instance))
+                if (config.MsgIdFactory.TryGetValue(jT808Package.Header.MsgId, out object instance))
                 {
                     if (jT808Package.Header.MessageBodyProperty.IsPackage)
                     {
@@ -262,7 +263,7 @@ namespace JT808.Protocol
             var msgid = reader.ReadUInt16();
             writer.WriteNumber($"[{msgid.ReadNumber()}]消息Id", msgid);
             ushort messageBodyPropertyValue = reader.ReadUInt16();
-            var headerMessageBodyProperty=new JT808HeaderMessageBodyProperty(messageBodyPropertyValue);
+            var headerMessageBodyProperty = new JT808HeaderMessageBodyProperty(messageBodyPropertyValue);
             //消息体属性对象 开始
             writer.WriteStartObject("消息体属性对象");
             ReadOnlySpan<char> messageBodyPropertyReadOnlySpan = messageBodyPropertyValue.ReadBinary();
@@ -270,7 +271,7 @@ namespace JT808.Protocol
             if (headerMessageBodyProperty.VersionFlag)
             {
                 reader.Version = JT808Version.JTT2019;
-                writer.WriteNumber( "[bit15]保留", 0);
+                writer.WriteNumber("[bit15]保留", 0);
                 writer.WriteBoolean("[bit14]协议版本标识", headerMessageBodyProperty.VersionFlag);
                 writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
                 writer.WriteString("[bit10~bit12]数据加密", headerMessageBodyProperty.Encrypt.ToString());
@@ -303,7 +304,7 @@ namespace JT808.Protocol
             var msgNum = reader.ReadUInt16();
             writer.WriteNumber($"[{msgNum.ReadNumber()}]消息流水号", msgNum);
             //  3.5.判断有无分包
-            uint packgeCount=0, packageIndex=0;
+            uint packgeCount = 0, packageIndex = 0;
             if (headerMessageBodyProperty.IsPackage)
             {
                 //3.5.1.读取消息包总数
@@ -345,12 +346,21 @@ namespace JT808.Protocol
                         {
                             try
                             {
+                                //数据体长度正常
                                 writer.WriteString($"[分包]{description}", reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength()).ToArray().ToHexString());
                                 if (instance is IJT808Analyze analyze)
                                 {
                                     //4.2.处理消息体
                                     analyze.Analyze(ref reader, writer, config);
-                                }
+                                } 
+                            }
+                            catch (IndexOutOfRangeException ex)
+                            {
+                                writer.WriteString($"数据体解析异常,无可用数据体进行解析", ex.StackTrace);
+                            }
+                            catch (ArgumentOutOfRangeException ex)
+                            {
+                                writer.WriteString($"[分包]数据体解析异常,无可用数据体进行解析", ex.StackTrace);
                             }
                             catch (Exception ex)
                             {
@@ -362,12 +372,21 @@ namespace JT808.Protocol
                     {
                         try
                         {
+                            //数据体长度正常
                             writer.WriteString($"{description}", reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength()).ToArray().ToHexString());
                             if (instance is IJT808Analyze analyze)
                             {
                                 //4.2.处理消息体
                                 analyze.Analyze(ref reader, writer, config);
                             }
+                        }
+                        catch(IndexOutOfRangeException ex)
+                        {
+                            writer.WriteString($"数据体解析异常,无可用数据体进行解析", ex.StackTrace);
+                        }
+                        catch (ArgumentOutOfRangeException ex)
+                        {
+                            writer.WriteString($"数据体解析异常,无可用数据体进行解析", ex.StackTrace);
                         }
                         catch (Exception ex)
                         {
@@ -403,13 +422,27 @@ namespace JT808.Protocol
                     writer.WriteNull($"[Null]数据体");
                 }
             }
-            // 5.读取校验码
-            reader.ReadByte();
-            writer.WriteNumber($"[{reader.RealCheckXorCode.ReadNumber()}]校验码", reader.RealCheckXorCode);
-            // 6.读取终止位置
-            byte end = reader.ReadEnd();
-            writer.WriteNumber($"[{end.ReadNumber()}]结束", end);
-            writer.WriteEndObject();
+            try
+            {
+                // 5.读取校验码
+                reader.ReadByte();
+                writer.WriteNumber($"[{reader.RealCheckXorCode.ReadNumber()}]校验码", reader.RealCheckXorCode);
+                // 6.读取终止位置
+                byte end = reader.ReadEnd();
+                writer.WriteNumber($"[{end.ReadNumber()}]结束", end);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                writer.WriteString($"数据解析异常,无可用数据进行解析", ex.StackTrace);
+            }
+            catch (Exception ex)
+            {
+                writer.WriteString($"数据解析异常", ex.StackTrace);
+            }
+            finally
+            {
+                writer.WriteEndObject();
+            }
         }
     }
 }
