@@ -65,7 +65,7 @@ namespace JT808.Protocol.Extensions
 
         public static string ReadHexStringLittle(ReadOnlySpan<byte> read, ref int offset, int len)
         {
-            ReadOnlySpan<byte> source = read.Slice(offset, len);
+            //ReadOnlySpan<byte> source = read.Slice(offset, len);
             string hex = HexUtil.DoHexDump(read, offset, len);
             offset += len;
             return hex;

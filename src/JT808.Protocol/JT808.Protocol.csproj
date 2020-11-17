@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net5;</TargetFrameworks>
+    <LangVersion>9.0</LangVersion>
     <Copyright>Copyright 2018.</Copyright>
     <Authors>SmallChi</Authors>
     <PackageId>JT808</PackageId>
@@ -13,27 +13,12 @@
     <PackageProjectUrl>https://github.com/SmallChi/JT808</PackageProjectUrl>
     <licenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</licenseUrl>
     <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
+    <DocumentationFile>JT808.Protocol.xml</DocumentationFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>2.2.14</Version>
+    <Version>2.3.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|Release|netstandard2.0|AnyCPU'">
-    <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
-    <OutputPath />
-    <NoWarn>1701;1702;CS1591;CS1572;CS1573;CS1574;CS1570;</NoWarn>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|Release|netstandard2.1|AnyCPU'">
-    <DocumentationFile>$(OutputPath)$(MSBuildProjectName).xml</DocumentationFile>
-    <OutputPath />
-    <NoWarn>1701;1702;CS1591;CS1572;CS1573;CS1574;CS1570;</NoWarn>
-  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Formatters\MessageBodyFormatters\**" />
     <Compile Remove="Metadata\JT808LocationAttachProperties\**" />
@@ -67,30 +52,38 @@
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
     <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Text.Json" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Text.Json" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net5' ">
+
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
-    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Update="Extensions\JT808PackageExtensionsTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>JT808PackageExtensionsTemplate.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  
+
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <Compile Update="Extensions\JT808PackageExtensionsTemplate.cs">
       <DesignTime>True</DesignTime>
