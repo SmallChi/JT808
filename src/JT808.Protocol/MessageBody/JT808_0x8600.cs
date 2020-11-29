@@ -6,6 +6,7 @@ using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -143,7 +144,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteNumber($"[{ jT808CircleAreaProperty.AreaId.ReadNumber()}]区域ID", jT808CircleAreaProperty.AreaId);
                 jT808CircleAreaProperty.AreaProperty = reader.ReadUInt16();
                 writer.WriteNumber($"[{ jT808CircleAreaProperty.AreaProperty.ReadNumber()}]区域属性", jT808CircleAreaProperty.AreaProperty);
-                ReadOnlySpan<char> areaPropertyBits = Convert.ToString(jT808CircleAreaProperty.AreaProperty, 2).PadLeft(16, '0').AsSpan();
+                ReadOnlySpan<char> areaPropertyBits =string.Join("", Convert.ToString(jT808CircleAreaProperty.AreaProperty, 2).PadLeft(16, '0').Reverse()).AsSpan();
                 writer.WriteStartObject($"区域属性对象[{areaPropertyBits.ToString()}]");
                 if (reader.Version == JT808Version.JTT2019)
                 {

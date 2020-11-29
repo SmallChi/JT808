@@ -5,6 +5,7 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -59,7 +60,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x8300 value = new JT808_0x8300();
             value.TextFlag = reader.ReadByte();
             writer.WriteNumber($"[{ value.TextFlag.ReadNumber()}]文本信息标志位", value.TextFlag);
-            ReadOnlySpan<char> textFlagBits = Convert.ToString(value.TextFlag, 2).PadLeft(8, '0').AsSpan();
+            ReadOnlySpan<char> textFlagBits =string.Join("",Convert.ToString(value.TextFlag, 2).PadLeft(8, '0').Reverse()).AsSpan();
             if (reader.Version == JT808Version.JTT2019)
             {
                 writer.WriteStartObject($"文本信息标志对象[{textFlagBits.ToString()}]");

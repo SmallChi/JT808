@@ -5,6 +5,7 @@ using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -143,7 +144,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0107 jT808_0X0107 = new JT808_0x0107();
             jT808_0X0107.TerminalType = reader.ReadUInt16();
             writer.WriteNumber($"[{jT808_0X0107.TerminalType.ReadNumber()}]终端类型", jT808_0X0107.TerminalType);
-            ReadOnlySpan<char> terminalTypeBits = Convert.ToString(jT808_0X0107.TerminalType, 2).PadLeft(16, '0').AsSpan();
+            ReadOnlySpan<char> terminalTypeBits =string.Join("", Convert.ToString(jT808_0X0107.TerminalType, 2).PadLeft(16, '0').Reverse()).AsSpan();
             writer.WriteStartObject("终端类型");
             writer.WriteString("bit0", terminalTypeBits[0] == '0' ? "不适用客运车辆" : "适用客运车辆");
             writer.WriteString("bit1", terminalTypeBits[1] == '0' ? "不适用危险品车辆" : "适用危险品车辆");
@@ -194,7 +195,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0107.Terminal_Firmware_Version_Num = reader.ReadString(jT808_0X0107.Terminal_Firmware_Version_Length);
             writer.WriteString($"[{firmwareVersionNumSpan.ToArray().ToHexString()}]终端固件版本号", jT808_0X0107.Terminal_Firmware_Version_Num);
             jT808_0X0107.GNSSModule = reader.ReadByte();
-            ReadOnlySpan<char> gNSSModuleBits = Convert.ToString(jT808_0X0107.GNSSModule, 2).PadLeft(8,'0').AsSpan();
+            ReadOnlySpan<char> gNSSModuleBits =string.Join("", Convert.ToString(jT808_0X0107.GNSSModule, 2).PadLeft(8,'0').Reverse()).AsSpan();
             writer.WriteNumber($"[{jT808_0X0107.GNSSModule.ReadNumber()}]GNSS模块属性", jT808_0X0107.GNSSModule);
             writer.WriteStartObject("GNSS模块属性");
             writer.WriteString("bit0", gNSSModuleBits[0] == '0' ? "不支持GPS定位" : "支持GPS定位");
@@ -203,7 +204,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteString("bit3", gNSSModuleBits[3] == '0' ? "不支持Galileo定位" : "支持Galileo定位");
             writer.WriteEndObject();
             jT808_0X0107.CommunicationModule = reader.ReadByte();
-            ReadOnlySpan<char> communicationModuleBits=Convert.ToString(jT808_0X0107.CommunicationModule, 2).PadLeft(8, '0').AsSpan();
+            ReadOnlySpan<char> communicationModuleBits=string.Join("",Convert.ToString(jT808_0X0107.CommunicationModule, 2).PadLeft(8, '0').Reverse()).AsSpan();
             writer.WriteNumber($"[{jT808_0X0107.CommunicationModule.ReadNumber()}]通信模块属性", jT808_0X0107.CommunicationModule);
             writer.WriteStartObject("通信模块属性");
             writer.WriteString("bit0", communicationModuleBits[0] == '0' ? "不支持GPRS通信" : "支持GPRS通信");

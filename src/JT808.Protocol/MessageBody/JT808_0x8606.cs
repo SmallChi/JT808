@@ -6,6 +6,7 @@ using JT808.Protocol.MessagePack;
 using JT808.Protocol.Metadata;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -168,7 +169,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{ value.RouteId.ReadNumber()}]路线ID", value.RouteId);
             value.RouteProperty = reader.ReadUInt16();
             writer.WriteNumber($"[{ value.RouteProperty.ReadNumber()}]路线属性", value.RouteProperty);
-            ReadOnlySpan<char> routeProperty16Bit = Convert.ToString(value.RouteProperty, 2).PadLeft(16, '0').AsSpan();
+            ReadOnlySpan<char> routeProperty16Bit =string.Join("", Convert.ToString(value.RouteProperty, 2).PadLeft(16, '0').Reverse()).AsSpan();
             writer.WriteStartObject($"路线属性对象[{routeProperty16Bit.ToString()}]");
             if (reader.Version == JT808Version.JTT2019)
             {

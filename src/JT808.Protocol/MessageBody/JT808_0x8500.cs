@@ -5,6 +5,7 @@ using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -65,7 +66,7 @@ namespace JT808.Protocol.MessageBody
             {
                 value.ControlFlag = reader.ReadByte();
                 writer.WriteNumber($"[{ value.ControlFlag.ReadNumber()}]控制标志", value.ControlFlag);
-                ReadOnlySpan<char> controlFlagBits = Convert.ToString(value.ControlFlag, 2).PadLeft(8, '0').AsSpan();
+                ReadOnlySpan<char> controlFlagBits =string.Join("", Convert.ToString(value.ControlFlag, 2).PadLeft(8, '0').Reverse()).AsSpan();
                 writer.WriteStartObject($"控制标志对象[{controlFlagBits.ToString()}]");
                 writer.WriteString("[bit1~bit7]保留", controlFlagBits.Slice(1, 7).ToString());
                 writer.WriteString("[bit0]", controlFlagBits[0]=='0'? "车门解锁" : "车门加锁");

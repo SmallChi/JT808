@@ -3,6 +3,7 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -46,7 +47,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{ value.AlarmMsgNum.ReadNumber()}]报警消息流水号", value.AlarmMsgNum);
             value.ManualConfirmAlarmType = reader.ReadUInt32();
             writer.WriteNumber($"[{ value.ManualConfirmAlarmType.ReadNumber()}]人工确认报警类型", value.ManualConfirmAlarmType);
-            ReadOnlySpan<char> manualConfirmAlarmTypeBits = Convert.ToString(value.ManualConfirmAlarmType, 2).PadLeft(32, '0').AsSpan();
+            ReadOnlySpan<char> manualConfirmAlarmTypeBits =string.Join("", Convert.ToString(value.ManualConfirmAlarmType, 2).PadLeft(32, '0').Reverse()).AsSpan();
             writer.WriteStartObject($"人工确认报警对象[{manualConfirmAlarmTypeBits.ToString()}]");
             writer.WriteString("[bit29~bit31]保留", manualConfirmAlarmTypeBits.Slice(29,3).ToString());
             writer.WriteString($"[bit28]{manualConfirmAlarmTypeBits[28]}","确认车辆非法位移报警");
