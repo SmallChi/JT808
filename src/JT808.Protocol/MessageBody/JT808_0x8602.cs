@@ -187,7 +187,7 @@ namespace JT808.Protocol.MessageBody
                 areaProperty.LowRightPointLng = reader.ReadUInt32();
                 writer.WriteNumber($"[{areaProperty.LowRightPointLng.ReadNumber()}]右下点经度", areaProperty.LowRightPointLng);
                 ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(areaProperty.AreaProperty, 2).PadLeft(16, '0').AsSpan();
-                bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
+                bool bit0Flag = areaProperty16Bit.Slice(0,1).ToString().Equals("0");
                 if (!bit0Flag)
                 {
                     areaProperty.StartTime = reader.ReadDateTime6();
@@ -195,7 +195,7 @@ namespace JT808.Protocol.MessageBody
                     areaProperty.EndTime = reader.ReadDateTime6();
                     writer.WriteString($"[{ areaProperty.EndTime.Value.ToString("yyMMddHHmmss")}]起始时间", areaProperty.EndTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
                 }
-                bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2, 1).ToString().Equals("0");
+                bool bit1Flag = areaProperty16Bit.Slice(1, 1).ToString().Equals("0");
                 if (!bit1Flag)
                 {
                     areaProperty.HighestSpeed = reader.ReadUInt16();

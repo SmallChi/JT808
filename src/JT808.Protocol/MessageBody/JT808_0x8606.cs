@@ -192,7 +192,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString($"[bit0]{routeProperty16Bit[0]}", routeProperty16Bit[0] == '1' ? "根据时间" : "无");
             }
             writer.WriteEndObject();
-            bool bit0Flag = routeProperty16Bit.Slice(routeProperty16Bit.Length - 1).ToString().Equals("0");
+            bool bit0Flag = routeProperty16Bit.Slice(0,1).ToString().Equals("0");
             if (!bit0Flag)
             {
                 value.StartTime = reader.ReadDateTime6();
@@ -219,7 +219,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteNumber($"[{ jT808InflectionPointProperty.SectionWidth.ReadNumber()}]路段宽度", jT808InflectionPointProperty.SectionWidth);
                 jT808InflectionPointProperty.SectionProperty = reader.ReadByte();
                 writer.WriteNumber($"[{ jT808InflectionPointProperty.SectionProperty.ReadNumber()}]路段属性", jT808InflectionPointProperty.SectionProperty);
-                ReadOnlySpan<char> sectionProperty8Bit = Convert.ToString(jT808InflectionPointProperty.SectionProperty, 2).PadLeft(8, '0').AsSpan();
+                ReadOnlySpan<char> sectionProperty8Bit =string.Join("", Convert.ToString(jT808InflectionPointProperty.SectionProperty, 2).PadLeft(8, '0').Reverse()).AsSpan();
                 writer.WriteStartObject($"路段属性对象[{sectionProperty8Bit.ToString()}]");
                 writer.WriteString($"[bit4~bit7]保留", sectionProperty8Bit.Slice(4, 4).ToString());
                 writer.WriteString($"[bit3]进路线是否报警给平台-{sectionProperty8Bit[3]}", sectionProperty8Bit[3] == '0' ? "无" : "限速");
@@ -227,7 +227,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString($"[bit1]{sectionProperty8Bit[1]}", sectionProperty8Bit[1] == '0' ? "东经" : "西经");
                 writer.WriteString($"[bit0]{sectionProperty8Bit[0]}", sectionProperty8Bit[0] == '0' ? "无" : "行驶时间");
                 writer.WriteEndObject();
-                bool sectionBit0Flag = sectionProperty8Bit.Slice(sectionProperty8Bit.Length - 1).ToString().Equals("0");
+                bool sectionBit0Flag = sectionProperty8Bit.Slice(0,1).ToString().Equals("0");
                 if (!sectionBit0Flag)
                 {
                     jT808InflectionPointProperty.SectionLongDrivingThreshold = reader.ReadUInt16();
@@ -235,7 +235,7 @@ namespace JT808.Protocol.MessageBody
                     jT808InflectionPointProperty.SectionDrivingUnderThreshold = reader.ReadUInt16();
                     writer.WriteNumber($"[{ jT808InflectionPointProperty.SectionDrivingUnderThreshold.Value.ReadNumber()}]路段行驶不足阈值", jT808InflectionPointProperty.SectionDrivingUnderThreshold.Value);
                 }
-                bool sectionBit1Flag = sectionProperty8Bit.Slice(sectionProperty8Bit.Length - 2, 1).ToString().Equals("0");
+                bool sectionBit1Flag = sectionProperty8Bit.Slice(1, 1).ToString().Equals("0");
                 if (!sectionBit1Flag)
                 {
                     jT808InflectionPointProperty.SectionHighestSpeed = reader.ReadUInt16();

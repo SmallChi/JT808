@@ -201,7 +201,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString($"[bit0]{areaPropertyBits[0]}", areaPropertyBits[0] == '1' ? "根据时间" : "无");
             }
             writer.WriteEndObject();
-            bool bit0Flag = areaPropertyBits.Slice(areaPropertyBits.Length - 1).ToString().Equals("0");
+            bool bit0Flag = areaPropertyBits.Slice(0,1).ToString().Equals("0");
             if (!bit0Flag)
             {
                 value.StartTime = reader.ReadDateTime6();
@@ -209,7 +209,7 @@ namespace JT808.Protocol.MessageBody
                 value.EndTime = reader.ReadDateTime6();
                 writer.WriteString($"[{ value.EndTime.Value.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             }
-            bool bit1Flag = areaPropertyBits.Slice(areaPropertyBits.Length - 2, 1).ToString().Equals("0");
+            bool bit1Flag = areaPropertyBits.Slice(1, 1).ToString().Equals("0");
             if (!bit1Flag)
             {
                 value.HighestSpeed = reader.ReadUInt16();
