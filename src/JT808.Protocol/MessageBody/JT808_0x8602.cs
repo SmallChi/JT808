@@ -186,7 +186,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteNumber($"[{areaProperty.LowRightPointLat.ReadNumber()}]右下点纬度", areaProperty.LowRightPointLat);
                 areaProperty.LowRightPointLng = reader.ReadUInt32();
                 writer.WriteNumber($"[{areaProperty.LowRightPointLng.ReadNumber()}]右下点经度", areaProperty.LowRightPointLng);
-                ReadOnlySpan<char> areaProperty16Bit = Convert.ToString(areaProperty.AreaProperty, 2).PadLeft(16, '0').AsSpan();
+                ReadOnlySpan<char> areaProperty16Bit =string.Join("", Convert.ToString(areaProperty.AreaProperty, 2).PadLeft(16, '0').Reverse()).AsSpan();
                 bool bit0Flag = areaProperty16Bit.Slice(0,1).ToString().Equals("0");
                 if (!bit0Flag)
                 {
