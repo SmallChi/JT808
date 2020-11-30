@@ -212,7 +212,7 @@ namespace JT808.Protocol.MessageBody
             value.AlarmFlag = reader.ReadUInt32();
             writer.WriteNumber($"[{value.AlarmFlag.ReadBinary().ToString()}]报警标志", value.AlarmFlag);
             value.StatusFlag = reader.ReadUInt32();
-            var alarmFlagBits =string.Join("", Convert.ToString(value.AlarmFlag, 2).PadLeft(32, '0').Reverse()).AsSpan();
+            var alarmFlagBits =Convert.ToString(value.AlarmFlag, 2).PadLeft(32, '0').AsSpan();
             writer.WriteStartObject("报警标志对象");
             if (reader.Version == JT808Version.JTT2019)
             {
