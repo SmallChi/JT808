@@ -165,6 +165,10 @@ namespace JT808.Protocol
         /// </summary>
         public const uint JT808_0x8103_0x0031 = 0x0031;
         /// <summary>
+        /// 电子围栏半径（非法位移阈值），单位为米
+        /// </summary>
+        public const uint JT808_0x8103_0x0032 = 0x0032;        
+        /// <summary>
         /// 监控平台电话号码
         /// </summary>
         public const uint JT808_0x8103_0x0040 = 0x0040;

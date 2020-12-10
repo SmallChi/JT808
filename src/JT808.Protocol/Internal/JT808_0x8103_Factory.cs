@@ -46,6 +46,7 @@ namespace JT808.Protocol.Interfaces
             Map.Add(JT808Constants.JT808_0x8103_0x002F, new JT808_0x8103_0x002F());
             Map.Add(JT808Constants.JT808_0x8103_0x0030, new JT808_0x8103_0x0030());
             Map.Add(JT808Constants.JT808_0x8103_0x0031, new JT808_0x8103_0x0031());
+            Map.Add(JT808Constants.JT808_0x8103_0x0032, new JT808_0x8103_0x0032());
             Map.Add(JT808Constants.JT808_0x8103_0x0040, new JT808_0x8103_0x0040());
             Map.Add(JT808Constants.JT808_0x8103_0x0041, new JT808_0x8103_0x0041());
             Map.Add(JT808Constants.JT808_0x8103_0x0042, new JT808_0x8103_0x0042());

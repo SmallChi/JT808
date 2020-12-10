@@ -176,5 +176,51 @@ namespace JT808.Protocol.Test.MessageBody
             string json = JT808Serializer.Analyze<JT808_0x8103>(bytes);
         }
 
+        [Fact]
+        public void Test4()
+        {
+            var JT808_0x8103 = new JT808_0x8103
+            {
+                ParamList = new List<JT808_0x8103_BodyBase>() {
+                                        new JT808_0x8103_0x0110() {
+                                                CollectTimeInterval= 1000,
+                                                 ChannelNo=1,
+                                                   FrameType=1,
+                                                    CollectWay=0,
+                                                     BusId=56789
+                                        }
+                },
+            };
+             var hex = JT808Serializer.Serialize(JT808_0x8103).ToHexString();
+            Assert.Equal("010000011008000003E8C000DDD5", hex);
+        }
+        [Fact]
+        public void Test4_1()
+        {
+            byte[] bytes = "010000011008000003E8C000DDD5".ToHexBytes();
+            var jT808_0x8103 = JT808Serializer.Deserialize<JT808_0x8103>(bytes);
+            var jT808_0x8103_0x0110 = jT808_0x8103.ParamList[0] as JT808_0x8103_0x0110;
+            Assert.Equal(8, jT808_0x8103_0x0110.ParamLength);
+            Assert.Equal(1000u, jT808_0x8103_0x0110.CollectTimeInterval);
+            Assert.Equal(1, jT808_0x8103_0x0110.ChannelNo);
+            Assert.Equal(1, jT808_0x8103_0x0110.FrameType);
+            Assert.Equal(0, jT808_0x8103_0x0110.CollectWay);
+            Assert.Equal(56789, jT808_0x8103_0x0110.BusId);
+        }
+        [Fact]
+        public void Test4_2()
+        {
+            byte[] bytes = "7E8103000e0135123443213039010000011008ffffffffffffffffed7E".ToHexBytes();
+            var jT808= JT808Serializer.Deserialize<JT808Package>(bytes);
+            var jT808_0x8103 = jT808.Bodies as JT808_0x8103;
+           var jT808_0x8103_0x0110 = jT808_0x8103.ParamList[0] as JT808_0x8103_0x0110;
+            Assert.Equal(8, jT808_0x8103_0x0110.ParamLength);
+        }
+        [Fact]
+        public void Test4_3()
+        {
+            byte[] bytes = "010000011008000003E8C000DDD5".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x8103>(bytes);
+        }
     }
 }
