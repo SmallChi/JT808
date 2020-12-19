@@ -17,9 +17,9 @@
 
 ### 数据包[JT808Package]
 
-| 头标识 | 数据头       | 数据体      | 校验码    | 尾标识 |
+| 头标识 | 数据头       | 数据体/分包数据体      | 校验码    | 尾标识 |
 | :----: | :---------: |  :---------: | :----------: | :----: |
-| Begin  | JT808Header |  JT808Bodies |CheckCode | End    |
+| Begin  | JT808Header |  JT808Bodies/JT808SubDataBodies |CheckCode | End    |
 | 7E     | -           | -           | -         | 7E     |
 
 ### 数据头[JT808Header]
@@ -244,7 +244,9 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 1. 第一包数据上来采用平常的方式去解析数据；
 
-2. 当N包数据上来，采用统一分包消息体去接收数据，最后在合并成一条。
+2. 当第二包上来跟第一包的分包数据体(SubDataBodies)进行合并
+
+3. 当N包数据上来，延续步骤2的方式。
 
 > 普及知识点：一般行业分包是按256的整数倍，太多不行，太少也不行，必须刚刚好。
 

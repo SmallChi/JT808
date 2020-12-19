@@ -5,7 +5,6 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
-using System.Runtime.InteropServices;
 using System.Text.Json;
 
 namespace JT808.Protocol
@@ -35,6 +34,10 @@ namespace JT808.Protocol
         /// 数据体
         /// </summary>
         public JT808Bodies Bodies { get; set; }
+        /// <summary>
+        /// 分包数据体
+        /// </summary>
+        public byte[] SubDataBodies { get; set; }
         /// <summary>
         /// 校验码
         /// 从消息头开始，同后一字节异或，直到校验码前一个字节，占用一个字节。
@@ -128,32 +131,14 @@ namespace JT808.Protocol
                 {
                     if (jT808Package.Header.MessageBodyProperty.IsPackage)
                     {
-                        if (jT808Package.Header.PackageIndex > 1)
+                        //读取分包的数据体
+                        try
                         {
-                            try
-                            {
-                                //4.2处理第二包之后的分包数据消息体
-                                JT808SplitPackageBodies jT808SplitPackageBodies = new JT808SplitPackageBodies();
-                                jT808Package.Bodies = jT808SplitPackageBodies.Deserialize(ref reader, config);
-                            }
-                            catch (Exception ex)
-                            {
-                                throw new JT808Exception(JT808ErrorCode.BodiesParseError, ex);
-                            }
+                            jT808Package.SubDataBodies = reader.ReadArray(jT808Package.Header.MessageBodyProperty.DataLength).ToArray();
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            try
-                            {
-                                //4.2.处理消息体
-                                jT808Package.Bodies = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(
-                                    instance,
-                                    ref reader, config);
-                            }
-                            catch (Exception ex)
-                            {
-                                throw new JT808Exception(JT808ErrorCode.BodiesParseError, ex);
-                            }
+                            throw new JT808Exception(JT808ErrorCode.BodiesParseError, ex);
                         }
                     }
                     else
@@ -225,14 +210,25 @@ namespace JT808.Protocol
                 writer.WriteUInt16(value.Header.PackageIndex);
             }
             int headerLength = writer.GetCurrentPosition();
-            // 3.处理数据体部分
-            if (value.Bodies != null)
+            if (value.Header.MessageBodyProperty.IsPackage)
             {
-                if (!value.Bodies.SkipSerialization)
+                if (value.SubDataBodies != null)
                 {
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(value.Bodies,
-                        ref writer, value.Bodies,
-                        config);
+                    //2.5.3.写入分包数据
+                    writer.WriteArray(value.SubDataBodies);
+                }
+            }
+            else
+            {
+                // 3.处理数据体部分
+                if (value.Bodies != null)
+                {
+                    if (!value.Bodies.SkipSerialization)
+                    {
+                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(value.Bodies,
+                            ref writer, value.Bodies,
+                            config);
+                    }
                 }
             }
             //  3.1.处理数据体长度
@@ -318,58 +314,38 @@ namespace JT808.Protocol
             //  4.1.判断有无数据体
             if (headerMessageBodyProperty.DataLength > 0)
             {
-                if (config.MsgIdFactory.TryGetValue(msgid, out object instance))
+                //数据体属性对象 开始
+                writer.WriteStartObject("数据体对象");
+                string description = "数据体";
+                if (headerMessageBodyProperty.IsPackage)
                 {
-                    //数据体属性对象 开始
-                    writer.WriteStartObject("数据体对象");
-                    string description = "数据体";
-                    if (instance is IJT808Description jT808Description)
+                    //读取分包的数据体
+                    try
                     {
-                        //4.2.处理消息体
-                        description = jT808Description.Description;
+                        writer.WriteString($"[分包]数据体", reader.ReadArray(reader.ReadCurrentRemainContentLength()).ToArray().ToHexString());
                     }
-                    if (headerMessageBodyProperty.IsPackage)
+                    catch (IndexOutOfRangeException ex)
                     {
-                        if (packageIndex > 1)
-                        {
-                            try
-                            {
-                                //4.2处理第二包之后的分包数据消息体
-                                writer.WriteString($"[分包]数据体", reader.ReadContent().ToArray().ToHexString());
-                            }
-                            catch (Exception ex)
-                            {
-                                writer.WriteString($"[分包]数据体异常", ex.StackTrace);
-                            }
-                        }
-                        else
-                        {
-                            try
-                            {
-                                //数据体长度正常
-                                writer.WriteString($"[分包]{description}", reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength()).ToArray().ToHexString());
-                                if (instance is IJT808Analyze analyze)
-                                {
-                                    //4.2.处理消息体
-                                    analyze.Analyze(ref reader, writer, config);
-                                } 
-                            }
-                            catch (IndexOutOfRangeException ex)
-                            {
-                                writer.WriteString($"数据体解析异常,无可用数据体进行解析", ex.StackTrace);
-                            }
-                            catch (ArgumentOutOfRangeException ex)
-                            {
-                                writer.WriteString($"[分包]数据体解析异常,无可用数据体进行解析", ex.StackTrace);
-                            }
-                            catch (Exception ex)
-                            {
-                                writer.WriteString($"[分包]数据体异常", ex.StackTrace);
-                            }
-                        }
+                        writer.WriteString($"数据体解析异常,无可用数据体进行解析", ex.StackTrace);
                     }
-                    else
+                    catch (ArgumentOutOfRangeException ex)
                     {
+                        writer.WriteString($"[分包]数据体解析异常,无可用数据体进行解析", ex.StackTrace);
+                    }
+                    catch (Exception ex)
+                    {
+                        writer.WriteString($"[分包]数据体异常", ex.StackTrace);
+                    }
+                }
+                else
+                {
+                    if (config.MsgIdFactory.TryGetValue(msgid, out object instance))
+                    {
+                        if (instance is IJT808Description jT808Description)
+                        {
+                            //4.2.处理消息体
+                            description = jT808Description.Description;
+                        }
                         try
                         {
                             //数据体长度正常
@@ -380,7 +356,7 @@ namespace JT808.Protocol
                                 analyze.Analyze(ref reader, writer, config);
                             }
                         }
-                        catch(IndexOutOfRangeException ex)
+                        catch (IndexOutOfRangeException ex)
                         {
                             writer.WriteString($"数据体解析异常,无可用数据体进行解析", ex.StackTrace);
                         }
@@ -393,13 +369,13 @@ namespace JT808.Protocol
                             writer.WriteString($"数据体异常", ex.StackTrace);
                         }
                     }
-                    //数据体属性对象 结束
-                    writer.WriteEndObject();
+                    else
+                    {
+                        writer.WriteString($"[未知]数据体", reader.ReadArray(reader.ReadCurrentRemainContentLength()).ToArray().ToHexString());
+                    }
                 }
-                else
-                {
-                    writer.WriteNull($"[Null]数据体");
-                }
+                //数据体属性对象 结束
+                writer.WriteEndObject();
             }
             else
             {

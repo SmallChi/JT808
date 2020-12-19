@@ -5,6 +5,8 @@ using System.Reflection;
 using Xunit;
 using System.Linq;
 using JT808.Protocol.Internal;
+using System.IO;
+using System.Drawing;
 
 namespace JT808.Protocol.Test.Simples
 {
@@ -95,28 +97,18 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal(10, jT808_0X0801_10.Header.PackageIndex);
             Assert.Equal(10, jT808_0X0801_10.Header.PackgeCount);
 
-
-            var jT808_0X0801_body_1 = jT808_0X0801_1.Bodies as JT808_0x0801;
-            var jT808_0X0801_body_2 = jT808_0X0801_2.Bodies as JT808SplitPackageBodies;
-            var jT808_0X0801_body_3 = jT808_0X0801_3.Bodies as JT808SplitPackageBodies;
-            var jT808_0X0801_body_4 = jT808_0X0801_4.Bodies as JT808SplitPackageBodies;
-            var jT808_0X0801_body_5 = jT808_0X0801_5.Bodies as JT808SplitPackageBodies;
-            var jT808_0X0801_body_6 = jT808_0X0801_6.Bodies as JT808SplitPackageBodies;
-            var jT808_0X0801_body_7 = jT808_0X0801_7.Bodies as JT808SplitPackageBodies;
-            var jT808_0X0801_body_8 = jT808_0X0801_8.Bodies as JT808SplitPackageBodies;
-            var jT808_0X0801_body_9 = jT808_0X0801_9.Bodies as JT808SplitPackageBodies;
-            var jT808_0X0801_body_10 = jT808_0X0801_10.Bodies as JT808SplitPackageBodies;
-            var imageBytes = jT808_0X0801_body_1.MultimediaDataPackage
-                                            .Concat(jT808_0X0801_body_2.Data)
-                                            .Concat(jT808_0X0801_body_3.Data)
-                                            .Concat(jT808_0X0801_body_4.Data)
-                                            .Concat(jT808_0X0801_body_5.Data)
-                                            .Concat(jT808_0X0801_body_6.Data)
-                                            .Concat(jT808_0X0801_body_7.Data)
-                                            .Concat(jT808_0X0801_body_8.Data)
-                                            .Concat(jT808_0X0801_body_9.Data)
-                                            .Concat(jT808_0X0801_body_10.Data).ToArray();
-            //using (MemoryStream ms = new MemoryStream(imageBytes))
+            var SplitBodyDataTotal = jT808_0X0801_1.SubDataBodies
+                                            .Concat(jT808_0X0801_2.SubDataBodies)
+                                            .Concat(jT808_0X0801_3.SubDataBodies)
+                                            .Concat(jT808_0X0801_4.SubDataBodies)
+                                            .Concat(jT808_0X0801_5.SubDataBodies)
+                                            .Concat(jT808_0X0801_6.SubDataBodies)
+                                            .Concat(jT808_0X0801_7.SubDataBodies)
+                                            .Concat(jT808_0X0801_8.SubDataBodies)
+                                            .Concat(jT808_0X0801_9.SubDataBodies)
+                                            .Concat(jT808_0X0801_10.SubDataBodies).ToArray();
+            JT808_0x0801 jT808_0x0801 = JT808Serializer.Deserialize<JT808_0x0801>(SplitBodyDataTotal);
+            //using (MemoryStream ms = new MemoryStream(jT808_0x0801.MultimediaDataPackage))
             //{
             //    Image image = Image.FromStream(ms);
             //    image.Save("test.jpeg");

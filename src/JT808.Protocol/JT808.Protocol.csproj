@@ -17,9 +17,13 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Version>2.3.2</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <AnalysisLevel>5.0</AnalysisLevel>
+    <AnalysisLevel>latest</AnalysisLevel>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <Optimize>false</Optimize>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

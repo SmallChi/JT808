@@ -3408,6 +3408,11 @@
             终止符
             </summary>
         </member>
+        <member name="P:JT808.Protocol.JT808HeaderPackage.Version">
+            <summary>
+            808版本号
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.JT808HeaderPackage.OriginalData">
             <summary>
             原数据
@@ -3443,6 +3448,11 @@
             数据体
             </summary>
         </member>
+        <member name="P:JT808.Protocol.JT808Package.SubDataBodies">
+            <summary>
+            分包数据体
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.JT808Package.CheckCode">
             <summary>
             校验码
@@ -3466,11 +3476,6 @@
             </summary>
             <param name="bytes"></param>
             <returns></returns>
-        </member>
-        <member name="T:JT808.Protocol.JT808SplitPackageBodies">
-            <summary>
-            统一分包数据体
-            </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x00">
             <summary>

@@ -1,16 +1,13 @@
-﻿using JT808.Protocol.Attributes;
-using JT808.Protocol.Enums;
+﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Exceptions;
-using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
-using System;
 
 namespace JT808.Protocol
 {
     /// <summary>
     /// JT808头部数据包
     /// </summary>
-    public ref struct JT808HeaderPackage
+    public record  JT808HeaderPackage
     {
         /// <summary>
         /// 起始符
@@ -23,7 +20,7 @@ namespace JT808.Protocol
         /// <summary>
         /// 数据体
         /// </summary>
-        public ReadOnlySpan<byte> Bodies { get; set; }
+        public byte[] Bodies { get; set; }
         /// <summary>
         /// 校验码
         /// 从消息头开始，同后一字节异或，直到校验码前一个字节，占用一个字节。
@@ -33,7 +30,10 @@ namespace JT808.Protocol
         /// 终止符
         /// </summary>
         public byte End { get; set; }
-        public JT808Version Version 
+        /// <summary>
+        /// 808版本号
+        /// </summary>
+        public  JT808Version Version 
         { 
             get {
                 if (Header != null)
@@ -63,9 +63,9 @@ namespace JT808.Protocol
         /// <summary>
         /// 原数据
         /// </summary>
-        public ReadOnlySpan<byte> OriginalData { get; set; }
+        public byte[] OriginalData { get; set; }
 
-        public JT808HeaderPackage(ref JT808MessagePackReader reader, IJT808Config config)
+        public  JT808HeaderPackage(ref JT808MessagePackReader reader, IJT808Config config)
         {
             // 1. 验证校验和
             if (!config.SkipCRCCode)
@@ -115,18 +115,18 @@ namespace JT808.Protocol
             //  4.1.判断有无数据体
             if (this.Header.MessageBodyProperty.DataLength > 0)
             {
-                this.Bodies = reader.ReadContent();
+                this.Bodies = reader.ReadContent().ToArray();
             }
             else
             {
-                this.Bodies = ReadOnlySpan<byte>.Empty;
+                this.Bodies = default;
             }
             // 5.读取校验码
             this.CheckCode = reader.ReadByte();
             // 6.读取终止位置
             this.End = reader.ReadEnd();
             // ---------------解包完成--------------
-            this.OriginalData = reader.SrcBuffer;
+            this.OriginalData = reader.SrcBuffer.ToArray();
         }
     }
 }
