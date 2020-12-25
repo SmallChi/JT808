@@ -3477,6 +3477,28 @@
             <param name="bytes"></param>
             <returns></returns>
         </member>
+        <member name="M:JT808.Protocol.JT808Serializer.Analyze(System.UInt16,System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Text.Json.JsonWriterOptions,System.Int32)">
+            <summary>
+            用于分包组合
+            </summary>
+            <param name="msgid">对应消息id</param>
+            <param name="bytes">组合的数据体</param>
+            <param name="version">对应版本号</param>
+            <param name="options">序列化选项</param>
+            <param name="minBufferSize">默认65535</param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808Serializer.AnalyzeJsonBuffer(System.UInt16,System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Text.Json.JsonWriterOptions,System.Int32)">
+            <summary>
+            用于分包组合
+            </summary>
+            <param name="msgid">对应消息id</param>
+            <param name="bytes">组合的数据体</param>
+            <param name="version">对应版本号</param>
+            <param name="options">序列化选项</param>
+            <param name="minBufferSize">默认65535</param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x00">
             <summary>
             采集记录仪执行标准版本

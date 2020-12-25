@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net5;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;</TargetFrameworks>
     <LangVersion>9.0</LangVersion>
     <Copyright>Copyright 2018.</Copyright>
     <Authors>SmallChi</Authors>
@@ -15,7 +15,7 @@
     <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
     <DocumentationFile>JT808.Protocol.xml</DocumentationFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>2.3.3</Version>
+    <Version>2.3.4</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AnalysisLevel>latest</AnalysisLevel>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>

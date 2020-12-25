@@ -213,6 +213,85 @@ namespace JT808.Protocol
             }
         }
 
+        /// <summary>
+        /// 用于分包组合
+        /// </summary>
+        /// <param name="msgid">对应消息id</param>
+        /// <param name="bytes">组合的数据体</param>
+        /// <param name="version">对应版本号</param>
+        /// <param name="options">序列化选项</param>
+        /// <param name="minBufferSize">默认65535</param>
+        /// <returns></returns>
+        public string Analyze(ushort msgid,ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 65535)
+        {
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
+            try
+            {
+                if(jT808Config.MsgIdFactory.TryGetValue(msgid,out object msgHandle))
+                {
+                    if (jT808Config.FormatterFactory.FormatterDict.TryGetValue(msgHandle.GetType().GUID, out object instance))
+                    {
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
+                        {
+                            JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
+                            utf8JsonWriter.WriteStartObject();
+                            instance.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                            utf8JsonWriter.WriteEndObject();
+                            utf8JsonWriter.Flush();
+                            string value = Encoding.UTF8.GetString(memoryStream.ToArray());
+                            return value;
+                        }
+                    }
+                    return $"未找到对应的0x{msgid.ToString("X2")}消息数据体类型";
+                }
+                return $"未找到对应的0x{msgid.ToString("X2")}消息数据体类型";
+            }
+            finally
+            {
+                JT808ArrayPool.Return(buffer);
+            }
+        }
+
+        /// <summary>
+        /// 用于分包组合
+        /// </summary>
+        /// <param name="msgid">对应消息id</param>
+        /// <param name="bytes">组合的数据体</param>
+        /// <param name="version">对应版本号</param>
+        /// <param name="options">序列化选项</param>
+        /// <param name="minBufferSize">默认65535</param>
+        /// <returns></returns>
+        public byte[] AnalyzeJsonBuffer(ushort msgid, ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 65535)
+        {
+            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
+            try
+            {
+                if (jT808Config.MsgIdFactory.TryGetValue(msgid, out object msgHandle))
+                {
+                    if (jT808Config.FormatterFactory.FormatterDict.TryGetValue(msgHandle.GetType().GUID, out object instance))
+                    {
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
+                        {
+                            JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
+                            utf8JsonWriter.WriteStartObject();
+                            instance.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                            utf8JsonWriter.WriteEndObject();
+                            utf8JsonWriter.Flush();
+                            return memoryStream.ToArray();
+                        }
+                    }
+                    return Encoding.UTF8.GetBytes($"未找到对应的0x{msgid.ToString("X2")}消息数据体类型");
+                }
+                return Encoding.UTF8.GetBytes($"未找到对应的0x{msgid.ToString("X2")}消息数据体类型");
+            }
+            finally
+            {
+                JT808ArrayPool.Return(buffer);
+            }
+        }
+
         public byte[] AnalyzeJsonBuffer(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
