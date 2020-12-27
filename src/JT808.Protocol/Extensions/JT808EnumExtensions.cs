@@ -181,6 +181,10 @@ namespace JT808.Protocol.Extensions
             for (int i = 0; i < digit; i++)
             {
                 uint pow = (uint)1 << i;
+                if(pow > value)
+                {
+                    break;
+                }
                 uint ret = value & pow;
                 if (ret != 0)
                 {
