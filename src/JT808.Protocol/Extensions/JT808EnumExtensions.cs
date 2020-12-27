@@ -170,16 +170,23 @@ namespace JT808.Protocol.Extensions
         /// <param name="digit">位数(8,16,32)</param>
         /// <param name="ignoreUnknown">是否忽略未知数据</param>
         /// <returns></returns>
-        public static IEnumerable<T> GetEnumTypes<T>(this int value, int digit, bool ignoreUnknown = false) where T : Enum
+        public static IEnumerable<T> GetEnumTypes<T>(this uint value, int digit, bool ignoreUnknown = false) where T : Enum
         {
             List<T> values = new List<T>();
+            if (digit > 32)
+            {
+                digit = 32;
+            }
+
             for (int i = 0; i < digit; i++)
             {
-                if (Math.Pow(2, i) <= value) continue;
-                values.Add((T)Enum.ToObject(typeof(T), (int)Math.Pow(2, i - 1)));
-                value = value - (int)Math.Pow(2, i - 1);
-                i = 0;
-                if (value <= 0) break;
+                uint pow = (uint)1 << i;
+                uint ret = value & pow;
+                if (ret != 0)
+                {
+                    values.Add((T)Enum.ToObject(typeof(T), pow));
+                }
+
             }
             if (ignoreUnknown)
             {
