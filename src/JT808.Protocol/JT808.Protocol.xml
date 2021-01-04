@@ -943,7 +943,7 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetEnumTypes``1(System.Int32,System.Int32,System.Boolean)">
+        <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetEnumTypes``1(System.UInt32,System.Int32,System.Boolean)">
             <summary>
             根据值获取对应枚举类型集合
             </summary>
