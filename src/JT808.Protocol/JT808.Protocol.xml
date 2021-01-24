@@ -8012,7 +8012,20 @@
             </summary>
             <param name="fromBase">>D2： 10  X2：16</param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull6(System.String)">
+            <summary>
+            yyMMddHHmmss
+            </summary>
+            <param name="fromBase">>D2： 10  X2：16</param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime5(System.String)">
+            <summary>
+            HH-mm-ss-msms
+            HH-mm-ss-fff
+            </summary>
+            <param name="format">D2： 10  X2：16</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull5(System.String)">
             <summary>
             HH-mm-ss-msms
             HH-mm-ss-fff
@@ -8025,7 +8038,19 @@
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull4(System.String)">
+            <summary>
+            YYYYMMDD
+            </summary>
+            <param name="format">D2： 10  X2：16</param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime3(System.String)">
+            <summary>
+            YYMMDD
+            </summary>
+            <param name="format">D2： 10  X2：16</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull3(System.String)">
             <summary>
             YYMMDD
             </summary>
@@ -8038,7 +8063,22 @@
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime6(System.Nullable{System.DateTime},System.Int32)">
+            <summary>
+            yyMMddHHmmss
+            </summary>
+            <param name="value"></param>
+            <param name="fromBase"></param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime5(System.DateTime,System.Int32)">
+            <summary>
+            HH-mm-ss-msms
+            HH-mm-ss-fff
+            </summary>
+            <param name="value"></param>
+            <param name="fromBase"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime5(System.Nullable{System.DateTime},System.Int32)">
             <summary>
             HH-mm-ss-msms
             HH-mm-ss-fff
@@ -8055,7 +8095,25 @@
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime4(System.Nullable{System.DateTime},System.Int32)">
+            <summary>
+            YYYYMMDD
+            BCD[4]
+            数据形如：20200101
+            </summary>
+            <param name="value"></param>
+            <param name="fromBase"></param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime3(System.DateTime,System.Int32)">
+            <summary>
+            YYMMDD
+            BCD[4]
+            数据形如：20200101
+            </summary>
+            <param name="value"></param>
+            <param name="fromBase"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime3(System.Nullable{System.DateTime},System.Int32)">
             <summary>
             YYMMDD
             BCD[4]

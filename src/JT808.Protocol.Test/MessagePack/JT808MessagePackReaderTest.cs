@@ -73,6 +73,19 @@ namespace JT808.Protocol.Test.MessagePack
             Assert.Equal(JT808Package.EndFlag, jT808MessagePackReader.ReadEnd());
         }
 
+        [Fact]
+        public void ReadDateTimeNullTest()
+        {
+            byte[] bytes = "7E0000000000000000000000000000007E".ToHexBytes();
+            JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes);
+            Assert.Equal(JT808Package.BeginFlag, jT808MessagePackReader.ReadStart());
+            Assert.Null(jT808MessagePackReader.ReadDateTimeNull4());
+            Assert.Null(jT808MessagePackReader.ReadDateTimeNull5());
+            Assert.Null(jT808MessagePackReader.ReadDateTimeNull6());
+            Assert.Equal(JT808Package.EndFlag, jT808MessagePackReader.ReadEnd());
+        }
+
+
         [Theory]
         [InlineData("smallchi(Koike)")]
         public void ReadStringTest(string str)

@@ -172,6 +172,34 @@ namespace JT808.Protocol.MessagePack
             writer.Advance(6);
         }
         /// <summary>
+        /// yyMMddHHmmss
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fromBase"></param>
+        public void WriteDateTime6(DateTime? value, int fromBase = 16)
+        {
+            var span = writer.Free;
+            if (value == null || value.HasValue)
+            {
+                span[0] = 0;
+                span[1] = 0;
+                span[2] = 0;
+                span[3] = 0;
+                span[4] = 0;
+                span[5] = 0;
+            }
+            else
+            {
+                span[0] = Convert.ToByte(value.Value.ToString("yy"), fromBase);
+                span[1] = Convert.ToByte(value.Value.ToString("MM"), fromBase);
+                span[2] = Convert.ToByte(value.Value.ToString("dd"), fromBase);
+                span[3] = Convert.ToByte(value.Value.ToString("HH"), fromBase);
+                span[4] = Convert.ToByte(value.Value.ToString("mm"), fromBase);
+                span[5] = Convert.ToByte(value.Value.ToString("ss"), fromBase);
+            }
+            writer.Advance(6);
+        }
+        /// <summary>
         /// HH-mm-ss-msms
         /// HH-mm-ss-fff
         /// </summary>
@@ -186,6 +214,34 @@ namespace JT808.Protocol.MessagePack
             var msSpan = value.Millisecond.ToString().PadLeft(4,'0').AsSpan();
             span[3] = Convert.ToByte(msSpan.Slice(0, 2).ToString(), fromBase);
             span[4] = Convert.ToByte(msSpan.Slice(2, 2).ToString(), fromBase);
+            writer.Advance(5);
+        }
+        /// <summary>
+        /// HH-mm-ss-msms
+        /// HH-mm-ss-fff
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fromBase"></param>
+        public void WriteDateTime5(DateTime? value, int fromBase = 16)
+        {
+            var span = writer.Free;
+            if (value == null || value.HasValue)
+            {
+                span[0] = 0;
+                span[1] = 0;
+                span[2] = 0;
+                span[3] = 0;
+                span[4] = 0;
+            }
+            else
+            {
+                span[0] = Convert.ToByte(value.Value.ToString("HH"), fromBase);
+                span[1] = Convert.ToByte(value.Value.ToString("mm"), fromBase);
+                span[2] = Convert.ToByte(value.Value.ToString("ss"), fromBase);
+                var msSpan = value.Value.Millisecond.ToString().PadLeft(4, '0').AsSpan();
+                span[3] = Convert.ToByte(msSpan.Slice(0, 2).ToString(), fromBase);
+                span[4] = Convert.ToByte(msSpan.Slice(2, 2).ToString(), fromBase);
+            }
             writer.Advance(5);
         }
         public void WriteUTCDateTime(DateTime value)
@@ -217,6 +273,35 @@ namespace JT808.Protocol.MessagePack
             span[3] = Convert.ToByte(value.ToString("dd"), fromBase);
             writer.Advance(4);
         }
+
+        /// <summary>
+        /// YYYYMMDD
+        /// BCD[4]
+        /// 数据形如：20200101
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fromBase"></param>
+        public void WriteDateTime4(DateTime? value, int fromBase = 16)
+        {
+            var span = writer.Free;
+            if (value==null || value.HasValue)
+            {
+                span[0] = 0;
+                span[1] = 0;
+                span[2] = 0;
+                span[3] = 0;
+            }
+            else
+            {
+                var yearSpan = value.Value.ToString("yyyy").AsSpan();
+                span[0] = Convert.ToByte(yearSpan.Slice(0, 2).ToString(), fromBase);
+                span[1] = Convert.ToByte(yearSpan.Slice(2, 2).ToString(), fromBase);
+                span[2] = Convert.ToByte(value.Value.ToString("MM"), fromBase);
+                span[3] = Convert.ToByte(value.Value.ToString("dd"), fromBase);
+            }
+            writer.Advance(4);
+        }
+
         /// <summary>
         /// YYMMDD
         /// BCD[4]
@@ -230,6 +315,31 @@ namespace JT808.Protocol.MessagePack
             span[0] = Convert.ToByte(value.ToString("yy"), fromBase);
             span[1] = Convert.ToByte(value.ToString("MM"), fromBase);
             span[2] = Convert.ToByte(value.ToString("dd"), fromBase);
+            writer.Advance(3);
+        }
+
+        /// <summary>
+        /// YYMMDD
+        /// BCD[4]
+        /// 数据形如：20200101
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fromBase"></param>
+        public void WriteDateTime3(DateTime? value, int fromBase = 16)
+        {
+            var span = writer.Free;
+            if (value == null || value.HasValue)
+            {
+                span[0] = 0;
+                span[1] = 0;
+                span[2] = 0;
+            }
+            else
+            {
+                span[0] = Convert.ToByte(value.Value.ToString("yy"), fromBase);
+                span[1] = Convert.ToByte(value.Value.ToString("MM"), fromBase);
+                span[2] = Convert.ToByte(value.Value.ToString("dd"), fromBase);
+            }
             writer.Advance(3);
         }
         public void WriteXor(int start, int end)

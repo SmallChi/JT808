@@ -263,6 +263,31 @@ namespace JT808.Protocol.MessagePack
             return d;
         }
         /// <summary>
+        /// yyMMddHHmmss
+        /// </summary>
+        /// <param name="fromBase">>D2： 10  X2：16</param>
+        public DateTime? ReadDateTimeNull6(string format = "X2")
+        {
+            DateTime? d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(6);
+                int year = Convert.ToInt32(readOnlySpan[0].ToString(format)) ;
+                int month = Convert.ToInt32(readOnlySpan[1].ToString(format));
+                int day = Convert.ToInt32(readOnlySpan[2].ToString(format));
+                int hour = Convert.ToInt32(readOnlySpan[3].ToString(format));
+                int minute = Convert.ToInt32(readOnlySpan[4].ToString(format));
+                int second = Convert.ToInt32(readOnlySpan[5].ToString(format));
+                if (year == 0 && month == 0 && day == 0 && hour == 0 && minute == 0 && second == 0) return null;
+                d = new DateTime(year + JT808Constants.DateLimitYear, month, day, hour, minute, second);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return d;
+        }
+        /// <summary>
         /// HH-mm-ss-msms
         /// HH-mm-ss-fff
         /// </summary>
@@ -274,8 +299,8 @@ namespace JT808.Protocol.MessagePack
             {
                 var readOnlySpan = GetReadOnlySpan(5);
                 StringBuilder sb = new StringBuilder(4);
-                sb.Append(readOnlySpan[3].ToString("X2"));
-                sb.Append(readOnlySpan[4].ToString("X2"));
+                sb.Append(readOnlySpan[3].ToString(format));
+                sb.Append(readOnlySpan[4].ToString(format));
                 d = new DateTime(
                 DateTime.Now.Year,
                 DateTime.Now.Month,
@@ -292,6 +317,40 @@ namespace JT808.Protocol.MessagePack
             return d;
         }
         /// <summary>
+        /// HH-mm-ss-msms
+        /// HH-mm-ss-fff
+        /// </summary>
+        /// <param name="format">D2： 10  X2：16</param>
+        public DateTime? ReadDateTimeNull5(string format = "X2")
+        {
+            DateTime? d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(5);
+                StringBuilder sb = new StringBuilder(4);
+                sb.Append(readOnlySpan[3].ToString("X2"));
+                sb.Append(readOnlySpan[4].ToString("X2"));
+                int hour = Convert.ToInt32(readOnlySpan[0].ToString(format));
+                int minute = Convert.ToInt32(readOnlySpan[1].ToString(format));
+                int second = Convert.ToInt32(readOnlySpan[2].ToString(format));
+                int millisecond = Convert.ToInt32(sb.ToString().TrimStart());
+                if (hour == 0 && minute == 0 && second == 0 && millisecond == 0) return null;
+                d = new DateTime(
+                DateTime.Now.Year,
+                DateTime.Now.Month,
+                DateTime.Now.Day,
+                hour,
+                minute,
+                second,
+                millisecond);
+            }
+            catch
+            {
+                return null;
+            }
+            return d;
+        }
+        /// <summary>
         /// YYYYMMDD
         /// </summary>
         /// <param name="format">D2： 10  X2：16</param>
@@ -302,8 +361,8 @@ namespace JT808.Protocol.MessagePack
             {
                 var readOnlySpan = GetReadOnlySpan(4);
                 StringBuilder sb = new StringBuilder(4);
-                sb.Append(readOnlySpan[0].ToString("X2"));
-                sb.Append(readOnlySpan[1].ToString("X2"));
+                sb.Append(readOnlySpan[0].ToString(format));
+                sb.Append(readOnlySpan[1].ToString(format));
                 d = new DateTime(
                 Convert.ToInt32(sb.ToString()),
                 Convert.ToInt32(readOnlySpan[2].ToString(format)),
@@ -314,6 +373,31 @@ namespace JT808.Protocol.MessagePack
                 d = JT808Constants.UTCBaseTime;
             }
             return d;   
+        }
+        /// <summary>
+        /// YYYYMMDD
+        /// </summary>
+        /// <param name="format">D2： 10  X2：16</param>
+        public DateTime? ReadDateTimeNull4(string format = "X2")
+        {
+            DateTime? d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(4);
+                StringBuilder sb = new StringBuilder(4);
+                sb.Append(readOnlySpan[0].ToString(format));
+                sb.Append(readOnlySpan[1].ToString(format));
+                int year = Convert.ToInt32(sb.ToString());
+                int month = Convert.ToInt32(readOnlySpan[2].ToString(format));
+                int day = Convert.ToInt32(readOnlySpan[3].ToString(format));
+                if (year == 0 && month == 0 && day == 0) return null;
+                d = new DateTime(year, month, day);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return d;
         }
         /// <summary>
         /// YYMMDD
@@ -329,6 +413,30 @@ namespace JT808.Protocol.MessagePack
                 Convert.ToInt32(readOnlySpan[0].ToString(format)) + JT808Constants.DateLimitYear,
                 Convert.ToInt32(readOnlySpan[1].ToString(format)),
                 Convert.ToInt32(readOnlySpan[2].ToString(format)));
+            }
+            catch (Exception)
+            {
+                d = JT808Constants.UTCBaseTime;
+            }
+            return d;
+        }
+        /// <summary>
+        /// YYMMDD
+        /// </summary>
+        /// <param name="format">D2： 10  X2：16</param>
+        public DateTime? ReadDateTimeNull3(string format = "X2")
+        {
+            DateTime? d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(3);
+                int year =Convert.ToInt32(readOnlySpan[0].ToString(format));
+                int month=Convert.ToInt32(readOnlySpan[1].ToString(format));
+                int day = Convert.ToInt32(readOnlySpan[2].ToString(format));
+                if (year == 0 && month == 0 && day == 0) return null;
+                d = new DateTime(
+                 year + JT808Constants.DateLimitYear, month,day
+                );
             }
             catch (Exception)
             {

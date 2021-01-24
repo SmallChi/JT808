@@ -78,6 +78,25 @@ namespace JT808.Protocol.Test.MessagePack
         }
 
         [Fact]
+        public void WriteDateTimeNullTest()
+        {
+            byte[] array = new byte[4096];
+            var msgpackWriter = new JT808MessagePackWriter(array);
+            msgpackWriter.WriteStart();
+            msgpackWriter.WriteDateTime4(null);
+            msgpackWriter.WriteDateTime5(null);
+            msgpackWriter.WriteDateTime6(null);
+            msgpackWriter.WriteEnd();
+            msgpackWriter.WriteEncode();
+            //===========output=========
+            //WriteDateTime4=>YYYYMMDD=>00 00 00 00
+            //WriteDateTime5=>HH-mm-ss-fff|HH-mm-ss-msms=>00 00 00 00 00
+            //WriteDateTime6=>yyMMddHHmmss=>00 00 00 00
+            var encodeBytes = msgpackWriter.FlushAndGetEncodingArray().ToHexString();
+            Assert.Equal("7E0000000000000000000000000000007E".Replace(" ", ""), encodeBytes);
+        }
+
+        [Fact]
         public void WriteUTCDateTimeTest()
         {
             byte[] array = new byte[4096];
