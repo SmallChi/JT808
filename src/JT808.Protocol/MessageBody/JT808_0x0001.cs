@@ -30,14 +30,14 @@ namespace JT808.Protocol.MessageBody
         /// 结果
         /// 0：成功/确认；1：失败；2：消息有误；3：不支持
         /// </summary>
-        public JT808TerminalResult JT808TerminalResult { get; set; }
+        public JT808TerminalResult TerminalResult { get; set; }
 
         public JT808_0x0001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0001 jT808_0X0001 = new JT808_0x0001();
             jT808_0X0001.ReplyMsgNum = reader.ReadUInt16();
             jT808_0X0001.ReplyMsgId = reader.ReadUInt16();
-            jT808_0X0001.JT808TerminalResult = (JT808TerminalResult)reader.ReadByte();
+            jT808_0X0001.TerminalResult = (JT808TerminalResult)reader.ReadByte();
             return jT808_0X0001;
         }
 
@@ -45,7 +45,7 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteUInt16(value.ReplyMsgNum);
             writer.WriteUInt16(value.ReplyMsgId);
-            writer.WriteByte((byte)value.JT808TerminalResult);
+            writer.WriteByte((byte)value.TerminalResult);
         }
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)

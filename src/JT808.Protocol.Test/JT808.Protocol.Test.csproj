@@ -32,6 +32,7 @@
     <Compile Include="Extensions\JT808EnumExtensionsTest.cs" />
     <Compile Include="Extensions\JT808HexExtensionsTest.cs" />
     <Compile Include="Extensions\JT808PackageExtensionsTest.cs" />
+    <Compile Include="Extensions\JT808ValidationExtensionsTest.cs" />
     <Compile Include="MessageBody\JT808LocationAttachExtensions\JT808LocationAttachImpl0x06.cs" />
     <Compile Include="MessageBody\JT808_0x0001Test.cs" />
     <Compile Include="MessageBody\JT808_0x0002Test.cs" />

@@ -153,11 +153,11 @@ namespace JT808.Protocol
         /// </summary>
         public const uint JT808_0x8103_0x002E = 0x002E;
         /// <summary>
-        /// 紧急报警时汇报距离间隔，单位为米（m），>0
+        /// 紧急报警时汇报距离间隔，单位为米（m）>0
         /// </summary>
         public const uint JT808_0x8103_0x002F = 0x002F;
         /// <summary>
-        /// 拐点补传角度，<180
+        /// 拐点补传角度小于180
         /// </summary>
         public const uint JT808_0x8103_0x0030 = 0x0030;
         /// <summary>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Buffers.Binary;
 using System.Text.Json;
-using JT808.Protocol.Attributes;
+
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
@@ -85,9 +85,9 @@ namespace JT808.Protocol.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0110 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
-            writer.WriteByte((byte)value.ParamLength);
+            writer.WriteByte(value.ParamLength);
             writer.WriteUInt32(value.CollectTimeInterval);
-            var temp = (uint)((value.ChannelNo << 31) | (value.FrameType << 30) | (value.CollectWay )<< 29 | (value.BusId& 0x01FFFFFF));
+            var temp = (uint)(value.ChannelNo << 31 | value.FrameType << 30 | value.CollectWay << 29 | (int)(value.BusId& 0x01FFFFFF));
             writer.WriteUInt32(temp);
         }
     }

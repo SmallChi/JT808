@@ -12,6 +12,6 @@
 
         public override ushort MsgId { get; } = 0x0003;
 
-        public override string Description => "终端注销请求";
+        public override string Description => "终端注销";
     }
 }

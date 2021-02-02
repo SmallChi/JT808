@@ -1,4 +1,4 @@
-﻿using JT808.Protocol.Attributes;
+﻿
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
@@ -22,7 +22,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 未压缩消息体
         /// 压缩消息体为需要压缩的消息经过 GZIP 压缩算法后的消息
-        /// 可实现 <see cref="JT808.Protocol.IJT808ICompress"/>自定义压缩算法
+        /// 可实现 refJT808.Protocol.IJT808ICompress 自定义压缩算法
         /// </summary>
         public byte[] UnCompressMessage { get; set; }
 

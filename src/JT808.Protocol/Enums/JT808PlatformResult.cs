@@ -1,5 +1,8 @@
 ﻿namespace JT808.Protocol.Enums
 {
+    /// <summary>
+    /// 返回结果
+    /// </summary>
     public enum JT808PlatformResult : byte
     {
         /// <summary>

@@ -6,65 +6,70 @@
 <#@ import namespace="JT808.Protocol" #>
 <#@ import namespace="JT808.Protocol.Enums" #>
 <#@ import namespace="JT808.Protocol.Extensions" #>
-<#@ import namespace="JT808.Protocol.Attributes" #>
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.Reflection" #>
 <#@ output extension=".cs" #>
 <#
-	var types=Enum.GetNames(typeof(JT808MsgId));
+	var types=Assembly.GetAssembly(typeof(JT808Package)).GetTypes().Where(w => w.BaseType == typeof(JT808Bodies)).ToList();
 #>
 using JT808.Protocol.Enums;
 
 namespace JT808.Protocol.Extensions
 {
+    /// <summary>
+    /// todo:source-generators正式发布以后将T4模板换掉
+    /// https://devblogs.microsoft.com/dotnet/introducing-c-source-generators/
+    /// </summary>
 	public static partial class JT808PackageExtensions
 	{
 <#
-	foreach (var item in types)
+	foreach (var type in types)
     {
-		JT808MsgId msgId = item.ToEnum<JT808MsgId>();
-		JT808BodiesTypeAttribute jT808BodiesTypeAttribute = msgId.GetAttribute<JT808BodiesTypeAttribute>();
-		JT808MsgIdDescriptionAttribute jT808MsgIdDescriptionAttribute = msgId.GetAttribute<JT808MsgIdDescriptionAttribute>();
-
+		 var instance = Activator.CreateInstance(type);
+		 if(instance is JT808Bodies jT808Bodies)
+         {
+            string code = $"0x{jT808Bodies.MsgId.ToString("X2").PadLeft(4, '0')}";
+            string name = jT808Bodies.Description;
 #>
-		/// <summary>
-		/// <#= jT808MsgIdDescriptionAttribute.Code #> - <#= jT808MsgIdDescriptionAttribute.Name #>
-		/// auto-generated
-		/// </summary>
-	    public static JT808Package Create_<#= jT808MsgIdDescriptionAttribute.Name #>(this JT808MsgId msgId, string terminalPhoneNo,<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName #> bodies)
-		{
-			return Create<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
-		}
+			/// <summary>
+			/// <#= code #> - <#= name #>
+			/// auto-generated
+			/// </summary>
+			public static JT808Package Create_<#= name #>(this JT808MsgId msgId, string terminalPhoneNo,<#= type.FullName #> bodies)
+			{
+				return Create<<#= type.FullName#>>(msgId,terminalPhoneNo,bodies);
+			}
 
-		/// <summary>
-		/// <#= jT808MsgIdDescriptionAttribute.Code #> - <#= jT808MsgIdDescriptionAttribute.Name #>
-		/// auto-generated
-		/// </summary>
-	    public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName #> bodies)
-		{
-			return Create<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
-		}
+			/// <summary>
+			/// <#= code #> - <#= name #>
+			/// auto-generated
+			/// </summary>
+			public static JT808Package Create(this JT808MsgId msgId, string terminalPhoneNo,<#= type.FullName #> bodies)
+			{
+				return Create<<#= type.FullName#>>(msgId,terminalPhoneNo,bodies);
+			}
 
-		/// <summary>
-		/// <#= jT808MsgIdDescriptionAttribute.Code #> - <#= jT808MsgIdDescriptionAttribute.Name #>
-		/// auto-generated 2019 version
-		/// </summary>
-	    public static JT808Package Create_<#= jT808MsgIdDescriptionAttribute.Name #>_2019(this JT808MsgId msgId, string terminalPhoneNo,<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName #> bodies)
-		{
-			return Create2019<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
-		}
+			/// <summary>
+			/// <#= code #> - <#= name #>
+			/// auto-generated 2019 version
+			/// </summary>
+			public static JT808Package Create_<#= name #>_2019(this JT808MsgId msgId, string terminalPhoneNo,<#= type.FullName #> bodies)
+			{
+				return Create2019<<#= type.FullName#>>(msgId,terminalPhoneNo,bodies);
+			}
 
-		/// <summary>
-		/// <#= jT808MsgIdDescriptionAttribute.Code #> - <#= jT808MsgIdDescriptionAttribute.Name #>
-		/// auto-generated 2019 version
-		/// </summary>
-	    public static JT808Package Create2019(this JT808MsgId msgId, string terminalPhoneNo,<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName #> bodies)
-		{
-			return Create2019<<#= jT808BodiesTypeAttribute.JT808BodiesType.FullName#>>(msgId,terminalPhoneNo,bodies);
-		}
+			/// <summary>
+			/// <#= code #> - <#= name #>
+			/// auto-generated 2019 version
+			/// </summary>
+			public static JT808Package Create2019(this JT808MsgId msgId, string terminalPhoneNo,<#= type.FullName #> bodies)
+			{
+				return Create2019<<#= type.FullName#>>(msgId,terminalPhoneNo,bodies);
+			}
 <#
+		}
     }
 #>
 	}

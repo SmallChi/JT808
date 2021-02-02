@@ -9,7 +9,7 @@ using System.Text;
 using Xunit;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.MessagePack;
-using JT808.Protocol.Attributes;
+
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using JT808.Protocol.Internal;

@@ -15,7 +15,7 @@
     <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
     <DocumentationFile>JT808.Protocol.xml</DocumentationFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>2.3.5</Version>
+    <Version>2.3.6</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <AnalysisLevel>latest</AnalysisLevel>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -67,7 +67,7 @@
     <PackageReference Include="System.Text.Json" Version="5.0.1" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net5' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
 
   </ItemGroup>
 
@@ -91,4 +91,7 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
 </Project>

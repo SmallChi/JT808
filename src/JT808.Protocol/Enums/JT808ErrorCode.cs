@@ -3,11 +3,11 @@
     public enum JT808ErrorCode
     {
         /// <summary>
-        /// 校验和不相等
+        /// JT808校验和不相等
         /// </summary>
         CheckCodeNotEqual = 1001,
         /// <summary>
-        /// 校验和不相等
+        /// JT19056校验和不相等
         /// </summary>
         CarDVRCheckCodeNotEqual = 1002,
         /// <summary>
@@ -18,7 +18,10 @@
         /// 消息体解析错误
         /// </summary>
         BodiesParseError = 1004,
-        GetAttributeError = 1005,
+        /// <summary>
+        /// 验证长度
+        /// </summary>
+        VailLength = 1005,
         /// <summary>
         /// 没有实现对应的类型
         /// </summary>
@@ -29,7 +32,7 @@
         NotEnoughLength = 1007,
         /// <summary>
         /// 没有全局注册格式化器
-        /// <see cref="JT808.Protocol.Formatters.IJT808MessagePackFormatter<T>"/>
+        /// IJT808MessagePackFormatter
         /// </summary>
         NotGlobalRegisterFormatterAssembly = 1008,        
         /// <summary>

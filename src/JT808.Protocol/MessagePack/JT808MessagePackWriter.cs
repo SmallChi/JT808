@@ -7,36 +7,70 @@ using System.Text;
 
 namespace JT808.Protocol.MessagePack
 {
+    /// <summary>
+    /// JT808消息写入器
+    /// </summary>
     public ref struct JT808MessagePackWriter
     {
         private JT808BufferWriter writer;
+        /// <summary>
+        /// JT808版本号
+        /// </summary>
         public JT808Version Version { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="buffer">内存块</param>
+        /// <param name="version">版本号:默认2013</param>
         public JT808MessagePackWriter(Span<byte> buffer, JT808Version version= JT808Version.JTT2013)
         {
             this.writer = new JT808BufferWriter(buffer);
             Version = version;
         }
+        /// <summary>
+        /// 编码后的数组
+        /// </summary>
+        /// <returns></returns>
         public byte[] FlushAndGetEncodingArray()
         {
             return writer.Written.Slice(writer.BeforeCodingWrittenPosition).ToArray();
         }
-
+        /// <summary>
+        /// 编码后的内存块
+        /// </summary>
+        /// <returns></returns>
         public ReadOnlySpan<byte> FlushAndGetEncodingReadOnlySpan()
         {
             return writer.Written.Slice(writer.BeforeCodingWrittenPosition);
         }
-
+        /// <summary>
+        /// 获取实际写入的内存块
+        /// </summary>
+        /// <returns></returns>
         public ReadOnlySpan<byte> FlushAndGetRealReadOnlySpan()
         {
             return writer.Written;
         }
-
+        /// <summary>
+        /// 获取实际写入的数组
+        /// </summary>
+        /// <returns></returns>
         public byte[] FlushAndGetRealArray()
         {
             return writer.Written.ToArray();
         }
+        /// <summary>
+        /// 写入头标识
+        /// </summary>
         public void WriteStart()=> WriteByte(JT808Package.BeginFlag);
+        /// <summary>
+        /// 写入尾标识
+        /// </summary>
         public void WriteEnd() => WriteByte(JT808Package.EndFlag);
+        /// <summary>
+        /// 写入空标识,0x00
+        /// </summary>
+        /// <param name="position"></param>
         public void Nil(out int position)
         {
             position = writer.WrittenCount;
@@ -44,6 +78,11 @@ namespace JT808.Protocol.MessagePack
             span[0] = 0x00;
             writer.Advance(1);
         }
+        /// <summary>
+        /// 跳过多少字节数
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="position">跳过前的内存位置</param>
         public void Skip(int count, out int position)
         {
             position = writer.WrittenCount;
@@ -54,6 +93,12 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(count);
         }
+        /// <summary>
+        /// 跳过多少字节数
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="position">跳过前的内存位置</param>
+        /// <param name="fullValue">用什么数值填充跳过的内存块</param>
         public void Skip(int count,out int position, byte fullValue = 0x00)
         {
             position = writer.WrittenCount;
@@ -64,70 +109,169 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(count);
         }
+        /// <summary>
+        /// 写入一个字符
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteChar(char value)
         {
             var span = writer.Free;
             span[0] = (byte)value;
             writer.Advance(1);
         }
+        /// <summary>
+        /// 写入一个字节
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteByte(byte value)
         {
             var span = writer.Free;
             span[0] = value;
             writer.Advance(1);
         }
+        /// <summary>
+        /// 写入两个字节的有符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteInt16(short value)
         {
             BinaryPrimitives.WriteInt16BigEndian(writer.Free, value);
             writer.Advance(2);
         }
+        /// <summary>
+        /// 写入两个字节的无符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteUInt16(ushort value)
         {
             BinaryPrimitives.WriteUInt16BigEndian(writer.Free, value);
             writer.Advance(2);
         }
+        /// <summary>
+        /// 写入四个字节的有符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteInt32(int value)
         {
             BinaryPrimitives.WriteInt32BigEndian(writer.Free, value);
             writer.Advance(4);
         }
-        public void WriteUInt64(ulong value)
-        {
-            BinaryPrimitives.WriteUInt64BigEndian(writer.Free, value);
-            writer.Advance(8);
-        }
+        /// <summary>
+        /// 写入四个字节的无符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteUInt32(uint value)
         {
             BinaryPrimitives.WriteUInt32BigEndian(writer.Free, value);
             writer.Advance(4);
         }
+        /// <summary>
+        /// 写入八个字节的无符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteUInt64(ulong value)
+        {
+            BinaryPrimitives.WriteUInt64BigEndian(writer.Free, value);
+            writer.Advance(8);
+        }
+        /// <summary>
+        /// 写入八个字节的有符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteInt64(long value)
+        {
+            BinaryPrimitives.WriteInt64BigEndian(writer.Free, value);
+            writer.Advance(8);
+        }
+        /// <summary>
+        /// 写入字符串
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteString(string value)
         {
             byte[] codeBytes = JT808Constants.Encoding.GetBytes(value);
             codeBytes.CopyTo(writer.Free);
             writer.Advance(codeBytes.Length);
         }
+        /// <summary>
+        /// 写入数组
+        /// </summary>
+        /// <param name="src"></param>
         public void WriteArray(ReadOnlySpan<byte> src)
         {
             src.CopyTo(writer.Free);
             writer.Advance(src.Length);
         }
+        /// <summary>
+        /// 根据内存定位,反写两个字节的无符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
         public void WriteUInt16Return(ushort value, int position)
         {
             BinaryPrimitives.WriteUInt16BigEndian(writer.Written.Slice(position, 2), value);
         }
+        /// <summary>
+        /// 根据内存定位,反写两个字节的有符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
+        public void WriteInt16Return(short value, int position)
+        {
+            BinaryPrimitives.WriteInt16BigEndian(writer.Written.Slice(position, 2), value);
+        }
+        /// <summary>
+        /// 根据内存定位,反写四个字节的有符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
         public void WriteInt32Return(int value, int position)
         {
             BinaryPrimitives.WriteInt32BigEndian(writer.Written.Slice(position, 4), value);
         }
+        /// <summary>
+        /// 根据内存定位,反写四个字节的无符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
         public void WriteUInt32Return(uint value, int position)
         {
             BinaryPrimitives.WriteUInt32BigEndian(writer.Written.Slice(position, 4), value);
         }
+
+        /// <summary>
+        /// 根据内存定位,反写八个字节的有符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
+        public void WriteInt64Return(long value, int position)
+        {
+            BinaryPrimitives.WriteInt64BigEndian(writer.Written.Slice(position, 8), value);
+        }
+        /// <summary>
+        /// 根据内存定位,反写八个字节的无符号数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
+        public void WriteUInt64Return(ulong value, int position)
+        {
+            BinaryPrimitives.WriteUInt64BigEndian(writer.Written.Slice(position, 8), value);
+        }
+        /// <summary>
+        /// 根据内存定位,反写1个字节的数值类型
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
         public void WriteByteReturn(byte value, int position)
         {
             writer.Written[position] = value;
         }
+        /// <summary>
+        /// 根据内存定位,反写BCD编码数据
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="len"></param>
+        /// <param name="position"></param>
         public void WriteBCDReturn(string value,int len, int position)
         {
             string bcdText = value ?? "";
@@ -146,17 +290,27 @@ namespace JT808.Protocol.MessagePack
                 startIndex += 2;
             }
         }
+        /// <summary>
+        /// 根据内存定位,反写一串字符串数据
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="position"></param>
         public void WriteStringReturn(string value, int position)
         {
             Span<byte> codeBytes = JT808Constants.Encoding.GetBytes(value);
             codeBytes.CopyTo(writer.Written.Slice(position));
         }
+        /// <summary>
+        /// 根据内存定位,反写一组数组数据
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="position"></param>
         public void WriteArrayReturn(ReadOnlySpan<byte> src, int position)
         {
             src.CopyTo(writer.Written.Slice(position));
         }
         /// <summary>
-        /// yyMMddHHmmss
+        /// 写入六个字节的日期类型,yyMMddHHmmss
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
@@ -172,7 +326,7 @@ namespace JT808.Protocol.MessagePack
             writer.Advance(6);
         }
         /// <summary>
-        /// yyMMddHHmmss
+        /// 写入六个字节的可空日期类型,yyMMddHHmmss
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
@@ -200,8 +354,7 @@ namespace JT808.Protocol.MessagePack
             writer.Advance(6);
         }
         /// <summary>
-        /// HH-mm-ss-msms
-        /// HH-mm-ss-fff
+        /// 写入五个字节的日期类型,HH-mm-ss-msms或HH-mm-ss-fff
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
@@ -217,8 +370,7 @@ namespace JT808.Protocol.MessagePack
             writer.Advance(5);
         }
         /// <summary>
-        /// HH-mm-ss-msms
-        /// HH-mm-ss-fff
+        /// 写入五个字节的可空日期类型,HH-mm-ss-msms或HH-mm-ss-fff
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
@@ -244,6 +396,10 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(5);
         }
+        /// <summary>
+        /// 写入UTC日期类型
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteUTCDateTime(DateTime value)
         {
             ulong totalSecends = (ulong)(value.AddHours(-8) - JT808Constants.UTCBaseTime).TotalSeconds;
@@ -257,9 +413,7 @@ namespace JT808.Protocol.MessagePack
             writer.Advance(8);
         }
         /// <summary>
-        /// YYYYMMDD
-        /// BCD[4]
-        /// 数据形如：20200101
+        /// 写入四个字节的日期类型,YYYYMMDD BCD[4] 数据形如：20200101
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
@@ -275,9 +429,7 @@ namespace JT808.Protocol.MessagePack
         }
 
         /// <summary>
-        /// YYYYMMDD
-        /// BCD[4]
-        /// 数据形如：20200101
+        /// 写入四个字节的可空日期类型,YYYYMMDD BCD[4]数据形如:20200101
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
@@ -303,9 +455,7 @@ namespace JT808.Protocol.MessagePack
         }
 
         /// <summary>
-        /// YYMMDD
-        /// BCD[4]
-        /// 数据形如：20200101
+        /// 写入三个字节的日期类型,YYMMDD 数据形如：20200101
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
@@ -319,9 +469,7 @@ namespace JT808.Protocol.MessagePack
         }
 
         /// <summary>
-        /// YYMMDD
-        /// BCD[4]
-        /// 数据形如：20200101
+        /// 写入三个字节的可空日期类型,YYMMDD 数据形如：20200101
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
@@ -342,6 +490,11 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(3);
         }
+        /// <summary>
+        /// 将指定内存块进行或运算并写入一个字节
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         public void WriteXor(int start, int end)
         {
             if (start > end)
@@ -358,6 +511,10 @@ namespace JT808.Protocol.MessagePack
             span[0] = result;
             writer.Advance(1);
         }
+        /// <summary>
+        /// 将指定内存块进行或运算并写入一个字节
+        /// </summary>
+        /// <param name="start"></param>
         public void WriteXor(int start)
         {
             if(writer.WrittenCount< start)
@@ -374,6 +531,9 @@ namespace JT808.Protocol.MessagePack
             span[0] = result;
             writer.Advance(1);
         }
+        /// <summary>
+        /// 将内存块进行或运算并写入一个字节
+        /// </summary>
         public void WriteXor()
         {
             if (writer.WrittenCount < 1)
@@ -391,6 +551,11 @@ namespace JT808.Protocol.MessagePack
             span[0] = result;
             writer.Advance(1);
         }
+        /// <summary>
+        /// 写入BCD编码数据
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="len"></param>
         public void WriteBCD(string value, int len)
         {
             string bcdText = value ?? "";
@@ -411,6 +576,11 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(byteIndex);
         }
+        /// <summary>
+        /// 写入Hex编码数据
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="len"></param>
         public void WriteHex(string value, int len)
         {
             value = value ?? "";
@@ -440,6 +610,10 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(byteIndex);
         }
+        /// <summary>
+        /// 写入ASCII编码数据
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteASCII(string value)
         {
             var spanFree = writer.Free;
@@ -447,6 +621,9 @@ namespace JT808.Protocol.MessagePack
             bytes.CopyTo(spanFree);
             writer.Advance(bytes.Length);
         }
+        /// <summary>
+        /// 将内存块进行808转义处理
+        /// </summary>
         public void WriteFullEncode()
         {
             var tmpSpan = writer.Written;
@@ -472,6 +649,9 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(tempOffset);
         }
+        /// <summary>
+        /// 将内存块进行808转义处理
+        /// </summary>
         internal void WriteEncode()
         {
             var tmpSpan = writer.Written;
@@ -500,7 +680,7 @@ namespace JT808.Protocol.MessagePack
             writer.Advance(tempOffset);
         }
         /// <summary>
-        /// 数字编码 大端模式、高位在前
+        /// 写入数值类型，数字编码 大端模式、高位在前
         /// </summary>
         /// <param name="value"></param>
         /// <param name="len"></param>
@@ -515,17 +695,27 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(len);
         }
-
+        /// <summary>
+        /// 将字符串写入并写入一个\0作为结尾
+        /// </summary>
+        /// <param name="value"></param>
         public void WriteStringEndChar0(string value)
         {
             WriteString(value);
             WriteChar('\0');
         }
-
+        /// <summary>
+        /// 获取当前内存块写入的位置
+        /// </summary>
+        /// <returns></returns>
         public int GetCurrentPosition()
         {
             return writer.WrittenCount;
         }
+        /// <summary>
+        /// 写入JT19056校验码
+        /// </summary>
+        /// <param name="currentPosition"></param>
         public void WriteCarDVRCheckCode(int currentPosition)
         {
             var carDVRPackage = writer.Written.Slice(currentPosition, writer.WrittenCount- currentPosition);

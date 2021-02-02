@@ -47,7 +47,7 @@ namespace JT808.Protocol.Test
                 {
                     ReplyMsgId = Enums.JT808MsgId.终端心跳.ToUInt16Value(),
                     ReplyMsgNum = 1000,
-                    JT808TerminalResult = Enums.JT808TerminalResult.Success
+                    TerminalResult = Enums.JT808TerminalResult.Success
                 }
             };
             var hexSpan = jT808Serializer.SerializeReadOnlySpan(jT808Package);

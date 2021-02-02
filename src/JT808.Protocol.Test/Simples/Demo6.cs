@@ -10,7 +10,7 @@ using Xunit;
 using JT808.Protocol.Formatters;
 using Microsoft.Extensions.DependencyInjection;
 using JT808.Protocol.MessagePack;
-using JT808.Protocol.Attributes;
+
 using JT808.Protocol.Internal;
 
 namespace JT808.Protocol.Test.Simples

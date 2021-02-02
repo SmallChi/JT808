@@ -6,12 +6,18 @@
     <members>
         <member name="T:JT808.Protocol.Buffers.JT808BufferWriter">
             <summary>
-            <see cref="!:System.Buffers.Writer"/>
+            
+            ref System.Buffers.Writer
             </summary>
         </member>
         <member name="P:JT808.Protocol.Buffers.JT808BufferWriter.BeforeCodingWrittenPosition">
             <summary>
             编码之前的写入位置
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.DependencyInjectionExtensions">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808Alarm">
@@ -220,12 +226,12 @@
         </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.CheckCodeNotEqual">
             <summary>
-            校验和不相等
+            JT808校验和不相等
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.CarDVRCheckCodeNotEqual">
             <summary>
-            校验和不相等
+            JT19056校验和不相等
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.HeaderParseError">
@@ -238,6 +244,11 @@
             消息体解析错误
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808ErrorCode.VailLength">
+            <summary>
+            验证长度
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.NotImplType">
             <summary>
             没有实现对应的类型
@@ -248,7 +259,12 @@
             长度不够
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:JT808.Protocol.Enums.JT808ErrorCode.NotGlobalRegisterFormatterAssembly" -->
+        <member name="F:JT808.Protocol.Enums.JT808ErrorCode.NotGlobalRegisterFormatterAssembly">
+            <summary>
+            没有全局注册格式化器
+            IJT808MessagePackFormatter
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.LatOrLngError">
             <summary>
             经纬度错误
@@ -581,6 +597,24 @@
             0x8607
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.行驶记录仪数据采集命令">
+            <summary>
+            行驶记录仪数据采集命令
+            0x8700
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.行驶记录仪数据上传">
+            <summary>
+            行驶记录仪数据上传
+            0x0700
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId.行驶记录仪参数下传命令">
+            <summary>
+            行驶记录仪参数下传命令
+            0x8701
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.Enums.JT808MsgId.电子运单上报">
             <summary>
             电子运单上报
@@ -763,6 +797,11 @@
             假如是其他地方打来要改成打 +886912345678
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Enums.JT808PlatformResult">
+            <summary>
+            返回结果
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.Enums.JT808PlatformResult.成功">
             <summary>
             成功/确认
@@ -791,6 +830,31 @@
         <member name="T:JT808.Protocol.Enums.JT808PositionType">
             <summary>
             位置类型
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.无特定位置">
+            <summary>
+            无特定位置
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.圆形区域">
+            <summary>
+            圆形区域
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.矩形区域">
+            <summary>
+            矩形区域
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.多边形区域">
+            <summary>
+            多边形区域
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.路段">
+            <summary>
+            路段
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808RecordCmd">
@@ -843,10 +907,107 @@
             升级结果
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.成功">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.失败">
+            <summary>
+            失败
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.取消">
+            <summary>
+            取消
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808UpgradeType">
             <summary>
             升级类型
             </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.终端">
+            <summary>
+            终端
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.道路运输证IC卡读卡器">
+            <summary>
+            道路运输证IC卡读卡器
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.北斗卫星定位模块">
+            <summary>
+            北斗卫星定位模块
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808Version">
+            <summary>
+            JT808版本号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Version.JTT2013">
+            <summary>
+            2013
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Version.JTT2019">
+            <summary>
+            2019
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Exceptions.JT808Exception">
+            <summary>
+            JT808异常处理类
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Exceptions.JT808Exception.#ctor(JT808.Protocol.Enums.JT808ErrorCode)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="M:JT808.Protocol.Exceptions.JT808Exception.#ctor(JT808.Protocol.Enums.JT808ErrorCode,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:JT808.Protocol.Exceptions.JT808Exception.#ctor(JT808.Protocol.Enums.JT808ErrorCode,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:JT808.Protocol.Exceptions.JT808Exception.#ctor(JT808.Protocol.Enums.JT808ErrorCode,System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+            <param name="message"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="P:JT808.Protocol.Exceptions.JT808Exception.ErrorCode">
+            <summary>
+            JT808统一错误码
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT808AnalyzeExtensions">
+            <summary>
+            JT808分析器扩展
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808AnalyzeExtensions.Analyze(System.Object,JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="instance"></param>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
         </member>
         <member name="T:JT808.Protocol.Extensions.JT808EnumExtensions">
             <summary>
@@ -925,14 +1086,14 @@
             <summary>
             获取DisplayNameAttribute特性枚举值的描述
             </summary>
-            <param name="obj">枚举值</param>
+            <param name="value">枚举值</param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetDisplayNameAttributeDictionary(System.Enum)">
             <summary>
             获取DisplayNameAttribute特性枚举及描述
             </summary>
-            <param name="type"></param>
+            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808EnumExtensions.GetAttribute``1(System.Enum)">
@@ -959,12 +1120,146 @@
             ref:"www.codeproject.com/tips/447938/high-performance-csharp-byte-array-to-hex-string-t"
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ToHexString(System.Byte[])">
+            <summary>
+            16进制数组转16进制字符串
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
         <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ToHexBytes(System.String)">
             <summary>
             16进制字符串转16进制数组
             </summary>
             <param name="hexString"></param>
-            <param name="separator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadHexStringLittle(System.ReadOnlySpan{System.Byte},System.Int32@,System.Int32)">
+            <summary>
+            从内存块中读取16进制字符串
+            </summary>
+            <param name="read"></param>
+            <param name="offset"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.WriteHexStringLittle(System.Byte[],System.Int32,System.String,System.Int32)">
+            <summary>
+            将16进制字符串写入对应数组中
+            </summary>
+            <param name="bytes"></param>
+            <param name="offset"></param>
+            <param name="data"></param>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadNumber(System.Byte,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadNumber(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadNumber(System.UInt32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadNumber(System.Int64,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadNumber(System.UInt64,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadNumber(System.Int16,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadNumber(System.UInt16,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadBinary(System.UInt16)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadBinary(System.Int16)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadBinary(System.UInt32)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadBinary(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808BinaryExtensions.ReadBinary(System.Byte)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.HexUtil">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.HexUtil.DoHexDump(System.ReadOnlySpan{System.Byte},System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="buffer"></param>
+            <param name="fromIndex"></param>
+            <param name="length"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.HexUtil.DoHexDump(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="array"></param>
+            <param name="fromIndex"></param>
+            <param name="length"></param>
             <returns></returns>
         </member>
         <member name="T:JT808.Protocol.Extensions.JT808MessagePackFormatterResolverExtensions">
@@ -973,6 +1268,12 @@
             ref http://adamsitnik.com/Span/#span-must-not-be-a-generic-type-argument
             ref http://adamsitnik.com/Span/
             ref:MessagePack.Formatters.DynamicObjectTypeFallbackFormatter
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT808PackageExtensions">
+            <summary>
+            todo:source-generators正式发布以后将T4模板换掉
+            https://devblogs.microsoft.com/dotnet/introducing-c-source-generators/
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_终端通用应答(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0001)">
@@ -1289,49 +1590,49 @@
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_提问应答(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0302)">
             <summary>
-            0x8302 - 提问应答
+            0x0302 - 提问应答
             auto-generated
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0302)">
             <summary>
-            0x8302 - 提问应答
+            0x0302 - 提问应答
             auto-generated
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_提问应答_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0302)">
             <summary>
-            0x8302 - 提问应答
+            0x0302 - 提问应答
             auto-generated 2019 version
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0302)">
             <summary>
-            0x8302 - 提问应答
+            0x0302 - 提问应答
             auto-generated 2019 version
             </summary>
         </member>
-        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_信息点播或取消(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0303)">
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_信息点播_取消(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0303)">
             <summary>
-            0x0303 - 信息点播或取消
+            0x0303 - 信息点播_取消
             auto-generated
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0303)">
             <summary>
-            0x0303 - 信息点播或取消
+            0x0303 - 信息点播_取消
             auto-generated
             </summary>
         </member>
-        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_信息点播或取消_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0303)">
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_信息点播_取消_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0303)">
             <summary>
-            0x0303 - 信息点播或取消
+            0x0303 - 信息点播_取消
             auto-generated 2019 version
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0303)">
             <summary>
-            0x0303 - 信息点播或取消
+            0x0303 - 信息点播_取消
             auto-generated 2019 version
             </summary>
         </member>
@@ -1380,6 +1681,30 @@
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0608)">
             <summary>
             0x0608 - 查询区域或线路数据应答
+            auto-generated 2019 version
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_行驶记录仪数据上传(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0700)">
+            <summary>
+            0x0700 - 行驶记录仪数据上传
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0700)">
+            <summary>
+            0x0700 - 行驶记录仪数据上传
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_行驶记录仪数据上传_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0700)">
+            <summary>
+            0x0700 - 行驶记录仪数据上传
+            auto-generated 2019 version
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0700)">
+            <summary>
+            0x0700 - 行驶记录仪数据上传
             auto-generated 2019 version
             </summary>
         </member>
@@ -2391,6 +2716,54 @@
             auto-generated 2019 version
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_行驶记录数据采集命令(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8700)">
+            <summary>
+            0x8700 - 行驶记录数据采集命令
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8700)">
+            <summary>
+            0x8700 - 行驶记录数据采集命令
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_行驶记录数据采集命令_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8700)">
+            <summary>
+            0x8700 - 行驶记录数据采集命令
+            auto-generated 2019 version
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8700)">
+            <summary>
+            0x8700 - 行驶记录数据采集命令
+            auto-generated 2019 version
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_行驶记录参数下传命令(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8701)">
+            <summary>
+            0x8701 - 行驶记录参数下传命令
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8701)">
+            <summary>
+            0x8701 - 行驶记录参数下传命令
+            auto-generated
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_行驶记录参数下传命令_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8701)">
+            <summary>
+            0x8701 - 行驶记录参数下传命令
+            auto-generated 2019 version
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8701)">
+            <summary>
+            0x8701 - 行驶记录参数下传命令
+            auto-generated 2019 version
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_上报驾驶员身份信息请求(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8702)">
             <summary>
             0x8702 - 上报驾驶员身份信息请求
@@ -2487,27 +2860,27 @@
             auto-generated 2019 version
             </summary>
         </member>
-        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_存储多媒体数据上传(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8803)">
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_存储多媒体数据上传命令(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8803)">
             <summary>
-            0x8803 - 存储多媒体数据上传
+            0x8803 - 存储多媒体数据上传命令
             auto-generated
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8803)">
             <summary>
-            0x8803 - 存储多媒体数据上传
+            0x8803 - 存储多媒体数据上传命令
             auto-generated
             </summary>
         </member>
-        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_存储多媒体数据上传_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8803)">
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_存储多媒体数据上传命令_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8803)">
             <summary>
-            0x8803 - 存储多媒体数据上传
+            0x8803 - 存储多媒体数据上传命令
             auto-generated 2019 version
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8803)">
             <summary>
-            0x8803 - 存储多媒体数据上传
+            0x8803 - 存储多媒体数据上传命令
             auto-generated 2019 version
             </summary>
         </member>
@@ -2537,25 +2910,25 @@
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_单条存储多媒体数据检索上传命令(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8805)">
             <summary>
-            0x8804 - 单条存储多媒体数据检索上传命令
+            0x8805 - 单条存储多媒体数据检索上传命令
             auto-generated
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8805)">
             <summary>
-            0x8804 - 单条存储多媒体数据检索上传命令
+            0x8805 - 单条存储多媒体数据检索上传命令
             auto-generated
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_单条存储多媒体数据检索上传命令_2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8805)">
             <summary>
-            0x8804 - 单条存储多媒体数据检索上传命令
+            0x8805 - 单条存储多媒体数据检索上传命令
             auto-generated 2019 version
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x8805)">
             <summary>
-            0x8804 - 单条存储多媒体数据检索上传命令
+            0x8805 - 单条存储多媒体数据检索上传命令
             auto-generated 2019 version
             </summary>
         </member>
@@ -2607,10 +2980,153 @@
             auto-generated 2019 version
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Extensions.JT808ValidationExtensions">
+            <summary>
+            验证长度扩展方法
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808ValidationExtensions.ValiString(System.String,System.String@,System.Int32@)">
+            <summary>
+            验证字符串长度
+            </summary>
+            <param name="value"></param>
+            <param name="fieldName"></param>
+            <param name="fixedLength"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808ValidationExtensions.ValiBytes(System.Byte[],System.String@,System.Int32@)">
+            <summary>
+            验证数组长度
+            </summary>
+            <param name="value"></param>
+            <param name="fieldName"></param>
+            <param name="fixedLength"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808ValidationExtensions.ValiList``1(System.Collections.Generic.IEnumerable{``0},System.String@,System.Int32@)">
+            <summary>
+            验证集合长度
+            </summary>
+            <param name="value"></param>
+            <param name="fieldName"></param>
+            <param name="fixedLength"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808ValidationExtensions.vali(System.Int32@,System.String@,System.Int32@)">
+            <summary>
+            验证
+            </summary>
+            <param name="length"></param>
+            <param name="fieldName"></param>
+            <param name="fixedLength"></param>
+        </member>
+        <member name="T:JT808.Protocol.JT808ConfigExtensions">
+            <summary>
+            JT808配置扩展
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.GetMessagePackFormatterByType(JT808.Protocol.IJT808Config,System.Type)">
+            <summary>
+            通过类型获取对应的消息序列化器
+            </summary>
+            <param name="jT808Config"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.GetAnalyzeByType(JT808.Protocol.IJT808Config,System.Type)">
+            <summary>
+            通过类型获取对应的消息分析器
+            </summary>
+            <param name="jT808Config"></param>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.GetMessagePackFormatter``1(JT808.Protocol.IJT808Config)">
+            <summary>
+            获取对应的消息序列化器
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="jT808Config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.GetAnalyze``1(JT808.Protocol.IJT808Config)">
+            <summary>
+            获取对应的消息分析器
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="jT808Config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.GetCarDVRSerializer(JT808.Protocol.IJT808Config)">
+            <summary>
+            获取JT19056序列化器
+            </summary>
+            <param name="jT808Config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.GetSerializer(JT808.Protocol.IJT808Config)">
+            <summary>
+            获取JT808序列化器
+            </summary>
+            <param name="jT808Config"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Formatters.IJT808FormatterFactory">
+            <summary>
+            序列化工厂
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Formatters.IJT808FormatterFactory.FormatterDict">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Formatters.IJT808FormatterFactory.SetMap``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TIJT808Formatter"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Formatters.IJT808MessagePackFormatter`1">
+            <summary>
+            序列化器接口
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:JT808.Protocol.Formatters.IJT808MessagePackFormatter`1.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,`0,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Formatters.IJT808MessagePackFormatter`1.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Formatters.IJT808Formatter">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Interfaces.IJT808Compress">
             <summary>
             压缩接口
             </summary>
+        </member>
+        <member name="T:JT808.Protocol.Interfaces.IJT808ExternalRegister">
+            <summary>
+            外部注册
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.IJT808ExternalRegister.Register(System.Reflection.Assembly)">
+            <summary>
+            
+            </summary>
+            <param name="externalAssembly"></param>
         </member>
         <member name="T:JT808.Protocol.Interfaces.IJT808SplitPackageStrategy">
             <summary>
@@ -2641,6 +3157,11 @@
         <member name="T:JT808.Protocol.Interfaces.JT808_CarDVR_Up_Factory">
             <summary>
             记录仪工厂
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.IJT808Config.ConfigId">
+            <summary>
+            配置ID
             </summary>
         </member>
         <member name="P:JT808.Protocol.IJT808Config.MsgSNDistributed">
@@ -3015,10 +3536,14 @@
         </member>
         <member name="F:JT808.Protocol.JT808Constants.JT808_0x8103_0x002F">
             <summary>
-            紧急报警时汇报距离间隔，单位为米（m），>0
+            紧急报警时汇报距离间隔，单位为米（m）>0
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "F:JT808.Protocol.JT808Constants.JT808_0x8103_0x0030" -->
+        <member name="F:JT808.Protocol.JT808Constants.JT808_0x8103_0x0030">
+            <summary>
+            拐点补传角度小于180
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.JT808Constants.JT808_0x8103_0x0031">
             <summary>
             电子围栏半径（非法位移阈值），单位为米
@@ -3467,6 +3992,27 @@
         <member name="P:JT808.Protocol.JT808Package.Version">
             <summary>
             808版本号
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.JT808Serializer">
+            <summary>
+            JT808序列化器
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.JT808Serializer.#ctor(JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="jT808Config"></param>
+        </member>
+        <member name="M:JT808.Protocol.JT808Serializer.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.JT808Serializer.SerializerId">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.HeaderDeserialize(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Int32)">
@@ -4544,7 +5090,7 @@
             <see cref="T:JT808.Protocol.Enums.JT808MsgId"/>
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.JT808TerminalResult">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0001.TerminalResult">
             <summary>
             结果
             0：成功/确认；1：失败；2：消息有误；3：不支持
@@ -5167,7 +5713,7 @@
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0700">
             <summary>
-            行驶记录数据上传
+            行驶记录仪数据上传
             0x0700
             </summary>
         </member>
@@ -5506,7 +6052,7 @@
             <summary>
             未压缩消息体
             压缩消息体为需要压缩的消息经过 GZIP 压缩算法后的消息
-            可实现 <see cref="!:JT808.Protocol.IJT808ICompress"/>自定义压缩算法
+            可实现 refJT808.Protocol.IJT808ICompress 自定义压缩算法
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0A00">
@@ -6153,13 +6699,21 @@
             紧急报警时汇报距离间隔，单位为米（m），>0
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "T:JT808.Protocol.MessageBody.JT808_0x8103_0x0030" -->
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0030">
+            <summary>
+            拐点补传角度，小于180
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0030.ParamLength">
             <summary>
             数据 长度
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:JT808.Protocol.MessageBody.JT808_0x8103_0x0030.ParamValue" -->
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_0x0030.ParamValue">
+            <summary>
+            拐点补传角度，小于180
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0031">
             <summary>
             电子围栏半径（非法位移阈值），单位为米
@@ -7974,6 +8528,31 @@
             RSA 公钥{e,n}中的 n
             </summary>
         </member>
+        <member name="T:JT808.Protocol.MessagePack.JT808MessagePackReader">
+            <summary>
+            JT808消息读取器
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessagePack.JT808MessagePackReader.Reader">
+            <summary>
+            读取buffer
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessagePack.JT808MessagePackReader.SrcBuffer">
+            <summary>
+            原数据
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessagePack.JT808MessagePackReader.ReaderCount">
+            <summary>
+            读取到的数量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessagePack.JT808MessagePackReader.Version">
+            <summary>
+            JT808版本号
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.MessagePack.JT808MessagePackReader._decoded">
             <summary>
             是否进行解码操作
@@ -7986,7 +8565,8 @@
             <summary>
             解码（转义还原）,计算校验和
             </summary>
-            <param name="buffer"></param>
+            <param name="srcBuffer"></param>
+            <param name="version">默认JT808Version.JTT2013</param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.Decode">
             <summary>
@@ -8000,134 +8580,630 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="P:JT808.Protocol.MessagePack.JT808MessagePackReader.CalculateCheckXorCode">
+            <summary>
+            计算的校验码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessagePack.JT808MessagePackReader.RealCheckXorCode">
+            <summary>
+            实际获取的校验码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessagePack.JT808MessagePackReader.CheckXorCodeVali">
+            <summary>
+            验证码是否正确
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadStart">
+            <summary>
+            读取标识头
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadEnd">
+            <summary>
+            读取尾标识
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadInt16">
+            <summary>
+            读取有符号位的两字节数值类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadUInt16">
+            <summary>
+            读取无符号位的两字节数值类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadUInt32">
+            <summary>
+            读取无符号位的四字节数值类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadInt32">
+            <summary>
+            读取有符号位的四字节数值类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadUInt64">
+            <summary>
+            读取无符号位的八字节数值类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadInt64">
+            <summary>
+            读取有符号位的八字节数值类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadByte">
+            <summary>
+            读取一个字节
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadChar">
+            <summary>
+            读取一个字符
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualByte">
+            <summary>
+            虚拟读取一个字节，不计入内存偏移量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualArray(System.Int32)">
+            <summary>
+            虚拟读取一个数组，不计入内存偏移量
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualUInt16">
+            <summary>
+            虚拟读取无符号位的两字节数值类型，不计入内存偏移量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualInt16">
+            <summary>
+            虚拟读取有符号位的两字节数值类型，不计入内存偏移量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualUInt32">
+            <summary>
+            虚拟读取无符号位的四字节数值类型，不计入内存偏移量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualInt32">
+            <summary>
+            虚拟读取有符号位的四字节数值类型，不计入内存偏移量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualUInt64">
+            <summary>
+            虚拟读取无符号位的八字节数值类型，不计入内存偏移量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualInt64">
+            <summary>
+            虚拟读取有符号位的八字节数值类型，不计入内存偏移量
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadBigNumber(System.Int32)">
             <summary>
-            数字编码 大端模式、高位在前
+            读取数字编码 
+            大端模式、高位在前
             </summary>
             <param name="len"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadArray(System.Int32)">
+            <summary>
+            读取固定大小的内存块
+            </summary>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadArray(System.Int32,System.Int32)">
+            <summary>
+            读取固定大小的内存块
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadString(System.Int32)">
+            <summary>
+            读取GBK字符串编码
+            </summary>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadASCII(System.Int32)">
+            <summary>
+            读取ASCII编码
+            </summary>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadRemainStringContent">
+            <summary>
+            读取剩余数据体内容为字符串模式
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadHex(System.Int32)">
+            <summary>
+            读取16进制编码
+            </summary>
+            <param name="len"></param>
+            <returns></returns>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime6(System.String)">
             <summary>
-            yyMMddHHmmss
+            读取六字节日期,yyMMddHHmmss
             </summary>
-            <param name="fromBase">>D2： 10  X2：16</param>
+            <param name="format">>D2： 10  X2：16</param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull6(System.String)">
             <summary>
-            yyMMddHHmmss
+            读取可空类型的六字节日期,yyMMddHHmmss
             </summary>
-            <param name="fromBase">>D2： 10  X2：16</param>
+            <param name="format">>D2： 10  X2：16</param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime5(System.String)">
             <summary>
-            HH-mm-ss-msms
-            HH-mm-ss-fff
+            读取五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull5(System.String)">
             <summary>
-            HH-mm-ss-msms
-            HH-mm-ss-fff
+            读取可空类型的五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime4(System.String)">
             <summary>
-            YYYYMMDD
+            读取四字节日期，YYYYMMDD
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull4(System.String)">
             <summary>
-            YYYYMMDD
+            读取可空类型的四字节日期，YYYYMMDD
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime3(System.String)">
             <summary>
-            YYMMDD
+            读取三字节日期，YYMMDD
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull3(System.String)">
             <summary>
-            YYMMDD
+            读取可空类型的三字节日期，YYMMDD
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadUTCDateTime">
+            <summary>
+            读取UTC时间类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadBCD(System.Int32,System.Boolean)">
+            <summary>
+            读取BCD编码
+            </summary>
+            <param name="len"></param>
+            <param name="trim"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.GetReadOnlySpan(System.Int32)">
+            <summary>
+            读取数量大小的内存块
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.GetVirtualReadOnlySpan(System.Int32)">
+            <summary>
+            虚拟读取数量大小的内存块，不计入内存偏移量
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadContent(System.Int32)">
+            <summary>
+            读取数据体内存块
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadStringEndChar0">
+            <summary>
+            读取一整串字符串到\0结束
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadVirtualStringEndChar0">
+            <summary>
+            虚拟读取一整串字符串到\0结束，不计入内存偏移量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadCurrentRemainContentLength">
+            <summary>
+            读取剩余数据体内容长度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.Skip(System.Int32)">
+            <summary>
+            跳过多少字节
+            </summary>
+            <param name="count"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadCarDVRCheckCode(System.Int32)">
+            <summary>
+            读取JT19056校验码
+            </summary>
+            <param name="currentPosition"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.MessagePack.JT808MessagePackWriter">
+            <summary>
+            JT808消息写入器
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessagePack.JT808MessagePackWriter.Version">
+            <summary>
+            JT808版本号
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.#ctor(System.Span{System.Byte},JT808.Protocol.Enums.JT808Version)">
+            <summary>
+            
+            </summary>
+            <param name="buffer">内存块</param>
+            <param name="version">版本号:默认2013</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.FlushAndGetEncodingArray">
+            <summary>
+            编码后的数组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.FlushAndGetEncodingReadOnlySpan">
+            <summary>
+            编码后的内存块
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.FlushAndGetRealReadOnlySpan">
+            <summary>
+            获取实际写入的内存块
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.FlushAndGetRealArray">
+            <summary>
+            获取实际写入的数组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteStart">
+            <summary>
+            写入头标识
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteEnd">
+            <summary>
+            写入尾标识
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.Nil(System.Int32@)">
+            <summary>
+            写入空标识,0x00
+            </summary>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.Skip(System.Int32,System.Int32@)">
+            <summary>
+            跳过多少字节数
+            </summary>
+            <param name="count"></param>
+            <param name="position">跳过前的内存位置</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.Skip(System.Int32,System.Int32@,System.Byte)">
+            <summary>
+            跳过多少字节数
+            </summary>
+            <param name="count"></param>
+            <param name="position">跳过前的内存位置</param>
+            <param name="fullValue">用什么数值填充跳过的内存块</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteChar(System.Char)">
+            <summary>
+            写入一个字符
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteByte(System.Byte)">
+            <summary>
+            写入一个字节
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteInt16(System.Int16)">
+            <summary>
+            写入两个字节的有符号数值类型
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteUInt16(System.UInt16)">
+            <summary>
+            写入两个字节的无符号数值类型
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteInt32(System.Int32)">
+            <summary>
+            写入四个字节的有符号数值类型
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteUInt32(System.UInt32)">
+            <summary>
+            写入四个字节的无符号数值类型
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteUInt64(System.UInt64)">
+            <summary>
+            写入八个字节的无符号数值类型
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteInt64(System.Int64)">
+            <summary>
+            写入八个字节的有符号数值类型
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteString(System.String)">
+            <summary>
+            写入字符串
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteArray(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            写入数组
+            </summary>
+            <param name="src"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteUInt16Return(System.UInt16,System.Int32)">
+            <summary>
+            根据内存定位,反写两个字节的无符号数值类型
+            </summary>
+            <param name="value"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteInt16Return(System.Int16,System.Int32)">
+            <summary>
+            根据内存定位,反写两个字节的有符号数值类型
+            </summary>
+            <param name="value"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteInt32Return(System.Int32,System.Int32)">
+            <summary>
+            根据内存定位,反写四个字节的有符号数值类型
+            </summary>
+            <param name="value"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteUInt32Return(System.UInt32,System.Int32)">
+            <summary>
+            根据内存定位,反写四个字节的无符号数值类型
+            </summary>
+            <param name="value"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteInt64Return(System.Int64,System.Int32)">
+            <summary>
+            根据内存定位,反写八个字节的有符号数值类型
+            </summary>
+            <param name="value"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteUInt64Return(System.UInt64,System.Int32)">
+            <summary>
+            根据内存定位,反写八个字节的无符号数值类型
+            </summary>
+            <param name="value"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteByteReturn(System.Byte,System.Int32)">
+            <summary>
+            根据内存定位,反写1个字节的数值类型
+            </summary>
+            <param name="value"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteBCDReturn(System.String,System.Int32,System.Int32)">
+            <summary>
+            根据内存定位,反写BCD编码数据
+            </summary>
+            <param name="value"></param>
+            <param name="len"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteStringReturn(System.String,System.Int32)">
+            <summary>
+            根据内存定位,反写一串字符串数据
+            </summary>
+            <param name="value"></param>
+            <param name="position"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteArrayReturn(System.ReadOnlySpan{System.Byte},System.Int32)">
+            <summary>
+            根据内存定位,反写一组数组数据
+            </summary>
+            <param name="src"></param>
+            <param name="position"></param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime6(System.DateTime,System.Int32)">
             <summary>
-            yyMMddHHmmss
+            写入六个字节的日期类型,yyMMddHHmmss
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime6(System.Nullable{System.DateTime},System.Int32)">
             <summary>
-            yyMMddHHmmss
+            写入六个字节的可空日期类型,yyMMddHHmmss
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime5(System.DateTime,System.Int32)">
             <summary>
-            HH-mm-ss-msms
-            HH-mm-ss-fff
+            写入五个字节的日期类型,HH-mm-ss-msms或HH-mm-ss-fff
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime5(System.Nullable{System.DateTime},System.Int32)">
             <summary>
-            HH-mm-ss-msms
-            HH-mm-ss-fff
+            写入五个字节的可空日期类型,HH-mm-ss-msms或HH-mm-ss-fff
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteUTCDateTime(System.DateTime)">
+            <summary>
+            写入UTC日期类型
+            </summary>
+            <param name="value"></param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime4(System.DateTime,System.Int32)">
             <summary>
-            YYYYMMDD
-            BCD[4]
-            数据形如：20200101
+            写入四个字节的日期类型,YYYYMMDD BCD[4] 数据形如：20200101
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime4(System.Nullable{System.DateTime},System.Int32)">
             <summary>
-            YYYYMMDD
-            BCD[4]
-            数据形如：20200101
+            写入四个字节的可空日期类型,YYYYMMDD BCD[4]数据形如:20200101
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime3(System.DateTime,System.Int32)">
             <summary>
-            YYMMDD
-            BCD[4]
-            数据形如：20200101
+            写入三个字节的日期类型,YYMMDD 数据形如：20200101
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime3(System.Nullable{System.DateTime},System.Int32)">
             <summary>
-            YYMMDD
-            BCD[4]
-            数据形如：20200101
+            写入三个字节的可空日期类型,YYMMDD 数据形如：20200101
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
-        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteBigNumber(System.String,System.Int32)">
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteXor(System.Int32,System.Int32)">
             <summary>
-            数字编码 大端模式、高位在前
+            将指定内存块进行或运算并写入一个字节
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteXor(System.Int32)">
+            <summary>
+            将指定内存块进行或运算并写入一个字节
+            </summary>
+            <param name="start"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteXor">
+            <summary>
+            将内存块进行或运算并写入一个字节
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteBCD(System.String,System.Int32)">
+            <summary>
+            写入BCD编码数据
             </summary>
             <param name="value"></param>
             <param name="len"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteHex(System.String,System.Int32)">
+            <summary>
+            写入Hex编码数据
+            </summary>
+            <param name="value"></param>
+            <param name="len"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteASCII(System.String)">
+            <summary>
+            写入ASCII编码数据
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteFullEncode">
+            <summary>
+            将内存块进行808转义处理
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteEncode">
+            <summary>
+            将内存块进行808转义处理
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteBigNumber(System.String,System.Int32)">
+            <summary>
+            写入数值类型，数字编码 大端模式、高位在前
+            </summary>
+            <param name="value"></param>
+            <param name="len"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteStringEndChar0(System.String)">
+            <summary>
+            将字符串写入并写入一个\0作为结尾
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.GetCurrentPosition">
+            <summary>
+            获取当前内存块写入的位置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteCarDVRCheckCode(System.Int32)">
+            <summary>
+            写入JT19056校验码
+            </summary>
+            <param name="currentPosition"></param>
         </member>
         <member name="T:JT808.Protocol.Metadata.JT808CanProperty">
             <summary>
@@ -8499,6 +9575,21 @@
         <member name="T:JT808.Protocol.Metadata.JT808SplitPackageProperty">
             <summary>
             分包属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Metadata.JT808SplitPackageProperty.PackgeIndex">
+            <summary>
+            当前页
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Metadata.JT808SplitPackageProperty.PackgeCount">
+            <summary>
+            分页总数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Metadata.JT808SplitPackageProperty.Data">
+            <summary>
+            分包数据
             </summary>
         </member>
     </members>

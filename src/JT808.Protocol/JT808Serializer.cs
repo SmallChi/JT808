@@ -11,20 +11,32 @@ using System.Text.Json;
 
 namespace JT808.Protocol
 {
+    /// <summary>
+    /// JT808序列化器
+    /// </summary>
     public  class JT808Serializer
     {
         private readonly static JT808Package jT808Package = new JT808Package();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jT808Config"></param>
         public JT808Serializer(IJT808Config jT808Config)
         {
             this.jT808Config = jT808Config;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public JT808Serializer():this(new DefaultGlobalConfig())
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string SerializerId => jT808Config.ConfigId;
 
         private readonly IJT808Config jT808Config;

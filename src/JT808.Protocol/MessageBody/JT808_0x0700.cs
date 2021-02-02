@@ -9,13 +9,13 @@ using System.Text.Json;
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
-    /// 行驶记录数据上传
+    /// 行驶记录仪数据上传
     /// 0x0700
     /// </summary>
     public class JT808_0x0700 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0700>, IJT808Analyze
     {
         public override ushort MsgId { get; } = 0x0700;
-        public override string Description => "行驶记录数据上传";
+        public override string Description => "行驶记录仪数据上传";
         /// <summary>
         /// 应答流水号
         /// </summary>

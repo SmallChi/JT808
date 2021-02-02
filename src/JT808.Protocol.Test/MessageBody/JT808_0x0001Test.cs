@@ -23,7 +23,7 @@ namespace JT808.Protocol.Test.MessageBody
                 {
                     ReplyMsgId = Enums.JT808MsgId.终端心跳.ToUInt16Value(),
                     ReplyMsgNum = 1000,
-                    JT808TerminalResult = Enums.JT808TerminalResult.Success
+                    TerminalResult = Enums.JT808TerminalResult.Success
                 }
             };
             //"7E 00 01 00 05 01 23 45 67 89 00 04 B3 03 E8 00 02 00 D3 7E"
@@ -42,7 +42,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x0001 JT808Bodies = (JT808_0x0001)jT808Package.Bodies;
             Assert.Equal(Enums.JT808MsgId.终端心跳.ToUInt16Value(), JT808Bodies.ReplyMsgId);
             Assert.Equal(1000, JT808Bodies.ReplyMsgNum);
-            Assert.Equal(Enums.JT808TerminalResult.Success, JT808Bodies.JT808TerminalResult);
+            Assert.Equal(Enums.JT808TerminalResult.Success, JT808Bodies.TerminalResult);
         }
 
         [Fact]

@@ -7,6 +7,9 @@ using System.Text;
 
 namespace JT808.Protocol
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class DependencyInjectionExtensions
     {
         public static IJT808Builder AddJT808Configure(this IServiceCollection services, IJT808Config jT808Config)
