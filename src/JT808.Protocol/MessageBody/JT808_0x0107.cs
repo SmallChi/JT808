@@ -15,8 +15,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0107 : JT808Bodies,IJT808MessagePackFormatter<JT808_0x0107>, IJT808_2019_Version,IJT808Analyze
     {
+        /// <summary>
+        /// 0x0107
+        /// </summary>
         public override ushort MsgId { get; } = 0x0107;
-
+        /// <summary>
+        /// 查询终端属性应答
+        /// </summary>
         public override string Description => "查询终端属性应答";
         /// <summary>
         /// 终端类型
@@ -88,7 +93,12 @@ namespace JT808.Protocol.MessageBody
         /// bit7，0：不支持其他通信方式， 1：支持其他通信方式
         /// </summary>
         public byte CommunicationModule { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0107 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0107 jT808_0X0107 = new JT808_0x0107();
@@ -114,23 +124,28 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0107.CommunicationModule = reader.ReadByte();
             return jT808_0X0107;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0107 value, IJT808Config config)
         {
             writer.WriteUInt16(value.TerminalType);
             if (writer.Version == JT808Version.JTT2019)
             {
-                writer.WriteString(value.MakerId.PadLeft(11, '0'));
-                writer.WriteString(value.TerminalModel.PadLeft(30, '0'));
-                writer.WriteString(value.TerminalId.PadLeft(30, '0'));
+                writer.WriteString(value.MakerId.PadLeft(11, '0').ValiString(nameof(value.MakerId),11));
+                writer.WriteString(value.TerminalModel.PadLeft(30, '0').ValiString(nameof(value.TerminalModel), 30));
+                writer.WriteString(value.TerminalId.PadLeft(30, '0').ValiString(nameof(value.TerminalId), 30));
             }
             else
             {
-                writer.WriteString(value.MakerId.PadRight(5, '0'));
-                writer.WriteString(value.TerminalModel.PadRight(20, '0'));
-                writer.WriteString(value.TerminalId.PadRight(7, '0'));
+                writer.WriteString(value.MakerId.PadRight(5, '0').ValiString(nameof(value.MakerId), 5));
+                writer.WriteString(value.TerminalModel.PadRight(20, '0').ValiString(nameof(value.TerminalModel), 20));
+                writer.WriteString(value.TerminalId.PadRight(7, '0').ValiString(nameof(value.TerminalId), 7));
             }
-            writer.WriteBCD(value.Terminal_SIM_ICCID, 20);
+            writer.WriteBCD(value.Terminal_SIM_ICCID.ValiString(nameof(value.Terminal_SIM_ICCID), 20), 20);
             writer.WriteByte((byte)value.Terminal_Hardware_Version_Num.Length);
             writer.WriteString(value.Terminal_Hardware_Version_Num);
             writer.WriteByte((byte)value.Terminal_Firmware_Version_Num.Length);
@@ -138,7 +153,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte(value.GNSSModule);
             writer.WriteByte(value.CommunicationModule);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0107 jT808_0X0107 = new JT808_0x0107();

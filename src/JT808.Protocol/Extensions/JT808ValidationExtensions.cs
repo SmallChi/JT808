@@ -18,9 +18,10 @@ namespace JT808.Protocol.Extensions
         /// <param name="value"></param>
         /// <param name="fieldName"></param>
         /// <param name="fixedLength"></param>
-        public static void ValiString(this string value,in string fieldName, in int fixedLength)
+        public static string ValiString(this string value,in string fieldName, in int fixedLength)
         {
             vali(value.Length, fieldName, fixedLength);
+            return value;
         }
 
         /// <summary>
@@ -29,9 +30,10 @@ namespace JT808.Protocol.Extensions
         /// <param name="value"></param>
         /// <param name="fieldName"></param>
         /// <param name="fixedLength"></param>
-        public static void ValiBytes(this byte[] value,in string fieldName, in int fixedLength)
+        public static byte[] ValiBytes(this byte[] value,in string fieldName, in int fixedLength)
         {
             vali(value.Length, fieldName, fixedLength);
+            return value;
         }
 
 
@@ -41,9 +43,10 @@ namespace JT808.Protocol.Extensions
         /// <param name="value"></param>
         /// <param name="fieldName"></param>
         /// <param name="fixedLength"></param>
-        public static void ValiList<T>(this IEnumerable<T> value, in string fieldName, in int fixedLength)
+        public static IEnumerable<T> ValiList<T>(this IEnumerable<T> value, in string fieldName, in int fixedLength)
         {
             vali(value.Count(), fieldName, fixedLength);
+            return value;
         }
 
         /// <summary>

@@ -12,7 +12,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0001 : JT808Bodies,IJT808MessagePackFormatter<JT808_0x0001>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0001
+        /// </summary>
         public override ushort MsgId => 0x0001;
+        /// <summary>
+        /// 终端通用应答
+        /// </summary>
         public override string Description => "终端通用应答";
         /// <summary>
         /// 应答流水号
@@ -31,7 +37,12 @@ namespace JT808.Protocol.MessageBody
         /// 0：成功/确认；1：失败；2：消息有误；3：不支持
         /// </summary>
         public JT808TerminalResult TerminalResult { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0001 jT808_0X0001 = new JT808_0x0001();
@@ -40,14 +51,24 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0001.TerminalResult = (JT808TerminalResult)reader.ReadByte();
             return jT808_0X0001;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0001 value, IJT808Config config)
         {
             writer.WriteUInt16(value.ReplyMsgNum);
             writer.WriteUInt16(value.ReplyMsgId);
             writer.WriteByte((byte)value.TerminalResult);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             var replyMsgNum = reader.ReadUInt16();

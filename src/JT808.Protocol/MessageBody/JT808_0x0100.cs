@@ -14,7 +14,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0100 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0100>, IJT808_2019_Version,IJT808Analyze
     {
+        /// <summary>
+        /// 0x0100
+        /// </summary>
         public override ushort MsgId { get; } = 0x0100;
+        /// <summary>
+        /// 终端注册
+        /// </summary>
         public override string Description => "终端注册";
         /// <summary>
         /// 省域 ID
@@ -66,7 +72,12 @@ namespace JT808.Protocol.MessageBody
         /// 否则，表示公安交通管理部门颁发的机动车号牌。
         /// </summary>
         public string PlateNo { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0100 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0100 jT808_0X0100 = new JT808_0x0100();
@@ -88,26 +99,37 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0100.PlateNo = reader.ReadRemainStringContent();
             return jT808_0X0100;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0100 value, IJT808Config config)
         {
             writer.WriteUInt16(value.AreaID);
             writer.WriteUInt16(value.CityOrCountyId);
             if (writer.Version == JT808Version.JTT2019)
             {
-                writer.WriteString(value.MakerId.PadLeft(11, '0'));
-                writer.WriteString(value.TerminalModel.PadLeft(30, '0'));
-                writer.WriteString(value.TerminalId.PadLeft(30, '0'));
+                writer.WriteString(value.MakerId.PadLeft(11, '0').ValiString(nameof(value.MakerId),11));
+                writer.WriteString(value.TerminalModel.PadLeft(30, '0').ValiString(nameof(value.TerminalModel), 30));
+                writer.WriteString(value.TerminalId.PadLeft(30, '0').ValiString(nameof(value.TerminalId), 30));
             }
             else
             {
-                writer.WriteString(value.MakerId.PadRight(5, '0'));
-                writer.WriteString(value.TerminalModel.PadRight(20, '0'));
-                writer.WriteString(value.TerminalId.PadRight(7, '0'));
+                writer.WriteString(value.MakerId.PadRight(5, '0').ValiString(nameof(value.MakerId), 5));
+                writer.WriteString(value.TerminalModel.PadRight(20, '0').ValiString(nameof(value.TerminalModel), 20));
+                writer.WriteString(value.TerminalId.PadRight(7, '0').ValiString(nameof(value.TerminalId), 7));
             }
             writer.WriteByte(value.PlateColor);
             writer.WriteString(value.PlateNo);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0100 jT808_0X0100 = new JT808_0x0100();

@@ -17,9 +17,20 @@ namespace JT808.Protocol.MessageBody
         /// 胎压
         /// </summary>
         public byte[] TirePressure { get; set; }
+        /// <summary>
+        /// JT808_0x0200_0x05
+        /// </summary>
         public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x05;
+        /// <summary>
+        /// 30 byte
+        /// </summary>
         public override byte AttachInfoLength { get; set; } = 30;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0200_0x05 value = new JT808_0x0200_0x05();
@@ -30,7 +41,12 @@ namespace JT808.Protocol.MessageBody
             value.TirePressure = reader.ReadArray(value.AttachInfoLength).ToArray();
             writer.WriteString($"胎压", value.TirePressure.ToHexString());
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0200_0x05 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x05 value = new JT808_0x0200_0x05();
@@ -39,7 +55,12 @@ namespace JT808.Protocol.MessageBody
             value.TirePressure = reader.ReadArray(value.AttachInfoLength).ToArray();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x05 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);

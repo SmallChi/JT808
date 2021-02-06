@@ -13,7 +13,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0005 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0005>, IJT808_2019_Version, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0005
+        /// </summary>
         public override ushort MsgId { get; } = 0x0005;
+        /// <summary>
+        /// 终端补传分包请求
+        /// </summary>
         public override string Description => "终端补传分包请求";
         /// <summary>
         /// 原始消息流水号
@@ -31,7 +37,12 @@ namespace JT808.Protocol.MessageBody
         /// 重传包序号顺序排列，如“包 ID1 包 ID2......包 IDn”。
         /// </summary>
         public byte[] AgainPackageData { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0005 value = new JT808_0x0005();
@@ -47,6 +58,12 @@ namespace JT808.Protocol.MessageBody
             value.AgainPackageData = reader.ReadArray(value.AgainPackageCount * 2).ToArray();
             return value;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0005 value, IJT808Config config)
         {
             writer.WriteUInt16(value.OriginalMsgNum);
@@ -60,7 +77,12 @@ namespace JT808.Protocol.MessageBody
             }
             writer.WriteArray(value.AgainPackageData);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             var originalMsgNum = reader.ReadUInt16();

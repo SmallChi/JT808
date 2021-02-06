@@ -17,9 +17,20 @@ namespace JT808.Protocol.MessageBody
         /// 车厢温度
         /// </summary>
         public short CarTemperature { get; set; }
+        /// <summary>
+        /// JT808_0x0200_0x06
+        /// </summary>
         public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x06;
+        /// <summary>
+        /// 2 byte
+        /// </summary>
         public override byte AttachInfoLength { get; set; } = 2;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0200_0x06 value = new JT808_0x0200_0x06();
@@ -30,7 +41,12 @@ namespace JT808.Protocol.MessageBody
             value.CarTemperature = reader.ReadInt16();
             writer.WriteNumber($"[{value.CarTemperature.ReadNumber()}]车厢温度", value.CarTemperature);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0200_0x06 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x06 value = new JT808_0x0200_0x06();
@@ -39,7 +55,12 @@ namespace JT808.Protocol.MessageBody
             value.CarTemperature =reader.ReadInt16();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x06 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);

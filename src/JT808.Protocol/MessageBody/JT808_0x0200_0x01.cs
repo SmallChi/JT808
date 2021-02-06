@@ -7,9 +7,18 @@ using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
+    /// <summary>
+    /// 里程
+    /// </summary>
     public class JT808_0x0200_0x01 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x01>, IJT808Analyze
     {
+        /// <summary>
+        /// JT808_0x0200_0x01
+        /// </summary>
         public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x01;
+        /// <summary>
+        ///  4 byte
+        /// </summary>
         public override byte AttachInfoLength { get; set; } = 4;
         /// <summary>
         /// 里程
@@ -20,7 +29,12 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         [IgnoreDataMember]
         public double ConvertMileage => Mileage / 10.0;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0200_0x01 value = new JT808_0x0200_0x01();
@@ -31,7 +45,12 @@ namespace JT808.Protocol.MessageBody
             value.Mileage = reader.ReadInt32();
             writer.WriteNumber($"[{value.Mileage.ReadNumber()}]里程", value.Mileage);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0200_0x01 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x01 value = new JT808_0x0200_0x01();
@@ -40,7 +59,12 @@ namespace JT808.Protocol.MessageBody
             value.Mileage = reader.ReadInt32();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x01 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);

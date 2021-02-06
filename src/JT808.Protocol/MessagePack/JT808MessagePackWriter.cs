@@ -83,7 +83,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="count"></param>
         /// <param name="position">跳过前的内存位置</param>
-        public void Skip(int count, out int position)
+        public void Skip(in int count, out int position)
         {
             position = writer.WrittenCount;
             var span = writer.Free;
@@ -99,7 +99,7 @@ namespace JT808.Protocol.MessagePack
         /// <param name="count"></param>
         /// <param name="position">跳过前的内存位置</param>
         /// <param name="fullValue">用什么数值填充跳过的内存块</param>
-        public void Skip(int count,out int position, byte fullValue = 0x00)
+        public void Skip(in int count,out int position, in byte fullValue = 0x00)
         {
             position = writer.WrittenCount;
             var span = writer.Free;
@@ -113,7 +113,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入一个字符
         /// </summary>
         /// <param name="value"></param>
-        public void WriteChar(char value)
+        public void WriteChar(in char value)
         {
             var span = writer.Free;
             span[0] = (byte)value;
@@ -123,7 +123,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入一个字节
         /// </summary>
         /// <param name="value"></param>
-        public void WriteByte(byte value)
+        public void WriteByte(in byte value)
         {
             var span = writer.Free;
             span[0] = value;
@@ -133,7 +133,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入两个字节的有符号数值类型
         /// </summary>
         /// <param name="value"></param>
-        public void WriteInt16(short value)
+        public void WriteInt16(in short value)
         {
             BinaryPrimitives.WriteInt16BigEndian(writer.Free, value);
             writer.Advance(2);
@@ -142,7 +142,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入两个字节的无符号数值类型
         /// </summary>
         /// <param name="value"></param>
-        public void WriteUInt16(ushort value)
+        public void WriteUInt16(in ushort value)
         {
             BinaryPrimitives.WriteUInt16BigEndian(writer.Free, value);
             writer.Advance(2);
@@ -151,7 +151,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入四个字节的有符号数值类型
         /// </summary>
         /// <param name="value"></param>
-        public void WriteInt32(int value)
+        public void WriteInt32(in int value)
         {
             BinaryPrimitives.WriteInt32BigEndian(writer.Free, value);
             writer.Advance(4);
@@ -160,7 +160,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入四个字节的无符号数值类型
         /// </summary>
         /// <param name="value"></param>
-        public void WriteUInt32(uint value)
+        public void WriteUInt32(in uint value)
         {
             BinaryPrimitives.WriteUInt32BigEndian(writer.Free, value);
             writer.Advance(4);
@@ -169,7 +169,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入八个字节的无符号数值类型
         /// </summary>
         /// <param name="value"></param>
-        public void WriteUInt64(ulong value)
+        public void WriteUInt64(in ulong value)
         {
             BinaryPrimitives.WriteUInt64BigEndian(writer.Free, value);
             writer.Advance(8);
@@ -178,7 +178,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入八个字节的有符号数值类型
         /// </summary>
         /// <param name="value"></param>
-        public void WriteInt64(long value)
+        public void WriteInt64(in long value)
         {
             BinaryPrimitives.WriteInt64BigEndian(writer.Free, value);
             writer.Advance(8);
@@ -187,7 +187,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入字符串
         /// </summary>
         /// <param name="value"></param>
-        public void WriteString(string value)
+        public void WriteString(in string value)
         {
             byte[] codeBytes = JT808Constants.Encoding.GetBytes(value);
             codeBytes.CopyTo(writer.Free);
@@ -197,7 +197,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入数组
         /// </summary>
         /// <param name="src"></param>
-        public void WriteArray(ReadOnlySpan<byte> src)
+        public void WriteArray(in ReadOnlySpan<byte> src)
         {
             src.CopyTo(writer.Free);
             writer.Advance(src.Length);
@@ -207,7 +207,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
-        public void WriteUInt16Return(ushort value, int position)
+        public void WriteUInt16Return(in ushort value, in int position)
         {
             BinaryPrimitives.WriteUInt16BigEndian(writer.Written.Slice(position, 2), value);
         }
@@ -216,7 +216,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
-        public void WriteInt16Return(short value, int position)
+        public void WriteInt16Return(in short value, in int position)
         {
             BinaryPrimitives.WriteInt16BigEndian(writer.Written.Slice(position, 2), value);
         }
@@ -225,7 +225,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
-        public void WriteInt32Return(int value, int position)
+        public void WriteInt32Return(in int value, in int position)
         {
             BinaryPrimitives.WriteInt32BigEndian(writer.Written.Slice(position, 4), value);
         }
@@ -234,7 +234,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
-        public void WriteUInt32Return(uint value, int position)
+        public void WriteUInt32Return(in uint value, in int position)
         {
             BinaryPrimitives.WriteUInt32BigEndian(writer.Written.Slice(position, 4), value);
         }
@@ -244,7 +244,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
-        public void WriteInt64Return(long value, int position)
+        public void WriteInt64Return(in long value, in int position)
         {
             BinaryPrimitives.WriteInt64BigEndian(writer.Written.Slice(position, 8), value);
         }
@@ -253,7 +253,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
-        public void WriteUInt64Return(ulong value, int position)
+        public void WriteUInt64Return(in ulong value, in int position)
         {
             BinaryPrimitives.WriteUInt64BigEndian(writer.Written.Slice(position, 8), value);
         }
@@ -262,7 +262,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
-        public void WriteByteReturn(byte value, int position)
+        public void WriteByteReturn(in byte value, in int position)
         {
             writer.Written[position] = value;
         }
@@ -272,7 +272,7 @@ namespace JT808.Protocol.MessagePack
         /// <param name="value"></param>
         /// <param name="len"></param>
         /// <param name="position"></param>
-        public void WriteBCDReturn(string value,int len, int position)
+        public void WriteBCDReturn(in string value, in int len, in int position)
         {
             string bcdText = value ?? "";
             int startIndex = 0;
@@ -295,7 +295,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="position"></param>
-        public void WriteStringReturn(string value, int position)
+        public void WriteStringReturn(in string value, in int position)
         {
             Span<byte> codeBytes = JT808Constants.Encoding.GetBytes(value);
             codeBytes.CopyTo(writer.Written.Slice(position));
@@ -305,7 +305,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="src"></param>
         /// <param name="position"></param>
-        public void WriteArrayReturn(ReadOnlySpan<byte> src, int position)
+        public void WriteArrayReturn(in ReadOnlySpan<byte> src, in int position)
         {
             src.CopyTo(writer.Written.Slice(position));
         }
@@ -314,7 +314,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
-        public void WriteDateTime6(DateTime value, int fromBase = 16)
+        public void WriteDateTime6(in DateTime value, in int fromBase = 16)
         {
             var span = writer.Free;
             span[0] = Convert.ToByte(value.ToString("yy"), fromBase);
@@ -330,7 +330,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
-        public void WriteDateTime6(DateTime? value, int fromBase = 16)
+        public void WriteDateTime6(in DateTime? value, in int fromBase = 16)
         {
             var span = writer.Free;
             if (value == null || value.HasValue)
@@ -358,7 +358,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
-        public void WriteDateTime5(DateTime value, int fromBase = 16)
+        public void WriteDateTime5(in DateTime value, in int fromBase = 16)
         {
             var span = writer.Free;
             span[0] = Convert.ToByte(value.ToString("HH"), fromBase);
@@ -374,7 +374,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
-        public void WriteDateTime5(DateTime? value, int fromBase = 16)
+        public void WriteDateTime5(in DateTime? value, in int fromBase = 16)
         {
             var span = writer.Free;
             if (value == null || value.HasValue)
@@ -400,7 +400,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入UTC日期类型
         /// </summary>
         /// <param name="value"></param>
-        public void WriteUTCDateTime(DateTime value)
+        public void WriteUTCDateTime(in DateTime value)
         {
             ulong totalSecends = (ulong)(value.AddHours(-8) - JT808Constants.UTCBaseTime).TotalSeconds;
             var span = writer.Free;
@@ -417,7 +417,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
-        public void WriteDateTime4(DateTime value, int fromBase = 16)
+        public void WriteDateTime4(in DateTime value, in int fromBase = 16)
         {
             var span = writer.Free;
             var yearSpan=value.ToString("yyyy").AsSpan();
@@ -433,7 +433,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
-        public void WriteDateTime4(DateTime? value, int fromBase = 16)
+        public void WriteDateTime4(in DateTime? value, in int fromBase = 16)
         {
             var span = writer.Free;
             if (value==null || value.HasValue)
@@ -459,7 +459,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
-        public void WriteDateTime3(DateTime value, int fromBase = 16)
+        public void WriteDateTime3(in DateTime value, in int fromBase = 16)
         {
             var span = writer.Free;
             span[0] = Convert.ToByte(value.ToString("yy"), fromBase);
@@ -473,7 +473,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
-        public void WriteDateTime3(DateTime? value, int fromBase = 16)
+        public void WriteDateTime3(in DateTime? value, in int fromBase = 16)
         {
             var span = writer.Free;
             if (value == null || value.HasValue)
@@ -495,7 +495,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public void WriteXor(int start, int end)
+        public void WriteXor(in int start, in int end)
         {
             if (start > end)
             {
@@ -515,7 +515,7 @@ namespace JT808.Protocol.MessagePack
         /// 将指定内存块进行或运算并写入一个字节
         /// </summary>
         /// <param name="start"></param>
-        public void WriteXor(int start)
+        public void WriteXor(in int start)
         {
             if(writer.WrittenCount< start)
             {
@@ -556,7 +556,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="len"></param>
-        public void WriteBCD(string value, int len)
+        public void WriteBCD(in string value, in int len)
         {
             string bcdText = value ?? "";
             int startIndex = 0;
@@ -581,7 +581,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="len"></param>
-        public void WriteHex(string value, int len)
+        public void WriteHex(string value, in int len)
         {
             value = value ?? "";
             value = value.Replace(" ", "");
@@ -614,7 +614,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入ASCII编码数据
         /// </summary>
         /// <param name="value"></param>
-        public void WriteASCII(string value)
+        public void WriteASCII(in string value)
         {
             var spanFree = writer.Free;
             var bytes = Encoding.ASCII.GetBytes(value).AsSpan();
@@ -684,7 +684,7 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="len"></param>
-        public void WriteBigNumber(string value, int len)
+        public void WriteBigNumber(in string value, int len)
         {
             var spanFree = writer.Free;
             ulong number = string.IsNullOrEmpty(value) ? 0 : (ulong)double.Parse(value);
@@ -716,7 +716,7 @@ namespace JT808.Protocol.MessagePack
         /// 写入JT19056校验码
         /// </summary>
         /// <param name="currentPosition"></param>
-        public void WriteCarDVRCheckCode(int currentPosition)
+        public void WriteCarDVRCheckCode(in int currentPosition)
         {
             var carDVRPackage = writer.Written.Slice(currentPosition, writer.WrittenCount- currentPosition);
             byte calculateXorCheckCode = 0;

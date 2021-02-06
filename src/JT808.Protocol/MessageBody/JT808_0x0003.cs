@@ -9,9 +9,13 @@
         /// 跳过数据体序列化
         /// </summary>
         public override bool SkipSerialization { get; set; } = true;
-
+        /// <summary>
+        /// 0x0003
+        /// </summary>
         public override ushort MsgId { get; } = 0x0003;
-
+        /// <summary>
+        /// 终端注销
+        /// </summary>
         public override string Description => "终端注销";
     }
 }
