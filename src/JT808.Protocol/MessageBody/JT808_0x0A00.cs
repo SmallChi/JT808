@@ -13,7 +13,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0A00 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0A00>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0A00
+        /// </summary>
         public override ushort MsgId { get; } = 0x0A00;
+        /// <summary>
+        /// 终端RSA公钥
+        /// </summary>
         public override string Description => "终端RSA公钥";
         /// <summary>
         /// e
@@ -25,7 +31,12 @@ namespace JT808.Protocol.MessageBody
         /// RSA 公钥{e,n}中的 n
         /// </summary>
         public byte[] N { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0A00 value = new JT808_0x0A00();
@@ -38,7 +49,12 @@ namespace JT808.Protocol.MessageBody
                 throw new JT808Exception(Enums.JT808ErrorCode.NotEnoughLength, $"{nameof(value.N)}->128");
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0A00 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0A00 value = new JT808_0x0A00
@@ -52,7 +68,12 @@ namespace JT808.Protocol.MessageBody
             }
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0A00 value, IJT808Config config)
         {
             writer.WriteUInt32(value.E);

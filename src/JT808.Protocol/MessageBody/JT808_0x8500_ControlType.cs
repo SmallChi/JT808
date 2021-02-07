@@ -10,6 +10,9 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public abstract class JT808_0x8500_ControlType : IJT808_2019_Version
     {
+        /// <summary>
+        /// 控制类型Id
+        /// </summary>
         public abstract ushort ControlTypeId { get; set; }
     }
 }

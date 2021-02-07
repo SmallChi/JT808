@@ -15,7 +15,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8103 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8103>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x8103
+        /// </summary>
         public override ushort MsgId { get; } = 0x8103;
+        /// <summary>
+        /// 设置终端参数
+        /// </summary>
         public override string Description => "设置终端参数";
         /// <summary>
         /// 参数总数
@@ -36,9 +42,16 @@ namespace JT808.Protocol.MessageBody
         /// 参数列表
         /// </summary>
         public List<JT808_0x8103_BodyBase> ParamList { get; set; }
-
+        /// <summary>
+        /// 自定义参数列表
+        /// </summary>
         public List<JT808_0x8103_CustomBodyBase> CustomParamList { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103 value = new JT808_0x8103
@@ -70,7 +83,12 @@ namespace JT808.Protocol.MessageBody
             }
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103 value, IJT808Config config)
         {
             writer.WriteByte(value.ParamCount);
@@ -90,7 +108,12 @@ namespace JT808.Protocol.MessageBody
             }
             catch (Exception ex) { }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             var paramCount = reader.ReadByte();//参数总数

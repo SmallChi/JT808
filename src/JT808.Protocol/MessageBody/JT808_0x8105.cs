@@ -12,7 +12,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8105 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8105>, IJT808Analyze, IJT808_2019_Version
     {
+        /// <summary>
+        /// 0x8105
+        /// </summary>
         public override ushort MsgId { get; } = 0x8105;
+        /// <summary>
+        /// 终端控制
+        /// </summary>
         public override string Description => "终端控制";
         /// <summary>
         /// 命令字
@@ -22,7 +28,12 @@ namespace JT808.Protocol.MessageBody
         /// 命令参数
         /// </summary>
         public CommandParams CommandValue { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8105 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8105 jT808_0x8105 = new JT808_0x8105
@@ -36,7 +47,12 @@ namespace JT808.Protocol.MessageBody
             }
             return jT808_0x8105;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8105 value, IJT808Config config)
         {
             writer.WriteByte(value.CommandWord);
@@ -45,7 +61,12 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString(value.CommandValue.ToString());
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8105 value = new JT808_0x8105
@@ -252,10 +273,18 @@ namespace JT808.Protocol.MessageBody
             ///                            若值为 0，则表示一直连接指 定服务器
             /// </summary>
             public ushort? ConnectTimeLimit { get; set; }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <returns></returns>
             public override string ToString()
             {
                 return $"{ConnectionControl};{DialPointName};{DialUserName};{DialPwd};{ServerUrl};{TCPPort};{UDPPort};{MakerId};{MonitoringPlatformAuthenticationCode};{HardwareVersion};{FirmwareVersion};{URL};{ConnectTimeLimit}";
             }
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="commandValue"></param>
             public void SetCommandParams(string commandValue)
             {
                 var values = commandValue.Split(';');

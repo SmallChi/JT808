@@ -13,7 +13,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0801>, IJT808Analyze, IJT808_2019_Version
     {
+        /// <summary>
+        /// 0x0801
+        /// </summary>
         public override ushort MsgId { get; } = 0x0801;
+        /// <summary>
+        /// 多媒体数据上传
+        /// </summary>
         public override string Description => "多媒体数据上传";
         /// <summary>
         /// 多媒体 ID
@@ -48,7 +54,12 @@ namespace JT808.Protocol.MessageBody
         /// 多媒体数据包
         /// </summary>
         public byte[] MultimediaDataPackage { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0801 value = new JT808_0x0801();
@@ -69,7 +80,12 @@ namespace JT808.Protocol.MessageBody
             value.MultimediaDataPackage = reader.ReadContent().ToArray();
             writer.WriteString($"多媒体数据包", value.MultimediaDataPackage.ToHexString());
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0801 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0801 value = new JT808_0x0801();
@@ -83,7 +99,12 @@ namespace JT808.Protocol.MessageBody
             value.MultimediaDataPackage = reader.ReadContent().ToArray();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0801 value, IJT808Config config)
         {
             writer.WriteUInt32(value.MultimediaId);

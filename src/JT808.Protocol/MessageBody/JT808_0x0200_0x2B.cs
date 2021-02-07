@@ -7,15 +7,29 @@ using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
+    /// <summary>
+    /// 模拟量
+    /// </summary>
     public class JT808_0x0200_0x2B : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x2B>, IJT808Analyze
     {
         /// <summary>
         /// 模拟量 bit0-15，AD0；bit16-31，AD1
         /// </summary>
         public int Analog { get; set; }
+        /// <summary>
+        /// JT808_0x0200_0x2B
+        /// </summary>
         public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x2B;
+        /// <summary>
+        /// 4 byte
+        /// </summary>
         public override byte AttachInfoLength { get; set; } = 4;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0200_0x2B value = new JT808_0x0200_0x2B();
@@ -26,7 +40,12 @@ namespace JT808.Protocol.MessageBody
             value.Analog = reader.ReadInt32();
             writer.WriteNumber($"[{value.Analog.ReadNumber()}]模拟量", value.Analog);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0200_0x2B Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x2B value = new JT808_0x0200_0x2B();
@@ -35,7 +54,12 @@ namespace JT808.Protocol.MessageBody
             value.Analog = reader.ReadInt32();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x2B value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);

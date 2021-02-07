@@ -12,16 +12,25 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8103_0x0049 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0049>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0049
+        /// </summary>
         public override uint ParamId { get; set; } = 0x0049;
         /// <summary>
-        /// 数据 长度
+        /// 数据长度
+        /// n byte
         /// </summary>
         public override byte ParamLength { get; set; }
         /// <summary>
         /// 监管平台特权短信号码
         /// </summary>
         public string ParamValue { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x0049 jT808_0x8103_0x0049 = new JT808_0x8103_0x0049();
@@ -33,7 +42,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{jT808_0x8103_0x0049.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0049.ParamLength);
             writer.WriteString($"[{paramValue.ToArray().ToHexString()}]参数值[监管平台特权短信号码]", jT808_0x8103_0x0049.ParamValue);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x0049 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0049 jT808_0x8103_0x0049 = new JT808_0x8103_0x0049();
@@ -42,7 +56,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x0049.ParamValue = reader.ReadString(jT808_0x8103_0x0049.ParamLength);
             return jT808_0x8103_0x0049;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0049 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);

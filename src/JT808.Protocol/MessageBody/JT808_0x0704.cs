@@ -13,7 +13,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0704 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0704>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0704
+        /// </summary>
         public override ushort MsgId { get; } = 0x0704;
+        /// <summary>
+        /// 定位数据批量上传
+        /// </summary>
         public override string Description => "定位数据批量上传";
         /// <summary>
         /// 数据项个数
@@ -38,7 +44,12 @@ namespace JT808.Protocol.MessageBody
             正常位置批量汇报 = 0x00,
             盲区补报 = 0x01
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0704 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0704 jT808_0X0704 = new JT808_0x0704();
@@ -62,7 +73,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0704.Positions = jT808_0X0200s;
             return jT808_0X0704;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0704 value, IJT808Config config)
         {
             writer.WriteUInt16(value.Count);
@@ -82,7 +98,12 @@ namespace JT808.Protocol.MessageBody
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0704 jT808_0X0704 = new JT808_0x0704();

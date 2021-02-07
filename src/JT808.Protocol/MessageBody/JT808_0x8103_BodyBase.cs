@@ -6,6 +6,9 @@ using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
+    /// <summary>
+    /// 终端参数设置
+    /// </summary>
     public abstract class JT808_0x8103_BodyBase
     {
         /// <summary>

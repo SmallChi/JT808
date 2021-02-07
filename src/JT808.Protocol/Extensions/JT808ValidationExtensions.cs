@@ -25,6 +25,21 @@ namespace JT808.Protocol.Extensions
         }
 
         /// <summary>
+        /// 验证字符串最大长度
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fieldName"></param>
+        /// <param name="maxLength"></param>
+        public static string ValiMaxString(this string value, in string fieldName, in int maxLength)
+        {
+            if (length > maxLength)
+            {
+                throw new JT808Exception(JT808ErrorCode.VailLength, $"{fieldName}:{length}>max length[{maxLength}]");
+            }
+            return value;
+        }
+
+        /// <summary>
         /// 验证数组长度
         /// </summary>
         /// <param name="value"></param>

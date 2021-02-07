@@ -19,9 +19,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8103_0x0110 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0110>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0110
+        /// </summary>
         public override uint ParamId { get; set; } = 0x0110;
         /// <summary>
-        /// 数据 长度
+        /// 数据长度
+        /// 8 byte
         /// </summary>
         public override byte ParamLength { get; set; } = 8;
         /// <summary>

@@ -12,16 +12,27 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8103_0x0021 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0021>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0021
+        /// </summary>
         public override uint ParamId { get; set; } = 0x0021;
         /// <summary>
-        /// 数据 长度
+        /// 数据长度
+        /// 4 byte
         /// </summary>
         public override byte ParamLength { get; set; } = 4;
         /// <summary>
-        /// 位置汇报方案，0：根据 ACC 状态； 1：根据登录状态和 ACC 状态，先判断登录状态，若登录再根据 ACC 状态
+        /// 位置汇报方案，
+        /// 0：根据 ACC 状态； 
+        /// 1：根据登录状态和 ACC 状态，先判断登录状态，若登录再根据 ACC 状态
         /// </summary>
         public uint ParamValue { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x0021 jT808_0x8103_0x0021 = new JT808_0x8103_0x0021();
@@ -32,7 +43,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{jT808_0x8103_0x0021.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0021.ParamLength);
             writer.WriteNumber($"[{ jT808_0x8103_0x0021.ParamValue.ReadNumber()}]参数值[位置汇报方案，0：根据 ACC 状态； 1：根据登录状态和 ACC 状态]", jT808_0x8103_0x0021.ParamValue);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x0021 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0021 jT808_0x8103_0x0021 = new JT808_0x8103_0x0021();
@@ -41,7 +57,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x0021.ParamValue = reader.ReadUInt32();
             return jT808_0x8103_0x0021;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0021 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);

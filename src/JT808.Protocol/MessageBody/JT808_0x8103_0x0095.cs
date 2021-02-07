@@ -17,11 +17,15 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8103_0x0095 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0095>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0095
+        /// </summary>
         public override uint ParamId { get; set; } = 0x0095;
         /// <summary>
-        /// 数据 长度
+        /// 数据长度
+        /// 4 byte
         /// </summary>
-        public override byte ParamLength { get; set; }
+        public override byte ParamLength { get; set; } = 4;
         /// <summary>
         /// GNSS 模块详细定位数据上传设置：
         /// 上传方式为 0x01 时，单位为秒；

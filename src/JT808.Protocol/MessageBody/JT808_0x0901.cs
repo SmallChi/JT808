@@ -13,7 +13,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x0901 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0901>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0901
+        /// </summary>
         public override ushort MsgId { get; } = 0x0901;
+        /// <summary>
+        /// 数据压缩上报
+        /// </summary>
         public override string Description => "数据压缩上报";
         /// <summary>
         /// 未压缩消息长度 
@@ -25,7 +31,12 @@ namespace JT808.Protocol.MessageBody
         /// 可实现 refJT808.Protocol.IJT808ICompress 自定义压缩算法
         /// </summary>
         public byte[] UnCompressMessage { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0901 value = new JT808_0x0901();
@@ -38,7 +49,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{value.UnCompressMessageLength.ReadNumber()}]未压缩消息长度", value.UnCompressMessageLength);
             writer.WriteString("未压缩消息体", value.UnCompressMessage.ToHexString());
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0901 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0901 value = new JT808_0x0901();
@@ -48,7 +64,12 @@ namespace JT808.Protocol.MessageBody
             value.UnCompressMessageLength = (uint)value.UnCompressMessage.Length;
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0901 value, IJT808Config config)
         {
             var data = config.Compress.Compress(value.UnCompressMessage);

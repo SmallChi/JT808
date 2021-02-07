@@ -11,11 +11,17 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 提问应答
     /// 0x0302
+    /// 2019版本已作删除
     /// </summary>
-    [Obsolete("2019版本已作删除")]
     public class JT808_0x0302 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0302>,IJT808_2019_Version, IJT808Analyze
     {
+        /// <summary>
+        /// 0x0302
+        /// </summary>
         public override ushort MsgId { get; } = 0x0302;
+        /// <summary>
+        /// 提问应答
+        /// </summary>
         public override string Description => "提问应答";
         /// <summary>
         /// 应答流水号
@@ -27,7 +33,12 @@ namespace JT808.Protocol.MessageBody
         /// 提问下发中附带的答案 ID
         /// </summary>
         public byte AnswerId { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0302 jT808_0X0302 = new JT808_0x0302();
@@ -36,7 +47,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{jT808_0X0302.ReplySNo.ReadNumber()}]应答流水号", jT808_0X0302.ReplySNo);
             writer.WriteNumber($"[{jT808_0X0302.AnswerId.ReadNumber()}]答案ID", jT808_0X0302.AnswerId);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0302 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0302 jT808_0X0302 = new JT808_0x0302();
@@ -44,6 +60,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0302.AnswerId = reader.ReadByte();
             return jT808_0X0302;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0302 value, IJT808Config config)
         {
             writer.WriteUInt16(value.ReplySNo);

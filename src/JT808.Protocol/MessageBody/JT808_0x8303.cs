@@ -13,10 +13,15 @@ namespace JT808.Protocol.MessageBody
     /// 信息点播菜单设置
     /// 0x8303
     /// </summary>
-    [Obsolete("2019版本已作删除")]
     public class JT808_0x8303 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8303>, IJT808Analyze, IJT808_2019_Version
     {
+        /// <summary>
+        /// 0x8303
+        /// </summary>
         public override ushort MsgId { get; } = 0x8303;
+        /// <summary>
+        /// 信息点播菜单设置
+        /// </summary>
         public override string Description => "信息点播菜单设置";
         /// <summary>
         /// 设置类型
@@ -32,7 +37,12 @@ namespace JT808.Protocol.MessageBody
         /// 信息项列表
         /// </summary>
         public List<JT808InformationItemProperty> InformationItems { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8303 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8303 jT808_0X8303 = new JT808_0x8303();
@@ -49,7 +59,12 @@ namespace JT808.Protocol.MessageBody
             }
             return jT808_0X8303;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8303 value, IJT808Config config)
         {
             writer.WriteByte(value.SettingType);
@@ -64,7 +79,12 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteUInt16Return(length, position);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8303 value = new JT808_0x8303();
