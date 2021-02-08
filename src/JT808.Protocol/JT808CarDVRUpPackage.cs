@@ -16,6 +16,9 @@ namespace JT808.Protocol
     /// </summary>
     public class JT808CarDVRUpPackage : IJT808_CarDVR_Up_Package,IJT808MessagePackFormatter<JT808CarDVRUpPackage>, IJT808Analyze
     {
+        /// <summary>
+        /// 起始字头
+        /// </summary>
         public const ushort BeginFlag = 0x557A;
         /// <summary>
         /// 起始字头
@@ -41,7 +44,12 @@ namespace JT808.Protocol
         /// 校验字
         /// </summary>
         public byte CheckCode { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808CarDVRUpPackage value = new JT808CarDVRUpPackage();
@@ -77,7 +85,12 @@ namespace JT808.Protocol
             }
             writer.WriteEndObject();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808CarDVRUpPackage Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808CarDVRUpPackage value = new JT808CarDVRUpPackage();
@@ -104,7 +117,12 @@ namespace JT808.Protocol
             value.CheckCode = reader.ReadByte();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpPackage value, IJT808Config config)
         {
             var currentPosition = writer.GetCurrentPosition();

@@ -14,7 +14,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8608 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8608>, IJT808Analyze, IJT808_2019_Version
     {
+        /// <summary>
+        /// 0x8608
+        /// </summary>
         public override ushort MsgId { get; } = 0x8608;
+        /// <summary>
+        /// 查询区域或线路数据
+        /// </summary>
         public override string Description => "查询区域或线路数据";
         /// <summary>
         /// 查询类型
@@ -30,7 +36,12 @@ namespace JT808.Protocol.MessageBody
         /// 查询的区域或线路的ID
         /// </summary>
         public List<uint> Ids { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8608 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8608 value = new JT808_0x8608();
@@ -46,7 +57,12 @@ namespace JT808.Protocol.MessageBody
             }
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8608 value, IJT808Config config)
         {
             writer.WriteByte(value.QueryType);
@@ -63,7 +79,12 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteUInt32(0);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8608 value = new JT808_0x8608();

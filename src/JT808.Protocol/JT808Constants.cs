@@ -4,6 +4,9 @@ using System.Text;
 
 namespace JT808.Protocol
 {
+    /// <summary>
+    /// JT808常量
+    /// </summary>
     public static class JT808Constants
     {
         static JT808Constants()
@@ -15,22 +18,70 @@ namespace JT808.Protocol
         /// 日期限制于2000年
         /// </summary>
         public const int DateLimitYear = 2000;
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly DateTime UTCBaseTime = new DateTime(1970, 1, 1);
+        /// <summary>
+        /// 
+        /// </summary>
         public static Encoding Encoding { get;}
+        /// <summary>
+        /// JT808_0x0200_0x01
+        /// </summary>
 
         public const byte JT808_0x0200_0x01 = 0x01;
+        /// <summary>
+        /// JT808_0x0200_0x02
+        /// </summary>
         public const byte JT808_0x0200_0x02 = 0x02;
+        /// <summary>
+        /// JT808_0x0200_0x03
+        /// </summary>
         public const byte JT808_0x0200_0x03 = 0x03;
+        /// <summary>
+        /// JT808_0x0200_0x04
+        /// </summary>
         public const byte JT808_0x0200_0x04 = 0x04;
+        /// <summary>
+        /// JT808_0x0200_0x05
+        /// </summary>
         public const byte JT808_0x0200_0x05 = 0x05;
+        /// <summary>
+        /// JT808_0x0200_0x06
+        /// </summary>
         public const byte JT808_0x0200_0x06 = 0x06;
+        /// <summary>
+        /// JT808_0x0200_0x11
+        /// </summary>
         public const byte JT808_0x0200_0x11 = 0x11;
+        /// <summary>
+        /// JT808_0x0200_0x12
+        /// </summary>
         public const byte JT808_0x0200_0x12 = 0x12;
+        /// <summary>
+        /// JT808_0x0200_0x13
+        /// </summary>
         public const byte JT808_0x0200_0x13 = 0x13;
+        /// <summary>
+        /// JT808_0x0200_0x25
+        /// </summary>
         public const byte JT808_0x0200_0x25 = 0x25;
+        /// <summary>
+        /// JT808_0x0200_0x2A
+        /// </summary>
         public const byte JT808_0x0200_0x2A = 0x2A;
+        /// <summary>
+        /// JT808_0x0200_0x2B
+        /// </summary>
         public const byte JT808_0x0200_0x2B = 0x2B;
+        /// <summary>
+        /// JT808_0x0200_0x30
+        /// </summary>
         public const byte JT808_0x0200_0x30 = 0x30;
+        /// <summary>
+        /// JT808_0x0200_0x31
+        /// </summary>
         public const byte JT808_0x0200_0x31 = 0x31;
         /// <summary>
         /// 终端心跳发送间隔，单位为秒（s）

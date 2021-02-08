@@ -40,7 +40,13 @@ namespace JT808.Protocol
         public string SerializerId => jT808Config.ConfigId;
 
         private readonly IJT808Config jT808Config;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="package"></param>
+        /// <param name="version"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public byte[] Serialize(JT808Package package, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -55,7 +61,13 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="package"></param>
+        /// <param name="version"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public ReadOnlySpan<byte> SerializeReadOnlySpan(JT808Package package, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -70,7 +82,13 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="version"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public JT808Package Deserialize(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -85,7 +103,14 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="version"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public byte [] Serialize<T>(T obj, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -101,7 +126,14 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <param name="version"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public ReadOnlySpan<byte> SerializeReadOnlySpan<T>(T obj, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -117,7 +149,14 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="bytes"></param>
+        /// <param name="version"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public T Deserialize<T>(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -134,7 +173,11 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private static bool CheckPackageType(Type type)
         {
             return type == typeof(JT808Package) || type == typeof(JT808HeaderPackage);
@@ -145,6 +188,8 @@ namespace JT808.Protocol
         /// 根据头部的消息Id进行分发处理，可以防止小部分性能损耗。
         /// </summary>
         /// <param name="bytes"></param>
+        /// <param name="version"></param>
+        /// <param name="minBufferSize"></param>
         /// <returns></returns>
         public JT808HeaderPackage HeaderDeserialize(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
@@ -160,6 +205,14 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="type"></param>
+        /// <param name="version"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public dynamic Deserialize(ReadOnlySpan<byte> bytes, Type type, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -176,7 +229,14 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="version"></param>
+        /// <param name="options"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public string Analyze(ReadOnlySpan<byte> bytes,  JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -198,7 +258,15 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }       
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="bytes"></param>
+        /// <param name="version"></param>
+        /// <param name="options"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public string Analyze<T>(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -303,7 +371,14 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="version"></param>
+        /// <param name="options"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public byte[] AnalyzeJsonBuffer(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
@@ -324,7 +399,15 @@ namespace JT808.Protocol
                 JT808ArrayPool.Return(buffer);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="bytes"></param>
+        /// <param name="version"></param>
+        /// <param name="options"></param>
+        /// <param name="minBufferSize"></param>
+        /// <returns></returns>
         public byte[] AnalyzeJsonBuffer<T>(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, JsonWriterOptions options = default, int minBufferSize = 8096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);

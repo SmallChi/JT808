@@ -49,7 +49,12 @@ namespace JT808.Protocol
         /// 报序号 从1开始
         /// </summary>
         public ushort PackageIndex { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808Header Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808Header jT808Header = new JT808Header();
@@ -82,7 +87,12 @@ namespace JT808.Protocol
             }
             return jT808Header;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808Header value, IJT808Config config)
         {
             // 1.消息ID

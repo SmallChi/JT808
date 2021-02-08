@@ -12,7 +12,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8804 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8804>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x8804
+        /// </summary>
         public override ushort MsgId { get; } = 0x8804;
+        /// <summary>
+        /// 录音开始命令
+        /// </summary>
         public override string Description => "录音开始命令";
         /// <summary>
         /// 录音命令
@@ -33,7 +39,12 @@ namespace JT808.Protocol.MessageBody
         /// 0：8K；1：11K；2：23K；3：32K；其他保留
         /// </summary>
         public byte AudioSampleRate { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8804 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8804 jT808_0X8804 = new JT808_0x8804();
@@ -43,6 +54,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0X8804.AudioSampleRate = reader.ReadByte();
             return jT808_0X8804;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8804 value, IJT808Config config)
         {
             writer.WriteByte((byte)value.RecordCmd);
@@ -50,7 +67,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte((byte)value.RecordSave);
             writer.WriteByte(value.AudioSampleRate);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8804 value = new JT808_0x8804();

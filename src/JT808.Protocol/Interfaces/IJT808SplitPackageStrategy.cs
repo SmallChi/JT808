@@ -10,6 +10,11 @@ namespace JT808.Protocol.Interfaces
     /// </summary>
     public interface IJT808SplitPackageStrategy
     {
+        /// <summary>
+        /// 分包处理器
+        /// </summary>
+        /// <param name="bigData"></param>
+        /// <returns></returns>
         IEnumerable<JT808SplitPackageProperty> Processor(ReadOnlySpan<byte> bigData);
     }
 }

@@ -10,8 +10,8 @@ namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 服务器 TCP 端口
+    /// 2019版本已作为保留
     /// </summary>
-    [Obsolete("2019版本已作为保留")]
     public class JT808_0x8103_0x0018 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0018>, IJT808_2019_Version, IJT808Analyze
     {
         /// <summary>

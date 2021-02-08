@@ -11,7 +11,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8900 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8900>, IJT808Analyze, IJT808_2019_Version
     {
+        /// <summary>
+        /// 0x8900
+        /// </summary>
         public override ushort MsgId { get; } = 0x8900;
+        /// <summary>
+        /// 数据下行透传
+        /// </summary>
         public override string Description => "数据下行透传";
         /// <summary>
         /// 透传消息类型
@@ -28,7 +34,12 @@ namespace JT808.Protocol.MessageBody
         /// 透传消息内容
         /// </summary>
         public JT808_0x8900_BodyBase JT808_0X8900_BodyBase { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8900 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8900 value = new JT808_0x8900();
@@ -43,13 +54,23 @@ namespace JT808.Protocol.MessageBody
             }
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8900 value, IJT808Config config)
         {
             writer.WriteByte(value.PassthroughType);
             JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(value.JT808_0X8900_BodyBase, ref writer, value.JT808_0X8900_BodyBase, config);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8900 value = new JT808_0x8900();

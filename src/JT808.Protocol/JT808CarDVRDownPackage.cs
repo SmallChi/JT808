@@ -11,8 +11,14 @@ using System.Text.Json;
 
 namespace JT808.Protocol
 {
+    /// <summary>
+    /// 行车记录仪下行数据包
+    /// </summary>
     public  class JT808CarDVRDownPackage : IJT808_CarDVR_Down_Package,IJT808MessagePackFormatter<JT808CarDVRDownPackage>, IJT808Analyze
     {
+        /// <summary>
+        /// 头标识
+        /// </summary>
         public const ushort BeginFlag = 0x557A;
         /// <summary>
         /// 起始字头
@@ -38,7 +44,12 @@ namespace JT808.Protocol
         /// 校验字
         /// </summary>
         public byte CheckCode { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRDownPackage value, IJT808Config config)
         {
             var currentPosition = writer.GetCurrentPosition();
@@ -57,7 +68,12 @@ namespace JT808.Protocol
             writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() -2-1- datalengthPosition), datalengthPosition);//此处-2：减去数据长度字段2位，-1：减去保留字长度
             writer.WriteCarDVRCheckCode(currentPosition);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808CarDVRDownPackage Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808CarDVRDownPackage value = new JT808CarDVRDownPackage();
@@ -84,7 +100,12 @@ namespace JT808.Protocol
             value.CheckCode = reader.ReadByte();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808CarDVRDownPackage value = new JT808CarDVRDownPackage();

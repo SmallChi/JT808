@@ -5,8 +5,18 @@ using System;
 
 namespace JT808.Protocol
 {
+    /// <summary>
+    /// 头部消息体属性
+    /// </summary>
     public class JT808HeaderMessageBodyProperty
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataLength"></param>
+        /// <param name="isPackage"></param>
+        /// <param name="versionFlag"></param>
+        /// <param name="jT808EncryptMethod"></param>
         public JT808HeaderMessageBodyProperty(int dataLength,bool isPackage, bool versionFlag= false, JT808EncryptMethod jT808EncryptMethod= JT808EncryptMethod.None)
         {
             IsPackage = isPackage;
@@ -14,7 +24,12 @@ namespace JT808.Protocol
             DataLength = dataLength;
             VersionFlag = versionFlag;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="isPackage"></param>
+        /// <param name="versionFlag"></param>
+        /// <param name="jT808EncryptMethod"></param>
         public JT808HeaderMessageBodyProperty(bool isPackage, bool versionFlag, JT808EncryptMethod jT808EncryptMethod = JT808EncryptMethod.None)
         {
             IsPackage = isPackage;
@@ -22,7 +37,11 @@ namespace JT808.Protocol
             DataLength = 0;
             VersionFlag = versionFlag;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="versionFlag"></param>
+        /// <param name="jT808EncryptMethod"></param>
         public JT808HeaderMessageBodyProperty(bool versionFlag, JT808EncryptMethod jT808EncryptMethod = JT808EncryptMethod.None)
         {
             IsPackage = false;
@@ -30,7 +49,14 @@ namespace JT808.Protocol
             DataLength = 0;
             VersionFlag = versionFlag;
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public JT808HeaderMessageBodyProperty(){}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
         public JT808HeaderMessageBodyProperty(ushort value)
         {
             VersionFlag = (value >> 14 & 0x01) == 1;
@@ -70,6 +96,10 @@ namespace JT808.Protocol
         /// 消息体长度
         /// </summary>
         public int DataLength { get; set; } = 0;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ushort Wrap()
         {
             //  1.是否分包

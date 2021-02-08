@@ -14,7 +14,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8802 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8802>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x8802
+        /// </summary>
         public override ushort MsgId { get; } = 0x8802;
+        /// <summary>
+        /// 存储多媒体数据检索
+        /// </summary>
         public override string Description => "存储多媒体数据检索";
         /// <summary>
         /// 多媒体类型
@@ -41,7 +47,12 @@ namespace JT808.Protocol.MessageBody
         /// YY-MM-DD-hh-mm-ss
         /// </summary>
         public DateTime EndTime { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8802 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8802 jT808_0X8802 = new JT808_0x8802();
@@ -52,7 +63,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0X8802.EndTime = reader.ReadDateTime6();
             return jT808_0X8802;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8802 value, IJT808Config config)
         {
             writer.WriteByte(value.MultimediaType);
@@ -61,7 +77,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteDateTime6(value.StartTime);
             writer.WriteDateTime6(value.EndTime);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8802 value = new JT808_0x8802();

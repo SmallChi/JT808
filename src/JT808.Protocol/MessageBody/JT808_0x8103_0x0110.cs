@@ -48,7 +48,12 @@ namespace JT808.Protocol.MessageBody
         /// bit28-bit0 表示 CAN 总线 ID。
         /// </summary>
         public long BusId { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x0110 jT808_0x8103_0x0110 = new JT808_0x8103_0x0110();
@@ -71,7 +76,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{ jT808_0x8103_0x0110.BusId.ReadNumber()}]CAN 总线 ID", jT808_0x8103_0x0110.BusId);
             writer.WriteEndObject();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x0110 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0110 jT808_0x8103_0x0110 = new JT808_0x8103_0x0110();
@@ -85,7 +95,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x0110.BusId = temp & 0x01FFFFFF;
             return jT808_0x8103_0x0110;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0110 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);

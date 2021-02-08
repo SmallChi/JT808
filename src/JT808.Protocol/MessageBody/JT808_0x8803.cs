@@ -14,7 +14,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8803 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8803>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x8803
+        /// </summary>
         public override ushort MsgId { get; } = 0x8803;
+        /// <summary>
+        /// 存储多媒体数据上传命令
+        /// </summary>
         public override string Description => "存储多媒体数据上传命令";
         /// <summary>
         /// 多媒体类型 
@@ -47,7 +53,12 @@ namespace JT808.Protocol.MessageBody
         /// <see cref="JT808.Protocol.Enums.JT808MultimediaDeleted"/>
         /// </summary>
         public byte MultimediaDeleted { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8803 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8803 jT808_0X8803 = new JT808_0x8803();
@@ -59,7 +70,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0X8803.MultimediaDeleted = reader.ReadByte();
             return jT808_0X8803;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8803 value, IJT808Config config)
         {
             writer.WriteByte(value.MultimediaType);
@@ -69,7 +85,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteDateTime6(value.EndTime);
             writer.WriteByte(value.MultimediaDeleted);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8803 value = new JT808_0x8803();

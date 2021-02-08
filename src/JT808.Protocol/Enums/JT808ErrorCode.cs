@@ -1,5 +1,8 @@
 ﻿namespace JT808.Protocol.Enums
 {
+    /// <summary>
+    /// 异常错误码
+    /// </summary>
     public enum JT808ErrorCode
     {
         /// <summary>

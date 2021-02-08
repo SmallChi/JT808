@@ -23,6 +23,13 @@ namespace JT808.Protocol.Extensions
         static readonly ConcurrentDictionary<Type, (object Value, JT808SerializeMethod SerializeMethod)> jT808Serializers = new ConcurrentDictionary<Type, (object Value, JT808SerializeMethod SerializeMethod)>();
         
         static readonly ConcurrentDictionary<Type, (object Value, JT808DeserializeMethod DeserializeMethod)> jT808Deserializes = new ConcurrentDictionary<Type, (object Value, JT808DeserializeMethod DeserializeMethod)>();
+        /// <summary>
+        /// JT808动态序列化
+        /// </summary>
+        /// <param name="objFormatter"></param>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public static void JT808DynamicSerialize(object objFormatter, ref JT808MessagePackWriter writer, object value, IJT808Config config)
         {
             Type type = value.GetType();
@@ -51,6 +58,13 @@ namespace JT808.Protocol.Extensions
             }
             formatterAndDelegate.SerializeMethod(formatterAndDelegate.Value, ref writer, value, config);
         }
+        /// <summary>
+        /// JT808动态反序列化
+        /// </summary>
+        /// <param name="objFormatter"></param>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public static dynamic JT808DynamicDeserialize(object objFormatter, ref JT808MessagePackReader reader, IJT808Config config)
         {
             var type = objFormatter.GetType();

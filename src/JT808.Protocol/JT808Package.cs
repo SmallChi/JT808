@@ -78,7 +78,12 @@ namespace JT808.Protocol
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808Package Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             // 1. 验证校验和
@@ -164,7 +169,12 @@ namespace JT808.Protocol
             // ---------------解包完成--------------
             return jT808Package;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808Package value, IJT808Config config)
         {
             // ---------------开始组包--------------
@@ -243,7 +253,12 @@ namespace JT808.Protocol
             writer.WriteEncode();
             // ---------------组包结束--------------
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             // ---------------开始解析对象--------------

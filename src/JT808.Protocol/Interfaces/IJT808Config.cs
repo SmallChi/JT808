@@ -8,6 +8,9 @@ using System.Text;
 
 namespace JT808.Protocol
 {
+    /// <summary>
+    /// JT808接口配置
+    /// </summary>
     public interface IJT808Config
     {
         /// <summary>

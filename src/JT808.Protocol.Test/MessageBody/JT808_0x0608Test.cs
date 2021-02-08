@@ -295,7 +295,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2020-01-07 00:00:12"), jT808_0X8606.StartTime);
             Assert.Equal(DateTime.Parse("2020-01-07 00:00:12"), jT808_0X8606.EndTime);
 
-            Assert.Equal(1, jT808_0X8606.InflectionPointItems.Count);
+            Assert.Single(jT808_0X8606.InflectionPointItems);
 
             Assert.Equal((uint)1000, jT808_0X8606.InflectionPointItems[0].InflectionPointId);
             Assert.Equal((uint)123456789, jT808_0X8606.InflectionPointItems[0].InflectionPointLat);

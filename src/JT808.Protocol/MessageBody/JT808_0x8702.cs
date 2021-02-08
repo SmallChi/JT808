@@ -5,7 +5,13 @@
     /// </summary>
     public class JT808_0x8702 : JT808Bodies
     {
+        /// <summary>
+        /// 0x8702
+        /// </summary>
         public override ushort MsgId { get; } = 0x8702;
+        /// <summary>
+        /// 上报驾驶员身份信息请求
+        /// </summary>
         public override string Description => "上报驾驶员身份信息请求";
         /// <summary>
         /// 跳过数据体序列化

@@ -32,9 +32,9 @@ namespace JT808.Protocol.Extensions
         /// <param name="maxLength"></param>
         public static string ValiMaxString(this string value, in string fieldName, in int maxLength)
         {
-            if (length > maxLength)
+            if (value.Length > maxLength)
             {
-                throw new JT808Exception(JT808ErrorCode.VailLength, $"{fieldName}:{length}>max length[{maxLength}]");
+                throw new JT808Exception(JT808ErrorCode.VailLength, $"{fieldName}:{value.Length}>max length[{maxLength}]");
             }
             return value;
         }

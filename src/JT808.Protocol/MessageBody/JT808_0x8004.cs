@@ -20,7 +20,9 @@ namespace JT808.Protocol.MessageBody
         /// 查询服务器时间应答
         /// </summary>
         public override string Description => "查询服务器时间应答";
-
+        /// <summary>
+        /// 服务器时间
+        /// </summary>
         public DateTime Time { get; set; } = DateTime.Now;
         /// <summary>
         /// 

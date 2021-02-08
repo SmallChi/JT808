@@ -64,7 +64,11 @@ namespace JT808.Protocol
         /// 原数据
         /// </summary>
         public byte[] OriginalData { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
         public  JT808HeaderPackage(ref JT808MessagePackReader reader, IJT808Config config)
         {
             // 1. 验证校验和

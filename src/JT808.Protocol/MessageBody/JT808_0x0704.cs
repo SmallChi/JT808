@@ -41,7 +41,13 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public enum BatchLocationType : byte
         {
+            /// <summary>
+            /// 正常位置批量汇报
+            /// </summary>
             正常位置批量汇报 = 0x00,
+            /// <summary>
+            /// 盲区补报
+            /// </summary>
             盲区补报 = 0x01
         }
         /// <summary>

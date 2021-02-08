@@ -13,7 +13,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8607 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8607>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x8607
+        /// </summary>
         public override ushort MsgId { get; } = 0x8607;
+        /// <summary>
+        /// 删除路线
+        /// </summary>
         public override string Description => "删除路线";
         /// <summary>
         /// 区域数
@@ -24,7 +30,12 @@ namespace JT808.Protocol.MessageBody
         /// 区域ID集合
         /// </summary>
         public List<uint> AreaIds { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8607 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8607 jT808_0X8607 = new JT808_0x8607();
@@ -36,7 +47,12 @@ namespace JT808.Protocol.MessageBody
             }
             return jT808_0X8607;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8607 value, IJT808Config config)
         {
             if (value.AreaIds != null)
@@ -48,7 +64,12 @@ namespace JT808.Protocol.MessageBody
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8607 value = new JT808_0x8607();

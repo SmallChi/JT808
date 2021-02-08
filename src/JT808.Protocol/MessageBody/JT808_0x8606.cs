@@ -17,7 +17,13 @@ namespace JT808.Protocol.MessageBody
     /// </summary>
     public class JT808_0x8606 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8606>, IJT808Analyze, IJT808_2019_Version
     {
+        /// <summary>
+        /// 0x8606
+        /// </summary>
         public override ushort MsgId { get; } = 0x8606;
+        /// <summary>
+        /// 设置路线
+        /// </summary>
         public override string Description => "设置路线";
         /// <summary>
         /// 路线 ID
@@ -54,7 +60,12 @@ namespace JT808.Protocol.MessageBody
         /// 路线名称
         /// </summary>
         public string RouteName { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8606 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8606 jT808_0X8606 = new JT808_0x8606();
@@ -102,7 +113,12 @@ namespace JT808.Protocol.MessageBody
             }
             return jT808_0X8606;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8606 value, IJT808Config config)
         {
             writer.WriteUInt32(value.RouteId);
@@ -161,7 +177,12 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - RouteNameLengthPosition - 2), RouteNameLengthPosition);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8606 value = new JT808_0x8606();

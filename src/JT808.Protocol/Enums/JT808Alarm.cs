@@ -85,8 +85,17 @@ namespace JT808.Protocol.Enums
         /// 标志维持至报警条件解除
         /// </summary>
         疲劳驾驶预警 = 16384,
+        /// <summary>
+        /// 保留1
+        /// </summary>
         保留1 = 32768,
+        /// <summary>
+        /// 保留2
+        /// </summary>
         保留2 = 65536,
+        /// <summary>
+        /// 保留3
+        /// </summary>
         保留3 = 131072,
         /// <summary>
         /// 当天累计驾驶超时
