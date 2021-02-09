@@ -17,6 +17,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Up_0x00 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x00>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x00
+        /// </summary>
         public override byte CommandId => JT808CarDVRCommandID.采集记录仪执行标准版本.ToByteValue();
         /// <summary>
         /// 记录仪执行标准年号后 2 位  BCD 码
@@ -28,8 +31,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// 无修改单或无应答则默认为 00H
         /// </summary>
         public byte ModifyNumber { get; set; }
+        /// <summary>
+        /// 记录仪执行标准的年号及修改单号
+        /// </summary>
         public override string Description => "记录仪执行标准的年号及修改单号";
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Up_0x00 value = new JT808_CarDVR_Up_0x00();
@@ -38,13 +49,23 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.ModifyNumber = reader.ReadByte();
             writer.WriteNumber($"[{value.ModifyNumber.ReadNumber()}]修改单号", value.ModifyNumber);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x00 value, IJT808Config config)
         {
             writer.WriteBCD(value.StandardYear, 2);
             writer.WriteByte(value.ModifyNumber);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_CarDVR_Up_0x00 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x00 value = new JT808_CarDVR_Up_0x00();

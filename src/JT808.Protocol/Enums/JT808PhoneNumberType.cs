@@ -10,9 +10,17 @@
     /// </summary>
     public enum JT808PhoneNumberType
     {
+        /// <summary>
+        /// 大陆
+        /// </summary>
         大陆 = 11,
-        香港 = 8,
-        澳门 = 8,
+        /// <summary>
+        /// 香港|澳门
+        /// </summary>
+        香港_澳门 = 8,
+        /// <summary>
+        /// 台湾
+        /// </summary>
         台湾 = 10
     }
 }

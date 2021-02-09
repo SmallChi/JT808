@@ -40,6 +40,6 @@ namespace JT808.Protocol.Enums
         /// <summary>
         /// x704_576_D1
         /// </summary>
-        x704_576_D1 = 0x07,
+        x704_576_D1 = 0x08,
     }
 }

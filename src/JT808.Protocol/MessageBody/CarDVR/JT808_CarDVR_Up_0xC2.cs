@@ -17,9 +17,17 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Up_0xC2 : JT808CarDVRUpBodies
     {
+        /// <summary>
+        /// 0xC2
+        /// </summary>
         public override byte CommandId => JT808CarDVRCommandID.设置记录仪时间.ToByteValue();
-
+        /// <summary>
+        /// 北京时间的日期、时钟
+        /// </summary>
         public override string Description => "北京时间的日期、时钟";
+        /// <summary>
+        /// 
+        /// </summary>
         public override bool SkipSerialization { get; set; } = true;
     }
 }

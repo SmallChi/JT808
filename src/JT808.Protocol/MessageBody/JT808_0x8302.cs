@@ -84,7 +84,7 @@ namespace JT808.Protocol.MessageBody
                     answer.Content = reader.ReadString(answer.ContentLength);
                     jT808_0X8302.Answers.Add(answer);
                 }
-                catch (Exception ex)
+                catch
                 {
                     break;
                 }

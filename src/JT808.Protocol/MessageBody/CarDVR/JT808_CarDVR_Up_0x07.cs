@@ -17,6 +17,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Up_0x07 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x07>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x07
+        /// </summary>
         public override byte CommandId => JT808CarDVRCommandID.采集记录仪唯一性编号.ToByteValue();
         /// <summary>
         /// 生产厂 CCC 认证代码  7字节
@@ -38,8 +41,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// 备用  5字节
         /// </summary>
         public string Reversed { get; set; }
+        /// <summary>
+        /// 唯一性编号及初次安装日期
+        /// </summary>
         public override string Description => "唯一性编号及初次安装日期";
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Up_0x07 value = new JT808_CarDVR_Up_0x07();
@@ -59,7 +70,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.Reversed = reader.ReadString(5);
             writer.WriteString($"[{hex.ToArray().ToHexString()}]备用", value.Reversed);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x07 value, IJT808Config config)
         {
             var currentPosition = writer.GetCurrentPosition();
@@ -76,7 +92,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
             writer.WriteString(value.Reversed);
             writer.Skip(5 - (writer.GetCurrentPosition() - currentPosition), out var _);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_CarDVR_Up_0x07 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x07 value = new JT808_CarDVR_Up_0x07();

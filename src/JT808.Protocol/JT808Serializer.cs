@@ -244,14 +244,12 @@ namespace JT808.Protocol
             {
                 JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
                 jT808MessagePackReader.Decode(buffer);
-                using(MemoryStream memoryStream = new MemoryStream())
-                using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
-                {
-                    jT808Package.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
-                    utf8JsonWriter.Flush();
-                    string value = Encoding.UTF8.GetString(memoryStream.ToArray());
-                    return value; 
-                }
+                using MemoryStream memoryStream = new MemoryStream();
+                using Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options);
+                jT808Package.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                utf8JsonWriter.Flush();
+                string value = Encoding.UTF8.GetString(memoryStream.ToArray());
+                return value;
             }
             finally
             {
@@ -276,16 +274,14 @@ namespace JT808.Protocol
                 if (CheckPackageType(typeof(T)))
                     jT808MessagePackReader.Decode(buffer);
                 var analyze = jT808Config.GetAnalyze<T>();
-                using (MemoryStream memoryStream = new MemoryStream())
-                using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
-                {
-                    if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteStartObject();
-                    analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
-                    if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteEndObject();
-                    utf8JsonWriter.Flush();
-                    string value = Encoding.UTF8.GetString(memoryStream.ToArray());
-                    return value;
-                }
+                using MemoryStream memoryStream = new MemoryStream();
+                using Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options);
+                if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteStartObject();
+                analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteEndObject();
+                utf8JsonWriter.Flush();
+                string value = Encoding.UTF8.GetString(memoryStream.ToArray());
+                return value;
             }
             finally
             {
@@ -311,21 +307,19 @@ namespace JT808.Protocol
                 {
                     if (jT808Config.FormatterFactory.FormatterDict.TryGetValue(msgHandle.GetType().GUID, out object instance))
                     {
-                        using (MemoryStream memoryStream = new MemoryStream())
-                        using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
-                        {
-                            JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
-                            utf8JsonWriter.WriteStartObject();
-                            instance.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
-                            utf8JsonWriter.WriteEndObject();
-                            utf8JsonWriter.Flush();
-                            string value = Encoding.UTF8.GetString(memoryStream.ToArray());
-                            return value;
-                        }
+                        using MemoryStream memoryStream = new MemoryStream();
+                        using Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options);
+                        JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
+                        utf8JsonWriter.WriteStartObject();
+                        instance.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                        utf8JsonWriter.WriteEndObject();
+                        utf8JsonWriter.Flush();
+                        string value = Encoding.UTF8.GetString(memoryStream.ToArray());
+                        return value;
                     }
-                    return $"未找到对应的0x{msgid.ToString("X2")}消息数据体类型";
+                    return $"未找到对应的0x{msgid:X2}消息数据体类型";
                 }
-                return $"未找到对应的0x{msgid.ToString("X2")}消息数据体类型";
+                return $"未找到对应的0x{msgid:X2}消息数据体类型";
             }
             finally
             {
@@ -351,20 +345,18 @@ namespace JT808.Protocol
                 {
                     if (jT808Config.FormatterFactory.FormatterDict.TryGetValue(msgHandle.GetType().GUID, out object instance))
                     {
-                        using (MemoryStream memoryStream = new MemoryStream())
-                        using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
-                        {
-                            JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
-                            utf8JsonWriter.WriteStartObject();
-                            instance.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
-                            utf8JsonWriter.WriteEndObject();
-                            utf8JsonWriter.Flush();
-                            return memoryStream.ToArray();
-                        }
+                        using MemoryStream memoryStream = new MemoryStream();
+                        using Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options);
+                        JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
+                        utf8JsonWriter.WriteStartObject();
+                        instance.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                        utf8JsonWriter.WriteEndObject();
+                        utf8JsonWriter.Flush();
+                        return memoryStream.ToArray();
                     }
-                    return Encoding.UTF8.GetBytes($"未找到对应的0x{msgid.ToString("X2")}消息数据体类型");
+                    return Encoding.UTF8.GetBytes($"未找到对应的0x{msgid:X2}消息数据体类型");
                 }
-                return Encoding.UTF8.GetBytes($"未找到对应的0x{msgid.ToString("X2")}消息数据体类型");
+                return Encoding.UTF8.GetBytes($"未找到对应的0x{msgid:X2}消息数据体类型");
             }
             finally
             {
@@ -386,13 +378,11 @@ namespace JT808.Protocol
             {
                 JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
                 jT808MessagePackReader.Decode(buffer);
-                using (MemoryStream memoryStream = new MemoryStream())
-                using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
-                {
-                    jT808Package.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
-                    utf8JsonWriter.Flush();
-                    return memoryStream.ToArray();
-                }
+                using MemoryStream memoryStream = new MemoryStream();
+                using Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options);
+                jT808Package.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                utf8JsonWriter.Flush();
+                return memoryStream.ToArray();
             }
             finally
             {
@@ -417,15 +407,13 @@ namespace JT808.Protocol
                 if (CheckPackageType(typeof(T)))
                     jT808MessagePackReader.Decode(buffer);
                 var analyze = jT808Config.GetAnalyze<T>();
-                using (MemoryStream memoryStream = new MemoryStream())
-                using (Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options))
-                {
-                    if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteStartObject();
-                    analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
-                    if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteEndObject();
-                    utf8JsonWriter.Flush();
-                    return memoryStream.ToArray();
-                }
+                using MemoryStream memoryStream = new MemoryStream();
+                using Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options);
+                if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteStartObject();
+                analyze.Analyze(ref jT808MessagePackReader, utf8JsonWriter, jT808Config);
+                if (!CheckPackageType(typeof(T))) utf8JsonWriter.WriteEndObject();
+                utf8JsonWriter.Flush();
+                return memoryStream.ToArray();
             }
             finally
             {

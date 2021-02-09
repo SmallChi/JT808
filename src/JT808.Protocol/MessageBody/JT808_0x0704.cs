@@ -116,7 +116,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0704.Count = reader.ReadUInt16();
             writer.WriteNumber($"[{jT808_0X0704.Count.ReadNumber()}]数据项个数", jT808_0X0704.Count);
             jT808_0X0704.LocationType = (JT808_0x0704.BatchLocationType)reader.ReadByte();
-            writer.WriteNumber($"[{((byte)jT808_0X0704.LocationType).ReadNumber()}]位置数据类型-{jT808_0X0704.LocationType.ToString()}", (byte)jT808_0X0704.LocationType);
+            writer.WriteNumber($"[{((byte)jT808_0X0704.LocationType).ReadNumber()}]位置数据类型-{jT808_0X0704.LocationType}", (byte)jT808_0X0704.LocationType);
             writer.WriteStartArray("位置汇报数据集合");
             for (int i = 0; i < jT808_0X0704.Count; i++)
             {

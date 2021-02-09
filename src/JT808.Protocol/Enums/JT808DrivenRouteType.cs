@@ -5,7 +5,13 @@
     /// </summary>
     public enum JT808DrivenRouteType
     {
+        /// <summary>
+        /// 不足
+        /// </summary>
         不足 = 0,
+        /// <summary>
+        /// 过长
+        /// </summary>
         过长 = 1
     }
 }

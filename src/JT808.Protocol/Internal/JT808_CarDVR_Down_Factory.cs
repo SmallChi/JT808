@@ -11,13 +11,22 @@ namespace JT808.Protocol.Interfaces
     /// </summary>
    public  class JT808_CarDVR_Down_Factory:IJT808_CarDVR_Down_Factory
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public IDictionary<byte, object> Map { get; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public JT808_CarDVR_Down_Factory()
         {
             Map = new Dictionary<byte, object>();
             Register(Assembly.GetExecutingAssembly());
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="externalAssembly"></param>
         public void Register(Assembly externalAssembly)
         {
             var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808CarDVRDownBodies)).ToList();
@@ -35,7 +44,11 @@ namespace JT808.Protocol.Interfaces
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TJT808CarDVRDownBodies"></typeparam>
+        /// <returns></returns>
         public IJT808_CarDVR_Down_Factory SetMap<TJT808CarDVRDownBodies>() where TJT808CarDVRDownBodies : JT808CarDVRDownBodies
         {
             Type type = typeof(TJT808CarDVRDownBodies);

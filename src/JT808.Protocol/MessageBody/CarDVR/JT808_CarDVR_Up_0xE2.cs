@@ -17,9 +17,17 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Up_0xE2 : JT808CarDVRUpBodies
     {
+        /// <summary>
+        /// 0xE2
+        /// </summary>
         public override byte CommandId => JT808CarDVRCommandID.进入脉冲系数误差测量.ToByteValue();
-
+        /// <summary>
+        /// 通过DB9的7脚输出车速传感器信号（TTL 电平）
+        /// </summary>
         public override string Description => "通过 DB9 的 7 脚输出车速传感器信号（TTL 电平）";
+        /// <summary>
+        /// 
+        /// </summary>
         public override bool SkipSerialization { get; set; } = true;
     }
 }

@@ -10,7 +10,7 @@ namespace JT808.Protocol.Test.MessageBody
 {
     public class JT808_0x0608Test
     {
-        JT808Serializer JT808Serializer = new JT808Serializer();
+        readonly JT808Serializer JT808Serializer = new JT808Serializer();
 
         [Fact]
         public void Test1()

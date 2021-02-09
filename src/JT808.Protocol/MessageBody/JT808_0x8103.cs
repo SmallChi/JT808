@@ -77,7 +77,7 @@ namespace JT808.Protocol.MessageBody
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
 
             }
@@ -106,7 +106,7 @@ namespace JT808.Protocol.MessageBody
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch { }
         }
         /// <summary>
         /// 

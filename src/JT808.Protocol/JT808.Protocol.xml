@@ -318,6 +318,141 @@
             行车记录仪命令字
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪执行标准版本">
+            <summary>
+            采集记录仪执行标准版本
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集当前驾驶人信息">
+            <summary>
+            采集当前驾驶人信息
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪实时时间">
+            <summary>
+            采集记录仪实时时间
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集累计行驶里程">
+            <summary>
+            采集累计行驶里程
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪脉冲系数">
+            <summary>
+            采集记录仪脉冲系数
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集车辆信息">
+            <summary>
+            采集车辆信息
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪状态信号配置信息">
+            <summary>
+            采集记录仪状态信号配置信息
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪唯一性编号">
+            <summary>
+            采集记录仪唯一性编号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的行驶速度记录">
+            <summary>
+            采集指定的行驶速度记录
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的位置信息记录">
+            <summary>
+            采集指定的位置信息记录
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的事故疑点记录">
+            <summary>
+            采集指定的事故疑点记录
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的超时驾驶记录">
+            <summary>
+            采集指定的超时驾驶记录
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的驾驶人身份记录">
+            <summary>
+            采集指定的驾驶人身份记录
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的外部供电记录">
+            <summary>
+            采集指定的外部供电记录
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的参数修改记录">
+            <summary>
+            采集指定的参数修改记录
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的速度状态日志">
+            <summary>
+            采集指定的速度状态日志
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置车辆信息">
+            <summary>
+            设置车辆信息
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置记录仪初次安装日期">
+            <summary>
+            设置记录仪初次安装日期
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置状态量配置信息">
+            <summary>
+            设置状态量配置信息
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置记录仪时间">
+            <summary>
+            设置记录仪时间
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置记录仪脉冲系数">
+            <summary>
+            设置记录仪脉冲系数
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置初始里程">
+            <summary>
+            设置初始里程
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.进入或保持检定状态">
+            <summary>
+            进入或保持检定状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.进入里程误差测量">
+            <summary>
+            进入里程误差测量
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.进入脉冲系数误差测量">
+            <summary>
+            进入脉冲系数误差测量
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.进入实时时间误差测量">
+            <summary>
+            进入实时时间误差测量
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.返回正常工作状态">
+            <summary>
+            返回正常工作状态
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808DirectionType">
             <summary>
             方向类型
@@ -336,6 +471,31 @@
         <member name="T:JT808.Protocol.Enums.JT808DrivenRouteType">
             <summary>
             路线行驶返回结果
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808DrivenRouteType.不足">
+            <summary>
+            不足
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808DrivenRouteType.过长">
+            <summary>
+            过长
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808EncryptMethod">
+            <summary>
+            JT808加密选项
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EncryptMethod.None">
+            <summary>
+            未加密
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EncryptMethod.RSA">
+            <summary>
+            RSA加密
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808ErrorCode">
@@ -394,6 +554,26 @@
             事件项编码
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.平台下发指令">
+            <summary>
+            平台下发指令
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.定时动作">
+            <summary>
+            定时动作
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.抢劫报警触发">
+            <summary>
+            抢劫报警触发
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.碰撞侧翻报警触发">
+            <summary>
+            碰撞侧翻报警触发
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808EventSettingType">
             <summary>
             事件设置类型
@@ -429,9 +609,44 @@
             IC 卡读取结果
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.IC卡读卡成功">
+            <summary>
+            IC卡读卡成功
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.读卡失败_原因为卡片密钥认证未通过">
+            <summary>
+            读卡失败_原因为卡片密钥认证未通过
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.读卡失败_原因为卡片已被锁定">
+            <summary>
+            读卡失败_原因为卡片已被锁定
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.读卡失败_原因为卡片被拔出">
+            <summary>
+            读卡失败_原因为卡片被拔出
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.读卡失败_原因为数据校验错误">
+            <summary>
+            读卡失败_原因为数据校验错误
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808ICCardStatus">
             <summary>
             插拔状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班">
+            <summary>
+            从业资格证IC卡插入_驾驶员上班
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808ICCardStatus.从业资格证IC卡拔出_驾驶员下班">
+            <summary>
+            从业资格证IC卡拔出_驾驶员下班
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808InformationSettingType">
@@ -895,15 +1110,65 @@
             多媒体格式编码
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaCodingFormat.JPEG">
+            <summary>
+            JPEG
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaCodingFormat.TIF">
+            <summary>
+            TIF
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaCodingFormat.MP3">
+            <summary>
+            MP3
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaCodingFormat.WAV">
+            <summary>
+            WAV
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaCodingFormat.WMV">
+            <summary>
+            WMV
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808MultimediaDeleted">
             <summary>
             删除标志
             单条存储多媒体数据检索上传命令
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaDeleted.保留">
+            <summary>
+            保留
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaDeleted.删除">
+            <summary>
+            删除
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808MultimediaType">
             <summary>
             多媒体类型
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.图像">
+            <summary>
+            图像
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.音频">
+            <summary>
+            音频
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.视频">
+            <summary>
+            视频
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808PhoneNumberType">
@@ -914,6 +1179,21 @@
             台湾的是10位 区号：886
             台湾手机号码有10码，例如0912345678不过前面那个0是我们自己在台湾打的，
             假如是其他地方打来要改成打 +886912345678
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.大陆">
+            <summary>
+            大陆
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.香港_澳门">
+            <summary>
+            香港|澳门
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.台湾">
+            <summary>
+            台湾
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808PlatformResult">
@@ -981,9 +1261,29 @@
             录音命令
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808RecordCmd.停止录音">
+            <summary>
+            停止录音
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808RecordCmd.开始录音">
+            <summary>
+            停止录音
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808RecordSave">
             <summary>
             保存标志
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808RecordSave.实时上传">
+            <summary>
+            实时上传
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808RecordSave.保存">
+            <summary>
+            保存
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808SettingProperty">
@@ -991,9 +1291,149 @@
             设置属性
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.更新区域">
+            <summary>
+            更新区域
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.追加区域">
+            <summary>
+            追加区域
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.修改区域">
+            <summary>
+            修改区域
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808SettingTelephoneBook">
             <summary>
             设置电话本 设置类型
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.删除终端上所有存储的联系人">
+            <summary>
+            删除终端上所有存储的联系人
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.更新电话本_删除终端中已有全部联系人并追加消息中的联系人">
+            <summary>
+            更新电话本_删除终端中已有全部联系人并追加消息中的联系人
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.追加电话本">
+            <summary>
+            追加电话本
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.修改电话本_以联系人为索引">
+            <summary>
+            修改电话本_以联系人为索引
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808Status">
+            <summary>
+            JT808车辆状态位
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.ACC开">
+            <summary>
+            ACC开
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.定位">
+            <summary>
+            定位
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.南纬">
+            <summary>
+            南纬
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.西经">
+            <summary>
+            西经
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.停运状态">
+            <summary>
+            停运状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.经纬度已经保密插件加密">
+            <summary>
+            经纬度已经保密插件加密
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.半载">
+            <summary>
+            半载
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.满载">
+            <summary>
+            满载
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.车辆油路断开">
+            <summary>
+            车辆油路断开
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.车辆电路断开">
+            <summary>
+            车辆电路断开
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.车门加锁">
+            <summary>
+            车门加锁
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.前门开">
+            <summary>
+            前门开
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.中门开">
+            <summary>
+            中门开
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.后门开">
+            <summary>
+            后门开
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.驾驶席门开">
+            <summary>
+            驾驶席门开
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.自定义">
+            <summary>
+            自定义
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.使用GPS卫星进行定位">
+            <summary>
+            使用GPS卫星进行定位
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.使用北斗卫星进行定位">
+            <summary>
+            使用北斗卫星进行定位
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.使用GLONASS卫星进行定位">
+            <summary>
+            使用GLONASS卫星进行定位
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Status.使用Galileo卫星进行定位">
+            <summary>
+            使用Galileo卫星进行定位
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808TelephoneBookContactType">
@@ -1459,9 +1899,84 @@
         </member>
         <member name="T:JT808.Protocol.Extensions.JT808PackageExtensions">
             <summary>
+            JT808创建包扩展
+            </summary>
+            <summary>
             todo:source-generators正式发布以后将T4模板换掉
             https://devblogs.microsoft.com/dotnet/introducing-c-source-generators/
             </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create``1(JT808.Protocol.Enums.JT808MsgId,System.String,``0)">
+            <summary>
+            根据消息Id创建包
+            </summary>
+            <typeparam name="TJT808Bodies"></typeparam>
+            <param name="msgId"></param>
+            <param name="terminalPhoneNo"></param>
+            <param name="bodies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create(JT808.Protocol.Enums.JT808MsgId,System.String)">
+            <summary>
+            根据消息Id创建包
+            </summary>
+            <param name="msgId"></param>
+            <param name="terminalPhoneNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.CreateCustomMsgId``1(System.UInt16,System.String,``0)">
+            <summary>
+            根据自定义消息Id创建包
+            </summary>
+            <typeparam name="TJT808Bodies"></typeparam>
+            <param name="msgId"></param>
+            <param name="terminalPhoneNo"></param>
+            <param name="bodies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.CreateCustomMsgId(System.UInt16,System.String)">
+            <summary>
+            根据自定义消息Id创建包
+            </summary>
+            <param name="msgId"></param>
+            <param name="terminalPhoneNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019``1(JT808.Protocol.Enums.JT808MsgId,System.String,``0)">
+            <summary>
+            根据消息Id创建2019版本包
+            </summary>
+            <typeparam name="TJT808Bodies"></typeparam>
+            <param name="msgId"></param>
+            <param name="terminalPhoneNo"></param>
+            <param name="bodies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create2019(JT808.Protocol.Enums.JT808MsgId,System.String)">
+            <summary>
+            根据消息Id创建2019版本包
+            </summary>
+            <param name="msgId"></param>
+            <param name="terminalPhoneNo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.CreateCustomMsgId2019``1(System.UInt16,System.String,``0)">
+            <summary>
+            根据自定义消息Id创建2019版本包
+            </summary>
+            <typeparam name="TJT808Bodies"></typeparam>
+            <param name="msgId"></param>
+            <param name="terminalPhoneNo"></param>
+            <param name="bodies"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.CreateCustomMsgId2019(System.UInt16,System.String)">
+            <summary>
+            根据自定义消息Id创建2019版本包
+            </summary>
+            <param name="msgId"></param>
+            <param name="terminalPhoneNo"></param>
+            <returns></returns>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT808PackageExtensions.Create_终端通用应答(JT808.Protocol.Enums.JT808MsgId,System.String,JT808.Protocol.MessageBody.JT808_0x0001)">
             <summary>
@@ -3673,15 +4188,72 @@
             记录仪工厂
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Interfaces.IJT808_CarDVR_Down_Factory.Map">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.IJT808_CarDVR_Down_Factory.SetMap``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TJT808CarDVRDownBodies"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Interfaces.IJT808_CarDVR_Down_Package">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Interfaces.IJT808_CarDVR_Up_Factory">
             <summary>
             记录仪工厂
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Interfaces.IJT808_CarDVR_Up_Factory.Map">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.IJT808_CarDVR_Up_Factory.SetMap``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TJT808CarDVRUpBodies"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Interfaces.IJT808_CarDVR_Up_Package">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.Interfaces.JT808_CarDVR_Down_Factory">
             <summary>
             记录仪工厂
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.Interfaces.JT808_CarDVR_Down_Factory.Map">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.JT808_CarDVR_Down_Factory.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.JT808_CarDVR_Down_Factory.Register(System.Reflection.Assembly)">
+            <summary>
+            
+            </summary>
+            <param name="externalAssembly"></param>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.JT808_CarDVR_Down_Factory.SetMap``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TJT808CarDVRDownBodies"></typeparam>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.Interfaces.JT808_CarDVR_Up_Factory">
             <summary>
@@ -5231,10 +5803,40 @@
             返回：记录仪执行标准的年号及修改单号
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x00.CommandId">
+            <summary>
+            0x00
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x00.Description">
+            <summary>
+            采集记录仪执行标准版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x00.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x01">
             <summary>
             机动车驾驶证号码
             返回：当前驾驶人的机动车驾驶证号码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x01.CommandId">
+            <summary>
+            0x01
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x01.Description">
+            <summary>
+            采集机动车驾驶证号码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x01.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x02">
@@ -5243,10 +5845,40 @@
             返回：实时时间
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x02.CommandId">
+            <summary>
+            0x02
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x02.Description">
+            <summary>
+            实时时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x02.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x03">
             <summary>
             采集累计行驶里程
             返回：实时时间、安装时的初始里程及安装后的累计行驶里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x03.CommandId">
+            <summary>
+            0x03
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x03.Description">
+            <summary>
+            实时时间、安装时的初始里程及安装后的累计行驶里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x03.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x04">
@@ -5255,10 +5887,40 @@
             返回：实时时间及设定的脉冲系数
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x04.CommandId">
+            <summary>
+            0x04
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x04.Description">
+            <summary>
+            实时时间及设定的脉冲系数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x04.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x05">
             <summary>
             采集车辆信息
             返回：车辆识别代号、机动车号牌号码和机动车号牌分类
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x05.CommandId">
+            <summary>
+            0x05
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x05.Description">
+            <summary>
+            车辆识别代号、机动车号牌号码和机动车号牌分类
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x05.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x06">
@@ -5267,10 +5929,40 @@
             返回：状态信号配置信息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x06.CommandId">
+            <summary>
+            0x06
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x06.Description">
+            <summary>
+            状态信号配置信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x06.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x07">
             <summary>
             采集记录仪唯一性编号
             返回：唯一性编号及初次安装日期
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x07.CommandId">
+            <summary>
+            0x07
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x07.Description">
+            <summary>
+            唯一性编号及初次安装日期
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x07.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x08">
@@ -5278,6 +5970,11 @@
             采集指定的行驶速度记录
             返回：符合条件的行驶速度记录
             如在指定的时间范围内无数据记录，则本数据块数据为空
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x08.CommandId">
+            <summary>
+            0x08
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x08.StartTime">
@@ -5295,11 +5992,50 @@
             最大单位数据块个数
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x08.Description">
+            <summary>
+            符合条件的行驶速度记录
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x08.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x08,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x08.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x08.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x09">
             <summary>
             采集指定的位置信息记录
             返回：符合条件的位置信息记录
             指定的时间范围内无数据记录，则本数据块数据为空
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x09.CommandId">
+            <summary>
+            0x09
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x09.Description">
+            <summary>
+            符合条件的位置信息记录
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x09.StartTime">
@@ -5317,11 +6053,45 @@
             最大单位数据块个数
             </summary>
         </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x09.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x09,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x09.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x09.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x10">
             <summary>
             采集指定的事故疑点记录
             返回：符合条件的事故疑点记录
             指定的时间范围内无数据记录，则本数据块数据为空
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x10.CommandId">
+            <summary>
+            0x10
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x10.Description">
+            <summary>
+            符合条件的事故疑点记录
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x10.StartTime">
@@ -5339,10 +6109,44 @@
             最大单位数据块个数
             </summary>
         </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x10.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x10,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x10.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x10.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x11">
             <summary>
             采集指定的超时驾驶记录
             返回：符合条件的超时驾驶记录
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x11.CommandId">
+            <summary>
+            0x11
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x11.Description">
+            <summary>
+            符合条件的超时驾驶记录
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x11.StartTime">
@@ -5360,10 +6164,44 @@
             最大单位数据块个数
             </summary>
         </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x11.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x11,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x11.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x11.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x12">
             <summary>
             采集指定的驾驶人身份记录
             返回：符合条件的驾驶人登录退出记录
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x12.CommandId">
+            <summary>
+            0x12
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x12.Description">
+            <summary>
+            符合条件的驾驶人登录退出记录
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x12.StartTime">
@@ -5381,10 +6219,44 @@
             最大单位数据块个数
             </summary>
         </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x12.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x12,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x12.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x12.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x13">
             <summary>
             采集指定的外部供电记录
             返回：符合条件的供电记录
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x13.CommandId">
+            <summary>
+            0x13
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x13.Description">
+            <summary>
+            符合条件的供电记录
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x13.StartTime">
@@ -5402,10 +6274,44 @@
             最大单位数据块个数
             </summary>
         </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x13.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x13,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x13.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x13.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x14">
             <summary>
             采集指定的参数修改记录
             返回：符合条件的参数修改记录
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x14.CommandId">
+            <summary>
+            0x14
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x14.Description">
+            <summary>
+            符合条件的参数修改记录
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x14.StartTime">
@@ -5423,10 +6329,44 @@
             最大单位数据块个数
             </summary>
         </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x14.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x14,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x14.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x14.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x15">
             <summary>
             采集指定的速度状态日志
             返回：符合条件的速度状态日志
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x15.CommandId">
+            <summary>
+            0x15
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x15.Description">
+            <summary>
+            符合条件的速度状态日志
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x15.StartTime">
@@ -5444,10 +6384,39 @@
             最大单位数据块个数
             </summary>
         </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x15.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x15,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x15.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x15.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82">
             <summary>
             设置车辆信息
             返回：车辆信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.CommandId">
+            <summary>
+            0x82
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.Vin">
@@ -5467,10 +6436,44 @@
             后 4 个字节为备用字
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.Description">
+            <summary>
+            车辆信息
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x82.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83">
             <summary>
             设置记录仪初次安装日期
             返回：初次安装日期
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83.CommandId">
+            <summary>
+            0x83
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83.RealTime">
@@ -5478,10 +6481,44 @@
             实时时间
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83.Description">
+            <summary>
+            初次安装日期
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x83.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84">
             <summary>
             设置状态量配置信息
             返回：状态量配置信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.CommandId">
+            <summary>
+            0x84
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.RealTime">
@@ -5497,7 +6534,17 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.D0">
             <summary>
-            
+            D0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.D1">
+            <summary>
+            D1
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.D2">
+            <summary>
+            D2
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.NearLight">
@@ -5530,10 +6577,44 @@
             10个字节，未使用或不足时，补0
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.Description">
+            <summary>
+            状态量配置信息
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0x84.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2">
             <summary>
             设置记录仪时间
             返回：北京时间的日期、时钟
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2.CommandId">
+            <summary>
+            0xC2
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2.RealTime">
@@ -5541,10 +6622,44 @@
             实时时间
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2.Description">
+            <summary>
+            北京时间的日期、时钟
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2,JT808.Protocol.IJT808Config)">
+            <summary>
+            北京时间的日期、时钟
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC2.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3">
             <summary>
             设置记录仪脉冲系数
             返回：记录仪脉冲系数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.CommandId">
+            <summary>
+            0xC3
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.RealTime">
@@ -5557,10 +6672,44 @@
             脉冲系数
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.Description">
+            <summary>
+            记录仪脉冲系数
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC3.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4">
             <summary>
             设置初始里程
             返回：记录仪初次安装时车辆已行驶的总里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.CommandId">
+            <summary>
+            0xC4
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.RealTime">
@@ -5583,16 +6732,65 @@
             累计里程
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.Description">
+            <summary>
+            车辆识别代号、机动车号牌号码和机动车号牌分类
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xC4.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE0">
             <summary>
             进入或保持检定状态
             返回：进入或保持检定状态
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE0.CommandId">
+            <summary>
+            0xE0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE0.Description">
+            <summary>
+            进入或保持检定状态
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE0.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1">
             <summary>
             进入里程误差测量
             返回：通过 DB9 的 7 脚接收标准速度脉冲测量信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.CommandId">
+            <summary>
+            0xE1
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.UniqueNumber">
@@ -5621,10 +6819,54 @@
             状态信号
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.Description">
+            <summary>
+            通过DB9的7脚接收标准速度脉冲测量信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE1.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE2">
             <summary>
             进入脉冲系数误差测量
             返回：通过 DB9 的 7 脚输出车速传感器信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE2.CommandId">
+            <summary>
+            0xE2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE2.Description">
+            <summary>
+            通过DB9的7脚输出车速传感器信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE2.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE3">
@@ -5633,16 +6875,51 @@
             返回：通过 DB9 的 7 脚输出实时时钟的秒脉冲信号（TTL 电平）
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE3.CommandId">
+            <summary>
+            0xE3
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE3.Description">
+            <summary>
+            通过 DB9 的 7 脚输出实时时钟的秒脉冲信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE3.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE4">
             <summary>
             返回正常工作状态
             返回：返回正常工作状态
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE4.CommandId">
+            <summary>
+            0xE4
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE4.Description">
+            <summary>
+            返回正常工作状态
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Down_0xE4.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00">
             <summary>
             采集记录仪执行标准版本
             返回：记录仪执行标准的年号及修改单号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00.CommandId">
+            <summary>
+            0x00
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00.StandardYear">
@@ -5657,10 +6934,44 @@
             无修改单或无应答则默认为 00H
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00.Description">
+            <summary>
+            记录仪执行标准的年号及修改单号
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x00.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x01">
             <summary>
             机动车驾驶证号码
             返回：当前驾驶人的机动车驾驶证号码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x01.CommandId">
+            <summary>
+            0x01
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x01.DriverLicenseNo">
@@ -5669,10 +6980,44 @@
             机动车驾驶证号码为 15 位时，后 3 位以 00H 补齐。驾驶人身份未知时以 00H 表示
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x01.Description">
+            <summary>
+            当前驾驶人的机动车驾驶证号码
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x01.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x01.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x01,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x01.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x02">
             <summary>
             采集记录仪实时时间
             返回：实时时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x02.CommandId">
+            <summary>
+            0x02
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x02.RealTime">
@@ -5680,10 +7025,44 @@
             实时时间
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x02.Description">
+            <summary>
+            实时时间
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x02.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x02.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x02,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x02.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x03">
             <summary>
             采集累计行驶里程
             返回：实时时间、安装时的初始里程及安装后的累计行驶里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x03.CommandId">
+            <summary>
+            0x03
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x03.RealTime">
@@ -5706,10 +7085,44 @@
             累计里程
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x03.Description">
+            <summary>
+            实时时间、安装时的初始里程及安装后的累计行驶里程
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x03.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x03.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x03,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x03.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04">
             <summary>
             采集记录仪脉冲系数
             返回：实时时间及设定的脉冲系数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.CommandId">
+            <summary>
+            0x04
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.RealTime">
@@ -5722,10 +7135,44 @@
             脉冲系数
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.Description">
+            <summary>
+            实时时间及设定的脉冲系数
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x04.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05">
             <summary>
             采集车辆信息
             返回：车辆识别代号、机动车号牌号码和机动车号牌分类
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05.CommandId">
+            <summary>
+            0x05
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05.Vin">
@@ -5745,10 +7192,44 @@
             后 4 个字节为备用字
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05.Description">
+            <summary>
+            车辆识别代号、机动车号牌号码和机动车号牌分类
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x05.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06">
             <summary>
             采集记录仪状态信号配置信息
             返回：状态信号配置信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.CommandId">
+            <summary>
+            0x06
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.RealTime">
@@ -5764,7 +7245,17 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.D0">
             <summary>
-            
+            D0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.D1">
+            <summary>
+            D1
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.D2">
+            <summary>
+            D2
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.NearLight">
@@ -5797,10 +7288,44 @@
             10个字节，未使用或不足时，补0
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.Description">
+            <summary>
+            状态信号配置信息
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x06.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x07">
             <summary>
             采集记录仪唯一性编号
             返回：唯一性编号及初次安装日期
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x07.CommandId">
+            <summary>
+            0x07
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x07.ProductionPlantCCCCertificationCode">
@@ -5828,6 +7353,35 @@
             备用  5字节
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x07.Description">
+            <summary>
+            唯一性编号及初次安装日期
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x07.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x07.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x07,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x07.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08">
             <summary>
             采集指定的行驶速度记录
@@ -5835,10 +7389,44 @@
             如在指定的时间范围内无数据记录，则本数据块数据为空
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.CommandId">
+            <summary>
+            0x08
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.JT808_CarDVR_Up_0x08_SpeedPerMinutes">
             <summary>
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.Description">
+            <summary>
+            符合条件的行驶速度记录
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x08_SpeedPerMinute">
             <summary>
@@ -5879,10 +7467,44 @@
             指定的时间范围内无数据记录，则本数据块数据为空
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.CommandId">
+            <summary>
+            0x09
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.JT808_CarDVR_Up_0x09_PositionPerHours">
             <summary>
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.Description">
+            <summary>
+            符合条件的位置信息记录
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x09_PositionPerHour">
             <summary>
@@ -5933,10 +7555,44 @@
             指定的时间范围内无数据记录，则本数据块数据为空
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.CommandId">
+            <summary>
+            0x10
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.JT808_CarDVR_Up_0x10_AccidentSuspectins">
             <summary>
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.Description">
+            <summary>
+            符合条件的事故疑点记录
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x10_AccidentSuspectin">
             <summary>
@@ -5996,10 +7652,44 @@
             返回：符合条件的超时驾驶记录
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.CommandId">
+            <summary>
+            0x11
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.JT808_CarDVR_Up_0x11_DriveOverTimes">
             <summary>
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.Description">
+            <summary>
+            符合条件的超时驾驶记录
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x11_DriveOverTime">
             <summary>
@@ -6057,10 +7747,44 @@
             返回：符合条件的驾驶人登录退出记录
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.CommandId">
+            <summary>
+            0x12
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.JT808_CarDVR_Up_0x12_DriveLogins">
             <summary>
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.Description">
+            <summary>
+            符合条件的驾驶人登录退出记录
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x12_DriveLogin">
             <summary>
@@ -6088,10 +7812,44 @@
             返回：符合条件的供电记录
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.CommandId">
+            <summary>
+            0x13
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.JT808_CarDVR_Up_0x13_ExternalPowerSupplys">
             <summary>
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.Description">
+            <summary>
+            符合条件的供电记录
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x13_ExternalPowerSupply">
             <summary>
@@ -6114,10 +7872,44 @@
             返回：符合条件的参数修改记录
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.CommandId">
+            <summary>
+            0x14
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.JT808_CarDVR_Up_0x14_ParameterModifys">
             <summary>
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.Description">
+            <summary>
+            符合条件的参数修改记录
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x14_ParameterModify">
             <summary>
@@ -6140,10 +7932,44 @@
             返回：符合条件的速度状态日志
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.CommandId">
+            <summary>
+            0x15
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.JT808_CarDVR_Up_0x15_SpeedStatusLogs">
             <summary>
             请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.Description">
+            <summary>
+            符合条件的速度状态日志
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x15_SpeedStatusLog">
             <summary>
@@ -6191,10 +8017,40 @@
             返回：车辆信息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x82.CommandId">
+            <summary>
+            0x82
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x82.Description">
+            <summary>
+            车辆信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x82.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x83">
             <summary>
             设置记录仪初次安装日期
             返回：初次安装日期
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x83.CommandId">
+            <summary>
+            0x83
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x83.Description">
+            <summary>
+            初次安装日期
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x83.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x84">
@@ -6203,10 +8059,40 @@
             返回：状态量配置信息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x84.CommandId">
+            <summary>
+            0x84
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x84.Description">
+            <summary>
+            状态量配置信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0x84.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC2">
             <summary>
             设置记录仪时间
             返回：北京时间的日期、时钟
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC2.CommandId">
+            <summary>
+            0xC2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC2.Description">
+            <summary>
+            北京时间的日期、时钟
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC2.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC3">
@@ -6215,10 +8101,40 @@
             返回：记录仪脉冲系数
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC3.CommandId">
+            <summary>
+            0xC3
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC3.Description">
+            <summary>
+            记录仪脉冲系数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC3.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC4">
             <summary>
             设置初始里程
             返回：记录仪初次安装时车辆已行驶的总里程
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC4.CommandId">
+            <summary>
+            0xC4
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC4.Description">
+            <summary>
+            车辆识别代号、机动车号牌号码和机动车号牌分类
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xC4.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE0">
@@ -6228,10 +8144,40 @@
             在检定状态下，检定装置以不大于2秒的时间间隔发送包含本命令字的命令帧，记录仪在6秒内未收到该命令帧，则自动返回正常工作状态。
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE0.CommandId">
+            <summary>
+            0xE0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE0.Description">
+            <summary>
+            进入或保持检定状态
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE0.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE1">
             <summary>
             进入里程误差测量
             返回：通过 DB9 的 7 脚接收标准速度脉冲测量信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE1.CommandId">
+            <summary>
+            0xE1
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE1.Description">
+            <summary>
+            通过DB9的7脚接收标准速度脉冲测量信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE1.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE2">
@@ -6240,16 +8186,61 @@
             返回：通过 DB9 的 7 脚输出车速传感器信号（TTL 电平）
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE2.CommandId">
+            <summary>
+            0xE2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE2.Description">
+            <summary>
+            通过DB9的7脚输出车速传感器信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE2.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE3">
             <summary>
             进入实时时间误差测量
             返回：通过 DB9 的 7 脚输出实时时钟的秒脉冲信号（TTL 电平）
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE3.CommandId">
+            <summary>
+            0xE3
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE3.Description">
+            <summary>
+            通过DB9的7脚输出实时时钟的秒脉冲信号（TTL 电平）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE3.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE4">
             <summary>
             返回正常工作状态
             返回：返回正常工作状态
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE4.CommandId">
+            <summary>
+            0xE4
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE4.Description">
+            <summary>
+            返回正常工作状态
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.CarDVR.JT808_CarDVR_Up_0xE4.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0001">
@@ -12687,6 +14678,30 @@
             上传方式为 0x0D 时，单位为条。
             </summary>
         </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x8103_0x0095.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x8103_0x0095.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x8103_0x0095.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.JT808_0x8103_0x0095,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0100">
             <summary>
             CAN 总线通道 1 采集时间间隔(ms)，0 表示不采集
@@ -12722,6 +14737,14 @@
             <param name="reader"></param>
             <param name="config"></param>
             <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x8103_0x0100.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.JT808_0x8103_0x0100,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_0x0101">
             <summary>

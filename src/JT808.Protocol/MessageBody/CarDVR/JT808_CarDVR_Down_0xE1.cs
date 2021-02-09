@@ -17,6 +17,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Down_0xE1 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0xE1>, IJT808Analyze
     {
+        /// <summary>
+        /// 0xE1
+        /// </summary>
         public override byte CommandId =>  JT808CarDVRCommandID.进入里程误差测量.ToByteValue();
         /// <summary>
         /// 记录仪唯一性编号
@@ -39,8 +42,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// 状态信号
         /// </summary>
         public byte StatusSignal { get; set; }
-        public override string Description => "通过 DB9 的 7 脚接收标准速度脉冲测量信号（TTL 电平）";
-
+        /// <summary>
+        /// 通过DB9的7脚接收标准速度脉冲测量信号（TTL 电平）
+        /// </summary>
+        public override string Description => "通过DB9的7脚接收标准速度脉冲测量信号（TTL 电平）";
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Down_0xE1 value = new JT808_CarDVR_Down_0xE1();
@@ -56,7 +67,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.StatusSignal = reader.ReadByte();
             writer.WriteNumber($"[{value.StatusSignal.ReadNumber()}]状态信号", value.StatusSignal);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xE1 value, IJT808Config config)
         {
             var currentPosition = writer.GetCurrentPosition();
@@ -67,7 +83,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
             writer.WriteUInt32(value.TotalMileage);
             writer.WriteByte(value.StatusSignal);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_CarDVR_Down_0xE1 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0xE1 value = new JT808_CarDVR_Down_0xE1();

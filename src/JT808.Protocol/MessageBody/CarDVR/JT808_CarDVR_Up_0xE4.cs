@@ -17,8 +17,17 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Up_0xE4 : JT808CarDVRUpBodies
     {
+        /// <summary>
+        /// 0xE4
+        /// </summary>
         public override byte CommandId =>  JT808CarDVRCommandID.返回正常工作状态.ToByteValue();
+        /// <summary>
+        /// 返回正常工作状态
+        /// </summary>
         public override string Description => "返回正常工作状态";
+        /// <summary>
+        /// 
+        /// </summary>
         public override bool SkipSerialization { get; set; } = true;
     }
 }

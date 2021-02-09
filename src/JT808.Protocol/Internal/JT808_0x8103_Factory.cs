@@ -110,7 +110,7 @@ namespace JT808.Protocol.Interfaces
                 {
                     paramId = (uint)type.GetProperty(nameof(JT808_0x8103_BodyBase.ParamId)).GetValue(instance);
                 }
-                catch (Exception ex)
+                catch
                 {
                     continue;
                 }

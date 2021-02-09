@@ -17,6 +17,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Up_0x04 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x04>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x04
+        /// </summary>
         public override byte CommandId =>  JT808CarDVRCommandID.采集记录仪脉冲系数.ToByteValue();
         /// <summary>
         /// 当前时间
@@ -26,9 +29,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// 脉冲系数
         /// </summary>
         public ushort PulseCoefficient { get; set; }
-
+        /// <summary>
+        /// 实时时间及设定的脉冲系数
+        /// </summary>
         public override string Description => "实时时间及设定的脉冲系数";
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Up_0x04 value = new JT808_CarDVR_Up_0x04();
@@ -38,13 +48,23 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.PulseCoefficient = reader.ReadUInt16();
             writer.WriteNumber($"[{value.PulseCoefficient.ReadNumber()}]脉冲系数",value.PulseCoefficient);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x04 value, IJT808Config config)
         {
             writer.WriteDateTime6(value.RealTime);
             writer.WriteUInt16(value.PulseCoefficient);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_CarDVR_Up_0x04 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x04 value = new JT808_CarDVR_Up_0x04();

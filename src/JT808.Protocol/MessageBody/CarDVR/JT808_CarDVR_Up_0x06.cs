@@ -17,6 +17,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Up_0x06 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x06>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x06
+        /// </summary>
         public override byte CommandId => JT808CarDVRCommandID.采集记录仪状态信号配置信息.ToByteValue();
         /// <summary>
         /// 实时时间
@@ -28,12 +31,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte SignalOperate { get; set; }
         /// <summary>
-        /// 
+        /// D0
         /// </summary>
         public string D0 { get; set; }
-
+        /// <summary>
+        /// D1
+        /// </summary>
         public string D1 { get; set; }
-
+        /// <summary>
+        /// D2
+        /// </summary>
         public string D2 { get; set; }
         /// <summary>
         /// 近光 D3
@@ -60,9 +67,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// 10个字节，未使用或不足时，补0
         /// </summary>
         public string Brake { get; set; }
-        
+        /// <summary>
+        /// 状态信号配置信息
+        /// </summary>
         public override string Description => "状态信号配置信息";
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Up_0x06 value = new JT808_CarDVR_Up_0x06();
@@ -96,7 +110,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.Brake = reader.ReadString(10);
             writer.WriteString($"[{hex.ToArray().ToHexString()}]制动", value.Brake);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x06 value, IJT808Config config)
         {
             writer.WriteDateTime6(value.RealTime);
@@ -126,7 +145,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
             writer.WriteString(value.Brake);
             writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_CarDVR_Up_0x06 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x06 value = new JT808_CarDVR_Up_0x06();

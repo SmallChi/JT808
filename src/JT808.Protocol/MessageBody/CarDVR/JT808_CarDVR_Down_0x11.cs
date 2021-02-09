@@ -16,8 +16,13 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Down_0x11 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0x11>, IJT808Analyze
     {
+        /// <summary>
+        /// 0x11
+        /// </summary>
         public override byte CommandId => JT808CarDVRCommandID.采集指定的超时驾驶记录.ToByteValue();
-
+        /// <summary>
+        /// 符合条件的超时驾驶记录
+        /// </summary>
         public override string Description => "符合条件的超时驾驶记录";
         /// <summary>
         /// 开始时间
@@ -31,14 +36,24 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// 最大单位数据块个数
         /// </summary>
         public ushort Count { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x11 value, IJT808Config config)
         {
             writer.WriteDateTime6(value.StartTime);
             writer.WriteDateTime6(value.EndTime);
             writer.WriteUInt16(value.Count);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_CarDVR_Down_0x11 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0x11 value = new JT808_CarDVR_Down_0x11();
@@ -47,14 +62,19 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.Count = reader.ReadUInt16();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Down_0x11 value = new JT808_CarDVR_Down_0x11();
             value.StartTime = reader.ReadDateTime6();
-            writer.WriteString($"[{value.StartTime.ToString("yyMMddHHmmss")}]开始时间", value.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            writer.WriteString($"[{value.StartTime:yyMMddHHmmss}]开始时间", value.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.EndTime = reader.ReadDateTime6();
-            writer.WriteString($"[{value.EndTime.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            writer.WriteString($"[{value.EndTime:yyMMddHHmmss}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.Count = reader.ReadUInt16();
             writer.WriteNumber($"[{value.Count.ReadNumber()}]最大单位数据块个数", value.Count);
         }

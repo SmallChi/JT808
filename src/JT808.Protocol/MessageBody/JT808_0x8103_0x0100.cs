@@ -54,7 +54,12 @@ namespace JT808.Protocol.MessageBody
             jT808_0x8103_0x0100.ParamValue = reader.ReadUInt32();
             return jT808_0x8103_0x0100;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0100 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);

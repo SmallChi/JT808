@@ -207,7 +207,7 @@ namespace JT808.Protocol.MessageBody
                     {
                         JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
                     }
-                    catch(Exception ex)
+                    catch
                     {
 
                     }
@@ -357,7 +357,7 @@ namespace JT808.Protocol.MessageBody
             value.Direction = reader.ReadUInt16();
             writer.WriteNumber($"[{value.Direction.ReadNumber()}]方向", value.Direction);
             value.GPSTime = reader.ReadDateTime6();
-            writer.WriteString($"[{value.GPSTime.ToString("yyMMddHHmmss")}]定位时间", value.GPSTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            writer.WriteString($"[{value.GPSTime:yyMMddHHmmss}]定位时间", value.GPSTime.ToString("yyyy-MM-dd HH:mm:ss"));
             // 位置附加信息
             writer.WriteStartArray("附加信息列表");
             while (reader.ReadCurrentRemainContentLength() > 0)
@@ -402,7 +402,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteString($"未知附加信息", reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray().ToHexString());   
                         reader.Skip(attachLen);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         throw;
                     }

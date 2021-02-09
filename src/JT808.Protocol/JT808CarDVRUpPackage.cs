@@ -73,9 +73,9 @@ namespace JT808.Protocol
                     writer.WriteEndObject();
                 }
             }
-            var carDVRCheckCode = reader.ReadCarDVRCheckCode(currentPosition);
+            var (CalculateXorCheckCode, RealXorCheckCode) = reader.ReadCarDVRCheckCode(currentPosition);
             value.CheckCode = reader.ReadByte();
-            if (carDVRCheckCode.RealXorCheckCode != carDVRCheckCode.CalculateXorCheckCode)
+            if (RealXorCheckCode != CalculateXorCheckCode)
             {
                 writer.WriteString($"[{value.CheckCode.ReadNumber()}]校验位错误", $"{reader.RealCheckXorCode}!={reader.CalculateCheckXorCode}");
             }
@@ -108,10 +108,10 @@ namespace JT808.Protocol
                     value.Bodies = attachImpl;
                 }
             }
-            var carDVRCheckCode = reader.ReadCarDVRCheckCode(currentPosition);
+            var (CalculateXorCheckCode, RealXorCheckCode) = reader.ReadCarDVRCheckCode(currentPosition);
             if (!config.SkipCarDVRCRCCode)
             {
-                if (carDVRCheckCode.RealXorCheckCode != carDVRCheckCode.CalculateXorCheckCode)
+                if (RealXorCheckCode != CalculateXorCheckCode)
                     throw new JT808Exception(JT808ErrorCode.CarDVRCheckCodeNotEqual, $"{reader.RealCheckXorCode}!={reader.CalculateCheckXorCode}");
             }
             value.CheckCode = reader.ReadByte();

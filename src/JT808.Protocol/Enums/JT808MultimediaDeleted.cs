@@ -6,7 +6,13 @@
     /// </summary>
     public enum JT808MultimediaDeleted : byte
     {
+        /// <summary>
+        /// 保留
+        /// </summary>
         保留 = 0,
+        /// <summary>
+        /// 删除
+        /// </summary>
         删除 = 1
     }
 }

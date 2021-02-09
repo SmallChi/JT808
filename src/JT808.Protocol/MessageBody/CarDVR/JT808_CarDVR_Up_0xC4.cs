@@ -17,8 +17,17 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Up_0xC4 : JT808CarDVRUpBodies
     {
+        /// <summary>
+        /// 0xC4
+        /// </summary>
         public override byte CommandId =>  JT808CarDVRCommandID.设置初始里程.ToByteValue();
+        /// <summary>
+        /// 车辆识别代号、机动车号牌号码和机动车号牌分类
+        /// </summary>
         public override string Description => "车辆识别代号、机动车号牌号码和机动车号牌分类";
+        /// <summary>
+        /// 
+        /// </summary>
         public override bool SkipSerialization { get; set; } = true;
     }
 }

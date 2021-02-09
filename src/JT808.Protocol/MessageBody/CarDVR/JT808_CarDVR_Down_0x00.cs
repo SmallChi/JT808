@@ -16,10 +16,17 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// </summary>
     public class JT808_CarDVR_Down_0x00 : JT808CarDVRDownBodies
     {
+        /// <summary>
+        /// 0x00
+        /// </summary>
         public override byte CommandId => JT808CarDVRCommandID.采集记录仪执行标准版本.ToByteValue();
-         
+        /// <summary>
+        /// 采集记录仪执行标准版本
+        /// </summary>
         public override string Description => "采集记录仪执行标准版本";
-
+        /// <summary>
+        /// 
+        /// </summary>
         public override bool SkipSerialization { get; set; } = true;
     }
 }

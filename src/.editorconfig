@@ -1,0 +1,10 @@
+﻿[*.{cs,vb}]
+
+# IDE0017: 简化对象初始化
+dotnet_diagnostic.IDE0017.severity = none
+
+# IDE0028: 简化集合初始化
+dotnet_diagnostic.IDE0028.severity = none
+
+# IDE0059: 不需要赋值
+dotnet_diagnostic.IDE0059.severity = none
