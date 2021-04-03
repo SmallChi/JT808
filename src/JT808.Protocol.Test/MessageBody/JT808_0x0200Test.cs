@@ -18,13 +18,18 @@ namespace JT808.Protocol.Test.MessageBody
     public class JT808_0x0200Test
     {
         JT808Serializer JT808Serializer;
+        JT808Serializer JT808Serializer1;
 
         public JT808_0x0200Test()
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
+            IJT808Config jT808Config1 = new DefaultGlobalConfig();
+            jT808Config1.SkipCRCCode = true;
             jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808LocationAttachImpl0x06>();
             JT808Serializer = new JT808Serializer(jT808Config);
+            JT808Serializer1 = new JT808Serializer(jT808Config1);
         }
+
         [Fact]
         public void Test1()
         {
@@ -335,6 +340,52 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bodys = "000493E0000F4AEE00BA7F0E07E4F11C0028003C000018071510101001040000006402020037".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808_0x0200>(bodys);
+        }
+
+        [Fact]
+        public void Test7()
+        {
+            //"附加信息列表": [
+            //  {
+            //    "[01]附加信息Id": 1,
+            //    "[04]附加信息长度": 4,
+            //    "[000024C7]里程": 9415
+            //  },
+            //  {
+            //    "[2B]附加信息Id": 43,
+            //    "[04]附加信息长度": 4,
+            //    "[0B290B29]模拟量": 187239209
+            //  },
+            //  {
+            //     "[30]附加信息Id": 48,
+            //    "[01]附加信息长度": 1,
+            //    "[17]无线通信网络信号强度": 23
+            //  },
+            //  {
+            //    "[31]附加信息Id": 49,
+            //    "[01]附加信息长度": 1,
+            //    "[1B]GNSS定位卫星数": 27
+            //  },
+            //  {
+            //    "[00]未知附加信息Id": 0,                        坑爹,相同的
+            //    "[04]未知附加信息长度": 4,
+            //    "未知附加信息": "000400CE0B29"
+            //  },
+            //  {
+            //    "[00]未知附加信息Id": 0,                        坑爹,相同的
+            //    "[0C]未知附加信息长度": 12,
+            //    "未知附加信息": "000C00B289860620150013559848"
+            //  },
+            //  {
+            //    "[EB]未知附加信息Id": 235,
+            //    "[0E]未知附加信息长度": 14,
+            //    "未知附加信息": "EB0E000C00B289860620150013559848"
+            //  }
+            //]
+            byte[] bodys = "7E020000520111111111100002000000000000000301789B3406238AFA0000018B00F62104020046090104000024C72B040B290B2930011731011B000400CE0B29000C00B289860620150013559848EB0E000C00B2898606201500135598486C7E".ToHexBytes();
+            var package = JT808Serializer1.Deserialize(bodys);
+            JT808_0x0200 jT808UploadLocationRequest =  (JT808_0x0200)package.Bodies;
+            Assert.Single(jT808UploadLocationRequest.ExceptionLocationAttachOriginalData);
         }
 
         [Fact]

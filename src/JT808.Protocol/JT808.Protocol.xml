@@ -8879,6 +8879,34 @@
             依赖平台录入的设备类型
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.ExceptionLocationAttachOriginalData">
+            <summary>
+            有些坑爹的设备，不讲武德，不会按照国标的附加信息Id来搞，变成附加信息Id搞为两个字节，导致解析的时候出问题，存在重复的附加Id。
+            形如:
+            00 0C 这个是长度
+            00 B2 这个是长度
+            实际解析  
+            00 附加信息Id
+            0C 附加信息长度
+            00 附加信息Id
+            B2 附加信息长度
+            只能兼容作为一个字节的兼容，恰恰好一般长度不会超过255，要是超过就去怼厂家吧
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.ExceptionLocationAttachData">
+            <summary>
+            有些坑爹的设备，不讲武德，不会按照国标的附加信息Id来搞，变成附加信息Id搞为两个字节，导致解析的时候出问题，存在重复的附加Id。
+            形如:
+            00 0C 这个是长度
+            00 B2 这个是长度
+            实际解析  
+            00 附加信息Id
+            0C 附加信息长度
+            00 附加信息Id
+            B2 附加信息长度
+            只能兼容作为一个字节的兼容，恰恰好一般长度不会超过255，要是超过就去怼厂家吧
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.MessageBody.JT808_0x0200.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
             <summary>
             

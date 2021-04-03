@@ -147,7 +147,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString($"[{tmSpan.ToArray().ToHexString()}]终端型号(30)", jT808_0X0100.TerminalModel);
                 ReadOnlySpan<byte> tidSpan = reader.ReadVirtualArray(30);
                 jT808_0X0100.TerminalId = reader.ReadString(30);
-                writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端型号(30)", jT808_0X0100.TerminalId);
+                writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端ID(30)", jT808_0X0100.TerminalId);
             }
             else
             {
@@ -159,13 +159,13 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString($"[{tmSpan.ToArray().ToHexString()}]终端型号(20)", jT808_0X0100.TerminalModel);
                 ReadOnlySpan<byte> tidSpan = reader.ReadVirtualArray(7);
                 jT808_0X0100.TerminalId = reader.ReadString(7);
-                writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端型号(7)", jT808_0X0100.TerminalId);
+                writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端ID(7)", jT808_0X0100.TerminalId);
             }
             jT808_0X0100.PlateColor = reader.ReadByte();
             writer.WriteNumber($"[{jT808_0X0100.PlateColor.ReadNumber()}]车牌颜色", jT808_0X0100.PlateColor);
             ReadOnlySpan<byte> vnoSpan = reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength());
             jT808_0X0100.PlateNo = reader.ReadRemainStringContent();
-            writer.WriteString($"[{vnoSpan.ToArray().ToHexString()}]车牌颜色", jT808_0X0100.PlateNo);
+            writer.WriteString($"[{vnoSpan.ToArray().ToHexString()}]车牌号码", jT808_0X0100.PlateNo);
         }
     }
 }

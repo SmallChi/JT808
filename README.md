@@ -290,6 +290,13 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo9](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo9.cs)
 
+### 举个栗子10
+
+场景:
+有些设备，不会按照国标的附加信息Id来搞，把附加信息Id搞为两个字节，这样在上报上来的数据就会存在重复的附加Id，导致平台解析出错。
+
+[可以参考Simples的Demo10](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo10.cs)
+
 ## NuGet安装
 
 | Package Name          | Version                                            | Downloads                                           |

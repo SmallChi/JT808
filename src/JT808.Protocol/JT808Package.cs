@@ -294,7 +294,7 @@ namespace JT808.Protocol
                 writer.WriteNumber($"[{protocolVersion.ReadNumber()}]协议版本号(2019)", protocolVersion);
                 //  3.4.读取终端手机号 
                 var terminalPhoneNo = reader.ReadBCD(20, config.Trim);
-                writer.WriteString($"[{terminalPhoneNo}]终端手机号", terminalPhoneNo);
+                writer.WriteString($"[{terminalPhoneNo.PadLeft(20,'0')}]终端手机号", terminalPhoneNo);
             }
             else
             {
@@ -309,7 +309,7 @@ namespace JT808.Protocol
                 //  3.3.读取终端手机号 
                 var terminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, false);
                 //消息体属性对象 结束
-                writer.WriteString($"[{terminalPhoneNo}]终端手机号", terminalPhoneNo);
+                writer.WriteString($"[{terminalPhoneNo.PadLeft(config.TerminalPhoneNoLength, '0')}]终端手机号", terminalPhoneNo);
             }
             //  3.4.读取消息流水号
             var msgNum = reader.ReadUInt16();
