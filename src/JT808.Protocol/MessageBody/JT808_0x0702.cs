@@ -163,13 +163,13 @@ namespace JT808.Protocol.MessageBody
                 {
                     writer.WriteByte((byte)value.DriverUserName.Length);
                     writer.WriteString(value.DriverUserName);
-                    writer.WriteString(value.QualificationCode.PadRight(20, '0').ValiString(nameof(value.QualificationCode),20));
+                    writer.WriteString(value.QualificationCode.PadRight(20, '\0').ValiString(nameof(value.QualificationCode),20));
                     writer.WriteByte((byte)value.LicenseIssuing.Length);
                     writer.WriteString(value.LicenseIssuing);
                     writer.WriteDateTime4(value.CertificateExpiresDate);
                     if (writer.Version == JT808Version.JTT2019)
                     {
-                        writer.WriteString(value.DriverIdentityCard.PadRight(20,'0').ValiString(nameof(value.DriverIdentityCard), 20));
+                        writer.WriteString(value.DriverIdentityCard.PadRight(20,'\0').ValiString(nameof(value.DriverIdentityCard), 20));
                     }
                 }
             }

@@ -143,7 +143,7 @@ namespace JT808.Protocol.MessageBody
             {
                 writer.WriteString(value.MakerId.PadRight(5, '\0').ValiString(nameof(value.MakerId), 5));
                 writer.WriteString(value.TerminalModel.PadRight(20, '\0').ValiString(nameof(value.TerminalModel), 20));
-                writer.WriteString(value.TerminalId.PadRight(7, '0').ValiString(nameof(value.TerminalId), 7));
+                writer.WriteString(value.TerminalId.PadRight(7, '\0').ValiString(nameof(value.TerminalId), 7));
             }
             writer.WriteBCD(value.Terminal_SIM_ICCID.ValiString(nameof(value.Terminal_SIM_ICCID), 20), 20);
             writer.WriteByte((byte)value.Terminal_Hardware_Version_Num.Length);

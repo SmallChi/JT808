@@ -81,11 +81,11 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte((byte)value.UpgradeType);
             if (writer.Version == JT808Version.JTT2019)
             {
-                writer.WriteString(value.MakerId.PadLeft(11, '0'));
+                writer.WriteString(value.MakerId.PadLeft(11, '\0'));
             }
             else
             {
-                writer.WriteString(value.MakerId.PadRight(5, '0'));
+                writer.WriteString(value.MakerId.PadRight(5, '\0'));
             }
             writer.WriteByte((byte)value.VersionNum.Length);
             writer.WriteString(value.VersionNum);
