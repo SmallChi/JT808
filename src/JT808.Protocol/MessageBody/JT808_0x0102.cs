@@ -75,7 +75,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString(value.Code);
                 writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - CodeLengthPosition - 1), CodeLengthPosition);
                 writer.WriteString(value.IMEI);
-                writer.WriteString(value.SoftwareVersion.PadRight(20,'0').ValiString(nameof(value.SoftwareVersion),20));
+                writer.WriteString(value.SoftwareVersion.PadRight(20,'\0').ValiString(nameof(value.SoftwareVersion),20));
             }
             else
             {

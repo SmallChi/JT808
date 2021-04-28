@@ -44,18 +44,18 @@ namespace JT808.Protocol.Test.MessageBody
                 SoftwareVersion="v2.0.0"
             };
             string hex = JT808Serializer.Serialize(jT808LoginRequestProperty,JT808Version.JTT2019).ToHexString();
-            Assert.Equal("05343536313231323334353637383930616263646576322E302E303030303030303030303030303030", hex);
+            Assert.Equal("05343536313231323334353637383930616263646576322E302E300000000000000000000000000000", hex);
         }
 
         [Fact]
         public void Test2019_2()
         {
-            byte[] bodys = "05343536313231323334353637383930616263646576322E302E303030303030303030303030303030".ToHexBytes();
+            byte[] bodys = "05343536313231323334353637383930616263646576322E302E300000000000000000000000000000".ToHexBytes();
             JT808_0x0102 jT808LoginRequest = JT808Serializer.Deserialize<JT808_0x0102>(bodys, JT808Version.JTT2019);
             Assert.Equal("45612", jT808LoginRequest.Code);
             Assert.Equal(5, jT808LoginRequest.CodeLength);
             Assert.Equal("1234567890abcde", jT808LoginRequest.IMEI);
-            Assert.Equal("v2.0.0".PadRight(20,'0'), jT808LoginRequest.SoftwareVersion);
+            Assert.Equal("v2.0.0", jT808LoginRequest.SoftwareVersion);
         }
 
         [Fact]
