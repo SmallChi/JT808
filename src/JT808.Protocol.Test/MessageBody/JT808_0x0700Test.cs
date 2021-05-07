@@ -249,13 +249,13 @@ namespace JT808.Protocol.Test.MessageBody
             };
 
             var hex = JT808Serializer.Serialize(value).ToHexString();
-            Assert.Equal("000105557A050027003132333435363738393132333435363738D4C142313233343500000000D6D8D0CDBBF5B3B5000009", hex);
+            Assert.Equal("000105557A050029003132333435363738393132333435363738D4C142313233343500000000D6D8D0CDBBF5B3B50000000007", hex);
         }
 
         [Fact]
         public void Test_Deserilize_0x05()
         {
-            byte[] bytes = "000105557A050027003132333435363738393132333435363738D4C142313233343500000000D6D8D0CDBBF5B3B5000009".ToHexBytes();
+            byte[] bytes = "000105557A050029003132333435363738393132333435363738D4C142313233343500000000D6D8D0CDBBF5B3B50000000007".ToHexBytes();
             JT808_0x0700 value = JT808Serializer.Deserialize<JT808_0x0700>(bytes);
             Assert.Equal(1, value.ReplyMsgNum);
             var body = value.JT808CarDVRUpPackage.Bodies as JT808_CarDVR_Up_0x05;

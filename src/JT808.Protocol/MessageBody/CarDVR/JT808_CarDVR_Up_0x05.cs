@@ -54,8 +54,8 @@ namespace JT808.Protocol.MessageBody.CarDVR
             hex = reader.ReadVirtualArray(12);
             value.VehicleNo = reader.ReadString(12);
             writer.WriteString($"[{hex.ToArray().ToHexString()}]机动车号牌号码", value.VehicleNo);
-            hex = reader.ReadVirtualArray(10);
-            value.VehicleType = reader.ReadString(10);
+            hex = reader.ReadVirtualArray(12);
+            value.VehicleType = reader.ReadString(12);
             writer.WriteString($"[{hex.ToArray().ToHexString()}]机动车号牌分类", value.VehicleType);
         }
         /// <summary>
@@ -74,7 +74,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             writer.Skip(12 - (writer.GetCurrentPosition() - currentPosition), out var _);
             currentPosition = writer.GetCurrentPosition();
             writer.WriteString(value.VehicleType);
-            writer.Skip(10 - (writer.GetCurrentPosition() - currentPosition), out var _);
+            writer.Skip(12 - (writer.GetCurrentPosition() - currentPosition), out var _);
         }
         /// <summary>
         /// 
