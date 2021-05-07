@@ -87,7 +87,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             JT808_CarDVR_Up_0x05 value = new JT808_CarDVR_Up_0x05();
             value.Vin = reader.ReadASCII(17);
             value.VehicleNo = reader.ReadString(12);
-            value.VehicleType = reader.ReadString(10);
+            value.VehicleType = reader.ReadString(12);
             return value;
         }
     }
