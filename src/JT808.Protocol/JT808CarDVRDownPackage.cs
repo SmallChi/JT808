@@ -14,7 +14,7 @@ namespace JT808.Protocol
     /// <summary>
     /// 行车记录仪下行数据包
     /// </summary>
-    public  class JT808CarDVRDownPackage : IJT808_CarDVR_Down_Package,IJT808MessagePackFormatter<JT808CarDVRDownPackage>, IJT808Analyze
+    public class JT808CarDVRDownPackage : IJT808_CarDVR_Down_Package, IJT808MessagePackFormatter<JT808CarDVRDownPackage>, IJT808Analyze
     {
         /// <summary>
         /// 头标识
@@ -58,14 +58,14 @@ namespace JT808.Protocol
             writer.Skip(2, out var datalengthPosition);
             writer.WriteByte(value.KeepFields);
             if (config.JT808_CarDVR_Down_Factory.Map.TryGetValue(value.CommandId, out var instance))
-            {                
-                if (!value.Bodies.SkipSerialization)
+            {
+                if (!value.Bodies?.SkipSerialization == true)
                 {
                     //4.2.处理消息体
                     JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(instance, ref writer, value.Bodies, config);
                 }
             }
-            writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() -2-1- datalengthPosition), datalengthPosition);//此处-2：减去数据长度字段2位，-1：减去保留字长度
+            writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - 2 - 1 - datalengthPosition), datalengthPosition);//此处-2：减去数据长度字段2位，-1：减去保留字长度
             writer.WriteCarDVRCheckCode(currentPosition);
         }
         /// <summary>

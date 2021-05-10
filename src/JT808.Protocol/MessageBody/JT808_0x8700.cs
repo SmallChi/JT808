@@ -70,7 +70,8 @@ namespace JT808.Protocol.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8700 value, IJT808Config config)
         {
             writer.WriteByte(value.CommandId);
-            JT808CarDVRSerializer.JT808CarDVRDownPackage.Serialize(ref writer, value.JT808CarDVRDownPackage, config);
+            if (value.JT808CarDVRDownPackage != default)
+                JT808CarDVRSerializer.JT808CarDVRDownPackage.Serialize(ref writer, value.JT808CarDVRDownPackage, config);
         }
     }
 }
