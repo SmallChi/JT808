@@ -63,7 +63,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteNumber($"[{jT808MultimediaSearchProperty.ChannelId.ReadNumber()}]通道ID", jT808MultimediaSearchProperty.ChannelId);
                 jT808MultimediaSearchProperty.EventItemCoding = reader.ReadByte();
                 writer.WriteNumber($"[{jT808MultimediaSearchProperty.EventItemCoding.ReadNumber()}]事件项编码-{((JT808EventItemCoding)jT808MultimediaSearchProperty.EventItemCoding).ToString()}", jT808MultimediaSearchProperty.EventItemCoding);
-                JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28));
+                JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28), reader.Version);
                 writer.WriteStartObject($"位置基本信息");
                 config.GetAnalyze<JT808_0x0200>().Analyze(ref positionReader, writer, config);
                 writer.WriteEndObject();
@@ -90,7 +90,7 @@ namespace JT808.Protocol.MessageBody
                 jT808MultimediaSearchProperty.MultimediaType = reader.ReadByte();
                 jT808MultimediaSearchProperty.ChannelId = reader.ReadByte();
                 jT808MultimediaSearchProperty.EventItemCoding = reader.ReadByte();
-                JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28));
+                JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28), reader.Version);
                 jT808MultimediaSearchProperty.Position = config.GetMessagePackFormatter<JT808_0x0200>().Deserialize(ref positionReader, config);
                 value.MultimediaSearchItems.Add(jT808MultimediaSearchProperty);
             }

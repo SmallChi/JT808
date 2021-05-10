@@ -297,6 +297,13 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo10](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo10.cs)
 
+### 举个栗子11
+
+场景:
+有些设备，补报的定位数据有异常数据包内容长度跟原始的内容长度不一致导致整包的数据的解析出错，再设备不升级，改不了的情况下，尽量能解析多少补报的数据量，就解析多少。
+
+[可以参考Simples的Demo11](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo11.cs)
+
 ## NuGet安装
 
 | Package Name          | Version                                            | Downloads                                           |

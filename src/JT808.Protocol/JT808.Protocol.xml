@@ -10208,6 +10208,13 @@
             位置汇报数据集合
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0704.ErrorRemainPositions">
+            <summary>
+            异常错误剩余数据存储
+            key:count index
+            value:0200 data
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0704.BatchLocationType">
             <summary>
             位置数据类型
