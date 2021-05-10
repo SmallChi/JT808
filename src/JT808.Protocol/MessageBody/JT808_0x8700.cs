@@ -58,7 +58,8 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x8700 value = new JT808_0x8700();
             value.CommandId = reader.ReadByte();
-            value.JT808CarDVRDownPackage = JT808CarDVRSerializer.JT808CarDVRDownPackage.Deserialize(ref reader, config);
+            if (reader.ReadCurrentRemainContentLength() > 0)
+                value.JT808CarDVRDownPackage = JT808CarDVRSerializer.JT808CarDVRDownPackage.Deserialize(ref reader, config);
             return value;
         }
         /// <summary>
