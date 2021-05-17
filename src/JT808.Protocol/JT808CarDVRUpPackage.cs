@@ -29,6 +29,11 @@ namespace JT808.Protocol
         /// </summary>
         public byte CommandId { get; set; }
         /// <summary>
+        /// 错误标志
+        /// CommandId == 0xFA || CommandId == 0xFB
+        /// </summary>
+        public bool ErrorFlag { get; set; }
+        /// <summary>
         /// 数据块长度
         /// </summary>
         public ushort DataLength { get; set; }
@@ -58,9 +63,18 @@ namespace JT808.Protocol
             value.Begin = reader.ReadUInt16();
             writer.WriteNumber($"[{value.Begin.ReadNumber()}]起始字头", value.Begin);
             value.CommandId = reader.ReadByte();
-            writer.WriteString($"[{value.Begin.ReadNumber()}]命令字", ((JT808CarDVRCommandID)value.CommandId).ToString());
-            value.DataLength = reader.ReadUInt16();
-            writer.WriteNumber($"[{value.DataLength.ReadNumber()}]数据块长度", value.DataLength);
+            //出错标志位
+            value.ErrorFlag = value.CommandId == 0xFA || value.CommandId == 0xFB;
+            if (!value.ErrorFlag)
+            {
+                writer.WriteString($"[{value.CommandId.ReadNumber()}]命令字", ((JT808CarDVRCommandID)value.CommandId).ToString());
+                value.DataLength = reader.ReadUInt16();
+                writer.WriteNumber($"[{value.DataLength.ReadNumber()}]数据块长度", value.DataLength);
+            }
+            else
+            {
+                writer.WriteString($"[{value.CommandId.ReadNumber()}]出错标志字", value.CommandId.ToString());
+            }
             value.KeepFields = reader.ReadByte();
             writer.WriteNumber($"[{value.KeepFields.ReadNumber()}]保留字", value.KeepFields);
             if (value.DataLength > 0)
@@ -97,7 +111,12 @@ namespace JT808.Protocol
             int currentPosition = reader.ReaderCount;
             value.Begin = reader.ReadUInt16();
             value.CommandId = reader.ReadByte();
-            value.DataLength = reader.ReadUInt16();
+            //出错标志位
+            value.ErrorFlag = value.CommandId == 0xFA || value.CommandId == 0xFB;
+            if (!value.ErrorFlag)
+            {
+                value.DataLength = reader.ReadUInt16();
+            }
             value.KeepFields = reader.ReadByte();
             if (value.DataLength > 0)
             {
@@ -128,17 +147,25 @@ namespace JT808.Protocol
             var currentPosition = writer.GetCurrentPosition();
             writer.WriteUInt16(value.Begin);
             writer.WriteByte(value.CommandId);
-            writer.Skip(2, out var datalengthPosition);
-            writer.WriteByte(value.KeepFields);
-            if (config.JT808_CarDVR_Up_Factory.Map.TryGetValue(value.CommandId, out var instance))
+            var isError = value.CommandId == 0xFA || value.CommandId == 0xFB;
+            int datalengthPosition=0;
+            if (!isError)
             {
-                if (!value.Bodies.SkipSerialization)
-                {
-                    //4.2.处理消息体
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(instance, ref writer, value.Bodies, config);
-                }
+                writer.Skip(2, out datalengthPosition);
             }
-            writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() -2-1- datalengthPosition), datalengthPosition);//此处-2：减去数据长度字段2位，-1：减去保留字长度
+            writer.WriteByte(value.KeepFields);
+            if (datalengthPosition > 0)
+            {
+                if (config.JT808_CarDVR_Up_Factory.Map.TryGetValue(value.CommandId, out var instance))
+                {
+                    if (!value.Bodies.SkipSerialization)
+                    {
+                        //4.2.处理消息体
+                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(instance, ref writer, value.Bodies, config);
+                    }
+                }
+                writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - 2 - 1 - datalengthPosition), datalengthPosition);//此处-2：减去数据长度字段2位，-1：减去保留字长度
+            }
             writer.WriteCarDVRCheckCode(currentPosition);
         }
     }

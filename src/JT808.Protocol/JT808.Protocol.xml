@@ -4791,6 +4791,12 @@
             命令字
             </summary>
         </member>
+        <member name="P:JT808.Protocol.JT808CarDVRUpPackage.ErrorFlag">
+            <summary>
+            错误标志
+            CommandId == 0xFA || CommandId == 0xFB
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.JT808CarDVRUpPackage.DataLength">
             <summary>
             数据块长度
