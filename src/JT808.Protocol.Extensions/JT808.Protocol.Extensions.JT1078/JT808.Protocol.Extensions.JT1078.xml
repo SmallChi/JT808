@@ -1,0 +1,1289 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JT808.Protocol.Extensions.JT1078</name>
+    </assembly>
+    <members>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x14">
+            <summary>
+            视频相关报警
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x15">
+            <summary>
+            视频信号丢失报警状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x16">
+            <summary>
+            视频信号遮挡报警状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x17">
+            <summary>
+            存储器故障报警状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x18">
+            <summary>
+            异常驾驶行为报警详细描述
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x0075">
+            <summary>
+            音视频参数设置
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x0076">
+            <summary>
+            音视频通道列表设置
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x0077">
+            <summary>
+            单独视频通道参数设置
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x0079">
+            <summary>
+            特殊报警录像参数设置
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x007A">
+            <summary>
+            视频相关报警屏蔽字
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x007B">
+            <summary>
+            图像分析报警参数设置
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x007C">
+            <summary>
+            终端休眠模式唤醒设置
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x14">
+            <summary>
+            视频相关报警
+            0x0200_0x14
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x14.AttachInfoLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x14.VideoRelateAlarm">
+            <summary>
+            视频相关报警
+            <see cref="T:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType"/>
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x15">
+            <summary>
+            视频信号丢失报警状态
+            0x0200_0x15
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x15.AttachInfoLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x15.VideoSignalLoseAlarmStatus">
+            <summary>
+            视频信号丢失报警状态
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x16">
+            <summary>
+            视频信号遮挡报警状态
+            0x0200_0x16
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x16.AttachInfoLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x16.VideoSignalOcclusionAlarmStatus">
+            <summary>
+            视频信号遮挡报警状态
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17">
+            <summary>
+            存储器故障报警状态
+            0x0200_0x17
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.AttachInfoLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.StorageFaultAlarmStatus">
+            <summary>
+            存储器故障报警状态
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x18">
+            <summary>
+            异常驾驶行为报警详细描述
+            0x0200_0x18
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x18.AttachInfoLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x18.AbnormalDrivingBehaviorAlarmType">
+            <summary>
+            异常驾驶行为报警类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x18.FatigueLevel">
+            <summary>
+            疲劳程度
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003">
+            <summary>
+            终端上传音视频属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.EnterAudioEncoding">
+            <summary>
+            输入音频编码方式
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.EnterAudioChannelsNumber">
+            <summary>
+            输入音频声道数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.EnterAudioSampleRate">
+            <summary>
+            输入音频采样率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.EnterAudioSampleDigits">
+            <summary>
+            输入音频采样位数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.AudioFrameLength">
+            <summary>
+            音频帧长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.IsSupportedAudioOutput">
+            <summary>
+            是否支持音频输出
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.VideoEncoding">
+            <summary>
+            视频编码方式
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.TerminalSupportedMaxNumberOfAudioPhysicalChannels">
+            <summary>
+            终端支持的最大音频物理通道数量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.TerminalSupportedMaxNumberOfVideoPhysicalChannels">
+            <summary>
+            终端支持的最大视频物理通道数量
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1005">
+            <summary>
+            终端上传乘客流量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1005.BeginTime">
+            <summary>
+            起始时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1005.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1005.GettingOnNumber">
+            <summary>
+            上车人数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1005.GettingOffNumber">
+            <summary>
+            下车人数
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205">
+            <summary>
+            终端上传音视频资源列表
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205.MsgNum">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205.AVResouceTotal">
+            <summary>
+            音视频资源总数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205.AVResouces">
+            <summary>
+            音视频资源列表
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce">
+            <summary>
+            终端上传音视频资源列表
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce.LogicChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce.BeginTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce.AlarmFlag">
+            <summary>
+            报警标志
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce.AVResourceType">
+            <summary>
+            音视频资源类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce.StreamType">
+            <summary>
+            码流类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce.MemoryType">
+            <summary>
+            存储器类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205_AVResouce.FileSize">
+            <summary>
+            文件大小
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1206">
+            <summary>
+            文件上传完成通知
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1206.MsgNum">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1206.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075">
+            <summary>
+            音视频参数设置
+            0x8103_0x0075
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.RTS_EncodeMode">
+            <summary>
+            实时流编码模式
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.RTS_Resolution">
+            <summary>
+            实时流分辨率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.RTS_KF_Interval">
+            <summary>
+            实时流关键帧间隔
+            （范围1-1000）帧
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.RTS_Target_FPS">
+            <summary>
+            实时流目标帧率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.RTS_Target_CodeRate">
+            <summary>
+            实时流目标码率
+            单位未千位每秒（kbps）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.StreamStore_EncodeMode">
+            <summary>
+            存储流编码模式
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.StreamStore_Resolution">
+            <summary>
+            存储流分辨率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.StreamStore_KF_Interval">
+            <summary>
+            存储流关键帧间隔
+            （范围1-1000）帧
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.StreamStore_Target_FPS">
+            <summary>
+            存储流目标帧率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.StreamStore_Target_CodeRate">
+            <summary>
+            存储流目标码率
+            单位未千位每秒（kbps）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.OSD">
+             <summary>
+            OSD字幕叠加设置
+             </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.AudioOutputEnabled">
+             <summary>
+            是否启用音频输出
+            0:不启用
+            1：启用
+             </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076">
+            <summary>
+            音视频通道列表设置
+            0x8103_0x0076
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076.AVChannelTotal">
+            <summary>
+            音视频通道总数
+            l
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076.AudioChannelTotal">
+            <summary>
+            音频通道总数
+            m
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076.VudioChannelTotal">
+            <summary>
+            视频通道总数
+            n
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076.AVChannelRefTables">
+            <summary>
+            音视频通道对照表
+            4*(l+m+n)
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076_AVChannelRefTable">
+            <summary>
+            音视频通道列表设置
+            0x8103_0x0076_AVChannelRefTable
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076_AVChannelRefTable.PhysicalChannelNo">
+            <summary>
+            物理通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076_AVChannelRefTable.LogicChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076_AVChannelRefTable.ChannelType">
+            <summary>
+            通道类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076_AVChannelRefTable.IsConnectCloudPlat">
+            <summary>
+            是否链接云台
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077">
+             <summary>
+            单独视频通道参数设置
+             0x8103_0x0077
+             </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077.NeedSetChannelTotal">
+            <summary>
+            需单独设置视频参数的通道数量 用n表示
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.LogicChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.RTS_EncodeMode">
+            <summary>
+            实时流编码模式
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.RTS_Resolution">
+            <summary>
+            实时流分辨率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.RTS_KF_Interval">
+            <summary>
+            实时流关键帧间隔
+            （范围1-1000）帧
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.RTS_Target_FPS">
+            <summary>
+            实时流目标帧率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.RTS_Target_CodeRate">
+            <summary>
+            实时流目标码率
+            单位未千位每秒（kbps）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.StreamStore_EncodeMode">
+            <summary>
+            存储流编码模式
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.StreamStore_Resolution">
+            <summary>
+            存储流分辨率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.StreamStore_KF_Interval">
+            <summary>
+            存储流关键帧间隔
+            （范围1-1000）帧
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.StreamStore_Target_FPS">
+            <summary>
+            存储流目标帧率
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.StreamStore_Target_CodeRate">
+            <summary>
+            存储流目标码率
+            单位未千位每秒（kbps）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077_SignalChannel.OSD">
+             <summary>
+            OSD字幕叠加设置
+             </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0079">
+            <summary>
+            特殊报警录像参数设置
+            0x8103_0x0079
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0079.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0079.StorageThresholds">
+            <summary>
+            特殊报警录像存储阈值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0079.Duration">
+            <summary>
+            特殊报警录像持续时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0079.BeginMinute">
+            <summary>
+            特殊报警标识起始时间
+            分钟min
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007A">
+            <summary>
+            视频相关报警屏蔽字
+            0x8103_0x007A
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007A.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007A.AlarmShielding">
+            <summary>
+            视频相关屏蔽报警字
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007B">
+            <summary>
+            图像分析报警参数设置
+            0x8103_0x007B
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007B.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007B.NuclearLoadNumber">
+            <summary>
+            车辆核载人数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007B.FatigueThreshold">
+            <summary>
+            疲劳程度阈值
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C">
+             <summary>
+            终端休眠模式唤醒设置
+             0x8103_0x007C
+             </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C.ParamLength">
+            <summary>
+            数据 长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C.SleepWakeMode">
+            <summary>
+            休眠唤醒模式
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C.WakeConditionType">
+            <summary>
+            唤醒条件类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C.TimerWakeDaySet">
+            <summary>
+            定时唤醒日设置
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C.TimerWakeDayParamter">
+            <summary>
+            日定时唤醒参数列表
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter">
+             <summary>
+            终端休眠模式唤醒设置
+             0x8103_0x007C
+             </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimerWakeEnableFlag">
+            <summary>
+            定时唤醒启用标志
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod1WakeTime">
+            <summary>
+            时间段1唤醒时间
+            2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod1CloseTime">
+            <summary>
+            时间段1关闭时间
+            2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod2WakeTime">
+            <summary>
+            时间段2唤醒时间
+            2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod2CloseTime">
+            <summary>
+            时间段2关闭时间
+            2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod3WakeTime">
+            <summary>
+            时间段3唤醒时间
+            2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod3CloseTime">
+            <summary>
+            时间段3关闭时间
+            2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod4WakeTime">
+            <summary>
+            时间段4唤醒时间
+            2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod4CloseTime">
+            <summary>
+            时间段4关闭时间
+            2
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9003">
+            <summary>
+            查询终端音视频属性
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101">
+            <summary>
+            实时音视频传输请求（live、talk、listen、fanout、passThrough直播、对讲、监听、广播、透传请求）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.ServerIpLength">
+            <summary>
+            视频服务器IP地址长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.ServerIp">
+            <summary>
+            视频服务器IP地址
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.TcpPort">
+            <summary>
+            视频服务器TCP端口号，不使用TCP协议传输时保持默认值0即可（TCP和UDP二选一，当TCP和UDP均非默认值时一般以TCP为准）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.UdpPort">
+            <summary>
+            视频服务器UDP端口号，不使用UDP协议传输时保持默认值0即可（TCP和UDP二选一，当TCP和UDP均非默认值时一般以TCP为准）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.DataType">
+            <summary>
+            数据类型
+            0:音视频
+            1:视频
+            2:双向对讲
+            3:监听
+            4:中心广播
+            5:透传
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.StreamType">
+            <summary>
+            码流类型
+            0:主码流
+            1:子码流
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            格式分析
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+             反序列化
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101,JT808.Protocol.IJT808Config)">
+            <summary>
+            序列化
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102">
+            <summary>
+            音视频实时传输控制(LiveControl直播控制)
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.ControlCmd">
+            <summary>
+            控制指令
+            平台可以通过该指令对设备的实时音视频进行控制：
+            0:关闭音视频传输指令
+            1:切换码流（增加暂停和继续）
+            2:暂停该通道所有流的发送
+            3:恢复暂停前流的发送,与暂停前的流类型一致
+            4:关闭双向对讲
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.CloseAVData">
+            <summary>
+            关闭音视频类型
+            0:关闭该通道有关的音视频数据
+            1:只关闭该通道有关的音频，保留该通道有关的视频
+            2:只关闭该通道有关的视频，保留该通道有关的音频
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.StreamType">
+            <summary>
+            切换码流类型
+            将之前申请的码流切换为新申请的码流，音频与切换前保持一致。
+            新申请的码流为：
+            0:主码流
+            1:子码流
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            格式分析
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            反序列化
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102,JT808.Protocol.IJT808Config)">
+            <summary>
+            序列化
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105">
+            <summary>
+            实时音视频传输状态通知
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.DropRate">
+            <summary>
+            丢包率  
+            当前传输通道的丢包率，数值乘以100之后取整部分
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201">
+            <summary>
+            平台下发远程录像回放请求(vod点播请求)
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.ServerIpLength">
+            <summary>
+            服务器IP地址长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.ServerIp">
+            <summary>
+            服务器IP地址
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.TcpPort">
+            <summary>
+            视频服务器TCP端口号，不使用TCP协议传输时保持默认值0即可（TCP和UDP二选一，当TCP和UDP均非默认值时一般以TCP为准）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.UdpPort">
+            <summary>
+            视频服务器UDP端口号，不使用UDP协议传输时保持默认值0即可（TCP和UDP二选一，当TCP和UDP均非默认值时一般以TCP为准）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.MediaType">
+            <summary>
+            音视频类型(媒体类型)
+            0：audio and video
+            1：audio
+            2：video
+            3：audio or video
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.StreamType">
+            <summary>
+            码流类型
+            0：主或子码流
+            1：主
+            2：子
+            如果此通道只传输音频，置为0
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.MemoryType">
+            <summary>
+            存储器类型
+            0：主或灾备存储器
+            1：主存储器
+            2：灾备存储器
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.PlaybackWay">
+            <summary>
+            回放方式
+            0：正常
+            1：快进
+            2：关键帧快退回放
+            3：关键帧播放
+            4：单帧上传
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.PlaySpeed">
+            <summary>
+            快进或快退倍数，当<see cref="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.PlaybackWay"/>为1和2时，此字段有效，否则置0
+            0：无效
+            1：1倍
+            2：2倍
+            3：4倍
+            4：8倍
+            5：16倍
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.BeginTime">
+            <summary>
+            开始时间，当<see cref="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.PlaybackWay"/>为4时，该字段表示单帧上传时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.EndTime">
+            <summary>
+            结束时间，当<see cref="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.PlaybackWay"/>为4时，该字段无效
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            格式分析
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+             反序列化
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201,JT808.Protocol.IJT808Config)">
+            <summary>
+            序列化
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202">
+            <summary>
+            平台下发远程录像回放控制(VodControl点播控制)
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.ChannelNo">
+            <summary>
+            音视频通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.PlayControl">
+            <summary>
+            回放控制
+            0：开始
+            1：暂停
+            2：结束
+            3：快进
+            4：关键帧快退播放
+            5：拖动(到指定位置)
+            6：关键帧播放
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.PlaySpeed">
+            <summary>
+            快进或快退倍数，当<see cref="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.PlayControl"/>为3和4时，此字段有效，否则置0
+            0：无效
+            1：1倍
+            2：2倍
+            3：4倍
+            4：8倍
+            5：16倍
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.DragPlayPosition">
+            <summary>
+            拖动回放位置，当<see cref="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.PlayControl"/>为5时有效（必须）
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205">
+            <summary>
+            查询资源列表
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.BeginTime">
+            <summary>
+            开始时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.AlarmFlag">
+            <summary>
+            报警标志
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.MediaType">
+            <summary>
+            音视频资源类型
+            0：audio and video
+            1：audio
+            2：video
+            3：audio or video
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.StreamType">
+            <summary>
+            码流类型
+            0：主或子码流
+            1：主
+            2：子
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.MemoryType">
+            <summary>
+            存储器类型
+            0：主或灾备存储器
+            1：主存储器
+            2：灾备存储器
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206">
+            <summary>
+            文件上传指令
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.ServerIpLength">
+            <summary>
+            服务器IP地址服务
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.ServerIp">
+            <summary>
+            服务器IP地址
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.Port">
+            <summary>
+            服务器端口
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.UserNameLength">
+            <summary>
+            用户名长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.PasswordLength">
+            <summary>
+            密码长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.FileUploadPathLength">
+            <summary>
+            文件上传路径长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.FileUploadPath">
+            <summary>
+            文件上传路径
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.BeginTime">
+            <summary>
+            起始时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.EndTime">
+            <summary>
+            结束时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.AlarmFlag">
+            <summary>
+            报警标志
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.MediaType">
+            <summary>
+            音视频资源类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.StreamType">
+            <summary>
+            码流类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.MemoryPositon">
+            <summary>
+            存储位置
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.TaskExcuteCondition">
+            <summary>
+            任务执行条件
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207">
+            <summary>
+            文件上传控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.MgsNum">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.UploadControl">
+            <summary>
+            上传控制
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301">
+            <summary>
+            云台旋转
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.Direction">
+            <summary>
+            方向
+            0：停止
+            1：上
+            2：下
+            3：左
+            4：右
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.Speed">
+            <summary>
+            速度
+            0-255
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302">
+            <summary>
+            云台调整焦距控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.LogicChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.FocusAdjustmentDirection">
+            <summary>
+            焦距调整方向
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303">
+            <summary>
+            云台调整光圈控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.IrisAdjustment">
+            <summary>
+            光圈调整方式
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304">
+            <summary>
+            云台雨刷控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.StartOrStop">
+            <summary>
+            启停标识
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305">
+            <summary>
+            红外补光控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.StartOrStop">
+            <summary>
+            启停标识
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306">
+            <summary>
+            云台变倍控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.ChannelNo">
+            <summary>
+            逻辑通道号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.ChangeMultipleControl">
+            <summary>
+            变倍控制
+            </summary>
+        </member>
+    </members>
+</doc>
