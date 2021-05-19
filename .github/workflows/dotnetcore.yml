@@ -1,4 +1,4 @@
-﻿name: .NET Core
+name: .NET Core
 
 on: [push]
 
@@ -22,10 +22,10 @@ jobs:
     - name: dotnet jt808 test
       run: dotnet test ./src/JT808.Protocol.Test/JT808.Protocol.Test.csproj
     - name: dotnet jt808_jt1078 build
-      run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JT1078/JT808.Protocol.Extensions.JT1078.Test.csproj
+      run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JT1078.Test/JT808.Protocol.Extensions.JT1078.Test.csproj
     - name: dotnet jt808_jt1078 test
-      run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JT1078/JT808.Protocol.Extensions.JT1078.Test.csproj
+      run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JT1078.Test/JT808.Protocol.Extensions.JT1078.Test.csproj
     - name: dotnet jt808_jtas build
-      run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JTActiveSafety/JT808.Protocol.Extensions.JTActiveSafety.Test.csproj
+      run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JTActiveSafety.Test/JT808.Protocol.Extensions.JTActiveSafety.Test.csproj
     - name: dotnet jt808_jtas test
-      run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JTActiveSafety/JT808.Protocol.Extensions.JTActiveSafety.Test.csproj
+      run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JTActiveSafety.Test/JT808.Protocol.Extensions.JTActiveSafety.Test.csproj
