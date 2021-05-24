@@ -4,6 +4,163 @@
         <name>JT808.Protocol.Extensions.JT1078</name>
     </assembly>
     <members>
+        <member name="T:JT808.Protocol.Extensions.JT1078.DependencyInjectionExtensions">
+            <summary>
+            1078扩展808
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.DependencyInjectionExtensions.AddJT1078Configure(JT808.Protocol.IJT808Builder)">
+            <summary>
+            注册1078扩展808
+            </summary>
+            <param name="jT808Builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId">
+            <summary>
+            JT808扩展消息体
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.终端上传音视频属性">
+            <summary>
+            终端上传音视频属性
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.终端上传乘客流量">
+            <summary>
+            终端上传乘客流量
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.终端上传音视频资源列表">
+            <summary>
+            终端上传音视频资源列表
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.文件上传完成通知">
+            <summary>
+            文件上传完成通知
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.查询终端音视频属性">
+            <summary>
+            查询终端音视频属性
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.实时音视频传输请求">
+            <summary>
+            实时音视频传输请求
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.音视频实时传输控制">
+            <summary>
+            音视频实时传输控制
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.实时音视频传输状态通知">
+            <summary>
+            实时音视频传输状态通知
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.平台下发远程录像回放请求">
+            <summary>
+            平台下发远程录像回放请求
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.平台下发远程录像回放控制">
+            <summary>
+            平台下发远程录像回放控制
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.查询资源列表">
+            <summary>
+            查询资源列表
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.文件上传指令">
+            <summary>
+            文件上传指令
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.文件上传控制">
+            <summary>
+            文件上传控制
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台旋转">
+            <summary>
+            云台旋转
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台调整焦距控制">
+            <summary>
+            云台调整焦距控制
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台调整光圈控制">
+            <summary>
+            云台调整光圈控制
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台雨刷控制">
+            <summary>
+            云台雨刷控制
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.红外补光控制">
+            <summary>
+            红外补光控制
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台变倍控制">
+            <summary>
+            云台变倍控制
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType">
+            <summary>
+            视频相关报警
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.视频信号丢失报警">
+            <summary>
+            视频信号丢失报警
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.视频信号遮挡报警">
+            <summary>
+            视频信号遮挡报警
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.存储单元故障报警">
+            <summary>
+            存储单元故障报警
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.其他视频设备故障报警">
+            <summary>
+            其他视频设备故障报警
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.客车超员报警">
+            <summary>
+            客车超员报警
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.异常驾驶行为报警">
+            <summary>
+            异常驾驶行为报警
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.特殊报警录像达到存储阈值报警">
+            <summary>
+            特殊报警录像达到存储阈值报警
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x14">
             <summary>
             视频相关报警

@@ -1,25 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\Info.props" />
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;</TargetFrameworks>
-    <LangVersion>9.0</LangVersion>
-    <Copyright>Copyright 2018.</Copyright>
-    <Authors>SmallChi</Authors>
     <PackageId>JT808</PackageId>
     <Product>JT808</Product>
     <Description>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议(支持2013、2019版本)</Description>
     <PackageReleaseNotes>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议(支持2013、2019版本)</PackageReleaseNotes>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <RepositoryUrl>https://github.com/SmallChi/JT808</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/SmallChi/JT808</PackageProjectUrl>
-    <licenseUrl>https://github.com/SmallChi/JT808/blob/master/LICENSE</licenseUrl>
-    <license>https://github.com/SmallChi/JT808/blob/master/LICENSE</license>
     <DocumentationFile>JT808.Protocol.xml</DocumentationFile>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>2.4.0</Version>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <AnalysisLevel>latest</AnalysisLevel>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
@@ -48,6 +34,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 

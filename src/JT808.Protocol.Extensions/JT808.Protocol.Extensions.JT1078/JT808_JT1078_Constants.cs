@@ -4,6 +4,9 @@ using System.Text;
 
 namespace JT808.Protocol.Extensions.JT1078
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class JT808_JT1078_Constants
     {
         /// <summary>
@@ -26,7 +29,6 @@ namespace JT808.Protocol.Extensions.JT1078
         /// 异常驾驶行为报警详细描述
         /// </summary>
         public const byte JT808_0X0200_0x18 = 0x18;
-
         /// <summary>
         /// 音视频参数设置
         /// </summary>

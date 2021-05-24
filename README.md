@@ -306,11 +306,12 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 ## NuGet安装
 
-| Package Name          | Version                                            | Downloads                                           |
-| --------------------- | -------------------------------------------------- | --------------------------------------------------- |
-| Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.svg) |
-| Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |
-| Install-Package JT808.Protocol.Extensions.JTActiveSafety| ![JT808.Protocol.Extensions.JTActiveSafety](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JTActiveSafety.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JTActiveSafety.svg) |
+| Package Name| Version| Preview  Version |Downloads|Remark|
+| --- | --- | --- | ---| --- |
+| Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.svg) |![JT808](https://img.shields.io/nuget/vpre/JT808.svg)|JT808|
+| Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JT1078.svg)|JT1078扩展JT808|
+| Install-Package JT808.Protocol.Extensions.JTActiveSafety| ![JT808.Protocol.Extensions.JTActiveSafety](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JTActiveSafety.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JTActiveSafety.svg) |![JT808.Protocol.Extensions.JTActiveSafety](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JTActiveSafety.svg)|主动安全（苏标）扩展JT808|
+| Install-Package JT808.Protocol.Extensions.YueBiao| ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.YueBiao.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.YueBiao.svg) |![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.YueBiao.svg)|粤标扩展JT808|
 
 ## 使用BenchmarkDotNet性能测试报告（只是玩玩，不能当真）
 
@@ -495,4 +496,17 @@ serviceDescriptors1.AddJT808Configure()
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddJTActiveSafetyConfigure();
+```
+
+## 粤标扩展JT808协议消息对照表
+
+| 序号  | 消息ID | 完成情况 | 测试情况 | 消息体名称 |
+| :---: | :---: | :---: | :---: | :---:|
+
+## 使用方法
+
+```dotnet
+IServiceCollection serviceDescriptors1 = new ServiceCollection();
+serviceDescriptors1.AddJT808Configure()
+                   .AddYueBiaoConfigure();
 ```
