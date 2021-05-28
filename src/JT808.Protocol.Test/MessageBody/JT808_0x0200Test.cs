@@ -25,7 +25,7 @@ namespace JT808.Protocol.Test.MessageBody
             IJT808Config jT808Config = new DefaultGlobalConfig();
             IJT808Config jT808Config1 = new DefaultGlobalConfig();
             jT808Config1.SkipCRCCode = true;
-            jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808LocationAttachImpl0x06>();
+            jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808LocationAttachImpl0x61>();
             JT808Serializer = new JT808Serializer(jT808Config);
             JT808Serializer1 = new JT808Serializer(jT808Config1);
         }
@@ -192,21 +192,21 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Oil = 55
             });
-            jT808UploadLocationRequest.JT808CustomLocationAttachData.Add(0x06, new JT808LocationAttachImpl0x06
+            jT808UploadLocationRequest.JT808CustomLocationAttachData.Add(0x61, new JT808LocationAttachImpl0x61
             {
                 Age = 18,
                 Gender = 1,
                 UserName = "smallchi"
             });
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037060D0000001201736D616C6C636869", hex);
+            Assert.Equal("000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037610D0000001201736D616C6C636869", hex);
         }
 
         [Fact]
         public void Test4()
         {
             // 1.添加自定义附加信息扩展 AddJT808LocationAttachMethod 
-            byte[] bodys = "00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37 06 0D 00 00 00 12 01 73 6D 61 6C 6C 63 68 69".ToHexBytes();
+            byte[] bodys = "000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037610D0000001201736D616C6C636869".ToHexBytes();
             JT808_0x0200 jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x0200>(bodys);
             Assert.Equal((uint)1, jT808UploadLocationRequest.AlarmFlag);
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808UploadLocationRequest.GPSTime);
@@ -216,10 +216,10 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
             Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
-            var jT808LocationAttachImpl0x06 = (JT808LocationAttachImpl0x06)jT808UploadLocationRequest.JT808CustomLocationAttachData[0x06];
-            Assert.Equal(18, jT808LocationAttachImpl0x06.Age);
-            Assert.Equal(1, jT808LocationAttachImpl0x06.Gender);
-            Assert.Equal("smallchi", jT808LocationAttachImpl0x06.UserName);
+            var jT808LocationAttachImpl0x61 = (JT808LocationAttachImpl0x61)jT808UploadLocationRequest.JT808CustomLocationAttachData[0x61];
+            Assert.Equal(18, jT808LocationAttachImpl0x61.Age);
+            Assert.Equal(1, jT808LocationAttachImpl0x61.Gender);
+            Assert.Equal("smallchi", jT808LocationAttachImpl0x61.UserName);
         }
 
         [Fact]
@@ -518,6 +518,112 @@ namespace JT808.Protocol.Test.MessageBody
             //16
             //7E
         }
+
+        [Fact]
+        public void Test_JT808_0x0200_0x07_1()
+        {
+            JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200();
+            jT808UploadLocationRequest.AlarmFlag = 1;
+            jT808UploadLocationRequest.Altitude = 40;
+            jT808UploadLocationRequest.GPSTime = DateTime.Parse("2021-05-28 18:10:10");
+            jT808UploadLocationRequest.Lat = 12222222;
+            jT808UploadLocationRequest.Lng = 132444444;
+            jT808UploadLocationRequest.Speed = 60;
+            jT808UploadLocationRequest.Direction = 0;
+            jT808UploadLocationRequest.StatusFlag = 2;
+            jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x07, new JT808_0x0200_0x07
+            {
+                 BeiDou=new List<JT808_0x0200_0x07.SatelliteStatusInformation>()
+                 {
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=1,
+                          Elevation=3,
+                          AzimuthAngle=2
+                     },
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=2,
+                          Elevation=4,
+                          AzimuthAngle=5
+                     },
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=3,
+                          Elevation=5,
+                          AzimuthAngle=6
+                     },
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=4,
+                          Elevation=5,
+                          AzimuthAngle=6
+                     }
+                 },
+                 GPS=new List<JT808_0x0200_0x07.SatelliteStatusInformation>()
+                 {
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=2,
+                          Elevation=4,
+                          AzimuthAngle=5
+                     },
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=3,
+                          Elevation=5,
+                          AzimuthAngle=6
+                     },
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=4,
+                          Elevation=5,
+                          AzimuthAngle=6
+                     }
+                 },
+                 GLONASS = new List<JT808_0x0200_0x07.SatelliteStatusInformation>
+                 {
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=3,
+                          Elevation=5,
+                          AzimuthAngle=6
+                     },
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=4,
+                          Elevation=5,
+                          AzimuthAngle=6
+                     }
+                 },
+                 Galileo =new List<JT808_0x0200_0x07.SatelliteStatusInformation>
+                 {
+                     new JT808_0x0200_0x07.SatelliteStatusInformation()
+                     {
+                          No=4,
+                          Elevation=5,
+                          AzimuthAngle=6
+                     }
+                  }
+            });
+            var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
+            Assert.Equal("000000010000000200BA7F0E07E4F11C0028003C0000210528181010072C0401030002020400050305000604050006030204000503050006040500060203050006040500060104050006", hex);
+        }
+
+        [Fact]
+        public void Test_JT808_0x0200_0x07_2()
+        {
+            byte[] bytes = "000000010000000200BA7F0E07E4F11C0028003C0000210528181010072C0401030002020400050305000604050006030204000503050006040500060203050006040500060104050006".ToHexBytes();
+            var jT808_0X0200 = JT808Serializer.Deserialize<JT808_0x0200>(bytes);
+            var jT808_0x0200_0x07=(JT808_0x0200_0x07)jT808_0X0200.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x07];
+            Assert.Equal((byte)(4 + (4 * 4 + 4 * 3 + 4 * 2 + 4)), jT808_0x0200_0x07.AttachInfoLength);
+            Assert.Equal(4, jT808_0x0200_0x07.BeiDou.Count);
+            Assert.Equal(3, jT808_0x0200_0x07.GPS.Count);
+            Assert.Equal(2, jT808_0x0200_0x07.GLONASS.Count);
+            Assert.Single(jT808_0x0200_0x07.Galileo);
+        }
+
         [Fact]
         public void LatLngTest1_1()
         {

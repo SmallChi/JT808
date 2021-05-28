@@ -66,9 +66,8 @@ namespace JT808.Protocol.Test.MessageBody
                 LicenseIssuing = "qwertx",
                 CertificateExpiresDate = DateTime.Parse("2018-08-16")
             };
-
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
-            Assert.Equal("0118081609161600056B6F696B6571776531323334353661616100000000000000000671776572747820180816".Replace(" ", ""), hex);
+            Assert.Equal("0118081609161600056B6F696B6500000000000000007177653132333435366161610671776572747820180816".Replace(" ", ""), hex);
         }
 
         [Fact]
@@ -100,7 +99,7 @@ namespace JT808.Protocol.Test.MessageBody
                 DriverIdentityCard="12345678901234567"
             };
             var hex = JT808Serializer.Serialize(jT808_0X0702, JT808Version.JTT2019).ToHexString();
-            Assert.Equal("0119120111111100056B6F696B65717765313233343536616161000000000000000006717765727478201912013132333435363738393031323334353637000000", hex);
+            Assert.Equal("0119120111111100056B6F696B65000000000000000071776531323334353661616106717765727478201912010000003132333435363738393031323334353637", hex);
             
         }
 
@@ -123,6 +122,50 @@ namespace JT808.Protocol.Test.MessageBody
         public void Test_2019_3()
         {
             byte[] bytes = "0119120111111100056B6F696B65717765313233343536616161303030303030303006717765727478201912013132333435363738393031323334353637303030".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0702>(bytes, JT808Version.JTT2019);
+        }
+
+        [Fact]
+        public void Test_2019_4()
+        {
+            JT808_0x0702 jT808_0X0702 = new JT808_0x0702
+            {
+                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班,
+                IC_Card_PlugDateTime = DateTime.Parse("2021-05-28 18:11:11"),
+                IC_Card_ReadResult = JT808ICCardReadResult.IC卡读卡成功,
+                DriverUserName = "koike",
+                QualificationCode = "qwe123456aaa",
+                LicenseIssuing = "qwertx",
+                CertificateExpiresDate = DateTime.Parse("2021-05-28"),
+                DriverIdentityCard = "12345678901234567",
+                FaceMatchValue=99,
+                UID= "12345678901234567"
+            };
+            var hex = JT808Serializer.Serialize(jT808_0X0702, JT808Version.JTT2019).ToHexString();
+            Assert.Equal("0121052818111100056B6F696B65000000000000000071776531323334353661616106717765727478202105280000003132333435363738393031323334353637630000003132333435363738393031323334353637", hex);
+        }
+
+        [Fact]
+        public void Test_2019_5()
+        {
+            byte[] bytes = "0121052818111100056B6F696B65000000000000000071776531323334353661616106717765727478202105280000003132333435363738393031323334353637630000003132333435363738393031323334353637".ToHexBytes();
+            JT808_0x0702 jT808_0X0702 = JT808Serializer.Deserialize<JT808_0x0702>(bytes, JT808Version.JTT2019);
+            Assert.Equal(JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班, jT808_0X0702.IC_Card_Status);
+            Assert.Equal(DateTime.Parse("2021-05-28 18:11:11"), jT808_0X0702.IC_Card_PlugDateTime);
+            Assert.Equal(JT808ICCardReadResult.IC卡读卡成功, jT808_0X0702.IC_Card_ReadResult);
+            Assert.Equal("koike", jT808_0X0702.DriverUserName);
+            Assert.Equal("qwe123456aaa", jT808_0X0702.QualificationCode);
+            Assert.Equal("qwertx", jT808_0X0702.LicenseIssuing);
+            Assert.Equal(DateTime.Parse("2021-05-28"), jT808_0X0702.CertificateExpiresDate);
+            Assert.Equal("12345678901234567", jT808_0X0702.DriverIdentityCard);
+            Assert.Equal(99, jT808_0X0702.FaceMatchValue.Value);
+            Assert.Equal("12345678901234567", jT808_0X0702.UID);
+        }
+
+        [Fact]
+        public void Test_2019_6()
+        {
+            byte[] bytes = "0121052818111100056B6F696B65000000000000000071776531323334353661616106717765727478202105280000003132333435363738393031323334353637630000003132333435363738393031323334353637".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808_0x0702>(bytes, JT808Version.JTT2019);
         }
     }

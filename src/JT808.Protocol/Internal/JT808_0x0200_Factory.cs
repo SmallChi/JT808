@@ -20,6 +20,9 @@ namespace JT808.Protocol.Internal
             Map.Add(JT808Constants.JT808_0x0200_0x02, new JT808_0x0200_0x02());
             Map.Add(JT808Constants.JT808_0x0200_0x03, new JT808_0x0200_0x03());
             Map.Add(JT808Constants.JT808_0x0200_0x04, new JT808_0x0200_0x04());
+            Map.Add(JT808Constants.JT808_0x0200_0x05, new JT808_0x0200_0x05());
+            Map.Add(JT808Constants.JT808_0x0200_0x06, new JT808_0x0200_0x06());
+            Map.Add(JT808Constants.JT808_0x0200_0x07, new JT808_0x0200_0x07());
             Map.Add(JT808Constants.JT808_0x0200_0x11, new JT808_0x0200_0x11());
             Map.Add(JT808Constants.JT808_0x0200_0x12, new JT808_0x0200_0x12());
             Map.Add(JT808Constants.JT808_0x0200_0x13, new JT808_0x0200_0x13());

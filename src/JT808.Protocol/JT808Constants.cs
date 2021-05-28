@@ -52,6 +52,10 @@ namespace JT808.Protocol
         /// </summary>
         public const byte JT808_0x0200_0x06 = 0x06;
         /// <summary>
+        /// JT808_0x0200_0x07
+        /// </summary>
+        public const byte JT808_0x0200_0x07 = 0x07;
+        /// <summary>
         /// JT808_0x0200_0x11
         /// </summary>
         public const byte JT808_0x0200_0x11 = 0x11;

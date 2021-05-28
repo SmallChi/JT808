@@ -4891,6 +4891,11 @@
             JT808_0x0200_0x06
             </summary>
         </member>
+        <member name="F:JT808.Protocol.JT808Constants.JT808_0x0200_0x07">
+            <summary>
+            JT808_0x0200_0x07
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.JT808Constants.JT808_0x0200_0x11">
             <summary>
             JT808_0x0200_0x11
@@ -9218,6 +9223,104 @@
             <param name="value"></param>
             <param name="config"></param>
         </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_0x07">
+            <summary>
+            卫星状态数据
+             2019版本
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x0200_0x07.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.AttachInfoId">
+            <summary>
+            JT808_0x0200_0x07
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.AttachInfoLength">
+            <summary>
+            4 的倍数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.BeiDou">
+            <summary>
+            BeiDou
+            最小值是 0，最大值 12，CN 值大于等于 20 的卫星数量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.GPS">
+            <summary>
+            GPS
+            最小值是 0，最大值 12，CN 值大于等于 20 的卫星数量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.GLONASS">
+            <summary>
+            GLONASS
+            最小值是 0，最大值 12，CN 值大于等于 20 的卫星数量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.Galileo">
+            <summary>
+            Galileo
+            最小值是 0，最大值 12，CN 值大于等于 20 的卫星数量
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x0200_0x07.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x0200_0x07.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x0200_0x07.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.JT808_0x0200_0x07,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_0x07.SatelliteStatusInformation">
+            <summary>
+            卫星状态信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.SatelliteStatusInformation.No">
+            <summary>
+            卫星编号
+            1-200
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.SatelliteStatusInformation.Elevation">
+            <summary>
+            仰角
+            0-90
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x07.SatelliteStatusInformation.AzimuthAngle">
+            <summary>
+            方位角
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x0200_0x07.SatelliteStatusInformation.Analyze(System.String,System.Text.Json.Utf8JsonWriter)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="writer"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_0x11">
             <summary>
             超速报警附加信息
@@ -10157,6 +10260,20 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.DriverIdentityCard">
             <summary>
             驾驶员身份证号 长度20 不足补0
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.FaceMatchValue">
+            <summary>
+            人脸匹配度
+            身份证或从业资格证照片与人脸匹配度比例：0~100
+            2019版本
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.UID">
+            <summary>
+            身份证 UID
+            长度 20 位，不足补0x00
             2019版本
             </summary>
         </member>

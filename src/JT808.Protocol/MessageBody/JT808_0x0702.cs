@@ -74,6 +74,18 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string DriverIdentityCard { get; set; }
         /// <summary>
+        /// 人脸匹配度
+        /// 身份证或从业资格证照片与人脸匹配度比例：0~100
+        /// 2019版本
+        /// </summary>
+        public byte? FaceMatchValue { get; set; }
+        /// <summary>
+        /// 身份证 UID
+        /// 长度 20 位，不足补0x00
+        /// 2019版本
+        /// </summary>
+        public string UID { get; set; }
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>
@@ -112,6 +124,15 @@ namespace JT808.Protocol.MessageBody
                         var driverIdentityCardBuffer = reader.ReadVirtualArray(20);
                         value.DriverIdentityCard = reader.ReadString(20);
                         writer.WriteString($"[{driverIdentityCardBuffer.ToArray().ToHexString()}]驾驶员身份证号", value.DriverIdentityCard);
+                        //兼容808-2019 补充
+                        if (reader.ReadCurrentRemainContentLength() > 0)
+                        {
+                            value.FaceMatchValue = reader.ReadByte();
+                            writer.WriteNumber($"[{value.FaceMatchValue.Value.ReadNumber()}]人脸匹配度", value.FaceMatchValue.Value);
+                            var uidBuffer = reader.ReadVirtualArray(20);
+                            value.UID = reader.ReadString(20);
+                            writer.WriteString($"[{uidBuffer.ToArray().ToHexString()}]身份证UID", value.UID);
+                        }
                     }
                 }
             }
@@ -141,6 +162,12 @@ namespace JT808.Protocol.MessageBody
                     if(reader.Version== JT808Version.JTT2019)
                     {
                         value.DriverIdentityCard = reader.ReadString(20);
+                        //兼容808-2019 补充
+                        if (reader.ReadCurrentRemainContentLength() > 0)
+                        {
+                            value.FaceMatchValue = reader.ReadByte();
+                            value.UID = reader.ReadString(20);
+                        }
                     }
                 }
             }
@@ -163,13 +190,22 @@ namespace JT808.Protocol.MessageBody
                 {
                     writer.WriteByte((byte)value.DriverUserName.Length);
                     writer.WriteString(value.DriverUserName);
-                    writer.WriteString(value.QualificationCode.PadRight(20, '\0').ValiString(nameof(value.QualificationCode),20));
+                    writer.WriteString(value.QualificationCode.PadLeft(20, '\0').ValiString(nameof(value.QualificationCode),20));
                     writer.WriteByte((byte)value.LicenseIssuing.Length);
                     writer.WriteString(value.LicenseIssuing);
                     writer.WriteDateTime4(value.CertificateExpiresDate);
                     if (writer.Version == JT808Version.JTT2019)
                     {
-                        writer.WriteString(value.DriverIdentityCard.PadRight(20,'\0').ValiString(nameof(value.DriverIdentityCard), 20));
+                        writer.WriteString(value.DriverIdentityCard.PadLeft(20,'\0').ValiString(nameof(value.DriverIdentityCard), 20));
+                        //兼容808-2019 补充
+                        if (value.FaceMatchValue.HasValue)
+                        {
+                            writer.WriteByte(value.FaceMatchValue.Value);
+                        }
+                        if (!string.IsNullOrEmpty(value.UID))
+                        {
+                            writer.WriteString(value.UID.PadLeft(20, '\0').ValiString(nameof(value.UID), 20));
+                        }
                     }
                 }
             }
