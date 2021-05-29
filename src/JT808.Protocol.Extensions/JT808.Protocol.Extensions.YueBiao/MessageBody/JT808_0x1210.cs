@@ -1,4 +1,4 @@
-﻿using JT808.Protocol.Extensions.JTActiveSafety.Metadata;
+﻿using JT808.Protocol.Extensions.YueBiao.Metadata;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
@@ -7,16 +7,16 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
+namespace JT808.Protocol.Extensions.YueBiao.MessageBody
 {
     /// <summary>
     /// 报警附件信息消息
     /// </summary>
-    public class JT808_0x1210: JT808Bodies, IJT808MessagePackFormatter<JT808_0x1210>, IJT808Analyze
+    public class JT808_0x1210: JT808Bodies, IJT808MessagePackFormatter<JT808_0x1210>, IJT808Analyze,IJT808_2019_Version
     {
         /// <summary>
-        /// 终端ID
-        /// 7 个字节，由大写字母和数字组成，此终端ID 由制造商自行定义，位数不足时，后补“0x00”
+        /// 终端 ID
+        /// 30 个字节，由大写字母和数字组成，此终端ID 由制造商自行定义，位数不足时，后补“0x00”
         /// </summary>
         public string TerminalId { get; set; }
         /// <summary>
@@ -59,21 +59,23 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x1210 value = new JT808_0x1210();
-            string makerIdHex=reader.ReadVirtualArray(7).ToArray().ToHexString();
-            value.TerminalId = reader.ReadString(7);
+            string makerIdHex=reader.ReadVirtualArray(30).ToArray().ToHexString();
+            value.TerminalId = reader.ReadString(30);
             writer.WriteString($"[{makerIdHex}]终端ID", value.TerminalId);
             value.AlarmIdentification = new AlarmIdentificationProperty();
-            string terminalIDHex = reader.ReadVirtualArray(7).ToArray().ToHexString();
-            value.AlarmIdentification.TerminalID = reader.ReadString(7);
+            string terminalIdHex = reader.ReadVirtualArray(30).ToArray().ToHexString();
+            value.AlarmIdentification.TerminalId = reader.ReadString(30);
             value.AlarmIdentification.Time = reader.ReadDateTime6();
             value.AlarmIdentification.SN = reader.ReadByte();
             value.AlarmIdentification.AttachCount = reader.ReadByte();
-            value.AlarmIdentification.Retain = reader.ReadByte();
-            writer.WriteString($"[{terminalIDHex}]终端ID", value.AlarmIdentification.TerminalID);
+            value.AlarmIdentification.Retain1 = reader.ReadByte();
+            value.AlarmIdentification.Retain2 = reader.ReadByte();
+            writer.WriteString($"[{terminalIdHex}]终端ID", value.AlarmIdentification.TerminalId);
             writer.WriteString($"[{value.AlarmIdentification.Time.ToString("yyMMddHHmmss")}]日期时间", value.AlarmIdentification.Time.ToString("yyyy-MM-dd HH:mm:ss"));
             writer.WriteNumber($"[{value.AlarmIdentification.SN.ReadNumber()}]序号", value.AlarmIdentification.SN);
             writer.WriteNumber($"[{value.AlarmIdentification.AttachCount.ReadNumber()}]附件数量", value.AlarmIdentification.AttachCount);
-            writer.WriteNumber($"[{value.AlarmIdentification.Retain.ReadNumber()}]预留", value.AlarmIdentification.Retain);
+            writer.WriteNumber($"[{value.AlarmIdentification.Retain1.ReadNumber()}]预留1", value.AlarmIdentification.Retain1);
+            writer.WriteNumber($"[{value.AlarmIdentification.Retain2.ReadNumber()}]预留2", value.AlarmIdentification.Retain2);
             string alarmIdHex = reader.ReadVirtualArray(32).ToArray().ToHexString();
             value.AlarmId = reader.ReadString(32);
             writer.WriteString($"[{alarmIdHex}]平台给报警分配的唯一编号", value.AlarmId);
@@ -109,14 +111,15 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
         public JT808_0x1210 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1210 value = new JT808_0x1210();
-            value.TerminalId = reader.ReadString(7);
+            value.TerminalId = reader.ReadString(30);
             value.AlarmIdentification = new AlarmIdentificationProperty
             {
-                TerminalID = reader.ReadString(7),
+                TerminalId = reader.ReadString(30),
                 Time = reader.ReadDateTime6(),
                 SN = reader.ReadByte(),
                 AttachCount = reader.ReadByte(),
-                Retain = reader.ReadByte()
+                Retain1 = reader.ReadByte(),
+                Retain2 = reader.ReadByte()
             };
             value.AlarmId = reader.ReadString(32);
             value.InfoType = reader.ReadByte();
@@ -143,16 +146,17 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1210 value, IJT808Config config)
         {
-            writer.WriteString(value.TerminalId.PadRight(7, '\0'));
+            writer.WriteString(value.TerminalId.PadRight(30, '\0'));
             if (value.AlarmIdentification == null)
             {
                 throw new NullReferenceException($"{nameof(AlarmIdentificationProperty)}不为空");
             }
-            writer.WriteString(value.AlarmIdentification.TerminalID);
+            writer.WriteString(value.AlarmIdentification.TerminalId.PadRight(30, '\0'));
             writer.WriteDateTime6(value.AlarmIdentification.Time);
             writer.WriteByte(value.AlarmIdentification.SN);
             writer.WriteByte(value.AlarmIdentification.AttachCount);
-            writer.WriteByte(value.AlarmIdentification.Retain);
+            writer.WriteByte(value.AlarmIdentification.Retain1);
+            writer.WriteByte(value.AlarmIdentification.Retain2);
             writer.WriteString(value.AlarmId);
             writer.WriteByte(value.InfoType);
             if (value.AttachInfos != null && value.AttachInfos.Count > 0)

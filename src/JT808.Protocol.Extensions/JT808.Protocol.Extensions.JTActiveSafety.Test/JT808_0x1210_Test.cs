@@ -43,7 +43,7 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.Test
                         FileSize=10
                     }
                 },
-                MakerID = "4444444",
+                TerminalId = "4444444",
                 InfoType = 0
             };
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
@@ -68,7 +68,7 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.Test
             Assert.Equal(9, jT808UploadLocationRequest.AttachInfos[1].FileNameLength);
             Assert.Equal(10u, jT808UploadLocationRequest.AttachInfos[1].FileSize);
 
-            Assert.Equal("4444444", jT808UploadLocationRequest.MakerID);
+            Assert.Equal("4444444", jT808UploadLocationRequest.TerminalId);
             Assert.Equal(0, jT808UploadLocationRequest.InfoType);
 
         }

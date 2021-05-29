@@ -9726,6 +9726,13 @@
             附加信息长度
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_BodyBase.AttachInfoLengthExtend">
+            <summary>
+            附加信息长度扩展
+            4个字节
+            注意：只适用于已知的协议才行
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase">
             <summary>
             自定义位置附加信息

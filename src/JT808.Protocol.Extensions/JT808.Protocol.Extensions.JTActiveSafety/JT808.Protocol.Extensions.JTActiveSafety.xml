@@ -783,9 +783,9 @@
             报警附件信息消息
             </summary>
         </member>
-        <member name="P:JT808.Protocol.Extensions.JTActiveSafety.MessageBody.JT808_0x1210.MakerID">
+        <member name="P:JT808.Protocol.Extensions.JTActiveSafety.MessageBody.JT808_0x1210.TerminalId">
             <summary>
-            制造商Id
+            终端ID
             7 个字节，由大写字母和数字组成，此终端ID 由制造商自行定义，位数不足时，后补“0x00”
             </summary>
         </member>
