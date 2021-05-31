@@ -10,7 +10,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 报警附件上传指令
     /// </summary>
-    public class JT808_0x9208: JT808Bodies, IJT808MessagePackFormatter<JT808_0x9208>, IJT808Analyze
+    public class JT808_0x9208: JT808Bodies, IJT808MessagePackFormatter<JT808_0x9208>, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// Description

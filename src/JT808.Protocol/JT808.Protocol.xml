@@ -1531,6 +1531,26 @@
             取消
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.未找到目标设备">
+            <summary>
+            粤标主动安全-未找到目标设备
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.硬件型号不支持">
+            <summary>
+            粤标主动安全-硬件型号不支持
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.软件版本相同">
+            <summary>
+            粤标主动安全-软件版本相同
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.软件版本不支持">
+            <summary>
+            粤标主动安全-软件版本不支持
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808UpgradeType">
             <summary>
             升级类型
@@ -1549,6 +1569,26 @@
         <member name="F:JT808.Protocol.Enums.JT808UpgradeType.北斗卫星定位模块">
             <summary>
             北斗卫星定位模块
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.高级驾驶辅助系统">
+            <summary>
+            粤标主动安全-高级驾驶辅助系统
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.驾驶状态监控系统">
+            <summary>
+            粤标主动安全-驾驶状态监控系统
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.胎压监测系统">
+            <summary>
+            粤标主动安全-胎压监测系统
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.盲点监测系统">
+            <summary>
+            粤标主动安全-盲点监测系统
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808Version">
@@ -9726,13 +9766,6 @@
             附加信息长度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_BodyBase.AttachInfoLengthExtend">
-            <summary>
-            附加信息长度扩展
-            4个字节
-            注意：只适用于已知的协议才行
-            </summary>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase">
             <summary>
             自定义位置附加信息
@@ -9746,6 +9779,13 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase.AttachInfoLength">
             <summary>
             自定义附加信息长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase.AttachInfoLengthExtend">
+            <summary>
+            附加信息长度扩展
+            4个字节
+            注意：只适用于已知的协议才行
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0201">
@@ -15169,6 +15209,7 @@
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105">
             <summary>
             终端控制
+            todo:重搞终端控制，加入自定义扩展
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.MsgId">
@@ -15295,7 +15336,7 @@
             <summary>
             连接到指定服务器时限
             单位：分（min），值非 0 后的有效期截止前，终端应连回原地址。
-                                       若值为 0，则表示一直连接指 定服务器
+            若值为 0，则表示一直连接指 定服务器
             </summary>
         </member>
         <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.CommandParams.ToString">
@@ -16895,6 +16936,7 @@
             <summary>
             保存标志 
             1：保存；0：实时上传
+            仅主机拍照时有效
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8801.Resolution">

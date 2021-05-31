@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 高级驾驶辅助系统参数
     /// </summary>
-    public class JT808_0x8103_0xF364 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0xF364>, IJT808Analyze
+    public class JT808_0x8103_0xF364 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0xF364>, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 高级驾驶辅助系统参数

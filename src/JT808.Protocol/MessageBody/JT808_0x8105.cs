@@ -3,12 +3,14 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
     /// <summary>
     /// 终端控制
+    /// todo:重搞终端控制，加入自定义扩展
     /// </summary>
     public class JT808_0x8105 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8105>, IJT808Analyze, IJT808_2019_Version
     {
@@ -270,9 +272,12 @@ namespace JT808.Protocol.MessageBody
             /// <summary>
             /// 连接到指定服务器时限
             /// 单位：分（min），值非 0 后的有效期截止前，终端应连回原地址。
-            ///                            若值为 0，则表示一直连接指 定服务器
+            /// 若值为 0，则表示一直连接指 定服务器
             /// </summary>
             public ushort? ConnectTimeLimit { get; set; }
+
+            public List<object> Ext { get; set; }
+
             /// <summary>
             /// 
             /// </summary>

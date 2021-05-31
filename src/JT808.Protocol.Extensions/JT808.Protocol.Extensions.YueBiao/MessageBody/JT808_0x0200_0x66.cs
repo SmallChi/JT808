@@ -13,7 +13,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 胎压监测系统报警信息
     /// </summary>
-    public class JT808_0x0200_0x66 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x66>, IJT808Analyze
+    public class JT808_0x0200_0x66 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x66>, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 胎压监测系统报警信息Id

@@ -29,5 +29,9 @@ namespace JT808.Protocol.Extensions.YueBiao.Enums
         /// 文件上传完成消息应答
         /// </summary>
         文件上传完成消息应答 = 0x9212,
+        /// <summary>
+        /// 终端升级进度上报
+        /// </summary>
+        终端升级进度上报 = 0x1FC4,
     }
 }

@@ -13,7 +13,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 高级驾驶辅助系统报警信息
     /// </summary>
-    public class JT808_0x0200_0x64 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x64>, IJT808Analyze
+    public class JT808_0x0200_0x64 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x64>, IJT808Analyze,IJT808_2019_Version
     {
         /// <summary>
         /// 高级驾驶辅助系统报警信息Id
@@ -22,7 +22,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <summary>
         /// 高级驾驶辅助系统报警信息附加长度
         /// </summary>
-        public override byte AttachInfoLength { get; set; } = 32;
+        public override byte AttachInfoLength { get; set; } = 73;
         /// <summary>
         /// 报警ID
         /// </summary>
@@ -322,7 +322,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x64 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
-            writer.WriteByte(value.AttachInfoLength);
+            writer.Skip(1, out int AttachInfoLengthPosition);
             writer.WriteUInt32(value.AlarmId);
             writer.WriteByte(value.FlagState);
             writer.WriteByte(value.AlarmOrEventType);
@@ -347,6 +347,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteByte(value.AlarmIdentification.AttachCount);
             writer.WriteByte(value.AlarmIdentification.Retain1);
             writer.WriteByte(value.AlarmIdentification.Retain2);
+            writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - AttachInfoLengthPosition - 1), AttachInfoLengthPosition);
         }
     }
 }

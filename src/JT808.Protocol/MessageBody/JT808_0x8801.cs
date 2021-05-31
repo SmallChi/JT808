@@ -38,6 +38,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 保存标志 
         /// 1：保存；0：实时上传
+        /// 仅主机拍照时有效
         /// </summary>
         public byte SaveFlag { get; set; }
         /// <summary>

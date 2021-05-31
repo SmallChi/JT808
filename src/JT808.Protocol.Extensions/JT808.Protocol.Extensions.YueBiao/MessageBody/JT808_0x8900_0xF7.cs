@@ -10,7 +10,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 状态查询
     /// </summary>
-    public class JT808_0x8900_0xF7 : JT808_0x8900_BodyBase, IJT808MessagePackFormatter<JT808_0x8900_0xF7>, IJT808Analyze
+    public class JT808_0x8900_0xF7 : JT808_0x8900_BodyBase, IJT808MessagePackFormatter<JT808_0x8900_0xF7>, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 查询基本信息类型

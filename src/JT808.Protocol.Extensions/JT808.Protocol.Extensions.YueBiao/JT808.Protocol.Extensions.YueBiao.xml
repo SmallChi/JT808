@@ -46,6 +46,66 @@
             不修改参数
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus">
+            <summary>
+            升级状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.固件下载中">
+            <summary>
+            固件下载中
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.固件下载成功">
+            <summary>
+            固件下载成功
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.固件下载失败">
+            <summary>
+            固件下载失败
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.固件安装中">
+            <summary>
+            固件安装中
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.安装成功">
+            <summary>
+            安装成功
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.安装失败">
+            <summary>
+            安装失败
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.未找到目标设备">
+            <summary>
+            未找到目标设备
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.硬件型号不支持">
+            <summary>
+            硬件型号不支持
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.软件版本相同">
+            <summary>
+            软件版本相同
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.软件版本不支持">
+            <summary>
+            软件版本不支持
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.其他">
+            <summary>
+            其他
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId">
             <summary>
             主动安全消息Id
@@ -74,6 +134,11 @@
         <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.文件上传完成消息应答">
             <summary>
             文件上传完成消息应答
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.终端升级进度上报">
+            <summary>
+            终端升级进度上报
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.PhotoResolutionType">
@@ -259,6 +324,12 @@
         <member name="F:JT808.Protocol.Extensions.YueBiao.JT808_YueBiao_Constants.JT808_0X8103_0xF367">
             <summary>
             盲区监测系统参数设置
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.JT808_YueBiao_Constants.JT808_0X8103_0xF370">
+            <summary>
+            智能视频协议版本信息
+            引入此智能视频协议版本信息方便平台进行版本控制初始版本是 1，每次修订版本号都会递增
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.YueBiao.JT808_YueBiao_Constants.JT808_0X0900_0xF7">
@@ -971,6 +1042,72 @@
             <param name="value"></param>
             <param name="config"></param>
         </member>
+        <member name="T:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4">
+            <summary>
+            终端升级进度上报
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.Description">
+            <summary>
+            终端升级进度上报
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.MsgId">
+            <summary>
+            终端升级进度上报
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.MsgNum">
+            <summary>
+            流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.UpgradeType">
+            <summary>
+            升级类型
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.UpgradeStatus">
+            <summary>
+            升级状态
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.UploadProgress">
+            <summary>
+            升级进度
+            0-100
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.ErrorCode">
+            <summary>
+            错误码
+            由厂家自定义
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364">
             <summary>
             高级驾驶辅助系统参数
@@ -1582,6 +1719,53 @@
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF367.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF367,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370">
+            <summary>
+            智能视频协议版本信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370.ParamId">
+            <summary>
+            系统参数Id
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370.ParamLength">
+            <summary>
+            参数长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370.SmartVideoProtocolVersion">
+            <summary>
+            智能视频协议版本信息
+            引入此智能视频协议版本信息方便平台进行版本控制初始版本是 
+            1，每次修订版本号都会递增* 
+            注：只支持获取，不支持设置
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370,JT808.Protocol.IJT808Config)">
             <summary>
             
             </summary>

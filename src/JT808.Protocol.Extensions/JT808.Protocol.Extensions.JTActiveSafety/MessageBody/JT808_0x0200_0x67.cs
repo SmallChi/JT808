@@ -22,7 +22,7 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
         /// <summary>
         /// 盲区监测系统报警信息长度
         /// </summary>
-        public override byte AttachInfoLength { get; set; } = 26;
+        public override byte AttachInfoLength { get; set; }
         /// <summary>
         /// 报警ID
         /// </summary>
@@ -254,7 +254,7 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x67 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
-            writer.WriteByte(value.AttachInfoLength);
+            writer.Skip(1, out int AttachInfoLengthPosition);
             writer.WriteUInt32(value.AlarmId);
             writer.WriteByte(value.FlagState);
             writer.WriteByte(value.AlarmOrEventType);
@@ -274,6 +274,7 @@ namespace JT808.Protocol.Extensions.JTActiveSafety.MessageBody
             writer.WriteByte(value.AlarmIdentification.SN);
             writer.WriteByte(value.AlarmIdentification.AttachCount);
             writer.WriteByte(value.AlarmIdentification.Retain);
+            writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - AttachInfoLengthPosition - 1), AttachInfoLengthPosition);
         }
     }
 }

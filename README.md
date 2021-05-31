@@ -304,6 +304,15 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo11](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo11.cs)
 
+### 举个栗子12
+
+场景:
+由于粤标的设备厂家自定义的附加信息长度可以为四4个字节的，所以需要兼容。
+
+[可以参考Simples的Demo12](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo12.cs)
+
+>注意：只适用于已知的设备厂家协议才行
+
 ## NuGet安装
 
 | Package Name| Version| Preview  Version |Downloads|Remark|

@@ -42,6 +42,11 @@ namespace JT808.Protocol.Extensions.YueBiao
         /// </summary>
         public const uint JT808_0X8103_0xF367 = 0xF367;
         /// <summary>
+        /// 智能视频协议版本信息
+        /// 引入此智能视频协议版本信息方便平台进行版本控制初始版本是 1，每次修订版本号都会递增
+        /// </summary>
+        public const uint JT808_0X8103_0xF370 = 0xF370;
+        /// <summary>
         /// 状态查询
         /// </summary>
         public const byte JT808_0X0900_0xF7 = 0xF7;

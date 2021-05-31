@@ -13,7 +13,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 透传数据
     /// </summary>
-    public class JT808_0x0900_0xF8 : JT808_0x0900_BodyBase, IJT808MessagePackFormatter<JT808_0x0900_0xF8>, IJT808Analyze
+    public class JT808_0x0900_0xF8 : JT808_0x0900_BodyBase, IJT808MessagePackFormatter<JT808_0x0900_0xF8>, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 透传类型

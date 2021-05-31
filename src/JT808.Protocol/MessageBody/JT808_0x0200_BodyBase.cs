@@ -17,11 +17,5 @@ namespace JT808.Protocol.MessageBody
         /// 附加信息长度
         /// </summary>
         public abstract byte AttachInfoLength { get; set; }
-        /// <summary>
-        /// 附加信息长度扩展
-        /// 4个字节
-        /// 注意：只适用于已知的协议才行
-        /// </summary>
-        public virtual uint AttachInfoLengthExtend { get; set; }
     }
 }
