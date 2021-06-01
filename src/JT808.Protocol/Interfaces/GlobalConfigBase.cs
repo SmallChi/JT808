@@ -1,9 +1,11 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Internal;
+using JT808.Protocol.MessageBody;
 using System;
 using System.Reflection;
 using System.Text;
+using static JT808.Protocol.MessageBody.JT808_0x8105;
 
 namespace JT808.Protocol.Interfaces
 {
@@ -34,6 +36,7 @@ namespace JT808.Protocol.Interfaces
             JT808_0x8500_2019_Factory = new JT808_0x8500_2019_Factory();
             JT808_CarDVR_Up_Factory = new JT808_CarDVR_Up_Factory();
             JT808_CarDVR_Down_Factory = new JT808_CarDVR_Down_Factory();
+            JT808_0x8105_Cusotm_Factory = new JT808_0x8105_Cusotm_Factory();
             TerminalPhoneNoLength = 12;
             Trim = true;
         }
@@ -120,6 +123,11 @@ namespace JT808.Protocol.Interfaces
         /// </summary>
         public bool SkipCarDVRCRCCode { get; set; }
         /// <summary>
+        /// 终端控制自定义参数命令工厂
+        /// </summary>
+        public virtual IJT808_0x8105_Cusotm_Factory JT808_0x8105_Cusotm_Factory { get; set; }
+
+        /// <summary>
         /// 外部扩展程序集注册
         /// </summary>
         /// <param name="externalAssemblies"></param>
@@ -141,6 +149,7 @@ namespace JT808.Protocol.Interfaces
                     JT808_0x8500_2019_Factory.Register(easb);
                     JT808_CarDVR_Up_Factory.Register(easb);
                     JT808_CarDVR_Down_Factory.Register(easb);
+                    JT808_0x8105_Cusotm_Factory.Register(easb);
                 }
             }
             return this;

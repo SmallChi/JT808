@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using static JT808.Protocol.MessageBody.JT808_0x8105;
 
 namespace JT808.Protocol
 {
@@ -66,6 +67,10 @@ namespace JT808.Protocol
         /// 控制类型工厂
         /// </summary>
         IJT808_0x8500_2019_Factory JT808_0x8500_2019_Factory { get; set; }
+        /// <summary>
+        /// 终端控制自定义参数命令工厂
+        /// </summary>
+        IJT808_0x8105_Cusotm_Factory JT808_0x8105_Cusotm_Factory { get; set; }
         /// <summary>
         /// 记录仪上行命令字工厂
         /// </summary>
