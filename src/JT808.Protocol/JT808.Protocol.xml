@@ -3767,6 +3767,32 @@
             <param name="fieldName"></param>
             <param name="fixedLength"></param>
         </member>
+        <member name="T:JT808.Protocol.Extensions.JT808_0x8105_CommandParameterExtensions">
+            <summary>
+            终端控制 命令参数扩展
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808_0x8105_CommandParameterExtensions.CreateCommandParameter(System.Int32@)">
+            <summary>
+            创建标准命令参数
+            </summary>
+            <param name="order"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808_0x8105_CommandParameterExtensions.GetCommandParameter``1(System.Collections.Generic.List{JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameter})">
+            <summary>
+            获取-连接控制
+            </summary>
+            <param name="CommandParameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808_0x8105_CommandParameterExtensions.ToValueString(JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameter)">
+            <summary>
+            获取-连接控制
+            </summary>
+            <param name="commandParameter"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.JT808ConfigExtensions">
             <summary>
             JT808配置扩展
@@ -15326,9 +15352,14 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameter.ToDescription">
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameterValue`1">
             <summary>
-            将命令值转为描述
+            命令参数值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameterValue`1.Value">
+            <summary>
+            对应参数值
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.ICusotmCommandParameter">
@@ -15353,7 +15384,7 @@
             连接控制
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.ConnectionControlCommandParameter.ConnectionControl">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.ConnectionControlCommandParameter.Value">
             <summary>
             连接控制
             0：切换到指定监管平台服务器，连接到该服务器后即进入应急状态，此状态下仅有下发控制指令的监管平台可发送包括短信在内的控制指令；
@@ -15372,12 +15403,6 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.ConnectionControlCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.DialPointNameCommandParameter">
             <summary>
             拨号点名称
@@ -15393,7 +15418,7 @@
             拨号点名称
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.DialPointNameCommandParameter.DialPointName">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.DialPointNameCommandParameter.Value">
             <summary>
             拨号点名称
             一般为服务器 APN，无线通信拨号访问点，若网络制式为 CDMA，则该值为 PPP 连接拨号号码
@@ -15411,12 +15436,6 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.DialPointNameCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.DialUserNameCommandParameter">
             <summary>
             拨号用户名
@@ -15433,7 +15452,7 @@
             拨号用户名
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.DialUserNameCommandParameter.DialUserName">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.DialUserNameCommandParameter.Value">
             <summary>
             拨号用户名
             服务器无线通信拨号用户名
@@ -15451,12 +15470,6 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.DialUserNameCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.DialPwdCommandParameter">
             <summary>
             拨号密码
@@ -15473,7 +15486,7 @@
             拨号密码
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.DialPwdCommandParameter.DialPwd">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.DialPwdCommandParameter.Value">
             <summary>
             拨号密码
             服务器无线通信拨号密码
@@ -15491,12 +15504,6 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.DialPwdCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.ServerUrlCommandParameter">
             <summary>
             服务器地址;IP 或域名
@@ -15512,7 +15519,7 @@
             服务器地址
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.ServerUrlCommandParameter.ServerUrl">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.ServerUrlCommandParameter.Value">
             <summary>
             服务器地址 IP或域名
             </summary>
@@ -15529,12 +15536,6 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.ServerUrlCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.TcpPortCommandParameter">
             <summary>
             Tcp端口
@@ -15550,7 +15551,7 @@
             连接控制
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.TcpPortCommandParameter.TcpPort">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.TcpPortCommandParameter.Value">
             <summary>
             Tcp端口
             </summary>
@@ -15567,12 +15568,6 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.TcpPortCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.UdpPortCommandParameter">
             <summary>
             Udp端口
@@ -15588,7 +15583,7 @@
             连接控制
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.UdpPortCommandParameter.UdpPort">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.UdpPortCommandParameter.Value">
             <summary>
             Udp端口
             </summary>
@@ -15605,12 +15600,6 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.UdpPortCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.MakerIdCommandParameter">
             <summary>
             制造商ID
@@ -15626,7 +15615,7 @@
             服务器地址
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.MakerIdCommandParameter.MakerId">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.MakerIdCommandParameter.Value">
             <summary>
             制造商ID
             </summary>
@@ -15642,12 +15631,6 @@
             
             </summary>
             <param name="bytes"></param>
-        </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.MakerIdCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.MonitorPlatformAuthCodeCommandParameter">
             <summary>
@@ -15665,7 +15648,7 @@
             监管平台鉴权码
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.MonitorPlatformAuthCodeCommandParameter.MonitorPlatformAuthCode">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.MonitorPlatformAuthCodeCommandParameter.Value">
             <summary>
             监管平台鉴权码
             </summary>
@@ -15681,12 +15664,6 @@
             
             </summary>
             <param name="bytes"></param>
-        </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.MonitorPlatformAuthCodeCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.HardwareVersionCommandParameter">
             <summary>
@@ -15704,7 +15681,7 @@
             硬件版本
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.HardwareVersionCommandParameter.HardwareVersion">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.HardwareVersionCommandParameter.Value">
             <summary>
             硬件版本
             终端的硬件版本号，由制造商自定
@@ -15722,12 +15699,6 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.HardwareVersionCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.FirmwareVersionCommandParameter">
             <summary>
             固件版本
@@ -15744,7 +15715,7 @@
             固件版本
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.FirmwareVersionCommandParameter.FirmwareVersion">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.FirmwareVersionCommandParameter.Value">
             <summary>
             固件版本
             终端的硬件版本号，由制造商自定
@@ -15762,15 +15733,9 @@
             </summary>
             <param name="bytes"></param>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.FirmwareVersionCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.UrlCommandParameter">
             <summary>
-            URL地址完整URL地址
+            URL的完整地址
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.UrlCommandParameter.Order">
@@ -15780,12 +15745,12 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.UrlCommandParameter.CommandName">
             <summary>
-            URL地址完整URL地址
+            URL的完整地址
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.UrlCommandParameter.Url">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.UrlCommandParameter.Value">
             <summary>
-            URL地址完整URL地址
+            URL的完整地址
             </summary>
         </member>
         <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.UrlCommandParameter.ToBytes">
@@ -15799,12 +15764,6 @@
             
             </summary>
             <param name="bytes"></param>
-        </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.UrlCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.ConnectTimeLimitCommandParameter">
             <summary>
@@ -15821,7 +15780,7 @@
             连接控制
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.ConnectTimeLimitCommandParameter.ConnectTimeLimit">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x8105.ConnectTimeLimitCommandParameter.Value">
             <summary>
             连接到指定服务器时限
             单位：分（min），值非 0 后的有效期截止前，终端应连回原地址。
@@ -15839,12 +15798,6 @@
             
             </summary>
             <param name="bytes"></param>
-        </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.ConnectTimeLimitCommandParameter.ToDescription">
-            <summary>
-            
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8106">
             <summary>

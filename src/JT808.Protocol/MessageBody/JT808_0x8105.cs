@@ -72,17 +72,18 @@ namespace JT808.Protocol.MessageBody
                     while (true)
                     {
                         var index = commandValueBuffer.IndexOf(CommandParameterSeparatorValue);
-                        if (index <= 0) break;
-                        if (index == 1)
+                        if (commandValueBuffer.Length <= 0) break;
+                        if (index == 0)
                         {
                             commandParameters.Add(null);
+                            commandValueBuffer = commandValueBuffer.Slice(index+1);
                         }
                         else
                         {
                             var value = commandValueBuffer.Slice(0, index);
                             commandParameters.Add(value.ToArray());
+                            commandValueBuffer = commandValueBuffer.Slice(index+1);
                         }
-                        commandValueBuffer = commandValueBuffer.Slice(index);
                     }
                     for (int i = 0; i < commandParameters.Count; i++)
                     {
@@ -99,13 +100,13 @@ namespace JT808.Protocol.MessageBody
                             }
                             else
                             {
-                                UnknownCommandParameters.Add(i, cmd);
+                                jT808_0x8105.UnknownCommandParameters.Add(i, cmd);
                             }
                         }
                         else
                         {
                             //读取标准的命令参数
-                            ICommandParameter commandParameter = CommandParameterFactory(i);
+                            ICommandParameter commandParameter = JT808_0x8105_CommandParameterExtensions.CreateCommandParameter(i);
                             if (commandParameter != null)
                             {
                                 commandParameter.ToValue(cmd);
@@ -190,17 +191,18 @@ namespace JT808.Protocol.MessageBody
                     while (true)
                     {
                         var index = commandValueBuffer.IndexOf(CommandParameterSeparatorValue);
-                        if (index <= 0) break;
-                        if (index == 1)
+                        if (commandValueBuffer.Length <= 0) break;
+                        if (index == 0)
                         {
                             commandParameters.Add(null);
+                            commandValueBuffer = commandValueBuffer.Slice(index + 1);
                         }
                         else
                         {
                             var value = commandValueBuffer.Slice(0, index);
                             commandParameters.Add(value.ToArray());
+                            commandValueBuffer = commandValueBuffer.Slice(index + 1);
                         }
-                        commandValueBuffer = commandValueBuffer.Slice(index);
                     }
                     writer.WriteStartObject("命令参数对象");
                     for (int i = 0; i < commandParameters.Count; i++)
@@ -214,7 +216,7 @@ namespace JT808.Protocol.MessageBody
                             {
                                 var commandParameter = (ICommandParameter)Activator.CreateInstance(type);
                                 commandParameter.ToValue(cmd);
-                                writer.WriteString($"[{cmd.ToHexString()}]{commandParameter.CommandName}", commandParameter.ToDescription());
+                                writer.WriteString($"[{cmd.ToHexString()}]{commandParameter.CommandName}", commandParameter.ToValueString());
                             }
                             else
                             {
@@ -224,194 +226,17 @@ namespace JT808.Protocol.MessageBody
                         else
                         {
                             //读取标准的命令参数
-                            ICommandParameter commandParameter = CommandParameterFactory(i);
+                            ICommandParameter commandParameter = JT808_0x8105_CommandParameterExtensions.CreateCommandParameter(i);
                             if (commandParameter != null)
                             {
                                 commandParameter.ToValue(cmd);
-                                writer.WriteString($"[{cmd.ToHexString()}]{commandParameter.CommandName}", commandParameter.ToDescription());
+                                writer.WriteString($"[{cmd.ToHexString()}]{commandParameter.CommandName}", commandParameter.ToValueString());
                             }
                         }
                     }
                     writer.WriteEndObject();
                 }
             }
-
-
-            //if (value.CommandWord == 1 || value.CommandWord == 2)
-            //{
-            //    value.CommandValue = new CommandParams();
-            //    var commandValueBuffer = reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength()).ToArray();
-            //    string commandValue=reader.ReadRemainStringContent();
-            //    writer.WriteString($"[{ commandValueBuffer.ToHexString()}]命令参数", commandValue);
-            //    writer.WriteStartObject("命令参数对象");
-            //    var values = commandValue.Split(';');
-            //    if (!string.IsNullOrEmpty(values[0]))
-            //    {
-            //        var connectionControl = byte.Parse(values[0]);
-            //        writer.WriteNumber("连接控制", connectionControl);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("连接控制");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[1]))
-            //    {
-            //        var dialPointName = values[1];
-            //        writer.WriteString("拨号点名称", dialPointName);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("拨号点名称");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[2]))
-            //    {
-            //        var dialUserName = values[2];
-            //        writer.WriteString("拨号用户名", dialUserName);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("拨号用户名");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[3]))
-            //    {
-            //        var dialPwd = values[3];
-            //        writer.WriteString("拨号密码", dialPwd);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("拨号密码");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[4]))
-            //    {
-            //        var serverUrl = values[4];
-            //        writer.WriteString("服务器地址", serverUrl);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("服务器地址");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[5]))
-            //    {
-            //        var tcpPort = ushort.Parse(values[5]);
-            //        writer.WriteNumber("TCP端口", tcpPort);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("TCP端口");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[6]))
-            //    {
-            //        var udpPort = ushort.Parse(values[6]);
-            //        writer.WriteNumber("UDP端口", udpPort);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("UDP端口");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[7]))
-            //    {
-            //        var manufacturerCode = long.Parse(values[7]);
-            //        writer.WriteNumber("制造商ID", manufacturerCode);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("制造商ID");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[8]))
-            //    {
-            //        var monitoringPlatformAuthenticationCode = values[8];
-            //        writer.WriteString("监管平台鉴权码", monitoringPlatformAuthenticationCode);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("监管平台鉴权码");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[9]))
-            //    {
-            //        var hardwareVersion = values[9];
-            //        writer.WriteString("硬件版本号", hardwareVersion);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("硬件版本号");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[10]))
-            //    {
-            //       var firmwareVersion = values[10];
-            //       writer.WriteString("固件版本号", firmwareVersion);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("固件版本号");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[11]))
-            //    {
-            //        var url = values[11];
-            //        writer.WriteString("URL地址", url);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("URL地址");
-            //    }
-            //    if (!string.IsNullOrEmpty(values[12]))
-            //    {
-            //        var connectTimeLimit = ushort.Parse(values[12]);
-            //        writer.WriteNumber("连接到指定服务器时限", connectTimeLimit);
-            //    }
-            //    else
-            //    {
-            //        writer.WriteNull("连接到指定服务器时限");
-            //    }
-            //    writer.WriteEndObject();
-            //}
-        }
-
-        private ICommandParameter CommandParameterFactory(in int order)
-        {
-            ICommandParameter commandParameter=default;
-            switch (order)
-            {
-                case 0:
-                    commandParameter = new ConnectionControlCommandParameter();
-                    break;
-                case 1:
-                    commandParameter = new DialPointNameCommandParameter();
-                    break;
-                case 2:
-                    commandParameter = new DialUserNameCommandParameter();
-                    break;
-                case 3:
-                    commandParameter = new DialPwdCommandParameter();
-                    break;
-                case 4:
-                    commandParameter = new ServerUrlCommandParameter();
-                    break;
-                case 5:
-                    commandParameter = new TcpPortCommandParameter();
-                    break;
-                case 6:
-                    commandParameter = new UdpPortCommandParameter();
-                    break;
-                case 7:
-                    commandParameter = new MakerIdCommandParameter();
-                    break;
-                case 8:
-                    commandParameter = new MonitorPlatformAuthCodeCommandParameter();
-                    break;
-                case 9:
-                    commandParameter = new HardwareVersionCommandParameter();
-                    break;
-                case 10:
-                    commandParameter = new FirmwareVersionCommandParameter();
-                    break;
-                case 11:
-                    commandParameter = new UrlCommandParameter();
-                    break;
-                case 12:
-                    commandParameter = new ConnectTimeLimitCommandParameter();
-                    break;
-            }
-            return commandParameter;
         }
 
         #region 命令参数
@@ -438,10 +263,16 @@ namespace JT808.Protocol.MessageBody
             /// </summary>
             /// <param name="bytes"></param>
             void ToValue(byte[] bytes);
+        }
+        /// <summary>
+        /// 命令参数值
+        /// </summary>
+        public interface ICommandParameterValue<TValue>
+        {
             /// <summary>
-            /// 将命令值转为描述
+            /// 对应参数值
             /// </summary>
-            string ToDescription();
+            TValue Value { get; set; }
         }
         /// <summary>
         /// 自定义命令参数接口
@@ -455,7 +286,7 @@ namespace JT808.Protocol.MessageBody
         /// 0：切换到指定监管平台服务器，连接到该服务器后即进入应急状态，此状态下仅有下发控制指令的监管平台可发送包括短信在内的控制指令；
         /// 1：切换回原缺省监控平台服务器，并恢复正常状态。
         /// </summary>
-        public class ConnectionControlCommandParameter : ICommandParameter
+        public class ConnectionControlCommandParameter : ICommandParameter, ICommandParameterValue<byte?>
         {
             /// <summary>
             /// 排序 0
@@ -470,15 +301,15 @@ namespace JT808.Protocol.MessageBody
             /// 0：切换到指定监管平台服务器，连接到该服务器后即进入应急状态，此状态下仅有下发控制指令的监管平台可发送包括短信在内的控制指令；
             /// 1：切换回原缺省监控平台服务器，并恢复正常状态。
             /// </summary>
-            public byte? ConnectionControl { get; set; }
+            public byte? Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (ConnectionControl.HasValue) return default;
-                return new byte[1] { ConnectionControl.Value };
+                if (!Value.HasValue) return default;
+                return new byte[1] { Value.Value };
             }
             /// <summary>
             /// 
@@ -488,22 +319,14 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    ConnectionControl = bytes[0];
+                    Value = bytes[0];
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{(ConnectionControl.HasValue ? "" : ConnectionControl.Value)}";
             }
         }
         /// <summary>
         /// 拨号点名称
         /// </summary>
-        public class DialPointNameCommandParameter : ICommandParameter
+        public class DialPointNameCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 1
@@ -517,15 +340,15 @@ namespace JT808.Protocol.MessageBody
             /// 拨号点名称
             /// 一般为服务器 APN，无线通信拨号访问点，若网络制式为 CDMA，则该值为 PPP 连接拨号号码
             /// </summary>
-            public string DialPointName { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(DialPointName)) return default;
-                return JT808Constants.Encoding.GetBytes(DialPointName);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value);
             }
             /// <summary>
             /// 
@@ -535,23 +358,15 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    DialPointName = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{DialPointName ?? ""}";
             }
         }
         /// <summary>
         /// 拨号用户名
         /// 服务器无线通信拨号用户名
         /// </summary>
-        public class DialUserNameCommandParameter : ICommandParameter
+        public class DialUserNameCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 2
@@ -565,15 +380,15 @@ namespace JT808.Protocol.MessageBody
             /// 拨号用户名
             /// 服务器无线通信拨号用户名
             /// </summary>
-            public string DialUserName { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(DialUserName)) return default;
-                return JT808Constants.Encoding.GetBytes(DialUserName);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value);
             }
             /// <summary>
             /// 
@@ -583,23 +398,15 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    DialUserName = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{DialUserName ?? ""}";
             }
         }
         /// <summary>
         /// 拨号密码
         /// 服务器无线通信拨号密码
         /// </summary>
-        public class DialPwdCommandParameter : ICommandParameter
+        public class DialPwdCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 3
@@ -613,15 +420,15 @@ namespace JT808.Protocol.MessageBody
             /// 拨号密码
             /// 服务器无线通信拨号密码
             /// </summary>
-            public string DialPwd { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(DialPwd)) return default;
-                return JT808Constants.Encoding.GetBytes(DialPwd);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value);
             }
             /// <summary>
             /// 
@@ -631,22 +438,14 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    DialPwd = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{DialPwd ?? ""}";
             }
         }
         /// <summary>
         /// 服务器地址;IP 或域名
         /// </summary>
-        public class ServerUrlCommandParameter : ICommandParameter
+        public class ServerUrlCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 4
@@ -659,15 +458,15 @@ namespace JT808.Protocol.MessageBody
             /// <summary>
             /// 服务器地址 IP或域名
             /// </summary>
-            public string ServerUrl { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(ServerUrl)) return default;
-                return JT808Constants.Encoding.GetBytes(ServerUrl);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value);
             }
             /// <summary>
             /// 
@@ -677,22 +476,14 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    ServerUrl = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{ServerUrl ?? ""}";
             }
         }
         /// <summary>
         /// Tcp端口
         /// </summary>
-        public class TcpPortCommandParameter : ICommandParameter
+        public class TcpPortCommandParameter : ICommandParameter, ICommandParameterValue<ushort?>
         {
             /// <summary>
             /// 排序 5
@@ -705,16 +496,16 @@ namespace JT808.Protocol.MessageBody
             /// <summary>
             /// Tcp端口
             /// </summary>
-            public ushort? TcpPort { get; set; }
+            public ushort? Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (TcpPort.HasValue) return default;
+                if (!Value.HasValue) return default;
                 var value = new byte[2];
-                BinaryPrimitives.WriteUInt16BigEndian(value, TcpPort.Value);
+                BinaryPrimitives.WriteUInt16BigEndian(value, Value.Value);
                 return value;
             }
             /// <summary>
@@ -725,22 +516,14 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    TcpPort = BinaryPrimitives.ReadUInt16BigEndian(bytes);
+                    Value = BinaryPrimitives.ReadUInt16BigEndian(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{(TcpPort.HasValue ? "" : TcpPort.Value)}";
             }
         }
         /// <summary>
         /// Udp端口
         /// </summary>
-        public class UdpPortCommandParameter : ICommandParameter
+        public class UdpPortCommandParameter : ICommandParameter, ICommandParameterValue<ushort?>
         {
             /// <summary>
             /// 排序 6
@@ -753,16 +536,16 @@ namespace JT808.Protocol.MessageBody
             /// <summary>
             /// Udp端口
             /// </summary>
-            public ushort? UdpPort { get; set; }
+            public ushort? Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (UdpPort.HasValue) return default;
+                if (!Value.HasValue) return default;
                 var value = new byte[2];
-                BinaryPrimitives.WriteUInt16BigEndian(value, UdpPort.Value);
+                BinaryPrimitives.WriteUInt16BigEndian(value, Value.Value);
                 return value;
             }
             /// <summary>
@@ -773,22 +556,14 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    UdpPort = BinaryPrimitives.ReadUInt16BigEndian(bytes);
+                    Value = BinaryPrimitives.ReadUInt16BigEndian(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{(UdpPort.HasValue ? "" : UdpPort.Value)}";
             }
         }
         /// <summary>
         /// 制造商ID
         /// </summary>
-        public class MakerIdCommandParameter : ICommandParameter
+        public class MakerIdCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 7
@@ -801,15 +576,15 @@ namespace JT808.Protocol.MessageBody
             /// <summary>
             /// 制造商ID
             /// </summary>
-            public string MakerId { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(MakerId)) return default;
-                return JT808Constants.Encoding.GetBytes(MakerId);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value.PadRight(5, '\0'));
             }
             /// <summary>
             /// 
@@ -819,23 +594,15 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    MakerId = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes).Trim('\0');
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{MakerId ?? ""}";
             }
         }
         /// <summary>
         /// 监管平台鉴权码
         /// 监管平台下发的鉴权码，仅用于终端连接到监管平台之后的鉴权，终端连接回原监控平台还用原鉴权码
         /// </summary>
-        public class MonitorPlatformAuthCodeCommandParameter : ICommandParameter
+        public class MonitorPlatformAuthCodeCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 8
@@ -848,15 +615,15 @@ namespace JT808.Protocol.MessageBody
             /// <summary>
             /// 监管平台鉴权码
             /// </summary>
-            public string MonitorPlatformAuthCode { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(MonitorPlatformAuthCode)) return default;
-                return JT808Constants.Encoding.GetBytes(MonitorPlatformAuthCode);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value);
             }
             /// <summary>
             /// 
@@ -866,23 +633,15 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    MonitorPlatformAuthCode = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{MonitorPlatformAuthCode ?? ""}";
             }
         }
         /// <summary>
         /// 硬件版本
         /// 终端的硬件版本号，由制造商自定
         /// </summary>
-        public class HardwareVersionCommandParameter : ICommandParameter
+        public class HardwareVersionCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 9
@@ -896,15 +655,15 @@ namespace JT808.Protocol.MessageBody
             /// 硬件版本
             /// 终端的硬件版本号，由制造商自定
             /// </summary>
-            public string HardwareVersion { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(HardwareVersion)) return default;
-                return JT808Constants.Encoding.GetBytes(HardwareVersion);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value);
             }
             /// <summary>
             /// 
@@ -914,23 +673,15 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    HardwareVersion = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{HardwareVersion ?? ""}";
             }
         }
         /// <summary>
         /// 固件版本
         /// 终端的固件版本号，由制造商自定
         /// </summary>
-        public class FirmwareVersionCommandParameter : ICommandParameter
+        public class FirmwareVersionCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 10
@@ -944,15 +695,15 @@ namespace JT808.Protocol.MessageBody
             /// 固件版本
             /// 终端的硬件版本号，由制造商自定
             /// </summary>
-            public string FirmwareVersion { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(FirmwareVersion)) return default;
-                return JT808Constants.Encoding.GetBytes(FirmwareVersion);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value);
             }
             /// <summary>
             /// 
@@ -962,43 +713,35 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    FirmwareVersion = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{FirmwareVersion ?? ""}";
             }
         }
         /// <summary>
-        /// URL地址完整URL地址
+        /// URL的完整地址
         /// </summary>
-        public class UrlCommandParameter : ICommandParameter
+        public class UrlCommandParameter : ICommandParameter, ICommandParameterValue<string>
         {
             /// <summary>
             /// 排序 11
             /// </summary>
             public int Order { get; } = 11;
             /// <summary>
-            /// URL地址完整URL地址
+            /// URL的完整地址
             /// </summary>
-            public string CommandName { get; } = "URL地址完整URL地址";
+            public string CommandName { get; } = "URL的完整地址";
             /// <summary>
-            /// URL地址完整URL地址
+            /// URL的完整地址
             /// </summary>
-            public string Url { get; set; }
+            public string Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (string.IsNullOrEmpty(Url)) return default;
-                return JT808Constants.Encoding.GetBytes(Url);
+                if (string.IsNullOrEmpty(Value)) return default;
+                return JT808Constants.Encoding.GetBytes(Value);
             }
             /// <summary>
             /// 
@@ -1008,22 +751,14 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    Url = JT808Constants.Encoding.GetString(bytes);
+                    Value = JT808Constants.Encoding.GetString(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{Url ?? ""}";
             }
         }
         /// <summary>
         /// 连接到指定服务器时限
         /// </summary>
-        public class ConnectTimeLimitCommandParameter : ICommandParameter
+        public class ConnectTimeLimitCommandParameter : ICommandParameter, ICommandParameterValue<ushort?>
         {
             /// <summary>
             /// 排序 12
@@ -1038,16 +773,16 @@ namespace JT808.Protocol.MessageBody
             /// 单位：分（min），值非 0 后的有效期截止前，终端应连回原地址。
             /// 若值为 0，则表示一直连接指 定服务器
             /// </summary>
-            public ushort? ConnectTimeLimit { get; set; }
+            public ushort? Value { get; set; }
             /// <summary>
             /// 
             /// </summary>
             /// <returns></returns>
             public byte[] ToBytes()
             {
-                if (ConnectTimeLimit.HasValue) return default;
+                if (!Value.HasValue) return default;
                 var value = new byte[2];
-                BinaryPrimitives.WriteUInt16BigEndian(value, ConnectTimeLimit.Value);
+                BinaryPrimitives.WriteUInt16BigEndian(value, Value.Value);
                 return value;
             }
             /// <summary>
@@ -1058,16 +793,8 @@ namespace JT808.Protocol.MessageBody
             {
                 if (bytes != null && bytes.Length > 0)
                 {
-                    ConnectTimeLimit = BinaryPrimitives.ReadUInt16BigEndian(bytes);
+                    Value = BinaryPrimitives.ReadUInt16BigEndian(bytes);
                 }
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public string ToDescription()
-            {
-                return $"{CommandName}:{(ConnectTimeLimit.HasValue ? "" : ConnectTimeLimit.Value)}";
             }
         }
         #endregion
