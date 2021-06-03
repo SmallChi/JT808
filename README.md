@@ -313,6 +313,13 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 >注意：只适用于已知的设备厂家协议才行
 
+### 举个栗子13
+
+场景:
+由于粤标的设备把2019版本的0x8105终端控制消息命令参数做了扩展，所以需要兼容。
+
+[可以参考Simples的Demo13](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo13.cs)
+
 ## NuGet安装
 
 | Package Name| Version| Preview  Version |Downloads|Remark|

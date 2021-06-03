@@ -85,9 +85,9 @@ namespace JT808.Protocol.Extensions
         {
             var name = nameof(ICommandParameterValue<object>.Value);
             var property = commandParameter.GetType().GetProperty(name);
-            if (property == null) return default;
+            if (property == null) return "空值";
             var value= property.GetValue(commandParameter);
-            if (value == null) return default;
+            if (value == null) return "空值";
             return value.ToString();
         }
     }

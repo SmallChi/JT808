@@ -15340,13 +15340,18 @@
             命令名称
             </summary>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameter.ToBytes">
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameterConvert">
+            <summary>
+            命令参数值的转换
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameterConvert.ToBytes">
             <summary>
             转为byte数组
             </summary>
             <returns></returns>
         </member>
-        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameter.ToValue(System.Byte[])">
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x8105.ICommandParameterConvert.ToValue(System.Byte[])">
             <summary>
             将byte数组转为命令值
             </summary>

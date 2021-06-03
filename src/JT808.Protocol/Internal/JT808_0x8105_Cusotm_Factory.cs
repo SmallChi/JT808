@@ -47,11 +47,11 @@ namespace JT808.Protocol.Internal
             var order = (int)type.GetProperty(nameof(ICusotmCommandParameter.Order)).GetValue(instance);
             if(order < CommandParameterCount)
             {
-                throw new ArgumentException($"{type.FullName} {order} We're starting at 13 and we're incremying by 1.");
+                throw new ArgumentException($"{type.FullName} Order is {order}. We're starting at 13 and we're incremying by 1.");
             }
             if (Map.ContainsKey(order))
             {
-                throw new ArgumentException($"{type.FullName} {order} An element with the same Order already exists.");
+                throw new ArgumentException($"{type.FullName} Order is {order}. An element with the same Order already exists.");
             }
             else
             {

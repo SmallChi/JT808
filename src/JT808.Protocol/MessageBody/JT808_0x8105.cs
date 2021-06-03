@@ -129,12 +129,12 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte(value.CommandWord);
             if (value.CommandWord == 1 || value.CommandWord == 2)
             {
-                if (CommandParameters != null && CommandParameters.Count > 0)
+                if (value.CommandParameters != null && value.CommandParameters.Count > 0)
                 {
                     //由于标准的命令参数是有顺序的，所以先判断有几个标准的命令参数
                     for (int i = 0; i < CommandParameterCount; i++)
                     {
-                        var cmd = CommandParameters.FirstOrDefault(f => f.Order == i);
+                        var cmd = value.CommandParameters.FirstOrDefault(f => f.Order == i);
                         if (cmd != null)
                         {
                             writer.WriteArray(cmd.ToBytes());
@@ -146,10 +146,17 @@ namespace JT808.Protocol.MessageBody
                         }
                     }
                 }
-                if (CustomCommandParameters != null && CustomCommandParameters.Count > 0)
+                else
+                {
+                    for (int i = 0; i < CommandParameterCount; i++)
+                    {
+                        writer.WriteChar(CommandParameterSeparator);
+                    }
+                }
+                if (value.CustomCommandParameters != null && value.CustomCommandParameters.Count > 0)
                 {
                     //自定义命令参数扩展
-                    foreach (var cmd in CustomCommandParameters.OrderBy(o => o.Order))
+                    foreach (var cmd in value.CustomCommandParameters.OrderBy(o => o.Order))
                     {
                         var bytes = cmd.ToBytes();
                         if (bytes != null && bytes.Length > 0)
@@ -230,7 +237,7 @@ namespace JT808.Protocol.MessageBody
                             if (commandParameter != null)
                             {
                                 commandParameter.ToValue(cmd);
-                                writer.WriteString($"[{cmd.ToHexString()}]{commandParameter.CommandName}", commandParameter.ToValueString());
+                                writer.WriteString($"[{cmd?.ToHexString()}]{commandParameter.CommandName}", commandParameter.ToValueString());
                             }
                         }
                     }
@@ -243,7 +250,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 命令参数接口
         /// </summary>
-        public interface ICommandParameter
+        public interface ICommandParameter:ICommandParameterConvert
         {
             /// <summary>
             /// 排序
@@ -253,6 +260,13 @@ namespace JT808.Protocol.MessageBody
             /// 命令名称
             /// </summary>
             string CommandName { get; }
+
+        }
+        /// <summary>
+        /// 命令参数值的转换
+        /// </summary>
+        public interface ICommandParameterConvert
+        {
             /// <summary>
             /// 转为byte数组
             /// </summary>

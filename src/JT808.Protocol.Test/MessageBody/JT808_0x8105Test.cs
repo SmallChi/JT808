@@ -9,6 +9,7 @@ namespace JT808.Protocol.Test.MessageBody
     public class JT808_0x8105Test
     {
         JT808Serializer JT808Serializer = new JT808Serializer();
+
         [Fact]
         public void Test1()
         {
