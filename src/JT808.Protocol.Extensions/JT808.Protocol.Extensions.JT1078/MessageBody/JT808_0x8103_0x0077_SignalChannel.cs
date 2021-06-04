@@ -8,6 +8,9 @@ using System.Text.Json;
 
 namespace JT808.Protocol.Extensions.JT1078.MessageBody
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class JT808_0x8103_0x0077_SignalChannel: IJT808MessagePackFormatter<JT808_0x8103_0x0077_SignalChannel>, IJT808Analyze
     {
         /// <summary>
@@ -62,7 +65,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         ///OSD字幕叠加设置
         /// </summary>
         public ushort OSD { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x0077_SignalChannel value = new JT808_0x8103_0x0077_SignalChannel();
@@ -219,7 +227,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 return obdDisplay.Length > 0 ? obdDisplay.Substring(1) : "";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x0077_SignalChannel Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0077_SignalChannel jT808_0X8103_0X0077_SignalChannel = new JT808_0x8103_0x0077_SignalChannel();
@@ -237,7 +250,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0X8103_0X0077_SignalChannel.OSD = reader.ReadUInt16();
             return jT808_0X8103_0X0077_SignalChannel;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0077_SignalChannel value, IJT808Config config)
         {
             writer.WriteByte(value.LogicChannelNo);

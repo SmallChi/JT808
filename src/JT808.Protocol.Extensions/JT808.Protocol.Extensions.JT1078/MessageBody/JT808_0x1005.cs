@@ -13,7 +13,13 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// </summary>
     public class JT808_0x1005 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x1005>, IJT808Analyze
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override string Description => "终端上传乘客流量";
+        /// <summary>
+        /// 
+        /// </summary>
         public override ushort MsgId => 0x1005;
         /// <summary>
         /// 起始时间
@@ -31,7 +37,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 下车人数
         /// </summary>
         public ushort GettingOffNumber { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x1005 value = new JT808_0x1005();
@@ -44,7 +55,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             value.GettingOffNumber = reader.ReadUInt16();
             writer.WriteNumber($"[{value.GettingOffNumber.ReadNumber()}]从开始时间到结束时间的下车人数", value.GettingOffNumber);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x1005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1005 jT808_0x1005 = new JT808_0x1005();
@@ -54,7 +70,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x1005.GettingOffNumber = reader.ReadUInt16();
             return jT808_0x1005;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1005 value, IJT808Config config)
         {
             writer.WriteDateTime6(value.BeginTime);

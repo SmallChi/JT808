@@ -13,6 +13,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// </summary>
     public class JT808_0x8103_0x007B : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x007B>, IJT808Analyze
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override uint ParamId { get; set; } = 0x007B;
         /// <summary>
         /// 数据 长度
@@ -26,7 +29,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 疲劳程度阈值
         /// </summary>
         public byte FatigueThreshold  { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x007B value = new JT808_0x8103_0x007B();
@@ -39,7 +47,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             value.FatigueThreshold = reader.ReadByte();
             writer.WriteNumber($"[{value.FatigueThreshold.ReadNumber()}]疲劳程度阈值", value.FatigueThreshold);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x007B Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x007B jT808_0x8103_0x007B = new JT808_0x8103_0x007B();
@@ -49,7 +62,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x8103_0x007B.FatigueThreshold = reader.ReadByte();
             return jT808_0x8103_0x007B;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x007B value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);

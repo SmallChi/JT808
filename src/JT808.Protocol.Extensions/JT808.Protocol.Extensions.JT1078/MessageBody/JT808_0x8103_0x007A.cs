@@ -13,6 +13,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// </summary>
     public class JT808_0x8103_0x007A : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x007A>, IJT808Analyze
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override uint ParamId { get; set; } = 0x007A;
         /// <summary>
         /// 数据 长度
@@ -22,7 +25,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 视频相关屏蔽报警字
         /// </summary>
         public uint AlarmShielding { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x007A value = new JT808_0x8103_0x007A();
@@ -52,7 +60,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 return "未知";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x007A Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x007A jT808_0x8103_0x007A = new JT808_0x8103_0x007A();
@@ -61,7 +74,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x8103_0x007A.AlarmShielding = reader.ReadUInt32();
             return jT808_0x8103_0x007A;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x007A value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);

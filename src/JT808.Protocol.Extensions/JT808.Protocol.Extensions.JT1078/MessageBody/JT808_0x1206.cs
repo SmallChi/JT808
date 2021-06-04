@@ -13,7 +13,13 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// </summary>
     public class JT808_0x1206 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x1206>, IJT808Analyze
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override string Description => "文件上传完成通知";
+        /// <summary>
+        /// 
+        /// </summary>
         public override ushort MsgId => 0x1206;
         /// <summary>
         /// 流水号
@@ -23,7 +29,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 结果
         /// </summary>
         public byte Result{ get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x1206 value = new JT808_0x1206();
@@ -43,7 +54,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x1206 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1206 jT808_0x1206 = new JT808_0x1206();
@@ -51,7 +67,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x1206.Result = reader.ReadByte();
             return jT808_0x1206;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1206 value, IJT808Config config)
         {
             writer.WriteUInt16(value.MsgNum);

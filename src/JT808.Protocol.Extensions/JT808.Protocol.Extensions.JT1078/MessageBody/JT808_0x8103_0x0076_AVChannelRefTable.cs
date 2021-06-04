@@ -27,7 +27,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 是否链接云台
         /// </summary>
         public byte IsConnectCloudPlat { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x0076_AVChannelRefTable value = new JT808_0x8103_0x0076_AVChannelRefTable();
@@ -102,7 +107,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x0076_AVChannelRefTable Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0076_AVChannelRefTable jT808_0X8103_0X0076_AVChannelRefTable = new JT808_0x8103_0x0076_AVChannelRefTable();
@@ -112,7 +122,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0X8103_0X0076_AVChannelRefTable.IsConnectCloudPlat = reader.ReadByte();
             return jT808_0X8103_0X0076_AVChannelRefTable;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0076_AVChannelRefTable value, IJT808Config config)
         {
             writer.WriteByte(value.PhysicalChannelNo);

@@ -25,10 +25,10 @@ jobs:
       run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JT1078.Test/JT808.Protocol.Extensions.JT1078.Test.csproj
     - name: dotnet jt808_jt1078 test
       run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JT1078.Test/JT808.Protocol.Extensions.JT1078.Test.csproj
-    - name: dotnet jt808_jtas build
-      run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JTActiveSafety.Test/JT808.Protocol.Extensions.JTActiveSafety.Test.csproj
-    - name: dotnet jt808_jtas test
-      run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.JTActiveSafety.Test/JT808.Protocol.Extensions.JTActiveSafety.Test.csproj
+    - name: dotnet jt808_subiao build
+      run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.SuBiao.Test/JT808.Protocol.Extensions.SuBiao.Test.csproj
+    - name: dotnet jt808_subiao test
+      run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.SuBiao.Test/JT808.Protocol.Extensions.SuBiao.Test.csproj
     - name: dotnet jt808_yuebiao build
       run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.YueBiao.Test/JT808.Protocol.Extensions.YueBiao.Test.csproj
     - name: dotnet jt808_yuebiao test

@@ -6,12 +6,13 @@
     <members>
         <member name="T:JT808.Protocol.Extensions.YueBiao.DependencyInjectionExtensions">
             <summary>
-            粤标扩展
+            添加粤标-主动安全
+            JT/T808-2019
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.DependencyInjectionExtensions.AddYueBiaoConfigure(JT808.Protocol.IJT808Builder)">
             <summary>
-            添加粤标扩展
+            添加粤标-主动安全
             </summary>
             <param name="jT808Builder"></param>
             <returns></returns>

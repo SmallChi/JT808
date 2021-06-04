@@ -324,10 +324,10 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 | Package Name| Version| Preview  Version |Downloads|Remark|
 | --- | --- | --- | ---| --- |
-| Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.svg) |![JT808](https://img.shields.io/nuget/vpre/JT808.svg)|JT808|
-| Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JT1078.svg)|JT1078扩展JT808|
-| Install-Package JT808.Protocol.Extensions.JTActiveSafety| ![JT808.Protocol.Extensions.JTActiveSafety](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JTActiveSafety.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JTActiveSafety.svg) |![JT808.Protocol.Extensions.JTActiveSafety](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JTActiveSafety.svg)|主动安全（苏标）扩展JT808|
-| Install-Package JT808.Protocol.Extensions.YueBiao| ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.YueBiao.svg) | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.YueBiao.svg) |![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.YueBiao.svg)|粤标扩展JT808|
+| Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/vpre/JT808.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.svg) |JT808|
+| Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JT1078.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |JT1078扩展JT808|
+| Install-Package JT808.Protocol.Extensions.SuBiao| ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.SuBiao.svg) | ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.SuBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.SuBiao.svg) |主动安全（苏标）扩展JT808|
+| Install-Package JT808.Protocol.Extensions.YueBiao| ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.YueBiao.svg) | ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.YueBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.YueBiao.svg) |主动安全（粤标）扩展JT808|
 
 ## 使用BenchmarkDotNet性能测试报告（只是玩玩，不能当真）
 
@@ -361,7 +361,7 @@ Platform=AnyCpu  Server=False  Toolchain=.NET Core 5.0
 ## JT808终端通讯协议消息对照表
 
 | 序号  | 消息ID        | 完成情况 | 测试情况 | 消息体名称                     |2019版本|
-| :---: | :-----------: | :------: | :------: | :----------------------------: |:----------------------------:|
+| :---: | :-----------: | :------: | :------: | :---------------------------- |:----------------------------:|
 | 1     | 0x0001        | √        | √        | 终端通用应答                   |
 | 2     | 0x8001        | √        | √        | 平台通用应答                   |
 | 3     | 0x0002        | √        | √        | 终端心跳                       |
@@ -441,7 +441,7 @@ Platform=AnyCpu  Server=False  Toolchain=.NET Core 5.0
 ## JT1078扩展JT808议消息对照表
 
 | 序号  | 消息ID        | 完成情况 | 测试情况 | 消息体名称                                     |
-| :---: | :-----------: | :------: | :------: | :----------------------------:              |
+| :---: | :-----------: | :------: | :------: | :----------------------------              |
 | 1     | 0x0200_0x14        | √        | √        | 视频相关报警                            |
 | 2     | 0x0200_0x15        | √        | √        | 视频信号丢失报警状态                     |
 | 3     | 0x0200_0x16        | √        | √        | 视频信号遮挡报警状态                     |
@@ -485,7 +485,7 @@ serviceDescriptors1.AddJT808Configure()
 ## 主动安全（苏标）扩展JT808协议消息对照表
 
 | 序号  | 消息ID | 完成情况 | 测试情况 | 消息体名称 |
-| :---: | :---: | :---: | :---: | :---:|
+| :---: | :---: | :---: | :---: | :---|
 | 1 | 0x1210 | √ | √ | 报警附件信息消息 |
 | 2 | 0x1211 | √ | √ | 文件信息上传 |
 | 3 | 0x1212 | √ | √ | 文件上传完成消息 |
@@ -511,13 +511,36 @@ serviceDescriptors1.AddJT808Configure()
 ```dotnet
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
-                   .AddJTActiveSafetyConfigure();
+                   .AddSuBiaoConfigure();
 ```
 
-## 粤标扩展JT808协议消息对照表
+## 主动安全（粤标）扩展JT808协议消息对照表
+
+> 注意：基于JT/T808 2019版本
 
 | 序号  | 消息ID | 完成情况 | 测试情况 | 消息体名称 |
-| :---: | :---: | :---: | :---: | :---:|
+| :---: | :---: | :---: | :---: | :---|
+| 1 | 0x1210 | √ | × | 报警附件信息消息 |
+| 2 | 0x1211 | √ | × | 文件信息上传 |
+| 3 | 0x1212 | √ | × | 文件上传完成消息 |
+| 4 | 0x9208 | √ | × | 报警附件上传指令 |
+| 5 | 0x9212 | √ | × | 文件上传完成消息应答 |
+| 6 | 0x1FC4 | √ | × | 终端升级进度上报 |
+| 7 | 0x0200_0x64 | √ | × | 高级驾驶辅助系统报警信息 |
+| 8 | 0x0200_0x65 | √ | × | 驾驶员状态监测系统报警信息 |
+| 9 | 0x0200_0x66 | √ | × | 胎压监测系统报警信息 |
+| 10 | 0x0200_0x67 | √ | × | 盲区监测系统报警信息 |
+| 11 | 0x8103_0xF364 | √ | × | 高级驾驶辅助系统参数 |
+| 12 | 0x8103_0xF365 | √ | × | 驾驶员状态监测系统参数 |
+| 13 | 0x8103_0xF366 | √ | × | 胎压监测系统参数 |
+| 14 | 0x8103_0xF367 | √ | × | 盲区监测系统参数 |
+| 15 | 0x8103_0xF370 | √ | × | 智能视频协议版本信息 |
+| 16 | 0x0900 | √ | × | 上传基本信息 |
+| 17 | 0x0900_0xF7 | √ | × | 外设工作状态 |
+| 18 | 0x0900_0xF8 | √ | × | 外设系统信息 |
+| 19 | 0x8900 | √ | × | 查询基本信息 |
+| 20 | 0x8900_0xF7 | √ | × | 外设工作状态 |
+| 21 | 0x8900_0xF8 | √ | × | 外设系统信息 |
 
 ## 使用方法
 

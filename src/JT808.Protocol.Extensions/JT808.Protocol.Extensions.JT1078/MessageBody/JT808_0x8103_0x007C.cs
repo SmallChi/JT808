@@ -13,6 +13,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// </summary>
     public class JT808_0x8103_0x007C : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x007C>, IJT808Analyze
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override uint ParamId { get; set; } = 0x007C;
         /// <summary>
         /// 数据 长度
@@ -34,7 +37,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 日定时唤醒参数列表
         /// </summary>
         public JT808_0x8103_0x007C_TimerWakeDayParamter TimerWakeDayParamter { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x007C value = new JT808_0x8103_0x007C();
@@ -79,7 +87,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 return timerWakeDaySetDisplay.Length>0? timerWakeDaySetDisplay.Substring(1):"";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x007C Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x007C jT808_0x8103_0x007C = new JT808_0x8103_0x007C();
@@ -91,7 +104,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x8103_0x007C.TimerWakeDayParamter = config.GetMessagePackFormatter<JT808_0x8103_0x007C_TimerWakeDayParamter>().Deserialize(ref reader, config);
             return jT808_0x8103_0x007C;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x007C value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);

@@ -45,7 +45,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 文件大小
         /// </summary>
         public uint FileSize { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x1205_AVResouce value = new JT808_0x1205_AVResouce();
@@ -141,7 +146,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x1205_AVResouce Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1205_AVResouce jT808_0x1205_AVResouce = new JT808_0x1205_AVResouce();
@@ -155,7 +165,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x1205_AVResouce.FileSize = reader.ReadUInt32();
             return jT808_0x1205_AVResouce;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1205_AVResouce value, IJT808Config config)
         {
             writer.WriteByte(value.LogicChannelNo);

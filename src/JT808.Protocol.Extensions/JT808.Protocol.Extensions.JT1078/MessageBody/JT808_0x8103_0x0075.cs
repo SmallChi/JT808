@@ -13,6 +13,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// </summary>
     public class JT808_0x8103_0x0075 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0075>, IJT808Analyze
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override uint ParamId { get; set; } = 0x0075;
         /// <summary>
         /// 数据 长度
@@ -72,7 +75,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         ///1：启用
         /// </summary>
         public byte AudioOutputEnabled { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x0075 value = new JT808_0x8103_0x0075();
@@ -187,10 +195,15 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 obdDisplay += ((OBD >> 4 & 0x0001) == 1) ? ",行驶记录速度" : "";
                 obdDisplay += ((OBD >> 5 & 0x0001) == 1) ? ",卫星定位速度" : "";
                 obdDisplay += ((OBD >> 6 & 0x0001) == 1) ? ",连续驾驶时间" : "";
-                return obdDisplay.Length>0? obdDisplay.Substring(1):"";
+                return obdDisplay.Length > 0 ? obdDisplay.Substring(1) : "";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x0075 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0075 jT808_0X8103_0X0075 = new JT808_0x8103_0x0075();
@@ -210,7 +223,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0X8103_0X0075.AudioOutputEnabled = reader.ReadByte();
             return jT808_0X8103_0X0075;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0075 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);

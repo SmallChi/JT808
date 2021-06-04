@@ -8,12 +8,13 @@ using System.Text;
 namespace JT808.Protocol.Extensions.YueBiao
 {
     /// <summary>
-    /// 粤标扩展
+    /// 添加粤标-主动安全
+    /// JT/T808-2019
     /// </summary>
     public static class DependencyInjectionExtensions
     {
         /// <summary>
-        /// 添加粤标扩展
+        /// 添加粤标-主动安全
         /// </summary>
         /// <param name="jT808Builder"></param>
         /// <returns></returns>

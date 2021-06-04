@@ -13,6 +13,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// </summary>
     public class JT808_0x0200_0x17 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x17>, IJT808Analyze
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override byte AttachInfoId { get; set; } = 0x17;
         /// <summary>
         /// 数据 长度
@@ -22,7 +25,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 存储器故障报警状态
         /// </summary>
         public ushort StorageFaultAlarmStatus{ get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0200_0x17 value = new JT808_0x0200_0x17();
@@ -63,7 +71,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             }
             writer.WriteEndArray();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x0200_0x17 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x17 value = new JT808_0x0200_0x17();
@@ -72,7 +85,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             value.StorageFaultAlarmStatus = reader.ReadUInt16();
             return value;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x17 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);

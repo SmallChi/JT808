@@ -57,7 +57,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 2
         /// </summary>
         public string TimePeriod4CloseTime { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x8103_0x007C_TimerWakeDayParamter value = new JT808_0x8103_0x007C_TimerWakeDayParamter();
@@ -82,13 +87,18 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             string TimerWakeEnableFlagDisplay(byte TimerWakeEnableFlag) {
                 string timerWakeEnableFlagDisplay = string.Empty;
                 timerWakeEnableFlagDisplay += (TimerWakeEnableFlag & 0x01) == 1 ? ",时间段1唤醒时间启用" : "";
-                timerWakeEnableFlagDisplay += (TimerWakeEnableFlag & 0x01) == 1 ? ",时间段2唤醒时间启用" : "";
-                timerWakeEnableFlagDisplay += (TimerWakeEnableFlag & 0x01) == 1 ? ",时间段3唤醒时间启用" : "";
-                timerWakeEnableFlagDisplay += (TimerWakeEnableFlag & 0x01) == 1 ? ",时间段4唤醒时间启用" : "";
+                timerWakeEnableFlagDisplay += ((TimerWakeEnableFlag >> 1) & 0x01) == 1 ? ",时间段2唤醒时间启用" : "";
+                timerWakeEnableFlagDisplay += ((TimerWakeEnableFlag >> 2) & 0x01) == 1 ? ",时间段3唤醒时间启用" : "";
+                timerWakeEnableFlagDisplay += ((TimerWakeEnableFlag >> 3) & 0x01) == 1 ? ",时间段4唤醒时间启用" : "";
                 return timerWakeEnableFlagDisplay.Length > 0 ? timerWakeEnableFlagDisplay.Substring(1) : "";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x8103_0x007C_TimerWakeDayParamter Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x007C_TimerWakeDayParamter jT808_0x8103_0x007C_TimerWakeDayParamter = new JT808_0x8103_0x007C_TimerWakeDayParamter();
@@ -103,7 +113,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x8103_0x007C_TimerWakeDayParamter.TimePeriod4CloseTime = reader.ReadBCD(4);
             return jT808_0x8103_0x007C_TimerWakeDayParamter;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x007C_TimerWakeDayParamter value, IJT808Config config)
         {
             writer.WriteByte(value.TimerWakeEnableFlag);
