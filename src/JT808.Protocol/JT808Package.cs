@@ -104,7 +104,7 @@ namespace JT808.Protocol
             jT808Package.Header.MsgId = reader.ReadUInt16();
             //  3.2.读取消息体属性
             jT808Package.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty(reader.ReadUInt16());
-            if (jT808Package.Header.MessageBodyProperty.VersionFlag)
+            if (reader.Version == JT808Version.JTT2019 || jT808Package.Header.MessageBodyProperty.VersionFlag)
             {
                 //2019版本
                 jT808Package.Header.ProtocolVersion = reader.ReadByte();
@@ -185,7 +185,7 @@ namespace JT808.Protocol
             writer.WriteUInt16(value.Header.MsgId);
             //  2.2.消息体属性(包含消息体长度所以先跳过)
             writer.Skip(2, out int msgBodiesPropertyPosition);
-            if (value.Header.MessageBodyProperty.VersionFlag)
+            if (writer.Version == JT808Version.JTT2019 || value.Header.MessageBodyProperty.VersionFlag)
             {
                 //2019版本
                 //  2.3.协议版本号
@@ -279,7 +279,7 @@ namespace JT808.Protocol
             writer.WriteStartObject("消息体属性对象");
             ReadOnlySpan<char> messageBodyPropertyReadOnlySpan = messageBodyPropertyValue.ReadBinary();
             writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan.ToString()}]消息体属性", messageBodyPropertyValue);
-            if (headerMessageBodyProperty.VersionFlag)
+            if (reader.Version == JT808Version.JTT2019 || headerMessageBodyProperty.VersionFlag)
             {
                 reader.Version = JT808Version.JTT2019;
                 writer.WriteNumber("[bit15]保留", 0);
@@ -294,7 +294,7 @@ namespace JT808.Protocol
                 writer.WriteNumber($"[{protocolVersion.ReadNumber()}]协议版本号(2019)", protocolVersion);
                 //  3.4.读取终端手机号 
                 var terminalPhoneNo = reader.ReadBCD(20, config.Trim);
-                writer.WriteString($"[{terminalPhoneNo.PadLeft(20,'0')}]终端手机号", terminalPhoneNo);
+                writer.WriteString($"[{terminalPhoneNo.PadLeft(20, '0')}]终端手机号", terminalPhoneNo);
             }
             else
             {
