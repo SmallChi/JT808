@@ -26,8 +26,8 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
             {
                 ErrorCode=1,
                  MsgNum=2,
-                  UpgradeStatus= Enums.JT808UpgradeStatus.¹Ì¼şÏÂÔØÖĞ,
-                   UpgradeType= Protocol.Enums.JT808UpgradeType.±±¶·ÎÀĞÇ¶¨Î»Ä£¿é,
+                  UpgradeStatus= Enums.JT808UpgradeStatus.å›ºä»¶ä¸‹è½½ä¸­,
+                   UpgradeType= Protocol.Enums.JT808UpgradeType.åŒ—æ–—å«æ˜Ÿå®šä½æ¨¡å—,
                     UploadProgress=3
             };
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
@@ -39,8 +39,8 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
             var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x1FC4>("000234010301".ToHexBytes());
             Assert.Equal(1, jT808UploadLocationRequest.ErrorCode);
             Assert.Equal(2, jT808UploadLocationRequest.MsgNum);
-            Assert.Equal(Enums.JT808UpgradeStatus.¹Ì¼şÏÂÔØÖĞ, jT808UploadLocationRequest.UpgradeStatus);
-            Assert.Equal(Protocol.Enums.JT808UpgradeType.±±¶·ÎÀĞÇ¶¨Î»Ä£¿é, jT808UploadLocationRequest.UpgradeType);
+            Assert.Equal(Enums.JT808UpgradeStatus.å›ºä»¶ä¸‹è½½ä¸­, jT808UploadLocationRequest.UpgradeStatus);
+            Assert.Equal(Protocol.Enums.JT808UpgradeType.åŒ—æ–—å«æ˜Ÿå®šä½æ¨¡å—, jT808UploadLocationRequest.UpgradeType);
             Assert.Equal(3, jT808UploadLocationRequest.UploadProgress);
         }
         [Fact]
