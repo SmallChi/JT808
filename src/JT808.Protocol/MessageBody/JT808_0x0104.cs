@@ -57,8 +57,14 @@ namespace JT808.Protocol.MessageBody
                     }
                     else
                     {
-                        jT808_0x0104.ParamList = new List<JT808_0x8103_BodyBase> { JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance,  ref reader,  config) };
+                        jT808_0x0104.ParamList = new List<JT808_0x8103_BodyBase> { JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config) };
                     }
+                }
+                else {
+                    //对于未能解析的自定义项，过滤其长度，以保证后续解析正常
+                    reader.Skip(4);//跳过参数id长度
+                    var len = reader.ReadByte();//获取协议长度
+                    reader.Skip(len);//跳过协议内容
                 }
             }
             return jT808_0x0104;
