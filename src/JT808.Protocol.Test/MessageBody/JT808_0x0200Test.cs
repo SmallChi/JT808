@@ -317,7 +317,6 @@ namespace JT808.Protocol.Test.MessageBody
             jT808Package.Header.ProtocolVersion = 0;//修改成 2013协议标识
             var newBytes = JT808Serializer.Serialize(jT808Package);//重新序列化
             var jt808PackageNew = JT808Serializer.Deserialize(newBytes);//验证是否修改标识符成功
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);    
         }
         [Fact]
         public void Test5_4()
