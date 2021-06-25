@@ -320,6 +320,13 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo13](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo13.cs)
 
+### 举个栗子14
+
+场景:
+由于协议库本身可能存在消息解析出错的情况，要么就提PR上来，但是不一定会及时发布，这时候就需要自己把原有的消息解析复制出来，改造好，然后重新注册。
+
+[可以参考Simples的Demo14](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo14.cs)
+
 ## NuGet安装
 
 | Package Name| Version| Preview  Version |Downloads|Remark|
