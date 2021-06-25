@@ -1606,6 +1606,11 @@
             2019
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808Version.JTT2013Force">
+            <summary>
+            强制2013
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Exceptions.JT808Exception">
             <summary>
             JT808异常处理类

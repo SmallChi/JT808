@@ -104,19 +104,26 @@ namespace JT808.Protocol
             jT808Package.Header.MsgId = reader.ReadUInt16();
             //  3.2.读取消息体属性
             jT808Package.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty(reader.ReadUInt16());
-            if (reader.Version == JT808Version.JTT2019 || jT808Package.Header.MessageBodyProperty.VersionFlag)
+            if (reader.Version == JT808Version.JTT2013Force)
             {
-                //2019版本
-                jT808Package.Header.ProtocolVersion = reader.ReadByte();
-                //  3.4.读取终端手机号 
-                jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(20, config.Trim);
-                reader.Version = JT808Version.JTT2019;
-            }
-            else
-            {
-                //2013版本
-                //  3.3.读取终端手机号 
                 jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+                reader.Version = JT808Version.JTT2013;
+            }
+            else {
+                if (reader.Version == JT808Version.JTT2019 || jT808Package.Header.MessageBodyProperty.VersionFlag)
+                {
+                    //2019版本
+                    jT808Package.Header.ProtocolVersion = reader.ReadByte();
+                    //  3.4.读取终端手机号 
+                    jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(20, config.Trim);
+                    reader.Version = JT808Version.JTT2019;
+                }
+                else
+                {
+                    //2013版本
+                    //  3.3.读取终端手机号 
+                    jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+                }
             }
             //  3.4.读取消息流水号
             jT808Package.Header.MsgNum = reader.ReadUInt16();
@@ -279,24 +286,7 @@ namespace JT808.Protocol
             writer.WriteStartObject("消息体属性对象");
             ReadOnlySpan<char> messageBodyPropertyReadOnlySpan = messageBodyPropertyValue.ReadBinary();
             writer.WriteNumber($"[{messageBodyPropertyReadOnlySpan.ToString()}]消息体属性", messageBodyPropertyValue);
-            if (reader.Version == JT808Version.JTT2019 || headerMessageBodyProperty.VersionFlag)
-            {
-                reader.Version = JT808Version.JTT2019;
-                writer.WriteNumber("[bit15]保留", 0);
-                writer.WriteBoolean("[bit14]协议版本标识", headerMessageBodyProperty.VersionFlag);
-                writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
-                writer.WriteString("[bit10~bit12]数据加密", headerMessageBodyProperty.Encrypt.ToString());
-                writer.WriteNumber("[bit0~bit9]消息体长度", headerMessageBodyProperty.DataLength);
-                //消息体属性对象 结束
-                writer.WriteEndObject();
-                //2019版本
-                var protocolVersion = reader.ReadByte();
-                writer.WriteNumber($"[{protocolVersion.ReadNumber()}]协议版本号(2019)", protocolVersion);
-                //  3.4.读取终端手机号 
-                var terminalPhoneNo = reader.ReadBCD(20, config.Trim);
-                writer.WriteString($"[{terminalPhoneNo.PadLeft(20, '0')}]终端手机号", terminalPhoneNo);
-            }
-            else
+            if (reader.Version == JT808Version.JTT2013Force)
             {
                 reader.Version = JT808Version.JTT2013;
                 writer.WriteNumber("[bit15]保留", 0);
@@ -311,6 +301,41 @@ namespace JT808.Protocol
                 //消息体属性对象 结束
                 writer.WriteString($"[{terminalPhoneNo.PadLeft(config.TerminalPhoneNoLength, '0')}]终端手机号", terminalPhoneNo);
             }
+            else {
+                if (reader.Version == JT808Version.JTT2019 || headerMessageBodyProperty.VersionFlag)
+                {
+                    reader.Version = JT808Version.JTT2019;
+                    writer.WriteNumber("[bit15]保留", 0);
+                    writer.WriteBoolean("[bit14]协议版本标识", headerMessageBodyProperty.VersionFlag);
+                    writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
+                    writer.WriteString("[bit10~bit12]数据加密", headerMessageBodyProperty.Encrypt.ToString());
+                    writer.WriteNumber("[bit0~bit9]消息体长度", headerMessageBodyProperty.DataLength);
+                    //消息体属性对象 结束
+                    writer.WriteEndObject();
+                    //2019版本
+                    var protocolVersion = reader.ReadByte();
+                    writer.WriteNumber($"[{protocolVersion.ReadNumber()}]协议版本号(2019)", protocolVersion);
+                    //  3.4.读取终端手机号 
+                    var terminalPhoneNo = reader.ReadBCD(20, config.Trim);
+                    writer.WriteString($"[{terminalPhoneNo.PadLeft(20, '0')}]终端手机号", terminalPhoneNo);
+                }
+                else
+                {
+                    reader.Version = JT808Version.JTT2013;
+                    writer.WriteNumber("[bit15]保留", 0);
+                    writer.WriteNumber("[bit14]保留", 0);
+                    writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
+                    writer.WriteString("[bit10~bit12]数据加密", headerMessageBodyProperty.Encrypt.ToString());
+                    writer.WriteNumber("[bit0~bit9]消息体长度", headerMessageBodyProperty.DataLength);
+                    writer.WriteEndObject();
+                    //2013版本
+                    //  3.3.读取终端手机号 
+                    var terminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, false);
+                    //消息体属性对象 结束
+                    writer.WriteString($"[{terminalPhoneNo.PadLeft(config.TerminalPhoneNoLength, '0')}]终端手机号", terminalPhoneNo);
+                }
+            }
+
             //  3.4.读取消息流水号
             var msgNum = reader.ReadUInt16();
             writer.WriteNumber($"[{msgNum.ReadNumber()}]消息流水号", msgNum);

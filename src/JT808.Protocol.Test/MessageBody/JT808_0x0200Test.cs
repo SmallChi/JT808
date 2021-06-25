@@ -310,6 +310,22 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
         }
         [Fact]
+        public void Test5_3()
+        {
+            byte[] bytes = "7e0100402d01003000067906ff000000003730393639455632350000000000000000000000000000000030303030363739090000000000000000cf7e".ToHexBytes();
+            var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes,JT808Version.JTT2013Force);
+            jT808Package.Header.ProtocolVersion = 0;//修改成 2013协议标识
+            var newBytes = JT808Serializer.Serialize(jT808Package);//重新序列化
+            var jt808PackageNew = JT808Serializer.Deserialize(newBytes);//验证是否修改标识符成功
+            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);    
+        }
+        [Fact]
+        public void Test5_4()
+        {
+            byte[] bytes = "7e0200406c010030000681090e00000000000c0003026c936f074c794c0004036300d7210625155739010400000000052801cc00210625155739054145bbc91e4145a2fa1141450000004145bbc8194145a1370a4145000000240200002a0200002b04000000003001153101125f0a89860418231870850620757e".ToHexBytes();
+            var json = JT808Serializer.Analyze(bytes, JT808Version.JTT2013Force);
+        }
+        [Fact]
         public void Test6()
         {
             JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200

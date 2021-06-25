@@ -17,5 +17,9 @@ namespace JT808.Protocol.Enums
         /// 2019
         /// </summary>
         JTT2019=2,
+        /// <summary>
+        /// 强制2013
+        /// </summary>
+        JTT2013Force = 99
     }
 }
