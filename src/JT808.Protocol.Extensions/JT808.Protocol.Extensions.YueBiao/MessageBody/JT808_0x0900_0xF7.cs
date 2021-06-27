@@ -6,6 +6,7 @@ using JT808.Protocol.MessageBody;
 using JT808.Protocol.MessagePack;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -55,7 +56,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
                     writer.WriteNumber($"[{item.WorkingCondition.ReadNumber()}]工作状态-{workingCondition.ToString()}", item.WorkingCondition);
                     item.AlarmStatus = reader.ReadUInt32();
                     writer.WriteNumber($"[{item.AlarmStatus.ReadNumber()}]报警状态", item.AlarmStatus);
-                    var alarmStatusBits = Convert.ToString(item.AlarmStatus, 2).PadLeft(32, '0').AsSpan();
+                    var alarmStatusBits = Convert.ToString(item.AlarmStatus, 2).PadLeft(32, '0').Reverse().ToArray().AsSpan();
                     writer.WriteStartObject($"报警状态对象[{alarmStatusBits.ToString()}]");
                     writer.WriteString($"[bit12~bit31]预留", alarmStatusBits.Slice(12).ToString());
                     writer.WriteString($"]bit11]定位模块异常", alarmStatusBits[11].ToString());

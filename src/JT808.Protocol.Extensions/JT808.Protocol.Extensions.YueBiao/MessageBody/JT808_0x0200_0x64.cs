@@ -56,7 +56,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public byte RoadSignIdentificationType { get; set; }
         /// <summary>
-        /// 道路标志识别类型
+        /// 道路标志识别数据
         /// </summary>
         public byte RoadSignIdentificationData { get; set; }
         /// <summary>
@@ -226,6 +226,14 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             else if (value.RoadSignIdentificationType == 0x03)
             {
                 roadSignIdentificationType = "限重标志";
+            }
+            else if (value.RoadSignIdentificationType == 0x04)
+            {
+                roadSignIdentificationType = "禁行标志";
+            }
+            else if (value.RoadSignIdentificationType == 0x05)
+            {
+                roadSignIdentificationType = "禁停标志";
             }
             writer.WriteNumber($"[{value.RoadSignIdentificationType.ReadNumber()}]道路标志识别类型-{roadSignIdentificationType}-{roadSignIdentificationTypeString}", value.RoadSignIdentificationType);
             value.RoadSignIdentificationData = reader.ReadByte();

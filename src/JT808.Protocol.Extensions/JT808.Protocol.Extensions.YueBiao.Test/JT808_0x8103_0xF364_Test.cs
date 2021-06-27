@@ -43,7 +43,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
                     FrequentChannelChangeAlarmJudgmentTimePeriod=15,
                     FrequentChannelChangeAlarmPhotos=16,
                     FrequentLaneChangeAlarmInterval=17,
-                    GradedSpeedThresholdLaneDeviationAlarm=18,
+                     GradedSpeedThresholdLaneDepartureAlarm=18,
                     HierarchicalSpeedThresholdForwardCollisionWarning=19,
                     HierarchicalSpeedThresholdFrequentChannelChangeAlarm=20,
                     HierarchicalSpeedThresholdObstacleAlarm=21,
@@ -70,17 +70,27 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
                     VideoRecordingTimeBeforeAndAfterLaneDepartureAlarm=42,
                     VideoRecordingTimeBeforeAndAfterObstacleAlarm=43,
                     VideoRecordingTimeBeforeAndAfterPedestrianCollisionAlarm=44,
-                    WarningVolume=45
+                    WarningVolume=45,
+
+                     CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold=46,
+                     VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm=47,
+                      CarriageAislePassengerDetectionAlarmPhotographs=48,
+                       CarriageAislePassengerDetectionAlarmPhotoInterval=49,
+                         SolidLineChangeLanesAlarmClassificationSpeedThreshold=50,
+                          VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm=51,
+                           SolidLineChangeLanesAlarmPhotographs=52,
+                            SolidLineChangeLanesAlarmPhotoInterval=53
+
                   }
                }
             };
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("010000F36438052D030002000122231D26000000040000000A1E09152B08180F0E14291011122A16170D13280C0B1C192C1B1A2425270607202101020304", hex);
+            Assert.Equal("010000F36440052D030002000122231D26000000040000000A1E09152B08180F0E14291011122A16170D13280C0B1C192C1B1A24252706072021323334352E2F303101020304", hex);
         }
         [Fact]
         public void Deserialize()
         {
-            var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x8103>("010000F36438052D030002000122231D26000000040000000A1E09152B08180F0E14291011122A16170D13280C0B1C192C1B1A2425270607202101020304".ToHexBytes());
+            var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x8103>("010000F36440052D030002000122231D26000000040000000A1E09152B08180F0E14291011122A16170D13280C0B1C192C1B1A24252706072021323334352E2F303101020304".ToHexBytes());
             JT808_0x8103_0xF364 jT808_0X8103_0XF364 = jT808UploadLocationRequest.ParamList[0] as JT808_0x8103_0xF364;
             Assert.Equal(1, jT808_0X8103_0XF364.ActiveDistancePhotographyDistanceInterval);
             Assert.Equal(2, jT808_0X8103_0XF364.ActivelyTimePhotoInterval);
@@ -99,7 +109,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
             Assert.Equal(15, jT808_0X8103_0XF364.FrequentChannelChangeAlarmJudgmentTimePeriod);
             Assert.Equal(16, jT808_0X8103_0XF364.FrequentChannelChangeAlarmPhotos);
             Assert.Equal(17, jT808_0X8103_0XF364.FrequentLaneChangeAlarmInterval);
-            Assert.Equal(18, jT808_0X8103_0XF364.GradedSpeedThresholdLaneDeviationAlarm);
+            Assert.Equal(18, jT808_0X8103_0XF364.GradedSpeedThresholdLaneDepartureAlarm);
             Assert.Equal(19, jT808_0X8103_0XF364.HierarchicalSpeedThresholdForwardCollisionWarning);
             Assert.Equal(20, jT808_0X8103_0XF364.HierarchicalSpeedThresholdFrequentChannelChangeAlarm);
             Assert.Equal(21, jT808_0X8103_0XF364.HierarchicalSpeedThresholdObstacleAlarm);
@@ -127,13 +137,23 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
             Assert.Equal(43, jT808_0X8103_0XF364.VideoRecordingTimeBeforeAndAfterObstacleAlarm);
             Assert.Equal(44, jT808_0X8103_0XF364.VideoRecordingTimeBeforeAndAfterPedestrianCollisionAlarm);
             Assert.Equal(45, jT808_0X8103_0XF364.WarningVolume);
+
+            Assert.Equal(46, jT808_0X8103_0XF364.CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold);
+            Assert.Equal(47, jT808_0X8103_0XF364.VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm);
+            Assert.Equal(48, jT808_0X8103_0XF364.CarriageAislePassengerDetectionAlarmPhotographs);
+            Assert.Equal(49, jT808_0X8103_0XF364.CarriageAislePassengerDetectionAlarmPhotoInterval);
+
+            Assert.Equal(50, jT808_0X8103_0XF364.SolidLineChangeLanesAlarmClassificationSpeedThreshold);
+            Assert.Equal(51, jT808_0X8103_0XF364.VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm);
+            Assert.Equal(52, jT808_0X8103_0XF364.SolidLineChangeLanesAlarmPhotographs);
+            Assert.Equal(53, jT808_0X8103_0XF364.SolidLineChangeLanesAlarmPhotoInterval);
             Assert.Equal(JT808_YueBiao_Constants.JT808_0X8103_0xF364, jT808_0X8103_0XF364.ParamId);
         }
 
         [Fact]
         public void Json()
         {
-            var json = JT808Serializer.Analyze<JT808_0x8103>("010000F36438052D030002000122231D26000000040000000A1E09152B08180F0E14291011122A16170D13280C0B1C192C1B1A2425270607202101020304".ToHexBytes());
+            var json = JT808Serializer.Analyze<JT808_0x8103>("010000F36440052D030002000122231D26000000040000000A1E09152B08180F0E14291011122A16170D13280C0B1C192C1B1A24252706072021323334352E2F303101020304".ToHexBytes());
         }
     }
 }

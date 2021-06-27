@@ -4,6 +4,7 @@ using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.Extensions.YueBiao.MessageBody
@@ -119,7 +120,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <summary>
         /// 车道偏离报警分级速度阈值
         /// </summary>
-        public byte GradedSpeedThresholdLaneDeviationAlarm { get; set; }
+        public byte GradedSpeedThresholdLaneDepartureAlarm { get; set; }
         /// <summary>
         /// 车道偏离报警前后视频录制时间
         /// </summary>
@@ -173,11 +174,11 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public byte PedestrianCollisionAlarmInterval { get; set; }
         /// <summary>
-        /// 车距监控报警距离阈值
+        /// 车距过近报警距离阈值
         /// </summary>
         public byte VehicleDistanceMonitoringAlarmDistanceThreshold { get; set; }
         /// <summary>
-        /// 车距监控报警分级速度阈值
+        /// 车距过近报警分级速度阈值
         /// </summary>
         public byte VehicleDistanceMonitoringAndAlarmClassificationSpeedThreshold { get; set; }
         /// <summary>
@@ -200,6 +201,38 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// 道路标志识别拍照间隔
         /// </summary>
         public byte RoadSignRecognitionPhotographsInterval { get; set; }
+        /// <summary>
+        /// 实线变道报警分级速度阈值
+        /// </summary>
+        public byte SolidLineChangeLanesAlarmClassificationSpeedThreshold { get; set; }
+        /// <summary>
+        /// 实线变道报警前后视频录制时间
+        /// </summary>
+        public byte VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm { get; set; }
+        /// <summary>
+        /// 实线变道报警拍照张数
+        /// </summary>
+        public byte SolidLineChangeLanesAlarmPhotographs { get; set; }
+        /// <summary>
+        /// 实线变道报警拍照间隔
+        /// </summary>
+        public byte SolidLineChangeLanesAlarmPhotoInterval { get; set; }
+        /// <summary>
+        /// 车厢过道行人检测报警分级速度阈值
+        /// </summary>
+        public byte CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold { get; set; }
+        /// <summary>
+        /// 车厢过道行人检测报警前后视频录制时间
+        /// </summary>
+        public byte VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm { get; set; }
+        /// <summary>
+        /// 车厢过道行人检测报警拍照张数
+        /// </summary>
+        public byte CarriageAislePassengerDetectionAlarmPhotographs { get; set; }
+        /// <summary>
+        /// 车厢过道行人检测报警拍照间隔
+        /// </summary>
+        public byte CarriageAislePassengerDetectionAlarmPhotoInterval { get; set; }
         /// <summary>
         /// 保留字段
         /// </summary>
@@ -240,12 +273,15 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteNumber($"[{value.VideoRecordingResolution.ReadNumber()}]视频录制分辨率-{videoRecordingResolution.ToString()}", value.VideoRecordingResolution);
             value.AlarmEnable = reader.ReadUInt32();
             writer.WriteNumber($"[{value.AlarmEnable.ReadNumber()}]报警使能", value.AlarmEnable);
-            var alarmEnableBits = Convert.ToString(value.AlarmEnable, 2).PadLeft(32, '0').AsSpan();
-            writer.WriteStartObject("报警使能对象");
+            var alarmEnableBits = Convert.ToString(value.AlarmEnable, 2).PadLeft(32, '0').Reverse().ToArray().AsSpan();
+            writer.WriteStartObject($"报警使能对象[{alarmEnableBits.ToString()}]");
             writer.WriteString("[bit30~bit31]预留", alarmEnableBits.Slice(30,2).ToString());
-            writer.WriteString("[bit17~bit29]用户自定义", alarmEnableBits.Slice(17, 13).ToString());
+            writer.WriteString("[bit20~bit29]用户自定义", alarmEnableBits.Slice(20, 10).ToString());
+            writer.WriteString("[bit19]车厢过道行人检测", alarmEnableBits[19] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit18]实线变道二级报警", alarmEnableBits[18] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit17]实线变道一级报警", alarmEnableBits[17] == '0' ? "关闭" : "打开");
             writer.WriteString("[bit16]道路标识超限报警", alarmEnableBits[16]=='0'?"关闭":"打开");
-            writer.WriteString("[bit12~bit15]道路标识超限报警", alarmEnableBits.Slice(12, 4).ToString());
+            writer.WriteString("[bit12~bit15]用户自定义", alarmEnableBits.Slice(12, 4).ToString());
             writer.WriteString("[bit11]车距过近二级报警", alarmEnableBits[11] == '0' ? "关闭" : "打开");
             writer.WriteString("[bit10]车距过近一级报警", alarmEnableBits[10] == '0' ? "关闭" : "打开");
             writer.WriteString("[bit9]行人碰撞二级报警", alarmEnableBits[9] == '0' ? "关闭" : "打开");
@@ -261,12 +297,12 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteEndObject();
             value.EventEnable = reader.ReadUInt32();
             writer.WriteNumber($"[{value.EventEnable.ReadNumber()}]事件使能", value.EventEnable);
-            var eventEnableBits = Convert.ToString(value.EventEnable, 2).PadLeft(32, '0').AsSpan();
-            writer.WriteStartObject("事件使能对象");
+            var eventEnableBits = Convert.ToString(value.EventEnable, 2).PadLeft(32, '0').Reverse().ToArray().AsSpan();
+            writer.WriteStartObject($"事件使能对象[{eventEnableBits.ToString()}]");
             writer.WriteString("[bit30~bit31]预留", eventEnableBits.Slice(30, 2).ToString());
             writer.WriteString("[bit2~bit29]用户自定义", alarmEnableBits.Slice(2, 28).ToString());
-            writer.WriteString("[bit1]主动拍照", alarmEnableBits[1] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit0]道路标识识别", alarmEnableBits[0] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit1]主动拍照", eventEnableBits[1] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit0]道路标识识别", eventEnableBits[0] == '0' ? "关闭" : "打开");
             writer.WriteEndObject();
             value.Placeholder1 = reader.ReadByte();
             writer.WriteNumber($"[{value.Placeholder1.ReadNumber()}]预留字段", value.Placeholder1);
@@ -292,8 +328,8 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteNumber($"[{value.FrequentChannelChangeAlarmPhotos.ReadNumber()}]频繁变道报警拍照张数", value.FrequentChannelChangeAlarmPhotos);
             value.FrequentLaneChangeAlarmInterval = reader.ReadByte();
             writer.WriteNumber($"[{value.FrequentLaneChangeAlarmInterval.ReadNumber()}]频繁变道报警拍照间隔", value.FrequentLaneChangeAlarmInterval);
-            value.GradedSpeedThresholdLaneDeviationAlarm = reader.ReadByte();
-            writer.WriteNumber($"[{value.GradedSpeedThresholdLaneDeviationAlarm.ReadNumber()}]车道偏离报警分级速度阈值", value.GradedSpeedThresholdLaneDeviationAlarm);
+            value.GradedSpeedThresholdLaneDepartureAlarm = reader.ReadByte();
+            writer.WriteNumber($"[{value.GradedSpeedThresholdLaneDepartureAlarm.ReadNumber()}]车道偏离报警分级速度阈值", value.GradedSpeedThresholdLaneDepartureAlarm);
             value.VideoRecordingTimeBeforeAndAfterLaneDepartureAlarm = reader.ReadByte();
             writer.WriteNumber($"[{value.VideoRecordingTimeBeforeAndAfterLaneDepartureAlarm.ReadNumber()}]车道偏离报警前后视频录制时间", value.VideoRecordingTimeBeforeAndAfterLaneDepartureAlarm);
             value.LaneDepartureAlarmPhoto = reader.ReadByte();
@@ -321,9 +357,9 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             value.PedestrianCollisionAlarmInterval = reader.ReadByte();
             writer.WriteNumber($"[{value.PedestrianCollisionAlarmInterval.ReadNumber()}]行人碰撞报警拍照间隔", value.PedestrianCollisionAlarmInterval);
             value.VehicleDistanceMonitoringAlarmDistanceThreshold = reader.ReadByte();
-            writer.WriteNumber($"[{value.VehicleDistanceMonitoringAlarmDistanceThreshold.ReadNumber()}]车距监控报警距离阈值", value.VehicleDistanceMonitoringAlarmDistanceThreshold);
+            writer.WriteNumber($"[{value.VehicleDistanceMonitoringAlarmDistanceThreshold.ReadNumber()}]车距过近报警距离阈值", value.VehicleDistanceMonitoringAlarmDistanceThreshold);
             value.VehicleDistanceMonitoringAndAlarmClassificationSpeedThreshold = reader.ReadByte();
-            writer.WriteNumber($"[{value.VehicleDistanceMonitoringAndAlarmClassificationSpeedThreshold.ReadNumber()}]车距监控报警分级速度阈值", value.VehicleDistanceMonitoringAndAlarmClassificationSpeedThreshold);
+            writer.WriteNumber($"[{value.VehicleDistanceMonitoringAndAlarmClassificationSpeedThreshold.ReadNumber()}]车距过近报警分级速度阈值", value.VehicleDistanceMonitoringAndAlarmClassificationSpeedThreshold);
             value.VideoRecordingTimeBeforeAndAfterAlarmVehicleProximity = reader.ReadByte();
             writer.WriteNumber($"[{value.VideoRecordingTimeBeforeAndAfterAlarmVehicleProximity.ReadNumber()}]车距过近报警前后视频录制时间", value.VideoRecordingTimeBeforeAndAfterAlarmVehicleProximity);
             value.AlarmPhotoVehicleCloseDistance = reader.ReadByte();
@@ -334,6 +370,24 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteNumber($"[{value.RoadSignRecognitionPhotographs.ReadNumber()}]道路标志识别拍照张数", value.RoadSignRecognitionPhotographs);
             value.RoadSignRecognitionPhotographsInterval = reader.ReadByte();
             writer.WriteNumber($"[{value.RoadSignRecognitionPhotographsInterval.ReadNumber()}]道路标志识别拍照间隔", value.RoadSignRecognitionPhotographsInterval);
+            //实线变道报警
+            value.SolidLineChangeLanesAlarmClassificationSpeedThreshold = reader.ReadByte();
+            writer.WriteNumber($"[{value.SolidLineChangeLanesAlarmClassificationSpeedThreshold.ReadNumber()}]实线变道报警分级速度阈值", value.SolidLineChangeLanesAlarmClassificationSpeedThreshold);
+            value.VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm = reader.ReadByte();
+            writer.WriteNumber($"[{value.VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm.ReadNumber()}]实线变道报警前后视频录制时间", value.VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm);
+            value.SolidLineChangeLanesAlarmPhotographs = reader.ReadByte();
+            writer.WriteNumber($"[{value.SolidLineChangeLanesAlarmPhotographs.ReadNumber()}]实线变道报警拍照张数", value.SolidLineChangeLanesAlarmPhotographs);
+            value.SolidLineChangeLanesAlarmPhotoInterval = reader.ReadByte();
+            writer.WriteNumber($"[{value.SolidLineChangeLanesAlarmPhotoInterval.ReadNumber()}]实线变道报警拍照间隔", value.SolidLineChangeLanesAlarmPhotoInterval);
+            //车厢过道行人检测报警
+            value.CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold = reader.ReadByte();
+            writer.WriteNumber($"[{value.CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold.ReadNumber()}]车厢过道行人检测报警分级速度阈值", value.CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold);
+            value.VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm = reader.ReadByte();
+            writer.WriteNumber($"[{value.VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm.ReadNumber()}]车厢过道行人检测报警前后视频录制时间", value.VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm);
+            value.CarriageAislePassengerDetectionAlarmPhotographs = reader.ReadByte();
+            writer.WriteNumber($"[{value.CarriageAislePassengerDetectionAlarmPhotographs.ReadNumber()}]车厢过道行人检测报警拍照张数", value.CarriageAislePassengerDetectionAlarmPhotographs);
+            value.CarriageAislePassengerDetectionAlarmPhotoInterval = reader.ReadByte();
+            writer.WriteNumber($"[{value.CarriageAislePassengerDetectionAlarmPhotoInterval.ReadNumber()}]车厢过道行人检测报警拍照间隔", value.CarriageAislePassengerDetectionAlarmPhotoInterval);
             value.Placeholder2 = reader.ReadArray(4).ToArray();
             writer.WriteString("保留字段", value.Placeholder2.ToHexString());
         }
@@ -371,7 +425,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             value.VideoRecordingTimeBeforeAndAfterFrequentLaneChangeAlarm = reader.ReadByte();
             value.FrequentChannelChangeAlarmPhotos = reader.ReadByte();
             value.FrequentLaneChangeAlarmInterval = reader.ReadByte();
-            value.GradedSpeedThresholdLaneDeviationAlarm = reader.ReadByte();
+            value.GradedSpeedThresholdLaneDepartureAlarm = reader.ReadByte();
             value.VideoRecordingTimeBeforeAndAfterLaneDepartureAlarm = reader.ReadByte();
             value.LaneDepartureAlarmPhoto = reader.ReadByte();
             value.LaneDepartureAlarmPhotoInterval = reader.ReadByte();
@@ -392,6 +446,17 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             value.AlarmPhotoVehicleCloseDistanceInterval = reader.ReadByte();
             value.RoadSignRecognitionPhotographs = reader.ReadByte();
             value.RoadSignRecognitionPhotographsInterval = reader.ReadByte();
+
+            value.SolidLineChangeLanesAlarmClassificationSpeedThreshold = reader.ReadByte();
+            value.VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm = reader.ReadByte();
+            value.SolidLineChangeLanesAlarmPhotographs = reader.ReadByte();
+            value.SolidLineChangeLanesAlarmPhotoInterval = reader.ReadByte();
+
+            value.CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold = reader.ReadByte();
+            value.VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm = reader.ReadByte();
+            value.CarriageAislePassengerDetectionAlarmPhotographs = reader.ReadByte();
+            value.CarriageAislePassengerDetectionAlarmPhotoInterval = reader.ReadByte();
+
             value.Placeholder2 = reader.ReadArray(4).ToArray();
             return value;
         }
@@ -428,7 +493,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteByte(value.VideoRecordingTimeBeforeAndAfterFrequentLaneChangeAlarm);
             writer.WriteByte(value.FrequentChannelChangeAlarmPhotos);
             writer.WriteByte(value.FrequentLaneChangeAlarmInterval);
-            writer.WriteByte(value.GradedSpeedThresholdLaneDeviationAlarm);
+            writer.WriteByte(value.GradedSpeedThresholdLaneDepartureAlarm);
             writer.WriteByte(value.VideoRecordingTimeBeforeAndAfterLaneDepartureAlarm);
             writer.WriteByte(value.LaneDepartureAlarmPhoto);
             writer.WriteByte(value.LaneDepartureAlarmPhotoInterval);
@@ -449,6 +514,14 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteByte(value.AlarmPhotoVehicleCloseDistanceInterval);
             writer.WriteByte(value.RoadSignRecognitionPhotographs);
             writer.WriteByte(value.RoadSignRecognitionPhotographsInterval);
+            writer.WriteByte(value.SolidLineChangeLanesAlarmClassificationSpeedThreshold);
+            writer.WriteByte(value.VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm);
+            writer.WriteByte(value.SolidLineChangeLanesAlarmPhotographs);
+            writer.WriteByte(value.SolidLineChangeLanesAlarmPhotoInterval);
+            writer.WriteByte(value.CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold);
+            writer.WriteByte(value.VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm);
+            writer.WriteByte(value.CarriageAislePassengerDetectionAlarmPhotographs);
+            writer.WriteByte(value.CarriageAislePassengerDetectionAlarmPhotoInterval);
             writer.WriteArray(value.Placeholder2);
             writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - ParamLengthPosition - 1), ParamLengthPosition);
         }

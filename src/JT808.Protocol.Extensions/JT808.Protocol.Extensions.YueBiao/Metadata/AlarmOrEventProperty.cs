@@ -12,7 +12,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Metadata
         /// <summary>
         /// 胎压报警位置
         /// </summary>
-        public byte TirePressureAlarmPosition { get; set; }
+        public ushort TirePressureAlarmPosition { get; set; }
         /// <summary>
         /// 报警/事件类型
         /// </summary>

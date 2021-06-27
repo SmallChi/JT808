@@ -4,6 +4,7 @@ using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Linq;
 using System.Text.Json;
 
 namespace JT808.Protocol.Extensions.YueBiao.MessageBody
@@ -126,17 +127,25 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public byte SmokingAlarmPhotographsDriverFaceCharacteristicsInterval { get; set; }
         /// <summary>
-        /// 分神驾驶报警分级车速阈值
+        /// 不目视前方报警分级车速阈值
         /// </summary>
         public byte ClassifiedSpeedThresholdDistractedDrivingAlarm { get; set; }
         /// <summary>
-        /// 分神驾驶报警拍照张数
+        /// 不目视前方报警前后视频录制时间
+        /// </summary>
+        public byte VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm { get; set; }
+        /// <summary>
+        ///  不目视前方报警拍照张数
         /// </summary>
         public byte DistractedDrivingAlarmPhotography{ get; set; }
         /// <summary>
-        /// 分神驾驶报警拍照间隔时间
+        ///  不目视前方报警拍照间隔时间
         /// </summary>
         public byte DistractedDrivingAlarmPhotographyInterval { get; set; }
+        /// <summary>
+        /// 驾驶行为异常分级车速阈值
+        /// </summary>
+        public byte ClassifiedSpeedThresholdAbnormalDrivingBehavior { get; set; }
         /// <summary>
         /// 驾驶行为异常视频录制时间
         /// </summary>
@@ -150,9 +159,76 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public byte PictureIntervalAbnormalDrivingBehavior{ get; set; }
         /// <summary>
-        /// 驾驶员身份识别触发
+        /// 驾驶员身份识别触发方式
         /// </summary>
         public byte DriverIdentificationTrigger { get; set; }
+        /// <summary>
+        /// 摄像机遮挡报警分级车速阈值
+        /// </summary>
+        public byte ClassifiedSpeedThresholdCameraOcclusion { get; set; }
+
+        /// <summary>
+        /// 不系安全带报警分级车速阈值
+        /// </summary>
+        public byte ClassifiedSpeedThresholdNotBuckleUp { get; set; }
+        /// <summary>
+        /// 不系安全带报警前后视频录制时间
+        /// </summary>
+        public byte VideoRecordingTimeNotBuckleUp { get; set; }
+        /// <summary>
+        /// 不系安全带报警抓拍照片张数
+        /// </summary>
+        public byte PhotographsNotBuckleUp { get; set; }
+        /// <summary>
+        ///不系安全带报警拍照间隔
+        /// </summary>
+        public byte PictureIntervalNotBuckleUp { get; set; }
+        ///<summary>
+        /// 红外墨镜阻断失效报警分级车速阈值
+        /// </summary>
+        public byte ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure { get; set; }
+        /// <summary>
+        /// 红外墨镜阻断失效报警前后视频录制时间
+        /// </summary>
+        public byte VideoRecordingTimeInfraredSunglassesBlockingFailure { get; set; }
+        /// <summary>
+        /// 红外墨镜阻断失效报警抓拍照片张数
+        /// </summary>
+        public byte PhotographsInfraredSunglassesBlockingFailure { get; set; }
+        /// <summary>
+        ///红外墨镜阻断失效报警拍照间隔
+        /// </summary>
+        public byte PictureIntervalInfraredSunglassesBlockingFailure { get; set; }
+        /// 双脱把报警分级车速阈值
+        /// </summary>
+        public byte ClassifiedSpeedThresholdDoubleHanderOff { get; set; }
+        /// <summary>
+        /// 双脱把报警前后视频录制时间
+        /// </summary>
+        public byte VideoRecordingTimeDoubleHanderOff { get; set; }
+        /// <summary>
+        /// 双脱把报警抓拍照片张数
+        /// </summary>
+        public byte PhotographsDoubleHanderOff { get; set; }
+        /// <summary>
+        ///双脱把报警拍照间隔
+        /// </summary>
+        public byte PictureIntervalDoubleHanderOff { get; set; }
+        ///玩手机报警分级车速阈值
+        /// </summary>
+        public byte ClassifiedSpeedThresholdPlayMobile { get; set; }
+        /// <summary>
+        /// 玩手机报警前后视频录制时间
+        /// </summary>
+        public byte VideoRecordingTimePlayMobile { get; set; }
+        /// <summary>
+        /// 玩手机报警抓拍照片张数
+        /// </summary>
+        public byte PhotographsPlayMobile { get; set; }
+        /// <summary>
+        ///玩手机报警拍照间隔
+        /// </summary>
+        public byte PictureIntervalPlayMobile { get; set; }
         /// <summary>
         /// 保留字段
         /// </summary>
@@ -193,33 +269,39 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteNumber($"[{value.VideoRecordingResolution.ReadNumber()}]视频录制分辨率-{videoRecordingResolution.ToString()}", value.VideoRecordingResolution);
             value.AlarmEnable = reader.ReadUInt32();
             writer.WriteNumber($"[{value.AlarmEnable.ReadNumber()}]报警使能", value.AlarmEnable);
-            var alarmEnableBits = Convert.ToString(value.AlarmEnable, 2).PadLeft(32, '0').AsSpan();
-            writer.WriteStartObject("报警使能对象");
-            writer.WriteString("[bit30~bit31]预留", alarmEnableBits.Slice(30, 2).ToString());
-            writer.WriteString("[bit17~bit29]用户自定义", alarmEnableBits.Slice(17, 13).ToString());
-            writer.WriteString("[bit16]道路标识超限报警", alarmEnableBits[16] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit12~bit15]道路标识超限报警", alarmEnableBits.Slice(12, 4).ToString());
-            writer.WriteString("[bit11]车距过近二级报警", alarmEnableBits[11] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit10]车距过近一级报警", alarmEnableBits[10] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit9]行人碰撞二级报警", alarmEnableBits[9] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit8]行人碰撞一级报警", alarmEnableBits[8] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit7]前向碰撞二级报警", alarmEnableBits[7] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit6]前向碰撞一级报警", alarmEnableBits[6] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit5]车道偏离二级报警", alarmEnableBits[5] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit4]车道偏离一级报警", alarmEnableBits[4] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit3]频繁变道二级报警", alarmEnableBits[3] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit2]频繁变道一级报警", alarmEnableBits[2] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit1]障碍检测二级报警", alarmEnableBits[1] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit0]障碍检测一级报警", alarmEnableBits[0] == '0' ? "关闭" : "打开");
+            var alarmEnableBits = Convert.ToString(value.AlarmEnable, 2).PadLeft(32, '0').Reverse().ToArray().AsSpan();
+            writer.WriteStartObject($"报警使能对象[{alarmEnableBits.ToString()}]");
+            writer.WriteString("[bit30~bit31]保留", alarmEnableBits.Slice(30, 2).ToString());
+            writer.WriteString("[bit20~bit29]用户自定义", alarmEnableBits.Slice(20, 10).ToString());
+            writer.WriteString("[bit19]玩手机二级报警", alarmEnableBits[19] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit18]玩手机一级报警", alarmEnableBits[18] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit17]双脱把二级报警（双手同时脱离方向盘）", alarmEnableBits[17] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit16]双脱把一级报警（双手同时脱离方向盘）", alarmEnableBits[16] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit15]红外墨镜阻断失效二级报警", alarmEnableBits[15] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit14]红外墨镜阻断失效一级报警", alarmEnableBits[14] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit13]不系安全带二级报警", alarmEnableBits[13] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit12]不系安全带一级报警", alarmEnableBits[12] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit11]摄像机遮挡二级报警", alarmEnableBits[11] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit10]摄像机遮挡一级报警", alarmEnableBits[10] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit9]驾驶员异常二级报警", alarmEnableBits[9] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit8]驾驶员异常一级报警", alarmEnableBits[8] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit7]不目视前方二级报警", alarmEnableBits[7] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit6]不目视前方一级报警", alarmEnableBits[6] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit5]抽烟二级报警", alarmEnableBits[5] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit4]抽烟一级报警", alarmEnableBits[4] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit3]接打手持电话二级报警", alarmEnableBits[3] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit2]接打手持电话一级报警", alarmEnableBits[2] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit1]疲劳驾驶二级报警", alarmEnableBits[1] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit0]疲劳驾驶一级报警", alarmEnableBits[0] == '0' ? "关闭" : "打开");
             writer.WriteEndObject();
             value.EventEnable = reader.ReadUInt32();
             writer.WriteNumber($"[{value.EventEnable.ReadNumber()}]事件使能", value.EventEnable);
-            var eventEnableBits = Convert.ToString(value.EventEnable, 2).PadLeft(32, '0').AsSpan();
-            writer.WriteStartObject("事件使能对象");
+            var eventEnableBits = Convert.ToString(value.EventEnable, 2).PadLeft(32, '0').Reverse().ToArray().AsSpan();
+            writer.WriteStartObject($"事件使能对象[{eventEnableBits.ToString()}]");
             writer.WriteString("[bit30~bit31]预留", eventEnableBits.Slice(30, 2).ToString());
-            writer.WriteString("[bit2~bit29]用户自定义", alarmEnableBits.Slice(2, 28).ToString());
-            writer.WriteString("[bit1]主动拍照", alarmEnableBits[1] == '0' ? "关闭" : "打开");
-            writer.WriteString("[bit0]道路标识识别", alarmEnableBits[0] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit2~bit29]用户自定义", eventEnableBits.Slice(2, 28).ToString());
+            writer.WriteString("[bit1]主动拍照事件", eventEnableBits[1] == '0' ? "关闭" : "打开");
+            writer.WriteString("[bit0]驾驶员变更事件", eventEnableBits[0] == '0' ? "关闭" : "打开");
             writer.WriteEndObject();
             value.TimeIntervalSmokingAlarmJudgment = reader.ReadUInt16();
             writer.WriteNumber($"[{value.TimeIntervalSmokingAlarmJudgment.ReadNumber()}]吸烟报警判断时间间隔", value.TimeIntervalSmokingAlarmJudgment);
@@ -253,10 +335,14 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteNumber($"[{value.SmokingAlarmPhotographsDriverFaceCharacteristicsInterval.ReadNumber()}]抽烟报警拍驾驶员面部特征照片间隔时间", value.SmokingAlarmPhotographsDriverFaceCharacteristicsInterval);
             value.ClassifiedSpeedThresholdDistractedDrivingAlarm = reader.ReadByte();
             writer.WriteNumber($"[{value.ClassifiedSpeedThresholdDistractedDrivingAlarm.ReadNumber()}]分神驾驶报警分级车速阈值", value.ClassifiedSpeedThresholdDistractedDrivingAlarm);
+            value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm = reader.ReadByte();
+            writer.WriteNumber($"[{value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm.ReadNumber()}]不目视前方报警前后视频录制时间", value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm);
             value.DistractedDrivingAlarmPhotography = reader.ReadByte();
             writer.WriteNumber($"[{value.DistractedDrivingAlarmPhotography.ReadNumber()}]分神驾驶报警拍照张数", value.DistractedDrivingAlarmPhotography);
             value.DistractedDrivingAlarmPhotographyInterval = reader.ReadByte();
             writer.WriteNumber($"[{value.DistractedDrivingAlarmPhotographyInterval.ReadNumber()}]分神驾驶报警拍照间隔时间", value.DistractedDrivingAlarmPhotographyInterval);
+            value.ClassifiedSpeedThresholdAbnormalDrivingBehavior = reader.ReadByte();
+            writer.WriteNumber($"[{value.ClassifiedSpeedThresholdAbnormalDrivingBehavior.ReadNumber()}]驾驶行为异常分级车速阈值", value.ClassifiedSpeedThresholdAbnormalDrivingBehavior);
             value.VideoRecordingTimeAbnormalDrivingBehavior = reader.ReadByte();
             writer.WriteNumber($"[{value.VideoRecordingTimeAbnormalDrivingBehavior.ReadNumber()}]驾驶行为异常视频录制时间", value.VideoRecordingTimeAbnormalDrivingBehavior);
             value.PhotographsAbnormalDrivingBehavior = reader.ReadByte();
@@ -264,7 +350,46 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             value.PictureIntervalAbnormalDrivingBehavior = reader.ReadByte();
             writer.WriteNumber($"[{value.PictureIntervalAbnormalDrivingBehavior.ReadNumber()}]驾驶行为异常拍照间隔", value.PictureIntervalAbnormalDrivingBehavior);
             value.DriverIdentificationTrigger = reader.ReadByte();
-            writer.WriteNumber($"[{value.DriverIdentificationTrigger.ReadNumber()}]驾驶员身份识别触发", value.DriverIdentificationTrigger);
+            writer.WriteNumber($"[{value.DriverIdentificationTrigger.ReadNumber()}]驾驶员身份识别触发方式", value.DriverIdentificationTrigger);
+            value.ClassifiedSpeedThresholdCameraOcclusion = reader.ReadByte();
+            writer.WriteNumber($"[{value.ClassifiedSpeedThresholdCameraOcclusion.ReadNumber()}]摄像机遮挡报警分级速度阈值", value.ClassifiedSpeedThresholdCameraOcclusion);
+            //不系安全带报警
+            value.ClassifiedSpeedThresholdNotBuckleUp = reader.ReadByte();
+            writer.WriteNumber($"[{value.ClassifiedSpeedThresholdNotBuckleUp.ReadNumber()}]不系安全带报警拍照间隔", value.ClassifiedSpeedThresholdNotBuckleUp);
+            value.VideoRecordingTimeNotBuckleUp = reader.ReadByte();
+            writer.WriteNumber($"[{value.VideoRecordingTimeNotBuckleUp.ReadNumber()}]不系安全带报警前后视频录制时间", value.VideoRecordingTimeNotBuckleUp);
+            value.PhotographsNotBuckleUp = reader.ReadByte();
+            writer.WriteNumber($"[{value.PhotographsNotBuckleUp.ReadNumber()}]不系安全带报警抓拍照片张数", value.PhotographsNotBuckleUp);
+            value.PictureIntervalNotBuckleUp = reader.ReadByte();
+            writer.WriteNumber($"[{value.PictureIntervalNotBuckleUp.ReadNumber()}]不系安全带报警拍照间隔", value.PictureIntervalNotBuckleUp);
+            //红外墨镜阻断失效报警
+            value.ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure = reader.ReadByte();
+            writer.WriteNumber($"[{value.ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure.ReadNumber()}]红外墨镜阻断失效报警分级车速阈值", value.ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure);
+            value.VideoRecordingTimeInfraredSunglassesBlockingFailure = reader.ReadByte();
+            writer.WriteNumber($"[{value.VideoRecordingTimeInfraredSunglassesBlockingFailure.ReadNumber()}]红外墨镜阻断失效报警前后视频录制时间", value.VideoRecordingTimeInfraredSunglassesBlockingFailure);
+            value.PhotographsInfraredSunglassesBlockingFailure = reader.ReadByte();
+            writer.WriteNumber($"[{value.PhotographsInfraredSunglassesBlockingFailure.ReadNumber()}]红外墨镜阻断失效报警抓拍照片张数", value.PhotographsInfraredSunglassesBlockingFailure);
+            value.PictureIntervalInfraredSunglassesBlockingFailure = reader.ReadByte();
+            writer.WriteNumber($"[{value.PictureIntervalInfraredSunglassesBlockingFailure.ReadNumber()}]红外墨镜阻断失效报警拍照间隔", value.PictureIntervalInfraredSunglassesBlockingFailure);
+            //双脱把报警
+            value.ClassifiedSpeedThresholdDoubleHanderOff = reader.ReadByte();
+            writer.WriteNumber($"[{value.ClassifiedSpeedThresholdDoubleHanderOff.ReadNumber()}]双脱把报警分级车速阈值", value.ClassifiedSpeedThresholdDoubleHanderOff);
+            value.VideoRecordingTimeDoubleHanderOff = reader.ReadByte();
+            writer.WriteNumber($"[{value.VideoRecordingTimeDoubleHanderOff.ReadNumber()}]双脱把报警前后视频录制时间", value.VideoRecordingTimeDoubleHanderOff);
+            value.PhotographsDoubleHanderOff = reader.ReadByte();
+            writer.WriteNumber($"[{value.PhotographsDoubleHanderOff.ReadNumber()}]双脱把报警抓拍照片张数", value.PhotographsDoubleHanderOff);
+            value.PictureIntervalDoubleHanderOff = reader.ReadByte();
+            writer.WriteNumber($"[{value.PictureIntervalDoubleHanderOff.ReadNumber()}]双脱把报警拍照间隔", value.PictureIntervalDoubleHanderOff);
+            //玩手机报警
+            value.ClassifiedSpeedThresholdPlayMobile = reader.ReadByte();
+            writer.WriteNumber($"[{value.ClassifiedSpeedThresholdPlayMobile.ReadNumber()}]玩手机报警分级车速阈值", value.ClassifiedSpeedThresholdPlayMobile);
+            value.VideoRecordingTimePlayMobile = reader.ReadByte();
+            writer.WriteNumber($"[{value.VideoRecordingTimePlayMobile.ReadNumber()}]玩手机报警前后视频录制时间", value.VideoRecordingTimePlayMobile);
+            value.PhotographsPlayMobile = reader.ReadByte();
+            writer.WriteNumber($"[{value.PhotographsPlayMobile.ReadNumber()}]玩手机报警抓拍照片张数", value.PhotographsPlayMobile);
+            value.PictureIntervalPlayMobile = reader.ReadByte();
+            writer.WriteNumber($"[{value.PictureIntervalPlayMobile.ReadNumber()}]玩手机报警拍照间隔", value.PictureIntervalPlayMobile);
+
             value.Retain = reader.ReadArray(reader.ReadCurrentRemainContentLength()).ToArray();
             writer.WriteString("保留字段", value.Retain.ToHexString());
         }
@@ -306,12 +431,36 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             value.SmokingAlarmPhotographsDriverFaceCharacteristics = reader.ReadByte();
             value.SmokingAlarmPhotographsDriverFaceCharacteristicsInterval = reader.ReadByte();
             value.ClassifiedSpeedThresholdDistractedDrivingAlarm = reader.ReadByte();
+            value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm = reader.ReadByte();
             value.DistractedDrivingAlarmPhotography = reader.ReadByte();
             value.DistractedDrivingAlarmPhotographyInterval = reader.ReadByte();
+            value.ClassifiedSpeedThresholdAbnormalDrivingBehavior = reader.ReadByte();
             value.VideoRecordingTimeAbnormalDrivingBehavior = reader.ReadByte();
             value.PhotographsAbnormalDrivingBehavior = reader.ReadByte();
             value.PictureIntervalAbnormalDrivingBehavior = reader.ReadByte();
             value.DriverIdentificationTrigger = reader.ReadByte();
+            value.ClassifiedSpeedThresholdCameraOcclusion = reader.ReadByte();
+
+            value.ClassifiedSpeedThresholdNotBuckleUp = reader.ReadByte();
+            value.VideoRecordingTimeNotBuckleUp = reader.ReadByte();
+            value.PhotographsNotBuckleUp = reader.ReadByte();
+            value.PictureIntervalNotBuckleUp = reader.ReadByte();
+
+            value.ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure = reader.ReadByte();
+            value.VideoRecordingTimeInfraredSunglassesBlockingFailure = reader.ReadByte();
+            value.PhotographsInfraredSunglassesBlockingFailure = reader.ReadByte();
+            value.PictureIntervalInfraredSunglassesBlockingFailure = reader.ReadByte();
+
+            value.ClassifiedSpeedThresholdDoubleHanderOff = reader.ReadByte();
+            value.VideoRecordingTimeDoubleHanderOff = reader.ReadByte();
+            value.PhotographsDoubleHanderOff = reader.ReadByte();
+            value.PictureIntervalDoubleHanderOff = reader.ReadByte();
+
+            value.ClassifiedSpeedThresholdPlayMobile = reader.ReadByte();
+            value.VideoRecordingTimePlayMobile = reader.ReadByte();
+            value.PhotographsPlayMobile = reader.ReadByte();
+            value.PictureIntervalPlayMobile = reader.ReadByte();
+
             value.Retain = reader.ReadArray(reader.ReadCurrentRemainContentLength()).ToArray();
             return value;
         }
@@ -352,12 +501,38 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             writer.WriteByte(value.SmokingAlarmPhotographsDriverFaceCharacteristics);
             writer.WriteByte(value.SmokingAlarmPhotographsDriverFaceCharacteristicsInterval);
             writer.WriteByte(value.ClassifiedSpeedThresholdDistractedDrivingAlarm);
+            writer.WriteByte(value.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm);
             writer.WriteByte(value.DistractedDrivingAlarmPhotography);
             writer.WriteByte(value.DistractedDrivingAlarmPhotographyInterval);
+
+            writer.WriteByte(value.ClassifiedSpeedThresholdAbnormalDrivingBehavior);
             writer.WriteByte(value.VideoRecordingTimeAbnormalDrivingBehavior);
             writer.WriteByte(value.PhotographsAbnormalDrivingBehavior);
             writer.WriteByte(value.PictureIntervalAbnormalDrivingBehavior);
+
             writer.WriteByte(value.DriverIdentificationTrigger);
+            writer.WriteByte(value.ClassifiedSpeedThresholdCameraOcclusion);
+
+            writer.WriteByte(value.ClassifiedSpeedThresholdNotBuckleUp);
+            writer.WriteByte(value.VideoRecordingTimeNotBuckleUp);
+            writer.WriteByte(value.PhotographsNotBuckleUp);
+            writer.WriteByte(value.PictureIntervalNotBuckleUp);
+
+            writer.WriteByte(value.ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure);
+            writer.WriteByte(value.VideoRecordingTimeInfraredSunglassesBlockingFailure);
+            writer.WriteByte(value.PhotographsInfraredSunglassesBlockingFailure);
+            writer.WriteByte(value.PictureIntervalInfraredSunglassesBlockingFailure);
+
+            writer.WriteByte(value.ClassifiedSpeedThresholdDoubleHanderOff);
+            writer.WriteByte(value.VideoRecordingTimeDoubleHanderOff);
+            writer.WriteByte(value.PhotographsDoubleHanderOff);
+            writer.WriteByte(value.PictureIntervalDoubleHanderOff);
+
+            writer.WriteByte(value.ClassifiedSpeedThresholdPlayMobile);
+            writer.WriteByte(value.VideoRecordingTimePlayMobile);
+            writer.WriteByte(value.PhotographsPlayMobile);
+            writer.WriteByte(value.PictureIntervalPlayMobile);
+
             writer.WriteArray(value.Retain);
             writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - ParamLengthPosition - 1), ParamLengthPosition);
         }

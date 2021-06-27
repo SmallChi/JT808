@@ -307,6 +307,16 @@
             附加信息ID 盲区监测系统报警信息
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.JT808_YueBiao_Constants.JT808_0X0200_0xF1">
+            <summary>
+            附加信息ID 安装信息异常
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.YueBiao.JT808_YueBiao_Constants.JT808_0X0200_0xF2">
+            <summary>
+            附加信息ID 算法异常信息
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.Extensions.YueBiao.JT808_YueBiao_Constants.JT808_0X8103_0xF364">
             <summary>
             高级驾驶辅助系统参数设置
@@ -400,7 +410,7 @@
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0x64.RoadSignIdentificationData">
             <summary>
-            道路标志识别类型
+            道路标志识别数据
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0x64.Speed">
@@ -696,11 +706,6 @@
             报警/事件类型
             </summary>
         </member>
-        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0x67.AlarmLevel">
-            <summary>
-            报警/事件类型
-            </summary>
-        </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0x67.Speed">
             <summary>
             车速
@@ -755,6 +760,94 @@
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0x67.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0x67,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF1">
+            <summary>
+            安装异常信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF1.AttachInfoId">
+            <summary>
+            安装异常信息附件ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF1.AttachInfoLength">
+            <summary>
+            算法异常信息长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF1.Retain">
+            <summary>
+            厂家自定义
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF1.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF1.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF1.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF1,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF2">
+            <summary>
+            算法异常信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF2.AttachInfoId">
+            <summary>
+            算法异常信息附件ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF2.AttachInfoLength">
+            <summary>
+            算法异常信息长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF2.Retain">
+            <summary>
+            厂家自定义
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF2.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF2.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF2.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0xF2,JT808.Protocol.IJT808Config)">
             <summary>
             
             </summary>
@@ -1241,7 +1334,7 @@
             频繁变道报警拍照间隔
             </summary>
         </member>
-        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.GradedSpeedThresholdLaneDeviationAlarm">
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.GradedSpeedThresholdLaneDepartureAlarm">
             <summary>
             车道偏离报警分级速度阈值
             </summary>
@@ -1313,12 +1406,12 @@
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.VehicleDistanceMonitoringAlarmDistanceThreshold">
             <summary>
-            车距监控报警距离阈值
+            车距过近报警距离阈值
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.VehicleDistanceMonitoringAndAlarmClassificationSpeedThreshold">
             <summary>
-            车距监控报警分级速度阈值
+            车距过近报警分级速度阈值
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.VideoRecordingTimeBeforeAndAfterAlarmVehicleProximity">
@@ -1344,6 +1437,46 @@
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.RoadSignRecognitionPhotographsInterval">
             <summary>
             道路标志识别拍照间隔
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.SolidLineChangeLanesAlarmClassificationSpeedThreshold">
+            <summary>
+            实线变道报警分级速度阈值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.VideoRecordingTimeBeforeAndAfterSolidLineChangeLanesAlarm">
+            <summary>
+            实线变道报警前后视频录制时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.SolidLineChangeLanesAlarmPhotographs">
+            <summary>
+            实线变道报警拍照张数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.SolidLineChangeLanesAlarmPhotoInterval">
+            <summary>
+            实线变道报警拍照间隔
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.CarriageAislePassengerDetectionAlarmClassificationSpeedThreshold">
+            <summary>
+            车厢过道行人检测报警分级速度阈值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.VideoRecordingTimeBeforeAndAfterCarriageAislePassengerDetectionAlarm">
+            <summary>
+            车厢过道行人检测报警前后视频录制时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.CarriageAislePassengerDetectionAlarmPhotographs">
+            <summary>
+            车厢过道行人检测报警拍照张数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.CarriageAislePassengerDetectionAlarmPhotoInterval">
+            <summary>
+            车厢过道行人检测报警拍照间隔
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.Placeholder2">
@@ -1522,17 +1655,27 @@
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdDistractedDrivingAlarm">
             <summary>
-            分神驾驶报警分级车速阈值
+            不目视前方报警分级车速阈值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm">
+            <summary>
+            不目视前方报警前后视频录制时间
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.DistractedDrivingAlarmPhotography">
             <summary>
-            分神驾驶报警拍照张数
+             不目视前方报警拍照张数
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.DistractedDrivingAlarmPhotographyInterval">
             <summary>
-            分神驾驶报警拍照间隔时间
+             不目视前方报警拍照间隔时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdAbnormalDrivingBehavior">
+            <summary>
+            驾驶行为异常分级车速阈值
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimeAbnormalDrivingBehavior">
@@ -1552,8 +1695,85 @@
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.DriverIdentificationTrigger">
             <summary>
-            驾驶员身份识别触发
+            驾驶员身份识别触发方式
             </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdCameraOcclusion">
+            <summary>
+            摄像机遮挡报警分级车速阈值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdNotBuckleUp">
+            <summary>
+            不系安全带报警分级车速阈值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimeNotBuckleUp">
+            <summary>
+            不系安全带报警前后视频录制时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.PhotographsNotBuckleUp">
+            <summary>
+            不系安全带报警抓拍照片张数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.PictureIntervalNotBuckleUp">
+             <summary>
+            不系安全带报警拍照间隔
+             </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure">
+            <summary>
+             红外墨镜阻断失效报警分级车速阈值
+             </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimeInfraredSunglassesBlockingFailure">
+            <summary>
+            红外墨镜阻断失效报警前后视频录制时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.PhotographsInfraredSunglassesBlockingFailure">
+            <summary>
+            红外墨镜阻断失效报警抓拍照片张数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.PictureIntervalInfraredSunglassesBlockingFailure">
+             <summary>
+            红外墨镜阻断失效报警拍照间隔
+             </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdDoubleHanderOff" -->
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimeDoubleHanderOff">
+            <summary>
+            双脱把报警前后视频录制时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.PhotographsDoubleHanderOff">
+            <summary>
+            双脱把报警抓拍照片张数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.PictureIntervalDoubleHanderOff">
+             <summary>
+            双脱把报警拍照间隔
+             </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdPlayMobile" -->
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimePlayMobile">
+            <summary>
+            玩手机报警前后视频录制时间
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.PhotographsPlayMobile">
+            <summary>
+            玩手机报警抓拍照片张数
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.PictureIntervalPlayMobile">
+             <summary>
+            玩手机报警拍照间隔
+             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.Retain">
             <summary>

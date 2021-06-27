@@ -138,12 +138,6 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             value.AlarmIdentification.AttachCount = reader.ReadByte();
             value.AlarmIdentification.Retain1 = reader.ReadByte();
             value.AlarmIdentification.Retain2 = reader.ReadByte();
-            writer.WriteString($"[{terminalIDHex}]终端ID", value.AlarmIdentification.TerminalId);
-            writer.WriteString($"[{value.AlarmIdentification.Time.ToString("yyMMddHHmmss")}]日期时间", value.AlarmIdentification.Time.ToString("yyyy-MM-dd HH:mm:ss"));
-            writer.WriteNumber($"[{value.AlarmIdentification.SN.ReadNumber()}]序号", value.AlarmIdentification.SN);
-            writer.WriteNumber($"[{value.AlarmIdentification.AttachCount.ReadNumber()}]附件数量", value.AlarmIdentification.AttachCount);
-            writer.WriteNumber($"[{value.AlarmIdentification.Retain1.ReadNumber()}]预留1", value.AlarmIdentification.Retain1);
-            writer.WriteNumber($"[{value.AlarmIdentification.Retain2.ReadNumber()}]预留2", value.AlarmIdentification.Retain2);
             value.AlarmOrEventCount = reader.ReadByte();
             writer.WriteNumber($"[{value.AlarmOrEventCount.ReadNumber()}]报警_事件列表总数", value.AlarmOrEventCount);
             if (value.AlarmOrEventCount > 0)
@@ -153,67 +147,29 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
                 {
                     writer.WriteStartObject();
                     AlarmOrEventProperty item = new AlarmOrEventProperty();
-                    item.TirePressureAlarmPosition = reader.ReadByte();
+                    item.TirePressureAlarmPosition = reader.ReadUInt16();
                     writer.WriteNumber($"[{item.TirePressureAlarmPosition.ReadNumber()}]胎压报警位置", item.TirePressureAlarmPosition);
                     item.AlarmOrEventType = reader.ReadUInt16();
-                    string alarmOrEventTypeString = "";
-                    switch (item.AlarmOrEventType)
-                    {
-                        case 0x01:
-                            alarmOrEventTypeString = "前向碰撞报警";
-                            break;
-                        case 0x02:
-                            alarmOrEventTypeString = "车道偏离报警";
-                            break;
-                        case 0x03:
-                            alarmOrEventTypeString = "车距过近报警";
-                            break;
-                        case 0x04:
-                            alarmOrEventTypeString = "行人碰撞报警";
-                            break;
-                        case 0x05:
-                            alarmOrEventTypeString = "频繁变道报警";
-                            break;
-                        case 0x06:
-                            alarmOrEventTypeString = "道路标识超限报警";
-                            break;
-                        case 0x07:
-                            alarmOrEventTypeString = "障碍物报警";
-                            break;
-                        case 0x08:
-                        case 0x09:
-                        case 0x0A:
-                        case 0x0B:
-                        case 0x0C:
-                        case 0x0D:
-                        case 0x0E:
-                        case 0x0F:
-                            alarmOrEventTypeString = "用户自定义";
-                            break;
-                        case 0x10:
-                            alarmOrEventTypeString = "道路标志识别事件";
-                            break;
-                        case 0x11:
-                            alarmOrEventTypeString = "主动抓拍事件";
-                            break;
-                        case 0x12:
-                        case 0x13:
-                        case 0x14:
-                        case 0x15:
-                        case 0x16:
-                        case 0x17:
-                        case 0x18:
-                        case 0x19:
-                        case 0x1A:
-                        case 0x1B:
-                        case 0x1C:
-                        case 0x1D:
-                        case 0x1E:
-                        case 0x1F:
-                            alarmOrEventTypeString = "用户自定义";
-                            break;
-                    }
-                    writer.WriteNumber($"[{item.AlarmOrEventType.ReadNumber()}]报警_事件类型-{alarmOrEventTypeString}", item.AlarmOrEventType);
+                    writer.WriteNumber($"[{item.AlarmOrEventType.ReadNumber()}]事件/报警类型", item.AlarmOrEventType);
+                    var AlarmOrEventTypeBits = Convert.ToString(item.AlarmOrEventType, 2).PadLeft(16, '0');
+                    writer.WriteStartObject($"事件/报警类型[{AlarmOrEventTypeBits}]");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[15]}]Bit0胎压(定时上报)", AlarmOrEventTypeBits[15] == '0' ? "无报警" : "有报警");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[14]}]Bit1胎压过高报警", AlarmOrEventTypeBits[14] == '0' ? "无报警" : "有报警");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[13]}]Bit2胎压过低报警", AlarmOrEventTypeBits[13] == '0' ? "无报警" : "有报警");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[12]}]Bit3胎温过高报警", AlarmOrEventTypeBits[12] == '0' ? "无报警" : "有报警");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[11]}]Bit4传感器异常报警", AlarmOrEventTypeBits[11] == '0' ? "无报警" : "有报警");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[10]}]Bit5胎压不平衡报警", AlarmOrEventTypeBits[10] == '0' ? "无报警" : "有报警");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[9]}]Bit6慢漏气报警", AlarmOrEventTypeBits[9] == '0' ? "无报警" : "有报警");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[8]}]Bit7电池电量低报警", AlarmOrEventTypeBits[8] == '0' ? "无报警" : "有报警");
+                    writer.WriteString($"[{AlarmOrEventTypeBits[7]}]Bit8自定义", AlarmOrEventTypeBits[7].ToString());
+                    writer.WriteString($"[{AlarmOrEventTypeBits[6]}]Bit9自定义", AlarmOrEventTypeBits[6].ToString());
+                    writer.WriteString($"[{AlarmOrEventTypeBits[5]}]Bit10自定义", AlarmOrEventTypeBits[5].ToString());
+                    writer.WriteString($"[{AlarmOrEventTypeBits[4]}]Bit11自定义", AlarmOrEventTypeBits[4].ToString());
+                    writer.WriteString($"[{AlarmOrEventTypeBits[3]}]Bit12自定义", AlarmOrEventTypeBits[3].ToString());
+                    writer.WriteString($"[{AlarmOrEventTypeBits[2]}]Bit13自定义", AlarmOrEventTypeBits[2].ToString());
+                    writer.WriteString($"[{AlarmOrEventTypeBits[1]}]Bit14自定义", AlarmOrEventTypeBits[1].ToString());
+                    writer.WriteString($"[{AlarmOrEventTypeBits[0]}]Bit15自定义", AlarmOrEventTypeBits[0].ToString());
+                    writer.WriteEndObject();
                     item.TirePressure = reader.ReadUInt16();
                     writer.WriteNumber($"[{item.TirePressure.ReadNumber()}]胎压Kpa", item.TirePressure);
                     item.TireTemperature = reader.ReadUInt16();
@@ -260,7 +216,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
                 for (int i = 0; i < value.AlarmOrEventCount; i++)
                 {
                     AlarmOrEventProperty alarmOrEventProperty = new AlarmOrEventProperty();
-                    alarmOrEventProperty.TirePressureAlarmPosition = reader.ReadByte();
+                    alarmOrEventProperty.TirePressureAlarmPosition = reader.ReadUInt16();
                     alarmOrEventProperty.AlarmOrEventType = reader.ReadUInt16();
                     alarmOrEventProperty.TirePressure = reader.ReadUInt16();
                     alarmOrEventProperty.TireTemperature = reader.ReadUInt16();
@@ -303,7 +259,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
                 writer.WriteByte((byte)value.AlarmOrEvents.Count);
                 foreach (var item in value.AlarmOrEvents)
                 {
-                    writer.WriteByte(item.TirePressureAlarmPosition);
+                    writer.WriteUInt16(item.TirePressureAlarmPosition);
                     writer.WriteUInt16(item.AlarmOrEventType);
                     writer.WriteUInt16(item.TirePressure);
                     writer.WriteUInt16(item.TireTemperature);

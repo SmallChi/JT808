@@ -26,6 +26,14 @@ namespace JT808.Protocol.Extensions.YueBiao
         /// </summary>
         public const byte JT808_0X0200_0x67 = 0x67;
         /// <summary>
+        /// 附加信息ID 安装信息异常
+        /// </summary>
+        public const byte JT808_0X0200_0xF1 = 0xF1;
+        /// <summary>
+        /// 附加信息ID 算法异常信息
+        /// </summary>
+        public const byte JT808_0X0200_0xF2 = 0xF2;
+        /// <summary>
         /// 高级驾驶辅助系统参数设置
         /// </summary>
         public const uint JT808_0X8103_0xF364 = 0xF364;

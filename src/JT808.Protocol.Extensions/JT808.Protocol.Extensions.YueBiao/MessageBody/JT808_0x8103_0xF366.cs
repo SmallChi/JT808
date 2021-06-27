@@ -111,7 +111,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
             JT808_0x8103_0xF366 value = new JT808_0x8103_0xF366();
             value.ParamId = reader.ReadUInt32();
             value.ParamLength = reader.ReadByte();
-            value.TyreSpecificationType = reader.ReadString(12);
+            value.TyreSpecificationType = reader.ReadASCII(12);
             value.TyrePressureUnit = reader.ReadUInt16();
             value.NormalFetalPressure = reader.ReadUInt16();
             value.ThresholdUnbalancedTirePressure = reader.ReadUInt16();
@@ -134,7 +134,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         {
             writer.WriteUInt32(value.ParamId);
             writer.Skip(1, out int ParamLengthPosition);
-            writer.WriteString(value.TyreSpecificationType);
+            writer.WriteASCII(value.TyreSpecificationType);
             writer.WriteUInt16(value.TyrePressureUnit);
             writer.WriteUInt16(value.NormalFetalPressure);
             writer.WriteUInt16(value.ThresholdUnbalancedTirePressure);

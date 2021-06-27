@@ -49,6 +49,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
                         FatigueDrivingAlarmPhotograph=55,
                         FatigueDrivingAlarmPhotographInterval=56,
                         GradedSpeedThresholdFatigueDrivingAlarm=57,
+
                         PhotographsAbnormalDrivingBehavior=58,
                         PictureIntervalAbnormalDrivingBehavior=59,
                         Reserve=new byte[]{1,2,3 },
@@ -59,17 +60,42 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
                         VideoRecordingTimeAbnormalDrivingBehavior=63,
                         VideoRecordingTimeBeforeAndAfterCallAlarm=64,
                         VideoRecordingTimeBeforeAndAfterFatigueDrivingAlarm=65,
-                        VideoRecordingTimeBeforeAndAfterSmokingAlarm=66
+                        VideoRecordingTimeBeforeAndAfterSmokingAlarm=66,
+                         
+                         ClassifiedSpeedThresholdCameraOcclusion=68,
+
+                          ClassifiedSpeedThresholdDoubleHanderOff=69,
+                           VideoRecordingTimeDoubleHanderOff=70,
+                            PhotographsDoubleHanderOff=71,
+                             PictureIntervalDoubleHanderOff=72,
+                             
+                              ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure=73,
+                               VideoRecordingTimeInfraredSunglassesBlockingFailure=74,
+                                PhotographsInfraredSunglassesBlockingFailure=75,
+                                 PictureIntervalInfraredSunglassesBlockingFailure=76,
+
+                                  ClassifiedSpeedThresholdNotBuckleUp=77,
+                                  VideoRecordingTimeNotBuckleUp=78,
+                                   PhotographsNotBuckleUp=79,
+                                    PictureIntervalNotBuckleUp=80,
+
+                                     ClassifiedSpeedThresholdPlayMobile=81,
+                                      VideoRecordingTimePlayMobile=82,
+                                       PhotographsPlayMobile=83,
+                                        PictureIntervalPlayMobile=84,
+
+                                      ClassifiedSpeedThresholdAbnormalDrivingBehavior=67,
+                                        VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm=85
                   }
                }
             };
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("010000F3652F052D030002000122231D26000000040000000A003E002E0102033941373831402F3033423C3D3234353F3A3B360506", hex);
+            Assert.Equal("010000F36542052D030002000122231D26000000040000000A003E002E0102033941373831402F3033423C3D32553435433F3A3B36444D4E4F50494A4B4C45464748515253540506", hex);
         }
         [Fact]
         public void Deserialize()
         {
-            var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x8103>("010000F3652F052D030002000122231D26000000040000000A003E002E0102033941373831402F3033423C3D3234353F3A3B360506".ToHexBytes());
+            var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x8103>("010000F36542052D030002000122231D26000000040000000A003E002E0102033941373831402F3033423C3D32553435433F3A3B36444D4E4F50494A4B4C45464748515253540506".ToHexBytes());
             JT808_0x8103_0xF365 jT808_0X8103_0XF365 = jT808UploadLocationRequest.ParamList[0] as JT808_0x8103_0xF365;
             Assert.Equal(1, jT808_0X8103_0XF365.ActiveDistancePhotographyDistanceInterval);
             Assert.Equal(2, jT808_0X8103_0XF365.ActivelyTimePhotoInterval);
@@ -105,12 +131,37 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
             Assert.Equal(64, jT808_0X8103_0XF365.VideoRecordingTimeBeforeAndAfterCallAlarm);
             Assert.Equal(65, jT808_0X8103_0XF365.VideoRecordingTimeBeforeAndAfterFatigueDrivingAlarm);
             Assert.Equal(66, jT808_0X8103_0XF365.VideoRecordingTimeBeforeAndAfterSmokingAlarm);
+
+            Assert.Equal(67, jT808_0X8103_0XF365.ClassifiedSpeedThresholdAbnormalDrivingBehavior);
+            Assert.Equal(68, jT808_0X8103_0XF365.ClassifiedSpeedThresholdCameraOcclusion);
+            Assert.Equal(85, jT808_0X8103_0XF365.VideoRecordingTimeBeforeAndAfterDistractedDrivingAlarm);
+
+            Assert.Equal(69, jT808_0X8103_0XF365.ClassifiedSpeedThresholdDoubleHanderOff);
+            Assert.Equal(70, jT808_0X8103_0XF365.VideoRecordingTimeDoubleHanderOff);
+            Assert.Equal(71, jT808_0X8103_0XF365.PhotographsDoubleHanderOff);
+            Assert.Equal(72, jT808_0X8103_0XF365.PictureIntervalDoubleHanderOff);
+
+            Assert.Equal(73, jT808_0X8103_0XF365.ClassifiedSpeedThresholdInfraredSunglassesBlockingFailure);
+            Assert.Equal(74, jT808_0X8103_0XF365.VideoRecordingTimeInfraredSunglassesBlockingFailure);
+            Assert.Equal(75, jT808_0X8103_0XF365.PhotographsInfraredSunglassesBlockingFailure);
+            Assert.Equal(76, jT808_0X8103_0XF365.PictureIntervalInfraredSunglassesBlockingFailure);
+
+            Assert.Equal(77, jT808_0X8103_0XF365.ClassifiedSpeedThresholdNotBuckleUp);
+            Assert.Equal(78, jT808_0X8103_0XF365.VideoRecordingTimeNotBuckleUp);
+            Assert.Equal(79, jT808_0X8103_0XF365.PhotographsNotBuckleUp);
+            Assert.Equal(80, jT808_0X8103_0XF365.PictureIntervalNotBuckleUp);
+
+            Assert.Equal(81, jT808_0X8103_0XF365.ClassifiedSpeedThresholdPlayMobile);
+            Assert.Equal(82, jT808_0X8103_0XF365.VideoRecordingTimePlayMobile);
+            Assert.Equal(83, jT808_0X8103_0XF365.PhotographsPlayMobile);
+            Assert.Equal(84, jT808_0X8103_0XF365.PictureIntervalPlayMobile);
+
             Assert.Equal(JT808_YueBiao_Constants.JT808_0X8103_0xF365, jT808_0X8103_0XF365.ParamId);
         }
         [Fact]
         public void Json()
         {
-            var json = JT808Serializer.Analyze<JT808_0x8103>("010000F3652F052D030002000122231D26000000040000000A003E002E0102033941373831402F3033423C3D3234353F3A3B360506".ToHexBytes());
+            var json = JT808Serializer.Analyze<JT808_0x8103>("010000F36542052D030002000122231D26000000040000000A003E002E0102033941373831402F3033423C3D32553435433F3A3B36444D4E4F50494A4B4C45464748515253540506".ToHexBytes());
         }
     }
 }

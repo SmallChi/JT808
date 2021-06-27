@@ -111,17 +111,17 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
                     item.USBID = reader.ReadByte();
                     item.MessageLength = reader.ReadByte();
                     item.CompantNameLength = reader.ReadByte();
-                    item.CompantName = reader.ReadString(item.CompantNameLength);
+                    item.CompantName = reader.ReadASCII(item.CompantNameLength);
                     item.ProductModelLength = reader.ReadByte();
-                    item.ProductModel = reader.ReadString(item.ProductModelLength);
+                    item.ProductModel = reader.ReadASCII(item.ProductModelLength);
                     item.HardwareVersionNumberLength = reader.ReadByte();
-                    item.HardwareVersionNumber = reader.ReadString(item.HardwareVersionNumberLength);
+                    item.HardwareVersionNumber = reader.ReadASCII(item.HardwareVersionNumberLength);
                     item.SoftwareVersionNumberLength = reader.ReadByte();
-                    item.SoftwareVersionNumber = reader.ReadString(item.SoftwareVersionNumberLength);
+                    item.SoftwareVersionNumber = reader.ReadASCII(item.SoftwareVersionNumberLength);
                     item.DevicesIDLength = reader.ReadByte();
-                    item.DevicesID = reader.ReadString(item.DevicesIDLength);
+                    item.DevicesID = reader.ReadASCII(item.DevicesIDLength);
                     item.CustomerCodeLength = reader.ReadByte();
-                    item.CustomerCode = reader.ReadString(item.CustomerCodeLength);
+                    item.CustomerCode = reader.ReadASCII(item.CustomerCodeLength);
                     value.USBMessages.Add(item);
                 }
             }
@@ -144,27 +144,27 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
                     writer.Skip(1,out int messageLengthPosition);
 
                     writer.Skip(1, out int CompantNameLengthPosition);
-                    writer.WriteString(item.CompantName);
+                    writer.WriteASCII(item.CompantName);
                     writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - CompantNameLengthPosition - 1), CompantNameLengthPosition);
 
                     writer.Skip(1, out int ProductModelLengthPosition);
-                    writer.WriteString(item.ProductModel);
+                    writer.WriteASCII(item.ProductModel);
                     writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - ProductModelLengthPosition - 1), ProductModelLengthPosition);
 
                     writer.Skip(1, out int HardwareVersionNumberLengthPosition);
-                    writer.WriteString(item.HardwareVersionNumber);
+                    writer.WriteASCII(item.HardwareVersionNumber);
                     writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - HardwareVersionNumberLengthPosition - 1), HardwareVersionNumberLengthPosition);
 
                     writer.Skip(1, out int SoftwareVersionNumberLengthPosition);
-                    writer.WriteString(item.SoftwareVersionNumber);
+                    writer.WriteASCII(item.SoftwareVersionNumber);
                     writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - SoftwareVersionNumberLengthPosition - 1), SoftwareVersionNumberLengthPosition);
 
                     writer.Skip(1, out int DevicesIDLengthPosition);
-                    writer.WriteString(item.DevicesID);
+                    writer.WriteASCII(item.DevicesID);
                     writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - DevicesIDLengthPosition - 1), DevicesIDLengthPosition);
 
                     writer.Skip(1, out int CustomerCodeLengthPosition);
-                    writer.WriteString(item.CustomerCode);
+                    writer.WriteASCII(item.CustomerCode);
                     writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - CustomerCodeLengthPosition - 1), CustomerCodeLengthPosition);
 
                     writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - messageLengthPosition - 1), messageLengthPosition);
