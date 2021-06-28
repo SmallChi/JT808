@@ -327,6 +327,13 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo14](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo14.cs)
 
+### 举个栗子15
+
+场景:
+由于某些厂商不按要求去做，明明使用的2013的协议但是在消息头部的版本标识位置为1，导致程序认为是2019协议。从而解析报错。此时可以强制解析成2013后，然后修正版本标识，重新序列化消息，以供下游服务使用
+
+[可以参考Simples的Demo15](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo15.cs)
+
 ## NuGet安装
 
 | Package Name| Version| Preview  Version |Downloads|Remark|
