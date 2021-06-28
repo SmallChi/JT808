@@ -4032,6 +4032,13 @@
             <param name="externalAssemblies"></param>
             <returns></returns>
         </member>
+        <member name="M:JT808.Protocol.Interfaces.GlobalConfigBase.ReplaceMsgId``2">
+            <summary>
+            替换原有消息
+            </summary>
+            <typeparam name="TSourceJT808Bodies"></typeparam>
+            <typeparam name="TTargetJT808Bodies"></typeparam>
+        </member>
         <member name="T:JT808.Protocol.Interfaces.IJT808Analyze">
             <summary>
             JT808分析器
@@ -4499,6 +4506,11 @@
             </summary>
             <param name="externalAssemblies"></param>
             <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.IJT808Config.ReplaceMsgId``2">
+            <summary>
+            替换原有消息
+            </summary>
         </member>
         <member name="T:JT808.Protocol.Internal.DefaultBuilder">
             <summary>

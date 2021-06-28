@@ -13,10 +13,14 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// </summary>
     public class JT808_0x9206 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9206>, IJT808Analyze
     {
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 文件上传指令
+        /// </summary>
         public override string Description => "文件上传指令";
+        /// <summary>
+        /// 0x9206
+        /// </summary>
         public override ushort MsgId => 0x9206;
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
         /// <summary>
         /// 服务器IP地址服务
         /// </summary>

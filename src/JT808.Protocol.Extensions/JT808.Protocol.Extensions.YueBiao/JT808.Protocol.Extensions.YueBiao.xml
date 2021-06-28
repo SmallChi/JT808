@@ -1743,7 +1743,11 @@
             红外墨镜阻断失效报警拍照间隔
              </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdDoubleHanderOff" -->
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdDoubleHanderOff">
+            <summary>
+            双脱把报警分级车速阈值
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimeDoubleHanderOff">
             <summary>
             双脱把报警前后视频录制时间
@@ -1759,7 +1763,11 @@
             双脱把报警拍照间隔
              </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdPlayMobile" -->
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.ClassifiedSpeedThresholdPlayMobile">
+             <summary>
+            玩手机报警分级车速阈值
+             </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.VideoRecordingTimePlayMobile">
             <summary>
             玩手机报警前后视频录制时间

@@ -199,6 +199,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         ///红外墨镜阻断失效报警拍照间隔
         /// </summary>
         public byte PictureIntervalInfraredSunglassesBlockingFailure { get; set; }
+        /// <summary>
         /// 双脱把报警分级车速阈值
         /// </summary>
         public byte ClassifiedSpeedThresholdDoubleHanderOff { get; set; }
@@ -214,6 +215,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         ///双脱把报警拍照间隔
         /// </summary>
         public byte PictureIntervalDoubleHanderOff { get; set; }
+        /// <summary>
         ///玩手机报警分级车速阈值
         /// </summary>
         public byte ClassifiedSpeedThresholdPlayMobile { get; set; }

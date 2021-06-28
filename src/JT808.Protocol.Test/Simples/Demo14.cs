@@ -27,17 +27,17 @@ namespace JT808.Protocol.Test.Simples
         public Demo14()
         {
             IServiceCollection serviceDescriptors = new ServiceCollection();
-            serviceDescriptors.AddJT808Configure();
+            serviceDescriptors.AddJT808Configure(new DefaultGlobalConfig("replace"));
             //通常在startup中使用app的Use进行扩展
             IServiceProvider serviceProvider = serviceDescriptors.BuildServiceProvider();
             Use(serviceProvider);
         }
 
-        public void Use(IServiceProvider serviceProvider)
+        void Use(IServiceProvider serviceProvider)
         {
-            IJT808Config jT808Config = serviceProvider.GetRequiredService<IJT808Config>();
+            IJT808Config jT808Config = serviceProvider.GetRequiredService<DefaultGlobalConfig>();
             //替换原有消息存在的BUG
-            jT808Config.MsgIdFactory.Map[0x0001]=new JT808_0x0001_Replace();
+            jT808Config.ReplaceMsgId<JT808_0x0001, JT808_0x0001_Replace>();
             JT808Serializer = jT808Config.GetSerializer();
         }
 

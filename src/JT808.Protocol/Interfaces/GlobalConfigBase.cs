@@ -126,7 +126,6 @@ namespace JT808.Protocol.Interfaces
         /// 终端控制自定义参数命令工厂
         /// </summary>
         public virtual IJT808_0x8105_Cusotm_Factory JT808_0x8105_Cusotm_Factory { get; set; }
-
         /// <summary>
         /// 外部扩展程序集注册
         /// </summary>
@@ -153,6 +152,20 @@ namespace JT808.Protocol.Interfaces
                 }
             }
             return this;
+        }
+        /// <summary>
+        /// 替换原有消息
+        /// </summary>
+        /// <typeparam name="TSourceJT808Bodies"></typeparam>
+        /// <typeparam name="TTargetJT808Bodies"></typeparam>
+        public void ReplaceMsgId<TSourceJT808Bodies, TTargetJT808Bodies>()
+            where TSourceJT808Bodies : JT808Bodies
+            where TTargetJT808Bodies : JT808Bodies, new()
+        {
+            TTargetJT808Bodies bodies = new TTargetJT808Bodies();
+            MsgIdFactory.Map[bodies.MsgId] = bodies;
+            FormatterFactory.FormatterDict.Remove(typeof(TSourceJT808Bodies).GUID);
+            FormatterFactory.FormatterDict.Add(typeof(TTargetJT808Bodies).GUID, bodies);
         }
     }
 }

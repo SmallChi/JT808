@@ -1831,6 +1831,16 @@
             文件上传指令
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.Description">
+            <summary>
+            文件上传指令
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.MsgId">
+            <summary>
+            0x9206
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.ServerIpLength">
             <summary>
             服务器IP地址服务

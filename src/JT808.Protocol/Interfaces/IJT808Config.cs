@@ -111,5 +111,12 @@ namespace JT808.Protocol
         /// <param name="externalAssemblies"></param>
         /// <returns></returns>
         IJT808Config Register(params Assembly[] externalAssemblies);
+        /// <summary>
+        /// 替换原有消息
+        /// </summary>
+        void ReplaceMsgId<TSourceJT808Bodies, TTargetJT808Bodies>()
+            where TSourceJT808Bodies : JT808Bodies
+            where TTargetJT808Bodies : JT808Bodies,new();
+
     }
 }
