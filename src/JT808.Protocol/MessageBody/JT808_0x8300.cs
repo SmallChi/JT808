@@ -90,7 +90,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString($"[bit4]{textFlagBits[4]}", "-");
                 writer.WriteString($"[bit3]{textFlagBits[3]}", "终端TTS播读");
                 writer.WriteString($"[bit2]{textFlagBits[2]}", "终端显示器显示");
-                var bit0And1= textFlagBits.Slice(0, 2).ToString().Reverse();
+                var bit0And1= textFlagBits.Slice(0, 2).ToString().Reverse().ToArray().AsSpan().ToString();
                 switch (bit0And1)
                 {
                     case "01":
