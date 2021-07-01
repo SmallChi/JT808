@@ -117,7 +117,7 @@ namespace JT808.Protocol.MessageBody
                     writer.WriteNumber($"[{ value.TextType.ReadNumber()}]文本类型-服务", value.TextType);
                 }
                 else {
-                    writer.WriteNumber($"[{ value.TextType.ReadNumber()}]文本类型-未设置}", value.TextType);
+                    writer.WriteNumber($"[{ value.TextType.ReadNumber()}]文本类型-未设置", value.TextType);
                 }      
             }
             else
