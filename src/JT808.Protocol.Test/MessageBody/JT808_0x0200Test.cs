@@ -312,9 +312,9 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test5_3()
         {
-            byte[] bytes = "7e0100402d01003000067906ff000000003730393639455632350000000000000000000000000000000030303030363739090000000000000000cf7e".ToHexBytes();
+            byte[] bytes = "7E0102400C01003000068109024A3130303330303030363831857E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes,JT808Version.JTT2013Force);
-            jT808Package.Header.ProtocolVersion = 0;//修改成 2013协议标识
+            jT808Package.Header.MessageBodyProperty.VersionFlag = false;//修改成 2013协议标识
             var newBytes = JT808Serializer.Serialize(jT808Package);//重新序列化
             var jt808PackageNew = JT808Serializer.Deserialize(newBytes);//验证是否修改标识符成功
         }

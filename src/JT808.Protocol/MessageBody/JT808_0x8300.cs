@@ -90,25 +90,35 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString($"[bit4]{textFlagBits[4]}", "-");
                 writer.WriteString($"[bit3]{textFlagBits[3]}", "终端TTS播读");
                 writer.WriteString($"[bit2]{textFlagBits[2]}", "终端显示器显示");
-                var bit0And1= textFlagBits.Slice(0, 2).ToString();
+                var bit0And1= textFlagBits.Slice(0, 2).ToString().Reverse();
                 switch (bit0And1)
                 {
                     case "01":
-                        writer.WriteString($"[bit0]{textFlagBits[0]}", "服务");
+                        writer.WriteString($"[bit0~1]{textFlagBits[0]}", "服务");
                         break;
                     case "10":
-                        writer.WriteString($"[bit0]{textFlagBits[0]}", "紧急");
+                        writer.WriteString($"[bit0~1]{textFlagBits[0]}", "紧急");
                         break;
                     case "11":
-                        writer.WriteString($"[bit0]{textFlagBits[0]}", "通知");
+                        writer.WriteString($"[bit0~1]{textFlagBits[0]}", "通知");
                         break;
                     case "00":
-                        writer.WriteString($"[bit0]{textFlagBits[0]}", "保留");
+                        writer.WriteString($"[bit0~1]{textFlagBits[0]}", "保留");
                         break;
                 }
                 writer.WriteEndObject();
                 value.TextType = reader.ReadByte();
-                writer.WriteNumber($"[{ value.TextType.ReadNumber()}]文本类型-{(value.TextType==1? "通知":"服务")}", value.TextType);
+                if (value.TextType == 1)
+                {
+                    writer.WriteNumber($"[{ value.TextType.ReadNumber()}]文本类型-通知", value.TextType);
+                }
+                else if (value.TextType == 2)
+                {
+                    writer.WriteNumber($"[{ value.TextType.ReadNumber()}]文本类型-服务", value.TextType);
+                }
+                else {
+                    writer.WriteNumber($"[{ value.TextType.ReadNumber()}]文本类型-未设置}", value.TextType);
+                }      
             }
             else
             {
