@@ -334,6 +334,13 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 [可以参考Simples的Demo15](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo15.cs)
 
+### 举个栗子16
+
+场景:
+兼容2011协议的注册消息
+
+[可以参考Simples的Demo15](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
+
 ## NuGet安装
 
 | Package Name| Version| Preview  Version |Downloads|Remark|

@@ -1596,6 +1596,11 @@
             JT808版本号
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808Version.JTT2011">
+            <summary>
+            2011
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.Enums.JT808Version.JTT2013">
             <summary>
             2013
@@ -8583,6 +8588,7 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0100.TerminalModel">
             <summary>
             终端型号
+            2011版本  8个字节  ，此终端型号由制造商自行定义，位数不足时，后补空格
             2013版本   20 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
             2019版本   30 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
             </summary>

@@ -10,9 +10,13 @@ namespace JT808.Protocol.Enums
     public enum JT808Version:byte
     {
         /// <summary>
+        /// 2011
+        /// </summary>
+        JTT2011 = 0,
+        /// <summary>
         /// 2013
         /// </summary>
-        JTT2013=1,
+        JTT2013 =1,
         /// <summary>
         /// 2019
         /// </summary>

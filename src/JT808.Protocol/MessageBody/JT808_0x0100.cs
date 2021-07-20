@@ -47,6 +47,7 @@ namespace JT808.Protocol.MessageBody
 
         /// <summary>
         /// 终端型号
+        /// 2011版本  8个字节  ，此终端型号由制造商自行定义，位数不足时，后补空格
         /// 2013版本   20 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
         /// 2019版本   30 个字节，此终端型号由制造商自行定义，位数不足时，后补“0X00”。
         /// </summary>
@@ -83,17 +84,25 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0100 jT808_0X0100 = new JT808_0x0100();
             jT808_0X0100.AreaID = reader.ReadUInt16();
             jT808_0X0100.CityOrCountyId = reader.ReadUInt16();
-            if(reader.Version== JT808Version.JTT2019)
+            if (reader.Version == JT808Version.JTT2019)
             {
                 jT808_0X0100.MakerId = reader.ReadString(11);
                 jT808_0X0100.TerminalModel = reader.ReadString(30);
                 jT808_0X0100.TerminalId = reader.ReadString(30);
             }
-            else
+            else if (reader.Version == JT808Version.JTT2013)
             {
-                jT808_0X0100.MakerId = reader.ReadString(5);
-                jT808_0X0100.TerminalModel = reader.ReadString(20);
-                jT808_0X0100.TerminalId = reader.ReadString(7);
+                if (reader.ReadCurrentRemainContentLength() > 33)
+                {
+                    jT808_0X0100.MakerId = reader.ReadString(5);
+                    jT808_0X0100.TerminalModel = reader.ReadString(20);
+                    jT808_0X0100.TerminalId = reader.ReadString(7);
+                }
+                else {
+                    jT808_0X0100.MakerId = reader.ReadString(5);
+                    jT808_0X0100.TerminalModel = reader.ReadString(8);
+                    jT808_0X0100.TerminalId = reader.ReadString(7);
+                }
             }
             jT808_0X0100.PlateColor = reader.ReadByte();
             jT808_0X0100.PlateNo = reader.ReadRemainStringContent();
@@ -111,14 +120,19 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt16(value.CityOrCountyId);
             if (writer.Version == JT808Version.JTT2019)
             {
-                writer.WriteString(value.MakerId.PadRight(11, '\0').ValiString(nameof(value.MakerId),11));
+                writer.WriteString(value.MakerId.PadRight(11, '\0').ValiString(nameof(value.MakerId), 11));
                 writer.WriteString(value.TerminalModel.PadRight(30, '\0').ValiString(nameof(value.TerminalModel), 30));
                 writer.WriteString(value.TerminalId.PadRight(30, '\0').ValiString(nameof(value.TerminalId), 30));
             }
-            else
+            else if (writer.Version == JT808Version.JTT2013)
             {
                 writer.WriteString(value.MakerId.PadRight(5, '\0').ValiString(nameof(value.MakerId), 5));
                 writer.WriteString(value.TerminalModel.PadRight(20, '\0').ValiString(nameof(value.TerminalModel), 20));
+                writer.WriteString(value.TerminalId.PadRight(7, '\0').ValiString(nameof(value.TerminalId), 7));
+            }
+            else {
+                writer.WriteString(value.MakerId.PadRight(5, '\0').ValiString(nameof(value.MakerId), 5));
+                writer.WriteString(value.TerminalModel.PadRight(8, '\0').ValiString(nameof(value.TerminalModel), 8));
                 writer.WriteString(value.TerminalId.PadRight(7, '\0').ValiString(nameof(value.TerminalId), 7));
             }
             writer.WriteByte(value.PlateColor);
@@ -149,17 +163,32 @@ namespace JT808.Protocol.MessageBody
                 jT808_0X0100.TerminalId = reader.ReadString(30);
                 writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端ID(30)", jT808_0X0100.TerminalId);
             }
-            else
+            else if (reader.Version == JT808Version.JTT2013)
             {
-                ReadOnlySpan<byte> midSpan = reader.ReadVirtualArray(5);
-                jT808_0X0100.MakerId = reader.ReadString(5);
-                writer.WriteString($"[{midSpan.ToArray().ToHexString()}]制造商ID(5)", jT808_0X0100.MakerId);
-                ReadOnlySpan<byte> tmSpan = reader.ReadVirtualArray(20);
-                jT808_0X0100.TerminalModel = reader.ReadString(20);
-                writer.WriteString($"[{tmSpan.ToArray().ToHexString()}]终端型号(20)", jT808_0X0100.TerminalModel);
-                ReadOnlySpan<byte> tidSpan = reader.ReadVirtualArray(7);
-                jT808_0X0100.TerminalId = reader.ReadString(7);
-                writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端ID(7)", jT808_0X0100.TerminalId);
+                var length = reader.ReadCurrentRemainContentLength();
+                if (length > 33)
+                {
+                    ReadOnlySpan<byte> midSpan = reader.ReadVirtualArray(5);
+                    jT808_0X0100.MakerId = reader.ReadString(5);
+                    writer.WriteString($"[{midSpan.ToArray().ToHexString()}]制造商ID(5)", jT808_0X0100.MakerId);
+                    ReadOnlySpan<byte> tmSpan = reader.ReadVirtualArray(20);
+                    jT808_0X0100.TerminalModel = reader.ReadString(20);
+                    writer.WriteString($"[{tmSpan.ToArray().ToHexString()}]终端型号(20)", jT808_0X0100.TerminalModel);
+                    ReadOnlySpan<byte> tidSpan = reader.ReadVirtualArray(7);
+                    jT808_0X0100.TerminalId = reader.ReadString(7);
+                    writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端ID(7)", jT808_0X0100.TerminalId);
+                }
+                else {
+                    ReadOnlySpan<byte> midSpan = reader.ReadVirtualArray(5);
+                    jT808_0X0100.MakerId = reader.ReadString(5);
+                    writer.WriteString($"[{midSpan.ToArray().ToHexString()}]制造商ID(5)", jT808_0X0100.MakerId);
+                    ReadOnlySpan<byte> tmSpan = reader.ReadVirtualArray(8);
+                    jT808_0X0100.TerminalModel = reader.ReadString(8);
+                    writer.WriteString($"[{tmSpan.ToArray().ToHexString()}]终端型号(8)", jT808_0X0100.TerminalModel);
+                    ReadOnlySpan<byte> tidSpan = reader.ReadVirtualArray(7);
+                    jT808_0X0100.TerminalId = reader.ReadString(7);
+                    writer.WriteString($"[{tidSpan.ToArray().ToHexString()}]终端ID(7)", jT808_0X0100.TerminalId);
+                }
             }
             jT808_0X0100.PlateColor = reader.ReadByte();
             writer.WriteNumber($"[{jT808_0X0100.PlateColor.ReadNumber()}]车牌颜色", jT808_0X0100.PlateColor);
