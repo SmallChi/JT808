@@ -44,8 +44,13 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x8800 jT808_0X8800 = new JT808_0x8800();
             jT808_0X8800.MultimediaId = reader.ReadUInt32();
-            jT808_0X8800.RetransmitPackageCount = reader.ReadByte();
-            jT808_0X8800.RetransmitPackageIds = reader.ReadArray(jT808_0X8800.RetransmitPackageCount * 2).ToArray();
+            if (reader.ReadCurrentRemainContentLength() > 0)
+            {
+                jT808_0X8800.RetransmitPackageCount = reader.ReadByte();//2011协议此处 为0
+                if (jT808_0X8800.RetransmitPackageCount > 0) {
+                    jT808_0X8800.RetransmitPackageIds = reader.ReadArray(jT808_0X8800.RetransmitPackageCount * 2).ToArray();
+                } 
+            }
             return jT808_0X8800;
         }
         /// <summary>
@@ -57,8 +62,19 @@ namespace JT808.Protocol.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8800 value, IJT808Config config)
         {
             writer.WriteUInt32(value.MultimediaId);
-            writer.WriteByte((byte)(value.RetransmitPackageIds.Length / 2));
-            writer.WriteArray(value.RetransmitPackageIds);
+            if (writer.Version == Enums.JT808Version.JTT2011)
+            {
+                writer.WriteByte((byte)(value.RetransmitPackageIds.Length / 2));
+                if (value.RetransmitPackageIds.Length > 0) {
+                    writer.WriteArray(value.RetransmitPackageIds);
+                }
+            }
+            else {
+                if (value.RetransmitPackageIds.Length > 0) {
+                    writer.WriteByte((byte)(value.RetransmitPackageIds.Length / 2));
+                    writer.WriteArray(value.RetransmitPackageIds);
+                }
+            }
         }
         /// <summary>
         /// 
@@ -70,19 +86,22 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x8800 value = new JT808_0x8800();
             value.MultimediaId = reader.ReadUInt32();
-            value.RetransmitPackageCount = reader.ReadByte();
-            value.RetransmitPackageIds = reader.ReadArray(value.RetransmitPackageCount * 2).ToArray();
-
             writer.WriteNumber($"[{ value.MultimediaId.ReadNumber()}]多媒体ID", value.MultimediaId);
-            writer.WriteNumber($"[{ value.RetransmitPackageCount.ReadNumber()}]重传包总数", value.RetransmitPackageCount);
-            writer.WriteString($"重传包", value.RetransmitPackageIds.ToHexString());
-            writer.WriteStartArray($"重传包ID列表");
-            ReadOnlySpan<byte> tmp = value.RetransmitPackageIds;
-            for(int i=0; i< value.RetransmitPackageCount; i++)
-            {
-                writer.WriteStringValue($"{tmp.Slice(i*2 , 2).ToArray().ToHexString()}");
+            if (reader.ReadCurrentRemainContentLength() > 0) {
+                value.RetransmitPackageCount = reader.ReadByte();
+                writer.WriteNumber($"[{ value.RetransmitPackageCount.ReadNumber()}]重传包总数", value.RetransmitPackageCount);
+                if (value.RetransmitPackageCount > 0) {
+                    writer.WriteString($"重传包", value.RetransmitPackageIds.ToHexString());
+                    writer.WriteStartArray($"重传包ID列表");
+                    value.RetransmitPackageIds = reader.ReadArray(value.RetransmitPackageCount * 2).ToArray();
+                    ReadOnlySpan<byte> tmp = value.RetransmitPackageIds;
+                    for (int i = 0; i < value.RetransmitPackageCount; i++)
+                    {
+                        writer.WriteStringValue($"{tmp.Slice(i * 2, 2).ToArray().ToHexString()}");
+                    }
+                    writer.WriteEndArray();
+                }
             }
-            writer.WriteEndArray();
         }
     }
 }

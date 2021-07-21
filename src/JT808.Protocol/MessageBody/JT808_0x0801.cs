@@ -45,6 +45,8 @@ namespace JT808.Protocol.MessageBody
         /// 通道 ID
         /// </summary>
         public byte ChannelId { get; set; }
+
+        public bool PositionError { get; set; }
         /// <summary>
         /// 位置信息汇报(0x0200)消息体
         /// 表示拍摄或录制的起始时刻的位置基本信息数据
@@ -73,12 +75,28 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{value.EventItemCoding.ReadNumber()}]事件项编码-{((JT808EventItemCoding)value.EventItemCoding).ToString()}", value.MultimediaCodingFormat);
             value.ChannelId = reader.ReadByte();
             writer.WriteNumber($"[{value.ChannelId.ReadNumber()}]通道ID", value.ChannelId);
-            JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28), reader.Version);
-            writer.WriteStartObject("位置基本信息");
-            config.GetAnalyze<JT808_0x0200>().Analyze(ref positionReader, writer, config);
-            writer.WriteEndObject();
-            value.MultimediaDataPackage = reader.ReadContent().ToArray();
-            writer.WriteString($"多媒体数据包", value.MultimediaDataPackage.ToHexString());
+            if (reader.ReadCurrentRemainContentLength() >= 28)
+            {
+                var tempData = reader.ReadVirtualArray(28);
+                try
+                {
+                    JT808MessagePackReader positionReader = new JT808MessagePackReader(tempData, reader.Version);
+                    writer.WriteStartObject("位置基本信息");
+                    config.GetAnalyze<JT808_0x0200>().Analyze(ref positionReader, writer, config);
+                    writer.WriteEndObject();
+                    reader.Skip(28);
+                }
+                catch
+                {
+                    PositionError = true;
+                }
+                value.MultimediaDataPackage = reader.ReadContent().ToArray();
+                writer.WriteString($"多媒体数据包", value.MultimediaDataPackage.ToHexString());
+            }
+            else {
+                value.MultimediaDataPackage = reader.ReadContent().ToArray();
+                writer.WriteString($"多媒体数据包", value.MultimediaDataPackage.ToHexString());
+            }
         }
         /// <summary>
         /// 
@@ -94,9 +112,24 @@ namespace JT808.Protocol.MessageBody
             value.MultimediaCodingFormat = reader.ReadByte();
             value.EventItemCoding = reader.ReadByte();
             value.ChannelId = reader.ReadByte();
-            JT808MessagePackReader positionReader = new JT808MessagePackReader(reader.ReadArray(28), reader.Version);
-            value.Position = config.GetMessagePackFormatter<JT808_0x0200>().Deserialize(ref positionReader, config);
-            value.MultimediaDataPackage = reader.ReadContent().ToArray();
+            if (reader.ReadCurrentRemainContentLength() >= 28)
+            {
+                var tempData = reader.ReadVirtualArray(28);
+                try
+                {
+                    JT808MessagePackReader positionReader = new JT808MessagePackReader(tempData, reader.Version);
+                    value.Position = config.GetMessagePackFormatter<JT808_0x0200>().Deserialize(ref positionReader, config);
+                    reader.Skip(28);
+                }
+                catch
+                {
+                    PositionError = true;
+                }
+                value.MultimediaDataPackage = reader.ReadContent().ToArray();
+            }
+            else {
+                value.MultimediaDataPackage = reader.ReadContent().ToArray();
+            }
             return value;
         }
         /// <summary>
@@ -112,7 +145,9 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte(value.MultimediaCodingFormat);
             writer.WriteByte(value.EventItemCoding);
             writer.WriteByte(value.ChannelId);
-            config.GetMessagePackFormatter<JT808_0x0200>().Serialize(ref writer, value.Position, config);
+            if (writer.Version != JT808Version.JTT2011) {
+                config.GetMessagePackFormatter<JT808_0x0200>().Serialize(ref writer, value.Position, config);
+            }
             writer.WriteArray(value.MultimediaDataPackage);
         }
     }

@@ -10361,8 +10361,9 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.QualificationCode">
             <summary>
-            从业资格证编码
-            长度 20 位，不足补 0x00。
+            从业资格证编码 
+            2011 长度40 位 ，不足补 '\0'；
+            2013 长度 20 位，不足补 '\0'。
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.LicenseIssuingLength">
@@ -10382,7 +10383,8 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0702.DriverIdentityCard">
             <summary>
-            驾驶员身份证号 长度20 不足补0
+            驾驶员身份证号 长度20 不足补 '\0'
+            2011版本
             2019版本
             </summary>
         </member>

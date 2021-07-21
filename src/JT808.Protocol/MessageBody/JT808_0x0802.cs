@@ -55,8 +55,12 @@ namespace JT808.Protocol.MessageBody
             {
                 writer.WriteStartObject();
                 JT808MultimediaSearchProperty jT808MultimediaSearchProperty = new JT808MultimediaSearchProperty();
-                jT808MultimediaSearchProperty.MultimediaId = reader.ReadUInt32();
-                writer.WriteNumber($"[{jT808MultimediaSearchProperty.MultimediaId.ReadNumber()}]多媒体ID", jT808MultimediaSearchProperty.MultimediaId);
+                if (reader.ReadCurrentRemainContentLength() == (value.MultimediaItemCount - i) * (4 + 1 + 1 + 1 + 28))
+                {
+                    //2013 ,2019协议          
+                    jT808MultimediaSearchProperty.MultimediaId = reader.ReadUInt32();
+                    writer.WriteNumber($"[{jT808MultimediaSearchProperty.MultimediaId.ReadNumber()}]多媒体ID", jT808MultimediaSearchProperty.MultimediaId);
+                }
                 jT808MultimediaSearchProperty.MultimediaType = reader.ReadByte();
                 writer.WriteNumber($"[{jT808MultimediaSearchProperty.MultimediaType.ReadNumber()}]多媒体类型-{((JT808MultimediaType)jT808MultimediaSearchProperty.MultimediaType).ToString()}", jT808MultimediaSearchProperty.MultimediaType);
                 jT808MultimediaSearchProperty.ChannelId = reader.ReadByte();
@@ -86,7 +90,12 @@ namespace JT808.Protocol.MessageBody
             for (var i = 0; i < value.MultimediaItemCount; i++)
             {
                 JT808MultimediaSearchProperty jT808MultimediaSearchProperty = new JT808MultimediaSearchProperty();
-                jT808MultimediaSearchProperty.MultimediaId = reader.ReadUInt32();
+                if (reader.ReadCurrentRemainContentLength() ==(value.MultimediaItemCount-i)*(4 + 1 + 1 + 1 + 28))
+                {
+                    //2013 ,2019协议                   
+                    jT808MultimediaSearchProperty.MultimediaId = reader.ReadUInt32();
+
+                }
                 jT808MultimediaSearchProperty.MultimediaType = reader.ReadByte();
                 jT808MultimediaSearchProperty.ChannelId = reader.ReadByte();
                 jT808MultimediaSearchProperty.EventItemCoding = reader.ReadByte();
@@ -108,7 +117,11 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt16((ushort)value.MultimediaSearchItems.Count);
             foreach (var item in value.MultimediaSearchItems)
             {
-                writer.WriteUInt32(item.MultimediaId);
+                if (writer.Version != JT808Version.JTT2011)
+                {
+                    writer.WriteUInt32(item.MultimediaId);
+
+                }
                 writer.WriteByte(item.MultimediaType);
                 writer.WriteByte(item.ChannelId);
                 writer.WriteByte(item.EventItemCoding);

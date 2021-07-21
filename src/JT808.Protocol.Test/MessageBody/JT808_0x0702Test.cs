@@ -168,5 +168,37 @@ namespace JT808.Protocol.Test.MessageBody
             byte[] bytes = "0121052818111100056B6F696B65000000000000000071776531323334353661616106717765727478202105280000003132333435363738393031323334353637630000003132333435363738393031323334353637".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808_0x0702>(bytes, JT808Version.JTT2019);
         }
+
+        [Fact]
+        public void Test2011_1()
+        {
+            JT808_0x0702 jT808_0X0702 = new JT808_0x0702
+            {
+                DriverUserName = "tk",
+                DriverIdentityCard="123456789123456789",
+                QualificationCode = "qwe123456aaa",
+                LicenseIssuing = "qwertx"
+            };
+            var hex = JT808Serializer.Serialize(jT808_0X0702, JT808Version.JTT2011).ToHexString();
+            Assert.Equal("02746B00003132333435363738393132333435363738390000000000000000000000000000000000000000000000000000000071776531323334353661616106717765727478".Replace(" ", ""), hex);
+        }
+
+        [Fact]
+        public void Test2011_2()
+        {
+            byte[] bytes = "02746B00003132333435363738393132333435363738390000000000000000000000000000000000000000000000000000000071776531323334353661616106717765727478".ToHexBytes();
+            JT808_0x0702 jT808_0X0702 = JT808Serializer.Deserialize<JT808_0x0702>(bytes);
+            Assert.Equal("tk", jT808_0X0702.DriverUserName);
+            Assert.Equal("qwe123456aaa", jT808_0X0702.QualificationCode);
+            Assert.Equal("qwertx", jT808_0X0702.LicenseIssuing);
+            Assert.Equal("123456789123456789", jT808_0X0702.DriverIdentityCard);
+        }
+
+        [Fact]
+        public void Test2011_3()
+        {
+            byte[] bytes = "02746B00003132333435363738393132333435363738390000000000000000000000000000000000000000000000000000000071776531323334353661616106717765727478".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808_0x0702>(bytes, JT808Version.JTT2011);
+        }
     }
 }
