@@ -340,7 +340,7 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 场景:
 兼容2011协议的注册消息
 
-[可以参考Simples的Demo15](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
+[可以参考Simples的Demo16](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
 
 ## NuGet安装
 
@@ -388,7 +388,7 @@ Platform=AnyCpu  Server=False  Toolchain=.NET Core 5.0
 | 1     | 0x0001        | √        | √        | 终端通用应答                   |
 | 2     | 0x8001        | √        | √        | 平台通用应答                   |
 | 3     | 0x0002        | √        | √        | 终端心跳                       |
-| 4     | 0x8003        | √        | √        | 补传分包请求                   |                 |被新增
+| 4     | 0x8003        | √        | √        | 补传分包请求                   |                 |被新增|
 | 5     | 0x0100        | √        | √        | 终端注册                       |修改             |被修改
 | 6     | 0x8100        | √        | √        | 终端注册应答                   |
 | 7     | 0x0003        | √        | √        | 终端注销                       |
