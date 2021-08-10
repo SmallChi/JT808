@@ -2,6 +2,7 @@
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -13,6 +14,8 @@ namespace JT808.Protocol.MessageBody
     {
         /// <summary>
         /// IO状态位
+        /// Flags
+        /// <see cref="JT808.Protocol.Enums.JT808IOStatus"/>
         /// </summary>
         public ushort IOStatus { get; set; }
         /// <summary>
@@ -38,6 +41,13 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             value.IOStatus = reader.ReadUInt16();
             writer.WriteNumber($"[{value.IOStatus.ReadNumber()}]IO状态位", value.IOStatus);
+            writer.WriteStartObject("IO状态位对象信息");
+            var carSignalStatus = Convert.ToString(value.IOStatus, 2).PadLeft(16, '0').AsSpan();
+            writer.WriteString("值", Convert.ToString(value.IOStatus, 2).PadLeft(16, '0'));
+            writer.WriteString("bit2~15", "保留");
+            writer.WriteString("bit1", (value.IOStatus & 2) == 2 ? "休眠状态" : "无");
+            writer.WriteString("bit0", (value.IOStatus & 1) == 1 ? "深度休眠状态" : "无");
+            writer.WriteEndObject();
         }
         /// <summary>
         /// 

@@ -2,6 +2,7 @@
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
+using System;
 using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
@@ -13,8 +14,9 @@ namespace JT808.Protocol.MessageBody
     {
         /// <summary>
         /// 扩展车辆信号状态位
+        /// <seealso cref="JT808.Protocol.Enums.JT808CarSignalStatus"/>
         /// </summary>
-        public int CarSignalStatus { get; set; }
+        public uint CarSignalStatus { get; set; }
         /// <summary>
         /// JT808_0x0200_0x25
         /// </summary>
@@ -36,8 +38,28 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{value.AttachInfoId.ReadNumber()}]附加信息Id", value.AttachInfoId);
             value.AttachInfoLength = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
-            value.CarSignalStatus = reader.ReadInt32();
+            value.CarSignalStatus = reader.ReadUInt32();
             writer.WriteNumber($"[{value.CarSignalStatus.ReadNumber()}]扩展车辆信号状态位", value.CarSignalStatus);
+            writer.WriteStartObject("扩展车辆信号状态位对象信息");
+            var carSignalStatus = Convert.ToString(value.CarSignalStatus, 2).PadLeft(32, '0').AsSpan();
+            writer.WriteString("值", Convert.ToString(value.CarSignalStatus, 2).PadLeft(32, '0'));
+            writer.WriteString("bit15~31", "保留");
+            writer.WriteString("bit14", (value.CarSignalStatus & 16384) == 16384 ? "离合器状态" : "无");
+            writer.WriteString("bit13", (value.CarSignalStatus & 8192) == 8192 ? "加热器工作" : "无");
+            writer.WriteString("bit12", (value.CarSignalStatus & 4096) == 4096 ? "ABS工作" : "无");
+            writer.WriteString("bit11", (value.CarSignalStatus & 2048) == 2048 ? "缓速器工作" : "无");
+            writer.WriteString("bit10", (value.CarSignalStatus & 1024) == 1024 ? "空挡信号" : "无");
+            writer.WriteString("bit9", (value.CarSignalStatus & 512) == 512 ? "空调状态" : "无");
+            writer.WriteString("bit8", (value.CarSignalStatus & 256) == 256 ? "喇叭信号" : "无");
+            writer.WriteString("bit7", (value.CarSignalStatus & 128) == 128 ? "示廓灯" : "无");
+            writer.WriteString("bit6", (value.CarSignalStatus & 64) == 64 ? "雾灯信号" : "无");
+            writer.WriteString("bit5", (value.CarSignalStatus & 32) == 32 ? "倒档信号" : "无");
+            writer.WriteString("bit4", (value.CarSignalStatus & 16) == 16 ? "制动信号" : "无");
+            writer.WriteString("bit3", (value.CarSignalStatus & 8) == 8 ? "左转向灯信号" : "无");
+            writer.WriteString("bit2", (value.CarSignalStatus & 4) == 4 ? "右转向灯信号" : "无");
+            writer.WriteString("bit1", (value.CarSignalStatus & 2) == 2 ? "远光灯信号" : "无");
+            writer.WriteString("bit0", (value.CarSignalStatus & 1) ==1?"近光灯信号":"无");
+            writer.WriteEndObject();
         }
         /// <summary>
         /// 
@@ -50,7 +72,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0200_0x25 value = new JT808_0x0200_0x25();
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
-            value.CarSignalStatus = reader.ReadInt32();
+            value.CarSignalStatus = reader.ReadUInt32();
             return value;
         }
         /// <summary>
@@ -63,7 +85,7 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);
-            writer.WriteInt32(value.CarSignalStatus);
+            writer.WriteUInt32(value.CarSignalStatus);
         }
     }
 }

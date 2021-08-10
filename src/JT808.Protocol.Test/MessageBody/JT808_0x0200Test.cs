@@ -535,6 +535,13 @@ namespace JT808.Protocol.Test.MessageBody
         }
 
         [Fact]
+        public void Test_all_attcahids_json()
+        {
+            var data = "7E0200005C11223344556622B8000000010000000200BA7F0E07E4F11C0028003C00001807151010100104000000640202003703020038040200011105010000000112060100000001011307000000020022012504000000172A0200F42B04000000F2300102310105167E".ToHexBytes();
+            var hex = JT808Serializer.Analyze(data);
+        }
+
+        [Fact]
         public void Test_JT808_0x0200_0x07_1()
         {
             JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200();

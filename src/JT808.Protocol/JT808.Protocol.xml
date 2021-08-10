@@ -453,6 +453,86 @@
             返回正常工作状态
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Enums.JT808CarSignalStatus">
+            <summary>
+            扩展车辆信号状态位
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.近光灯信号">
+            <summary>
+            开启近光信号灯
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.远光灯信号">
+            <summary>
+            远光灯信号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.右转向灯信号">
+            <summary>
+            右转向灯信号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.左转向灯信号">
+            <summary>
+            左转向灯信号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.制动信号">
+            <summary>
+            制动信号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.倒档信号">
+            <summary>
+            倒档信号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.雾灯信号">
+            <summary>
+            雾灯信号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.示廓灯">
+            <summary>
+            示廓灯
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.喇叭信号">
+            <summary>
+            喇叭信号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.空调状态">
+            <summary>
+            空调状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.空挡信号">
+            <summary>
+            空挡信号
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.缓速器工作">
+            <summary>
+            缓速器工作
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.ABS工作">
+            <summary>
+            ABS工作
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.加热器工作">
+            <summary>
+            加热器工作
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.离合器状态">
+            <summary>
+            离合器状态
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808DirectionType">
             <summary>
             方向类型
@@ -672,6 +752,21 @@
         <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.修改菜单">
             <summary>
             修改菜单
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Enums.JT808IOStatus">
+            <summary>
+            IO状态位
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808IOStatus.深度休眠状态">
+            <summary>
+            深度休眠状态
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808IOStatus.休眠状态">
+            <summary>
+            休眠状态
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808MsgId">
@@ -9615,6 +9710,7 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x25.CarSignalStatus">
             <summary>
             扩展车辆信号状态位
+            <seealso cref="T:JT808.Protocol.Enums.JT808CarSignalStatus"/>
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x25.AttachInfoId">
@@ -9659,6 +9755,8 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x2A.IOStatus">
             <summary>
             IO状态位
+            Flags
+            <see cref="T:JT808.Protocol.Enums.JT808IOStatus"/>
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x2A.AttachInfoId">
