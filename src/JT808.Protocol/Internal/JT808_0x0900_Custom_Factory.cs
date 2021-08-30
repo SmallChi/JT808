@@ -19,11 +19,11 @@ namespace JT808.Protocol.Internal
 
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x0200_CustomBodyBase)).ToList();
+            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x0900_BodyBase)).ToList();
             foreach(var type in types)
             {
                 var instance = Activator.CreateInstance(type);
-                var attachid = (byte)type.GetProperty(nameof(JT808_0x0200_CustomBodyBase.AttachInfoId)).GetValue(instance);
+                var attachid = (byte)type.GetProperty(nameof(JT808_0x0900_BodyBase.PassthroughType)).GetValue(instance);
                 if (Map.ContainsKey(attachid))
                 {
                     throw new ArgumentException($"{type.FullName} {attachid} An element with the same key already exists.");
