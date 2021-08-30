@@ -36,13 +36,48 @@ namespace JT808.Protocol.Test.Simples
         [Fact]
         public void Test1()
         {
-            var bytes = "7e0102400c01003000068109024a3130303330303030363831857e".ToHexBytes();
-            JT808Package jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes, JT808Version.JTT2013Force);//强制使用2013协议转换
-            //因头部的版本标识号是2019，实际上是使用2013的协议
-            jT808Package.Header.MessageBodyProperty.VersionFlag = false;
-            //修改版本号之后，重新编码协议，以便后续服务正常使用
-            var newBytes=JT808Serializer.Serialize(jT808Package);
-            JT808Package jT808PackageNew = JT808Serializer.Deserialize<JT808Package>(newBytes);
+            JT808Package jT808_0X0100 = new JT808Package
+            {
+                Header = new JT808Header
+                {
+                    MsgId = Enums.JT808MsgId.终端注册.ToUInt16Value(),
+                    ManualMsgNum = 10,
+                    TerminalPhoneNo = "123456789",
+                },
+                Bodies = new JT808_0x0100
+                {
+                    AreaID = 40,
+                    CityOrCountyId = 50,
+                    MakerId = "1234",
+                    PlateColor = 1,
+                    PlateNo = "粤A12345",
+                    TerminalId = "CHI123",
+                    TerminalModel = "tk12345"
+                }
+            };
+            var hex = JT808Serializer.Serialize(jT808_0X0100, JT808Version.JTT2011).ToHexString();
+            Assert.Equal("7E01000021000123456789000A002800323132333400746B3132333435004348493132330001D4C1413132333435857E", hex);
+        }
+
+        [Fact]
+        public void Test2()
+        {
+            var bytes = "7E01000021000123456789000A002800323132333400746B3132333435004348493132330001D4C1413132333435857E".ToHexBytes();
+            JT808Package jT808_0X0100 = JT808Serializer.Deserialize<JT808Package>(bytes);
+            //  采用2011协议 的终端注册消息解析
+            Assert.Equal(JT808MsgId.终端注册.ToUInt16Value(), jT808_0X0100.Header.MsgId);
+            Assert.Equal(1, jT808_0X0100.Header.ProtocolVersion);
+            Assert.Equal(10, jT808_0X0100.Header.MsgNum);
+            Assert.Equal("123456789", jT808_0X0100.Header.TerminalPhoneNo);
+
+            JT808_0x0100 JT808Bodies = (JT808_0x0100)jT808_0X0100.Bodies;
+            Assert.Equal(40, JT808Bodies.AreaID);
+            Assert.Equal(50, JT808Bodies.CityOrCountyId);
+            Assert.Equal("1234", JT808Bodies.MakerId);
+            Assert.Equal(1, JT808Bodies.PlateColor);
+            Assert.Equal("粤A12345", JT808Bodies.PlateNo);
+            Assert.Equal("CHI123", JT808Bodies.TerminalId);
+            Assert.Equal("tk12345", JT808Bodies.TerminalModel);
         }
     }
 }

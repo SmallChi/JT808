@@ -4249,7 +4249,22 @@
         </member>
         <member name="P:JT808.Protocol.Interfaces.IJT808_0x0200_Custom_Factory.Map">
             <summary>
-            
+            map JT808_0x0200_CustomBodyBase
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Interfaces.IJT808_0x0200_Custom_Factory.Map2">
+            <summary>
+            map JT808_0x0200_CustomBodyBase2
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Interfaces.IJT808_0x0200_Custom_Factory.Map3">
+            <summary>
+            map JT808_0x0200_CustomBodyBase3
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Interfaces.IJT808_0x0200_Custom_Factory.Map4">
+            <summary>
+            map JT808_0x0200_CustomBodyBase4
             </summary>
         </member>
         <member name="M:JT808.Protocol.Interfaces.IJT808_0x0200_Custom_Factory.SetMap``1">
@@ -4257,6 +4272,27 @@
             
             </summary>
             <typeparam name="TJT808_0x0200_CustomBody"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.IJT808_0x0200_Custom_Factory.SetMap2``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TJT808_0x0200_CustomBody2"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.IJT808_0x0200_Custom_Factory.SetMap3``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TJT808_0x0200_CustomBody3"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.IJT808_0x0200_Custom_Factory.SetMap4``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="TJT808_0x0200_CustomBody4"></typeparam>
             <returns></returns>
         </member>
         <member name="T:JT808.Protocol.Interfaces.IJT808_0x0200_Factory">
@@ -9079,17 +9115,12 @@
             YY-MM-DD-hh-mm-ss（GMT+8 时间，本标准中之后涉及的时间均采用此时区）
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.JT808LocationAttachData">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.BasicLocationAttachData">
             <summary>
-            位置附加信息
+            基础位置附加信息
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.JT808UnknownLocationAttachOriginalData">
-            <summary>
-            存储未知的附加信息源数据
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.JT808CustomLocationAttachData">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.CustomLocationAttachData">
             <summary>
             自定义位置附加信息
             场景：
@@ -9101,32 +9132,32 @@
             依赖平台录入的设备类型
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.ExceptionLocationAttachOriginalData">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.CustomLocationAttachData2">
             <summary>
-            有些坑爹的设备，不讲武德，不会按照国标的附加信息Id来搞，变成附加信息Id搞为两个字节，导致解析的时候出问题，存在重复的附加Id。
-            形如:
-            00 0C 这个是长度
-            00 B2 这个是长度
-            实际解析  
-            00 附加信息Id
-            0C 附加信息长度
-            00 附加信息Id
-            B2 附加信息长度
-            只能兼容作为一个字节的兼容，恰恰好一般长度不会超过255，要是超过就去怼厂家吧
+            自定义位置附加信息2
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.ExceptionLocationAttachData">
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.CustomLocationAttachData3">
             <summary>
-            有些坑爹的设备，不讲武德，不会按照国标的附加信息Id来搞，变成附加信息Id搞为两个字节，导致解析的时候出问题，存在重复的附加Id。
-            形如:
-            00 0C 这个是长度
-            00 B2 这个是长度
-            实际解析  
-            00 附加信息Id
-            0C 附加信息长度
-            00 附加信息Id
-            B2 附加信息长度
-            只能兼容作为一个字节的兼容，恰恰好一般长度不会超过255，要是超过就去怼厂家吧
+            自定义位置附加信息3
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.CustomLocationAttachData4">
+            <summary>
+            自定义位置附加信息4
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.UnknownLocationAttachData">
+            <summary>
+            未知自定义附加数据【一切都是为了尽可能兼容】
+            形如:自定义_附加Id字节数_附加数据长度_附加Id
+            注意：这边不是最好的解决方式，最好的方式就是通过已知的自定义协议附加，根据提供的文档进行组织后在注册。
+            这边采用优先1-1的，然后是绝大多数设备厂家有2-1，少部分是2-2，最后是1_4。
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.ExceptionLocationAttachOriginalData">
+            <summary>
+            设备未知自定义附加数据（未注册）、数据解析异常
             </summary>
         </member>
         <member name="M:JT808.Protocol.MessageBody.JT808_0x0200.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
@@ -9955,11 +9986,53 @@
             自定义附加信息长度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase.AttachInfoLengthExtend">
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase2">
             <summary>
-            附加信息长度扩展
-            4个字节
-            注意：只适用于已知的协议才行
+            自定义位置附加信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase2.AttachInfoId">
+            <summary>
+            自定义附加信息Id扩展
+            两个字节
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase2.AttachInfoLength">
+            <summary>
+            自定义附加信息长度
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase3">
+            <summary>
+            自定义位置附加信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase3.AttachInfoId">
+            <summary>
+            自定义附加信息Id扩展
+            两个字节
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase3.AttachInfoLength">
+            <summary>
+            自定义附加信息长度
+            两个字节
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase4">
+            <summary>
+            自定义位置附加信息
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase4.AttachInfoId">
+            <summary>
+            自定义附加信息Id扩展
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_CustomBodyBase4.AttachInfoLength">
+            <summary>
+            自定义附加信息长度
+            四个字节
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0201">

@@ -5,6 +5,7 @@ using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
 using System;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -62,13 +63,9 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public DateTime GPSTime { get; set; }
         /// <summary>
-        /// 位置附加信息
+        /// 基础位置附加信息
         /// </summary>
-        public Dictionary<byte, JT808_0x0200_BodyBase> JT808LocationAttachData { get; set; }
-        /// <summary>
-        /// 存储未知的附加信息源数据
-        /// </summary>
-        public Dictionary<byte, byte[]> JT808UnknownLocationAttachOriginalData { get; set; }
+        public Dictionary<byte, JT808_0x0200_BodyBase> BasicLocationAttachData { get; set; }
         /// <summary>
         /// 自定义位置附加信息
         /// 场景：
@@ -79,33 +76,30 @@ namespace JT808.Protocol.MessageBody
         /// 缺点：
         /// 依赖平台录入的设备类型
         /// </summary>
-        public Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; set; }
+        public Dictionary<byte, JT808_0x0200_CustomBodyBase> CustomLocationAttachData { get; set; }
         /// <summary>
-        /// 有些坑爹的设备，不讲武德，不会按照国标的附加信息Id来搞，变成附加信息Id搞为两个字节，导致解析的时候出问题，存在重复的附加Id。
-        /// 形如:
-        /// 00 0C 这个是长度
-        /// 00 B2 这个是长度
-        /// 实际解析  
-        /// 00 附加信息Id
-        /// 0C 附加信息长度
-        /// 00 附加信息Id
-        /// B2 附加信息长度
-        /// 只能兼容作为一个字节的兼容，恰恰好一般长度不会超过255，要是超过就去怼厂家吧
+        /// 自定义位置附加信息2
+        /// </summary>
+        public Dictionary<ushort, JT808_0x0200_CustomBodyBase2> CustomLocationAttachData2 { get; set; }
+        /// <summary>
+        /// 自定义位置附加信息3
+        /// </summary>
+        public Dictionary<ushort, JT808_0x0200_CustomBodyBase3> CustomLocationAttachData3 { get; set; }
+        /// <summary>
+        /// 自定义位置附加信息4
+        /// </summary>
+        public Dictionary<byte, JT808_0x0200_CustomBodyBase4> CustomLocationAttachData4 { get; set; }
+        /// <summary>
+        /// 未知自定义附加数据【一切都是为了尽可能兼容】
+        /// 形如:自定义_附加Id字节数_附加数据长度_附加Id
+        /// 注意：这边不是最好的解决方式，最好的方式就是通过已知的自定义协议附加，根据提供的文档进行组织后在注册。
+        /// 这边采用优先1-1的，然后是绝大多数设备厂家有2-1，少部分是2-2，最后是1_4。
+        /// </summary>
+        public Dictionary<ushort, byte[]> UnknownLocationAttachData { get; set; }
+        /// <summary>
+        /// 设备未知自定义附加数据（未注册）、数据解析异常
         /// </summary>
         public List<byte[]> ExceptionLocationAttachOriginalData { get; set; }
-        /// <summary>
-        /// 有些坑爹的设备，不讲武德，不会按照国标的附加信息Id来搞，变成附加信息Id搞为两个字节，导致解析的时候出问题，存在重复的附加Id。
-        /// 形如:
-        /// 00 0C 这个是长度
-        /// 00 B2 这个是长度
-        /// 实际解析  
-        /// 00 附加信息Id
-        /// 0C 附加信息长度
-        /// 00 附加信息Id
-        /// B2 附加信息长度
-        /// 只能兼容作为一个字节的兼容，恰恰好一般长度不会超过255，要是超过就去怼厂家吧
-        /// </summary>
-        public List<JT808_0x0200_CustomBodyBase> ExceptionLocationAttachData { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -138,88 +132,145 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0200.Direction = reader.ReadUInt16();
             jT808_0X0200.GPSTime = reader.ReadDateTime6();
             // 位置附加信息
-            jT808_0X0200.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
-            jT808_0X0200.JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
-            jT808_0X0200.JT808UnknownLocationAttachOriginalData = new Dictionary<byte, byte[]>();
+            jT808_0X0200.BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            jT808_0X0200.CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
+            jT808_0X0200.CustomLocationAttachData2 = new Dictionary<ushort, JT808_0x0200_CustomBodyBase2>();
+            jT808_0X0200.CustomLocationAttachData3 = new Dictionary<ushort, JT808_0x0200_CustomBodyBase3>();
+            jT808_0X0200.CustomLocationAttachData4 = new Dictionary<byte, JT808_0x0200_CustomBodyBase4>();
             jT808_0X0200.ExceptionLocationAttachOriginalData = new List<byte[]>();
-            jT808_0X0200.ExceptionLocationAttachData = new List<JT808_0x0200_CustomBodyBase>();
+            jT808_0X0200.UnknownLocationAttachData = new Dictionary<ushort, byte[]>();
             while (reader.ReadCurrentRemainContentLength() > 0)
             {
                 try
                 {
-                    ReadOnlySpan<byte> attachSpan = reader.GetVirtualReadOnlySpan(2);
-                    byte attachId = attachSpan[0];
-                    byte attachLen = attachSpan[1];           
-                    if (config.JT808_0X0200_Factory.Map.TryGetValue(attachId, out object jT808LocationAttachInstance))
+                    //正常自定义注册、正常数据解析，不支持国标乱序组包
+                    //优先国标组包->自定义附加数据注册->未知/异常数据
+                    //注意：最坏的是自定义的跟基础标准的附加信息Id冲突了,那么优先使用标准的进行解析
+                    //基础标准附加Id、自定义标准附加Id、自定义标准附加Id 4
+                    byte attachId = reader.ReadVirtualByte();
+                    //自定义标准附加Id2、自定义标准附加Id3
+                    ushort attachId2_3 = reader.ReadVirtualUInt16();
+                    if (config.JT808_0X0200_Factory.Map.TryGetValue(attachId, out object attachInstance))
                     {
-                        if (jT808_0X0200.JT808LocationAttachData.ContainsKey(attachId))
+                        if (jT808_0X0200.BasicLocationAttachData.ContainsKey(attachId))
                         {
                             //存在重复的就不解析，把数据统一放在异常定位数据里面
-                            reader.Skip(2);
+                            reader.Skip(1);
+                            byte attachLen = reader.ReadByte();
                             jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
                             reader.Skip(attachLen);
                         }
                         else
                         {
-                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(jT808LocationAttachInstance, ref reader, config);
-                            jT808_0X0200.JT808LocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
+                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(attachInstance, ref reader, config);
+                            jT808_0X0200.BasicLocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
                         }
                     }
-                    else if (config.JT808_0X0200_Custom_Factory.Map.TryGetValue(attachId,out object customAttachInstance))
+                    else if (config.JT808_0X0200_Custom_Factory.Map.TryGetValue(attachId, out object customAttachInstance))
                     {
-                        if (jT808_0X0200.JT808CustomLocationAttachData.ContainsKey(attachId))
+                        if (jT808_0X0200.CustomLocationAttachData.ContainsKey(attachId))
                         {
-                            //目前根据坑爹的协议只做了附加Id相同的情况下，长度不同的解析方式。
-                            //在已知的情况:附加Id相同，但是长度不同的时候，只能当做用长度来识别是对应的哪个，然后把数据剩下一个放在异常附加数据里面
-                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance, ref reader, config);
-                            jT808_0X0200.ExceptionLocationAttachData.Add(attachImpl);
+                            reader.Skip(1);
+                            byte attachLen = reader.ReadByte();
+                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
+                            reader.Skip(attachLen);
                         }
                         else
                         {
                             dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance, ref reader, config);
-                            jT808_0X0200.JT808CustomLocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
+                            jT808_0X0200.CustomLocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
+                        }
+                    }
+                    else if (config.JT808_0X0200_Custom_Factory.Map2.TryGetValue(attachId2_3, out object customAttachInstance2))
+                    {
+                        if (jT808_0X0200.CustomLocationAttachData2.ContainsKey(attachId2_3))
+                        {
+                            reader.Skip(2);
+                            byte attachLen = reader.ReadByte();
+                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 3, attachLen + 3).ToArray());
+                            reader.Skip(attachLen);
+                        }
+                        else
+                        {
+                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance2, ref reader, config);
+                            jT808_0X0200.CustomLocationAttachData2.Add(attachImpl.AttachInfoId, attachImpl);
+                        }
+                    }
+                    else if (config.JT808_0X0200_Custom_Factory.Map4.TryGetValue(attachId, out object customAttachInstance4))
+                    {
+                        if (jT808_0X0200.CustomLocationAttachData4.ContainsKey(attachId))
+                        {
+                            reader.Skip(1);
+                            int attachLen = reader.ReadInt32();
+                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 5, attachLen + 5).ToArray());
+                            reader.Skip(attachLen);
+                        }
+                        else
+                        {
+                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance4, ref reader, config);
+                            jT808_0X0200.CustomLocationAttachData4.Add(attachImpl.AttachInfoId, attachImpl);
+                        }
+                    }
+                    else if (config.JT808_0X0200_Custom_Factory.Map3.TryGetValue(attachId2_3, out object customAttachInstance3))
+                    {
+                        if (jT808_0X0200.CustomLocationAttachData3.ContainsKey(attachId2_3))
+                        {
+                            reader.Skip(2);
+                            ushort attachLen = reader.ReadUInt16();
+                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 4, attachLen + 4).ToArray());
+                            reader.Skip(attachLen);
+                        }
+                        else
+                        {
+                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance3, ref reader, config);
+                            jT808_0X0200.CustomLocationAttachData3.Add(attachImpl.AttachInfoId, attachImpl);
                         }
                     }
                     else
                     {
-                        reader.Skip(2);
-                        if (jT808_0X0200.JT808UnknownLocationAttachOriginalData.ContainsKey(attachId))
+                        //未知的附加只通过标准的自定义附加信息来解析，其余的通过自己注册，自己实现的方式来解析
+                        reader.Skip(1);
+                        byte attachLen = reader.ReadByte();
+                        int remainLength = reader.ReadCurrentRemainContentLength();
+                        if(remainLength < attachLen)
                         {
-                            //未知的情况下:存在重复的就不解析，把数据统一放在异常定位数据里面
-                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
+                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(remainLength).ToArray());
                         }
                         else
                         {
-                            jT808_0X0200.JT808UnknownLocationAttachOriginalData.Add(attachId, reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
+                            if (jT808_0X0200.UnknownLocationAttachData.ContainsKey(attachId))
+                            {
+                                //存在重复的就不解析，把数据统一放在异常定位数据里面
+                                jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
+                            }
+                            else
+                            {
+                                jT808_0X0200.UnknownLocationAttachData.Add(attachId, reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
+                            }
+                            reader.Skip(attachLen);
                         }
-                        reader.Skip(attachLen);
                     }
                 }
                 catch
                 {
                     try
                     {
-                        byte attachId = reader.ReadByte();
-                        byte attachLen = reader.ReadByte();
-                        if (jT808_0X0200.JT808UnknownLocationAttachOriginalData.ContainsKey(attachId))
+                        var remainLength = reader.ReadCurrentRemainContentLength();
+                        if (remainLength > 0)
                         {
-                            //未知的情况下:存在重复的就不解析，把数据统一放在异常定位数据里面
-                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
+                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(remainLength).ToArray());
+                            break;
                         }
-                        else
-                        {
-                            jT808_0X0200.JT808UnknownLocationAttachOriginalData.Add(attachId, reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray());
-                        }
-                        reader.Skip(attachLen);
                     }
                     catch (Exception ex)
                     {
-                        throw;
+                        break;
                     }
                 }
             }
             return jT808_0X0200;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -263,9 +314,9 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt16(value.Speed);
             writer.WriteUInt16(value.Direction);
             writer.WriteDateTime6(value.GPSTime);
-            if (value.JT808LocationAttachData != null && value.JT808LocationAttachData.Count > 0)
+            if (value.BasicLocationAttachData != null && value.BasicLocationAttachData.Count > 0)
             {
-                foreach (var item in value.JT808LocationAttachData)
+                foreach (var item in value.BasicLocationAttachData)
                 {
                     try
                     {
@@ -277,18 +328,52 @@ namespace JT808.Protocol.MessageBody
                     }
                 }
             }
-            if (value.JT808CustomLocationAttachData != null && value.JT808CustomLocationAttachData.Count > 0)
+            if (value.CustomLocationAttachData != null && value.CustomLocationAttachData.Count > 0)
             {
-                foreach (var item in value.JT808CustomLocationAttachData)
+                foreach (var item in value.CustomLocationAttachData)
                 {
                     JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
                 }
             }
-            if (value.ExceptionLocationAttachData != null && value.ExceptionLocationAttachData.Count > 0)
+            if (value.CustomLocationAttachData2 != null && value.CustomLocationAttachData2.Count > 0)
             {
-                foreach (var item in value.ExceptionLocationAttachData)
+                foreach (var item in value.CustomLocationAttachData2)
                 {
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
+                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
+                }
+            }
+            if (value.CustomLocationAttachData3 != null && value.CustomLocationAttachData3.Count > 0)
+            {
+                foreach (var item in value.CustomLocationAttachData3)
+                {
+                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
+                }
+            }
+            if (value.CustomLocationAttachData4 != null && value.CustomLocationAttachData4.Count > 0)
+            {
+                foreach (var item in value.CustomLocationAttachData4)
+                {
+                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
+                }
+            }
+            if (value.UnknownLocationAttachData!=null && value.UnknownLocationAttachData.Count > 0)
+            {
+                foreach (var item in value.UnknownLocationAttachData)
+                {
+                    if(item.Value!=null && item.Value.Length >= 2)
+                    {
+                        writer.WriteArray(item.Value);
+                    }
+                }
+            }
+            if (value.ExceptionLocationAttachOriginalData != null && value.ExceptionLocationAttachOriginalData.Count > 0)
+            {
+                foreach (var item in value.ExceptionLocationAttachOriginalData)
+                {
+                    if (item != null && item.Length >= 2)
+                    {
+                        writer.WriteArray(item);
+                    }
                 }
             }
         }
@@ -430,57 +515,168 @@ namespace JT808.Protocol.MessageBody
             value.GPSTime = reader.ReadDateTime6();
             writer.WriteString($"[{value.GPSTime:yyMMddHHmmss}]定位时间", value.GPSTime.ToString("yyyy-MM-dd HH:mm:ss"));
             // 位置附加信息
+            value.BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+            value.CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
+            value.CustomLocationAttachData2 = new Dictionary<ushort, JT808_0x0200_CustomBodyBase2>();
+            value.CustomLocationAttachData3 = new Dictionary<ushort, JT808_0x0200_CustomBodyBase3>();
+            value.CustomLocationAttachData4 = new Dictionary<byte, JT808_0x0200_CustomBodyBase4>();
+            value.ExceptionLocationAttachOriginalData = new List<byte[]>();
             writer.WriteStartArray("附加信息列表");
             while (reader.ReadCurrentRemainContentLength() > 0)
             {
                 try
                 {
-                    ReadOnlySpan<byte> attachSpan = reader.GetVirtualReadOnlySpan(2);
-                    byte attachId = attachSpan[0];
-                    byte attachLen = attachSpan[1];
-                    if (config.JT808_0X0200_Factory.Map.TryGetValue(attachId, out object jT808LocationAttachInstance))
+                    //正常自定义注册、正常数据解析，不支持国标乱序组包
+                    //优先国标组包->自定义附加数据注册->异常数据
+                    //注意：最坏的是自定义的跟基础标准的附加信息Id冲突了,那么优先使用标准的进行解析
+                    //基础标准附加Id、自定义标准附加Id、自定义标准附加Id 4
+                    byte attachId = reader.ReadVirtualByte();
+                    //自定义标准附加Id2、自定义标准附加Id3
+                    ushort attachId2_3 = reader.ReadVirtualUInt16();
+                    if (config.JT808_0X0200_Factory.Map.TryGetValue(attachId, out object attachInstance))
                     {
-                        writer.WriteStartObject();
-                        jT808LocationAttachInstance.Analyze(ref reader, writer, config);
-                        writer.WriteEndObject();
+                        if (value.BasicLocationAttachData.ContainsKey(attachId))
+                        {
+                            //存在重复的就不解析，把数据统一放在异常定位数据里面
+                            reader.Skip(1);
+                            byte attachLen = reader.ReadByte();
+                            writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
+                            writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
+                            writer.WriteString($"未知附加信息", reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray().ToHexString());
+                            reader.Skip(attachLen);
+                        }
+                        else
+                        {
+                            writer.WriteStartObject();
+                            attachInstance.Analyze(ref reader, writer, config);
+                            writer.WriteEndObject();
+                            value.BasicLocationAttachData.Add(attachId, null);
+                        }
                     }
                     else if (config.JT808_0X0200_Custom_Factory.Map.TryGetValue(attachId, out object customAttachInstance))
                     {
-                        writer.WriteStartObject();
-                        customAttachInstance.Analyze(ref reader, writer, config);
-                        writer.WriteEndObject();
+                        if (value.CustomLocationAttachData.ContainsKey(attachId))
+                        {
+                            reader.Skip(1);
+                            byte attachLen = reader.ReadByte();
+                            writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
+                            writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
+                            writer.WriteString($"未知附加信息_{attachId}", reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray().ToHexString());
+                            reader.Skip(attachLen);
+                        }
+                        else
+                        {
+                            writer.WriteStartObject();
+                            customAttachInstance.Analyze(ref reader, writer, config);
+                            writer.WriteEndObject();
+                            value.CustomLocationAttachData.Add(attachId, null);
+                        }
+                    }
+                    else if (config.JT808_0X0200_Custom_Factory.Map4.TryGetValue(attachId, out object customAttachInstance4))
+                    {
+                        if (value.CustomLocationAttachData4.ContainsKey(attachId))
+                        {
+                            reader.Skip(1);
+                            int attachLen = reader.ReadInt32();
+                            writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
+                            writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
+                            writer.WriteString($"未知附加信息1_4_{attachId}", reader.ReadArray(reader.ReaderCount - 5, attachLen + 5).ToArray().ToHexString());
+                            reader.Skip(attachLen);
+                        }
+                        else
+                        {
+                            writer.WriteStartObject();
+                            customAttachInstance4.Analyze(ref reader, writer, config);
+                            writer.WriteEndObject();
+                            value.CustomLocationAttachData4.Add(attachId, null);
+                        }
+                    }
+                    else if (config.JT808_0X0200_Custom_Factory.Map2.TryGetValue(attachId2_3, out object customAttachInstance2))
+                    {
+                        if (value.CustomLocationAttachData2.ContainsKey(attachId2_3))
+                        {
+                            reader.Skip(2);
+                            byte attachLen = reader.ReadByte();
+                            writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
+                            writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
+                            writer.WriteString($"未知附加信息2_1", reader.ReadArray(reader.ReaderCount - 3, attachLen + 3).ToArray().ToHexString());
+                            reader.Skip(attachLen);
+                        }
+                        else
+                        {
+                            writer.WriteStartObject();
+                            customAttachInstance2.Analyze(ref reader, writer, config);
+                            writer.WriteEndObject();
+                            value.CustomLocationAttachData2.Add(attachId2_3, null);
+                        }
+                    }
+                    else if (config.JT808_0X0200_Custom_Factory.Map3.TryGetValue(attachId2_3, out object customAttachInstance3))
+                    {
+                        if (value.CustomLocationAttachData3.ContainsKey(attachId2_3))
+                        {
+                            reader.Skip(2);
+                            ushort attachLen = reader.ReadUInt16();
+                            writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
+                            writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
+                            writer.WriteString($"未知附加信息2_2_{attachId}", reader.ReadArray(reader.ReaderCount - 4, attachLen + 4).ToArray().ToHexString());
+                            reader.Skip(attachLen);
+                        }
+                        else
+                        {
+                            writer.WriteStartObject();
+                            customAttachInstance3.Analyze(ref reader, writer, config);
+                            writer.WriteEndObject();
+                            value.CustomLocationAttachData3.Add(attachId2_3, null);
+                        }
                     }
                     else
                     {
+                        //未知的附加只通过标准的自定义附加信息来解析，其余的通过自己注册，自己实现的方式来解析
+                        reader.Skip(1);
+                        byte attachLen = reader.ReadByte();
+                        int remainLength = reader.ReadCurrentRemainContentLength();
                         writer.WriteStartObject();
-                        reader.Skip(2);
                         writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
                         writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
-                        writer.WriteString($"未知附加信息", reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray().ToHexString());
-                        reader.Skip(attachLen);
+                        if ((attachLen+2) > remainLength)
+                        {
+                            writer.WriteString($"未知附加信息", reader.ReadArray(remainLength).ToArray().ToHexString());
+                        }
+                        else
+                        {
+                            writer.WriteString($"未知附加信息", reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray().ToHexString());
+                            reader.Skip(attachLen);
+                        }
                         writer.WriteEndObject();
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
                     writer.WriteStartObject();
+                    writer.WriteString($"解析外部部未知附加信息报错", ex.StackTrace);
                     try
                     {
-                        byte attachId = reader.ReadByte();
-                        byte attachLen = reader.ReadByte();
-                        writer.WriteNumber($"[{attachId.ReadNumber()}]未知附加信息Id", attachId);
-                        writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
-                        writer.WriteString($"未知附加信息", reader.ReadArray(reader.ReaderCount - 2, attachLen + 2).ToArray().ToHexString());   
-                        reader.Skip(attachLen);
+                        var remainLength = reader.ReadCurrentRemainContentLength();
+                        if (remainLength > 0)
+                        {
+                            writer.WriteString($"未知附加信息", reader.ReadArray(remainLength).ToArray().ToHexString());
+                        }
+                        else
+                        {
+                            writer.WriteStartObject();
+                            writer.WriteString($"未知附加信息", "无");
+                            writer.WriteEndObject();
+                        }
                     }
-                    catch
+                    catch (Exception innerEx)
                     {
-                        throw;
+                        writer.WriteString($"解析内部未知附加信息报错", innerEx.StackTrace);
                     }
                     finally
                     {
                         writer.WriteEndObject();
                     }
+                    break;
                 }
             }
             writer.WriteEndArray();

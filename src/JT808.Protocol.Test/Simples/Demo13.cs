@@ -26,11 +26,19 @@ namespace JT808.Protocol.Test.Simples
 
         public Demo13()
         {
-            IJT808Config jT808Config = new DefaultGlobalConfig();
-            jT808Config.JT808_0x8105_Cusotm_Factory.SetMap<Koike1CommandParameter>();
-            jT808Config.JT808_0x8105_Cusotm_Factory.SetMap<Koike2CommandParameter>();
-            jT808Config.JT808_0x8105_Cusotm_Factory.SetMap<Koike3CommandParameter>();
-            JT808Serializer = new JT808Serializer(jT808Config);
+            IServiceCollection serviceDescriptors = new ServiceCollection();
+            serviceDescriptors.AddJT808Configure(new DefaultGlobalConfig("replace"));
+            //通常在startup中使用app的Use进行扩展
+            IServiceProvider serviceProvider = serviceDescriptors.BuildServiceProvider();
+            Use(serviceProvider);
+        }
+
+        void Use(IServiceProvider serviceProvider)
+        {
+            IJT808Config jT808Config = serviceProvider.GetRequiredService<DefaultGlobalConfig>();
+            //替换原有消息存在的BUG
+            jT808Config.ReplaceMsgId<JT808_0x0001, JT808_0x0001_Replace>();
+            JT808Serializer = jT808Config.GetSerializer();
         }
 
         [Fact]
@@ -40,236 +48,115 @@ namespace JT808.Protocol.Test.Simples
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端控制.ToUInt16Value(),
-                    ManualMsgNum = 1,
-                    TerminalPhoneNo = "12345678900",
+                    MsgId = Enums.JT808MsgId.终端通用应答.ToUInt16Value(),
+                    ManualMsgNum = 1203,
+                    TerminalPhoneNo = "012345678900",
                 },
-                Bodies = new JT808_0x8105
+                Bodies = new JT808_0x0001_Replace
                 {
-                    CommandWord = 1,
-                    CustomCommandParameters=new List<ICommandParameter>
-                    {
-                        new Koike1CommandParameter
-                        {
-                             Value=23
-                        },
-                        new Koike2CommandParameter
-                        {
-                             Value="SmallChi"
-                        },
-                        new Koike3CommandParameter
-                        {
-                             Value=new Koike3Object
-                             {
-                                  Value1=0xff,
-                                  Value2="Happy"
-                             }
-                        }
-                    }
+                    ReplyMsgId = Enums.JT808MsgId.终端心跳.ToUInt16Value(),
+                    ReplyMsgNum = 1000,
+                    TerminalResult = Enums.JT808TerminalResult.Success,
+                    Test=168
                 }
             };
             var hex = JT808Serializer.Serialize(jT808Package).ToHexString();
-            Assert.Equal("7E8105002A0123456789000001013B3B3B3B3B3B3B3B3B3B3B3B3B000000173B536D616C6C43686900003BFF486170707900000000003B827E", hex);
+            Assert.Equal("7E0001000701234567890004B303E800020000A8797E", hex);
         }
 
         [Fact]
         public void Test2()
         {
-            byte[] bytes = "7E8105002A0123456789000001013B3B3B3B3B3B3B3B3B3B3B3B3B000000173B536D616C6C43686900003BFF486170707900000000003B827E".ToHexBytes();
-            var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.终端控制.ToUInt16Value(), jT808Package.Header.MsgId);
-            Assert.Equal(1, jT808Package.Header.MsgNum);
-            Assert.Equal("12345678900", jT808Package.Header.TerminalPhoneNo);
-            var JT808_0x8105 = (JT808_0x8105)jT808Package.Bodies;
-            Assert.Equal(1, JT808_0x8105.CommandWord);
-            Assert.Equal(23u, JT808_0x8105.CustomCommandParameters.GetCommandParameter<Koike1CommandParameter>().Value.Value);
-            Assert.Equal("SmallChi", JT808_0x8105.CustomCommandParameters.GetCommandParameter<Koike2CommandParameter>().Value);
-            Assert.Equal(new Koike3Object() 
-            {
-                Value1 = 0xff,
-                Value2 = "Happy"
-            }, JT808_0x8105.CustomCommandParameters.GetCommandParameter<Koike3CommandParameter>().Value);
+            var bytes = "7E0001000701234567890004B303E800020000A8797E".ToHexBytes();
+            JT808Package jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
+            Assert.Equal(Enums.JT808MsgId.终端通用应答.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(1203, jT808Package.Header.MsgNum);
+            JT808_0x0001_Replace JT808Bodies = (JT808_0x0001_Replace)jT808Package.Bodies;
+            Assert.Equal(Enums.JT808MsgId.终端心跳.ToUInt16Value(), JT808Bodies.ReplyMsgId);
+            Assert.Equal(1000, JT808Bodies.ReplyMsgNum);
+            Assert.Equal(Enums.JT808TerminalResult.Success, JT808Bodies.TerminalResult);
+            Assert.Equal(168u, JT808Bodies.Test);
         }
+    }
 
-        [Fact]
-        public void Test3()
-        {
-            byte[] bytes = "7E8105002A0123456789000001013B3B3B3B3B3B3B3B3B3B3B3B3B000000173B536D616C6C43686900003BFF486170707900000000003B827E".ToHexBytes();
-            var json = JT808Serializer.Analyze(bytes); 
-        }
-
-        [Fact]
-        public void Test4()
-        {
-            var ex= Assert.Throws<System.ArgumentException>(() => 
-            {
-                IJT808Config jT808Config = new DefaultGlobalConfig();
-                jT808Config.JT808_0x8105_Cusotm_Factory.SetMap<ErrorCommandParameter>();
-            });
-            Assert.Equal(ex.Message, $"{typeof(ErrorCommandParameter).FullName} Order is {3}. We're starting at 13 and we're incremying by 1.");
-        }
+    /// <summary>
+    /// 终端通用应答_替换原有的消息，来解决库现有的bug
+    /// </summary>
+    public class JT808_0x0001_Replace : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0001_Replace>, IJT808Analyze
+    {
+        /// <summary>
+        /// 0x0001
+        /// </summary>
+        public override ushort MsgId => 0x0001;
+        /// <summary>
+        /// 终端通用应答
+        /// </summary>
+        public override string Description => "终端通用应答";
+        /// <summary>
+        /// 应答流水号
+        /// 对应的平台消息的流水号
+        /// </summary>
+        public ushort ReplyMsgNum { get; set; }
+        /// <summary>
+        /// 应答 ID
+        /// 对应的平台消息的 ID
+        /// <see cref="JT808.Protocol.Enums.JT808MsgId"/>
+        /// </summary>
+        public ushort ReplyMsgId { get; set; }
 
         /// <summary>
-        /// ICusotmCommandParameter  自定义命令参数接口
-        /// ICommandParameterValue<> 对应的数据类型值
-        /// 注意：Order必须从13开始逐一递增
+        /// 结果
+        /// 0：成功/确认；1：失败；2：消息有误；3：不支持
         /// </summary>
-        public class Koike1CommandParameter : ICusotmCommandParameter, ICommandParameterValue<uint?>
+        public JT808TerminalResult TerminalResult { get; set; }
+        /// <summary>
+        /// 测试
+        /// </summary>
+        public ushort Test { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public JT808_0x0001_Replace Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            public int Order => 13;
-
-            public string CommandName => "Koike1";
-
-            public uint? Value { get; set; }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public byte[] ToBytes()
-            {
-                if (!Value.HasValue) return default;
-                var value = new byte[4];
-                BinaryPrimitives.WriteUInt32BigEndian(value, Value.Value);
-                return value;
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="bytes"></param>
-            public void ToValue(byte[] bytes)
-            {
-                if (bytes != null && bytes.Length > 0)
-                {
-                    Value = BinaryPrimitives.ReadUInt32BigEndian(bytes);
-                }
-            }
+            JT808_0x0001_Replace jT808_0X0001 = new JT808_0x0001_Replace();
+            jT808_0X0001.ReplyMsgNum = reader.ReadUInt16();
+            jT808_0X0001.ReplyMsgId = reader.ReadUInt16();
+            jT808_0X0001.TerminalResult = (JT808TerminalResult)reader.ReadByte();
+            jT808_0X0001.Test = reader.ReadUInt16();
+            return jT808_0X0001;
         }
         /// <summary>
-        /// ICusotmCommandParameter  自定义命令参数接口
-        /// ICommandParameterValue<> 对应的数据类型值
-        /// 注意：Order必须从13开始逐一递增
+        /// 
         /// </summary>
-        public class Koike2CommandParameter : ICusotmCommandParameter, ICommandParameterValue<string>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
+        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0001_Replace value, IJT808Config config)
         {
-            public int Order => 14;
-            public string CommandName => "Koike2";
-            public string Value { get; set; }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public byte[] ToBytes()
-            {
-                if (string.IsNullOrEmpty(Value)) return default;
-                return JT808Constants.Encoding.GetBytes(Value.PadRight(10, '\0'));
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="bytes"></param>
-            public void ToValue(byte[] bytes)
-            {
-                if (bytes != null && bytes.Length > 0)
-                {
-                    Value = JT808Constants.Encoding.GetString(bytes).Trim('\0');
-                }
-            }
+            writer.WriteUInt16(value.ReplyMsgNum);
+            writer.WriteUInt16(value.ReplyMsgId);
+            writer.WriteByte((byte)value.TerminalResult);
+            writer.WriteUInt16(value.Test);
         }
         /// <summary>
-        /// ICusotmCommandParameter  自定义命令参数接口
-        /// ICommandParameterValue<> 对应的数据类型值
-        /// 注意：Order必须从13开始逐一递增
+        /// 
         /// </summary>
-        public class Koike3CommandParameter : ICusotmCommandParameter, ICommandParameterValue<Koike3Object>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            public int Order => 15;
-            public string CommandName => "Koike3";
-            public Koike3Object Value { get; set; }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public byte[] ToBytes()
-            {
-                if (Value==null) return default;
-                return Value.ToBytes();
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="bytes"></param>
-            public void ToValue(byte[] bytes)
-            {
-                if (bytes != null && bytes.Length > 0)
-                {
-                    Value = new Koike3Object();
-                    Value.ToValue(bytes);
-                }
-            }
-        }
-        /// <summary>
-        /// Koike3为对象
-        /// ICommandParameterConvert:命令参数转换
-        /// ToString:为对象类型用于分析器自定义显示
-        /// </summary>
-        public record Koike3Object : ICommandParameterConvert
-        {
-            public byte Value1 { get; set; }
-            public string Value2 { get; set; }
-            public byte[] ToBytes()
-            {
-                byte[] value = new byte[11];
-                value[0] = Value1;
-                var val2 = JT808Constants.Encoding.GetBytes(Value2.PadRight(10, '\0'));
-                Array.Copy(val2, 0, value, 1, val2.Length);
-                return value;
-            }
-            public void ToValue(byte[] bytes)
-            {
-                if (bytes != null && bytes.Length > 0)
-                {
-                    var val = bytes.AsSpan();
-                    Value1 = val[0];
-                    Value2 = JT808Constants.Encoding.GetString(val.Slice(1)).Trim('\0');
-                }
-            }
-            /// <summary>
-            /// 用于分析器描述
-            /// </summary>
-            /// <returns></returns>
-            public override string ToString()
-            {
-                return JsonConvert.SerializeObject(this);
-            }
-        }
-
-        /// <summary>
-        /// ICusotmCommandParameter  自定义命令参数接口
-        /// ICommandParameterValue<> 对应的数据类型值
-        /// 注意：Order必须从13开始逐一递增
-        /// </summary>
-        public class ErrorCommandParameter : ICusotmCommandParameter, ICommandParameterValue<bool>
-        {
-            public int Order => 3;
-            public string CommandName => "Error";
-            public bool Value { get; set; }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <returns></returns>
-            public byte[] ToBytes()
-            {
-                return default;
-            }
-            /// <summary>
-            /// 
-            /// </summary>
-            /// <param name="bytes"></param>
-            public void ToValue(byte[] bytes)
-            {
-
-            }
+            var replyMsgNum = reader.ReadUInt16();
+            var replyMsgId = reader.ReadUInt16();
+            var terminalResult = reader.ReadByte();
+            var test = reader.ReadUInt16();
+            writer.WriteNumber($"[{replyMsgNum.ReadNumber()}]应答流水号", replyMsgNum);
+            writer.WriteNumber($"[{replyMsgId.ReadNumber()}]应答消息Id", replyMsgId);
+            writer.WriteString($"[{terminalResult.ReadNumber()}]结果", ((JT808TerminalResult)terminalResult).ToString());
+            writer.WriteNumber($"[{test.ReadNumber()}]测试", test);
         }
     }
 }

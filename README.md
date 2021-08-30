@@ -74,14 +74,14 @@ jT808_0x0200.Lng = 132444444;
 jT808_0x0200.Speed = 60;
 jT808_0x0200.Direction = 0;
 jT808_0x0200.StatusFlag = 2;
-jT808_0x0200.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+jT808_0x0200.BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
 
-jT808_0x0200.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x01, new JT808_0x0200_0x01
+jT808_0x0200.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x01, new JT808_0x0200_0x01
 {
     Mileage = 100
 });
 
-jT808_0x0200.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x02, new JT808_0x0200_0x02
+jT808_0x0200.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x02, new JT808_0x0200_0x02
 {
     Oil = 125
 });
@@ -162,9 +162,9 @@ Assert.Equal(60, jT808_0x0200.Speed);
 Assert.Equal(0, jT808_0x0200.Direction);
 Assert.Equal((uint)2, jT808_0x0200.StatusFlag);
 //4.1.附加信息1
-Assert.Equal(100, ((JT808_0x0200_0x01)jT808_0x0200.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+Assert.Equal(100, ((JT808_0x0200_0x01)jT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
 //4.2.附加信息2
-Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.JT808LocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
+Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
 ```
 
 ### 举个栗子2
@@ -181,7 +181,7 @@ JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("12345678
         Speed = 60,
         Direction = 0,
         StatusFlag = 2,
-        JT808LocationAttachData = new Dictionary<byte, JT808LocationAttachBase>
+        BasicLocationAttachData = new Dictionary<byte, JT808LocationAttachBase>
         {
             { JT808Constants.JT808_0x0200_0x01,new JT808_0x0200_0x01{Mileage = 100}},
             { JT808Constants.JT808_0x0200_0x02,new JT808_0x0200_0x02{Oil = 125}}
@@ -293,10 +293,25 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 ### 举个栗子10
 
-场景:
+场景1:
 有些设备，不会按照国标的附加信息Id来搞，把附加信息Id搞为两个字节，这样在上报上来的数据就会存在重复的附加Id，导致平台解析出错。
 
+场景2：
+由于粤标的设备厂家自定义的附加信息长度可以为四4个字节的，所以需要兼容。
+
+场景3：
+有些设备上报会出现两个相同的附加信息Id,那么只能解析一个，另一个只能丢在异常附加信息里面去处理。
+
+|附加信息类说明| 附加ID字节数 | 附加长度字节数 | 备注 |
+| :--- | :---: | :---: | :---:|
+| JT808_0x0200_CustomBodyBase  | 1 BYTE | 1 BYTE | 标准|
+| JT808_0x0200_CustomBodyBase2 | 2 BYTE | 1 BYTE | 自定义|
+| JT808_0x0200_CustomBodyBase3 | 2 BYTE | 2 BYTE | 自定义|
+| JT808_0x0200_CustomBodyBase4 | 1 BYTE | 4 BYTE | 自定义|
+
 [可以参考Simples的Demo10](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo10.cs)
+
+>注意：默认都是以**标准**的去解析，要是出现未知的附加，不一定解析就是正确，最好还是需要依照协议文档去开发然后自行注册解析器去解析。
 
 ### 举个栗子11
 
@@ -308,39 +323,30 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 ### 举个栗子12
 
 场景:
-由于粤标的设备厂家自定义的附加信息长度可以为四4个字节的，所以需要兼容。
+由于粤标的设备把2019版本的0x8105终端控制消息命令参数做了扩展，所以需要兼容。
 
 [可以参考Simples的Demo12](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo12.cs)
-
->注意：只适用于已知的设备厂家协议才行
 
 ### 举个栗子13
 
 场景:
-由于粤标的设备把2019版本的0x8105终端控制消息命令参数做了扩展，所以需要兼容。
+由于协议库本身可能存在消息解析出错的情况，要么就提PR上来，但是不一定会及时发布，这时候就需要自己把原有的消息解析复制出来，改造好，然后重新注册。
 
-[可以参考Simples的Demo13](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo13.cs)
+[可以参考Simples的Demo14](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo13.cs)
 
 ### 举个栗子14
 
 场景:
-由于协议库本身可能存在消息解析出错的情况，要么就提PR上来，但是不一定会及时发布，这时候就需要自己把原有的消息解析复制出来，改造好，然后重新注册。
+由于某些厂商不按要求去做，明明使用的2013的协议但是在消息头部的版本标识位置为1，导致程序认为是2019协议。从而解析报错。此时可以强制解析成2013后，然后修正版本标识，重新序列化消息，以供下游服务使用
 
 [可以参考Simples的Demo14](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo14.cs)
 
 ### 举个栗子15
 
 场景:
-由于某些厂商不按要求去做，明明使用的2013的协议但是在消息头部的版本标识位置为1，导致程序认为是2019协议。从而解析报错。此时可以强制解析成2013后，然后修正版本标识，重新序列化消息，以供下游服务使用
-
-[可以参考Simples的Demo15](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo15.cs)
-
-### 举个栗子16
-
-场景:
 兼容2011协议的注册消息
 
-[可以参考Simples的Demo16](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
+[可以参考Simples的Demo15](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo15.cs)
 
 ## NuGet安装
 

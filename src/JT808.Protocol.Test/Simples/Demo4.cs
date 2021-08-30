@@ -48,7 +48,7 @@ namespace JT808.Protocol.Test.Simples
                                             Speed = 60,
                                             Direction = 0,
                                             StatusFlag = 2,
-                                            JT808CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>
+                                            CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>
                                                 {
                                                     {0x81,new JT808_0x0200_DT1_0x81 {
                                                         Age=15,
@@ -62,7 +62,7 @@ namespace JT808.Protocol.Test.Simples
             var jT808PackageResult = demo5JT808Serializer.Deserialize<JT808Package>(data);
             JT808_0x0200 jT808_0X0200 = jT808PackageResult.Bodies as JT808_0x0200;
 
-            var attach = DeviceTypeFactory.Create(cache[jT808PackageResult.Header.TerminalPhoneNo], jT808_0X0200.JT808CustomLocationAttachData);
+            var attach = DeviceTypeFactory.Create(cache[jT808PackageResult.Header.TerminalPhoneNo], jT808_0X0200.CustomLocationAttachData);
             var extJson = attach.ExtData.Data.ToString(Formatting.None);
             var attachinfo81 = (JT808_0x0200_DT1_0x81)attach.JT808CustomLocationAttachData[0x81];
             Assert.Equal((uint)15, attachinfo81.Age);

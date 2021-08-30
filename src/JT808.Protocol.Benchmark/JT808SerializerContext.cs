@@ -57,57 +57,57 @@ namespace JT808.Protocol.Benchmark
                 jT808UploadLocationRequest.Speed = 60;
                 jT808UploadLocationRequest.Direction = 0;
                 jT808UploadLocationRequest.StatusFlag = 2;
-                jT808UploadLocationRequest.JT808LocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x01, new JT808_0x0200_0x01
+                jT808UploadLocationRequest.BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x01, new JT808_0x0200_0x01
                 {
                     Mileage = 100
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x02, new JT808_0x0200_0x02
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x02, new JT808_0x0200_0x02
                 {
                     Oil = 55
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x03, new JT808_0x0200_0x03
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x03, new JT808_0x0200_0x03
                 {
                      Speed=56
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x04, new JT808_0x0200_0x04
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x04, new JT808_0x0200_0x04
                 {
                      EventId=1
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x11, new JT808_0x0200_0x11
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x11, new JT808_0x0200_0x11
                 {
                      AreaId=1,
                      JT808PositionType= Enums.JT808PositionType.圆形区域
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x12, new JT808_0x0200_0x12
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x12, new JT808_0x0200_0x12
                 {
                     AreaId = 1,
                     JT808PositionType = Enums.JT808PositionType.圆形区域,
                     Direction= Enums.JT808DirectionType.出
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x13, new JT808_0x0200_0x13
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x13, new JT808_0x0200_0x13
                 {
                      DrivenRoute= Enums.JT808DrivenRouteType.过长,
                      DrivenRouteId=2,
                      Time=34
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x25, new JT808_0x0200_0x25
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x25, new JT808_0x0200_0x25
                 {
                      CarSignalStatus=23
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x2A, new JT808_0x0200_0x2A
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x2A, new JT808_0x0200_0x2A
                 {
                     IOStatus=244
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x2B, new JT808_0x0200_0x2B
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x2B, new JT808_0x0200_0x2B
                 {
                      Analog = 242
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x30, new JT808_0x0200_0x30
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x30, new JT808_0x0200_0x30
                 {
                      WiFiSignalStrength=0x02
                 });
-                jT808UploadLocationRequest.JT808LocationAttachData.Add(JT808Constants.JT808_0x0200_0x31, new JT808_0x0200_0x31
+                jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x31, new JT808_0x0200_0x31
                 {
                      GNSSCount=0x05
                 });

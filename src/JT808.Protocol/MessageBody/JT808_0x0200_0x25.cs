@@ -44,21 +44,21 @@ namespace JT808.Protocol.MessageBody
             var carSignalStatus = Convert.ToString(value.CarSignalStatus, 2).PadLeft(32, '0').AsSpan();
             writer.WriteString("值", Convert.ToString(value.CarSignalStatus, 2).PadLeft(32, '0'));
             writer.WriteString("bit15~31", "保留");
-            writer.WriteString("bit14", (value.CarSignalStatus & 16384) == 16384 ? "离合器状态" : "无");
-            writer.WriteString("bit13", (value.CarSignalStatus & 8192) == 8192 ? "加热器工作" : "无");
-            writer.WriteString("bit12", (value.CarSignalStatus & 4096) == 4096 ? "ABS工作" : "无");
-            writer.WriteString("bit11", (value.CarSignalStatus & 2048) == 2048 ? "缓速器工作" : "无");
-            writer.WriteString("bit10", (value.CarSignalStatus & 1024) == 1024 ? "空挡信号" : "无");
-            writer.WriteString("bit9", (value.CarSignalStatus & 512) == 512 ? "空调状态" : "无");
-            writer.WriteString("bit8", (value.CarSignalStatus & 256) == 256 ? "喇叭信号" : "无");
-            writer.WriteString("bit7", (value.CarSignalStatus & 128) == 128 ? "示廓灯" : "无");
-            writer.WriteString("bit6", (value.CarSignalStatus & 64) == 64 ? "雾灯信号" : "无");
-            writer.WriteString("bit5", (value.CarSignalStatus & 32) == 32 ? "倒档信号" : "无");
-            writer.WriteString("bit4", (value.CarSignalStatus & 16) == 16 ? "制动信号" : "无");
-            writer.WriteString("bit3", (value.CarSignalStatus & 8) == 8 ? "左转向灯信号" : "无");
-            writer.WriteString("bit2", (value.CarSignalStatus & 4) == 4 ? "右转向灯信号" : "无");
-            writer.WriteString("bit1", (value.CarSignalStatus & 2) == 2 ? "远光灯信号" : "无");
-            writer.WriteString("bit0", (value.CarSignalStatus & 1) ==1?"近光灯信号":"无");
+            writer.WriteString("bit14-离合器状态", (value.CarSignalStatus & 16384) == 16384 ? "离合器状态" : "无");
+            writer.WriteString("bit13-加热器工作", (value.CarSignalStatus & 8192) == 8192 ? "加热器工作" : "无");
+            writer.WriteString("bit12-ABS工作", (value.CarSignalStatus & 4096) == 4096 ? "ABS工作" : "无");
+            writer.WriteString("bit11-缓速器工作", (value.CarSignalStatus & 2048) == 2048 ? "缓速器工作" : "无");
+            writer.WriteString("bit10-空挡信号", (value.CarSignalStatus & 1024) == 1024 ? "空挡信号" : "无");
+            writer.WriteString("bit9-空调状态", (value.CarSignalStatus & 512) == 512 ? "空调状态" : "无");
+            writer.WriteString("bit8-喇叭信号", (value.CarSignalStatus & 256) == 256 ? "喇叭信号" : "无");
+            writer.WriteString("bit7-示廓灯", (value.CarSignalStatus & 128) == 128 ? "示廓灯" : "无");
+            writer.WriteString("bit6-雾灯信号", (value.CarSignalStatus & 64) == 64 ? "雾灯信号" : "无");
+            writer.WriteString("bit5-倒档信号", (value.CarSignalStatus & 32) == 32 ? "倒档信号" : "无");
+            writer.WriteString("bit4-制动信号", (value.CarSignalStatus & 16) == 16 ? "制动信号" : "无");
+            writer.WriteString("bit3-左转向灯信号", (value.CarSignalStatus & 8) == 8 ? "左转向灯信号" : "无");
+            writer.WriteString("bit2-右转向灯信号", (value.CarSignalStatus & 4) == 4 ? "右转向灯信号" : "无");
+            writer.WriteString("bit1-远光灯信号", (value.CarSignalStatus & 2) == 2 ? "远光灯信号" : "无");
+            writer.WriteString("bit0-近光灯信号", (value.CarSignalStatus & 1) ==1?"近光灯信号":"无");
             writer.WriteEndObject();
         }
         /// <summary>
