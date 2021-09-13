@@ -6,6 +6,7 @@
     <Description>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议(支持2011、2013、2019版本)</Description>
     <PackageReleaseNotes>JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议(支持2011、2013、2019版本)</PackageReleaseNotes>
     <DocumentationFile>JT808.Protocol.xml</DocumentationFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
@@ -30,11 +31,8 @@
     <EmbeddedResource Remove="Metadata\JT808LocationAttachProperties\**" />
     <None Remove="Formatters\MessageBodyFormatters\**" />
     <None Remove="Metadata\JT808LocationAttachProperties\**" />
-    <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath=""/>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
