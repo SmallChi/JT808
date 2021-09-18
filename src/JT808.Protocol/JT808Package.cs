@@ -289,6 +289,7 @@ namespace JT808.Protocol
             if (reader.Version == JT808Version.JTT2013Force)
             {
                 reader.Version = JT808Version.JTT2013;
+                writer.WriteString("版本号", JT808Version.JTT2013.ToString());
                 writer.WriteNumber("[bit15]保留", 0);
                 writer.WriteNumber("[bit14]保留", 0);
                 writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
@@ -305,6 +306,7 @@ namespace JT808.Protocol
                 if (reader.Version == JT808Version.JTT2019 || headerMessageBodyProperty.VersionFlag)
                 {
                     reader.Version = JT808Version.JTT2019;
+                    writer.WriteString("版本号", JT808Version.JTT2019.ToString());
                     writer.WriteNumber("[bit15]保留", 0);
                     writer.WriteBoolean("[bit14]协议版本标识", headerMessageBodyProperty.VersionFlag);
                     writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
@@ -322,6 +324,7 @@ namespace JT808.Protocol
                 else
                 {
                     reader.Version = JT808Version.JTT2013;
+                    writer.WriteString("版本号", JT808Version.JTT2013.ToString());
                     writer.WriteNumber("[bit15]保留", 0);
                     writer.WriteNumber("[bit14]保留", 0);
                     writer.WriteBoolean("[bit13]是否分包", headerMessageBodyProperty.IsPackage);
@@ -335,7 +338,6 @@ namespace JT808.Protocol
                     writer.WriteString($"[{terminalPhoneNo.PadLeft(config.TerminalPhoneNoLength, '0')}]终端手机号", terminalPhoneNo);
                 }
             }
-
             //  3.4.读取消息流水号
             var msgNum = reader.ReadUInt16();
             writer.WriteNumber($"[{msgNum.ReadNumber()}]消息流水号", msgNum);
