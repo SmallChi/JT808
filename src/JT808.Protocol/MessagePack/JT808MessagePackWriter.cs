@@ -3,6 +3,7 @@ using JT808.Protocol.Enums;
 using System;
 using System.Buffers;
 using System.Buffers.Binary;
+using System.Collections.Generic;
 using System.Text;
 
 namespace JT808.Protocol.MessagePack
@@ -309,27 +310,133 @@ namespace JT808.Protocol.MessagePack
         {
             src.CopyTo(writer.Written.Slice(position));
         }
+
+        /// <summary>
+        /// 整型数据转为BCD BYTE
+        /// 为了兼容int类型，不使用byte做参数
+        /// 支持0xFF一个字节的转换
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public byte IntToBcd(int value)
+        {
+            byte result = 0;
+            if (value <= 0xFF)
+            {
+                //19 00010011
+                //0001 1001
+                int high = value / 10;
+                int low = value % 10;
+                result = (byte)(high << 4 | low); 
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 整型数据转为BCD BYTE[]
+        /// </summary>
+        /// <param name="value">整数值</param>
+        /// <param name="list">bytes</param>
+        /// <param name="count">字节数>=整数值</param>
+        public void IntToBcd(int value, Span<byte> list, int count)
+        {
+            int level = count - 1;
+            var high = value / 100;
+            var low = value % 100;
+            if (high > 0)
+            {
+                IntToBcd(high, list, --count);
+            }
+            byte res = (byte)(((low / 10) << 4) + (low % 10));
+            list[level] = res;
+        }
+
+        /// <summary>
+        /// 整型数据转为BCD BYTE[]
+        /// </summary>
+        /// <param name="value">整数值</param>
+        /// <param name="list">bytes</param>
+        /// <param name="byteCount">字节数>=整数值</param>
+        public void IntToBcd(long value, Span<byte> list, int byteCount)
+        {
+            int level = byteCount - 1;
+            if (level < 0) return;
+            var high = value / 100;
+            var low = value % 100;
+            if (high > 0)
+            {
+                IntToBcd(high, list, --byteCount);
+            }
+            byte res = (byte)(((low / 10) << 4) + (low % 10));
+            list[level] = res;
+        }
+
+        /// <summary>
+        /// 写入BCD编码数据
+        /// </summary>
+        /// <param name="value">整数值</param>
+        /// <param name="byteCount">字节数>=整数值</param>
+        public void WriteBCD(in long value, in int byteCount)
+        {
+            var span = writer.Free;
+            IntToBcd(value, writer.Free, byteCount);
+            writer.Advance(byteCount);
+        }
+
+        /// <summary>
+        /// 写入BCD编码数据
+        /// </summary>
+        /// <param name="value">整数值</param>
+        /// <param name="count">字节数>=整数值</param>
+        public void WriteBCD(in int value, in int count)
+        {
+            var span = writer.Free;
+            IntToBcd(value, writer.Free, count);
+            writer.Advance(count);
+        }
+
         /// <summary>
         /// 写入六个字节的日期类型,yyMMddHHmmss
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
+        [Obsolete("use WriteDateTime_yyMMddHHmmss")]
         public void WriteDateTime6(in DateTime value, in int fromBase = 16)
         {
             var span = writer.Free;
-            span[0] = Convert.ToByte(value.ToString("yy"), fromBase);
-            span[1] = Convert.ToByte(value.ToString("MM"), fromBase);
-            span[2] = Convert.ToByte(value.ToString("dd"), fromBase);
-            span[3] = Convert.ToByte(value.ToString("HH"), fromBase);
-            span[4] = Convert.ToByte(value.ToString("mm"), fromBase);
-            span[5] = Convert.ToByte(value.ToString("ss"), fromBase);
+            int yy = value.Year - JT808Constants.DateLimitYear;
+            span[0] = IntToBcd(yy);
+            span[1] = IntToBcd(value.Month);
+            span[2] = IntToBcd(value.Day);
+            span[3] = IntToBcd(value.Hour);
+            span[4] = IntToBcd(value.Minute);
+            span[5] = IntToBcd(value.Second);
             writer.Advance(6);
         }
+
+        /// <summary>
+        /// 写入六个字节的日期类型,yyMMddHHmmss
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteDateTime_yyMMddHHmmss(in DateTime value)
+        {
+            var span = writer.Free;
+            int yy = value.Year - JT808Constants.DateLimitYear;
+            span[0] = IntToBcd(yy);
+            span[1] = IntToBcd(value.Month);
+            span[2] = IntToBcd(value.Day);
+            span[3] = IntToBcd(value.Hour);
+            span[4] = IntToBcd(value.Minute);
+            span[5] = IntToBcd(value.Second);
+            writer.Advance(6);
+        }
+
         /// <summary>
         /// 写入六个字节的可空日期类型,yyMMddHHmmss
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
+        [Obsolete("use WriteDateTime_yyMMddHHmmss")]
         public void WriteDateTime6(in DateTime? value, in int fromBase = 16)
         {
             var span = writer.Free;
@@ -344,37 +451,22 @@ namespace JT808.Protocol.MessagePack
             }
             else
             {
-                span[0] = Convert.ToByte(value.Value.ToString("yy"), fromBase);
-                span[1] = Convert.ToByte(value.Value.ToString("MM"), fromBase);
-                span[2] = Convert.ToByte(value.Value.ToString("dd"), fromBase);
-                span[3] = Convert.ToByte(value.Value.ToString("HH"), fromBase);
-                span[4] = Convert.ToByte(value.Value.ToString("mm"), fromBase);
-                span[5] = Convert.ToByte(value.Value.ToString("ss"), fromBase);
+                int yy = value.Value.Year - JT808Constants.DateLimitYear;
+                span[0] = IntToBcd(yy);
+                span[1] = IntToBcd(value.Value.Month);
+                span[2] = IntToBcd(value.Value.Day);
+                span[3] = IntToBcd(value.Value.Hour);
+                span[4] = IntToBcd(value.Value.Minute);
+                span[5] = IntToBcd(value.Value.Second);
             }
             writer.Advance(6);
         }
+
         /// <summary>
-        /// 写入五个字节的日期类型,HH-mm-ss-msms或HH-mm-ss-fff
+        /// 写入六个字节的可空日期类型,yyMMddHHmmss
         /// </summary>
         /// <param name="value"></param>
-        /// <param name="fromBase"></param>
-        public void WriteDateTime5(in DateTime value, in int fromBase = 16)
-        {
-            var span = writer.Free;
-            span[0] = Convert.ToByte(value.ToString("HH"), fromBase);
-            span[1] = Convert.ToByte(value.ToString("mm"), fromBase);
-            span[2] = Convert.ToByte(value.ToString("ss"), fromBase);
-            var msSpan = value.Millisecond.ToString().PadLeft(4,'0').AsSpan();
-            span[3] = Convert.ToByte(msSpan.Slice(0, 2).ToString(), fromBase);
-            span[4] = Convert.ToByte(msSpan.Slice(2, 2).ToString(), fromBase);
-            writer.Advance(5);
-        }
-        /// <summary>
-        /// 写入五个字节的可空日期类型,HH-mm-ss-msms或HH-mm-ss-fff
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="fromBase"></param>
-        public void WriteDateTime5(in DateTime? value, in int fromBase = 16)
+        public void WriteDateTime_yyMMddHHmmss(in DateTime? value)
         {
             var span = writer.Free;
             if (value == null || value.HasValue)
@@ -384,18 +476,111 @@ namespace JT808.Protocol.MessagePack
                 span[2] = 0;
                 span[3] = 0;
                 span[4] = 0;
+                span[5] = 0;
             }
             else
             {
-                span[0] = Convert.ToByte(value.Value.ToString("HH"), fromBase);
-                span[1] = Convert.ToByte(value.Value.ToString("mm"), fromBase);
-                span[2] = Convert.ToByte(value.Value.ToString("ss"), fromBase);
-                var msSpan = value.Value.Millisecond.ToString().PadLeft(4, '0').AsSpan();
-                span[3] = Convert.ToByte(msSpan.Slice(0, 2).ToString(), fromBase);
-                span[4] = Convert.ToByte(msSpan.Slice(2, 2).ToString(), fromBase);
+                int yy = value.Value.Year - JT808Constants.DateLimitYear;
+                span[0] = IntToBcd(yy);
+                span[1] = IntToBcd(value.Value.Month);
+                span[2] = IntToBcd(value.Value.Day);
+                span[3] = IntToBcd(value.Value.Hour);
+                span[4] = IntToBcd(value.Value.Minute);
+                span[5] = IntToBcd(value.Value.Second);
             }
-            writer.Advance(5);
+            writer.Advance(6);
         }
+
+        /// <summary>
+        /// 写入五个字节的日期类型,HH-mm-ss-msms或HH-mm-ss-fff
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fromBase"></param>
+        [Obsolete("use WriteDateTime_HHmmssfff")]
+        public void WriteDateTime5(in DateTime value, in int fromBase = 16)
+        {
+            var span = writer.Free;
+            span[0] = IntToBcd(value.Hour);
+            span[1] = IntToBcd(value.Minute);
+            span[2] = IntToBcd(value.Second);
+            writer.Advance(3);
+            IntToBcd(value.Millisecond, writer.Free, 2);
+            writer.Advance(2);
+        }
+
+        /// <summary>
+        /// 写入五个字节的日期类型,HH-mm-ss-msms或HH-mm-ss-fff
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteDateTime_HHmmssfff(in DateTime value)
+        {
+            var span = writer.Free;
+            span[0] = IntToBcd(value.Hour);
+            span[1] = IntToBcd(value.Minute);
+            span[2] = IntToBcd(value.Second);
+            writer.Advance(3);
+            IntToBcd(value.Millisecond, writer.Free, 2);
+            writer.Advance(2);
+        }
+
+        /// <summary>
+        /// 写入五个字节的可空日期类型,HH-mm-ss-msms或HH-mm-ss-fff
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="fromBase"></param>
+        [Obsolete("use WriteDateTime_HHmmssfff")]
+        public void WriteDateTime5(in DateTime? value, in int fromBase = 16)
+        {
+            if (value == null || value.HasValue)
+            {
+                var span = writer.Free;
+                span[0] = 0;
+                span[1] = 0;
+                span[2] = 0;
+                span[3] = 0;
+                span[4] = 0;
+                writer.Advance(5);
+            }
+            else
+            {
+                var span = writer.Free;
+                span[0] = IntToBcd(value.Value.Hour);
+                span[1] = IntToBcd(value.Value.Minute);
+                span[2] = IntToBcd(value.Value.Second);
+                writer.Advance(3);
+                IntToBcd(value.Value.Millisecond, writer.Free, 2);
+                writer.Advance(2);
+            }
+        }
+
+        /// <summary>
+        /// 写入五个字节的可空日期类型,HH-mm-ss-msms或HH-mm-ss-fff
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteDateTime_HHmmssfff(in DateTime? value)
+        {
+            if (value == null || value.HasValue)
+            {
+                var span = writer.Free;
+                span[0] = 0;
+                span[1] = 0;
+                span[2] = 0;
+                span[3] = 0;
+                span[4] = 0;
+                writer.Advance(5);
+            }
+            else
+            {
+                var span = writer.Free;
+                span[0] = IntToBcd(value.Value.Hour);
+                span[1] = IntToBcd(value.Value.Minute);
+                span[2] = IntToBcd(value.Value.Second);
+                writer.Advance(3);
+                IntToBcd(value.Value.Millisecond, writer.Free, 2);
+                writer.Advance(2);
+            }
+        }
+
         /// <summary>
         /// 写入UTC日期类型
         /// </summary>
@@ -412,20 +597,35 @@ namespace JT808.Protocol.MessagePack
             }
             writer.Advance(8);
         }
+
         /// <summary>
         /// 写入四个字节的日期类型,YYYYMMDD BCD[4] 数据形如：20200101
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
+        [Obsolete("use WriteDateTime_YYYYMMDD")]
         public void WriteDateTime4(in DateTime value, in int fromBase = 16)
         {
+            IntToBcd(value.Year, writer.Free, 2);
+            writer.Advance(2);
             var span = writer.Free;
-            var yearSpan=value.ToString("yyyy").AsSpan();
-            span[0] = Convert.ToByte(yearSpan.Slice(0, 2).ToString(), fromBase);
-            span[1] = Convert.ToByte(yearSpan.Slice(2, 2).ToString(), fromBase);
-            span[2] = Convert.ToByte(value.ToString("MM"), fromBase);
-            span[3] = Convert.ToByte(value.ToString("dd"), fromBase);
-            writer.Advance(4);
+            span[0] = IntToBcd(value.Month);
+            span[1] = IntToBcd(value.Day);
+            writer.Advance(2);
+        }
+
+        /// <summary>
+        /// 写入四个字节的日期类型,YYYYMMDD BCD[4] 数据形如：20200101
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteDateTime_YYYYMMDD(in DateTime value)
+        {
+            IntToBcd(value.Year, writer.Free, 2);
+            writer.Advance(2);
+            var span = writer.Free;
+            span[0] = IntToBcd(value.Month);
+            span[1] = IntToBcd(value.Day);
+            writer.Advance(2);
         }
 
         /// <summary>
@@ -433,25 +633,53 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
+        [Obsolete("use WriteDateTime_YYYYMMDD")]
         public void WriteDateTime4(in DateTime? value, in int fromBase = 16)
         {
-            var span = writer.Free;
             if (value==null || value.HasValue)
             {
+                var span = writer.Free;
                 span[0] = 0;
                 span[1] = 0;
                 span[2] = 0;
                 span[3] = 0;
+                writer.Advance(4);
             }
             else
             {
-                var yearSpan = value.Value.ToString("yyyy").AsSpan();
-                span[0] = Convert.ToByte(yearSpan.Slice(0, 2).ToString(), fromBase);
-                span[1] = Convert.ToByte(yearSpan.Slice(2, 2).ToString(), fromBase);
-                span[2] = Convert.ToByte(value.Value.ToString("MM"), fromBase);
-                span[3] = Convert.ToByte(value.Value.ToString("dd"), fromBase);
+                IntToBcd(value.Value.Year, writer.Free, 2);
+                writer.Advance(2);
+                var span = writer.Free;
+                span[0] = IntToBcd(value.Value.Month);
+                span[1] = IntToBcd(value.Value.Day);
+                writer.Advance(2);
+            }    
+        }
+
+        /// <summary>
+        /// 写入四个字节的可空日期类型,YYYYMMDD BCD[4]数据形如:20200101
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteDateTime_YYYYMMDD(in DateTime? value)
+        {
+            if (value == null || value.HasValue)
+            {
+                var span = writer.Free;
+                span[0] = 0;
+                span[1] = 0;
+                span[2] = 0;
+                span[3] = 0;
+                writer.Advance(4);
             }
-            writer.Advance(4);
+            else
+            {
+                IntToBcd(value.Value.Year, writer.Free, 2);
+                writer.Advance(2);
+                var span = writer.Free;
+                span[0] = IntToBcd(value.Value.Month);
+                span[1] = IntToBcd(value.Value.Day);
+                writer.Advance(2);
+            }
         }
 
         /// <summary>
@@ -459,20 +687,35 @@ namespace JT808.Protocol.MessagePack
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
+        [Obsolete("use WriteDateTime_YYMMDD")]
         public void WriteDateTime3(in DateTime value, in int fromBase = 16)
         {
             var span = writer.Free;
-            span[0] = Convert.ToByte(value.ToString("yy"), fromBase);
-            span[1] = Convert.ToByte(value.ToString("MM"), fromBase);
-            span[2] = Convert.ToByte(value.ToString("dd"), fromBase);
+            int yy = value.Year - JT808Constants.DateLimitYear;
+            span[0] = IntToBcd(yy);
+            span[1] = IntToBcd(value.Month);
+            span[2] = IntToBcd(value.Day);
             writer.Advance(3);
         }
-
+        /// <summary>
+        /// 写入三个字节的日期类型,YYMMDD 数据形如：20200101
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteDateTime_YYMMDD(in DateTime value)
+        {
+            var span = writer.Free;
+            int yy = value.Year - JT808Constants.DateLimitYear;
+            span[0] = IntToBcd(yy);
+            span[1] = IntToBcd(value.Month);
+            span[2] = IntToBcd(value.Day);
+            writer.Advance(3);
+        }
         /// <summary>
         /// 写入三个字节的可空日期类型,YYMMDD 数据形如：20200101
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>
+        [Obsolete("use WriteDateTime_YYMMDD")]
         public void WriteDateTime3(in DateTime? value, in int fromBase = 16)
         {
             var span = writer.Free;
@@ -484,9 +727,32 @@ namespace JT808.Protocol.MessagePack
             }
             else
             {
-                span[0] = Convert.ToByte(value.Value.ToString("yy"), fromBase);
-                span[1] = Convert.ToByte(value.Value.ToString("MM"), fromBase);
-                span[2] = Convert.ToByte(value.Value.ToString("dd"), fromBase);
+                int yy = value.Value.Year - JT808Constants.DateLimitYear;
+                span[0] = IntToBcd(yy);
+                span[1] = IntToBcd(value.Value.Month);
+                span[2] = IntToBcd(value.Value.Day);
+            }
+            writer.Advance(3);
+        }
+        /// <summary>
+        /// 写入三个字节的可空日期类型,YYMMDD 数据形如：20200101
+        /// </summary>
+        /// <param name="value"></param>
+        public void WriteDateTime_YYMMDD(in DateTime? value)
+        {
+            var span = writer.Free;
+            if (value == null || value.HasValue)
+            {
+                span[0] = 0;
+                span[1] = 0;
+                span[2] = 0;
+            }
+            else
+            {
+                int yy = value.Value.Year - JT808Constants.DateLimitYear;
+                span[0] = IntToBcd(yy);
+                span[1] = IntToBcd(value.Value.Month);
+                span[2] = IntToBcd(value.Value.Day);
             }
             writer.Advance(3);
         }

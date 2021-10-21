@@ -371,18 +371,19 @@ namespace JT808.Protocol.MessagePack
         /// 读取六字节日期,yyMMddHHmmss
         /// </summary>
         /// <param name="format">>D2： 10  X2：16</param>
+        [Obsolete("use ReadDateTime_yyMMddHHmmss")]
         public DateTime ReadDateTime6(string format = "X2")
         {
             DateTime d;
             try
             {
                 var readOnlySpan = GetReadOnlySpan(6);
-                int year = Convert.ToInt32(readOnlySpan[0].ToString(format)) + JT808Constants.DateLimitYear;
-                int month = Convert.ToInt32(readOnlySpan[1].ToString(format));
-                int day = Convert.ToInt32(readOnlySpan[2].ToString(format));
-                int hour = Convert.ToInt32(readOnlySpan[3].ToString(format));
-                int minute = Convert.ToInt32(readOnlySpan[4].ToString(format));
-                int second = Convert.ToInt32(readOnlySpan[5].ToString(format));
+                int year = BcdToInt(readOnlySpan[0])  + JT808Constants.DateLimitYear;
+                int month = BcdToInt(readOnlySpan[1]);
+                int day = BcdToInt(readOnlySpan[2]);
+                int hour = BcdToInt(readOnlySpan[3]);
+                int minute = BcdToInt(readOnlySpan[4]);
+                int second = BcdToInt(readOnlySpan[5]);
                 d = new DateTime(year, month, day, hour, minute, second);
             }
             catch (Exception)
@@ -392,21 +393,81 @@ namespace JT808.Protocol.MessagePack
             return d;
         }
         /// <summary>
+        /// 读取六字节日期,yyMMddHHmmss
+        /// </summary>
+        public DateTime ReadDateTime_yyMMddHHmmss()
+        {
+            DateTime d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(6);
+                int year = BcdToInt(readOnlySpan[0]) + JT808Constants.DateLimitYear;
+                int month = BcdToInt(readOnlySpan[1]);
+                int day = BcdToInt(readOnlySpan[2]);
+                int hour = BcdToInt(readOnlySpan[3]);
+                int minute = BcdToInt(readOnlySpan[4]);
+                int second = BcdToInt(readOnlySpan[5]);
+                d = new DateTime(year, month, day, hour, minute, second);
+            }
+            catch (Exception)
+            {
+                d = JT808Constants.UTCBaseTime;
+            }
+            return d;
+        }
+        /// <summary>
+        /// 16进制的BCD BYTE转成整型
+        /// </summary>
+        /// <param name="value">16进制的BCD BYTE转成整型</param>
+        /// <returns></returns>
+        public int BcdToInt(byte value)
+        {
+            int high = value >> 4;
+            int low = value & 0xF;
+            int number = 10 * high + low;
+            return number;
+        }
+        /// <summary>
         /// 读取可空类型的六字节日期,yyMMddHHmmss
         /// </summary>
         /// <param name="format">>D2： 10  X2：16</param>
+        [Obsolete("use ReadDateTimeNull_yyMMddHHmmss")]
         public DateTime? ReadDateTimeNull6(string format = "X2")
         {
             DateTime? d;
             try
             {
                 var readOnlySpan = GetReadOnlySpan(6);
-                int year = Convert.ToInt32(readOnlySpan[0].ToString(format)) ;
-                int month = Convert.ToInt32(readOnlySpan[1].ToString(format));
-                int day = Convert.ToInt32(readOnlySpan[2].ToString(format));
-                int hour = Convert.ToInt32(readOnlySpan[3].ToString(format));
-                int minute = Convert.ToInt32(readOnlySpan[4].ToString(format));
-                int second = Convert.ToInt32(readOnlySpan[5].ToString(format));
+                int year = BcdToInt(readOnlySpan[0]);
+                int month = BcdToInt(readOnlySpan[1]);
+                int day = BcdToInt(readOnlySpan[2]);
+                int hour = BcdToInt(readOnlySpan[3]);
+                int minute = BcdToInt(readOnlySpan[4]);
+                int second = BcdToInt(readOnlySpan[5]);
+                if (year == 0 && month == 0 && day == 0 && hour == 0 && minute == 0 && second == 0) return null;
+                d = new DateTime(year + JT808Constants.DateLimitYear, month, day, hour, minute, second);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return d;
+        }
+        /// <summary>
+        /// 读取可空类型的六字节日期,yyMMddHHmmss
+        /// </summary>
+        public DateTime? ReadDateTimeNull_yyMMddHHmmss()
+        {
+            DateTime? d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(6);
+                int year = BcdToInt(readOnlySpan[0]);
+                int month = BcdToInt(readOnlySpan[1]);
+                int day = BcdToInt(readOnlySpan[2]);
+                int hour = BcdToInt(readOnlySpan[3]);
+                int minute = BcdToInt(readOnlySpan[4]);
+                int second = BcdToInt(readOnlySpan[5]);
                 if (year == 0 && month == 0 && day == 0 && hour == 0 && minute == 0 && second == 0) return null;
                 d = new DateTime(year + JT808Constants.DateLimitYear, month, day, hour, minute, second);
             }
@@ -420,23 +481,45 @@ namespace JT808.Protocol.MessagePack
         /// 读取五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
         /// </summary>
         /// <param name="format">D2： 10  X2：16</param>
+        [Obsolete("use ReadDateTime_HHmmssfff")]
         public DateTime ReadDateTime5(string format = "X2")
         {
             DateTime d;
             try
             {
                 var readOnlySpan = GetReadOnlySpan(5);
-                StringBuilder sb = new StringBuilder(4);
-                sb.Append(readOnlySpan[3].ToString(format));
-                sb.Append(readOnlySpan[4].ToString(format));
+                var fff = BcdToInt(readOnlySpan[3]) * 100 + BcdToInt(readOnlySpan[4]);
                 d = new DateTime(
                 DateTime.Now.Year,
                 DateTime.Now.Month,
                 DateTime.Now.Day,
-                Convert.ToInt32(readOnlySpan[0].ToString(format)),
-                Convert.ToInt32(readOnlySpan[1].ToString(format)),
-                Convert.ToInt32(readOnlySpan[2].ToString(format)),
-                Convert.ToInt32(sb.ToString().TrimStart()));
+                BcdToInt(readOnlySpan[0]),
+                BcdToInt(readOnlySpan[1]),
+                BcdToInt(readOnlySpan[2]), fff);
+            }
+            catch
+            {
+                d = JT808Constants.UTCBaseTime;
+            }
+            return d;
+        }
+        /// <summary>
+        /// 读取五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
+        /// </summary>
+        public DateTime ReadDateTime_HHmmssfff()
+        {
+            DateTime d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(5);
+                var fff = BcdToInt(readOnlySpan[3]) * 100 + BcdToInt(readOnlySpan[4]);
+                d = new DateTime(
+                DateTime.Now.Year,
+                DateTime.Now.Month,
+                DateTime.Now.Day,
+                BcdToInt(readOnlySpan[0]),
+                BcdToInt(readOnlySpan[1]),
+                BcdToInt(readOnlySpan[2]), fff);
             }
             catch
             {
@@ -448,20 +531,18 @@ namespace JT808.Protocol.MessagePack
         /// 读取可空类型的五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
         /// </summary>
         /// <param name="format">D2： 10  X2：16</param>
+        [Obsolete("use ReadDateTimeNull_HHmmssfff")]
         public DateTime? ReadDateTimeNull5(string format = "X2")
         {
             DateTime? d;
             try
             {
                 var readOnlySpan = GetReadOnlySpan(5);
-                StringBuilder sb = new StringBuilder(4);
-                sb.Append(readOnlySpan[3].ToString("X2"));
-                sb.Append(readOnlySpan[4].ToString("X2"));
-                int hour = Convert.ToInt32(readOnlySpan[0].ToString(format));
-                int minute = Convert.ToInt32(readOnlySpan[1].ToString(format));
-                int second = Convert.ToInt32(readOnlySpan[2].ToString(format));
-                int millisecond = Convert.ToInt32(sb.ToString().TrimStart());
-                if (hour == 0 && minute == 0 && second == 0 && millisecond == 0) return null;
+                int hour = BcdToInt(readOnlySpan[0]);
+                int minute = BcdToInt(readOnlySpan[1]);
+                int second = BcdToInt(readOnlySpan[2]);
+                var fff = BcdToInt(readOnlySpan[3]) * 100 + BcdToInt(readOnlySpan[4]);
+                if (hour == 0 && minute == 0 && second == 0 && fff == 0) return null;
                 d = new DateTime(
                 DateTime.Now.Year,
                 DateTime.Now.Month,
@@ -469,7 +550,36 @@ namespace JT808.Protocol.MessagePack
                 hour,
                 minute,
                 second,
-                millisecond);
+                fff);
+            }
+            catch
+            {
+                return null;
+            }
+            return d;
+        }
+        /// <summary>
+        /// 读取可空类型的五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
+        /// </summary>
+        public DateTime? ReadDateTimeNull_HHmmssfff()
+        {
+            DateTime? d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(5);
+                int hour = BcdToInt(readOnlySpan[0]);
+                int minute = BcdToInt(readOnlySpan[1]);
+                int second = BcdToInt(readOnlySpan[2]);
+                var fff = BcdToInt(readOnlySpan[3]) * 100 + BcdToInt(readOnlySpan[4]);
+                if (hour == 0 && minute == 0 && second == 0 && fff == 0) return null;
+                d = new DateTime(
+                DateTime.Now.Year,
+                DateTime.Now.Month,
+                DateTime.Now.Day,
+                hour,
+                minute,
+                second,
+                fff);
             }
             catch
             {
@@ -481,19 +591,18 @@ namespace JT808.Protocol.MessagePack
         /// 读取四字节日期，YYYYMMDD
         /// </summary>
         /// <param name="format">D2： 10  X2：16</param>
+        [Obsolete("use ReadDateTime_YYYYMMDD")]
         public DateTime ReadDateTime4(string format = "X2")
         {
             DateTime d;
             try
             {
                 var readOnlySpan = GetReadOnlySpan(4);
-                StringBuilder sb = new StringBuilder(4);
-                sb.Append(readOnlySpan[0].ToString(format));
-                sb.Append(readOnlySpan[1].ToString(format));
+                var year = BcdToInt(readOnlySpan[0]) * 100 + BcdToInt(readOnlySpan[1]);
                 d = new DateTime(
-                Convert.ToInt32(sb.ToString()),
-                Convert.ToInt32(readOnlySpan[2].ToString(format)),
-                Convert.ToInt32(readOnlySpan[3].ToString(format)));
+                    year, 
+                    BcdToInt(readOnlySpan[2]),
+                    BcdToInt(readOnlySpan[3]));
             }
             catch (Exception)
             {
@@ -502,21 +611,61 @@ namespace JT808.Protocol.MessagePack
             return d;   
         }
         /// <summary>
+        /// 读取四字节日期，YYYYMMDD
+        /// </summary>
+        public DateTime ReadDateTime_YYYYMMDD()
+        {
+            DateTime d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(4);
+                var year = BcdToInt(readOnlySpan[0]) * 100 + BcdToInt(readOnlySpan[1]);
+                d = new DateTime(
+                    year,
+                    BcdToInt(readOnlySpan[2]),
+                    BcdToInt(readOnlySpan[3]));
+            }
+            catch (Exception)
+            {
+                d = JT808Constants.UTCBaseTime;
+            }
+            return d;
+        }
+        /// <summary>
         /// 读取可空类型的四字节日期，YYYYMMDD
         /// </summary>
         /// <param name="format">D2： 10  X2：16</param>
+        [Obsolete("use ReadDateTimeNull_YYYYMMDD")]
         public DateTime? ReadDateTimeNull4(string format = "X2")
         {
             DateTime? d;
             try
             {
                 var readOnlySpan = GetReadOnlySpan(4);
-                StringBuilder sb = new StringBuilder(4);
-                sb.Append(readOnlySpan[0].ToString(format));
-                sb.Append(readOnlySpan[1].ToString(format));
-                int year = Convert.ToInt32(sb.ToString());
-                int month = Convert.ToInt32(readOnlySpan[2].ToString(format));
-                int day = Convert.ToInt32(readOnlySpan[3].ToString(format));
+                var year = BcdToInt(readOnlySpan[0]) * 100 + BcdToInt(readOnlySpan[1]);
+                int month = BcdToInt(readOnlySpan[2]);
+                int day = BcdToInt(readOnlySpan[3]);
+                if (year == 0 && month == 0 && day == 0) return null;
+                d = new DateTime(year, month, day);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return d;
+        }
+        /// <summary>
+        /// 读取可空类型的四字节日期，YYYYMMDD
+        /// </summary>
+        public DateTime? ReadDateTimeNull_YYYYMMDD()
+        {
+            DateTime? d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(4);
+                var year = BcdToInt(readOnlySpan[0]) * 100 + BcdToInt(readOnlySpan[1]);
+                int month = BcdToInt(readOnlySpan[2]);
+                int day = BcdToInt(readOnlySpan[3]);
                 if (year == 0 && month == 0 && day == 0) return null;
                 d = new DateTime(year, month, day);
             }
@@ -530,6 +679,7 @@ namespace JT808.Protocol.MessagePack
         /// 读取三字节日期，YYMMDD
         /// </summary>
         /// <param name="format">D2： 10  X2：16</param>
+        [Obsolete("use ReadDateTime_YYMMDD")]
         public DateTime ReadDateTime3(string format = "X2")
         {
             DateTime d;
@@ -537,9 +687,29 @@ namespace JT808.Protocol.MessagePack
             {
                 var readOnlySpan = GetReadOnlySpan(3);
                 d = new DateTime(
-                Convert.ToInt32(readOnlySpan[0].ToString(format)) + JT808Constants.DateLimitYear,
-                Convert.ToInt32(readOnlySpan[1].ToString(format)),
-                Convert.ToInt32(readOnlySpan[2].ToString(format)));
+                BcdToInt(readOnlySpan[0]) + JT808Constants.DateLimitYear,
+                BcdToInt(readOnlySpan[1]),
+                BcdToInt(readOnlySpan[2]));
+            }
+            catch (Exception)
+            {
+                d = JT808Constants.UTCBaseTime;
+            }
+            return d;
+        }
+        /// <summary>
+        /// 读取三字节日期，YYMMDD
+        /// </summary>
+        public DateTime ReadDateTime_YYMMDD()
+        {
+            DateTime d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(3);
+                d = new DateTime(
+                BcdToInt(readOnlySpan[0]) + JT808Constants.DateLimitYear,
+                BcdToInt(readOnlySpan[1]),
+                BcdToInt(readOnlySpan[2]));
             }
             catch (Exception)
             {
@@ -551,18 +721,42 @@ namespace JT808.Protocol.MessagePack
         /// 读取可空类型的三字节日期，YYMMDD
         /// </summary>
         /// <param name="format">D2： 10  X2：16</param>
+        [Obsolete("use ReadDateTimeNull_YYMMDD")]
         public DateTime? ReadDateTimeNull3(string format = "X2")
         {
             DateTime? d;
             try
             {
                 var readOnlySpan = GetReadOnlySpan(3);
-                int year =Convert.ToInt32(readOnlySpan[0].ToString(format));
-                int month=Convert.ToInt32(readOnlySpan[1].ToString(format));
-                int day = Convert.ToInt32(readOnlySpan[2].ToString(format));
+                int year = BcdToInt(readOnlySpan[0]);
+                int month= BcdToInt(readOnlySpan[1]);
+                int day = BcdToInt(readOnlySpan[2]);
                 if (year == 0 && month == 0 && day == 0) return null;
                 d = new DateTime(
                  year + JT808Constants.DateLimitYear, month,day
+                );
+            }
+            catch (Exception)
+            {
+                d = JT808Constants.UTCBaseTime;
+            }
+            return d;
+        }
+        /// <summary>
+        /// 读取可空类型的三字节日期，YYMMDD
+        /// </summary>
+        public DateTime? ReadDateTimeNull_YYMMDD()
+        {
+            DateTime? d;
+            try
+            {
+                var readOnlySpan = GetReadOnlySpan(3);
+                int year = BcdToInt(readOnlySpan[0]);
+                int month = BcdToInt(readOnlySpan[1]);
+                int day = BcdToInt(readOnlySpan[2]);
+                if (year == 0 && month == 0 && day == 0) return null;
+                d = new DateTime(
+                 year + JT808Constants.DateLimitYear, month, day
                 );
             }
             catch (Exception)

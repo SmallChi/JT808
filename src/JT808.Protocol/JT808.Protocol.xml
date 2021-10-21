@@ -18256,11 +18256,28 @@
             </summary>
             <param name="format">>D2： 10  X2：16</param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime_yyMMddHHmmss">
+            <summary>
+            读取六字节日期,yyMMddHHmmss
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.BcdToInt(System.Byte)">
+            <summary>
+            16进制的BCD BYTE转成整型
+            </summary>
+            <param name="value">16进制的BCD BYTE转成整型</param>
+            <returns></returns>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull6(System.String)">
             <summary>
             读取可空类型的六字节日期,yyMMddHHmmss
             </summary>
             <param name="format">>D2： 10  X2：16</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull_yyMMddHHmmss">
+            <summary>
+            读取可空类型的六字节日期,yyMMddHHmmss
+            </summary>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime5(System.String)">
             <summary>
@@ -18268,11 +18285,21 @@
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime_HHmmssfff">
+            <summary>
+            读取五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull5(System.String)">
             <summary>
             读取可空类型的五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
             </summary>
             <param name="format">D2： 10  X2：16</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull_HHmmssfff">
+            <summary>
+            读取可空类型的五字节日期,HH-mm-ss-msms|HH-mm-ss-fff
+            </summary>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime4(System.String)">
             <summary>
@@ -18280,11 +18307,21 @@
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime_YYYYMMDD">
+            <summary>
+            读取四字节日期，YYYYMMDD
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull4(System.String)">
             <summary>
             读取可空类型的四字节日期，YYYYMMDD
             </summary>
             <param name="format">D2： 10  X2：16</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull_YYYYMMDD">
+            <summary>
+            读取可空类型的四字节日期，YYYYMMDD
+            </summary>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime3(System.String)">
             <summary>
@@ -18292,11 +18329,21 @@
             </summary>
             <param name="format">D2： 10  X2：16</param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTime_YYMMDD">
+            <summary>
+            读取三字节日期，YYMMDD
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull3(System.String)">
             <summary>
             读取可空类型的三字节日期，YYMMDD
             </summary>
             <param name="format">D2： 10  X2：16</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadDateTimeNull_YYMMDD">
+            <summary>
+            读取可空类型的三字节日期，YYMMDD
+            </summary>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackReader.ReadUTCDateTime">
             <summary>
@@ -18567,12 +18614,57 @@
             <param name="src"></param>
             <param name="position"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.IntToBcd(System.Int32)">
+            <summary>
+            整型数据转为BCD BYTE
+            为了兼容int类型，不使用byte做参数
+            支持0xFF一个字节的转换
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.IntToBcd(System.Int32,System.Span{System.Byte},System.Int32)">
+            <summary>
+            整型数据转为BCD BYTE[]
+            </summary>
+            <param name="value">整数值</param>
+            <param name="list">bytes</param>
+            <param name="count">字节数>=整数值</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.IntToBcd(System.Int64,System.Span{System.Byte},System.Int32)">
+            <summary>
+            整型数据转为BCD BYTE[]
+            </summary>
+            <param name="value">整数值</param>
+            <param name="list">bytes</param>
+            <param name="byteCount">字节数>=整数值</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteBCD(System.Int64@,System.Int32@)">
+            <summary>
+            写入BCD编码数据
+            </summary>
+            <param name="value">整数值</param>
+            <param name="byteCount">字节数>=整数值</param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteBCD(System.Int32@,System.Int32@)">
+            <summary>
+            写入BCD编码数据
+            </summary>
+            <param name="value">整数值</param>
+            <param name="count">字节数>=整数值</param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime6(System.DateTime@,System.Int32@)">
             <summary>
             写入六个字节的日期类型,yyMMddHHmmss
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_yyMMddHHmmss(System.DateTime@)">
+            <summary>
+            写入六个字节的日期类型,yyMMddHHmmss
+            </summary>
+            <param name="value"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime6(System.Nullable{System.DateTime}@,System.Int32@)">
             <summary>
@@ -18581,6 +18673,12 @@
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_yyMMddHHmmss(System.Nullable{System.DateTime}@)">
+            <summary>
+            写入六个字节的可空日期类型,yyMMddHHmmss
+            </summary>
+            <param name="value"></param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime5(System.DateTime@,System.Int32@)">
             <summary>
             写入五个字节的日期类型,HH-mm-ss-msms或HH-mm-ss-fff
@@ -18588,12 +18686,24 @@
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_HHmmssfff(System.DateTime@)">
+            <summary>
+            写入五个字节的日期类型,HH-mm-ss-msms或HH-mm-ss-fff
+            </summary>
+            <param name="value"></param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime5(System.Nullable{System.DateTime}@,System.Int32@)">
             <summary>
             写入五个字节的可空日期类型,HH-mm-ss-msms或HH-mm-ss-fff
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_HHmmssfff(System.Nullable{System.DateTime}@)">
+            <summary>
+            写入五个字节的可空日期类型,HH-mm-ss-msms或HH-mm-ss-fff
+            </summary>
+            <param name="value"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteUTCDateTime(System.DateTime@)">
             <summary>
@@ -18608,12 +18718,24 @@
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_YYYYMMDD(System.DateTime@)">
+            <summary>
+            写入四个字节的日期类型,YYYYMMDD BCD[4] 数据形如：20200101
+            </summary>
+            <param name="value"></param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime4(System.Nullable{System.DateTime}@,System.Int32@)">
             <summary>
             写入四个字节的可空日期类型,YYYYMMDD BCD[4]数据形如:20200101
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_YYYYMMDD(System.Nullable{System.DateTime}@)">
+            <summary>
+            写入四个字节的可空日期类型,YYYYMMDD BCD[4]数据形如:20200101
+            </summary>
+            <param name="value"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime3(System.DateTime@,System.Int32@)">
             <summary>
@@ -18622,12 +18744,24 @@
             <param name="value"></param>
             <param name="fromBase"></param>
         </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_YYMMDD(System.DateTime@)">
+            <summary>
+            写入三个字节的日期类型,YYMMDD 数据形如：20200101
+            </summary>
+            <param name="value"></param>
+        </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime3(System.Nullable{System.DateTime}@,System.Int32@)">
             <summary>
             写入三个字节的可空日期类型,YYMMDD 数据形如：20200101
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_YYMMDD(System.Nullable{System.DateTime}@)">
+            <summary>
+            写入三个字节的可空日期类型,YYMMDD 数据形如：20200101
+            </summary>
+            <param name="value"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteXor(System.Int32@,System.Int32@)">
             <summary>
