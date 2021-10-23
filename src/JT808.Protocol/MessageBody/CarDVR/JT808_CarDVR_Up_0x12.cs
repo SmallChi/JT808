@@ -45,7 +45,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 writer.WriteStartObject();
                 writer.WriteStartObject($"指定的结束时间之前最近的第 {i+1}条驾驶人登录退出记录");
                 var hex = reader.ReadVirtualArray(6);
-                jT808_CarDVR_Up_0x12_DriveLogin.LoginTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x12_DriveLogin.LoginTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{hex.ToArray().ToHexString()}]登录/登出发生时间", jT808_CarDVR_Up_0x12_DriveLogin.LoginTime);
                 hex = reader.ReadVirtualArray(18);
                 jT808_CarDVR_Up_0x12_DriveLogin.DriverLicenseNo = reader.ReadASCII(18);
@@ -81,7 +81,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
             foreach (var driveLogin in value.JT808_CarDVR_Up_0x12_DriveLogins)
             {
-                writer.WriteDateTime6(driveLogin.LoginTime);
+                writer.WriteDateTime_yyMMddHHmmss(driveLogin.LoginTime);
                 var currentPosition = writer.GetCurrentPosition();
                 writer.WriteASCII(driveLogin.DriverLicenseNo);
                 writer.Skip(18 - (writer.GetCurrentPosition() - currentPosition), out var _);
@@ -102,7 +102,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             for (int i = 0; i < count; i++)
             {
                 JT808_CarDVR_Up_0x12_DriveLogin jT808_CarDVR_Up_0x12_DriveLogin = new JT808_CarDVR_Up_0x12_DriveLogin();
-                jT808_CarDVR_Up_0x12_DriveLogin.LoginTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x12_DriveLogin.LoginTime = reader.ReadDateTime_yyMMddHHmmss();
                 jT808_CarDVR_Up_0x12_DriveLogin.DriverLicenseNo = reader.ReadASCII(18);
                 jT808_CarDVR_Up_0x12_DriveLogin.LoginType = reader.ReadByte();
                 value.JT808_CarDVR_Up_0x12_DriveLogins.Add(jT808_CarDVR_Up_0x12_DriveLogin);

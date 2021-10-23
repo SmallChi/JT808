@@ -50,9 +50,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC4 value = new JT808_CarDVR_Down_0xC4();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.RealTime:yyMMddHHmmss}]当前时间", value.RealTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.FirstInstallTime = reader.ReadDateTime6();
+            value.FirstInstallTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.FirstInstallTime:yyMMddHHmmss}]初次安装时间", value.FirstInstallTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.FirstMileage = reader.ReadBCD(8);
             writer.WriteString($"[{value.FirstMileage}]初始里程", value.FirstMileage);
@@ -67,8 +67,8 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC4 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.RealTime);
-            writer.WriteDateTime6(value.FirstInstallTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.FirstInstallTime);
             writer.WriteBCD(value.FirstMileage, 8);
             writer.WriteBCD(value.TotalMilage, 8);
         }
@@ -81,8 +81,8 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public JT808_CarDVR_Down_0xC4 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC4 value = new JT808_CarDVR_Down_0xC4();
-            value.RealTime = reader.ReadDateTime6();
-            value.FirstInstallTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
+            value.FirstInstallTime = reader.ReadDateTime_yyMMddHHmmss();
             value.FirstMileage = reader.ReadBCD(8);
             value.TotalMilage = reader.ReadBCD(8);
             return value;

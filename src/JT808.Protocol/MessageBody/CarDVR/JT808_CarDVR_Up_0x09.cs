@@ -46,7 +46,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 writer.WriteStartObject();
                 writer.WriteStartObject($"指定的结束时间之前最近的第{i+1}小时的位置信息记录");
                 var hex = reader.ReadVirtualArray(6);
-                jT808_CarDVR_Up_0x09_PositionPerHour.StartTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x09_PositionPerHour.StartTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{hex.ToArray().ToHexString()}]开始时间", jT808_CarDVR_Up_0x09_PositionPerHour.StartTime);
                 for (int j = 0; j < 60; j++)//60钟
                 {
@@ -77,7 +77,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
             foreach (var positionPerHour in value.JT808_CarDVR_Up_0x09_PositionPerHours)
             {
-                writer.WriteDateTime6(positionPerHour.StartTime);
+                writer.WriteDateTime_yyMMddHHmmss(positionPerHour.StartTime);
                 for (int i = 0; i < 60; i++)
                 {
                     if (i < positionPerHour.JT808_CarDVR_Up_0x09_PositionPerMinutes.Count)
@@ -111,7 +111,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             {
                 JT808_CarDVR_Up_0x09_PositionPerHour jT808_CarDVR_Up_0x09_PositionPerHour = new JT808_CarDVR_Up_0x09_PositionPerHour()
                 {
-                    StartTime = reader.ReadDateTime6(),
+                    StartTime = reader.ReadDateTime_yyMMddHHmmss(),
                     JT808_CarDVR_Up_0x09_PositionPerMinutes = new List<JT808_CarDVR_Up_0x09_PositionPerMinute>()
                 };
                 for (int j = 0; j < 60; j++)//60钟

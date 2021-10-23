@@ -63,8 +63,8 @@ namespace JT808.Protocol.MessageBody
                 bool bit0Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 1).ToString().Equals("0");
                 if (!bit0Flag)
                 {
-                    areaProperty.StartTime = reader.ReadDateTime6();
-                    areaProperty.EndTime = reader.ReadDateTime6();
+                    areaProperty.StartTime = reader.ReadDateTime_yyMMddHHmmss();
+                    areaProperty.EndTime = reader.ReadDateTime_yyMMddHHmmss();
                 }
                 bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2, 1).ToString().Equals("0");
                 if (!bit1Flag)
@@ -111,11 +111,11 @@ namespace JT808.Protocol.MessageBody
                     {
                         if (item.StartTime.HasValue)
                         {
-                            writer.WriteDateTime6(item.StartTime.Value);
+                            writer.WriteDateTime_yyMMddHHmmss(item.StartTime.Value);
                         }
                         if (item.EndTime.HasValue)
                         {
-                            writer.WriteDateTime6(item.EndTime.Value);
+                            writer.WriteDateTime_yyMMddHHmmss(item.EndTime.Value);
                         }
                     }
                     bool bit1Flag = areaProperty16Bit.Slice(areaProperty16Bit.Length - 2, 1).ToString().Equals("0");
@@ -211,9 +211,9 @@ namespace JT808.Protocol.MessageBody
                 bool bit0Flag = areaProperty16Bit.Slice(0,1).ToString().Equals("0");
                 if (!bit0Flag)
                 {
-                    areaProperty.StartTime = reader.ReadDateTime6();
+                    areaProperty.StartTime = reader.ReadDateTime_yyMMddHHmmss();
                     writer.WriteString($"[{ areaProperty.StartTime.Value.ToString("yyMMddHHmmss")}]起始时间", areaProperty.StartTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                    areaProperty.EndTime = reader.ReadDateTime6();
+                    areaProperty.EndTime = reader.ReadDateTime_yyMMddHHmmss();
                     writer.WriteString($"[{ areaProperty.EndTime.Value.ToString("yyMMddHHmmss")}]起始时间", areaProperty.EndTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
                 }
                 bool bit1Flag = areaProperty16Bit.Slice(1, 1).ToString().Equals("0");

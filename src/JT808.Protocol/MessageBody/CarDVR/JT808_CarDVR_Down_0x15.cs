@@ -44,8 +44,8 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x15 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.StartTime);
-            writer.WriteDateTime6(value.EndTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.StartTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.EndTime);
             writer.WriteUInt16(value.Count);
         }
         /// <summary>
@@ -57,8 +57,8 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public JT808_CarDVR_Down_0x15 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0x15 value = new JT808_CarDVR_Down_0x15();
-            value.StartTime = reader.ReadDateTime6();
-            value.EndTime = reader.ReadDateTime6();
+            value.StartTime = reader.ReadDateTime_yyMMddHHmmss();
+            value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             value.Count = reader.ReadUInt16();
             return value;
         }
@@ -71,9 +71,9 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Down_0x15 value = new JT808_CarDVR_Down_0x15();
-            value.StartTime = reader.ReadDateTime6();
+            value.StartTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.StartTime:yyMMddHHmmss}]开始时间", value.StartTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.EndTime = reader.ReadDateTime6();
+            value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.EndTime:yyMMddHHmmss}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.Count = reader.ReadUInt16();
             writer.WriteNumber($"[{value.Count.ReadNumber()}]最大单位数据块个数", value.Count);

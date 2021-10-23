@@ -56,9 +56,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             JT808_0x1205_AVResouce value = new JT808_0x1205_AVResouce();
             value.LogicChannelNo = reader.ReadByte();
             writer.WriteString($"[{value.LogicChannelNo.ReadNumber()}]逻辑通道号", LogicalChannelNoDisplay(value.LogicChannelNo));
-            value.BeginTime = reader.ReadDateTime6();
+            value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.BeginTime.ToString("yyMMddHHmmss")}]开始时间", value.BeginTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.BeginTime = reader.ReadDateTime6();
+            value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.BeginTime.ToString("yyMMddHHmmss")}]开始时间", value.BeginTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.AlarmFlag = reader.ReadUInt32();
             writer.WriteNumber($"[{value.AlarmFlag.ReadNumber()}]报警标志", value.AlarmFlag);//此处的报警标志不是很明白
@@ -156,8 +156,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         {
             JT808_0x1205_AVResouce jT808_0x1205_AVResouce = new JT808_0x1205_AVResouce();
             jT808_0x1205_AVResouce.LogicChannelNo = reader.ReadByte();
-            jT808_0x1205_AVResouce.BeginTime = reader.ReadDateTime6();
-            jT808_0x1205_AVResouce.EndTime = reader.ReadDateTime6();
+            jT808_0x1205_AVResouce.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
+            jT808_0x1205_AVResouce.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             jT808_0x1205_AVResouce.AlarmFlag = reader.ReadUInt64();
             jT808_0x1205_AVResouce.AVResourceType = reader.ReadByte();
             jT808_0x1205_AVResouce.StreamType = reader.ReadByte();
@@ -174,8 +174,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1205_AVResouce value, IJT808Config config)
         {
             writer.WriteByte(value.LogicChannelNo);
-            writer.WriteDateTime6(value.BeginTime);
-            writer.WriteDateTime6(value.EndTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.BeginTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.EndTime);
             writer.WriteUInt64(value.AlarmFlag);
             writer.WriteByte(value.AVResourceType);
             writer.WriteByte(value.StreamType);

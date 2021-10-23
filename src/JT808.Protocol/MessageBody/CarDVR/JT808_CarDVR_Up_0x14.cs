@@ -45,7 +45,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 writer.WriteStartObject();
                 writer.WriteStartObject($"指定的结束时间之前最近的第{i+1}条参数修改记录");
                 var hex = reader.ReadVirtualArray(6);
-                jT808_CarDVR_Up_0x14_ParameterModify.EventTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x14_ParameterModify.EventTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{hex.ToArray().ToHexString()}]事件发生时间", jT808_CarDVR_Up_0x14_ParameterModify.EventTime);
                 jT808_CarDVR_Up_0x14_ParameterModify.EventType = reader.ReadByte();
                 writer.WriteString($"[{  jT808_CarDVR_Up_0x14_ParameterModify.EventType.ReadNumber()}]事件类型", ((JT808CarDVRCommandID)jT808_CarDVR_Up_0x14_ParameterModify.EventType).ToString());
@@ -64,7 +64,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
             foreach (var parameterModify in value.JT808_CarDVR_Up_0x14_ParameterModifys)
             {
-                writer.WriteDateTime6(parameterModify.EventTime);
+                writer.WriteDateTime_yyMMddHHmmss(parameterModify.EventTime);
                 writer.WriteByte(parameterModify.EventType);
             }
         }
@@ -82,7 +82,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             for (int i = 0; i < count; i++)
             {
                 JT808_CarDVR_Up_0x14_ParameterModify jT808_CarDVR_Up_0x14_ParameterModify = new JT808_CarDVR_Up_0x14_ParameterModify();
-                jT808_CarDVR_Up_0x14_ParameterModify.EventTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x14_ParameterModify.EventTime = reader.ReadDateTime_yyMMddHHmmss();
                 jT808_CarDVR_Up_0x14_ParameterModify.EventType = reader.ReadByte();
                 value.JT808_CarDVR_Up_0x14_ParameterModifys.Add(jT808_CarDVR_Up_0x14_ParameterModify);
             }

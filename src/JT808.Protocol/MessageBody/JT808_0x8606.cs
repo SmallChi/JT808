@@ -75,8 +75,8 @@ namespace JT808.Protocol.MessageBody
             bool bit0Flag = routeProperty16Bit.Slice(routeProperty16Bit.Length - 1).ToString().Equals("0");
             if (!bit0Flag)
             {
-                jT808_0X8606.StartTime = reader.ReadDateTime6();
-                jT808_0X8606.EndTime = reader.ReadDateTime6();
+                jT808_0X8606.StartTime = reader.ReadDateTime_yyMMddHHmmss();
+                jT808_0X8606.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             }
             jT808_0X8606.InflectionPointCount = reader.ReadUInt16();
             jT808_0X8606.InflectionPointItems = new List<JT808InflectionPointProperty>();
@@ -128,10 +128,10 @@ namespace JT808.Protocol.MessageBody
             if (!bit0Flag)
             {
                 if (value.StartTime.HasValue)
-                    writer.WriteDateTime6(value.StartTime.Value);
+                    writer.WriteDateTime_yyMMddHHmmss(value.StartTime.Value);
 
                 if (value.EndTime.HasValue)
-                    writer.WriteDateTime6(value.EndTime.Value);
+                    writer.WriteDateTime_yyMMddHHmmss(value.EndTime.Value);
             }
             //bool bit1Flag = routeProperty16Bit.Slice(routeProperty16Bit.Length - 2, 1).ToString().Equals("0");
             if (value.InflectionPointItems != null && value.InflectionPointItems.Count > 0)
@@ -216,9 +216,9 @@ namespace JT808.Protocol.MessageBody
             bool bit0Flag = routeProperty16Bit.Slice(0,1).ToString().Equals("0");
             if (!bit0Flag)
             {
-                value.StartTime = reader.ReadDateTime6();
+                value.StartTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{ value.StartTime.Value.ToString("yyMMddHHmmss")}]起始时间", value.StartTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
-                value.EndTime = reader.ReadDateTime6();
+                value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{ value.EndTime.Value.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.Value.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             value.InflectionPointCount = reader.ReadUInt16();

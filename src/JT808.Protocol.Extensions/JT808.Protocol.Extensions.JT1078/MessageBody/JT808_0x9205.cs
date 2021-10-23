@@ -61,9 +61,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             JT808_0x9205 value = new JT808_0x9205();
             value.ChannelNo = reader.ReadByte();
             writer.WriteString($"[{value.ChannelNo.ReadNumber()}]逻辑通道号", LogicalChannelNoDisplay(value.ChannelNo));
-            value.BeginTime = reader.ReadDateTime6();
+            value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.BeginTime.ToString("yyMMddHHmmss")}]起始时间", value.BeginTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.EndTime = reader.ReadDateTime6();
+            value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.EndTime.ToString("yyMMddHHmmss")}]起始时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.AlarmFlag = reader.ReadUInt64();
             writer.WriteNumber($"[{value.AlarmFlag.ReadNumber()}]报警标志", value.AlarmFlag);
@@ -133,8 +133,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         {
             var jT808_0x9205 = new JT808_0x9205();
             jT808_0x9205.ChannelNo = reader.ReadByte();
-            jT808_0x9205.BeginTime = reader.ReadDateTime6();
-            jT808_0x9205.EndTime = reader.ReadDateTime6();
+            jT808_0x9205.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
+            jT808_0x9205.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             jT808_0x9205.AlarmFlag = reader.ReadUInt64();
             jT808_0x9205.MediaType = reader.ReadByte();
             jT808_0x9205.StreamType = reader.ReadByte();
@@ -145,8 +145,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9205 value, IJT808Config config)
         {
             writer.WriteByte(value.ChannelNo);
-            writer.WriteDateTime6(value.BeginTime);
-            writer.WriteDateTime6(value.EndTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.BeginTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.EndTime);
             writer.WriteUInt64(value.AlarmFlag);
             writer.WriteByte(value.MediaType);
             writer.WriteByte(value.StreamType);

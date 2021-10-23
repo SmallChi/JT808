@@ -61,7 +61,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteString($"[{value.PlayControl.ReadNumber()}]回放控制", PlayBackControlDisplay(value.PlayControl));
             value.PlaySpeed = reader.ReadByte();
             writer.WriteString($"[{value.PlaySpeed.ReadNumber()}]快进或快退倍数", FastForwardOrFastRewindMultiplesDisplay(value.PlaySpeed));
-            value.DragPlayPosition = reader.ReadDateTime6();
+            value.DragPlayPosition = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.DragPlayPosition.ToString("yyMMddHHmmss")}]拖动回放位置", value.DragPlayPosition.ToString("yyyy-MM-dd HH:mm:ss"));
             static string AVChannelNoDisplay(byte LogicalChannelNo)
             {
@@ -124,7 +124,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x9202.ChannelNo = reader.ReadByte();
             jT808_0x9202.PlayControl = reader.ReadByte();
             jT808_0x9202.PlaySpeed = reader.ReadByte();
-            jT808_0x9202.DragPlayPosition = reader.ReadDateTime6();
+            jT808_0x9202.DragPlayPosition = reader.ReadDateTime_yyMMddHHmmss();
             return jT808_0x9202;
         }
         /// <summary>
@@ -138,7 +138,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteByte(value.ChannelNo);
             writer.WriteByte(value.PlayControl);
             writer.WriteByte(value.PlaySpeed);
-            writer.WriteDateTime6(value.DragPlayPosition);
+            writer.WriteDateTime_yyMMddHHmmss(value.DragPlayPosition);
         }
     }
 }

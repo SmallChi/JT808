@@ -67,9 +67,9 @@ namespace JT808.Protocol.Test.MessagePack
             byte[] bytes = "7E2019061923232301231906192323237E".ToHexBytes();
             JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes);
             Assert.Equal(JT808Package.BeginFlag, jT808MessagePackReader.ReadStart());
-            Assert.Equal(DateTime.Parse("2019-06-19"), jT808MessagePackReader.ReadDateTime4());
-            Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,23,23,23,123), jT808MessagePackReader.ReadDateTime5());
-            Assert.Equal(DateTime.Parse("2019-06-19 23:23:23"), jT808MessagePackReader.ReadDateTime6());
+            Assert.Equal(DateTime.Parse("2019-06-19"), jT808MessagePackReader.ReadDateTime_YYYYMMDD());
+            Assert.Equal(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day,23,23,23,123), jT808MessagePackReader.ReadDateTime_HHmmssfff());
+            Assert.Equal(DateTime.Parse("2019-06-19 23:23:23"), jT808MessagePackReader.ReadDateTime_yyMMddHHmmss());
             Assert.Equal(JT808Package.EndFlag, jT808MessagePackReader.ReadEnd());
         }
 
@@ -79,9 +79,9 @@ namespace JT808.Protocol.Test.MessagePack
             byte[] bytes = "7E0000000000000000000000000000007E".ToHexBytes();
             JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes);
             Assert.Equal(JT808Package.BeginFlag, jT808MessagePackReader.ReadStart());
-            Assert.Null(jT808MessagePackReader.ReadDateTimeNull4());
-            Assert.Null(jT808MessagePackReader.ReadDateTimeNull5());
-            Assert.Null(jT808MessagePackReader.ReadDateTimeNull6());
+            Assert.Null(jT808MessagePackReader.ReadDateTimeNull_YYYYMMDD());
+            Assert.Null(jT808MessagePackReader.ReadDateTimeNull_HHmmssfff());
+            Assert.Null(jT808MessagePackReader.ReadDateTimeNull_yyMMddHHmmss());
             Assert.Equal(JT808Package.EndFlag, jT808MessagePackReader.ReadEnd());
         }
 

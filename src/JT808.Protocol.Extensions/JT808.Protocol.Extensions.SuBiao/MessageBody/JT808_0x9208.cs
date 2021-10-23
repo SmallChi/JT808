@@ -70,7 +70,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             value.AlarmIdentification = new AlarmIdentificationProperty();
             string terminalIDHex = reader.ReadVirtualArray(7).ToArray().ToHexString();
             value.AlarmIdentification.TerminalID = reader.ReadString(7);
-            value.AlarmIdentification.Time = reader.ReadDateTime6();
+            value.AlarmIdentification.Time = reader.ReadDateTime_yyMMddHHmmss();
             value.AlarmIdentification.SN = reader.ReadByte();
             value.AlarmIdentification.AttachCount = reader.ReadByte();
             value.AlarmIdentification.Retain = reader.ReadByte();
@@ -101,7 +101,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             value.AlarmIdentification = new AlarmIdentificationProperty
             {
                 TerminalID = reader.ReadString(7),
-                Time = reader.ReadDateTime6(),
+                Time = reader.ReadDateTime_yyMMddHHmmss(),
                 SN = reader.ReadByte(),
                 AttachCount = reader.ReadByte(),
                 Retain = reader.ReadByte()
@@ -128,7 +128,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
                 throw new NullReferenceException($"{nameof(AlarmIdentificationProperty)}不为空");
             }
             writer.WriteString(value.AlarmIdentification.TerminalID);
-            writer.WriteDateTime6(value.AlarmIdentification.Time);
+            writer.WriteDateTime_yyMMddHHmmss(value.AlarmIdentification.Time);
             writer.WriteByte(value.AlarmIdentification.SN);
             writer.WriteByte(value.AlarmIdentification.AttachCount);
             writer.WriteByte(value.AlarmIdentification.Retain);

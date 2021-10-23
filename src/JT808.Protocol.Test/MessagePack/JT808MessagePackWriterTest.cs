@@ -58,9 +58,9 @@ namespace JT808.Protocol.Test.MessagePack
             byte[] array = new byte[4096];
             var msgpackWriter = new JT808MessagePackWriter(array);
             msgpackWriter.WriteStart();
-            msgpackWriter.WriteDateTime4(DateTime.Parse("2019-06-19 23:23:23"));
-            msgpackWriter.WriteDateTime5(DateTime.Parse("2019-06-19 23:23:23.123"));
-            msgpackWriter.WriteDateTime6(DateTime.Parse("2019-06-19 23:23:23"));
+            msgpackWriter.WriteDateTime_YYYYMMDD(DateTime.Parse("2019-06-19 23:23:23"));
+            msgpackWriter.WriteDateTime_HHmmssfff(DateTime.Parse("2019-06-19 23:23:23.123"));
+            msgpackWriter.WriteDateTime_yyMMddHHmmss(DateTime.Parse("2019-06-19 23:23:23"));
             msgpackWriter.WriteEnd();
             msgpackWriter.WriteEncode();
             //===========output=========
@@ -83,9 +83,9 @@ namespace JT808.Protocol.Test.MessagePack
             byte[] array = new byte[4096];
             var msgpackWriter = new JT808MessagePackWriter(array);
             msgpackWriter.WriteStart();
-            msgpackWriter.WriteDateTime4(null);
-            msgpackWriter.WriteDateTime5(null);
-            msgpackWriter.WriteDateTime6(null);
+            msgpackWriter.WriteDateTime_YYYYMMDD(null);
+            msgpackWriter.WriteDateTime_HHmmssfff(null);
+            msgpackWriter.WriteDateTime_yyMMddHHmmss(null);
             msgpackWriter.WriteEnd();
             msgpackWriter.WriteEncode();
             //===========output=========

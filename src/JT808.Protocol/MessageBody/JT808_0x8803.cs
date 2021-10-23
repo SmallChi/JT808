@@ -65,8 +65,8 @@ namespace JT808.Protocol.MessageBody
             jT808_0X8803.MultimediaType = reader.ReadByte();
             jT808_0X8803.ChannelId = reader.ReadByte();
             jT808_0X8803.EventItemCoding = reader.ReadByte();
-            jT808_0X8803.StartTime = reader.ReadDateTime6();
-            jT808_0X8803.EndTime = reader.ReadDateTime6();
+            jT808_0X8803.StartTime = reader.ReadDateTime_yyMMddHHmmss();
+            jT808_0X8803.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             jT808_0X8803.MultimediaDeleted = reader.ReadByte();
             return jT808_0X8803;
         }
@@ -81,8 +81,8 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte(value.MultimediaType);
             writer.WriteByte(value.ChannelId);
             writer.WriteByte(value.EventItemCoding);
-            writer.WriteDateTime6(value.StartTime);
-            writer.WriteDateTime6(value.EndTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.StartTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.EndTime);
             writer.WriteByte(value.MultimediaDeleted);
         }
         /// <summary>
@@ -97,8 +97,8 @@ namespace JT808.Protocol.MessageBody
             value.MultimediaType = reader.ReadByte();
             value.ChannelId = reader.ReadByte();
             value.EventItemCoding = reader.ReadByte();
-            value.StartTime = reader.ReadDateTime6();
-            value.EndTime = reader.ReadDateTime6();
+            value.StartTime = reader.ReadDateTime_yyMMddHHmmss();
+            value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             value.MultimediaDeleted = reader.ReadByte();
             JT808MultimediaType multimediaType = (JT808MultimediaType)value.MultimediaType;
             JT808EventItemCoding eventItemCoding = (JT808EventItemCoding)value.EventItemCoding;

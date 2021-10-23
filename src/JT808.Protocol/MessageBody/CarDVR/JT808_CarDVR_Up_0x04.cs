@@ -43,7 +43,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
             JT808_CarDVR_Up_0x04 value = new JT808_CarDVR_Up_0x04();
             var hex = reader.ReadVirtualArray(6);
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{hex.ToArray().ToHexString()}]当前时间", value.RealTime);
             value.PulseCoefficient = reader.ReadUInt16();
             writer.WriteNumber($"[{value.PulseCoefficient.ReadNumber()}]脉冲系数",value.PulseCoefficient);
@@ -56,7 +56,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x04 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.RealTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
             writer.WriteUInt16(value.PulseCoefficient);
         }
         /// <summary>
@@ -68,7 +68,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public JT808_CarDVR_Up_0x04 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x04 value = new JT808_CarDVR_Up_0x04();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             value.PulseCoefficient = reader.ReadUInt16();
             return value;
         }

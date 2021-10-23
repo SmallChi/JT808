@@ -50,7 +50,7 @@ namespace JT808.Protocol.MessageBody
             value.CanItemCount = reader.ReadUInt16();
             writer.WriteNumber($"[{value.CanItemCount.ReadNumber()}]数据项个数", value.CanItemCount);
             var dateTimeBuffer = reader.ReadVirtualArray(5).ToArray();
-            value.FirstCanReceiveTime = reader.ReadDateTime5();
+            value.FirstCanReceiveTime = reader.ReadDateTime_HHmmssfff();
             writer.WriteString($"[{dateTimeBuffer.ToHexString()}]CAN总线数据接收时间", value.FirstCanReceiveTime.ToString("HH-mm-ss:fff"));
             writer.WriteStartArray("CAN总线数据项");
             for (var i = 0; i < value.CanItemCount; i++)
@@ -79,7 +79,7 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x0705 value = new JT808_0x0705();
             value.CanItemCount = reader.ReadUInt16();
-            value.FirstCanReceiveTime = reader.ReadDateTime5();
+            value.FirstCanReceiveTime = reader.ReadDateTime_HHmmssfff();
             value.CanItems = new List<JT808CanProperty>();
             for (var i = 0; i < value.CanItemCount; i++)
             {
@@ -105,7 +105,7 @@ namespace JT808.Protocol.MessageBody
             if (value.CanItems != null && value.CanItems.Count > 0)
             {
                 writer.WriteUInt16((ushort)value.CanItems.Count);
-                writer.WriteDateTime5(value.FirstCanReceiveTime);
+                writer.WriteDateTime_HHmmssfff(value.FirstCanReceiveTime);
                 foreach (var item in value.CanItems)
                 {
                     writer.WriteUInt32(item.CanId);

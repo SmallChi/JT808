@@ -45,7 +45,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 writer.WriteStartObject();
                 writer.WriteStartObject($"从指定的结束时间之前最近的第{i+1}条外部电源记录");
                 var hex = reader.ReadVirtualArray(6);
-                jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{hex.ToArray().ToHexString()}]事件发生时间", jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime);
                 jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType = reader.ReadByte();
                 writer.WriteString($"[{  jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType.ReadNumber()}]事件类型", EventTypeDisplay(jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType));
@@ -74,7 +74,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
             foreach (var externalPowerSupply in value.JT808_CarDVR_Up_0x13_ExternalPowerSupplys)
             {
-                writer.WriteDateTime6(externalPowerSupply.EventTime);
+                writer.WriteDateTime_yyMMddHHmmss(externalPowerSupply.EventTime);
                 writer.WriteByte(externalPowerSupply.EventType);
             }
         }
@@ -92,7 +92,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             for (int i = 0; i < count; i++)
             {
                 JT808_CarDVR_Up_0x13_ExternalPowerSupply jT808_CarDVR_Up_0x13_ExternalPowerSupply = new JT808_CarDVR_Up_0x13_ExternalPowerSupply();
-                jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventTime = reader.ReadDateTime_yyMMddHHmmss();
                 jT808_CarDVR_Up_0x13_ExternalPowerSupply.EventType = reader.ReadByte();
                 value.JT808_CarDVR_Up_0x13_ExternalPowerSupplys.Add(jT808_CarDVR_Up_0x13_ExternalPowerSupply);
             }

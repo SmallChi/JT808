@@ -698,7 +698,7 @@ namespace JT808.Protocol.MessagePack
             writer.Advance(3);
         }
         /// <summary>
-        /// 写入三个字节的日期类型,YYMMDD 数据形如：20200101
+        /// 写入三个字节的日期类型,YYMMDD 数据形如：200101
         /// </summary>
         /// <param name="value"></param>
         public void WriteDateTime_YYMMDD(in DateTime value)
@@ -711,7 +711,7 @@ namespace JT808.Protocol.MessagePack
             writer.Advance(3);
         }
         /// <summary>
-        /// 写入三个字节的可空日期类型,YYMMDD 数据形如：20200101
+        /// 写入三个字节的可空日期类型,YYMMDD 数据形如：200101
         /// </summary>
         /// <param name="value"></param>
         /// <param name="fromBase"></param>

@@ -38,7 +38,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Down_0x83 value = new JT808_CarDVR_Down_0x83();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.RealTime:yyMMddHHmmss}]初次安装日期", value.RealTime.ToString("yyyy-MM-dd HH:mm:ss"));
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x83 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.RealTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
         }
         /// <summary>
         /// 
@@ -60,7 +60,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public JT808_CarDVR_Down_0x83 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0x83 value = new JT808_CarDVR_Down_0x83();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             return value;
         }
     }

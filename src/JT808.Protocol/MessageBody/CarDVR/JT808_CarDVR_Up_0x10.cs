@@ -47,7 +47,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 writer.WriteStartObject();
                 writer.WriteStartObject($"指定的结束时间之前最近的第{i+1}条事故疑点记录");
                 var hex = reader.ReadVirtualArray(6);
-                jT808_CarDVR_Up_0x10_AccidentSuspectin.EndTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x10_AccidentSuspectin.EndTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{hex.ToArray().ToHexString()}]行驶结束时间", jT808_CarDVR_Up_0x10_AccidentSuspectin.EndTime);
                 hex = reader.ReadVirtualArray(18);
                 jT808_CarDVR_Up_0x10_AccidentSuspectin.DriverLicenseNo = reader.ReadASCII(18);
@@ -89,7 +89,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
             foreach (var accidentSuspectin in value.JT808_CarDVR_Up_0x10_AccidentSuspectins)
             {
-                writer.WriteDateTime6(accidentSuspectin.EndTime);
+                writer.WriteDateTime_yyMMddHHmmss(accidentSuspectin.EndTime);
                 var currentPosition = writer.GetCurrentPosition();
                 writer.WriteASCII(accidentSuspectin.DriverLicenseNo);
                 writer.Skip(18 - (writer.GetCurrentPosition() - currentPosition), out var _);
@@ -125,7 +125,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             for (int i = 0; i < count; i++)
             {
                 JT808_CarDVR_Up_0x10_AccidentSuspectin jT808_CarDVR_Up_0x10_AccidentSuspectin = new JT808_CarDVR_Up_0x10_AccidentSuspectin();
-                jT808_CarDVR_Up_0x10_AccidentSuspectin.EndTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x10_AccidentSuspectin.EndTime = reader.ReadDateTime_yyMMddHHmmss();
                 jT808_CarDVR_Up_0x10_AccidentSuspectin.DriverLicenseNo = reader.ReadASCII(18);
                 jT808_CarDVR_Up_0x10_AccidentSuspectin.JT808_CarDVR_Up_0x10_DrivingStatuss = new List<JT808_CarDVR_Up_0x10_DrivingStatus>();
                 for (int j = 0; j < 100; j++)//100组

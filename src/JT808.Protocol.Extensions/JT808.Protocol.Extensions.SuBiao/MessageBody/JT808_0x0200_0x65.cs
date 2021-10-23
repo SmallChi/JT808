@@ -186,7 +186,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             writer.WriteNumber($"[{value.Latitude.ReadNumber()}]纬度", value.Latitude);
             value.Longitude = (int)reader.ReadUInt32();
             writer.WriteNumber($"[{value.Longitude.ReadNumber()}]经度", value.Longitude);
-            value.AlarmTime = reader.ReadDateTime6();
+            value.AlarmTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.AlarmTime.ToString("yyMMddHHmmss")}]日期时间", value.AlarmTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.VehicleState = reader.ReadUInt16();
             writer.WriteNumber($"[{value.VehicleState.ReadNumber()}]车辆状态", value.VehicleState);
@@ -212,7 +212,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             value.AlarmIdentification = new AlarmIdentificationProperty();
             string terminalIDHex = reader.ReadVirtualArray(7).ToArray().ToHexString();
             value.AlarmIdentification.TerminalID = reader.ReadString(7);
-            value.AlarmIdentification.Time = reader.ReadDateTime6();
+            value.AlarmIdentification.Time = reader.ReadDateTime_yyMMddHHmmss();
             value.AlarmIdentification.SN = reader.ReadByte();
             value.AlarmIdentification.AttachCount = reader.ReadByte();
             value.AlarmIdentification.Retain = reader.ReadByte();
@@ -243,12 +243,12 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             value.Altitude = reader.ReadUInt16();
             value.Latitude = (int)reader.ReadUInt32();
             value.Longitude = (int)reader.ReadUInt32();
-            value.AlarmTime = reader.ReadDateTime6();
+            value.AlarmTime = reader.ReadDateTime_yyMMddHHmmss();
             value.VehicleState = reader.ReadUInt16();
             value.AlarmIdentification = new AlarmIdentificationProperty
             {
                 TerminalID = reader.ReadString(7),
-                Time = reader.ReadDateTime6(),
+                Time = reader.ReadDateTime_yyMMddHHmmss(),
                 SN = reader.ReadByte(),
                 AttachCount = reader.ReadByte(),
                 Retain = reader.ReadByte()
@@ -272,21 +272,21 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             writer.WriteByte(value.Fatigue);
             if (value.Retain.Length != 4)
             {
-                throw new ArgumentOutOfRangeException($"{nameof(JT808_0x0200_0x65.Retain)} length==4");
+                throw new ArgumentOutOfRangeException($"{nameof(value.Retain)} length==4");
             }
             writer.WriteArray(value.Retain);
             writer.WriteByte(value.Speed);
             writer.WriteUInt16(value.Altitude);
             writer.WriteUInt32((uint)value.Latitude);
             writer.WriteUInt32((uint)value.Longitude);
-            writer.WriteDateTime6(value.AlarmTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.AlarmTime);
             writer.WriteUInt16(value.VehicleState);
             if (value.AlarmIdentification == null)
             {
                 throw new NullReferenceException($"{nameof(AlarmIdentificationProperty)}不为空");
             }
             writer.WriteString(value.AlarmIdentification.TerminalID);
-            writer.WriteDateTime6(value.AlarmIdentification.Time);
+            writer.WriteDateTime_yyMMddHHmmss(value.AlarmIdentification.Time);
             writer.WriteByte(value.AlarmIdentification.SN);
             writer.WriteByte(value.AlarmIdentification.AttachCount);
             writer.WriteByte(value.AlarmIdentification.Retain);

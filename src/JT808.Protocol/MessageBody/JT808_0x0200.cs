@@ -130,7 +130,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0200.Altitude = reader.ReadUInt16();
             jT808_0X0200.Speed = reader.ReadUInt16();
             jT808_0X0200.Direction = reader.ReadUInt16();
-            jT808_0X0200.GPSTime = reader.ReadDateTime6();
+            jT808_0X0200.GPSTime = reader.ReadDateTime_yyMMddHHmmss();
             // 位置附加信息
             jT808_0X0200.BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();
             jT808_0X0200.CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>();
@@ -313,7 +313,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt16(value.Altitude);
             writer.WriteUInt16(value.Speed);
             writer.WriteUInt16(value.Direction);
-            writer.WriteDateTime6(value.GPSTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.GPSTime);
             if (value.BasicLocationAttachData != null && value.BasicLocationAttachData.Count > 0)
             {
                 foreach (var item in value.BasicLocationAttachData)
@@ -512,7 +512,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{value.Speed.ReadNumber()}]速度", value.Speed);
             value.Direction = reader.ReadUInt16();
             writer.WriteNumber($"[{value.Direction.ReadNumber()}]方向", value.Direction);
-            value.GPSTime = reader.ReadDateTime6();
+            value.GPSTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.GPSTime:yyMMddHHmmss}]定位时间", value.GPSTime.ToString("yyyy-MM-dd HH:mm:ss"));
             // 位置附加信息
             value.BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>();

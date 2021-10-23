@@ -45,7 +45,9 @@ namespace JT808.Protocol.MessageBody
         /// 通道 ID
         /// </summary>
         public byte ChannelId { get; set; }
-
+        /// <summary>
+        /// 定位错误
+        /// </summary>
         public bool PositionError { get; set; }
         /// <summary>
         /// 位置信息汇报(0x0200)消息体

@@ -118,9 +118,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteString($"[{value.PlaybackWay.ReadNumber()}]回访方式", PlayBackWayDisplay(value.PlaybackWay));
             value.PlaySpeed = reader.ReadByte();
             writer.WriteString($"[{value.PlaySpeed.ReadNumber()}]快进或快退倍数", FastForwardOrFastRewindMultiplesDisplay(value.PlaySpeed));
-            value.BeginTime = reader.ReadDateTime6();
+            value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.BeginTime:yyMMddHHmmss}]起始时间", value.BeginTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.EndTime = reader.ReadDateTime6();
+            value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.EndTime:yyMMddHHmmss}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
             static string AVItemTypeDisplay(byte AVItemType)
             {
@@ -220,8 +220,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x9201.MemoryType = reader.ReadByte();
             jT808_0x9201.PlaybackWay = reader.ReadByte();
             jT808_0x9201.PlaySpeed = reader.ReadByte();
-            jT808_0x9201.BeginTime = reader.ReadDateTime6();
-            jT808_0x9201.EndTime = reader.ReadDateTime6();
+            jT808_0x9201.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
+            jT808_0x9201.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             return jT808_0x9201;
         }
 
@@ -244,8 +244,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteByte(value.MemoryType);
             writer.WriteByte(value.PlaybackWay);
             writer.WriteByte(value.PlaySpeed);
-            writer.WriteDateTime6(value.BeginTime);
-            writer.WriteDateTime6(value.EndTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.BeginTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.EndTime);
         }
     }
 }

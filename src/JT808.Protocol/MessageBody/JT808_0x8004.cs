@@ -32,7 +32,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            var datetime= reader.ReadDateTime6();
+            var datetime= reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{ datetime.ToString("yyMMddHHmmss")}]查询服务器时间应答", datetime.ToString("yyyy-MM-dd HH:mm:ss"));
         }
         /// <summary>
@@ -44,7 +44,7 @@ namespace JT808.Protocol.MessageBody
         public JT808_0x8004 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8004 value = new JT808_0x8004();
-            value.Time = reader.ReadDateTime6();
+            value.Time = reader.ReadDateTime_yyMMddHHmmss();
             return value;
         }
         /// <summary>
@@ -55,7 +55,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8004 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.Time);
+            writer.WriteDateTime_yyMMddHHmmss(value.Time);
         }
     }
 }

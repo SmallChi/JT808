@@ -90,7 +90,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public byte TaskExcuteCondition { get; set; }
 
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x9206 value = new JT808_0x9206();
@@ -119,9 +124,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
 
             value.ChannelNo = reader.ReadByte();
             writer.WriteString($"[{value.ChannelNo.ReadNumber()}]逻辑通道号", LogicalChannelNoDisplay(value.ChannelNo));
-            value.BeginTime = reader.ReadDateTime6();
+            value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.BeginTime.ToString("yyMMddHHmmss")}]起始时间", value.BeginTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.EndTime = reader.ReadDateTime6();
+            value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.EndTime.ToString("yyMMddHHmmss")}]起始时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.AlarmFlag = reader.ReadUInt64();
             writer.WriteNumber($"[{value.AlarmFlag.ReadNumber()}]报警标志", value.AlarmFlag);
@@ -195,7 +200,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 return taskExcuteConditionDisplay.Length > 0 ? taskExcuteConditionDisplay.Substring(1) : "";
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
         public JT808_0x9206 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             var jT808_0x9206 = new JT808_0x9206();
@@ -209,8 +219,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x9206.FileUploadPathLength = reader.ReadByte();
             jT808_0x9206.FileUploadPath = reader.ReadString(jT808_0x9206.FileUploadPathLength);
             jT808_0x9206.ChannelNo = reader.ReadByte();
-            jT808_0x9206.BeginTime = reader.ReadDateTime6();
-            jT808_0x9206.EndTime = reader.ReadDateTime6();
+            jT808_0x9206.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
+            jT808_0x9206.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             jT808_0x9206.AlarmFlag = reader.ReadUInt64();
             jT808_0x9206.MediaType = reader.ReadByte();
             jT808_0x9206.StreamType = reader.ReadByte();
@@ -218,7 +228,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x9206.TaskExcuteCondition = reader.ReadByte();
             return jT808_0x9206;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9206 value, IJT808Config config)
         {
             writer.Skip(1, out int serverIpLengthposition);
@@ -235,14 +250,13 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteString(value.FileUploadPath);
             writer.WriteByteReturn((byte)(writer.GetCurrentPosition() - fileUploadPathLengthLengthposition - 1), fileUploadPathLengthLengthposition);
             writer.WriteByte(value.ChannelNo);
-            writer.WriteDateTime6(value.BeginTime);
-            writer.WriteDateTime6(value.EndTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.BeginTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.EndTime);
             writer.WriteUInt64(value.AlarmFlag);
             writer.WriteByte(value.MediaType);
             writer.WriteByte(value.StreamType);
             writer.WriteByte(value.MemoryPositon);
             writer.WriteByte(value.TaskExcuteCondition);
         }
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
     }
 }

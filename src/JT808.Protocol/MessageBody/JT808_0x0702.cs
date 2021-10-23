@@ -102,7 +102,7 @@ namespace JT808.Protocol.MessageBody
             {
                 value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
                 writer.WriteNumber($"[{((byte)value.IC_Card_Status).ReadNumber()}]状态-{value.IC_Card_Status.ToString()}", (byte)value.IC_Card_Status);
-                value.IC_Card_PlugDateTime = reader.ReadDateTime6();
+                value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{value.IC_Card_PlugDateTime.ToString("yyMMddHHmmss")}]插拔卡时间", value.IC_Card_PlugDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (value.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
                 {
@@ -123,7 +123,7 @@ namespace JT808.Protocol.MessageBody
                         var licenseIssuingLengtheBuffer = reader.ReadVirtualArray(value.LicenseIssuingLength);
                         value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
                         writer.WriteString($"[{licenseIssuingLengtheBuffer.ToArray().ToHexString()}]发证机构名称", value.LicenseIssuing);
-                        value.CertificateExpiresDate = reader.ReadDateTime4();
+                        value.CertificateExpiresDate = reader.ReadDateTime_YYYYMMDD();
                         writer.WriteString($"[{value.CertificateExpiresDate.ToString("yyMMdd")}]插拔卡时间", value.CertificateExpiresDate.ToString("yyyy-MM-dd"));
                         if (reader.Version == JT808Version.JTT2019)
                         {
@@ -150,7 +150,7 @@ namespace JT808.Protocol.MessageBody
                     //如果字节是0x02且长度只有7，那么该协议就是2013或者2019
                     value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
                     writer.WriteNumber($"[{((byte)value.IC_Card_Status).ReadNumber()}]状态-{value.IC_Card_Status.ToString()}", (byte)value.IC_Card_Status);
-                    value.IC_Card_PlugDateTime = reader.ReadDateTime6();
+                    value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
                     writer.WriteString($"[{value.IC_Card_PlugDateTime.ToString("yyMMddHHmmss")}]插拔卡时间", value.IC_Card_PlugDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
                 }
                 else
@@ -188,7 +188,7 @@ namespace JT808.Protocol.MessageBody
             if (firstByte == 0x01)
             {
                 value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
-                value.IC_Card_PlugDateTime = reader.ReadDateTime6();
+                value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
                 if (value.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
                 {
                     value.IC_Card_ReadResult = (JT808ICCardReadResult)reader.ReadByte();
@@ -199,7 +199,7 @@ namespace JT808.Protocol.MessageBody
                         value.QualificationCode = reader.ReadString(20);
                         value.LicenseIssuingLength = reader.ReadByte();
                         value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
-                        value.CertificateExpiresDate = reader.ReadDateTime4();
+                        value.CertificateExpiresDate = reader.ReadDateTime_YYYYMMDD();
                         if (reader.Version == JT808Version.JTT2019)
                         {
                             value.DriverIdentityCard = reader.ReadString(20);
@@ -219,7 +219,7 @@ namespace JT808.Protocol.MessageBody
                 {
                     //如果字节是0x02且长度只有7，那么该协议就是2013或者2019
                     value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
-                    value.IC_Card_PlugDateTime = reader.ReadDateTime6();
+                    value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
                 }
                 else {
                     value.DriverUserNameLength = reader.ReadByte();
@@ -251,7 +251,7 @@ namespace JT808.Protocol.MessageBody
             }
             else {
                 writer.WriteByte((byte)value.IC_Card_Status);
-                writer.WriteDateTime6(value.IC_Card_PlugDateTime);
+                writer.WriteDateTime_yyMMddHHmmss(value.IC_Card_PlugDateTime);
                 if (value.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
                 {
                     writer.WriteByte((byte)value.IC_Card_ReadResult);
@@ -262,7 +262,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteString(value.QualificationCode.PadLeft(20, '\0').ValiString(nameof(value.QualificationCode), 20));
                         writer.WriteByte((byte)value.LicenseIssuing.Length);
                         writer.WriteString(value.LicenseIssuing);
-                        writer.WriteDateTime4(value.CertificateExpiresDate);
+                        writer.WriteDateTime_YYYYMMDD(value.CertificateExpiresDate);
                         if (writer.Version == JT808Version.JTT2019)
                         {
                             writer.WriteString(value.DriverIdentityCard.PadLeft(20, '\0').ValiString(nameof(value.DriverIdentityCard), 20));

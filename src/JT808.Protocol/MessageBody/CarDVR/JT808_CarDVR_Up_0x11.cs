@@ -48,10 +48,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 jT808_CarDVR_Up_0x11_DriveOverTime.DriverLicenseNo = reader.ReadASCII(18);
                 writer.WriteString($"[{hex.ToArray().ToHexString()}机动车驾驶证号码]", jT808_CarDVR_Up_0x11_DriveOverTime.DriverLicenseNo);
                 hex = reader.ReadVirtualArray(6);
-                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{hex.ToArray().ToHexString()}连续驾驶开始时间]", jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime);
                 hex = reader.ReadVirtualArray(6);
-                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{hex.ToArray().ToHexString()}连续驾驶结束时间]", jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime);
                 writer.WriteStartObject("连续驾驶开始时间所在的最近一次有效位置信息");
                 jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLng = reader.ReadInt32();
@@ -87,8 +87,8 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 var currentPosition = writer.GetCurrentPosition();
                 writer.WriteASCII(driveOverTime.DriverLicenseNo);
                 writer.Skip(18 - (writer.GetCurrentPosition() - currentPosition), out var _);
-                writer.WriteDateTime6(driveOverTime.ContinueDrivingStartTime);
-                writer.WriteDateTime6(driveOverTime.ContinueDrivingEndTime);
+                writer.WriteDateTime_yyMMddHHmmss(driveOverTime.ContinueDrivingStartTime);
+                writer.WriteDateTime_yyMMddHHmmss(driveOverTime.ContinueDrivingEndTime);
                 writer.WriteInt32(driveOverTime.GpsStartLng);
                 writer.WriteInt32(driveOverTime.GpsStartLat);
                 writer.WriteInt16(driveOverTime.StartHeight);
@@ -112,8 +112,8 @@ namespace JT808.Protocol.MessageBody.CarDVR
             {
                 JT808_CarDVR_Up_0x11_DriveOverTime jT808_CarDVR_Up_0x11_DriveOverTime = new JT808_CarDVR_Up_0x11_DriveOverTime();
                 jT808_CarDVR_Up_0x11_DriveOverTime.DriverLicenseNo = reader.ReadASCII(18);
-                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime = reader.ReadDateTime6();
-                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingStartTime = reader.ReadDateTime_yyMMddHHmmss();
+                jT808_CarDVR_Up_0x11_DriveOverTime.ContinueDrivingEndTime = reader.ReadDateTime_yyMMddHHmmss();
                 jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLng = reader.ReadInt32();
                 jT808_CarDVR_Up_0x11_DriveOverTime.GpsStartLat = reader.ReadInt32();
                 jT808_CarDVR_Up_0x11_DriveOverTime.StartHeight = reader.ReadInt16();

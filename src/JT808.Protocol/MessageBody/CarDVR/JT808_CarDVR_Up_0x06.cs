@@ -81,7 +81,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
             JT808_CarDVR_Up_0x06 value = new JT808_CarDVR_Up_0x06();
             var hex = reader.ReadVirtualArray(6);
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{hex.ToArray().ToHexString()}]实时时间", value.RealTime);
             value.SignalOperate = reader.ReadByte();
             writer.WriteNumber($"[{value.SignalOperate.ReadNumber()}]信号个数", value.SignalOperate) ;
@@ -118,7 +118,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x06 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.RealTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
             writer.WriteByte(value.SignalOperate);
             var currentPosition = writer.GetCurrentPosition();
             writer.WriteString(value.D0);
@@ -154,7 +154,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public JT808_CarDVR_Up_0x06 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x06 value = new JT808_CarDVR_Up_0x06();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             value.SignalOperate = reader.ReadByte();
             value.D0 = reader.ReadString(10);
             value.D1 = reader.ReadString(10);

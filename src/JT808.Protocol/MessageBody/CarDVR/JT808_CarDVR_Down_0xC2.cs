@@ -38,7 +38,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC2 value = new JT808_CarDVR_Down_0xC2();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.RealTime:yyMMddHHmmss}]实时时间", value.RealTime.ToString("yyyy-MM-dd HH:mm:ss"));
         }
 
@@ -50,7 +50,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC2 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.RealTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
         }
         /// <summary>
         /// 
@@ -61,7 +61,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public JT808_CarDVR_Down_0xC2 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC2 value = new JT808_CarDVR_Down_0xC2();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             return value;
         }
     }

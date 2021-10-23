@@ -10853,6 +10853,11 @@
             通道 ID
             </summary>
         </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0801.PositionError">
+            <summary>
+            定位错误
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0801.Position">
             <summary>
             位置信息汇报(0x0200)消息体
@@ -18746,13 +18751,13 @@
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime_YYMMDD(System.DateTime@)">
             <summary>
-            写入三个字节的日期类型,YYMMDD 数据形如：20200101
+            写入三个字节的日期类型,YYMMDD 数据形如：200101
             </summary>
             <param name="value"></param>
         </member>
         <member name="M:JT808.Protocol.MessagePack.JT808MessagePackWriter.WriteDateTime3(System.Nullable{System.DateTime}@,System.Int32@)">
             <summary>
-            写入三个字节的可空日期类型,YYMMDD 数据形如：20200101
+            写入三个字节的可空日期类型,YYMMDD 数据形如：200101
             </summary>
             <param name="value"></param>
             <param name="fromBase"></param>

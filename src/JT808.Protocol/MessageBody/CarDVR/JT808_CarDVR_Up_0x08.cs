@@ -46,7 +46,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
                 writer.WriteStartObject();
                 writer.WriteStartObject($"第{i+1}分钟行驶速度记录数据块格式");
                 var hex = reader.ReadVirtualArray(6);
-                jT808_CarDVR_Up_0X08_SpeedPerMinute.StartTime = reader.ReadDateTime6();
+                jT808_CarDVR_Up_0X08_SpeedPerMinute.StartTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{hex.ToArray().ToHexString()}]开始时间", jT808_CarDVR_Up_0X08_SpeedPerMinute.StartTime);
                 for (int j = 0; j < 60; j++)//60秒
                 {
@@ -74,7 +74,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         {
             foreach (var speedPerMinute in value.JT808_CarDVR_Up_0x08_SpeedPerMinutes)
             {
-                writer.WriteDateTime6(speedPerMinute.StartTime);
+                writer.WriteDateTime_yyMMddHHmmss(speedPerMinute.StartTime);
                 for (int i = 0; i < 60; i++)
                 {
                     if (i < speedPerMinute.JT808_CarDVR_Up_0x08_SpeedPerSeconds.Count)
@@ -104,7 +104,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             {
                 JT808_CarDVR_Up_0x08_SpeedPerMinute jT808_CarDVR_Up_0X08_SpeedPerMinute = new JT808_CarDVR_Up_0x08_SpeedPerMinute()
                 {
-                    StartTime = reader.ReadDateTime6(),
+                    StartTime = reader.ReadDateTime_yyMMddHHmmss(),
                     JT808_CarDVR_Up_0x08_SpeedPerSeconds = new List<JT808_CarDVR_Up_0x08_SpeedPerSecond>()
                 };
                 for (int j = 0; j < 60; j++)//60秒

@@ -43,7 +43,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC3 value = new JT808_CarDVR_Down_0xC3();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.RealTime:yyMMddHHmmss}]当前时间", value.RealTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.PulseCoefficient = reader.ReadUInt16();
             writer.WriteNumber($"[{value.PulseCoefficient.ReadNumber()}]脉冲系数", value.PulseCoefficient);
@@ -58,7 +58,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC3 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.RealTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
             writer.WriteUInt16(value.PulseCoefficient);
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         public JT808_CarDVR_Down_0xC3 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC3 value = new JT808_CarDVR_Down_0xC3();
-            value.RealTime = reader.ReadDateTime6();
+            value.RealTime = reader.ReadDateTime_yyMMddHHmmss();
             value.PulseCoefficient = reader.ReadUInt16();
             return value;
         }

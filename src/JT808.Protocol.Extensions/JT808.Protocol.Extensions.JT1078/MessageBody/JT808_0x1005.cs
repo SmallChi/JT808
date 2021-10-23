@@ -46,9 +46,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x1005 value = new JT808_0x1005();
-            value.BeginTime = reader.ReadDateTime6();
+            value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.BeginTime.ToString("yyMMddHHmmss")}]开始时间", value.BeginTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.EndTime = reader.ReadDateTime6();
+            value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.EndTime.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.GettingOnNumber = reader.ReadUInt16();
             writer.WriteNumber($"[{value.GettingOnNumber.ReadNumber()}]从开始时间到结束时间的上车人数",value.GettingOnNumber);
@@ -64,8 +64,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         public JT808_0x1005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1005 jT808_0x1005 = new JT808_0x1005();
-            jT808_0x1005.BeginTime = reader.ReadDateTime6();
-            jT808_0x1005.EndTime = reader.ReadDateTime6();
+            jT808_0x1005.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
+            jT808_0x1005.EndTime = reader.ReadDateTime_yyMMddHHmmss();
             jT808_0x1005.GettingOnNumber = reader.ReadUInt16();
             jT808_0x1005.GettingOffNumber = reader.ReadUInt16();
             return jT808_0x1005;
@@ -78,8 +78,8 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="config"></param>
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1005 value, IJT808Config config)
         {
-            writer.WriteDateTime6(value.BeginTime);
-            writer.WriteDateTime6(value.EndTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.BeginTime);
+            writer.WriteDateTime_yyMMddHHmmss(value.EndTime);
             writer.WriteUInt16(value.GettingOnNumber);
             writer.WriteUInt16(value.GettingOffNumber);
         }

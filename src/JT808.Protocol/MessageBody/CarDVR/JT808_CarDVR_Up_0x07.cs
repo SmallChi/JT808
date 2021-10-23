@@ -61,7 +61,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             value.CertifiedProductModels = reader.ReadASCII(16);
             writer.WriteString($"[{hex.ToArray().ToHexString()}]认证产品型号", value.CertifiedProductModels);
             hex = reader.ReadVirtualArray(3);
-            value.ProductionDate = reader.ReadDateTime3();
+            value.ProductionDate = reader.ReadDateTime_YYMMDD();
             writer.WriteString($"[{hex.ToArray().ToHexString()}]生产日期", value.ProductionDate);
             hex = reader.ReadVirtualArray(4);
             value.ProductProductionFlowNumber = reader.ReadString(4);
@@ -84,7 +84,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             currentPosition = writer.GetCurrentPosition();
             writer.WriteASCII(value.CertifiedProductModels);
             writer.Skip(16 - (writer.GetCurrentPosition()- currentPosition), out var _);
-            writer.WriteDateTime3(value.ProductionDate);
+            writer.WriteDateTime_YYMMDD(value.ProductionDate);
             currentPosition = writer.GetCurrentPosition();
             writer.WriteString(value.ProductProductionFlowNumber);
             writer.Skip(4 - (writer.GetCurrentPosition() - currentPosition), out var _);
@@ -103,7 +103,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
             JT808_CarDVR_Up_0x07 value = new JT808_CarDVR_Up_0x07();
             value.ProductionPlantCCCCertificationCode = reader.ReadASCII(7);
             value.CertifiedProductModels = reader.ReadASCII(16);
-            value.ProductionDate = reader.ReadDateTime3();
+            value.ProductionDate = reader.ReadDateTime_YYMMDD();
             value.ProductProductionFlowNumber = reader.ReadString(4);
             value.Reversed = reader.ReadString(5);
             return value;
