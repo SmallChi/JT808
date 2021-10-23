@@ -93,8 +93,16 @@ namespace JT808.Protocol.MessageBody
         public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0900 value, IJT808Config config)
         {
             writer.WriteByte(value.PassthroughType);
-            object obj = config.GetMessagePackFormatterByType(value.JT808_0x0900_BodyBase.GetType());
-            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(obj, ref writer, value.JT808_0x0900_BodyBase, config);
+
+            if ( value.JT808_0x0900_BodyBase != null )
+            {
+                object obj = config.GetMessagePackFormatterByType( value.JT808_0x0900_BodyBase.GetType() );
+                JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize( obj, ref writer, value.JT808_0x0900_BodyBase, config );
+            }
+            else
+            {
+                writer.WriteArray( value.PassthroughData );
+            }
         }
     }
 }
