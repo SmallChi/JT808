@@ -50,34 +50,7 @@ namespace JT808.Protocol
         /// <summary>
         /// 808版本号
         /// </summary>
-        public JT808Version Version
-        {
-            get
-            {
-                if (Header != null)
-                {
-                    try
-                    {
-                        if (Header.MessageBodyProperty.VersionFlag)
-                        {
-                            return JT808Version.JTT2019;
-                        }
-                        else
-                        {
-                            return JT808Version.JTT2013;
-                        }
-                    }
-                    catch
-                    {
-                        return JT808Version.JTT2013;
-                    }
-                }
-                else
-                {
-                    return JT808Version.JTT2013;
-                }
-            }
-        }
+        public JT808Version Version { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -125,6 +98,7 @@ namespace JT808.Protocol
                     jT808Package.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
                 }
             }
+            jT808Package.Version = reader.Version;
             //  3.4.读取消息流水号
             jT808Package.Header.MsgNum = reader.ReadUInt16();
             //  3.5.判断有无分包
@@ -200,6 +174,7 @@ namespace JT808.Protocol
                 //  2.4.终端手机号
                 writer.WriteBCD(value.Header.TerminalPhoneNo, 20);
                 writer.Version = JT808Version.JTT2019;
+                value.Header.MessageBodyProperty.VersionFlag = true;
             }
             else
             {

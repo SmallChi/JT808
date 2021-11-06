@@ -33,33 +33,7 @@ namespace JT808.Protocol
         /// <summary>
         /// 808版本号
         /// </summary>
-        public  JT808Version Version 
-        { 
-            get {
-                if (Header != null)
-                {
-                    try
-                    {
-                        if (Header.MessageBodyProperty.VersionFlag)
-                        {
-                            return JT808Version.JTT2019;
-                        }
-                        else
-                        {
-                            return JT808Version.JTT2013;
-                        }
-                    }
-                    catch
-                    {
-                        return JT808Version.JTT2013;
-                    }
-                }
-                else
-                {
-                    return JT808Version.JTT2013;
-                }
-            } 
-        }
+        public JT808Version Version { get; set; }
         /// <summary>
         /// 原数据
         /// </summary>
@@ -90,21 +64,30 @@ namespace JT808.Protocol
             ushort messageBodyPropertyValue = reader.ReadUInt16();
             //    3.2.1.解包消息体属性
             this.Header.MessageBodyProperty = new JT808HeaderMessageBodyProperty(messageBodyPropertyValue);
-            if (this.Header.MessageBodyProperty.VersionFlag)
+            if (reader.Version == JT808Version.JTT2013Force)
             {
-                //2019版本
-                //  3.3.读取协议版本号 
-                this.Header.ProtocolVersion = reader.ReadByte();
-                //  3.4.读取终端手机号 
-                this.Header.TerminalPhoneNo = reader.ReadBCD(20, config.Trim);
-                reader.Version = JT808Version.JTT2019;
+                this.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+                reader.Version = JT808Version.JTT2013;
             }
             else
             {
-                //2013版本
-                //  3.3.读取终端手机号 
-                this.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+                if (reader.Version == JT808Version.JTT2019 || this.Header.MessageBodyProperty.VersionFlag)
+                {
+                    //2019版本
+                    //  3.3.读取协议版本号 
+                    this.Header.ProtocolVersion = reader.ReadByte();
+                    //  3.4.读取终端手机号 
+                    this.Header.TerminalPhoneNo = reader.ReadBCD(20, config.Trim);
+                    reader.Version = JT808Version.JTT2019;
+                }
+                else
+                {
+                    //2013版本
+                    //  3.3.读取终端手机号 
+                    this.Header.TerminalPhoneNo = reader.ReadBCD(config.TerminalPhoneNoLength, config.Trim);
+                }
             }
+            this.Version = reader.Version;
             // 3.4.读取消息流水号
             this.Header.MsgNum = reader.ReadUInt16();
             // 3.5.判断有无分包
