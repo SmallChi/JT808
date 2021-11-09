@@ -164,7 +164,7 @@ namespace JT808.Protocol.Benchmark
     {
         public JT808SerializerConfig()
         {
-            AddJob(Job.Default.WithGcServer(false).WithToolchain(CsProjCoreToolchain.NetCoreApp50).WithPlatform(Platform.AnyCpu));
+            AddJob(Job.Default.WithGcServer(false).WithToolchain(CsProjCoreToolchain.NetCoreApp60).WithPlatform(Platform.AnyCpu));
         }
     }
 }
