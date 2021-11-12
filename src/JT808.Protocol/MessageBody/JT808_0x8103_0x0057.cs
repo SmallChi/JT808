@@ -25,6 +25,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 连续驾驶时间门限
+        /// </summary>
+        public override string Description => "连续驾驶时间门限";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

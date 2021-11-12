@@ -34,6 +34,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public byte ParamValue { get; set; }
         /// <summary>
+        /// GNSS 定位模式
+        /// </summary>
+        public override string Description => "GNSS定位模式";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

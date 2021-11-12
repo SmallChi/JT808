@@ -43,6 +43,11 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public List<JT808_0x8103_0x0076_AVChannelRefTable> AVChannelRefTables { get; set; }
         /// <summary>
+        /// 音视频通道列表设置
+        /// </summary>
+        public override string Description => "音视频通道列表设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

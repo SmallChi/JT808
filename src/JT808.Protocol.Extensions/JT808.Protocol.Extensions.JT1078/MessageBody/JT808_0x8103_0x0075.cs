@@ -76,6 +76,11 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public byte AudioOutputEnabled { get; set; }
         /// <summary>
+        /// 音视频参数设置
+        /// </summary>
+        public override string Description => "音视频参数设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

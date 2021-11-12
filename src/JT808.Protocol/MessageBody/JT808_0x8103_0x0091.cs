@@ -33,6 +33,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public byte ParamValue { get; set; }
         /// <summary>
+        /// GNSS 波特率
+        /// </summary>
+        public override string Description => "GNSS波特率";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

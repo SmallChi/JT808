@@ -76,6 +76,10 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions
         ///1：启用
         /// </summary>
         public byte AudioOutputEnabled { get; set; }
+        /// <summary>
+        /// 音视频参数设置
+        /// </summary>
+        public override string Description => "音视频参数设置";
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {

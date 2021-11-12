@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string ParamValue { get; set; }
         /// <summary>
+        /// 备份服务器 APN
+        /// </summary>
+        public override string Description => "备份服务器APN";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

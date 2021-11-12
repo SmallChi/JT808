@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string ParamValue { get; set; }
         /// <summary>
+        /// 监管平台特权短信号码
+        /// </summary>
+        public override string Description => "监管平台特权短信号码";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

@@ -30,6 +30,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort ParamValue { get; set; }
         /// <summary>
+        /// 碰撞报警参数设置
+        /// </summary>
+        public override string Description => "碰撞报警参数设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

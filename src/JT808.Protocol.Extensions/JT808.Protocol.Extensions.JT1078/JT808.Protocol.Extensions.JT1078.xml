@@ -849,6 +849,11 @@
             1：启用
              </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.Description">
+            <summary>
+            音视频参数设置
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0075.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -911,6 +916,11 @@
             <summary>
             音视频通道对照表
             4*(l+m+n)
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076.Description">
+            <summary>
+            音视频通道列表设置
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0076.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
@@ -1011,6 +1021,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077.SignalChannels">
             <summary>
             
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077.Description">
+            <summary>
+            单独视频通道参数设置
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0077.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
@@ -1162,6 +1177,11 @@
             分钟min
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0079.Description">
+            <summary>
+            特殊报警录像参数设置
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x0079.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1205,6 +1225,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007A.AlarmShielding">
             <summary>
             视频相关屏蔽报警字
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007A.Description">
+            <summary>
+            视频相关报警屏蔽字
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007A.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
@@ -1255,6 +1280,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007B.FatigueThreshold">
             <summary>
             疲劳程度阈值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007B.Description">
+            <summary>
+            图像分析报警参数设置
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007B.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
@@ -1315,6 +1345,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C.TimerWakeDayParamter">
             <summary>
             日定时唤醒参数列表
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C.Description">
+            <summary>
+            终端休眠模式唤醒设置
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x8103_0x007C.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">

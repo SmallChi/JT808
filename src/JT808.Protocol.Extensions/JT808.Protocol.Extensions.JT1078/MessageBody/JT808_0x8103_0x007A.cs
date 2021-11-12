@@ -26,6 +26,11 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public uint AlarmShielding { get; set; }
         /// <summary>
+        /// 视频相关报警屏蔽字
+        /// </summary>
+        public override string Description => "视频相关报警屏蔽字";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

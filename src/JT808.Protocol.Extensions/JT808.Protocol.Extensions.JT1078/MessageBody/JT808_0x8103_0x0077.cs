@@ -31,6 +31,11 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public List<JT808_0x8103_0x0077_SignalChannel> SignalChannels { get; set; }
         /// <summary>
+        /// 单独视频通道参数设置
+        /// </summary>
+        public override string Description => "单独视频通道参数设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

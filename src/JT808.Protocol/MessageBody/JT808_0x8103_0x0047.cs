@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 当月最长通话时间
+        /// </summary>
+        public override string Description => "当月最长通话时间";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

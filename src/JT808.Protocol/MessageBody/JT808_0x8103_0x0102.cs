@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// CAN总线通道2采集时间间隔
+        /// </summary>
+        public override string Description => "CAN总线通道2采集时间间隔";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

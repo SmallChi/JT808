@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// GNSS模块详细定位数据采集频率
+        /// </summary>
+        public override string Description => "GNSS模块详细定位数据采集频率";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

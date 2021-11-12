@@ -64,6 +64,11 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public byte[] Retain { get; set; } = new byte[6];
         /// <summary>
+        /// 胎压监测系统参数
+        /// </summary>
+        public override string Description => "胎压监测系统参数";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

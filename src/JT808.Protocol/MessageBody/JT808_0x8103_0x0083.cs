@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string ParamValue { get; set; }
         /// <summary>
+        /// 公安交通管理部门颁发的机动车号牌
+        /// </summary>
+        public override string Description => "公安交通管理部门颁发的机动车号牌";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

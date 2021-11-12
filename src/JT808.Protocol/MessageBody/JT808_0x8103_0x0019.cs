@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 服务器UDP端口
+        /// </summary>
+        public override string Description => "服务器UDP端口";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

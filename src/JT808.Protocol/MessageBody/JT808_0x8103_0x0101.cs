@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort ParamValue { get; set; }
         /// <summary>
+        /// 总线通道1上传时间间隔
+        /// </summary>
+        public override string Description => "CAN 总线通道1上传时间间隔";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

@@ -27,6 +27,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// TCP消息应答超时时间
+        /// </summary>
+        public override string Description => "TCP消息应答超时时间";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

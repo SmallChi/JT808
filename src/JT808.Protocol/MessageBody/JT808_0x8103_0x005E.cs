@@ -28,6 +28,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort ParamValue { get; set; }
         /// <summary>
+        /// 侧翻报警参数设置
+        /// </summary>
+        public override string Description => "侧翻报警参数设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

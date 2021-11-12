@@ -38,6 +38,11 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public JT808_0x8103_0x007C_TimerWakeDayParamter TimerWakeDayParamter { get; set; }
         /// <summary>
+        /// 终端休眠模式唤醒设置
+        /// </summary>
+        public override string Description => "终端休眠模式唤醒设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

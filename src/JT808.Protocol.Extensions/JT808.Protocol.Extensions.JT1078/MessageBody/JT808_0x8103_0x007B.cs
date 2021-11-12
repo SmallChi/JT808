@@ -30,6 +30,11 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public byte FatigueThreshold  { get; set; }
         /// <summary>
+        /// 图像分析报警参数设置
+        /// </summary>
+        public override string Description => "图像分析报警参数设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

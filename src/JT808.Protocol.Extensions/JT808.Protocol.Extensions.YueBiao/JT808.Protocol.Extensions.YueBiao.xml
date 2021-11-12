@@ -1484,6 +1484,11 @@
             保留字段
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.Description">
+            <summary>
+            高级驾驶辅助系统参数
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF364.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1788,6 +1793,11 @@
             保留字段
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.Description">
+            <summary>
+            驾驶员状态监测系统参数
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF365.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1882,6 +1892,11 @@
             保留项
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF366.Description">
+            <summary>
+            胎压监测系统参数
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF366.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1931,6 +1946,11 @@
             侧后方接近报警时间阈值
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF367.Description">
+            <summary>
+            盲区监测系统参数
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF367.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1976,6 +1996,11 @@
             引入此智能视频协议版本信息方便平台进行版本控制初始版本是 
             1，每次修订版本号都会递增* 
             注：只支持获取，不支持设置
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370.Description">
+            <summary>
+            智能视频协议版本信息
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x8103_0xF370.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">

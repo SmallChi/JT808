@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 终端电话接听策略
+        /// </summary>
+        public override string Description => "终端电话接听策略";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

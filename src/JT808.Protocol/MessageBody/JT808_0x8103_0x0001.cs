@@ -27,6 +27,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 终端心跳发送间隔
+        /// </summary>
+        public override string Description => "终端心跳发送间隔";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

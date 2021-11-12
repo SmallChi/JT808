@@ -25,6 +25,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 道路运输证IC卡认证主服务器TCP端口
+        /// </summary>
+        public override string Description => "道路运输证IC卡认证主服务器TCP端口";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

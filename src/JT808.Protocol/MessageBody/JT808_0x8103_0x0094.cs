@@ -38,6 +38,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public byte ParamValue { get; set; }
         /// <summary>
+        /// GNSS 模块详细定位数据上传方式
+        /// </summary>
+        public override string Description => "GNSS模块详细定位数据上传方式";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

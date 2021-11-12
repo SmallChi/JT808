@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
@@ -25,6 +24,11 @@ namespace JT808.Protocol.MessageBody
         /// 主服务器无线通信拨号密码
         /// </summary>
         public string ParamValue { get; set; }
+        /// <summary>
+        /// 主服务器无线通信拨号密码
+        /// </summary>
+        public override string Description => "主服务器无线通信拨号密码";
+
         /// <summary>
         /// 
         /// </summary>

@@ -27,6 +27,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// UDP消息重传次数
+        /// </summary>
+        public override string Description => "UDP消息重传次数";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

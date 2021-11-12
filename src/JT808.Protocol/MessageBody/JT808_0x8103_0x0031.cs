@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort ParamValue { get; set; }
         /// <summary>
+        /// 电子围栏半径
+        /// </summary>
+        public override string Description => "电子围栏半径";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

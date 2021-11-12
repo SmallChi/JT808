@@ -35,6 +35,11 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public byte BeginMinute { get; set; }
         /// <summary>
+        /// 特殊报警录像参数设置
+        /// </summary>
+        public override string Description => "特殊报警录像参数设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

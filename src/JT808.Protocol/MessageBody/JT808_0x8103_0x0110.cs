@@ -49,6 +49,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public long BusId { get; set; }
         /// <summary>
+        /// CAN总线ID单独采集设置
+        /// </summary>
+        public override string Description => "CAN总线ID单独采集设置";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

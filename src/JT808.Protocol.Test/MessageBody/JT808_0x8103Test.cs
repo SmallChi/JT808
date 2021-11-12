@@ -162,7 +162,7 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test3_1()
         {
-            var customParams = "[{\"ParamId\":117,\"ParamLength\":21,\"RTS_EncodeMode\":3,\"RTS_Resolution\":5,\"RTS_KF_Interval\":4,\"RTS_Target_FPS\":7,\"RTS_Target_CodeRate\":6,\"StreamStore_EncodeMode\":8,\"StreamStore_Resolution\":10,\"StreamStore_KF_Interval\":9,\"StreamStore_Target_FPS\":12,\"StreamStore_Target_CodeRate\":11,\"OSD\":2,\"AudioOutputEnabled\":1}]";
+            var customParams = "[{\"ParamId\":117,\"ParamLength\":21,\"RTS_EncodeMode\":3,\"RTS_Resolution\":5,\"RTS_KF_Interval\":4,\"RTS_Target_FPS\":7,\"RTS_Target_CodeRate\":6,\"StreamStore_EncodeMode\":8,\"StreamStore_Resolution\":10,\"StreamStore_KF_Interval\":9,\"StreamStore_Target_FPS\":12,\"StreamStore_Target_CodeRate\":11,\"OSD\":2,\"AudioOutputEnabled\":1,\"Description\":\"音视频参数设置\"}]";
             byte[] bytes = "010000007515030500040700000006080A00090C0000000B000201".ToHexBytes();
             JT808_0x8103 jT808_0X8103 = JT808Serializer.Deserialize<JT808_0x8103>(bytes);
 

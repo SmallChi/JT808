@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string ParamValue { get; set; }
         /// <summary>
+        /// 接收终端SMS文本报警号码
+        /// </summary>
+        public override string Description => "接收终端SMS文本报警号码";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

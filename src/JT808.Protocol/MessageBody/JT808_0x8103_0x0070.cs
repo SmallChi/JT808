@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 图像/视频质量
+        /// </summary>
+        public override string Description => "图像_视频质量";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

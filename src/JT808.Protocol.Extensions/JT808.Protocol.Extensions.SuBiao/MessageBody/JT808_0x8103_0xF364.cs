@@ -205,6 +205,11 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// </summary>
         public byte[] Placeholder2 { get; set; } = new byte[4];
         /// <summary>
+        /// 高级驾驶辅助系统参数
+        /// </summary>
+        public override string Description => "高级驾驶辅助系统参数";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

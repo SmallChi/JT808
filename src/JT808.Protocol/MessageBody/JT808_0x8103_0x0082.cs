@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort ParamValue { get; set; }
         /// <summary>
+        /// 车辆所在的市域ID
+        /// </summary>
+        public override string Description => "车辆所在的市域ID";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

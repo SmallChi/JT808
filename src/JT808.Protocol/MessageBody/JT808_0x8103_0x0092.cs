@@ -32,6 +32,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public byte ParamValue { get; set; }
         /// <summary>
+        /// GNSS模块详细定位数据输出频率
+        /// </summary>
+        public override string Description => "GNSS模块详细定位数据输出频率";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

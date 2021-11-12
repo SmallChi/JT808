@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string ParamValue { get; set; }
         /// <summary>
+        /// 恢复出厂设置电话号码
+        /// </summary>
+        public override string Description => "恢复出厂设置电话号码";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

@@ -28,6 +28,11 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public byte LateralRearApproachAlarmTimeThreshold { get; set; }
         /// <summary>
+        /// 盲区监测系统参数
+        /// </summary>
+        public override string Description => "盲区监测系统参数";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

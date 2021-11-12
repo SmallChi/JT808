@@ -28,6 +28,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string ParamValue { get; set; }
         /// <summary>
+        /// 从服务器备份地址IP
+        /// </summary>
+        public override string Description => "从服务器备份地址IP";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

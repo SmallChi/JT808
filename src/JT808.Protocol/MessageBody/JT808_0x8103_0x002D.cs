@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 驾驶员未登录汇报距离间隔
+        /// </summary>
+        public override string Description => "驾驶员未登录汇报距离间隔";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

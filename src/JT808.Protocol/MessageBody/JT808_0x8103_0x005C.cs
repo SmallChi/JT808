@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort ParamValue { get; set; }
         /// <summary>
+        /// 疲劳驾驶预警差值
+        /// </summary>
+        public override string Description => "疲劳驾驶预警差值";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

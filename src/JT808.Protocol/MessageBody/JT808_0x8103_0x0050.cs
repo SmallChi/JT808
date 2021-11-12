@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 报警屏蔽字
+        /// </summary>
+        public override string Description => "报警屏蔽字";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

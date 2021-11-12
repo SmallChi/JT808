@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 车辆里程表读数
+        /// </summary>
+        public override string Description => "车辆里程表读数";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

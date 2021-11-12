@@ -127,12 +127,20 @@ namespace JT808.Protocol.MessageBody
                     if (config.JT808_0X8103_Factory.Map.TryGetValue(paramId, out object instance))
                     {
                         writer.WriteStartObject();
+                        if(instance is IJT808Description description)
+                        {
+                            writer.WriteString("参数名称", description.Description);
+                        }
                         instance.Analyze(ref reader, writer, config);
                         writer.WriteEndObject();
                     }
                     else if (config.JT808_0X8103_Custom_Factory.Map.TryGetValue(paramId, out object customInstance))
                     {
                         writer.WriteStartObject();
+                        if (customInstance is IJT808Description description)
+                        {
+                            writer.WriteString("自定义参数名称", description.Description);
+                        }
                         customInstance.Analyze(ref reader, writer, config);
                         writer.WriteEndObject();
                     }

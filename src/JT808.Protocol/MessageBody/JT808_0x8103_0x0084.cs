@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public byte ParamValue { get; set; }
         /// <summary>
+        /// 车牌颜色
+        /// </summary>
+        public override string Description => "车牌颜色";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

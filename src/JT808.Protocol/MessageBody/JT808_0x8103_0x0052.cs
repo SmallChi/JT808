@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 报警拍摄开关
+        /// </summary>
+        public override string Description => "报警拍摄开关";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

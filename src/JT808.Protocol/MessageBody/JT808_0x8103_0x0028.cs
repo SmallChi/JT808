@@ -27,6 +27,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 紧急报警时汇报时间间隔
+        /// </summary>
+        public override string Description => "紧急报警时汇报时间间隔";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

@@ -27,6 +27,11 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public byte SmartVideoProtocolVersion { get; set; }
         /// <summary>
+        /// 智能视频协议版本信息
+        /// </summary>
+        public override string Description => "智能视频协议版本信息";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

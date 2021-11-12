@@ -1213,6 +1213,11 @@
             保留字段
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF364.Description">
+            <summary>
+            高级驾驶辅助系统参数
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF364.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1422,6 +1427,11 @@
             保留字段
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF365.Description">
+            <summary>
+            驾驶员状态监测系统参数
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF365.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1516,6 +1526,11 @@
             保留项
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF366.Description">
+            <summary>
+            胎压监测系统参数
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF366.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1563,6 +1578,11 @@
         <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF367.LateralRearApproachAlarmTimeThreshold">
             <summary>
             侧后方接近报警时间阈值
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF367.Description">
+            <summary>
+            盲区监测系统参数
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x8103_0xF367.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">

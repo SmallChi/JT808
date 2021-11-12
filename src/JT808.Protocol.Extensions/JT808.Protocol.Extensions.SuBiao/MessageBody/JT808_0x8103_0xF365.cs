@@ -158,6 +158,11 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// </summary>
         public byte[] Retain { get; set; } = new byte[2];
         /// <summary>
+        /// 驾驶员状态监测系统参数
+        /// </summary>
+        public override string Description => "驾驶员状态监测系统参数";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>

@@ -26,6 +26,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public uint ParamValue { get; set; }
         /// <summary>
+        /// 缺省时间汇报间隔
+        /// </summary>
+        public override string Description => "缺省时间汇报间隔";
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="reader"></param>
