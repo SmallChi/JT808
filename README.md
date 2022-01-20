@@ -54,7 +54,7 @@
 
 > MsgId 0x0200:位置信息汇报
 
-``` package
+``` csharp
 
 JT808Package jT808Package = new JT808Package();
 
@@ -98,7 +98,7 @@ var hex = data.ToHexString();
 
 #### 2.手动解包：
 
-``` unpackage
+``` text
 1.原包：
 7E 02 00 00 26 12 34 56 78 90 12 00 (7D 02) 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 (7D 01) 13 7E
 
@@ -134,7 +134,7 @@ var hex = data.ToHexString();
 
 #### 3.程序解包：
 
-``` unpackage2
+``` csharp
 //1.转成byte数组
 byte[] bytes = "7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 13 7E".ToHexBytes();
 
@@ -169,7 +169,7 @@ Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.BasicLocationAttachData[JT808
 
 ### 举个栗子2
 
-``` create package
+``` csharp
 // 使用消息Id的扩展方法创建JT808Package包
 JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012",
     new JT808_0x0200 {
@@ -197,7 +197,7 @@ var hex = data.ToHexString();
 
 ### 举个栗子3
 
-``` config
+``` csharp
 // 初始化配置
 IJT808Config DT1JT808Config = new DT1Config();
 IJT808Config DT2JT808Config = new DT2Config();
@@ -347,6 +347,15 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 兼容2011协议的注册消息
 
 [可以参考Simples的Demo15](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo15.cs)
+
+### 举个栗子16
+
+场景:
+平台下发分包数据到设备
+
+可以参考【栗子5】中，设备上来的分包数据结构，然后举一反三的去实现。
+
+[可以参考Simples的Demo16](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
 
 ## NuGet安装
 
@@ -536,7 +545,7 @@ serviceDescriptors1.AddJT808Configure()
 
 ## 使用方法
 
-```dotnet
+```csharp
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddSuBiaoConfigure();
@@ -572,7 +581,7 @@ serviceDescriptors1.AddJT808Configure()
 
 ## 使用方法
 
-```dotnet
+```csharp
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddYueBiaoConfigure();
