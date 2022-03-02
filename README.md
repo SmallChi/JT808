@@ -249,7 +249,8 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 3. 当N包数据上来，延续步骤2的方式。
 
-> 普及知识点：一般行业分包是按256的整数倍，太多不行，太少也不行，必须刚刚好。
+> 普及知识点1：由于消息体长度最大为10bit也就是1023的字节，所以这边就有个硬性条件不能超过最大长度
+> 普及知识点2：一般行业分包是按256的整数倍，太多不行，太少也不行，必须刚刚好。
 
 [可以参考Simples的Demo5](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo5.cs)
 
@@ -513,7 +514,7 @@ Platform=AnyCpu  Server=False  Toolchain=.NET 6.0
 
 ## 使用方法
 
-```dotnet
+```csharp
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddJT1078Configure();
