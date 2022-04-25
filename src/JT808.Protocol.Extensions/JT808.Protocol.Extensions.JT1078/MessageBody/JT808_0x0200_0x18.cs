@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// 异常驾驶行为报警详细描述
     /// 0x0200_0x18
     /// </summary>
-    public class JT808_0x0200_0x18 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x18>, IJT808Analyze
+    public class JT808_0x0200_0x18 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x18>, IJT808Analyze
     {
         /// <summary>
         /// 

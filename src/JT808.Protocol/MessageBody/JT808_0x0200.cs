@@ -120,7 +120,7 @@ namespace JT808.Protocol.MessageBody
                 jT808_0X0200.Lat = reader.ReadInt32();
             }
             if (((jT808_0X0200.StatusFlag >> 27) & 1) == 1)
-            {   //西经 ‭134217728‬ 0x8000000
+            {   //西经 134217728 0x8000000
                 jT808_0X0200.Lng = (int)reader.ReadUInt32();
             }
             else
@@ -150,7 +150,7 @@ namespace JT808.Protocol.MessageBody
                     byte attachId = reader.ReadVirtualByte();
                     //自定义标准附加Id2、自定义标准附加Id3
                     ushort attachId2_3 = reader.ReadVirtualUInt16();
-                    if (config.JT808_0X0200_Factory.Map.TryGetValue(attachId, out object attachInstance))
+                    if (config.JT808_0X0200_Factory.TryGetValue(reader.Version, attachId, out object attachInstance))
                     {
                         if (jT808_0X0200.BasicLocationAttachData.ContainsKey(attachId))
                         {
@@ -234,7 +234,8 @@ namespace JT808.Protocol.MessageBody
                         int remainLength = reader.ReadCurrentRemainContentLength();
                         if(remainLength < attachLen)
                         {
-                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(remainLength).ToArray());
+                            jT808_0X0200.ExceptionLocationAttachOriginalData.Add(reader.ReadArray(reader.ReaderCount - 2, remainLength+2).ToArray());
+                            reader.ReadArray(remainLength);
                         }
                         else
                         {
@@ -282,7 +283,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt32(value.AlarmFlag);
             writer.WriteUInt32(value.StatusFlag);
             //0x10000000 南纬 134217728
-            //0x8000000  西经 ‭‬268435456
+            //0x8000000  西经 268435456
             //0x18000000 南纬-西经 134217728+268435456
             if (((value.StatusFlag >> 28) & 1) == 1)
             {
@@ -497,7 +498,7 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteNumber($"[{value.Lat.ReadNumber()}]纬度", value.Lat);
             }
             if (((value.StatusFlag >> 27) & 1) == 1)
-            {   //西经 ‭134217728‬ 0x8000000
+            {   //西经 134217728 0x8000000
                 value.Lng = (int)reader.ReadUInt32();
                 writer.WriteNumber($"[{value.Lng.ReadNumber()}]经度", value.Lng);
             }
@@ -533,7 +534,7 @@ namespace JT808.Protocol.MessageBody
                     byte attachId = reader.ReadVirtualByte();
                     //自定义标准附加Id2、自定义标准附加Id3
                     ushort attachId2_3 = reader.ReadVirtualUInt16();
-                    if (config.JT808_0X0200_Factory.Map.TryGetValue(attachId, out object attachInstance))
+                    if (config.JT808_0X0200_Factory.TryGetValue(reader.Version, attachId, out object attachInstance))
                     {
                         if (value.BasicLocationAttachData.ContainsKey(attachId))
                         {
@@ -640,7 +641,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteNumber($"[{attachLen.ReadNumber()}]未知附加信息长度", attachLen);
                         if ((attachLen+2) > remainLength)
                         {
-                            writer.WriteString($"未知附加信息", reader.ReadArray(remainLength).ToArray().ToHexString());
+                            writer.WriteString($"未知附加信息[异常解析]", reader.ReadArray(remainLength).ToArray().ToHexString());
                         }
                         else
                         {

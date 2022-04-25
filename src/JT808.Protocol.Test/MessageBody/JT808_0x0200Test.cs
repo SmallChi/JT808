@@ -404,6 +404,96 @@ namespace JT808.Protocol.Test.MessageBody
         }
 
         [Fact]
+        public void Test8()
+        {
+            //7E
+            //0200
+            //0085
+            //011111111111
+            //0AA2
+            //00000000
+            //000C0000
+            //01F62E83
+            //07147C92
+            //001E
+            //0000
+            //001E
+            //11 01 11 03 11 52
+            //01
+            //  04
+            //      00 13 1A 34
+            //03
+            //  02
+            //      00 00
+            //05
+            //  01
+            //      00
+            //06
+            //  03
+            //      02 05 90
+            //07
+            //  03
+            //      03 81 20
+            //25
+            //  04
+            //      00 00 00 00
+            //2B
+            //  04
+            //      00 00 00 F0
+            //30
+            //  01
+            //      17
+            //31
+            //  01
+            //      05
+            //E0
+            //  01
+            //      3D
+            //E1
+            //  08
+            //      00 00 00 00 00 04 BC FD
+            //E2
+            //  04
+            //      00 00 00 00
+            //E3
+            //  04
+            //      00 00 07 AC
+            //E4
+            //  04
+            //      00 00 00 00
+            //E5
+            //  0C
+            //      00 13 00 27 00 13 00 27 00 13 00 27
+            //EA
+            //  04
+            //      00 00 00 00
+            //EB
+            //  04
+            //      00 00 00 00
+            //EE
+            //  01
+            //      00
+            //F6
+            //  04          error
+            //      14 50   error
+            //E9
+            //7E
+            byte[] bodys = "7E020000850111111111110AA200000000000C000001F62E8307147C92001E0000001E110111031152010400131A3403020000050100060302059007030381202504000000002B04000000F0300117310105E0013DE108000000000004BCFDE20400000000E304000007ACE40400000000E50C001300270013002700130027EA0400000000EB0400000000EE0100F6041450E97E".ToHexBytes();
+            var package = JT808Serializer1.Deserialize(bodys);
+            JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)package.Bodies;
+            Assert.Single(jT808UploadLocationRequest.ExceptionLocationAttachOriginalData);
+            Assert.Equal(0x6, jT808UploadLocationRequest.BasicLocationAttachData.Count);
+            Assert.Equal(0xc,jT808UploadLocationRequest.UnknownLocationAttachData.Count);
+        }
+
+        [Fact]
+        public void Test8_1()
+        {
+            byte[] bodys = "7E020000850111111111110AA200000000000C000001F62E8307147C92001E0000001E110111031152010400131A3403020000050100060302059007030381202504000000002B04000000F0300117310105E0013DE108000000000004BCFDE20400000000E304000007ACE40400000000E50C001300270013002700130027EA0400000000EB0400000000EE0100F6041450E97E".ToHexBytes();
+            var json = JT808Serializer1.Analyze(bodys);
+        }
+
+        [Fact]
         public void Test_all_attcahids()
         {
             JT808Package jT808Package = new JT808Package();
@@ -637,7 +727,7 @@ namespace JT808.Protocol.Test.MessageBody
         public void Test_JT808_0x0200_0x07_2()
         {
             byte[] bytes = "000000010000000200BA7F0E07E4F11C0028003C0000210528181010072C0401030002020400050305000604050006030204000503050006040500060203050006040500060104050006".ToHexBytes();
-            var jT808_0X0200 = JT808Serializer.Deserialize<JT808_0x0200>(bytes);
+            var jT808_0X0200 = JT808Serializer.Deserialize<JT808_0x0200>(bytes, JT808Version.JTT2019);
             var jT808_0x0200_0x07=(JT808_0x0200_0x07)jT808_0X0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x07];
             Assert.Equal((byte)(4 + (4 * 4 + 4 * 3 + 4 * 2 + 4)), jT808_0x0200_0x07.AttachInfoLength);
             Assert.Equal(4, jT808_0x0200_0x07.BeiDou.Count);
@@ -780,7 +870,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(-12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(-132444444, jT808UploadLocationRequest.Lng);
-            Assert.Equal(60, jT808UploadLocationRequest.Speed); //‭402653184‬
+            Assert.Equal(60, jT808UploadLocationRequest.Speed); 
         }
         [Fact]
         public void LatLngTest2_1()
@@ -810,7 +900,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(-12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(-132444444, jT808UploadLocationRequest.Lng);
-            Assert.Equal(60, jT808UploadLocationRequest.Speed); //‭402653184‬
+            Assert.Equal(60, jT808UploadLocationRequest.Speed); //402653184
         }
         [Fact]
         public void LatTest1_1()
@@ -840,7 +930,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(-12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
-            Assert.Equal(60, jT808UploadLocationRequest.Speed); //‭402653184‬
+            Assert.Equal(60, jT808UploadLocationRequest.Speed);
         }
         [Fact]
         public void LatTest2()
@@ -890,7 +980,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(-12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
-            Assert.Equal(60, jT808UploadLocationRequest.Speed); //‭402653184‬
+            Assert.Equal(60, jT808UploadLocationRequest.Speed); //402653184
         }
         [Fact]
         public void LngTest1_1()
@@ -920,7 +1010,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(-132444444, jT808UploadLocationRequest.Lng);
-            Assert.Equal(60, jT808UploadLocationRequest.Speed); //‭402653184‬
+            Assert.Equal(60, jT808UploadLocationRequest.Speed); //402653184
         }
         [Fact]
         public void LngTest2()
@@ -970,7 +1060,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(-132444444, jT808UploadLocationRequest.Lng);
-            Assert.Equal(60, jT808UploadLocationRequest.Speed); //‭402653184‬
+            Assert.Equal(60, jT808UploadLocationRequest.Speed); //402653184
         }
     }
 }

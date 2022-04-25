@@ -12,7 +12,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// 视频相关报警
     /// 0x0200_0x14
     /// </summary>
-    public class JT808_0x0200_0x14 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x14>,IJT808Analyze
+    public class JT808_0x0200_0x14 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x14>,IJT808Analyze
     {
         /// <summary>
         /// 

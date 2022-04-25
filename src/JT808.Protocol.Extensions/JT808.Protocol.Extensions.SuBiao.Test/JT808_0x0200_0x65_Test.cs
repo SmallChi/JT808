@@ -32,9 +32,9 @@ namespace JT808.Protocol.Extensions.SuBiao.Test
                 Speed = 60,
                 Direction = 0,
                 StatusFlag = 2,
-                BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
+                CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>()
             };
-            jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808_SuBiao_Constants.JT808_0X0200_0x65, new JT808_0x0200_0x65
+            jT808UploadLocationRequest.CustomLocationAttachData.Add(JT808_SuBiao_Constants.JT808_0X0200_0x65, new JT808_0x0200_0x65
             {
                 AlarmId = 1,
                 AlarmIdentification = new Metadata.AlarmIdentificationProperty
@@ -63,7 +63,7 @@ namespace JT808.Protocol.Extensions.SuBiao.Test
         public void Deserialize()
         {
             var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x0200>("000000010000000200BA7F0E07E4F11C0028003C00001807151010106520000000010C060512010203041100070000000D0000000E191211183100001334343434343434191210183100030200".ToHexBytes());
-            jT808UploadLocationRequest.BasicLocationAttachData.TryGetValue(JT808_SuBiao_Constants.JT808_0X0200_0x65, out var value);
+            jT808UploadLocationRequest.CustomLocationAttachData.TryGetValue(JT808_SuBiao_Constants.JT808_0X0200_0x65, out var value);
             JT808_0x0200_0x65 jT808_0X0200_0X65 = value as JT808_0x0200_0x65;
             Assert.Equal(1u, jT808_0X0200_0X65.AlarmId);
             Assert.Equal(2, jT808_0X0200_0X65.AlarmIdentification.AttachCount);

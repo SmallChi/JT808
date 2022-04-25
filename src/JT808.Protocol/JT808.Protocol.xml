@@ -3872,6 +3872,17 @@
             <param name="fieldName"></param>
             <param name="fixedLength"></param>
         </member>
+        <member name="T:JT808.Protocol.Extensions.JT808_0X0200_FactoryExtensions">
+            <summary>
+            0200扩展
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT808_0X0200_FactoryExtensions.TryGetValue(JT808.Protocol.Interfaces.IJT808_0x0200_Factory,JT808.Protocol.Enums.JT808Version,System.Byte,System.Object@)">
+            <summary>
+            根据不同的版本号进行附加保留位判断
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT808_0x8105_CommandParameterExtensions">
             <summary>
             终端控制 命令参数扩展

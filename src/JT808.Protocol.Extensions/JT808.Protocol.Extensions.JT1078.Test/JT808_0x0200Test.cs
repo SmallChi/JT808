@@ -36,9 +36,9 @@ namespace JT808.Protocol.Extensions.JT1078.Test
                 Speed = 60,
                 Direction = 0,
                 StatusFlag = 2,
-                BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
+                CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>()
             };
-            jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808_JT1078_Constants.JT808_0X0200_0x14, new JT808_0x0200_0x14
+            jT808UploadLocationRequest.CustomLocationAttachData.Add(JT808_JT1078_Constants.JT808_0X0200_0x14, new JT808_0x0200_0x14
             {
                  VideoRelateAlarm = (uint)(VideoRelateAlarmType.视频信号遮挡报警 | VideoRelateAlarmType.其他视频设备故障报警)
             });
@@ -57,7 +57,7 @@ namespace JT808.Protocol.Extensions.JT1078.Test
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal((uint)(VideoRelateAlarmType.视频信号遮挡报警 | VideoRelateAlarmType.其他视频设备故障报警), ((JT808_0x0200_0x14)jT808UploadLocationRequest.BasicLocationAttachData[JT808_JT1078_Constants.JT808_0X0200_0x14]).VideoRelateAlarm);
+            Assert.Equal((uint)(VideoRelateAlarmType.视频信号遮挡报警 | VideoRelateAlarmType.其他视频设备故障报警), ((JT808_0x0200_0x14)jT808UploadLocationRequest.CustomLocationAttachData[JT808_JT1078_Constants.JT808_0X0200_0x14]).VideoRelateAlarm);
         }
 
         [Fact]
@@ -80,9 +80,9 @@ namespace JT808.Protocol.Extensions.JT1078.Test
                 Speed = 60,
                 Direction = 0,
                 StatusFlag = 2,
-                BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
+                CustomLocationAttachData = new Dictionary<byte, JT808_0x0200_CustomBodyBase>()
             };
-            jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808_JT1078_Constants.JT808_0X0200_0x15, new JT808_0x0200_0x15
+            jT808UploadLocationRequest.CustomLocationAttachData.Add(JT808_JT1078_Constants.JT808_0X0200_0x15, new JT808_0x0200_0x15
             {
                  VideoSignalLoseAlarmStatus=3
             });
@@ -101,7 +101,7 @@ namespace JT808.Protocol.Extensions.JT1078.Test
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(3u, ((JT808_0x0200_0x15)jT808UploadLocationRequest.BasicLocationAttachData[JT808_JT1078_Constants.JT808_0X0200_0x15]).VideoSignalLoseAlarmStatus);
+            Assert.Equal(3u, ((JT808_0x0200_0x15)jT808UploadLocationRequest.CustomLocationAttachData[JT808_JT1078_Constants.JT808_0X0200_0x15]).VideoSignalLoseAlarmStatus);
         }
 
         [Fact]

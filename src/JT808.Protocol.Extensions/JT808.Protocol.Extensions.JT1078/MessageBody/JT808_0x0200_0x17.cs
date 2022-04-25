@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// 存储器故障报警状态
     /// 0x0200_0x17
     /// </summary>
-    public class JT808_0x0200_0x17 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x17>, IJT808Analyze
+    public class JT808_0x0200_0x17 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x17>, IJT808Analyze
     {
         /// <summary>
         /// 

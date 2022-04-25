@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// 视频信号遮挡报警状态
     /// 0x0200_0x16
     /// </summary>
-    public class JT808_0x0200_0x16 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x16>, IJT808Analyze
+    public class JT808_0x0200_0x16 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x16>, IJT808Analyze
     {
         /// <summary>
         /// 
