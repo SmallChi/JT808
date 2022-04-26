@@ -13,7 +13,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 高级驾驶辅助系统报警信息
     /// </summary>
-    public class JT808_0x0200_0x64 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x64>, IJT808Analyze,IJT808_2019_Version
+    public class JT808_0x0200_0x64 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x64>, IJT808Analyze,IJT808_2019_Version
     {
         /// <summary>
         /// 高级驾驶辅助系统报警信息Id
