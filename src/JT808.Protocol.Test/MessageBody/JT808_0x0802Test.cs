@@ -23,7 +23,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X0802.MultimediaSearchItems.Add(new JT808MultimediaSearchProperty()
             {
                 ChannelId = 123,
-                EventItemCoding = JT808EventItemCoding.定时动作.ToByteValue(),
+                EventItemCoding = JT808EventItemCoding.regular_action.ToByteValue(),
                 MultimediaId = 258,
                 MultimediaType = JT808MultimediaType.图像.ToByteValue(),
                 Position = new JT808_0x0200()
@@ -42,7 +42,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X0802.MultimediaSearchItems.Add(new JT808MultimediaSearchProperty()
             {
                 ChannelId = 124,
-                EventItemCoding = JT808EventItemCoding.平台下发指令.ToByteValue(),
+                EventItemCoding = JT808EventItemCoding.platform_delivery_order.ToByteValue(),
                 MultimediaId = 259,
                 MultimediaType = JT808MultimediaType.视频.ToByteValue(),
                 Position = new JT808_0x0200()
@@ -72,7 +72,7 @@ namespace JT808.Protocol.Test.MessageBody
 
 
             Assert.Equal(123, jT808_0X0802.MultimediaSearchItems[0].ChannelId);
-            Assert.Equal(JT808EventItemCoding.定时动作.ToByteValue(), jT808_0X0802.MultimediaSearchItems[0].EventItemCoding);
+            Assert.Equal(JT808EventItemCoding.regular_action.ToByteValue(), jT808_0X0802.MultimediaSearchItems[0].EventItemCoding);
             Assert.Equal(JT808MultimediaType.图像.ToByteValue(), jT808_0X0802.MultimediaSearchItems[0].MultimediaType);
             Assert.Equal((uint)258, jT808_0X0802.MultimediaSearchItems[0].MultimediaId);
 
@@ -86,7 +86,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)2, jT808_0X0802.MultimediaSearchItems[0].Position.StatusFlag);
 
             Assert.Equal(124, jT808_0X0802.MultimediaSearchItems[1].ChannelId);
-            Assert.Equal(JT808EventItemCoding.平台下发指令.ToByteValue(), jT808_0X0802.MultimediaSearchItems[1].EventItemCoding);
+            Assert.Equal(JT808EventItemCoding.platform_delivery_order.ToByteValue(), jT808_0X0802.MultimediaSearchItems[1].EventItemCoding);
             Assert.Equal(JT808MultimediaType.视频.ToByteValue(), jT808_0X0802.MultimediaSearchItems[1].MultimediaType);
             Assert.Equal((uint)259, jT808_0X0802.MultimediaSearchItems[1].MultimediaId);
 
@@ -119,7 +119,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X0802.MultimediaSearchItems.Add(new JT808MultimediaSearchProperty()
             {
                 ChannelId = 123,
-                EventItemCoding = JT808EventItemCoding.定时动作.ToByteValue(),
+                EventItemCoding = JT808EventItemCoding.regular_action.ToByteValue(),
                 MultimediaType = JT808MultimediaType.图像.ToByteValue(),
                 Position = new JT808_0x0200()
                 {
@@ -137,7 +137,7 @@ namespace JT808.Protocol.Test.MessageBody
             jT808_0X0802.MultimediaSearchItems.Add(new JT808MultimediaSearchProperty()
             {
                 ChannelId = 124,
-                EventItemCoding = JT808EventItemCoding.平台下发指令.ToByteValue(),
+                EventItemCoding = JT808EventItemCoding.platform_delivery_order.ToByteValue(),
                 MultimediaType = JT808MultimediaType.视频.ToByteValue(),
                 Position = new JT808_0x0200()
                 {
@@ -166,7 +166,7 @@ namespace JT808.Protocol.Test.MessageBody
 
 
             Assert.Equal(123, jT808_0X0802.MultimediaSearchItems[0].ChannelId);
-            Assert.Equal(JT808EventItemCoding.定时动作.ToByteValue(), jT808_0X0802.MultimediaSearchItems[0].EventItemCoding);
+            Assert.Equal(JT808EventItemCoding.regular_action.ToByteValue(), jT808_0X0802.MultimediaSearchItems[0].EventItemCoding);
             Assert.Equal(JT808MultimediaType.图像.ToByteValue(), jT808_0X0802.MultimediaSearchItems[0].MultimediaType);
 
             Assert.Equal((uint)1, jT808_0X0802.MultimediaSearchItems[0].Position.AlarmFlag);
@@ -179,7 +179,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)2, jT808_0X0802.MultimediaSearchItems[0].Position.StatusFlag);
 
             Assert.Equal(124, jT808_0X0802.MultimediaSearchItems[1].ChannelId);
-            Assert.Equal(JT808EventItemCoding.平台下发指令.ToByteValue(), jT808_0X0802.MultimediaSearchItems[1].EventItemCoding);
+            Assert.Equal(JT808EventItemCoding.platform_delivery_order.ToByteValue(), jT808_0X0802.MultimediaSearchItems[1].EventItemCoding);
             Assert.Equal(JT808MultimediaType.视频.ToByteValue(), jT808_0X0802.MultimediaSearchItems[1].MultimediaType);
 
             Assert.Equal((uint)1, jT808_0X0802.MultimediaSearchItems[1].Position.AlarmFlag);

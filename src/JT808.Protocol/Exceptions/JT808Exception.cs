@@ -5,6 +5,7 @@ namespace JT808.Protocol.Exceptions
 {
     /// <summary>
     /// JT808异常处理类
+    /// Exception handling class
     /// </summary>
     [Serializable]
     public class JT808Exception : Exception
@@ -47,6 +48,7 @@ namespace JT808.Protocol.Exceptions
         }
         /// <summary>
         /// JT808统一错误码
+        /// Unified error code
         /// </summary>
         public JT808ErrorCode ErrorCode { get; }
     }

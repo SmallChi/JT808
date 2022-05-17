@@ -15,7 +15,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x8301 jT808_0X8301 = new JT808_0x8301
             {
-                SettingType = JT808EventSettingType.删除终端现有所有事件_该命令后不带后继字节.ToByteValue(),
+                SettingType = JT808EventSettingType.delete_terminal_all_existing_events.ToByteValue(),
                 EventItems = new List<JT808EventProperty>()
             };
             jT808_0X8301.EventItems.Add(new JT808EventProperty
@@ -38,7 +38,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "000201063132333435360206373839343536".ToHexBytes();
             JT808_0x8301 jT808_0X8301 = JT808Serializer.Deserialize<JT808_0x8301>(bytes);
-            Assert.Equal(JT808EventSettingType.删除终端现有所有事件_该命令后不带后继字节.ToByteValue(), jT808_0X8301.SettingType);
+            Assert.Equal(JT808EventSettingType.delete_terminal_all_existing_events.ToByteValue(), jT808_0X8301.SettingType);
             Assert.Equal(2, jT808_0X8301.SettingCount);
   
             Assert.Equal(1, jT808_0X8301.EventItems[0].EventId);

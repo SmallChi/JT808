@@ -62,215 +62,222 @@
         <member name="T:JT808.Protocol.Enums.JT808Alarm">
             <summary>
             报警标志
+            Alarm Flag
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.紧急报警_触动报警开关后触发">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.emergency_alarm">
             <summary>
             紧急报警_触动报警开关后触发
-            收到应答后清零
+            The emergency alarm is triggered after the alarm switch is touched
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.超速报警">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.overspeed_alarm">
             <summary>
-            超速报警
-            标志维持至报警条件解除
+            超速报警 标志维持至报警条件解除
+            Overspeed alarm
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.疲劳驾驶">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.fatigue_driving">
+            <summary> 
+            疲劳驾驶 标志维持至报警条件解除
+            fatigue driving
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.danger_warning">
             <summary>
-            标志维持至报警条件解除
-            疲劳驾驶
+            危险预警 标志维持至报警条件解除
+            danger warning
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.危险预警">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.gnss_module_fault">
             <summary>
-            危险预警
-            收到应答后清零
+            GNSS模块发生故障 标志维持至报警条件解除
+            The GNSS module is faulty
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.GNSS模块发生故障">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.gnss_ant_not_connected">
             <summary>
-            GNSS模块发生故障
-            标志维持至报警条件解除
+            GNSS天线未接或被剪断 标志维持至报警条件解除
+            The GNSS antenna is not connected or cut off
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.GNSS天线未接或被剪断">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.gnss_ant_short">
             <summary>
-            GNSS天线未接或被剪断
-            标志维持至报警条件解除
+            GNSS天线短路 标志维持至报警条件解除
+            GNSS antenna short-circuited  
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.GNSS天线短路">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.terminal_main_power_undervoltage">
             <summary>
-            GNSS天线短路
-            标志维持至报警条件解除
+            终端主电源欠压 标志维持至报警条件解除
+            The main power supply of the terminal is undervoltage
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.终端主电源欠压">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.terminal_main_power_down">
             <summary>
-            终端主电源欠压
-            标志维持至报警条件解除
+            终端主电源掉电 标志维持至报警条件解除
+            The main power supply of the terminal fails
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.终端主电源掉电">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.terminal_display_fault">
             <summary>
-            终端主电源掉电
-            标志维持至报警条件解除
+            终端LCD或显示器故障 标志维持至报警条件解除
+            The LCD or monitor of the terminal is faulty
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.终端LCD或显示器故障">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.tts_module_fault">
             <summary>
-            终端LCD或显示器故障
-            标志维持至报警条件解除
+            TTS模块故障 标志维持至报警条件解除
+            The TTS module is faulty  
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.TTS模块故障">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.camera_fault">
             <summary>
-            TTS模块故障
-            标志维持至报警条件解除
+            摄像头故障 标志维持至报警条件解除
+            Camera fault
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.摄像头故障">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.road_transport_cert_ic_card_module_fault">
             <summary>
-            摄像头故障
-            标志维持至报警条件解除
+            道路运输证IC卡模块故障 标志维持至报警条件解除
+            The IC card module of the road transport certificate is faulty
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.道路运输证IC卡模块故障">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.overspeed_warning">
             <summary>
-            道路运输证IC卡模块故障
-            标志维持至报警条件解除
+            超速预警 标志维持至报警条件解除
+            Overspeed warning
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.超速预警">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.fatigue_driving_warning">
             <summary>
-            超速预警
-            标志维持至报警条件解除
+            疲劳驾驶预警 标志维持至报警条件解除
+            Fatigue driving warning
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.疲劳驾驶预警">
-            <summary>
-            疲劳驾驶预警
-            标志维持至报警条件解除
-            </summary>
-        </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.保留1">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.reserve1">
             <summary>
             保留1
+            reserve1
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.保留2">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.reserve2">
             <summary>
             保留2
+            reserve2
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.保留3">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.reserve3">
             <summary>
             保留3
+            reserve3
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.当天累计驾驶超时">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.day_accumulated_driving_timeout">
             <summary>
-            当天累计驾驶超时
-            标志维持至报警条件解除
+            当天累计驾驶超时 标志维持至报警条件解除
+            Accumulated driving overtime that day
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.超时停车">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.timeout_parking">
             <summary>
-            超时停车
-            标志维持至报警条件解除
+            超时停车 标志维持至报警条件解除
+            Timeout parking
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.进出区域">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.in_area">
             <summary>
-            进出区域
-            收到应答后清零
+            进出区域 收到应答后清零
+            In and out of the area
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.进出路线">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.in_route">
             <summary>
-            进出路线
-            收到应答后清零
+            进出路线 收到应答后清零
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.路段行驶时间不足或过长">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.road_driving_time_insufficient">
             <summary>
-            路段行驶时间不足或过长
-            收到应答后清零
+            路段行驶时间不足或过长 收到应答后清零
+            Road section driving time is insufficient or too long
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.路线偏离报警">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.route_deviation_alarm">
             <summary>
-            路线偏离报警
-            标志维持至报警条件解除
+            路线偏离报警 标志维持至报警条件解除
+            Route deviation alarm
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆VSS故障">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.vehicle_vss_fault">
             <summary>
-            车辆VSS故障
-            标志维持至报警条件解除
+            车辆VSS故障 标志维持至报警条件解除
+            VSS of the vehicle is faulty
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆油量异常">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.vehicle_fuel_abnormal">
             <summary>
-            车辆油量异常
-            标志维持至报警条件解除
+            车辆油量异常 标志维持至报警条件解除
+            Abnormal vehicle fuel level
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆被盗">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.vehicle_stolen">
             <summary>
-            车辆被盗通过车辆防盗器
-            标志维持至报警条件解除
+            车辆被盗通过车辆防盗器 标志维持至报警条件解除
+            The vehicle is stolen
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆非法点火">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.vehicle_illegal_ignition">
             <summary>
             车辆非法点火
+            Illegal ignition of vehicles
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.车辆非法位移">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.vehicle_illegal_displacement">
             <summary>
-            车辆非法位移
-            收到应答后清零
+            车辆非法位移 收到应答后清零
+            Illegal displacement of vehicle
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.碰撞预警">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.collision_warning">
             <summary>
-            碰撞预警
-            标志维持至报警条件解除
+            碰撞预警 标志维持至报警条件解除
+            collision Warning
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.侧翻预警">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.rollover_warning">
             <summary>
-            侧翻预警
-            标志维持至报警条件解除
+            侧翻预警 标志维持至报警条件解除
+            rollover warning
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Alarm.非法开门报警">
+        <member name="F:JT808.Protocol.Enums.JT808Alarm.illegal_opening_door_alarm">
             <summary>
-            非法开门报警
-            （终端未设置区域时，不判断非法开门）
-            收到应答后清零
+            非法开门报警（终端未设置区域时，不判断非法开门） 收到应答后清零
+            Illegal door opening alarm
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808CallBackType">
             <summary>
             电话回拨类型
+            Callback type
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CallBackType.普通通话">
+        <member name="F:JT808.Protocol.Enums.JT808CallBackType.normal_call">
             <summary>
             普通通话
+            normal call
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CallBackType.监听">
+        <member name="F:JT808.Protocol.Enums.JT808CallBackType.cue">
             <summary>
             监听
+            cue
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808CameraResolutionType">
             <summary>
             摄像头分辨率
+            Camera resolution
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808CameraResolutionType.x320_240">
@@ -456,94 +463,111 @@
         <member name="T:JT808.Protocol.Enums.JT808CarSignalStatus">
             <summary>
             扩展车辆信号状态位
+            Extended vehicle signal status bits
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.近光灯信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.close_light_signal">
             <summary>
             开启近光信号灯
+            Close light signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.远光灯信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.high_beam_signal">
             <summary>
             远光灯信号
+            High beam signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.右转向灯信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.right_turn_signal">
             <summary>
             右转向灯信号
+            Right turn signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.左转向灯信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.left_turn_signal">
             <summary>
             左转向灯信号
+            Left turn signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.制动信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.brake_signal">
             <summary>
             制动信号
+            brake signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.倒档信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.reverse_signals">
             <summary>
             倒档信号
+            Reverse signals
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.雾灯信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.fog_light_signal">
             <summary>
             雾灯信号
+            The fog light signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.示廓灯">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.clearance_lamp">
             <summary>
             示廓灯
+            Clearance Lamp
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.喇叭信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.horn_signal">
             <summary>
             喇叭信号
+            horn signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.空调状态">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.air_condition_status">
             <summary>
             空调状态
+            Air condition status
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.空挡信号">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.neutral_signal">
             <summary>
             空挡信号
+            Neutral signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.缓速器工作">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.retarder_working">
             <summary>
             缓速器工作
+            Retarder working
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.ABS工作">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.abs_working">
             <summary>
             ABS工作
+            abs_working
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.加热器工作">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.heater_operation">
             <summary>
             加热器工作
+            Heater operation
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.离合器状态">
+        <member name="F:JT808.Protocol.Enums.JT808CarSignalStatus.clutch_condition">
             <summary>
             离合器状态
+            Clutch condition
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808DirectionType">
             <summary>
             方向类型
+            Direction Type
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808DirectionType.进">
+        <member name="F:JT808.Protocol.Enums.JT808DirectionType.direction_in">
             <summary>
             进
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808DirectionType.出">
+        <member name="F:JT808.Protocol.Enums.JT808DirectionType.direction_out">
             <summary>
             出
             </summary>
@@ -551,36 +575,43 @@
         <member name="T:JT808.Protocol.Enums.JT808DrivenRouteType">
             <summary>
             路线行驶返回结果
+            Route driving returns results
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808DrivenRouteType.不足">
+        <member name="F:JT808.Protocol.Enums.JT808DrivenRouteType.insufficient">
             <summary>
             不足
+            insufficient
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808DrivenRouteType.过长">
+        <member name="F:JT808.Protocol.Enums.JT808DrivenRouteType.overlength">
             <summary>
             过长
+            overlength
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808EncryptMethod">
             <summary>
             JT808加密选项
+            Encryption Options
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808EncryptMethod.None">
             <summary>
             未加密
+            None
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808EncryptMethod.RSA">
             <summary>
             RSA加密
+            RSA encrypt
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808ErrorCode">
             <summary>
             异常错误码
+            Exception error code
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.CheckCodeNotEqual">
@@ -620,8 +651,8 @@
         </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.NotGlobalRegisterFormatterAssembly">
             <summary>
-            没有全局注册格式化器
-            IJT808MessagePackFormatter
+            没有全局注册格式化器 IJT808MessagePackFormatter
+            There is no global register formatter [IJT808MessagePackFormatter]
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808ErrorCode.LatOrLngError">
@@ -632,126 +663,151 @@
         <member name="T:JT808.Protocol.Enums.JT808EventItemCoding">
             <summary>
             事件项编码
+            Event item coding
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.平台下发指令">
+        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.platform_delivery_order">
             <summary>
             平台下发指令
+            Platform delivery order
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.定时动作">
+        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.regular_action">
             <summary>
             定时动作
+            Regular action
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.抢劫报警触发">
+        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.robbery_alarm_trigger">
             <summary>
             抢劫报警触发
+            Robbery alarm trigger
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.碰撞侧翻报警触发">
+        <member name="F:JT808.Protocol.Enums.JT808EventItemCoding.collision_rollover_alarm_triggered">
             <summary>
             碰撞侧翻报警触发
+            Collision rollover alarm triggered
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808EventSettingType">
             <summary>
             事件设置类型
+            Event setting Type
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.删除终端现有所有事件_该命令后不带后继字节">
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.delete_terminal_all_existing_events">
             <summary>
             删除终端现有所有事件_该命令后不带后继字节
+            Delete all existing events on the terminal This command does not contain subsequent bytes
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.更新事件">
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.update_events">
             <summary>
             更新事件
+            Update events
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.追加事件">
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.append_events">
             <summary>
             追加事件
+            Append events
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.修改事件">
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.modify_events">
             <summary>
             修改事件
+            Modify event
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.删除特定几项事件_之后事件项中无需带事件内容">
+        <member name="F:JT808.Protocol.Enums.JT808EventSettingType.delete_specific_events">
             <summary>
             删除特定几项事件，之后事件项中无需带事件内容
+            Delete specific events
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808ICCardReadResult">
             <summary>
             IC 卡读取结果
+            IC card read result
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.IC卡读卡成功">
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.ic_card_reading_succeeded">
             <summary>
             IC卡读卡成功
+            IC card Reading succeeded.
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.读卡失败_原因为卡片密钥认证未通过">
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.read_card_failure_auth">
             <summary>
             读卡失败_原因为卡片密钥认证未通过
+            Read the card failure:The cause is that the card key authentication fails
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.读卡失败_原因为卡片已被锁定">
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.read_card_failure_locked">
             <summary>
             读卡失败_原因为卡片已被锁定
+            Read the card failure:The reason is that the card is locked
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.读卡失败_原因为卡片被拔出">
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.read_card_failure_removed">
             <summary>
             读卡失败_原因为卡片被拔出
+            Read the card failure:The cause is that the card is removed
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.读卡失败_原因为数据校验错误">
+        <member name="F:JT808.Protocol.Enums.JT808ICCardReadResult.read_card_failure_data_verify_error">
             <summary>
             读卡失败_原因为数据校验错误
+             Read the card failure:The cause is a data verification error
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808ICCardStatus">
             <summary>
             插拔状态
+            Plug state
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班">
+        <member name="F:JT808.Protocol.Enums.JT808ICCardStatus.ic_card_into">
             <summary>
             从业资格证IC卡插入_驾驶员上班
+            License IC card inserted_Driver on duty
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808ICCardStatus.从业资格证IC卡拔出_驾驶员下班">
+        <member name="F:JT808.Protocol.Enums.JT808ICCardStatus.ic_card_pull_out">
             <summary>
             从业资格证IC卡拔出_驾驶员下班
+            License IC card pulled out_driver off duty
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808InformationSettingType">
             <summary>
             信息设置类型
+            Information setting type
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.删除终端全部信息项">
+        <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.delete_all_items">
             <summary>
             删除终端全部信息项
+            Delete all terminal information items
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.更新菜单">
+        <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.update_menu">
             <summary>
             更新菜单
+            Update menu
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.追加菜单">
+        <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.append_menu">
             <summary>
             追加菜单
+            Append menu
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.修改菜单">
+        <member name="F:JT808.Protocol.Enums.JT808InformationSettingType.modify_menu">
             <summary>
             修改菜单
+            Modify the menu
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808IOStatus">
@@ -1714,6 +1770,7 @@
         <member name="T:JT808.Protocol.Exceptions.JT808Exception">
             <summary>
             JT808异常处理类
+            Exception handling class
             </summary>
         </member>
         <member name="M:JT808.Protocol.Exceptions.JT808Exception.#ctor(JT808.Protocol.Enums.JT808ErrorCode)">
@@ -1747,6 +1804,7 @@
         <member name="P:JT808.Protocol.Exceptions.JT808Exception.ErrorCode">
             <summary>
             JT808统一错误码
+            Unified error code
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.JT808AnalyzeExtensions">
@@ -3963,6 +4021,7 @@
         <member name="T:JT808.Protocol.Formatters.IJT808FormatterFactory">
             <summary>
             序列化工厂
+            Serialization factory
             </summary>
         </member>
         <member name="P:JT808.Protocol.Formatters.IJT808FormatterFactory.FormatterDict">

@@ -538,11 +538,11 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 AreaId = 1,
                 JT808PositionType = Enums.JT808PositionType.圆形区域,
-                Direction = Enums.JT808DirectionType.出
+                Direction = Enums.JT808DirectionType.direction_out
             });
             jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x13, new JT808_0x0200_0x13
             {
-                DrivenRoute = Enums.JT808DrivenRouteType.过长,
+                DrivenRoute = Enums.JT808DrivenRouteType.overlength,
                 DrivenRouteId = 2,
                 Time = 34
             });

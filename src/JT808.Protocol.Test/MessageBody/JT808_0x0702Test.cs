@@ -14,7 +14,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x0702 jT808_0X0702 = new JT808_0x0702
             {
-                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡拔出_驾驶员下班,
+                IC_Card_Status = JT808ICCardStatus.ic_card_pull_out,
                 IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16")
             };
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
@@ -26,7 +26,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "02 18 08 16 09 16 16".ToHexBytes();
             JT808_0x0702 jT808_0X0702 = JT808Serializer.Deserialize<JT808_0x0702>(bytes);
-            Assert.Equal(JT808ICCardStatus.从业资格证IC卡拔出_驾驶员下班, jT808_0X0702.IC_Card_Status);
+            Assert.Equal(JT808ICCardStatus.ic_card_pull_out, jT808_0X0702.IC_Card_Status);
             Assert.Equal(DateTime.Parse("2018-08-16 09:16:16"), jT808_0X0702.IC_Card_PlugDateTime);
         }
 
@@ -35,9 +35,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x0702 jT808_0X0702 = new JT808_0x0702
             {
-                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班,
+                IC_Card_Status = JT808ICCardStatus.ic_card_into,
                 IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16"),
-                IC_Card_ReadResult = JT808ICCardReadResult.读卡失败_原因为卡片密钥认证未通过
+                IC_Card_ReadResult = JT808ICCardReadResult.read_card_failure_auth
             };
             var hex = JT808Serializer.Serialize(jT808_0X0702).ToHexString();
             Assert.Equal("01 18 08 16 09 16 16 01".Replace(" ", ""), hex);
@@ -48,9 +48,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "01 18 08 16 09 16 16 01".ToHexBytes();
             JT808_0x0702 jT808_0X0702 = JT808Serializer.Deserialize<JT808_0x0702>(bytes);
-            Assert.Equal(JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班, jT808_0X0702.IC_Card_Status);
+            Assert.Equal(JT808ICCardStatus.ic_card_into, jT808_0X0702.IC_Card_Status);
             Assert.Equal(DateTime.Parse("2018-08-16 09:16:16"), jT808_0X0702.IC_Card_PlugDateTime);
-            Assert.Equal(JT808ICCardReadResult.读卡失败_原因为卡片密钥认证未通过, jT808_0X0702.IC_Card_ReadResult);
+            Assert.Equal(JT808ICCardReadResult.read_card_failure_auth, jT808_0X0702.IC_Card_ReadResult);
         }
 
         [Fact]
@@ -58,9 +58,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x0702 jT808_0X0702 = new JT808_0x0702
             {
-                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班,
+                IC_Card_Status = JT808ICCardStatus.ic_card_into,
                 IC_Card_PlugDateTime = DateTime.Parse("2018-08-16 09:16:16"),
-                IC_Card_ReadResult = JT808ICCardReadResult.IC卡读卡成功,
+                IC_Card_ReadResult = JT808ICCardReadResult.ic_card_reading_succeeded,
                 DriverUserName = "koike",
                 QualificationCode = "qwe123456aaa",
                 LicenseIssuing = "qwertx",
@@ -75,9 +75,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "0118081609161600056B6F696B6571776531323334353661616100000000000000000671776572747820180816".ToHexBytes();
             JT808_0x0702 jT808_0X0702 = JT808Serializer.Deserialize<JT808_0x0702>(bytes);
-            Assert.Equal(JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班, jT808_0X0702.IC_Card_Status);
+            Assert.Equal(JT808ICCardStatus.ic_card_into, jT808_0X0702.IC_Card_Status);
             Assert.Equal(DateTime.Parse("2018-08-16 09:16:16"), jT808_0X0702.IC_Card_PlugDateTime);
-            Assert.Equal(JT808ICCardReadResult.IC卡读卡成功, jT808_0X0702.IC_Card_ReadResult);
+            Assert.Equal(JT808ICCardReadResult.ic_card_reading_succeeded, jT808_0X0702.IC_Card_ReadResult);
             Assert.Equal("koike", jT808_0X0702.DriverUserName);
             Assert.Equal("qwe123456aaa", jT808_0X0702.QualificationCode);
             Assert.Equal("qwertx", jT808_0X0702.LicenseIssuing);
@@ -89,9 +89,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x0702 jT808_0X0702 = new JT808_0x0702
             {
-                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班,
+                IC_Card_Status = JT808ICCardStatus.ic_card_into,
                 IC_Card_PlugDateTime = DateTime.Parse("2019-12-01 11:11:11"),
-                IC_Card_ReadResult = JT808ICCardReadResult.IC卡读卡成功,
+                IC_Card_ReadResult = JT808ICCardReadResult.ic_card_reading_succeeded,
                 DriverUserName = "koike",
                 QualificationCode = "qwe123456aaa",
                 LicenseIssuing = "qwertx",
@@ -108,9 +108,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "0119120111111100056B6F696B65717765313233343536616161000000000000000006717765727478201912013132333435363738393031323334353637000000".ToHexBytes();
             JT808_0x0702 jT808_0X0702 = JT808Serializer.Deserialize<JT808_0x0702>(bytes, JT808Version.JTT2019);
-            Assert.Equal(JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班, jT808_0X0702.IC_Card_Status);
+            Assert.Equal(JT808ICCardStatus.ic_card_into, jT808_0X0702.IC_Card_Status);
             Assert.Equal(DateTime.Parse("2019-12-01 11:11:11"), jT808_0X0702.IC_Card_PlugDateTime);
-            Assert.Equal(JT808ICCardReadResult.IC卡读卡成功, jT808_0X0702.IC_Card_ReadResult);
+            Assert.Equal(JT808ICCardReadResult.ic_card_reading_succeeded, jT808_0X0702.IC_Card_ReadResult);
             Assert.Equal("koike", jT808_0X0702.DriverUserName);
             Assert.Equal("qwe123456aaa", jT808_0X0702.QualificationCode);
             Assert.Equal("qwertx", jT808_0X0702.LicenseIssuing);
@@ -130,9 +130,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x0702 jT808_0X0702 = new JT808_0x0702
             {
-                IC_Card_Status = JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班,
+                IC_Card_Status = JT808ICCardStatus.ic_card_into,
                 IC_Card_PlugDateTime = DateTime.Parse("2021-05-28 18:11:11"),
-                IC_Card_ReadResult = JT808ICCardReadResult.IC卡读卡成功,
+                IC_Card_ReadResult = JT808ICCardReadResult.ic_card_reading_succeeded,
                 DriverUserName = "koike",
                 QualificationCode = "qwe123456aaa",
                 LicenseIssuing = "qwertx",
@@ -150,9 +150,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "0121052818111100056B6F696B65000000000000000071776531323334353661616106717765727478202105280000003132333435363738393031323334353637630000003132333435363738393031323334353637".ToHexBytes();
             JT808_0x0702 jT808_0X0702 = JT808Serializer.Deserialize<JT808_0x0702>(bytes, JT808Version.JTT2019);
-            Assert.Equal(JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班, jT808_0X0702.IC_Card_Status);
+            Assert.Equal(JT808ICCardStatus.ic_card_into, jT808_0X0702.IC_Card_Status);
             Assert.Equal(DateTime.Parse("2021-05-28 18:11:11"), jT808_0X0702.IC_Card_PlugDateTime);
-            Assert.Equal(JT808ICCardReadResult.IC卡读卡成功, jT808_0X0702.IC_Card_ReadResult);
+            Assert.Equal(JT808ICCardReadResult.ic_card_reading_succeeded, jT808_0X0702.IC_Card_ReadResult);
             Assert.Equal("koike", jT808_0X0702.DriverUserName);
             Assert.Equal("qwe123456aaa", jT808_0X0702.QualificationCode);
             Assert.Equal("qwertx", jT808_0X0702.LicenseIssuing);

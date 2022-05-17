@@ -2,16 +2,17 @@
 {
     /// <summary>
     /// 方向类型
+    /// Direction Type
     /// </summary>
     public enum JT808DirectionType : byte
     {
         /// <summary>
         /// 进
         /// </summary>
-        进 = 0,
+        direction_in = 0,
         /// <summary>
         /// 出
         /// </summary>
-        出 = 1
+        direction_out = 1
     }
 }

@@ -104,11 +104,11 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteNumber($"[{((byte)value.IC_Card_Status).ReadNumber()}]状态-{value.IC_Card_Status.ToString()}", (byte)value.IC_Card_Status);
                 value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{value.IC_Card_PlugDateTime.ToString("yyMMddHHmmss")}]插拔卡时间", value.IC_Card_PlugDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
-                if (value.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
+                if (value.IC_Card_Status == JT808ICCardStatus.ic_card_into)
                 {
                     value.IC_Card_ReadResult = (JT808ICCardReadResult)reader.ReadByte();
                     writer.WriteNumber($"[{((byte)value.IC_Card_ReadResult).ReadNumber()}]IC卡读取结果-{value.IC_Card_ReadResult.ToString()}", (byte)value.IC_Card_ReadResult);
-                    if (value.IC_Card_ReadResult == JT808ICCardReadResult.IC卡读卡成功)
+                    if (value.IC_Card_ReadResult == JT808ICCardReadResult.ic_card_reading_succeeded)
                     {
                         value.DriverUserNameLength = reader.ReadByte();
                         writer.WriteNumber($"[{value.DriverUserNameLength.ReadNumber()}]驾驶员姓名长度", value.DriverUserNameLength);
@@ -189,10 +189,10 @@ namespace JT808.Protocol.MessageBody
             {
                 value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
                 value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
-                if (value.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
+                if (value.IC_Card_Status == JT808ICCardStatus.ic_card_into)
                 {
                     value.IC_Card_ReadResult = (JT808ICCardReadResult)reader.ReadByte();
-                    if (value.IC_Card_ReadResult == JT808ICCardReadResult.IC卡读卡成功)
+                    if (value.IC_Card_ReadResult == JT808ICCardReadResult.ic_card_reading_succeeded)
                     {
                         value.DriverUserNameLength = reader.ReadByte();
                         value.DriverUserName = reader.ReadString(value.DriverUserNameLength);
@@ -252,10 +252,10 @@ namespace JT808.Protocol.MessageBody
             else {
                 writer.WriteByte((byte)value.IC_Card_Status);
                 writer.WriteDateTime_yyMMddHHmmss(value.IC_Card_PlugDateTime);
-                if (value.IC_Card_Status == JT808ICCardStatus.从业资格证IC卡插入_驾驶员上班)
+                if (value.IC_Card_Status == JT808ICCardStatus.ic_card_into)
                 {
                     writer.WriteByte((byte)value.IC_Card_ReadResult);
-                    if (value.IC_Card_ReadResult == JT808ICCardReadResult.IC卡读卡成功)
+                    if (value.IC_Card_ReadResult == JT808ICCardReadResult.ic_card_reading_succeeded)
                     {
                         writer.WriteByte((byte)value.DriverUserName.Length);
                         writer.WriteString(value.DriverUserName);

@@ -6,6 +6,7 @@ namespace JT808.Protocol.Enums
 {
     /// <summary>
     /// 摄像头分辨率
+    /// Camera resolution
     /// </summary>
     public enum JT808CameraResolutionType:byte
     {

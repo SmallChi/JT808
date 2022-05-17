@@ -2,28 +2,34 @@
 {
     /// <summary>
     /// 事件设置类型
+    /// Event setting Type
     /// </summary>
     public enum JT808EventSettingType : byte
     {
         /// <summary>
         /// 删除终端现有所有事件_该命令后不带后继字节
+        /// Delete all existing events on the terminal This command does not contain subsequent bytes
         /// </summary>
-        删除终端现有所有事件_该命令后不带后继字节 = 0x00,
+        delete_terminal_all_existing_events = 0x00,
         /// <summary>
         /// 更新事件
+        /// Update events
         /// </summary>
-        更新事件 = 0x01,
+        update_events = 0x01,
         /// <summary>
         /// 追加事件
+        /// Append events
         /// </summary>
-        追加事件 = 0x02,
+        append_events = 0x02,
         /// <summary>
         /// 修改事件
+        /// Modify event
         /// </summary>
-        修改事件 = 0x03,
+        modify_events = 0x03,
         /// <summary>
         /// 删除特定几项事件，之后事件项中无需带事件内容
+        /// Delete specific events
         /// </summary>
-        删除特定几项事件_之后事件项中无需带事件内容 = 0x04
+        delete_specific_events = 0x04
     }
 }

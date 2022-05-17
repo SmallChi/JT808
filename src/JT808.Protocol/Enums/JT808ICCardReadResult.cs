@@ -2,28 +2,34 @@
 {
     /// <summary>
     /// IC 卡读取结果
+    /// IC card read result
     /// </summary>
     public enum JT808ICCardReadResult : byte
     {
         /// <summary>
         /// IC卡读卡成功
+        /// IC card Reading succeeded.
         /// </summary>
-        IC卡读卡成功 = 0x00,
+        ic_card_reading_succeeded = 0x00,
         /// <summary>
         /// 读卡失败_原因为卡片密钥认证未通过
+        /// Read the card failure:The cause is that the card key authentication fails
         /// </summary>
-        读卡失败_原因为卡片密钥认证未通过 = 0x01,
+        read_card_failure_auth = 0x01,
         /// <summary>
         /// 读卡失败_原因为卡片已被锁定
+        /// Read the card failure:The reason is that the card is locked
         /// </summary>
-        读卡失败_原因为卡片已被锁定 = 0x02,
+        read_card_failure_locked = 0x02,
         /// <summary>
         /// 读卡失败_原因为卡片被拔出
+        /// Read the card failure:The cause is that the card is removed
         /// </summary>
-        读卡失败_原因为卡片被拔出 = 0x03,
+        read_card_failure_removed = 0x03,
         /// <summary>
         /// 读卡失败_原因为数据校验错误
+        ///  Read the card failure:The cause is a data verification error
         /// </summary>
-        读卡失败_原因为数据校验错误 = 0x04,
+        read_card_failure_data_verify_error = 0x04,
     }
 }

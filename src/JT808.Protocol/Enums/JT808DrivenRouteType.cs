@@ -2,16 +2,19 @@
 {
     /// <summary>
     /// 路线行驶返回结果
+    /// Route driving returns results
     /// </summary>
     public enum JT808DrivenRouteType
     {
         /// <summary>
         /// 不足
+        /// insufficient
         /// </summary>
-        不足 = 0,
+        insufficient = 0,
         /// <summary>
         /// 过长
+        /// overlength
         /// </summary>
-        过长 = 1
+        overlength = 1
     }
 }

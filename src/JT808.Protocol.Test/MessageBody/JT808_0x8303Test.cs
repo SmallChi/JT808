@@ -15,7 +15,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x8303 jT808_0X8303 = new JT808_0x8303
             {
-                SettingType = JT808InformationSettingType.删除终端全部信息项.ToByteValue(),
+                SettingType = JT808InformationSettingType.delete_all_items.ToByteValue(),
                 InformationItems = new List<JT808InformationItemProperty>()
             };
             jT808_0X8303.InformationItems.Add(new JT808InformationItemProperty
@@ -37,7 +37,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "00020B0009736D616C6C63686931160009736D616C6C63686932".ToHexBytes();
             JT808_0x8303 jT808_0X8303 = JT808Serializer.Deserialize<JT808_0x8303>(bytes);
-            Assert.Equal(JT808InformationSettingType.删除终端全部信息项.ToByteValue(), jT808_0X8303.SettingType);
+            Assert.Equal(JT808InformationSettingType.delete_all_items.ToByteValue(), jT808_0X8303.SettingType);
 
             Assert.Equal(11, jT808_0X8303.InformationItems[0].InformationType);
             Assert.Equal("smallchi1", jT808_0X8303.InformationItems[0].InformationName);

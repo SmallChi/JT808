@@ -8,6 +8,7 @@ namespace JT808.Protocol.Formatters
 {
     /// <summary>
     /// 序列化工厂
+    /// Serialization factory
     /// </summary>
     public interface IJT808FormatterFactory: IJT808ExternalRegister
     {

@@ -27,7 +27,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x0801 jT808_0X0801 = new JT808_0x0801
             {
                 ChannelId = 123,
-                EventItemCoding = JT808EventItemCoding.定时动作.ToByteValue(),
+                EventItemCoding = JT808EventItemCoding.regular_action.ToByteValue(),
                 MultimediaCodingFormat = JT808MultimediaCodingFormat.JPEG.ToByteValue(),
                 MultimediaId = 2567,
                 MultimediaType = JT808MultimediaType.图像.ToByteValue(),
@@ -54,7 +54,7 @@ namespace JT808.Protocol.Test.MessageBody
             byte[] bytes = "00000A070000017B000000010000000200BA7F0E07E4F11C0028003C000018111523261001020304".ToHexBytes();
             JT808_0x0801 jT808_0X0801 = JT808Serializer.Deserialize<JT808_0x0801>(bytes);
             Assert.Equal(123, jT808_0X0801.ChannelId);
-            Assert.Equal(JT808EventItemCoding.定时动作.ToByteValue(), jT808_0X0801.EventItemCoding);
+            Assert.Equal(JT808EventItemCoding.regular_action.ToByteValue(), jT808_0X0801.EventItemCoding);
             Assert.Equal(JT808MultimediaCodingFormat.JPEG.ToByteValue(), jT808_0X0801.MultimediaCodingFormat);
             Assert.Equal((uint)2567, jT808_0X0801.MultimediaId);
             Assert.Equal(JT808MultimediaType.图像.ToByteValue(), jT808_0X0801.MultimediaType);
@@ -104,7 +104,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x0801 jT808_0X0801 = new JT808_0x0801
             {
                 ChannelId = 123,
-                EventItemCoding = JT808EventItemCoding.定时动作.ToByteValue(),
+                EventItemCoding = JT808EventItemCoding.regular_action.ToByteValue(),
                 MultimediaCodingFormat = JT808MultimediaCodingFormat.JPEG.ToByteValue(),
                 MultimediaId = 2567,
                 MultimediaType = JT808MultimediaType.图像.ToByteValue(),
@@ -120,7 +120,7 @@ namespace JT808.Protocol.Test.MessageBody
             byte[] bytes = "00000A070000017B01020304".ToHexBytes();
             JT808_0x0801 jT808_0X0801 = JT808Serializer.Deserialize<JT808_0x0801>(bytes);
             Assert.Equal(123, jT808_0X0801.ChannelId);
-            Assert.Equal(JT808EventItemCoding.定时动作.ToByteValue(), jT808_0X0801.EventItemCoding);
+            Assert.Equal(JT808EventItemCoding.regular_action.ToByteValue(), jT808_0X0801.EventItemCoding);
             Assert.Equal(JT808MultimediaCodingFormat.JPEG.ToByteValue(), jT808_0X0801.MultimediaCodingFormat);
             Assert.Equal((uint)2567, jT808_0X0801.MultimediaId);
             Assert.Equal(JT808MultimediaType.图像.ToByteValue(), jT808_0X0801.MultimediaType);

@@ -2,6 +2,7 @@
 {
     /// <summary>
     /// 异常错误码
+    /// Exception error code
     /// </summary>
     public enum JT808ErrorCode
     {
@@ -34,8 +35,8 @@
         /// </summary>
         NotEnoughLength = 1007,
         /// <summary>
-        /// 没有全局注册格式化器
-        /// IJT808MessagePackFormatter
+        /// 没有全局注册格式化器 IJT808MessagePackFormatter
+        /// There is no global register formatter [IJT808MessagePackFormatter]
         /// </summary>
         NotGlobalRegisterFormatterAssembly = 1008,        
         /// <summary>

@@ -2,16 +2,19 @@
 {
     /// <summary>
     /// 电话回拨类型
+    /// Callback type
     /// </summary>
     public enum JT808CallBackType : byte
     {
         /// <summary>
         /// 普通通话
+        /// normal call
         /// </summary>
-        普通通话 = 0,
+        normal_call = 0,
         /// <summary>
         /// 监听
+        /// cue
         /// </summary>
-        监听 = 1
+        cue = 1
     }
 }
