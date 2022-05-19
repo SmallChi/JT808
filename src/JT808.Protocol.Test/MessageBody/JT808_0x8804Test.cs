@@ -13,9 +13,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x8804 jT808_0X8804 = new JT808_0x8804
             {
-                RecordCmd = JT808RecordCmd.停止录音,
+                RecordCmd = JT808RecordCmd.stop,
                 RecordTime = 30,
-                RecordSave = JT808RecordSave.实时上传,
+                RecordSave = JT808RecordSave.realtime_upload,
                 AudioSampleRate = 1
             };
             string hex = JT808Serializer.Serialize(jT808_0X8804).ToHexString();
@@ -28,9 +28,9 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "00 00 1E 00 01".ToHexBytes();
             JT808_0x8804 jT808_0X8804 = JT808Serializer.Deserialize<JT808_0x8804>(bytes);
-            Assert.Equal(JT808RecordCmd.停止录音, jT808_0X8804.RecordCmd);
+            Assert.Equal(JT808RecordCmd.stop, jT808_0X8804.RecordCmd);
             Assert.Equal(30, jT808_0X8804.RecordTime);
-            Assert.Equal(JT808RecordSave.实时上传, jT808_0X8804.RecordSave);
+            Assert.Equal(JT808RecordSave.realtime_upload, jT808_0X8804.RecordSave);
             Assert.Equal(1, jT808_0X8804.AudioSampleRate);
         }
         [Fact]

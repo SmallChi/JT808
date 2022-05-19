@@ -77,12 +77,12 @@ namespace JT808.Protocol.Benchmark
                 jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x11, new JT808_0x0200_0x11
                 {
                      AreaId=1,
-                     JT808PositionType= Enums.JT808PositionType.圆形区域
+                     JT808PositionType= Enums.JT808PositionType.circular_region
                 });
                 jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x12, new JT808_0x0200_0x12
                 {
                     AreaId = 1,
-                    JT808PositionType = Enums.JT808PositionType.圆形区域,
+                    JT808PositionType = Enums.JT808PositionType.circular_region,
                     Direction= Enums.JT808DirectionType.direction_out
                 });
                 jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x13, new JT808_0x0200_0x13

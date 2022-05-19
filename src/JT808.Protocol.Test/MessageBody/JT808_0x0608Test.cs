@@ -70,7 +70,7 @@ namespace JT808.Protocol.Test.MessageBody
                                 AreaName="SmallChi"
                              }
                          },
-                         SettingAreaProperty= JT808SettingProperty.追加区域.ToByteValue()
+                         SettingAreaProperty= JT808SettingProperty.append_region.ToByteValue()
                     }
                 }
             };
@@ -86,7 +86,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(1, value.QueryType);
             Assert.Equal(1u, value.Count);
             var jT808_0X8600 = value.JT808_0x8600s[0];
-            Assert.Equal(JT808SettingProperty.追加区域.ToByteValue(), jT808_0X8600.SettingAreaProperty);
+            Assert.Equal(JT808SettingProperty.append_region.ToByteValue(), jT808_0X8600.SettingAreaProperty);
             Assert.Equal(1, jT808_0X8600.AreaCount);
             var item0 = jT808_0X8600.AreaItems[0];
             Assert.Equal((uint)1522, item0.AreaId);
@@ -136,7 +136,7 @@ namespace JT808.Protocol.Test.MessageBody
                                 AreaName="smallchi"
                             }
                          },
-                         SettingAreaProperty= JT808SettingProperty.追加区域.ToByteValue()
+                         SettingAreaProperty= JT808SettingProperty.append_region.ToByteValue()
                     }
                 }
             };
@@ -152,7 +152,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(2, value.QueryType);
             Assert.Equal(1u, value.Count);
             var jT808_0X8602 = value.JT808_0x8602s[0];
-            Assert.Equal(JT808SettingProperty.追加区域.ToByteValue(), jT808_0X8602.SettingAreaProperty);
+            Assert.Equal(JT808SettingProperty.append_region.ToByteValue(), jT808_0X8602.SettingAreaProperty);
             Assert.Equal(1, jT808_0X8602.AreaCount);
             var item0 = jT808_0X8602.AreaItems[0];
             Assert.Equal((uint)1522, item0.AreaId);
@@ -186,7 +186,7 @@ namespace JT808.Protocol.Test.MessageBody
                 {
                     new JT808_0x8604
                     {   AreaId = 1234,
-                        AreaProperty = JT808SettingProperty.追加区域.ToByteValue(),
+                        AreaProperty = JT808SettingProperty.append_region.ToByteValue(),
                         StartTime = DateTime.Parse("2020-01-07 00:00:12"),
                         EndTime = DateTime.Parse("2020-01-07 00:00:13"),
                         HighestSpeed = 62,
@@ -222,7 +222,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(1u, value.Count);
             var jT808_0X8604 = value.JT808_0x8604s[0];
             Assert.Equal((uint)1234, jT808_0X8604.AreaId);
-            Assert.Equal(JT808SettingProperty.追加区域.ToByteValue(), jT808_0X8604.AreaProperty);
+            Assert.Equal(JT808SettingProperty.append_region.ToByteValue(), jT808_0X8604.AreaProperty);
             Assert.Null(jT808_0X8604.HighestSpeed);
             Assert.Null(jT808_0X8604.OverspeedDuration);
             Assert.Equal(DateTime.Parse("2020-01-07 00:00:12"), jT808_0X8604.StartTime);

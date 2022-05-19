@@ -12,15 +12,16 @@
     {
         /// <summary>
         /// 大陆
+        /// china
         /// </summary>
-        大陆 = 11,
+        china = 11,
         /// <summary>
         /// 香港|澳门
         /// </summary>
-        香港_澳门 = 8,
+        china_hongkong_macao = 8,
         /// <summary>
         /// 台湾
         /// </summary>
-        台湾 = 10
+        china_taiwan = 10
     }
 }

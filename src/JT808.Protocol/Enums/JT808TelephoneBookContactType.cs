@@ -2,20 +2,24 @@
 {
     /// <summary>
     /// 电话本联系人标志
+    /// Phone book contact mark
     /// </summary>
     public enum JT808TelephoneBookContactType : byte
     {
         /// <summary>
         /// 呼入
+        /// call_in
         /// </summary>
-        呼入 = 1,
+        callin = 1,
         /// <summary>
         /// 呼出
+        /// call_out
         /// </summary>
-        呼出 = 2,
+        callout = 2,
         /// <summary>
         /// 呼入_呼出
+        /// call_in|call_out
         /// </summary>
-        呼入_呼出 = 3
+        call_in_out = 3
     }
 }

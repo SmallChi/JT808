@@ -2,20 +2,24 @@
 {
     /// <summary>
     /// 设置属性
+    /// set attributes
     /// </summary>
     public enum JT808SettingProperty : byte
     {
         /// <summary>
         /// 更新区域
+        /// update region
         /// </summary>
-        更新区域 = 0x00,
+        update_region = 0x00,
         /// <summary>
         /// 追加区域
+        /// append region
         /// </summary>
-        追加区域 = 0x01,
+        append_region = 0x01,
         /// <summary>
         /// 修改区域
+        /// modify region
         /// </summary>
-        修改区域 = 0x02
+        modify_region = 0x02
     }
 }

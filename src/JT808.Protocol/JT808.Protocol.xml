@@ -813,16 +813,19 @@
         <member name="T:JT808.Protocol.Enums.JT808IOStatus">
             <summary>
             IO状态位
+            IO status bits
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808IOStatus.深度休眠状态">
+        <member name="F:JT808.Protocol.Enums.JT808IOStatus.deep_dormant_state">
             <summary>
             深度休眠状态
+            Deep dormant state
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808IOStatus.休眠状态">
+        <member name="F:JT808.Protocol.Enums.JT808IOStatus.dormant_state">
             <summary>
             休眠状态
+            dormant state
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808MsgId">
@@ -1259,6 +1262,7 @@
         <member name="T:JT808.Protocol.Enums.JT808MultimediaCodingFormat">
             <summary>
             多媒体格式编码
+            Multimedia format coding
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808MultimediaCodingFormat.JPEG">
@@ -1290,36 +1294,43 @@
             <summary>
             删除标志
             单条存储多媒体数据检索上传命令
+            Single storage multimedia data retrieval upload command
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808MultimediaDeleted.保留">
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaDeleted.reserve">
             <summary>
             保留
+            reserve
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808MultimediaDeleted.删除">
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaDeleted.delete">
             <summary>
             删除
+            delete
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808MultimediaType">
             <summary>
             多媒体类型
+            Multimedia Type
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.图像">
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.image">
             <summary>
             图像
+            image
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.音频">
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.audio">
             <summary>
             音频
+            audio
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.视频">
+        <member name="F:JT808.Protocol.Enums.JT808MultimediaType.video">
             <summary>
             视频
+            video
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808PhoneNumberType">
@@ -1332,17 +1343,18 @@
             假如是其他地方打来要改成打 +886912345678
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.大陆">
+        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.china">
             <summary>
             大陆
+            china
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.香港_澳门">
+        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.china_hongkong_macao">
             <summary>
             香港|澳门
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.台湾">
+        <member name="F:JT808.Protocol.Enums.JT808PhoneNumberType.china_taiwan">
             <summary>
             台湾
             </summary>
@@ -1350,136 +1362,162 @@
         <member name="T:JT808.Protocol.Enums.JT808PlatformResult">
             <summary>
             返回结果
+            return to the result
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.成功">
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.succeed">
             <summary>
             成功/确认
+            succeed
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.失败">
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.fail">
             <summary>
             失败
+            fail
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.消息有误">
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.message_wrong">
             <summary>
             消息有误
+            The message is wrong
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.不支持">
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.nonsupport">
             <summary>
             不支持
+            nonsupport
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.报警处理确认">
+        <member name="F:JT808.Protocol.Enums.JT808PlatformResult.alarm_processing_confirmation">
             <summary>
             报警处理确认
+            Alarm processing confirmation
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808PositionType">
             <summary>
             位置类型
+            Position type
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PositionType.无特定位置">
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.no_specific_position">
             <summary>
             无特定位置
+            No specific position
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PositionType.圆形区域">
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.circular_region">
             <summary>
             圆形区域
+            circular region
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PositionType.矩形区域">
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.rectangular_region">
             <summary>
             矩形区域
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PositionType.多边形区域">
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.polyarea">
             <summary>
             多边形区域
+            polyarea
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808PositionType.路段">
+        <member name="F:JT808.Protocol.Enums.JT808PositionType.road_segment">
             <summary>
             路段
+            Road Segment
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808RecordCmd">
             <summary>
             录音命令
+            The recording command
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808RecordCmd.停止录音">
+        <member name="F:JT808.Protocol.Enums.JT808RecordCmd.stop">
             <summary>
             停止录音
+            stop
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808RecordCmd.开始录音">
+        <member name="F:JT808.Protocol.Enums.JT808RecordCmd.start">
             <summary>
-            停止录音
+            开始录音
+            start
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808RecordSave">
             <summary>
             保存标志
+            Save the logo
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808RecordSave.实时上传">
+        <member name="F:JT808.Protocol.Enums.JT808RecordSave.realtime_upload">
             <summary>
             实时上传
+            In real time to upload
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808RecordSave.保存">
+        <member name="F:JT808.Protocol.Enums.JT808RecordSave.save">
             <summary>
             保存
+            Save
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808SettingProperty">
             <summary>
             设置属性
+            set attributes
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.更新区域">
+        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.update_region">
             <summary>
             更新区域
+            update region
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.追加区域">
+        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.append_region">
             <summary>
             追加区域
+            append region
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.修改区域">
+        <member name="F:JT808.Protocol.Enums.JT808SettingProperty.modify_region">
             <summary>
             修改区域
+            modify region
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808SettingTelephoneBook">
             <summary>
-            设置电话本 设置类型
+            设置电话本设置类型
+            Set the phone book setting type
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.删除终端上所有存储的联系人">
+        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.delete_all">
             <summary>
             删除终端上所有存储的联系人
+            Delete all contacts stored on the terminal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.更新电话本_删除终端中已有全部联系人并追加消息中的联系人">
+        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.update_phone_book">
             <summary>
             更新电话本_删除终端中已有全部联系人并追加消息中的联系人
+            Update the phone book _ Delete all contacts from the terminal and add contacts to the message 
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.追加电话本">
+        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.append_phone_book">
             <summary>
             追加电话本
+            Append phone book
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.修改电话本_以联系人为索引">
+        <member name="F:JT808.Protocol.Enums.JT808SettingTelephoneBook.modify_phone_book">
             <summary>
             修改电话本_以联系人为索引
+            Modify the phone book to index contacts
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808Status">
@@ -1590,56 +1628,67 @@
         <member name="T:JT808.Protocol.Enums.JT808TelephoneBookContactType">
             <summary>
             电话本联系人标志
+            Phone book contact mark
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808TelephoneBookContactType.呼入">
+        <member name="F:JT808.Protocol.Enums.JT808TelephoneBookContactType.callin">
             <summary>
             呼入
+            call_in
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808TelephoneBookContactType.呼出">
+        <member name="F:JT808.Protocol.Enums.JT808TelephoneBookContactType.callout">
             <summary>
             呼出
+            call_out
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808TelephoneBookContactType.呼入_呼出">
+        <member name="F:JT808.Protocol.Enums.JT808TelephoneBookContactType.call_in_out">
             <summary>
             呼入_呼出
+            call_in|call_out
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808TerminalRegisterResult">
             <summary>
             终端注册返回结果
+            The terminal registration result is returned
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.成功">
+        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.success">
             <summary>
             成功
+            success
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.车辆已被注册">
+        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.vehicle_registered">
             <summary>
             车辆已被注册
+            The vehicle has been registered
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.数据库中无该车辆">
+        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.vehicle_not_database">
             <summary>
             数据库中无该车辆
+            The vehicle is not in the database
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.终端已被注册">
+        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.terminal_registered">
             <summary>
             终端已被注册
+            The terminal has been registered
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.数据库中无该终端">
+        <member name="F:JT808.Protocol.Enums.JT808TerminalRegisterResult.terminal_not_database">
             <summary>
             数据库中无该终端
+            The terminal is not in the database
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808TerminalResult">
             <summary>
             通用应答返回
+            Universal reply return
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808TerminalResult.Success">
@@ -1665,86 +1714,103 @@
         <member name="T:JT808.Protocol.Enums.JT808UpgradeResult">
             <summary>
             升级结果
+            Upgrade Result
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.成功">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.success">
             <summary>
             成功
+            success
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.失败">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.fail">
             <summary>
             失败
+            fail
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.取消">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.cancel">
             <summary>
             取消
+            cancel
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.未找到目标设备">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.yue_biao_active_safety_target_device_not_found">
             <summary>
             粤标主动安全-未找到目标设备
+            Yue Biao active Safety. - Target device not found
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.硬件型号不支持">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.yue_biao_active_safety_hardware_not_supported">
             <summary>
             粤标主动安全-硬件型号不支持
+            Yue Biao Active Safety - hardware models not supported
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.软件版本相同">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.yue_biao_active_safety_same_software_version">
             <summary>
             粤标主动安全-软件版本相同
+            Yue Biao Active Safety - Same Software Version
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.软件版本不支持">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeResult.yue_biao_active_safety_same_software_version_not_supported">
             <summary>
             粤标主动安全-软件版本不支持
+            Yue Biao Active Safety - The software version is not supported
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808UpgradeType">
             <summary>
             升级类型
+            Upgrade Type
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.终端">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.terminal">
             <summary>
             终端
+            terminal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.道路运输证IC卡读卡器">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.road_transport_cert_ic_card_reader">
             <summary>
             道路运输证IC卡读卡器
+            Road transport certificate IC card reader
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.北斗卫星定位模块">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.beidou_module">
             <summary>
             北斗卫星定位模块
+            Beidou satellite positioning module
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.高级驾驶辅助系统">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.adas">
             <summary>
             粤标主动安全-高级驾驶辅助系统
+            Advanced driver assistance system
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.驾驶状态监控系统">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.dsm">
             <summary>
             粤标主动安全-驾驶状态监控系统
+            Driving condition monitoring system
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.胎压监测系统">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.tpms">
             <summary>
             粤标主动安全-胎压监测系统
+            tire pressure monitoring system
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.盲点监测系统">
+        <member name="F:JT808.Protocol.Enums.JT808UpgradeType.bsd">
             <summary>
             粤标主动安全-盲点监测系统
+            Blind Spot Monitoring system
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808Version">
             <summary>
             JT808版本号
+            JT808 Version
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808Version.JTT2011">

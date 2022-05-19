@@ -27,7 +27,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
                 ErrorCode=1,
                  MsgNum=2,
                   UpgradeStatus= Enums.JT808UpgradeStatus.固件下载中,
-                   UpgradeType= Protocol.Enums.JT808UpgradeType.北斗卫星定位模块,
+                   UpgradeType= Protocol.Enums.JT808UpgradeType.beidou_module,
                     UploadProgress=3
             };
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
@@ -40,7 +40,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
             Assert.Equal(1, jT808UploadLocationRequest.ErrorCode);
             Assert.Equal(2, jT808UploadLocationRequest.MsgNum);
             Assert.Equal(Enums.JT808UpgradeStatus.固件下载中, jT808UploadLocationRequest.UpgradeStatus);
-            Assert.Equal(Protocol.Enums.JT808UpgradeType.北斗卫星定位模块, jT808UploadLocationRequest.UpgradeType);
+            Assert.Equal(Protocol.Enums.JT808UpgradeType.beidou_module, jT808UploadLocationRequest.UpgradeType);
             Assert.Equal(3, jT808UploadLocationRequest.UploadProgress);
         }
         [Fact]

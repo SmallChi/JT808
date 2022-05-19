@@ -2,6 +2,7 @@
 {
     /// <summary>
     /// 通用应答返回
+    /// Universal reply return
     /// </summary>
     public enum JT808TerminalResult : byte
     {

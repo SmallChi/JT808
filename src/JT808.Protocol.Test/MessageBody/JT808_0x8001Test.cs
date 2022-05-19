@@ -21,7 +21,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Bodies = new JT808_0x8001
                 {
                     AckMsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
-                    JT808PlatformResult = Enums.JT808PlatformResult.成功,
+                    JT808PlatformResult = Enums.JT808PlatformResult.succeed,
                     MsgNum = 100
                 }
             };
@@ -51,7 +51,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x8001 JT808Bodies = (JT808_0x8001)jT808Package.Bodies;
             Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToUInt16Value(), JT808Bodies.AckMsgId);
             Assert.Equal(100, JT808Bodies.MsgNum);
-            Assert.Equal(Enums.JT808PlatformResult.成功, JT808Bodies.JT808PlatformResult);
+            Assert.Equal(Enums.JT808PlatformResult.succeed, JT808Bodies.JT808PlatformResult);
         }
 
         [Fact]

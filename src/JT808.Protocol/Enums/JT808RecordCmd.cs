@@ -2,16 +2,19 @@
 {
     /// <summary>
     /// 录音命令
+    /// The recording command
     /// </summary>
     public enum JT808RecordCmd : byte
     {
         /// <summary>
         /// 停止录音
+        /// stop
         /// </summary>
-        停止录音 = 0x00,
+        stop = 0x00,
         /// <summary>
-        /// 停止录音
+        /// 开始录音
+        /// start
         /// </summary>
-        开始录音 = 0x01
+        start = 0x01
     }
 }

@@ -21,7 +21,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Bodies = new JT808_0x8100
                 {
                     Code = "123456",
-                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.成功,
+                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.success,
                     AckMsgNum = 100
                 }
             };
@@ -51,7 +51,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x8100 JT808Bodies = (JT808_0x8100)jT808Package.Bodies;
             Assert.Equal("123456", JT808Bodies.Code);
             Assert.Equal(100, JT808Bodies.AckMsgNum);
-            Assert.Equal(Enums.JT808TerminalRegisterResult.成功, JT808Bodies.JT808TerminalRegisterResult);
+            Assert.Equal(Enums.JT808TerminalRegisterResult.success, JT808Bodies.JT808TerminalRegisterResult);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Bodies = new JT808_0x8100
                 {
                     Code = "123456",
-                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.数据库中无该终端,
+                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.terminal_not_database,
                     AckMsgNum = 100
                 }
             };
@@ -97,7 +97,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x8100 JT808Bodies = (JT808_0x8100)jT808Package.Bodies;
             Assert.Null(JT808Bodies.Code);
             Assert.Equal(100, JT808Bodies.AckMsgNum);
-            Assert.Equal(Enums.JT808TerminalRegisterResult.数据库中无该终端, JT808Bodies.JT808TerminalRegisterResult);
+            Assert.Equal(Enums.JT808TerminalRegisterResult.terminal_not_database, JT808Bodies.JT808TerminalRegisterResult);
         }
 
 
@@ -115,7 +115,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Bodies = new JT808_0x8100
                 {
                     Code = "zssdaf23124sfdsc",
-                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.成功,
+                    JT808TerminalRegisterResult = Enums.JT808TerminalRegisterResult.success,
                     AckMsgNum = 100
                 }
             };
@@ -136,7 +136,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x8100 JT808Bodies = (JT808_0x8100)jT808Package.Bodies;
             Assert.Equal("zssdaf23124sfdsc", JT808Bodies.Code);
             Assert.Equal(100, JT808Bodies.AckMsgNum);
-            Assert.Equal(Enums.JT808TerminalRegisterResult.成功, JT808Bodies.JT808TerminalRegisterResult);
+            Assert.Equal(Enums.JT808TerminalRegisterResult.success, JT808Bodies.JT808TerminalRegisterResult);
         }
 
         [Fact]

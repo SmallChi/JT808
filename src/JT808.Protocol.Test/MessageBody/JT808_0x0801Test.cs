@@ -30,7 +30,7 @@ namespace JT808.Protocol.Test.MessageBody
                 EventItemCoding = JT808EventItemCoding.regular_action.ToByteValue(),
                 MultimediaCodingFormat = JT808MultimediaCodingFormat.JPEG.ToByteValue(),
                 MultimediaId = 2567,
-                MultimediaType = JT808MultimediaType.图像.ToByteValue(),
+                MultimediaType = JT808MultimediaType.image.ToByteValue(),
                 MultimediaDataPackage = new byte[] { 0x01, 0x02, 0x03, 0x04 },
                 Position = new JT808_0x0200
                 {
@@ -57,7 +57,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(JT808EventItemCoding.regular_action.ToByteValue(), jT808_0X0801.EventItemCoding);
             Assert.Equal(JT808MultimediaCodingFormat.JPEG.ToByteValue(), jT808_0X0801.MultimediaCodingFormat);
             Assert.Equal((uint)2567, jT808_0X0801.MultimediaId);
-            Assert.Equal(JT808MultimediaType.图像.ToByteValue(), jT808_0X0801.MultimediaType);
+            Assert.Equal(JT808MultimediaType.image.ToByteValue(), jT808_0X0801.MultimediaType);
             Assert.Equal(new byte[] { 0x01, 0x02, 0x03, 0x04 }, jT808_0X0801.MultimediaDataPackage);
             Assert.Equal((uint)1, jT808_0X0801.Position.AlarmFlag);
             Assert.Equal(40, jT808_0X0801.Position.Altitude);
@@ -107,7 +107,7 @@ namespace JT808.Protocol.Test.MessageBody
                 EventItemCoding = JT808EventItemCoding.regular_action.ToByteValue(),
                 MultimediaCodingFormat = JT808MultimediaCodingFormat.JPEG.ToByteValue(),
                 MultimediaId = 2567,
-                MultimediaType = JT808MultimediaType.图像.ToByteValue(),
+                MultimediaType = JT808MultimediaType.image.ToByteValue(),
                 MultimediaDataPackage = new byte[] { 0x01, 0x02, 0x03, 0x04 }
             };
             string hex = JT808Serializer.Serialize(jT808_0X0801,JT808Version.JTT2011).ToHexString();
@@ -123,7 +123,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(JT808EventItemCoding.regular_action.ToByteValue(), jT808_0X0801.EventItemCoding);
             Assert.Equal(JT808MultimediaCodingFormat.JPEG.ToByteValue(), jT808_0X0801.MultimediaCodingFormat);
             Assert.Equal((uint)2567, jT808_0X0801.MultimediaId);
-            Assert.Equal(JT808MultimediaType.图像.ToByteValue(), jT808_0X0801.MultimediaType);
+            Assert.Equal(JT808MultimediaType.image.ToByteValue(), jT808_0X0801.MultimediaType);
             Assert.Equal(new byte[] { 0x01, 0x02, 0x03, 0x04 }, jT808_0X0801.MultimediaDataPackage);
         }
 

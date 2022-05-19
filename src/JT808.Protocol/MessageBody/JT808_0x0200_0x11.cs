@@ -38,7 +38,7 @@ namespace JT808.Protocol.MessageBody
         {
             get
             {
-                if (JT808PositionType != JT808PositionType.无特定位置)
+                if (JT808PositionType != JT808PositionType.no_specific_position)
                 {
                     return 5;
                 }
@@ -64,7 +64,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             value.JT808PositionType = (JT808PositionType)reader.ReadByte();
             writer.WriteNumber($"[{((byte)value.JT808PositionType).ReadNumber()}]超速报警附加信息-{value.JT808PositionType.ToString()}", (byte)value.JT808PositionType);
-            if (value.JT808PositionType != JT808PositionType.无特定位置)
+            if (value.JT808PositionType != JT808PositionType.no_specific_position)
             {
                 value.AreaId = reader.ReadUInt32();
                 writer.WriteNumber($"[{value.AreaId.ReadNumber()}]区域或路段ID", value.AreaId);
@@ -82,7 +82,7 @@ namespace JT808.Protocol.MessageBody
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
             value.JT808PositionType = (JT808PositionType)reader.ReadByte();
-            if (value.JT808PositionType != JT808PositionType.无特定位置)
+            if (value.JT808PositionType != JT808PositionType.no_specific_position)
             {
                 value.AreaId = reader.ReadUInt32();
             }
@@ -99,7 +99,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);
             writer.WriteByte((byte)value.JT808PositionType);
-            if (value.JT808PositionType != JT808PositionType.无特定位置)
+            if (value.JT808PositionType != JT808PositionType.no_specific_position)
             {
                 writer.WriteUInt32(value.AreaId);
             }

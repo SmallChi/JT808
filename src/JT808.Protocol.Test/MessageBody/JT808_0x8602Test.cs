@@ -16,7 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x8602 jT808_0X8602 = new JT808_0x8602
             {
-                SettingAreaProperty = JT808SettingProperty.追加区域.ToByteValue(),
+                SettingAreaProperty = JT808SettingProperty.append_region.ToByteValue(),
                 AreaItems = new List<JT808RectangleAreaProperty>()
             };
             jT808_0X8602.AreaItems.Add(new JT808RectangleAreaProperty
@@ -55,7 +55,7 @@ namespace JT808.Protocol.Test.MessageBody
             byte[] bytes = "0102000005F200DE075BCD13075BCD12075BCD15075BCD14003CC8000005F3000A075BCCBE075BCCBF075BCCBC075BCCBD003CC8".ToHexBytes();
             JT808_0x8602 jT808_0X8602 = JT808Serializer.Deserialize<JT808_0x8602>(bytes);
 
-            Assert.Equal(JT808SettingProperty.追加区域.ToByteValue(), jT808_0X8602.SettingAreaProperty);
+            Assert.Equal(JT808SettingProperty.append_region.ToByteValue(), jT808_0X8602.SettingAreaProperty);
             Assert.Equal(2, jT808_0X8602.AreaCount);
 
             var item0 = jT808_0X8602.AreaItems[0];

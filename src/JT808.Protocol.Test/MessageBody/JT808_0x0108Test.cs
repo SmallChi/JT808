@@ -13,8 +13,8 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x0108 jT808_0X0108 = new JT808_0x0108
             {
-                UpgradeType = JT808UpgradeType.北斗卫星定位模块,
-                UpgradeResult = JT808UpgradeResult.成功
+                UpgradeType = JT808UpgradeType.beidou_module,
+                UpgradeResult = JT808UpgradeResult.success
             };
             string hex = JT808Serializer.Serialize(jT808_0X0108).ToHexString();
             Assert.Equal("3400", hex);
@@ -25,8 +25,8 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "34 00".ToHexBytes();
             JT808_0x0108 jT808_0X0108 = JT808Serializer.Deserialize<JT808_0x0108>(bytes);
-            Assert.Equal(JT808UpgradeResult.成功, jT808_0X0108.UpgradeResult);
-            Assert.Equal(JT808UpgradeType.北斗卫星定位模块, jT808_0X0108.UpgradeType);
+            Assert.Equal(JT808UpgradeResult.success, jT808_0X0108.UpgradeResult);
+            Assert.Equal(JT808UpgradeType.beidou_module, jT808_0X0108.UpgradeType);
         }
 
         [Fact]

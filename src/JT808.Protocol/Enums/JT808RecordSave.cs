@@ -2,16 +2,19 @@
 {
     /// <summary>
     /// 保存标志
+    /// Save the logo
     /// </summary>
     public enum JT808RecordSave : byte
     {
         /// <summary>
         /// 实时上传
+        /// In real time to upload
         /// </summary>
-        实时上传 = 0,
+        realtime_upload = 0,
         /// <summary>
         /// 保存
+        /// Save
         /// </summary>
-        保存 = 1
+        save = 1
     }
 }

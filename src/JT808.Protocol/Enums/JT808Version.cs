@@ -6,6 +6,7 @@ namespace JT808.Protocol.Enums
 {
     /// <summary>
     /// JT808版本号
+    /// JT808 Version
     /// </summary>
     public enum JT808Version:byte
     {

@@ -50,7 +50,7 @@ namespace JT808.Protocol.MessageBody
             value.JT808TerminalRegisterResult = (JT808TerminalRegisterResult)reader.ReadByte();
             writer.WriteNumber($"[{ ((byte)value.JT808TerminalRegisterResult).ReadNumber()}]结果-{value.JT808TerminalRegisterResult.ToString()}", (byte)value.JT808TerminalRegisterResult);
             // 只有在成功后才有该字段
-            if (value.JT808TerminalRegisterResult == JT808TerminalRegisterResult.成功)
+            if (value.JT808TerminalRegisterResult == JT808TerminalRegisterResult.success)
             {
                 var codeBuffer = reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength()).ToArray();
                 value.Code = reader.ReadRemainStringContent();
@@ -69,7 +69,7 @@ namespace JT808.Protocol.MessageBody
             value.AckMsgNum = reader.ReadUInt16();
             value.JT808TerminalRegisterResult = (JT808TerminalRegisterResult)reader.ReadByte();
             // 只有在成功后才有该字段
-            if (value.JT808TerminalRegisterResult == JT808TerminalRegisterResult.成功)
+            if (value.JT808TerminalRegisterResult == JT808TerminalRegisterResult.success)
             {
                 value.Code = reader.ReadRemainStringContent();
             }
@@ -86,7 +86,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteUInt16(value.AckMsgNum);
             writer.WriteByte((byte)value.JT808TerminalRegisterResult);
             // 只有在成功后才有该字段
-            if (value.JT808TerminalRegisterResult == JT808TerminalRegisterResult.成功)
+            if (value.JT808TerminalRegisterResult == JT808TerminalRegisterResult.success)
             {
                 writer.WriteString(value.Code);
             }

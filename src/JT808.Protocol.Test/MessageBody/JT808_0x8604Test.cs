@@ -17,7 +17,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x8604 jT808_0X8604 = new JT808_0x8604
             {
                 AreaId = 1234,
-                AreaProperty = JT808SettingProperty.追加区域.ToByteValue(),
+                AreaProperty = JT808SettingProperty.append_region.ToByteValue(),
                 StartTime = DateTime.Parse("2018-11-20 00:00:12"),
                 EndTime = DateTime.Parse("2018-11-21 00:00:12"),
                 HighestSpeed = 62,
@@ -44,7 +44,7 @@ namespace JT808.Protocol.Test.MessageBody
             byte[] bytes = "000004D200011811200000121811210000120002075BCD15075BCD14075BCCBC075BCCBD".ToHexBytes();
             JT808_0x8604 jT808_0X8604 = JT808Serializer.Deserialize<JT808_0x8604>(bytes);
             Assert.Equal((uint)1234, jT808_0X8604.AreaId);
-            Assert.Equal(JT808SettingProperty.追加区域.ToByteValue(), jT808_0X8604.AreaProperty);
+            Assert.Equal(JT808SettingProperty.append_region.ToByteValue(), jT808_0X8604.AreaProperty);
             Assert.Null(jT808_0X8604.HighestSpeed);
             Assert.Null(jT808_0X8604.OverspeedDuration);
 

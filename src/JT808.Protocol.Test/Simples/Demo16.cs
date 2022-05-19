@@ -49,7 +49,7 @@ namespace JT808.Protocol.Test.Simples
                 {
                     var bodies = new JT808_0x8108
                     {
-                        UpgradeType = JT808UpgradeType.终端,
+                        UpgradeType = JT808UpgradeType.terminal,
                         VersionNum = "v1.2.1",
                         MakerId = "1234",
                         UpgradePackage = splitPackage[i - 1].Data

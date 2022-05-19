@@ -2,6 +2,7 @@
 {
     /// <summary>
     /// 多媒体格式编码
+    /// Multimedia format coding
     /// </summary>
     public enum JT808MultimediaCodingFormat : byte
     {

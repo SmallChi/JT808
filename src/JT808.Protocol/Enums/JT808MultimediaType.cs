@@ -2,20 +2,24 @@
 {
     /// <summary>
     /// 多媒体类型
+    /// Multimedia Type
     /// </summary>
     public enum JT808MultimediaType : byte
     {
         /// <summary>
         /// 图像
+        /// image
         /// </summary>
-        图像 = 0x00,
+        image = 0x00,
         /// <summary>
         /// 音频
+        /// audio
         /// </summary>
-        音频 = 0x01,
+        audio = 0x01,
         /// <summary>
         /// 视频
+        /// video
         /// </summary>
-        视频 = 0x02
+        video = 0x02
     }
 }

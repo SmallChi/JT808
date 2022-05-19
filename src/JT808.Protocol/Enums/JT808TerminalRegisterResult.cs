@@ -2,28 +2,34 @@
 {
     /// <summary>
     /// 终端注册返回结果
+    /// The terminal registration result is returned
     /// </summary>
     public enum JT808TerminalRegisterResult : byte
     {
         /// <summary>
         /// 成功
+        /// success
         /// </summary>
-        成功 = 0x00,
+        success = 0x00,
         /// <summary>
         /// 车辆已被注册
+        /// The vehicle has been registered
         /// </summary>
-        车辆已被注册 = 0x01,
+        vehicle_registered = 0x01,
         /// <summary>
         /// 数据库中无该车辆
+        /// The vehicle is not in the database
         /// </summary>
-        数据库中无该车辆 = 0x02,
+        vehicle_not_database = 0x02,
         /// <summary>
         /// 终端已被注册
+        /// The terminal has been registered
         /// </summary>
-        终端已被注册 = 0x03,
+        terminal_registered = 0x03,
         /// <summary>
         /// 数据库中无该终端
+        /// The terminal is not in the database
         /// </summary>
-        数据库中无该终端 = 0x04
+        terminal_not_database = 0x04
     }
 }

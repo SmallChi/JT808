@@ -6,17 +6,20 @@ namespace JT808.Protocol.Enums
 {
     /// <summary>
     /// IO状态位
+    /// IO status bits
     /// </summary>
     [Flags]
     public enum JT808IOStatus:ushort
     {
         /// <summary>
         /// 深度休眠状态
+        /// Deep dormant state
         /// </summary>
-        深度休眠状态 = 1,
+        deep_dormant_state = 1,
         /// <summary>
         /// 休眠状态
+        /// dormant state
         /// </summary>
-        休眠状态 = 2
+        dormant_state = 2
     }
 }

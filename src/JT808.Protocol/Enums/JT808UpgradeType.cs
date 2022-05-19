@@ -2,36 +2,44 @@
 {
     /// <summary>
     /// 升级类型
+    /// Upgrade Type
     /// </summary>
     public enum JT808UpgradeType : byte
     {
         /// <summary>
         /// 终端
+        /// terminal
         /// </summary>
-        终端 = 0,
+        terminal = 0,
         /// <summary>
         /// 道路运输证IC卡读卡器
+        /// Road transport certificate IC card reader
         /// </summary>
-        道路运输证IC卡读卡器 = 0x0C,
+        road_transport_cert_ic_card_reader = 0x0C,
         /// <summary>
         /// 北斗卫星定位模块
+        /// Beidou satellite positioning module
         /// </summary>
-        北斗卫星定位模块 = 0x34,
+        beidou_module = 0x34,
         /// <summary>
         /// 粤标主动安全-高级驾驶辅助系统
+        /// Advanced driver assistance system
         /// </summary>
-        高级驾驶辅助系统 = 0x64,
+        adas = 0x64,
         /// <summary>
         /// 粤标主动安全-驾驶状态监控系统
+        /// Driving condition monitoring system
         /// </summary>
-        驾驶状态监控系统 = 0x65,
+        dsm = 0x65,
         /// <summary>
         /// 粤标主动安全-胎压监测系统
+        /// tire pressure monitoring system
         /// </summary>
-        胎压监测系统 = 0x66,
+        tpms = 0x66,
         /// <summary>
         /// 粤标主动安全-盲点监测系统
+        /// Blind Spot Monitoring system
         /// </summary>
-        盲点监测系统 = 0x67,
+        bsd = 0x67,
     }
 }
