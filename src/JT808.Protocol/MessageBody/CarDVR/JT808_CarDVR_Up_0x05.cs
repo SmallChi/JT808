@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x05
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.采集车辆信息.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.collect_vehicle_information.ToByteValue();
         /// <summary>
         /// 车辆识别代号
         /// </summary>

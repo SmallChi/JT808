@@ -19,7 +19,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x14
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.采集指定的参数修改记录.ToByteValue();
+        public override byte CommandId => JT808CarDVRCommandID.collect_specified_modify_parameters_records.ToByteValue();
         /// <summary>
         /// 符合条件的参数修改记录
         /// </summary>

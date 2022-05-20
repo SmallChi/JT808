@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x01
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.采集当前驾驶人信息.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.collect_driver.ToByteValue();
         /// <summary>
         /// 机动车驾驶证号码
         /// 机动车驾驶证号码为 15 位时，后 3 位以 00H 补齐。驾驶人身份未知时以 00H 表示

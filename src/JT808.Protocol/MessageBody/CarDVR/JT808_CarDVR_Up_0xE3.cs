@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0xE3
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.进入实时时间误差测量.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.enter_realtime_time_error_measurement.ToByteValue();
         /// <summary>
         /// 通过DB9的7脚输出实时时钟的秒脉冲信号（TTL 电平）
         /// </summary>

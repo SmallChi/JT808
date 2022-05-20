@@ -38,7 +38,7 @@ namespace JT808.Protocol.Test.Simples
         public void Test2()
         {
             JT808CarDVRDownPackage jT808CarDVRDownPackage = new JT808CarDVRDownPackage();
-            jT808CarDVRDownPackage.CommandId = JT808CarDVRCommandID.设置初始里程.ToByteValue();
+            jT808CarDVRDownPackage.CommandId = JT808CarDVRCommandID.set_init_mileage.ToByteValue();
             jT808CarDVRDownPackage.Bodies = new JT808_CarDVR_Down_0xC4()
             {
                  FirstInstallTime=DateTime.Parse("2020-03-25 10:26:01"),
@@ -55,7 +55,7 @@ namespace JT808.Protocol.Test.Simples
         public void Test3()
         {
             JT808CarDVRDownPackage jT808CarDVRDownPackage = new JT808CarDVRDownPackage();
-            jT808CarDVRDownPackage.CommandId = JT808CarDVRCommandID.设置初始里程.ToByteValue();
+            jT808CarDVRDownPackage.CommandId = JT808CarDVRCommandID.set_init_mileage.ToByteValue();
             jT808CarDVRDownPackage.Bodies = new JT808_CarDVR_Down_0xC4()
             {
                 FirstInstallTime = DateTime.Parse("2020-03-25 10:26:01"),
@@ -80,7 +80,7 @@ namespace JT808.Protocol.Test.Simples
         public void Test4()
         {
             JT808CarDVRUpPackage package = new JT808CarDVRUpPackage();
-            package.CommandId = JT808CarDVRCommandID.设置初始里程.ToByteValue();
+            package.CommandId = JT808CarDVRCommandID.set_init_mileage.ToByteValue();
             package.Bodies = new JT808_CarDVR_Up_0xC4()
             {
                 
@@ -103,7 +103,7 @@ namespace JT808.Protocol.Test.Simples
         {
             var data = "557AC4000000EB".ToHexBytes();
             JT808CarDVRUpPackage package = JT808CarDVRSerializer.UpDeserialize(data);
-            Assert.Equal(JT808CarDVRCommandID.设置初始里程.ToByteValue(), package.CommandId);
+            Assert.Equal(JT808CarDVRCommandID.set_init_mileage.ToByteValue(), package.CommandId);
             Assert.Null(package.Bodies);
         }
 

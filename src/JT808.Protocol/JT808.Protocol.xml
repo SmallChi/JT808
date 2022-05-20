@@ -323,141 +323,169 @@
         <member name="T:JT808.Protocol.Enums.JT808CarDVRCommandID">
             <summary>
             行车记录仪命令字
+            Dashcam command words
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪执行标准版本">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_recorder_performs_standard_version">
             <summary>
             采集记录仪执行标准版本
+            The collect recorder performs the standard version
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集当前驾驶人信息">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_driver">
             <summary>
             采集当前驾驶人信息
+            Collect current driver information
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪实时时间">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_realtime">
             <summary>
             采集记录仪实时时间
+            Collect of real time recorder
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集累计行驶里程">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_accumulated_mileage">
             <summary>
             采集累计行驶里程
+            Collect accumulated mileage
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪脉冲系数">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_recorder_pulse_coefficient">
             <summary>
             采集记录仪脉冲系数
+            Pulse coefficient of collect recorder
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集车辆信息">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_vehicle_information">
             <summary>
             采集车辆信息
+            Collection of vehicle information
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪状态信号配置信息">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_recorder_status_signal_configuration_information">
             <summary>
             采集记录仪状态信号配置信息
+            Collect the configuration information of recorder status signal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集记录仪唯一性编号">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_recorder_unique_number">
             <summary>
             采集记录仪唯一性编号
+            Collection recorder unique number
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的行驶速度记录">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_recorder_specified_speed">
             <summary>
             采集指定的行驶速度记录
+            Collect the specified speed record
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的位置信息记录">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_specified_location_information">
             <summary>
             采集指定的位置信息记录
+            Collect the specified location information record
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的事故疑点记录">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_specified_incident_suspect_records">
             <summary>
             采集指定的事故疑点记录
+            Collect specified incident suspect records
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的超时驾驶记录">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_specified_driving_overtime_records">
             <summary>
             采集指定的超时驾驶记录
+            Collect specified driving overtime records
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的驾驶人身份记录">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_drivers_identification_records">
             <summary>
             采集指定的驾驶人身份记录
+            Collect identification records of designated drivers
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的外部供电记录">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_specified_external_power_supply_records">
             <summary>
             采集指定的外部供电记录
+            Collect the specified external power supply records
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的参数修改记录">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_specified_modify_parameters_records">
             <summary>
             采集指定的参数修改记录
+            Collect the modification records of specified parameters
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.采集指定的速度状态日志">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.collect_specified_speed_status_logs">
             <summary>
             采集指定的速度状态日志
+            Collects the specified speed status logs
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置车辆信息">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.setting_vehicle_information">
             <summary>
             设置车辆信息
+            Setting vehicle Information
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置记录仪初次安装日期">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.set_first_install_date_recorder">
             <summary>
             设置记录仪初次安装日期
+            Set the first installation date of recorder
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置状态量配置信息">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.set_state_quantity_configuration_information">
             <summary>
             设置状态量配置信息
+            Set state quantity configuration information
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置记录仪时间">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.set_recorder_time">
             <summary>
             设置记录仪时间
+            Setting recorder time
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置记录仪脉冲系数">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.set_pulse_coefficient_recorder">
             <summary>
             设置记录仪脉冲系数
+            Set the pulse coefficient of recorder
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.设置初始里程">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.set_init_mileage">
             <summary>
             设置初始里程
+            Setting the initial mileage
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.进入或保持检定状态">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.enters_maintains_check_state">
             <summary>
             进入或保持检定状态
+            Enters or maintains the check state
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.进入里程误差测量">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.enter_mileage_error_measurement">
             <summary>
             进入里程误差测量
+            Enter the mileage error measurement
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.进入脉冲系数误差测量">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.enter_pulse_coefficient_error_measurement">
             <summary>
             进入脉冲系数误差测量
+            Enter the pulse coefficient error measurement
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.进入实时时间误差测量">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.enter_realtime_time_error_measurement">
             <summary>
             进入实时时间误差测量
+            Enter real-time time error measurement
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.返回正常工作状态">
+        <member name="F:JT808.Protocol.Enums.JT808CarDVRCommandID.return_normal_working_status">
             <summary>
             返回正常工作状态
+            Return to normal working status
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808CarSignalStatus">
@@ -1523,106 +1551,127 @@
         <member name="T:JT808.Protocol.Enums.JT808Status">
             <summary>
             JT808车辆状态位
+            Vehicle status position
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.ACC开">
+        <member name="F:JT808.Protocol.Enums.JT808Status.acc_open">
             <summary>
             ACC开
+            The ACC open  
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.定位">
+        <member name="F:JT808.Protocol.Enums.JT808Status.location">
             <summary>
             定位
+            location
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.南纬">
+        <member name="F:JT808.Protocol.Enums.JT808Status.latitude">
             <summary>
             南纬
+            latitude
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.西经">
+        <member name="F:JT808.Protocol.Enums.JT808Status.longitude">
             <summary>
             西经
+            longitude
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.停运状态">
+        <member name="F:JT808.Protocol.Enums.JT808Status.shutdown_state">
             <summary>
             停运状态
+            Shut down the state
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.经纬度已经保密插件加密">
+        <member name="F:JT808.Protocol.Enums.JT808Status.lat_lng_encrypt">
             <summary>
             经纬度已经保密插件加密
+            Latitude and longitude are encrypted by secret plug-in
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.半载">
+        <member name="F:JT808.Protocol.Enums.JT808Status.half_load">
             <summary>
             半载
+            half_load
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.满载">
+        <member name="F:JT808.Protocol.Enums.JT808Status.full_load">
             <summary>
             满载
+            full load
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.车辆油路断开">
+        <member name="F:JT808.Protocol.Enums.JT808Status.vehicle_fuel_line_disconnected">
             <summary>
             车辆油路断开
+            The fuel line of the vehicle is disconnected
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.车辆电路断开">
+        <member name="F:JT808.Protocol.Enums.JT808Status.vehicle_circuit_disconnection">
             <summary>
             车辆电路断开
+            Vehicle circuit disconnection
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.车门加锁">
+        <member name="F:JT808.Protocol.Enums.JT808Status.door_lock">
             <summary>
             车门加锁
+            The door lock
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.前门开">
+        <member name="F:JT808.Protocol.Enums.JT808Status.front_door_open">
             <summary>
             前门开
+            The front door open
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.中门开">
+        <member name="F:JT808.Protocol.Enums.JT808Status.door_opened">
             <summary>
             中门开
+            The door opened
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.后门开">
+        <member name="F:JT808.Protocol.Enums.JT808Status.back_door_open">
             <summary>
             后门开
+            The back door open
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.驾驶席门开">
+        <member name="F:JT808.Protocol.Enums.JT808Status.drivers_seat_door_open">
             <summary>
             驾驶席门开
+            The driver's seat door is open
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.自定义">
+        <member name="F:JT808.Protocol.Enums.JT808Status.custom">
             <summary>
             自定义
+            custom
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.使用GPS卫星进行定位">
+        <member name="F:JT808.Protocol.Enums.JT808Status.used_gps">
             <summary>
             使用GPS卫星进行定位
+            GPS satellites are used for positioning
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.使用北斗卫星进行定位">
+        <member name="F:JT808.Protocol.Enums.JT808Status.used_beidou">
             <summary>
             使用北斗卫星进行定位
+            Beidou satellites were used for positioning
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.使用GLONASS卫星进行定位">
+        <member name="F:JT808.Protocol.Enums.JT808Status.used_glonass">
             <summary>
             使用GLONASS卫星进行定位
+            GLONASS satellite was used for positioning  
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Enums.JT808Status.使用Galileo卫星进行定位">
+        <member name="F:JT808.Protocol.Enums.JT808Status.used_galileo">
             <summary>
-            使用Galileo卫星进行定位
+            使用Galileo卫星进行定位+
+            Galileo satellite is used for positioning  
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808TelephoneBookContactType">

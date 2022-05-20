@@ -19,7 +19,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x13
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.采集指定的外部供电记录.ToByteValue();
+        public override byte CommandId => JT808CarDVRCommandID.collect_specified_external_power_supply_records.ToByteValue();
         /// <summary>
         /// 符合条件的供电记录
         /// </summary>

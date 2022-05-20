@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0xE1
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.进入里程误差测量.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.enter_mileage_error_measurement.ToByteValue();
         /// <summary>
         /// 记录仪唯一性编号
         /// </summary>

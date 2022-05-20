@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x08
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.采集指定的行驶速度记录.ToByteValue();
+        public override byte CommandId => JT808CarDVRCommandID.collect_recorder_specified_speed.ToByteValue();
         /// <summary>
         /// 开始时间
         /// </summary>

@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x07
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.采集记录仪唯一性编号.ToByteValue();
+        public override byte CommandId => JT808CarDVRCommandID.collect_recorder_unique_number.ToByteValue();
         /// <summary>
         /// 生产厂 CCC 认证代码  7字节
         /// </summary>

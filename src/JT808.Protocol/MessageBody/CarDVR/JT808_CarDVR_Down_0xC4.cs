@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0xC4
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.设置初始里程.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.set_init_mileage.ToByteValue();
         /// <summary>
         /// 实时时间
         /// </summary>

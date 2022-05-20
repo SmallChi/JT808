@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x83
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.设置记录仪初次安装日期.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.set_first_install_date_recorder.ToByteValue();
         /// <summary>
         /// 初次安装日期
         /// </summary>

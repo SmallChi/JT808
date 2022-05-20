@@ -19,7 +19,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x04
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.采集记录仪脉冲系数.ToByteValue();
+        public override byte CommandId =>  JT808CarDVRCommandID.collect_recorder_pulse_coefficient.ToByteValue();
         /// <summary>
         /// 实时时间及设定的脉冲系数
         /// </summary>

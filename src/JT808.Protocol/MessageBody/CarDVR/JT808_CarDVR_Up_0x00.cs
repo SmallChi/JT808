@@ -20,7 +20,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x00
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.采集记录仪执行标准版本.ToByteValue();
+        public override byte CommandId => JT808CarDVRCommandID.collect_recorder_performs_standard_version.ToByteValue();
         /// <summary>
         /// 记录仪执行标准年号后 2 位  BCD 码
         /// 无应答则默认为 03

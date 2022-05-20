@@ -19,7 +19,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x06
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.采集记录仪状态信号配置信息.ToByteValue();
+        public override byte CommandId => JT808CarDVRCommandID.collect_recorder_status_signal_configuration_information.ToByteValue();
         /// <summary>
         /// 状态信号配置信息
         /// </summary>

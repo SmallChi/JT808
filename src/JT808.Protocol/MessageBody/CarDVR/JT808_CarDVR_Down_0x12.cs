@@ -19,7 +19,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x12
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.采集指定的驾驶人身份记录.ToByteValue();
+        public override byte CommandId => JT808CarDVRCommandID.collect_drivers_identification_records.ToByteValue();
         /// <summary>
         /// 符合条件的驾驶人登录退出记录
         /// </summary>
