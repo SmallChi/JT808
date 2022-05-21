@@ -15,7 +15,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.文本信息下发.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x8300.ToUInt16Value(),
                     ManualMsgNum = 1,
                     TerminalPhoneNo = "012345678900",
                 }
@@ -50,7 +50,7 @@ namespace JT808.Protocol.Test.MessageBody
                 Header = new JT808Header
                 {
                     MessageBodyProperty = jT808HeaderMessageBodyProperty,
-                    MsgId = Enums.JT808MsgId.文本信息下发.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x8300.ToUInt16Value(),
                     ManualMsgNum = 1,
                     TerminalPhoneNo = "012345678900",
                 }

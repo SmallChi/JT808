@@ -16,7 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.位置信息查询应答.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0201.ToUInt16Value(),
                     ManualMsgNum = 8888,
                     TerminalPhoneNo = "112233445566",
                 }

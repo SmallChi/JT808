@@ -69,7 +69,7 @@ namespace JT808.Protocol.Test.MessageBody
                 JT808Package jT808Package = new JT808Package();
                 jT808Package.Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                     ManualMsgNum = (ushort)i,
                     TerminalPhoneNo = "1122334455"+i.ToString(),
                 };
@@ -228,7 +228,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                 MsgNum = 8888,
                 TerminalPhoneNo = "112233445566",
                 //MessageBodyProperty=new JT808MessageBodyProperty(38),
@@ -289,7 +289,7 @@ namespace JT808.Protocol.Test.MessageBody
 
             byte[] bytes = "7E 02 00 00 26 11 22 33 44 55 66 22 B8 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 07 15 10 10 10 01 04 00 00 00 64 02 02 00 37 57 7E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0200.ToValue(), jT808Package.Header.MsgId);
 
             Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
             Assert.Equal(8888, jT808Package.Header.MsgNum);
@@ -499,7 +499,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                 ManualMsgNum = 8888,
                 TerminalPhoneNo = "112233445566",
             };

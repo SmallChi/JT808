@@ -23,7 +23,7 @@ namespace JT808.Protocol.Test.Simples
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = JT808MsgId.位置信息汇报.Create("123456789012",
+            JT808Package jT808Package = JT808MsgId._0x0200.Create("123456789012",
                 new JT808_0x0200
                 {
                     AlarmFlag = 1,

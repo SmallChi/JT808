@@ -16,7 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.车辆控制应答.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0500.ToUInt16Value(),
                     ManualMsgNum = 8888,
                     TerminalPhoneNo = "112233445566",
                 }
@@ -55,7 +55,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "7E0500002811223344556622B803E8000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037B57E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.车辆控制应答.ToUInt16Value(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0500.ToUInt16Value(), jT808Package.Header.MsgId);
             Assert.Equal(8888, jT808Package.Header.MsgNum);
             Assert.Equal("112233445566", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0500 JT808Bodies = (JT808_0x0500)jT808Package.Bodies;

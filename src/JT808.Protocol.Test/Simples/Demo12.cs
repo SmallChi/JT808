@@ -40,7 +40,7 @@ namespace JT808.Protocol.Test.Simples
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端控制.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x8105.ToUInt16Value(),
                     ManualMsgNum = 1,
                     TerminalPhoneNo = "12345678900",
                 },
@@ -77,7 +77,7 @@ namespace JT808.Protocol.Test.Simples
         {
             byte[] bytes = "7E8105002A0123456789000001013B3B3B3B3B3B3B3B3B3B3B3B3B000000173B536D616C6C43686900003BFF486170707900000000003B827E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.终端控制.ToUInt16Value(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x8105.ToUInt16Value(), jT808Package.Header.MsgId);
             Assert.Equal(1, jT808Package.Header.MsgNum);
             Assert.Equal("12345678900", jT808Package.Header.TerminalPhoneNo);
             var JT808_0x8105 = (JT808_0x8105)jT808Package.Bodies;

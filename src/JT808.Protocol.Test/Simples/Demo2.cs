@@ -30,7 +30,7 @@ namespace JT808.Protocol.Test.Simples
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
 
             //3.数据包头
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0200.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
             Assert.Equal(126, jT808Package.Header.MsgNum);
             Assert.Equal("123456789012", jT808Package.Header.TerminalPhoneNo);

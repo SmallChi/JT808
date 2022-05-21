@@ -16,7 +16,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端注册.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0100.ToUInt16Value(),
                     ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
@@ -40,7 +40,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "7E0100002D000123456789000A002800323132333400736D616C6C6368693132330000000000000000004348493132330001D4C14131323334358A7E".ToHexBytes();
             JT808Package jT808_0X0100 = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.终端注册.ToUInt16Value(), jT808_0X0100.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0100.ToUInt16Value(), jT808_0X0100.Header.MsgId);
             Assert.Equal(10, jT808_0X0100.Header.MsgNum);
             Assert.Equal("123456789", jT808_0X0100.Header.TerminalPhoneNo);
 
@@ -61,7 +61,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端注册.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0100.ToUInt16Value(),
                     ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                     ProtocolVersion=1,
@@ -88,7 +88,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "7E010040540100000000000123456789000A002800323132333400000000000000736D616C6C6368693132330000000000000000000000000000000000000043484931323300000000000000000000000000000000000000000000000001D4C1413132333435B27E".ToHexBytes();
             JT808Package jT808_0X0100 = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(JT808MsgId.终端注册.ToUInt16Value(), jT808_0X0100.Header.MsgId);
+            Assert.Equal(JT808MsgId._0x0100.ToUInt16Value(), jT808_0X0100.Header.MsgId);
             Assert.Equal(1, jT808_0X0100.Header.ProtocolVersion);
             Assert.Equal(JT808Version.JTT2019, jT808_0X0100.Version);
             Assert.True(jT808_0X0100.Header.MessageBodyProperty.VersionFlag);
@@ -114,7 +114,7 @@ namespace JT808.Protocol.Test.MessageBody
         [Fact]
         public void Test2019_4_1()
         {
-            var package = JT808MsgId.终端注册.Create2019("22222222222", new JT808_0x0100()
+            var package = JT808MsgId._0x0100.Create2019("22222222222", new JT808_0x0100()
             {
                 PlateNo = "粤A12346",
                 PlateColor = 2,
@@ -161,7 +161,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端注册.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0100.ToUInt16Value(),
                     ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
@@ -185,7 +185,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "7E01000021000123456789000A002800323132333400746B3132333435004348493132330001D4C1413132333435857E".ToHexBytes();
             JT808Package jT808_0X0100 = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(JT808MsgId.终端注册.ToUInt16Value(), jT808_0X0100.Header.MsgId);
+            Assert.Equal(JT808MsgId._0x0100.ToUInt16Value(), jT808_0X0100.Header.MsgId);
             Assert.Equal(1, jT808_0X0100.Header.ProtocolVersion);
             Assert.Equal(10, jT808_0X0100.Header.MsgNum);
             Assert.Equal("123456789", jT808_0X0100.Header.TerminalPhoneNo);

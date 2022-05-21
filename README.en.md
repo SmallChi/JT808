@@ -1,62 +1,62 @@
-﻿# JT808协议
+﻿# JT/T808 Protocol
 
 [![MIT Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/SmallChi/JT808/blob/master/LICENSE)![.NET Core](https://github.com/SmallChi/JT808/workflows/.NET%20Core/badge.svg?branch=master)
 
 <p>
-    <span>中文</span> |  
-    <a href="README.en.md">English</a>
+    <span>English</span> |  
+    <a href="README.md">中文</a>
 </p>
 
-## 前提条件
+## Precondition
 
-1. 掌握进制转换：二进制转十六进制；
-2. 掌握BCD编码、Hex编码；
-3. 掌握各种位移、异或；
-4. 掌握常用反射；
-5. 掌握JObject的用法；
-6. 掌握快速ctrl+c、ctrl+v；
-7. 掌握Span\<T\>的基本用法
-8. 掌握以上装逼技能，就可以开始搬砖了。
+1. Master base conversion: binary to hexadecimal;
+2. Master BCD and Hex coding；
+3. Master all kinds of displacement, xor;
+4. Master common reflexes;
+5. Master the use of JObject;  
+6. Command fast CTRL + C, CTRL + V;
+7. Master the basic usage of Span\<T\>;
+8. Master the above skills, you can begin to move bricks.
 
-## JT808数据结构解析
+## JT808 Data structure parsing
 
-### 数据包[JT808Package]
+### Packet[JT808Package]
 
-| 头标识 | 数据头       | 数据体/分包数据体      | 校验码    | 尾标识 |
+| Head logo | Header   | Data volume/Subcontracted data volume | Checksum   | tail logo |
 | :----: | :---------: |  :---------: | :----------: | :----: |
 | Begin  | JT808Header |  JT808Bodies/JT808SubDataBodies |CheckCode | End    |
 | 7E     | -           | -           | -         | 7E     |
 
-### 数据头[JT808Header]
+### Header[JT808Header]
 
-| 消息ID | 消息体属性                     | 协议版本号(2019版本)|终端手机号      | 消息流水号 | 消息总包数(依赖是否分包)  | 包序号(依赖是否分包)   |
+| Message Id | Message body properties| Protocol Version (2019 version)|Terminal Phone Number| Message sequence number | Total number of message packages (dependent on subcontracting)  | Package Number (depends on subcontracting or not)  |
 | :----: | :----------------------------: | :-------------: |:-------------: | :--------: |:---------: | :-------:|
 | MsgId  | JT808HeaderMessageBodyProperty | ProtocolVersion|TerminalPhoneNo | MsgNum     |PackgeCount | PackageIndex |
 
-#### 数据头-消息体属性[JT808HeaderMessageBodyProperty]
+#### Header Message Body Property[JT808HeaderMessageBodyProperty]
 
-|版本标识(2019版本)| 是否分包 | 加密标识 | 消息体长度 |
+|Protocol Version (2019 version)| Whether the subcontract | Encryption identification | Body length |
 |:------:| :------: | :------: | :--------: |
 |VersionFlag| IsPackge | Encrypt  | DataLength |
 
-#### 消息体属性[JT808Bodies]
+#### Message body properties[JT808Bodies]
 
-> 根据对应消息ID：MsgId
+> According to the corresponding message ID：MsgId
 
-***注意：数据内容(除去头和尾标识)进行转义判断***
+***notic:Data content (excluding header and tail identifiers) is escaped***
 
-转义规则如下:
+The escape rules are as follows:
 
-1. 若数据内容中有出现字符 0x7e 的，需替换为字符 0x7d 紧跟字符 0x02;
-2. 若数据内容中有出现字符 0x7d 的，需替换为字符 0x7d 紧跟字符 0x01;
+1. If the data contains character 0x7e, replace it with character 0x7d followed by character 0x02;
+2. If character 0x7d exists in the data content, replace it with character 0x7d followed by character 0x01.
 
-反转义的原因：确认JT808协议的TCP消息边界。
+The cause of the anti-escape：Verify the TCP message boundary for the JT808 protocol.
 
-### 举个栗子1
+### For example 1
 
-#### 1.组包：
+#### 1.Create Package:
 
-> MsgId 0x0200:位置信息汇报
+> MsgId 0x0200:Location information reporting
 
 ``` csharp
 
@@ -96,23 +96,23 @@ byte[] data = JT808Serializer.Serialize(jT808Package);
 
 var hex = data.ToHexString();
 
-// 输出结果Hex：
+// output result Hex:
 // 7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 13 7E
 ```
 
-#### 2.手动解包：
+#### 2.Manual unpack:
 
 ``` text
-1.原包：
+1.original package:
 7E 02 00 00 26 12 34 56 78 90 12 00 (7D 02) 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 (7D 01) 13 7E
 
-2.进行反转义
+2.Reverse escape
 7D 02 ->7E
 7D 01 ->7D
-反转义后
+After the escape
 7E 02 00 00 26 12 34 56 78 90 12 00 7E 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 13 7E
 
-3.拆解
+3.disassembly
 7E                  --头标识
 02 00               --数据头->消息ID
 00 26               --数据头->消息体属性
@@ -136,17 +136,17 @@ var hex = data.ToHexString();
 7E                  --尾标识
 ```
 
-#### 3.程序解包：
+#### 3.Program to unpack:
 
 ``` csharp
-//1.转成byte数组
+//1.Convert to a byte array
 byte[] bytes = "7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 13 7E".ToHexBytes();
 
-//2.将数组反序列化
+//2.Deserialize the array
 var jT808Package = JT808Serializer.Deserialize(bytes);
 
-//3.数据包头
-Assert.Equal(Enums.JT808MsgId.位置信息汇报, jT808Package.Header.MsgId);
+//3.packet header
+Assert.Equal(Enums.JT808MsgId.Location, jT808Package.Header.MsgId);
 Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
 Assert.Equal(126, jT808Package.Header.MsgNum);
 Assert.Equal("123456789012", jT808Package.Header.TerminalPhoneNo);
@@ -155,7 +155,7 @@ Assert.Equal(0, jT808Package.Header.PackageIndex);
 Assert.Equal(0, jT808Package.Header.PackgeCount);
 Assert.Equal(JT808EncryptMethod.None, jT808Package.Header.MessageBodyProperty.Encrypt);
 
-//4.数据包体
+//4.The packet body
 JT808_0x0200 jT808_0x0200 = (JT808_0x0200)jT808Package.Bodies;
 Assert.Equal((uint)1, jT808_0x0200.AlarmFlag);
 Assert.Equal((uint)40, jT808_0x0200.Altitude);
@@ -165,9 +165,9 @@ Assert.Equal(132444444, jT808_0x0200.Lng);
 Assert.Equal(60, jT808_0x0200.Speed);
 Assert.Equal(0, jT808_0x0200.Direction);
 Assert.Equal((uint)2, jT808_0x0200.StatusFlag);
-//4.1.附加信息1
+//4.1.Additional information 1
 Assert.Equal(100, ((JT808_0x0200_0x01)jT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
-//4.2.附加信息2
+//4.2.Additional information 2
 Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
 ```
 

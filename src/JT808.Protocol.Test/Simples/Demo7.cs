@@ -23,7 +23,7 @@ namespace JT808.Protocol.Test.Simples
         [Fact]
         public void Test1()
         {
-            JT808Package jT808Package = JT808MsgId.查询服务器时间应答.Create_查询服务器时间应答_2019("123456789012",
+            JT808Package jT808Package = JT808MsgId._0x8004.Create_查询服务器时间应答_2019("123456789012",
             new JT808_0x8004
             {
                 Time = DateTime.Parse("2019-12-02 10:10:10"),
@@ -39,7 +39,7 @@ namespace JT808.Protocol.Test.Simples
         {
             var data = "7E8004400601000000001234567890120001191202101010517E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize(data);
-            Assert.Equal(JT808MsgId.查询服务器时间应答.ToUInt16Value(), jT808Package.Header.MsgId);
+            Assert.Equal(JT808MsgId._0x8004.ToUInt16Value(), jT808Package.Header.MsgId);
             Assert.Equal(JT808Version.JTT2019, jT808Package.Version);
             Assert.True(jT808Package.Header.MessageBodyProperty.VersionFlag);
             Assert.Equal(DateTime.Parse("2019-12-02 10:10:10"), ((JT808_0x8004)jT808Package.Bodies).Time);

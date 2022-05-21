@@ -38,14 +38,14 @@ namespace JT808.Protocol.Test
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端通用应答.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0001.ToUInt16Value(),
                     MsgNum = 1203,
                     TerminalPhoneNo = "012345678900",
                     MessageBodyProperty=new JT808HeaderMessageBodyProperty()
                 },
                 Bodies = new JT808_0x0001
                 {
-                    ReplyMsgId = Enums.JT808MsgId.终端心跳.ToUInt16Value(),
+                    ReplyMsgId = Enums.JT808MsgId._0x0002.ToUInt16Value(),
                     ReplyMsgNum = 1000,
                     TerminalResult = Enums.JT808TerminalResult.Success
                 }

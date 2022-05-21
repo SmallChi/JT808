@@ -37,7 +37,7 @@ namespace JT808.Protocol.Test.Simples
             jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT1_0x81>();
             JT808Serializer demo5JT808Serializer = new JT808Serializer(jT808Config);
 
-            JT808Package jT808Package = JT808MsgId.位置信息汇报.Create("123456789012",
+            JT808Package jT808Package = JT808MsgId._0x0200.Create("123456789012",
                                         new JT808_0x0200
                                         {
                                             AlarmFlag = 1,

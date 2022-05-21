@@ -40,7 +40,7 @@ namespace JT808.Protocol.Test.Simples
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端注册.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0100.ToUInt16Value(),
                     ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
@@ -65,7 +65,7 @@ namespace JT808.Protocol.Test.Simples
             var bytes = "7E01000021000123456789000A002800323132333400746B3132333435004348493132330001D4C1413132333435857E".ToHexBytes();
             JT808Package jT808_0X0100 = JT808Serializer.Deserialize<JT808Package>(bytes);
             //  采用2011协议 的终端注册消息解析
-            Assert.Equal(JT808MsgId.终端注册.ToUInt16Value(), jT808_0X0100.Header.MsgId);
+            Assert.Equal(JT808MsgId._0x0100.ToUInt16Value(), jT808_0X0100.Header.MsgId);
             Assert.Equal(1, jT808_0X0100.Header.ProtocolVersion);
             Assert.Equal(10, jT808_0X0100.Header.MsgNum);
             Assert.Equal("123456789", jT808_0X0100.Header.TerminalPhoneNo);

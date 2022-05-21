@@ -15,7 +15,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                     MsgId= (ushort)JT808MsgId.多媒体数据上传应答,
+                     MsgId= (ushort)JT808MsgId._0x8800,
                       TerminalPhoneNo="123456789",                       
                 },
                 Bodies = new JT808_0x8800
@@ -53,7 +53,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = (ushort)JT808MsgId.多媒体数据上传应答,
+                    MsgId = (ushort)JT808MsgId._0x8800,
                     TerminalPhoneNo = "123456789",
                 },
                 Bodies = new JT808_0x8800
@@ -92,7 +92,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = (ushort)JT808MsgId.多媒体数据上传应答,
+                    MsgId = (ushort)JT808MsgId._0x8800,
                     TerminalPhoneNo = "123456789",
                 },
                 Bodies = new JT808_0x8800

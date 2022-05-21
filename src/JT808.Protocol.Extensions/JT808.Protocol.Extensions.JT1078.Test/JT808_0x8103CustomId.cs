@@ -31,7 +31,7 @@ namespace JT808.Protocol.Extensions.JT1078.Test
             {
                 Header = new JT808Header
                 {
-                    MsgId = JT808MsgId.设置终端参数.ToUInt16Value(),
+                    MsgId = JT808MsgId._0x8103.ToUInt16Value(),
                     ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
@@ -164,7 +164,7 @@ namespace JT808.Protocol.Extensions.JT1078.Test
         {
             byte[] bytes = "7E8103009C000123456789000A070000007515030500040700000006080A00090C0000000B000201000000761B02010303020001070604050B0A08090F0E0C0D1312101117161415000000772B0201030500040700000006080A00090C0000000B000201030500040700000006080A00090C0000000B000200000079030302010000007A04000000010000007B0201020000007C140103020A00230012004500340067005600890078587E".ToHexBytes();
             JT808Package jT808_0X8103 = JT808Serializer.Deserialize(bytes);
-            Assert.Equal(JT808MsgId.设置终端参数.ToUInt16Value(), jT808_0X8103.Header.MsgId);
+            Assert.Equal(JT808MsgId._0x8103.ToUInt16Value(), jT808_0X8103.Header.MsgId);
             Assert.Equal(10, jT808_0X8103.Header.MsgNum);
             Assert.Equal("123456789", jT808_0X8103.Header.TerminalPhoneNo);
 

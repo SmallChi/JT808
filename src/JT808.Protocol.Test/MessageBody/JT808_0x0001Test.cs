@@ -15,13 +15,13 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端通用应答.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0001.ToUInt16Value(),
                     ManualMsgNum = 1203,
                     TerminalPhoneNo = "012345678900",
                 },
                 Bodies = new JT808_0x0001
                 {
-                    ReplyMsgId = Enums.JT808MsgId.终端心跳.ToUInt16Value(),
+                    ReplyMsgId = Enums.JT808MsgId._0x0002.ToUInt16Value(),
                     ReplyMsgNum = 1000,
                     TerminalResult = Enums.JT808TerminalResult.Success
                 }
@@ -36,11 +36,11 @@ namespace JT808.Protocol.Test.MessageBody
         {
             var bytes = "7E 00 01 00 05 01 23 45 67 89 00 04 B3 03 E8 00 02 00 D3 7E".ToHexBytes();
             JT808Package jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.终端通用应答.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0001.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(1203, jT808Package.Header.MsgNum);
 
             JT808_0x0001 JT808Bodies = (JT808_0x0001)jT808Package.Bodies;
-            Assert.Equal(Enums.JT808MsgId.终端心跳.ToUInt16Value(), JT808Bodies.ReplyMsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0002.ToUInt16Value(), JT808Bodies.ReplyMsgId);
             Assert.Equal(1000, JT808Bodies.ReplyMsgNum);
             Assert.Equal(Enums.JT808TerminalResult.Success, JT808Bodies.TerminalResult);
         }

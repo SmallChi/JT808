@@ -72,7 +72,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.终端鉴权.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0102.ToUInt16Value(),
                     ManualMsgNum = 12345,
                     TerminalPhoneNo = "12345678900",
                 },
@@ -90,7 +90,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bodys = "7E 01 02 00 09 01 23 45 67 89 00 30 39 34 35 36 31 32 31 31 31 31 BE 7E".ToHexBytes();
             JT808Package jT808LoginRequest = JT808Serializer.Deserialize<JT808Package>(bodys);
-            Assert.Equal(Enums.JT808MsgId.终端鉴权.ToUInt16Value(), jT808LoginRequest.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0102.ToUInt16Value(), jT808LoginRequest.Header.MsgId);
             Assert.Equal(12345, jT808LoginRequest.Header.MsgNum);
             Assert.Equal("12345678900", jT808LoginRequest.Header.TerminalPhoneNo);
 

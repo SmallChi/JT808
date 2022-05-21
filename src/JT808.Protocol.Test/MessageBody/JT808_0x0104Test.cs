@@ -15,7 +15,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0104.ToUInt16Value(),
                     ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
@@ -41,7 +41,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "7E0104000C000123456789000A00140100000001040000000A907E".ToHexBytes();
             JT808Package jT808_0X8104 = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(), jT808_0X8104.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0104.ToUInt16Value(), jT808_0X8104.Header.MsgId);
             Assert.Equal(10, jT808_0X8104.Header.MsgNum);
             Assert.Equal("123456789", jT808_0X8104.Header.TerminalPhoneNo);
 
@@ -64,7 +64,7 @@ namespace JT808.Protocol.Test.MessageBody
             {
                 Header = new JT808Header
                 {
-                    MsgId = Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(),
+                    MsgId = Enums.JT808MsgId._0x0104.ToUInt16Value(),
                     ManualMsgNum = 10,
                     TerminalPhoneNo = "123456789",
                 },
@@ -118,7 +118,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "7E0104001E000123456789000A00140200000001040000000A000000130D7777772E62616964752E636F6DF27E".ToHexBytes();
             JT808Package jT808_0X8104 = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(), jT808_0X8104.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0104.ToUInt16Value(), jT808_0X8104.Header.MsgId);
             Assert.Equal(10, jT808_0X8104.Header.MsgNum);
             Assert.Equal("123456789", jT808_0X8104.Header.TerminalPhoneNo);
 
@@ -148,7 +148,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "7E010400C604052458039503D800020100000077BE09010101002D1400000064000500141400000320001F020101002D0F00000064000500191900000840001F030101002D0F00000064000500191900000840001F040101002D0F00000064000500191900000840001F050101002D0F00000064010500191900000840001F060101002D0F00000064000500191900000840001F070101002D0F000000640103001919000004CE001F080101002D0F00000064000500191900000840001F090101000F0F000000C8010500191900000400001F127E".ToHexBytes();
             JT808Package jT808_0X8104 = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.查询终端参数应答.ToUInt16Value(), jT808_0X8104.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0104.ToUInt16Value(), jT808_0X8104.Header.MsgId);
             Assert.Equal(0x03d8, jT808_0X8104.Header.MsgNum);
             Assert.Equal("40524580395", jT808_0X8104.Header.TerminalPhoneNo);
 

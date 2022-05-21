@@ -49,7 +49,7 @@ namespace JT808.Protocol.Test.Simples
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                 ManualMsgNum = 1,
                 TerminalPhoneNo = "1122334455",
             };
@@ -88,7 +88,7 @@ namespace JT808.Protocol.Test.Simples
         {
             byte[] bytes = "7E0200006A0011223344550001000000010000000200BA7F0E07E4F11C0028003C000021083018171001040000006402020037DF42000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000677E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0200.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(1u, jT808Package.Header.MsgNum);
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
@@ -113,7 +113,7 @@ namespace JT808.Protocol.Test.Simples
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                 ManualMsgNum = 1,
                 TerminalPhoneNo = "1122334455",
             };
@@ -152,7 +152,7 @@ namespace JT808.Protocol.Test.Simples
         {
             byte[] bytes = "7E0200006C0011223344550001000000010000000200BA7F0E07E4F11C0028003C00002108301817100104000000640202003700DD0042000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000637E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0200.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(1u, jT808Package.Header.MsgNum);
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
@@ -177,7 +177,7 @@ namespace JT808.Protocol.Test.Simples
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                 ManualMsgNum = 1,
                 TerminalPhoneNo = "1122334455",
             };
@@ -216,7 +216,7 @@ namespace JT808.Protocol.Test.Simples
         {
             byte[] bytes = "7E0200006B0011223344550001000000010000000200BA7F0E07E4F11C0028003C00002108301817100104000000640202003700DE42000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000677E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0200.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(1u, jT808Package.Header.MsgNum);
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
@@ -241,7 +241,7 @@ namespace JT808.Protocol.Test.Simples
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                 ManualMsgNum = 1,
                 TerminalPhoneNo = "1122334455",
             };
@@ -280,7 +280,7 @@ namespace JT808.Protocol.Test.Simples
         {
             byte[] bytes = "7E0200012B0011223344550001000000010000000200BA7F0E07E4F11C0028003C000021053118171001040000006402020037620000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000D57E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0200.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(1u, jT808Package.Header.MsgNum);
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
@@ -305,7 +305,7 @@ namespace JT808.Protocol.Test.Simples
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                 ManualMsgNum = 1,
                 TerminalPhoneNo = "1122334455",
             };
@@ -365,7 +365,7 @@ namespace JT808.Protocol.Test.Simples
         {
             byte[] bytes = "7E020002050011223344550001000000010000000200BA7F0E07E4F11C0028003C000021083018171001040000006402020037DF4200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000DE4200000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000DD0042000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000620000010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000CA01FFCB02FFFECD02FFFE587E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0200.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(1u, jT808Package.Header.MsgNum);
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
@@ -414,7 +414,7 @@ namespace JT808.Protocol.Test.Simples
             JT808Package jT808Package = new JT808Package();
             jT808Package.Header = new JT808Header
             {
-                MsgId = Enums.JT808MsgId.位置信息汇报.ToUInt16Value(),
+                MsgId = Enums.JT808MsgId._0x0200.ToUInt16Value(),
                 ManualMsgNum = 1,
                 TerminalPhoneNo = "1122334455",
             };
@@ -460,7 +460,7 @@ namespace JT808.Protocol.Test.Simples
         {
             byte[] bytes = "7E020000710011223344550001000000010000000200BA7F0E07E4F11C0028003C000021083018171001040000006402020037DF42000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000DF01FFCB02FFFE957E".ToHexBytes();
             var jT808Package = JT808Serializer.Deserialize<JT808Package>(bytes);
-            Assert.Equal(Enums.JT808MsgId.位置信息汇报.ToValue(), jT808Package.Header.MsgId);
+            Assert.Equal(Enums.JT808MsgId._0x0200.ToValue(), jT808Package.Header.MsgId);
             Assert.Equal(1u, jT808Package.Header.MsgNum);
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
