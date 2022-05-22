@@ -1,7 +1,11 @@
 ﻿# JT808协议
 
-
 [![MIT Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/SmallChi/JT808/blob/master/LICENSE)![.NET Core](https://github.com/SmallChi/JT808/workflows/.NET%20Core/badge.svg?branch=master)
+
+<p>
+    <span>中文</span> |  
+    <a href="README.en.md">English</a>
+</p>
 
 ## 前提条件
 
@@ -60,7 +64,7 @@ JT808Package jT808Package = new JT808Package();
 
 jT808Package.Header = new JT808Header
 {
-    MsgId = Enums.JT808MsgId.位置信息汇报,
+    MsgId = Enums.JT808MsgId._0x0200,
     ManualMsgNum = 126,
     TerminalPhoneNo = "123456789012"
 };
