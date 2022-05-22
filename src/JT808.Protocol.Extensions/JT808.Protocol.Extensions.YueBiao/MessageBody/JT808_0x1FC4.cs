@@ -21,7 +21,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <summary>
         /// 终端升级进度上报
         /// </summary>
-        public override ushort MsgId => JT808_YueBiao_MsgId.终端升级进度上报.ToUInt16Value();
+        public override ushort MsgId => JT808_YueBiao_MsgId.terminal_upgrade_progress_reported.ToUInt16Value();
         /// <summary>
         /// 流水号
         /// </summary>

@@ -29,6 +29,7 @@ namespace JT808.Protocol.Test.Simples
             IServiceCollection serviceDescriptors = new ServiceCollection();
             serviceDescriptors.AddJT808Configure(new DefaultGlobalConfig("replace"));
             //通常在startup中使用app的Use进行扩展
+            //The Use of the app is typically extended in startup  
             IServiceProvider serviceProvider = serviceDescriptors.BuildServiceProvider();
             Use(serviceProvider);
         }
@@ -37,6 +38,7 @@ namespace JT808.Protocol.Test.Simples
         {
             IJT808Config jT808Config = serviceProvider.GetRequiredService<DefaultGlobalConfig>();
             //替换原有消息存在的BUG
+            //Replace the bugs in the original message
             jT808Config.ReplaceMsgId<JT808_0x0001, JT808_0x0001_Replace>();
             JT808Serializer = jT808Config.GetSerializer();
         }
@@ -81,6 +83,7 @@ namespace JT808.Protocol.Test.Simples
 
     /// <summary>
     /// 终端通用应答_替换原有的消息，来解决库现有的bug
+    /// The terminal general answer _ replaces the original message to solve the existing library bug  
     /// </summary>
     public class JT808_0x0001_Replace : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0001_Replace>, IJT808Analyze
     {

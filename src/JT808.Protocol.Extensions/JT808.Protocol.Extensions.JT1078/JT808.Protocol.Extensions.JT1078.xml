@@ -6,12 +6,13 @@
     <members>
         <member name="T:JT808.Protocol.Extensions.JT1078.DependencyInjectionExtensions">
             <summary>
-            1078扩展808
+            JT/T1078 extension JT/T808
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.DependencyInjectionExtensions.AddJT1078Configure(JT808.Protocol.IJT808Builder)">
             <summary>
-            注册1078扩展808
+            注册JT/T1078扩展JT/T808
+            Register JT/T1078 extension JT/T808
             </summary>
             <param name="jT808Builder"></param>
             <returns></returns>
@@ -19,141 +20,169 @@
         <member name="T:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId">
             <summary>
             JT808扩展消息体
+            JT808 Extended message body
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.终端上传音视频属性">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x1003">
             <summary>
             终端上传音视频属性
+            The terminal uploads audio and video properties
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.终端上传乘客流量">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x1005">
             <summary>
             终端上传乘客流量
+            Terminal uploads passenger flow
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.终端上传音视频资源列表">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x1205">
             <summary>
             终端上传音视频资源列表
+            The terminal uploads the audio and video resource list
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.文件上传完成通知">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x1206">
             <summary>
             文件上传完成通知
+            Notification of file upload completion
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.查询终端音视频属性">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9003">
             <summary>
             查询终端音视频属性
+            Example Query audio and video properties of terminals
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.实时音视频传输请求">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9101">
             <summary>
             实时音视频传输请求
+            Real-time audio and video transmission request
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.音视频实时传输控制">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9102">
             <summary>
             音视频实时传输控制
+            Audio and video real-time transmission control
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.实时音视频传输状态通知">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9105">
             <summary>
             实时音视频传输状态通知
+            Real-time audio and video transmission status notification
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.平台下发远程录像回放请求">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9201">
             <summary>
             平台下发远程录像回放请求
+            The platform delivers a remote video playback request
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.平台下发远程录像回放控制">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9202">
             <summary>
             平台下发远程录像回放控制
+            Platform delivers remote video playback control
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.查询资源列表">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9205">
             <summary>
             查询资源列表
+            Querying a Resource List
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.文件上传指令">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9206">
             <summary>
             文件上传指令
+            File upload command
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.文件上传控制">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9207">
             <summary>
             文件上传控制
+            File Upload Control
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台旋转">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9301">
             <summary>
             云台旋转
+            PTZ rotation
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台调整焦距控制">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9302">
             <summary>
             云台调整焦距控制
+            PTZ Adjust focal length control
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台调整光圈控制">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9303">
             <summary>
             云台调整光圈控制
+            PTZ Adjust aperture control
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台雨刷控制">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9304">
             <summary>
             云台雨刷控制
+            PTZ Wiper control
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.红外补光控制">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9305">
             <summary>
             红外补光控制
+            Infrared light filling control
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId.云台变倍控制">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.JT808_JT1078_MsgId._0x9306">
             <summary>
             云台变倍控制
+            Head doubling control
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType">
             <summary>
             视频相关报警
+            Video related alarm
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.视频信号丢失报警">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.video_signal_loss_alarm">
             <summary>
             视频信号丢失报警
+            Video signal loss alarm
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.视频信号遮挡报警">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.video_signal_occlusion_alarm">
             <summary>
             视频信号遮挡报警
+            Video signal occlusion alarm
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.存储单元故障报警">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.storage_unit_faulty">
             <summary>
             存储单元故障报警
+            The storage unit is faulty
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.其他视频设备故障报警">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.other_video_equipment_fault_alarm">
             <summary>
             其他视频设备故障报警
+            Other video equipment fault alarm
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.客车超员报警">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.bus_overcrowding_alarm">
             <summary>
             客车超员报警
+            Bus overcrowding alarm
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.异常驾驶行为报警">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.abnormal_driving_behavior_alarm">
             <summary>
             异常驾驶行为报警
+            Abnormal driving behavior alarm
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.特殊报警录像达到存储阈值报警">
+        <member name="F:JT808.Protocol.Extensions.JT1078.Enums.VideoRelateAlarmType.special_alarm_video_reaches_storage_threshold_alarm">
             <summary>
             特殊报警录像达到存储阈值报警
+            Special alarm video reaches storage threshold alarm
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants">
@@ -164,61 +193,73 @@
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x14">
             <summary>
             视频相关报警
+            Video related alarm
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x15">
             <summary>
             视频信号丢失报警状态
+            Video signal loss alarm status
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x16">
             <summary>
             视频信号遮挡报警状态
+            Video signal occlusion alarm status
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x17">
             <summary>
             存储器故障报警状态
+            Video signal occlusion alarm status Memory fault alarm status
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X0200_0x18">
             <summary>
             异常驾驶行为报警详细描述
+            Abnormal driving behavior alarm detailed description
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x0075">
             <summary>
             音视频参数设置
+            Audio and video parameter Settings
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x0076">
             <summary>
             音视频通道列表设置
+            Set the audio and video channel list
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x0077">
             <summary>
             单独视频通道参数设置
+            Separate video channel parameter Settings
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x0079">
             <summary>
             特殊报警录像参数设置
+            Special alarm video parameter setting
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x007A">
             <summary>
             视频相关报警屏蔽字
+            Video related alarm masking word
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x007B">
             <summary>
             图像分析报警参数设置
+            Image analysis alarm parameter setting
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.JT808_0X8103_0x007C">
             <summary>
             终端休眠模式唤醒设置
+            Wake up in hibernation mode
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x14">

@@ -39,7 +39,8 @@ namespace JT808.Protocol.Extensions.SuBiao.Enums
         _1080P = 0x07,
         /// <summary>
         /// 不修改参数
+        /// not_modify_parameters
         /// </summary>
-        不修改参数 = 0xFF
+        not_modify_parameters = 0xFF
     }
 }

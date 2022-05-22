@@ -1,4 +1,4 @@
-﻿# JT808协议
+﻿# JT/JT808协议
 
 [![MIT Licence](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/SmallChi/JT808/blob/master/LICENSE)![.NET Core](https://github.com/SmallChi/JT808/workflows/.NET%20Core/badge.svg?branch=master)
 
@@ -146,7 +146,7 @@ byte[] bytes = "7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 0
 var jT808Package = JT808Serializer.Deserialize(bytes);
 
 //3.数据包头
-Assert.Equal(Enums.JT808MsgId.位置信息汇报, jT808Package.Header.MsgId);
+Assert.Equal(Enums.JT808MsgId._0x0200, jT808Package.Header.MsgId);
 Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
 Assert.Equal(126, jT808Package.Header.MsgNum);
 Assert.Equal("123456789012", jT808Package.Header.TerminalPhoneNo);
@@ -175,7 +175,7 @@ Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.BasicLocationAttachData[JT808
 
 ``` csharp
 // 使用消息Id的扩展方法创建JT808Package包
-JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012",
+JT808Package jT808Package = Enums.JT808MsgId._0x0200.Create("123456789012",
     new JT808_0x0200 {
         AlarmFlag = 1,
         Altitude = 40,

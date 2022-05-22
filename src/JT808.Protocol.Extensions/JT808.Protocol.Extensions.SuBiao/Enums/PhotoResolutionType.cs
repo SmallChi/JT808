@@ -35,7 +35,8 @@ namespace JT808.Protocol.Extensions.SuBiao.Enums
         x1920_1080 = 0x06,
         /// <summary>
         /// 不修改参数
+        /// not_modify_parameters
         /// </summary>
-        不修改参数 = 0xFF
+        not_modify_parameters = 0xFF
     }
 }

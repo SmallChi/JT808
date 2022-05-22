@@ -12,22 +12,25 @@ namespace JT808.Protocol.Extensions.YueBiao.Enums
         /// <summary>
         /// 不开启
         /// </summary>
-        不开启 = 0x00,
+        not_enabled = 0x00,
         /// <summary>
         /// 定时拍照
+        /// Camera Timer
         /// </summary>
-        定时拍照 = 0x01,
+        camera_timer = 0x01,
         /// <summary>
-        /// 定距拍照
+        /// Distance take photos
         /// </summary>
-        定距拍照 = 0x02,
+        distance_take_photos = 0x02,
         /// <summary>
         /// 保留
+        /// reserve
         /// </summary>
-        保留 = 0x03,
+        reserve = 0x03,
         /// <summary>
         /// 不修改参数
+        /// Do not Modify parameters
         /// </summary>
-        不修改参数 = 0xFF
+        not_modify_parameters = 0xFF
     }
 }

@@ -6,6 +6,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Enums
 {
     /// <summary>
     /// 视频录制分辨率
+    /// Video recording resolution
     /// </summary>
     public enum VideoRecordingResolutionType:byte
     {
@@ -39,7 +40,8 @@ namespace JT808.Protocol.Extensions.YueBiao.Enums
         _1080P = 0x07,
         /// <summary>
         /// 不修改参数
+        /// Do not Modify parameters
         /// </summary>
-        不修改参数 = 0xFF
+        not_modify_parameters = 0xFF
     }
 }

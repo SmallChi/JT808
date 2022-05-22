@@ -43,7 +43,7 @@
 
 > According to the corresponding message ID：MsgId
 
-***notic:Data content (excluding header and tail identifiers) is escaped***
+***Notic:Data content (excluding header and tail identifiers) is escaped***
 
 The escape rules are as follows:
 
@@ -113,27 +113,27 @@ After the escape
 7E 02 00 00 26 12 34 56 78 90 12 00 7E 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 13 7E
 
 3.disassembly
-7E                  --头标识
-02 00               --数据头->消息ID
-00 26               --数据头->消息体属性
-12 34 56 78 90 12   --数据头->终端手机号
-00 7E               --数据头->消息流水号
-00 00 00 01         --消息体->报警标志
-00 00 00 02         --消息体->状态位标志
-00 BA 7F 0E         --消息体->纬度
-07 E4 F1 1C         --消息体->经度
-00 28               --消息体->海拔高度
-00 3C               --消息体->速度
-00 00               --消息体->方向
-18 10 15 10 10 10   --消息体->GPS时间
-01                  --消息体->附加信息->里程
-04                  --消息体->附加信息->长度
-00 00 00 64         --消息体->附加信息->数据
-02                  --消息体->附加信息->油量
-02                  --消息体->附加信息->长度
-00 7D               --消息体->附加信息->数据
-13                  --检验码
-7E                  --尾标识
+7E                  --Head logo 
+02 00               --data head->message id
+00 26               --data head->message body properties
+12 34 56 78 90 12   --data head->terminal phone number
+00 7E               --data head->message sequence number
+00 00 00 01         --message body->alarm flag
+00 00 00 02         --message body->status flag
+00 BA 7F 0E         --message body->latitude
+07 E4 F1 1C         --message body->longitude
+00 28               --message body->elevation
+00 3C               --message body->speed
+00 00               --message body->direction
+18 10 15 10 10 10   --message body->gps time
+01                  --message body->additional information->mileage
+04                  --message body->additional information->length
+00 00 00 64         --message body->additional information->mileage value
+02                  --message body->additional information->oil
+02                  --message body->additional information->length
+00 7D               --message body->additional information->oil value
+13                  --Checksum
+7E                  --tail logo
 ```
 
 #### 3.Program to unpack:
@@ -146,7 +146,7 @@ byte[] bytes = "7E 02 00 00 26 12 34 56 78 90 12 00 7D 02 00 00 00 01 00 00 00 0
 var jT808Package = JT808Serializer.Deserialize(bytes);
 
 //3.packet header
-Assert.Equal(Enums.JT808MsgId.Location, jT808Package.Header.MsgId);
+Assert.Equal(Enums.JT808MsgId._0x0200, jT808Package.Header.MsgId);
 Assert.Equal(38, jT808Package.Header.MessageBodyProperty.DataLength);
 Assert.Equal(126, jT808Package.Header.MsgNum);
 Assert.Equal("123456789012", jT808Package.Header.TerminalPhoneNo);
@@ -171,11 +171,11 @@ Assert.Equal(100, ((JT808_0x0200_0x01)jT808_0x0200.BasicLocationAttachData[JT808
 Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
 ```
 
-### 举个栗子2
+### For example 2
 
 ``` csharp
-// 使用消息Id的扩展方法创建JT808Package包
-JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("123456789012",
+// Create the JT808Package package using the extension method of the message Id
+JT808Package jT808Package = Enums.JT808MsgId._0x0200.Create("123456789012",
     new JT808_0x0200 {
         AlarmFlag = 1,
         Altitude = 40,
@@ -195,183 +195,180 @@ JT808Package jT808Package = Enums.JT808MsgId.位置信息汇报.Create("12345678
 byte[] data = JT808Serializer.Serialize(jT808Package);
 
 var hex = data.ToHexString();
-//输出结果Hex：
+//output result hex：
 //7E 02 00 00 26 12 34 56 78 90 12 00 01 00 00 00 01 00 00 00 02 00 BA 7F 0E 07 E4 F1 1C 00 28 00 3C 00 00 18 10 15 10 10 10 01 04 00 00 00 64 02 02 00 7D 01 6C 7E
 ```
 
-### 举个栗子3
+### For example 3
 
 ``` csharp
-// 初始化配置
+// Initial Configuration
 IJT808Config DT1JT808Config = new DT1Config();
 IJT808Config DT2JT808Config = new DT2Config();
-// 注册自定义消息外部程序集
+// Register custom message external assemblies
 DT1JT808Config.Register(Assembly.GetExecutingAssembly());
-// 跳过校验和验证
+// Skip checksum validation
 DT1JT808Config.SkipCRCCode = true;
-// 根据不同的设备终端号，添加自定义消息Id
+// Add a user-defined message Id based on the device terminal Id
 DT1JT808Config.MsgIdFactory.SetMap<DT1Demo6>();
 DT2JT808Config.MsgIdFactory.SetMap<DT2Demo6>();
-// 初始化序列化实例
+// Initializes the serialization instance
 JT808Serializer DT1JT808Serializer = new JT808Serializer(DT1JT808Config);
 JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 ```
 
-[可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
+[See Demo6 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 
-### 举个栗子4
+### For example 4
 
-#### 遇到的问题-多设备多协议的自定义位置附加信息
+#### Problems encountered - Additional information about custom locations for multiple devices and protocols
 
-场景：
-一个设备厂商对应多个设备类型，不同设备类型可能存在相同的自定义位置附加信息Id，导致自定义附加信息Id冲突，无法解析。
+***scene:***
+One device vendor corresponds to multiple device types. Different device types may have the same Id of the user-defined location additional information. As a result, the ids of the user-defined additional information conflict and cannot be resolved.  
 
-***解决方式：***
+***solution:***
+1. You can make a factory based on the device type to decouple the dependency on the common serializer.
 
-1.可以根据设备类型做个工厂，解耦对公共序列化器的依赖。
+2. You can configure (GlobalConfigBase) based on the device type and bind the corresponding protocol parsers to different GlobalConfigBase instances.
 
-2.可以根据设备类型去实现(GlobalConfigBase)对应的配置，根据不同的GlobalConfigBase实例去绑定对应协议解析器。
+[See Demo4 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo4.cs)
 
-[可以参考Simples的Demo4](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo4.cs)
+[See Demo6 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 
-[可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
+> If anyone has another solution, please let me know. Thank you.  
 
-> 要是哪位大佬还有其他的解决方式，请您告知我下，谢谢您了。
+### For example 5
 
-### 举个栗子5
+#### Problems encountered - multimedia data upload for subcontracting processing
 
-#### 遇到的问题-多媒体数据上传进行分包处理
+***scene:***
+When the device uploads multimedia data, due to the large amount of data, it cannot upload at one time, so it adopts the subcontracting method.  
 
-场景:
-设备在上传多媒体数据的时候，由于数据比较多，一次上传不了，所以采用分包方式处理。
+***solution:***
 
-***解决方式：***
+1. The first packet of data is parsed in the usual way;
 
-1. 第一包数据上来采用平常的方式去解析数据；
+2. When the second packet comes up, it merges with the SubDataBodies of the first packet;
 
-2. 当第二包上来跟第一包的分包数据体(SubDataBodies)进行合并
+3. When N packet data comes in, continue as in Step 2.
 
-3. 当N包数据上来，延续步骤2的方式。
+> General Knowledge 1:Since the maximum length of the message body is 10bits (1023 bytes), there is a hard condition that the maximum length cannot be exceeded.
+> General Knowledge 2:General industry subcontracting is an integer multiple of 256, too much is not good, too little is not good, must be just right.  
 
-> 普及知识点1：由于消息体长度最大为10bit也就是1023的字节，所以这边就有个硬性条件不能超过最大长度
-> 普及知识点2：一般行业分包是按256的整数倍，太多不行，太少也不行，必须刚刚好。
+[See Demo5 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo5.cs)
 
-[可以参考Simples的Demo5](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo5.cs)
+### For example 6
 
-### 举个栗子6
+#### Problems encountered - Message ids conflict on multiple devices and protocols
 
-#### 遇到的问题-多设备多协议的消息ID冲突
+***scene:***
+Because each device vendor is different, the private protocol of the device may use the same message ID as the instruction, causing the platform to fail to resolve the message.
 
-场景:
-由于每个设备厂商不同，导致设备的私有协议可能使用相同的消息ID作为指令，导致平台解析不了。
+***solution:***
+You can configure (GlobalConfigBase) according to the device type and bind the corresponding protocol parser according to the GlobalConfigBase instance.
 
-***解决方式：***
+[See Demo6 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 
-可以根据设备类型去实现(GlobalConfigBase)对应的配置，根据不同的GlobalConfigBase实例去绑定对应
-协议解析器。
+### For example 7
 
-[可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
+How to compatibility with the 2019 version.
 
-### 举个栗子7
+> The latest protocol documentation has been written for compatibility, which is the version identifier at bit 14 in the message body attribute.  
 
-如何兼容2019版本
+1. If the 14th bit is 0, the protocol is the 2011 version.
 
-> 最新协议文档已经写好了如何做兼容，就是在消息体属性中第14位为版本标识。
+2. When bit 14 is 1, the protocol is the 2019 version.
 
-1. 当第14位为0时，标识协议为2011年的版本；
+[See Demo7 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo7.cs)
 
-2. 当第14位为1时，标识协议为2019年的版本。
+### For example 8
 
-[可以参考Simples的Demo7](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo7.cs)
+Protocol analyzer is also very useful in data anomalies and error correction, always can not rely on 24K krypton eye to observe the data, so you can develop the protocol at the same time to write the protocol analyzer, so that it is convenient for technology or technical support troubleshooting problems, improve efficiency.
 
-### 举个栗子8
+[See Demo8 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo8.cs)
 
-协议分析器在数据出现异常和纠错的时候也是挺有用的，总不能凭借24K氪金眼去观察数据，那么可以在开发协议的同时就把协议分析器给写好，这样方便技术或者技术支持排查问题，提高效率。
+### For example 9
 
-[可以参考Simples的Demo8](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo8.cs)
+Add dashcam serializer, which can either exist alone or be assembled into 808 data packets.
 
-### 举个栗子9
+[See Demo9 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo9.cs)
 
-增加行车记录仪序列化器，既可以单独的存在，也可以组装在808的数据包当中。
+### For example 10
 
-[可以参考Simples的Demo9](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo9.cs)
+***scene1:***
+Some devices, not in accordance with the NATIONAL standard additional information Id, the additional information Id is two bytes, so that there will be repeated additional Id in the reported data, resulting in platform parsing errors.
 
-### 举个栗子10
+***scene2:***
+Since the length of additional information customized by the equipment manufacturer of Guangdong Standard can be four or four bytes, it needs to be compatible.
 
-场景1:
-有些设备，不会按照国标的附加信息Id来搞，把附加信息Id搞为两个字节，这样在上报上来的数据就会存在重复的附加Id，导致平台解析出错。
+***scene3:***
+Some devices report two ids with the same additional information. In this case, only one Id can be parsed and the other Id can be discarded in the exception additional information.
 
-场景2：
-由于粤标的设备厂家自定义的附加信息长度可以为四4个字节的，所以需要兼容。
-
-场景3：
-有些设备上报会出现两个相同的附加信息Id,那么只能解析一个，另一个只能丢在异常附加信息里面去处理。
-
-|附加信息类说明| 附加ID字节数 | 附加长度字节数 | 备注 |
+|Additional Information| Number of additional ID bytes | Number of additional length bytes | Remarks |
 | :--- | :---: | :---: | :---:|
-| JT808_0x0200_CustomBodyBase  | 1 BYTE | 1 BYTE | 标准|
-| JT808_0x0200_CustomBodyBase2 | 2 BYTE | 1 BYTE | 自定义|
-| JT808_0x0200_CustomBodyBase3 | 2 BYTE | 2 BYTE | 自定义|
-| JT808_0x0200_CustomBodyBase4 | 1 BYTE | 4 BYTE | 自定义|
+| JT808_0x0200_CustomBodyBase  | 1 BYTE | 1 BYTE | standard|
+| JT808_0x0200_CustomBodyBase2 | 2 BYTE | 1 BYTE | custom|
+| JT808_0x0200_CustomBodyBase3 | 2 BYTE | 2 BYTE | custom|
+| JT808_0x0200_CustomBodyBase4 | 1 BYTE | 4 BYTE | custom|
 
-[可以参考Simples的Demo10](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo10.cs)
+[See Demo10 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo10.cs)
 
->注意：默认都是以**标准**的去解析，要是出现未知的附加，不一定解析就是正确，最好还是需要依照协议文档去开发然后自行注册解析器去解析。
+>Notice:The default is the **standard** to parse, if there is unknown add-on, may not be the correct resolution, it is better to develop according to the protocol document and then register the parser to parse.
 
-### 举个栗子11
+### For example 11
 
-场景:
-有些设备，补报的定位数据有异常数据包内容长度跟原始的内容长度不一致导致整包的数据的解析出错，再设备不升级，改不了的情况下，尽量能解析多少补报的数据量，就解析多少。
+***scene:***
+On some devices, abnormal positioning data reported by the supplement is inconsistent with the length of the original content, resulting in errors in data parsing of the whole packet. If the device is not upgraded and cannot be changed, the amount of data reported by the supplement can be resolved as much as possible.
 
-[可以参考Simples的Demo11](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo11.cs)
+[See Demo11 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo11.cs)
 
-### 举个栗子12
+### For example 12
 
-场景:
-由于粤标的设备把2019版本的0x8105终端控制消息命令参数做了扩展，所以需要兼容。
+***scene:***
+Since the device of Yue Biao has extended the 0x8105 terminal control message command parameter of the 2019 version, it needs to be compatible.
 
-[可以参考Simples的Demo12](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo12.cs)
+[See Demo12 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo12.cs)
 
-### 举个栗子13
+### For example 13
 
-场景:
-由于协议库本身可能存在消息解析出错的情况，要么就提PR上来，但是不一定会及时发布，这时候就需要自己把原有的消息解析复制出来，改造好，然后重新注册。
+***scene:***
+Because the protocol library itself may have a message parsing error, or put up PR, but may not be released in time, at this time you need to copy the original message parsing, transform, and then re-register.
 
-[可以参考Simples的Demo13](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo13.cs)
+[See Demo13 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo13.cs)
 
-### 举个栗子14
+### For example 14
 
-场景:
-由于某些厂商不按要求去做，明明使用的2013的协议但是在消息头部的版本标识位置为1，导致程序认为是2019协议。从而解析报错。此时可以强制解析成2013后，然后修正版本标识，重新序列化消息，以供下游服务使用
+***scene:***
+Because some vendors do not comply with the requirements, the application uses the 2013 protocol but the version identifier position in the message header is 1, causing the application to believe that the 2019 protocol is used.  Parse the error.  At this point, you can force parsing to 2013, then fix the version identity and reserialize the message for use by downstream services.
 
-[可以参考Simples的Demo14](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo14.cs)
+[See Demo14 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo14.cs)
 
-### 举个栗子15
+### For example 15
 
-场景:
-兼容2011协议的注册消息
+***scene:***
+A registration message compatible with the 2011 protocol.
 
-[可以参考Simples的Demo15](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo15.cs)
+[See Demo15 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo15.cs)
 
-### 举个栗子16
+### For example 16
 
-场景:
-平台下发分包数据到设备
+***scene:***
+The platform delivers subcontracted data to the equipment.
 
-可以参考【栗子5】中，设备上来的分包数据结构，然后举一反三的去实现。
+We can refer to the subcontracting data structure of the equipment in [Example 5], and then to achieve it.  
 
-[可以参考Simples的Demo16](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
+[See Demo16 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
 
-## NuGet安装
+## NuGet Install
 
 | Package Name| Version| Preview  Version |Downloads|Remark|
 | --- | --- | --- | ---| --- |
 | Install-Package JT808 | ![JT808](https://img.shields.io/nuget/v/JT808.svg) | ![JT808](https://img.shields.io/nuget/vpre/JT808.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.svg) |JT808|
-| Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JT1078.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |JT1078扩展JT808|
-| Install-Package JT808.Protocol.Extensions.SuBiao| ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.SuBiao.svg) | ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.SuBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.SuBiao.svg) |主动安全（苏标）扩展JT808|
-| Install-Package JT808.Protocol.Extensions.YueBiao| ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.YueBiao.svg) | ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.YueBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.YueBiao.svg) |主动安全（粤标）扩展JT808|
+| Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JT1078.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |JT1078 extension JT808|
+| Install-Package JT808.Protocol.Extensions.SuBiao| ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.SuBiao.svg) | ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.SuBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.SuBiao.svg) |Active Safety (Su Biao) extension JT808|
+| Install-Package JT808.Protocol.Extensions.YueBiao| ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.YueBiao.svg) | ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.YueBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.YueBiao.svg) |Active Safety (Yue Biao) extension JT808|
 
-## 使用BenchmarkDotNet性能测试报告（只是玩玩，不能当真）
+## Using BenchmarkDotNet performance test reports (just for fun, not to be taken seriously)
 
 ``` ini
 
@@ -400,123 +397,123 @@ Platform=AnyCpu  Server=False  Toolchain=.NET 6.0
 |                 **0x0100Serialize** | **0x0100Serializer** | **100000** |  **75,323.96 μs** |   **494.762 μs** |   **462.800 μs** | **10857.1429** |  **67,189 KB** |
 |               0x0100Deserialize | 0x0100Serializer | 100000 |  65,503.11 μs |   765.326 μs |   715.886 μs | 15875.0000 |  97,656 KB |
 
-## JT808终端通讯协议消息对照表
+## JT808 Comparison table of terminal communication protocol messages
 
-| 序号  | 消息ID        | 完成情况 | 测试情况 | 消息体名称                     |2019版本            | 2011版本
+| SN  | Message Id      | Completion | Unit Test | Message body name  |2019 version | 2011 version
 | :---: | :-----------: | :------: | :------: | :---------------------------- |:----------------------------:|:----------------------------:|
-| 1     | 0x0001        | √        | √        | 终端通用应答                   |
-| 2     | 0x8001        | √        | √        | 平台通用应答                   |
-| 3     | 0x0002        | √        | √        | 终端心跳                       |
-| 4     | 0x8003        | √        | √        | 补传分包请求                   |                 |被新增|
-| 5     | 0x0100        | √        | √        | 终端注册                       |修改             |被修改
-| 6     | 0x8100        | √        | √        | 终端注册应答                   |
-| 7     | 0x0003        | √        | √        | 终端注销                       |
-| 8     | 0x0102        | √        | √        | 终端鉴权                       |修改|
-| 9     | 0x8103        | √        | √        | 设置终端参数                   |修改且增加        |被修改
-| 10    | 0x8104        | √        | √        | 查询终端参数                   |
-| 11    | 0x0104        | √        | √        | 查询终端参数应答               |
-| 12    | 0x8105        | √        | √        | 终端控制                       |
-| 13    | 0x8106        | √        | √        | 查询指定终端参数               |                  |被新增
-| 14    | 0x8107        | √        | 消息体为空| 查询终端属性                   |                  |被新增
-| 15    | 0x0107        | √        | √        | 查询终端属性应答               |                  |被新增
-| 16    | 0x8108        | √        | √        | 下发终端升级包                 |                  |被新增
-| 17    | 0x0108        | √        | √        | 终端升级结果通知               |                  |被新增
-| 18    | 0x0200        | √        | √        | 位置信息汇报                   |增加附加信息       |被修改
-| 19    | 0x8201        | √        | √        | 位置信息查询                   |
-| 20    | 0x0201        | √        | √        | 位置信息查询应答               |
-| 21    | 0x8202        | √        | √        | 临时位置跟踪控制               |
-| 22    | 0x8203        | √        | √        | 人工确认报警消息               |                  |被新增
-| 23    | 0x8300        | √        | √        | 文本信息下发                   |修改              |被修改
-| 24    | 0x8301        | √        | √        | 事件设置                       |删除|
-| 25    | 0x0301        | √        | √        | 事件报告                       |删除|
-| 26    | 0x8302        | √        | √        | 提问下发                       |删除|
-| 27    | 0x0302        | √        | √        | 提问应答                       |删除|
-| 28    | 0x8303        | √        | √        | 信息点播菜单设置               |删除|
-| 29    | 0x0303        | √        | √        | 信息点播/取消                  |删除|
-| 30    | 0x8304        | √        | √        | 信息服务                       |删除|
-| 31    | 0x8400        | √        | √        | 电话回拨                       |
-| 32    | 0x8401        | √        | √        | 设置电话本                     |
-| 33    | 0x8500        | √        | √        | 车辆控制                       |修改|
-| 34    | 0x0500        | √        | √        | 车辆控制应答                   |
-| 35    | 0x8600        | √        | √        | 设置圆形区域                   |修改                |被修改
-| 36    | 0x8601        | √        | √        | 删除圆形区域                   |
-| 37    | 0x8602        | √        | √        | 设置矩形区域                   |修改|
-| 38    | 0x8603        | √        | √        | 删除矩形区域                   |
-| 39    | 0x8604        | √        | √        | 设置多边形区域                 |修改|
-| 40    | 0x8605        | √        | √        | 删除多边形区域                 |
-| 41    | 0x8606        | √        | √        | 设置路线                       |修改|
-| 42    | 0x8607        | √        | √        | 删除路线                       |
-| 43    | 0x8700        | √        | √      | 行驶记录仪数据采集命令         |                       |被修改
-| 44    | 0x0700        | √        | √      | 行驶记录仪数据上传             |
-| 45    | 0x8701        | √        | √      | 行驶记录仪参数下传命令         |                        |被修改
-| 46    | 0x0701        | √        | √        | 电子运单上报                   |
-| 47    | 0x0702        | √        | √        | 驾驶员身份信息采集上报         |修改                  |被修改
-| 48    | 0x8702        | √        | 消息体为空| 上报驾驶员身份信息请求         |                      |被新增
-| 49    | 0x0704        | √        | √        | 定位数据批量上传               |修改|                 |被新增
-| 50    | 0x0705        | √        | √        | CAN 总线数据上传               |修改|                 |被新增
-| 51    | 0x0800        | √        | √        | 多媒体事件信息上传             |                      |被修改
-| 52    | 0x0801        | √        | √        | 多媒体数据上传                 |修改                  |被修改
-| 53    | 0x8800        | √        | √        | 多媒体数据上传应答             |                      |被修改
-| 54    | 0x8801        | √        | √        | 摄像头立即拍摄命令             |修改|
-| 55    | 0x0805        | √        | √        | 摄像头立即拍摄命令应答         |修改|                  |被新增
-| 56    | 0x8802        | √        | √        | 存储多媒体数据检索             |
-| 57    | 0x0802        | √        | √        | 存储多媒体数据检索应答         |                      |被修改
-| 58    | 0x8803        | √        | √        | 存储多媒体数据上传             |
-| 59    | 0x8804        | √        | √        | 录音开始命令                   |
-| 60    | 0x8805        | √        | √        | 单条存储多媒体数据检索上传命令 |修改|                   |被新增
-| 61    | 0x8900        | √        | √        | 数据下行透传                   |修改                  |被修改
-| 62    | 0x0900        | √        | √        | 数据上行透传                   |修改                  |被修改
-| 63    | 0x0901        | √        | √        | 数据压缩上报                   |
-| 64    | 0x8A00        | √        | √        | 平台 RSA 公钥                  |
-| 65    | 0x0A00        | √        | √        | 终端 RSA 公钥                  |
-| 66    | 0x8F00~0x8FFF | 保留     | 保留     | 平台下行消息保留               |
-| 67    | 0x0F00~0x0FFF | 保留     | 保留     | 终端上行消息保留               |
-| 68    | 0x0004 | √     | √     | 查询服务器时间请求             |新增|
-| 69    | 0x8004 | √     | √     | 查询服务器时间应答             |新增|
-| 70    | 0x0005 | √     | √     | 终端补传分包请求               |新增|
-| 71    | 0x8204 | √     | √     | 链路检测               |新增|
-| 72    | 0x8608 | √     | √     | 查询区域或线路数据      |新增|
-| 73    | 0x0608 | √     | √     | 查询区域或线路数据应答  |新增|
-| 74    | 0xE000~0xEFFF | 保留     | 保留     | 厂商自定义上行消息      |新增|
-| 75    | 0xF000~0xFFFF | 保留     | 保留     | 厂商自定义下行消息  |新增|
+| 1     | 0x0001        | √        | √        | Terminal universal reply       |
+| 2     | 0x8001        | √        | √        | Platform Universal response    |
+| 3     | 0x0002        | √        | √        | Terminal heart                 |
+| 4     | 0x8003        | √        | √        | Forwarding subcontract request |                 |Is the new|
+| 5     | 0x0100        | √        | √        | Terminal registration                       |changed             |be modified
+| 6     | 0x8100        | √        | √        | Terminal registration reply  |
+| 7     | 0x0003        | √        | √        | Terminal logout              |
+| 8     | 0x0102        | √        | √        | Terminal authentication      |changed|
+| 9     | 0x8103        | √        | √        | Setting Terminal Parameters   |changedAndNew        |be modified
+| 10    | 0x8104        | √        | √        | Querying Terminal Parameters   |
+| 11    | 0x0104        | √        | √        | Query terminal parameter response |
+| 12    | 0x8105        | √        | √        | Terminal control              |
+| 13    | 0x8106        | √        | √        | Example Query specified terminal parameters |                  |Is the new
+| 14    | 0x8107        | √        | The message body is empty| Querying Terminal Properties  |                  |Is the new
+| 15    | 0x0107        | √        | √        | Query the response of the terminal properties |                  |Is the new
+| 16    | 0x8108        | √        | √        | Query terminal properties reply Deliver the terminal upgrade package                 |                  |Is the new
+| 17    | 0x0108        | √        | √        | Terminal upgrade result notification               |                  |Is the new
+| 18    | 0x0200        | √        | √        | Location information reporting                   |Add Additional information       |be modified
+| 19    | 0x8201        | √        | √        | Location information query                   |
+| 20    | 0x0201        | √        | √        | Location information query response               |
+| 21    | 0x8202        | √        | √        | Temporary position tracking control               |
+| 22    | 0x8203        | √        | √        | Manually confirm the alarm message               |                  |Is the new
+| 23    | 0x8300        | √        | √        | Text message delivery|changed              |be modified
+| 24    | 0x8301        | √        | √        | Event set                       |delete|
+| 25    | 0x0301        | √        | √        | Event report                       |delete|
+| 26    | 0x8302        | √        | √        | Questions issued                       |delete|
+| 27    | 0x0302        | √        | √        | Question answering                       |delete|
+| 28    | 0x8303        | √        | √        | Information on demand menu Settings               |delete|
+| 29    | 0x0303        | √        | √        | Information on demand/Information cancel                  |delete|
+| 30    | 0x8304        | √        | √        | Information service                       |delete|
+| 31    | 0x8400        | √        | √        | Back to the dial                       |
+| 32    | 0x8401        | √        | √        | Set up a phone book                     |
+| 33    | 0x8500        | √        | √        | Vehicle control                       |changed|
+| 34    | 0x0500        | √        | √        | Vehicle control response                   |
+| 35    | 0x8600        | √        | √        | Set the circular area                   |changed                |be modified
+| 36    | 0x8601        | √        | √        | Delete circular area                   |
+| 37    | 0x8602        | √        | √        | Set rectangle area|changed|
+| 38    | 0x8603        | √        | √        | Delete rectangular area                   |
+| 39    | 0x8604        | √        | √        | Set polygon region                 |changed|
+| 40    | 0x8605        | √        | √        | Delete polygon area                 |
+| 41    | 0x8606        | √        | √        | Set the route                       |changed|
+| 42    | 0x8607        | √        | √        | Delete the route                       |
+| 43    | 0x8700        | √        | √      | Drive recorder data acquisition command         |                       |be modified
+| 44    | 0x0700        | √        | √      | Data upload from driving recorder             |
+| 45    | 0x8701        | √        | √      | Driving recorder parameters down command         |                        |be modified
+| 46    | 0x0701        | √        | √        |  Electronic waybill reporting                   |
+| 47    | 0x0702        | √        | √        | Collect and report driver identity information         |changed                  |be modified
+| 48    | 0x8702        | √        | The message body is empty| Report driver identification request         |                      |Is the new
+| 49    | 0x0704        | √        | √        | Upload location data in batches               |changed|                 |Is the new
+| 50    | 0x0705        | √        | √        | CAN bus data upload|changed|                 |Is the new
+| 51    | 0x0800        | √        | √        | Upload multimedia event information|                      |be modified
+| 52    | 0x0801        | √        | √        | Multimedia Data upload|changed                  |be modified
+| 53    | 0x8800        | √        | √        | Reply to multimedia data upload |                      |be modified
+| 54    | 0x8801        | √        | √        | The camera immediately shoots the command |changed|
+| 55    | 0x0805        | √        | √        | The camera immediately shoots the command reply         |changed|                  |Is the new
+| 56    | 0x8802        | √        | √        | Store multimedia data retrieval             |
+| 57    | 0x0802        | √        | √        | Store multimedia data retrieval replies   |be modified
+| 58    | 0x8803        | √        | √        | Store multimedia data upload             |
+| 59    | 0x8804        | √        | √        | Recording Start Command                   |
+| 60    | 0x8805        | √        | √        | Single storage multimedia data retrieval upload command |changed|                   |Is the new
+| 61    | 0x8900        | √        | √        | Data is transmitted through downlink   |changed                  |be modified
+| 62    | 0x0900        | √        | √        | Data is transparently transmitted upstream  |changed                  |be modified
+| 63    | 0x0901        | √        | √        | Data compression reporting     |
+| 64    | 0x8A00        | √        | √        | Platform RSA Public Key        |
+| 65    | 0x0A00        | √        | √        | Terminal RSA Public Key        |
+| 66    | 0x8F00~0x8FFF | reserved     | reserved     | Platform downlink message reserved  |
+| 67    | 0x0F00~0x0FFF | reserved     | reserved     | The uplink message on the terminal is reserved |
+| 68    | 0x0004 | √     | √     | Queries server time requests             |new|
+| 69    | 0x8004 | √     | √     | Query the server time response             |new|
+| 70    | 0x0005 | √     | √     | The terminal sends the subcontract request  |new|
+| 71    | 0x8204 | √     | √     | Link detection               |new|
+| 72    | 0x8608 | √     | √     | Example Query area or line data      |new|
+| 73    | 0x0608 | √     | √     | Query area or line data reply  |new|
+| 74    | 0xE000~0xEFFF | reserved     | reserved     | The vendor defines the uplink message  |new|
+| 75    | 0xF000~0xFFFF | reserved     | reserved     | Vendor defined downlink messages  |new|
 
-## JT1078扩展JT808议消息对照表
+## Extend JT808 discussion message comparison table
 
-| 序号  | 消息ID        | 完成情况 | 测试情况 | 消息体名称                                     |
+| SN  | Message Id      | Completion | Unit Test | Message body name  |
 | :---: | :-----------: | :------: | :------: | :----------------------------              |
-| 1     | 0x0200_0x14        | √        | √        | 视频相关报警                            |
-| 2     | 0x0200_0x15        | √        | √        | 视频信号丢失报警状态                     |
-| 3     | 0x0200_0x16        | √        | √        | 视频信号遮挡报警状态                     |
-| 4     | 0x0200_0x17        | √        | √        | 存储器故障报警状态                       |
-| 5     | 0x0200_0x18        | √        | √        | 异常驾驶行为报警详细描述                  |
-| 6     | 0x8103_0x0075        | √        | √        | 音视频参数设置                   |
-| 7     | 0x8103_0x0076        | √        | √        | 音视频通道列表设置                       |
-| 8     | 0x8103_0x0077        | √        | √        | 单独视频通道参数设置                       |
-| 9     | 0x8103_0x0079        | √        | √        | 特殊报警录像参数设置                   |
-| 10     | 0x8103_0x007A        | √        | √        | 视频相关报警屏蔽字                       |
-| 11     | 0x8103_0x007B        | √        | √        | 图像分析报警参数设置                       |
-| 12     | 0x8103_0x007C        | √        | √        | 终端休眠模式唤醒设置                   |
-| 13     | 0x1003        | √        | √        | 终端上传音视频属性                            |
-| 14     | 0x1005        | √        | √        | 终端上传乘客流量                     |
-| 15     | 0x1205        | √        | √        | 终端上传音视频资源列表                     |
-| 16     | 0x1206        | √        | √        | 文件上传完成通知                       |
-| 17     | 0x9003        | √        | √        | 查询终端音视频属性                  |
-| 18     | 0x9101        | √        | √        | 实时音视频传输请求                   |
-| 19     | 0x9102        | √        | √        | 音视频实时传输控制                       |
-| 20     | 0x9105        | √        | √        | 实时音视频传输状态通知                       |
-| 21     | 0x9201        | √        | √        | 平台下发远程录像回放请求                   |
-| 22     | 0x9202        | √        | √        | 平台下发远程录像回放控制                       |
-| 23     | 0x9205        | √        | √        | 查询资源列表                       |
-| 24     | 0x9206        | √        | √        | 文件上传指令                   |
-| 25     | 0x9207        | √        | √        | 文件上传控制                            |
-| 26     | 0x9301        | √        | √        | 云台旋转                     |
-| 27     | 0x9302        | √        | √        | 云台调整焦距控制                     |
-| 28     | 0x9303        | √        | √        | 云台调整光圈控制                       |
-| 29     | 0x9304        | √        | √        | 云台雨刷控制                  |
-| 30     | 0x9305        | √        | √        | 红外补光控制                   |
-| 31     | 0x9306        | √        | √        | 云台变倍控制                       |
+| 1     | 0x0200_0x14        | √        | √        | Video related alarm                            |
+| 2     | 0x0200_0x15        | √        | √        | Video signal loss alarm status                     |
+| 3     | 0x0200_0x16        | √        | √        | Video signal occlusion alarm status                     |
+| 4     | 0x0200_0x17        | √        | √        | Memory fault alarm status                       |
+| 5     | 0x0200_0x18        | √        | √        | Abnormal driving behavior alarm detailed description                  |
+| 6     | 0x8103_0x0075        | √        | √        | Audio and video parameter Settings                   |
+| 7     | 0x8103_0x0076        | √        | √        | Set the audio and video channel list                       |
+| 8     | 0x8103_0x0077        | √        | √        | Separate video channel parameter Settings                       |
+| 9     | 0x8103_0x0079        | √        | √        | Special alarm video parameter setting                   |
+| 10     | 0x8103_0x007A        | √        | √        | Video related alarm masking word                       |
+| 11     | 0x8103_0x007B        | √        | √        | Image analysis alarm parameter setting                       |
+| 12     | 0x8103_0x007C        | √        | √        | Wake up in hibernation mode                   |
+| 13     | 0x1003        | √        | √        | The terminal uploads audio and video properties                            |
+| 14     | 0x1005        | √        | √        | Terminal uploads passenger flow                     |
+| 15     | 0x1205        | √        | √        | The terminal uploads the audio and video resource list                     |
+| 16     | 0x1206        | √        | √        | Notification of file upload completion                       |
+| 17     | 0x9003        | √        | √        | Example Query audio and video properties of terminals                  |
+| 18     | 0x9101        | √        | √        | Real-time audio and video transmission request                   |
+| 19     | 0x9102        | √        | √        | Audio and video real-time transmission control                       |
+| 20     | 0x9105        | √        | √        | Real-time audio and video transmission status notification                       |
+| 21     | 0x9201        | √        | √        | The platform delivers a remote video playback request                   |
+| 22     | 0x9202        | √        | √        |  Platform delivers remote video playback control                       |
+| 23     | 0x9205        | √        | √        | Querying a Resource List                       |
+| 24     | 0x9206        | √        | √        | File upload command                   |
+| 25     | 0x9207        | √        | √        | File Upload Control                            |
+| 26     | 0x9301        | √        | √        | PTZ rotation                     |
+| 27     | 0x9302        | √        | √        | PTZ Adjust focal length control                     |
+| 28     | 0x9303        | √        | √        | PTZ Adjust aperture control                       |
+| 29     | 0x9304        | √        | √        | PTZ Wiper control                  |
+| 30     | 0x9305        | √        | √        | Infrared light filling control                   |
+| 31     | 0x9306        | √        | √        | Head doubling control                       |
 
-## 使用方法
+## usage
 
 ```csharp
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
@@ -524,31 +521,31 @@ serviceDescriptors1.AddJT808Configure()
                    .AddJT1078Configure();
 ```
 
-## 主动安全（苏标）扩展JT808协议消息对照表
+## Active Security (SuBiao) extended JT808 protocol message comparison table
 
-| 序号  | 消息ID | 完成情况 | 测试情况 | 消息体名称 |
+| SN  | Message Id      | Completion | Unit Test | Message body name  |
 | :---: | :---: | :---: | :---: | :---|
-| 1 | 0x1210 | √ | √ | 报警附件信息消息 |
-| 2 | 0x1211 | √ | √ | 文件信息上传 |
-| 3 | 0x1212 | √ | √ | 文件上传完成消息 |
-| 4 | 0x9208 | √ | √ | 报警附件上传指令 |
-| 5 | 0x9212 | √ | √ | 文件上传完成消息应答 |
-| 6 | 0x0200_0x64 | √ | √ | 高级驾驶辅助系统报警信息 |
-| 7 | 0x0200_0x65 | √ | √ | 驾驶员状态监测系统报警信息 |
-| 8 | 0x0200_0x66 | √ | √ | 胎压监测系统报警信息 |
-| 9 | 0x0200_0x67 | √ | √ | 盲区监测系统报警信息 |
-| 10 | 0x8103_0xF364 | √ | √ | 高级驾驶辅助系统参数 |
-| 11 | 0x8103_0xF365 | √ | √ | 驾驶员状态监测系统参数 |
-| 12 | 0x8103_0xF366 | √ | √ | 胎压监测系统参数 |
-| 13 | 0x8103_0xF367 | √ | √ | 盲区监测系统参数 |
-| 14 | 0x0900 | √ | √ | 上传基本信息 |
-| 15 | 0x0900_0xF7 | √ | √ | 外设工作状态 |
-| 16 | 0x0900_0xF8 | √ | √ | 外设系统信息 |
-| 17 | 0x8900 | √ | √ | 查询基本信息 |
-| 18 | 0x8900_0xF7 | √ | √ | 外设工作状态 |
-| 19 | 0x8900_0xF8 | √ | √ | 外设系统信息 |
+| 1 | 0x1210 | √ | √ | Alarm attachment information message |
+| 2 | 0x1211 | √ | √ | Uploading File Information |
+| 3 | 0x1212 | √ | √ | Message indicating that file uploading is complete |
+| 4 | 0x9208 | √ | √ | Alarm attachment upload instruction |
+| 5 | 0x9212 | √ | √ | File upload complete reply message |
+| 6 | 0x0200_0x64 | √ | √ | Advanced driver assistance system alarm information |
+| 7 | 0x0200_0x65 | √ | √ | Driver status monitoring system alarm information |
+| 8 | 0x0200_0x66 | √ | √ | Tire pressure monitoring system alarm information |
+| 9 | 0x0200_0x67 | √ | √ | Blind area monitoring system alarm information |
+| 10 | 0x8103_0xF364 | √ | √ | Advanced driver assistance system parameters |
+| 11 | 0x8103_0xF365 | √ | √ | Driver condition monitoring system parameters |
+| 12 | 0x8103_0xF366 | √ | √ | Tire pressure monitoring system parameters |
+| 13 | 0x8103_0xF367 | √ | √ | Blind area monitoring system parameters |
+| 14 | 0x0900 | √ | √ | Upload basic Information |
+| 15 | 0x0900_0xF7 | √ | √ | Operating status of peripheral |
+| 16 | 0x0900_0xF8 | √ | √ | Peripheral system information |
+| 17 | 0x8900 | √ | √ | Querying Basic Information |
+| 18 | 0x8900_0xF7 | √ | √ | Operating status of peripheral |
+| 19 | 0x8900_0xF8 | √ | √ | Peripheral system information |
 
-## 使用方法
+## usage
 
 ```csharp
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
@@ -556,35 +553,35 @@ serviceDescriptors1.AddJT808Configure()
                    .AddSuBiaoConfigure();
 ```
 
-## 主动安全（粤标）扩展JT808协议消息对照表
+## Active Security (Yue Biao) extended JT808 protocol message comparison table
 
-> 注意：基于JT/T808 2019版本
+> Notice:Based on JT/T808 version 2019
 
-| 序号  | 消息ID | 完成情况 | 测试情况 | 消息体名称 |
+| SN  | Message Id      | Completion | Unit Test | Message body name  |
 | :---: | :---: | :---: | :---: | :---|
-| 1 | 0x1210 | √ | √ | 报警附件信息消息 |
-| 2 | 0x1211 | √ | √ | 文件信息上传 |
-| 3 | 0x1212 | √ |  √ | 文件上传完成消息 |
-| 4 | 0x9208 | √ | √ | 报警附件上传指令 |
-| 5 | 0x9212 | √ | √ | 文件上传完成消息应答 |
-| 6 | 0x1FC4 | √ | √ | 终端升级进度上报 |
-| 7 | 0x0200_0x64 | √ | √ | 高级驾驶辅助系统报警信息 |
-| 8 | 0x0200_0x65 | √ | √ | 驾驶员状态监测系统报警信息 |
-| 9 | 0x0200_0x66 | √ | √ | 胎压监测系统报警信息 |
-| 10 | 0x0200_0x67 | √ | √ | 盲区监测系统报警信息 |
-| 11 | 0x8103_0xF364 | √ | √ | 高级驾驶辅助系统参数 |
-| 12 | 0x8103_0xF365 | √ | √ | 驾驶员状态监测系统参数 |
-| 13 | 0x8103_0xF366 | √ | √ | 胎压监测系统参数 |
-| 14 | 0x8103_0xF367 | √ | √ | 盲区监测系统参数 |
-| 15 | 0x8103_0xF370 | √ | √ | 智能视频协议版本信息 |
-| 16 | 0x0900 | √ | √ | 上传基本信息 |
-| 17 | 0x0900_0xF7 | √ | √ | 外设工作状态 |
-| 18 | 0x0900_0xF8 | √ | √ | 外设系统信息 |
-| 19 | 0x8900 | √ | √ | 查询基本信息 |
-| 20 | 0x8900_0xF7 | √ | √ | 外设工作状态 |
-| 21 | 0x8900_0xF8 | √ | √ | 外设系统信息 |
+| 1 | 0x1210 | √ | √ | Alarm attachment information message |
+| 2 | 0x1211 | √ | √ | Uploading File Information |
+| 3 | 0x1212 | √ |  √ | Message indicating that file uploading is complete |
+| 4 | 0x9208 | √ | √ | Alarm attachment upload instruction |
+| 5 | 0x9212 | √ | √ | File upload complete reply message |
+| 6 | 0x1FC4 | √ | √ | Terminal upgrade progress reported |
+| 7 | 0x0200_0x64 | √ | √ | Advanced driver assistance system alarm information |
+| 8 | 0x0200_0x65 | √ | √ | Driver status monitoring system alarm information |
+| 9 | 0x0200_0x66 | √ | √ | Tire pressure monitoring system alarm information |
+| 10 | 0x0200_0x67 | √ | √ | Blind area monitoring system alarm information |
+| 11 | 0x8103_0xF364 | √ | √ | Advanced driver assistance system parameters |
+| 12 | 0x8103_0xF365 | √ | √ | Driver condition monitoring system parameters |
+| 13 | 0x8103_0xF366 | √ | √ | Tire pressure monitoring system parameters |
+| 14 | 0x8103_0xF367 | √ | √ | Blind area monitoring system parameters |
+| 15 | 0x8103_0xF370 | √ | √ | Smart video protocol version information |
+| 16 | 0x0900 | √ | √ | Upload basic Information |
+| 17 | 0x0900_0xF7 | √ | √ | Operating status of peripheral |
+| 18 | 0x0900_0xF8 | √ | √ | Peripheral system information |
+| 19 | 0x8900 | √ | √ | Querying Basic Information |
+| 20 | 0x8900_0xF7 | √ | √ | Operating status of peripheral |
+| 21 | 0x8900_0xF8 | √ | √ | Peripheral system information |
 
-## 使用方法
+## usage
 
 ```csharp
 IServiceCollection serviceDescriptors1 = new ServiceCollection();

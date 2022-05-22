@@ -65,18 +65,19 @@ namespace JT808.Protocol.Enums
         /// <summary>
         /// 查询终端参数
         /// 0x8104
+        /// Querying Terminal Parameters
         /// </summary>
         _0x8104 = 0x8104,
         /// <summary>
         /// 查询终端参数应答
         /// 0x0104
-        /// Querying Terminal Parameters
+        /// Query terminal parameter response
         /// </summary>
         _0x0104 = 0x0104,
         /// <summary>
         /// 终端控制
         /// 0x8105
-        /// terminal control
+        /// Terminal control
         /// </summary>
         _0x8105 = 0x8105,
         /// <summary>
@@ -185,7 +186,7 @@ namespace JT808.Protocol.Enums
         /// <summary>
         /// 信息服务
         /// 0x8304
-        /// information service
+        /// Information service
         /// </summary>
         _0x8304 = 0x8304,
         /// <summary>
@@ -203,7 +204,7 @@ namespace JT808.Protocol.Enums
         /// <summary>
         /// 车辆控制
         /// 0x8500
-        /// vehicle control
+        /// Vehicle control
         /// </summary>
         _0x8500 = 0x8500,
         /// <summary>
@@ -345,6 +346,12 @@ namespace JT808.Protocol.Enums
         /// </summary>
         _0x8802 = 0x8802,
         /// <summary>
+        ///  存储多媒体数据检索应答 
+        ///  0x0802
+        ///  Store multimedia data retrieval replies
+        /// </summary>
+        _0x0802 = 0x0802,
+        /// <summary>
         /// 存储多媒体数据上传
         /// 0x8803
         /// Store multimedia data upload
@@ -428,11 +435,5 @@ namespace JT808.Protocol.Enums
         ///  Query area or line data reply
         /// </summary>
         _0x0608 = 0x0608,
-        /// <summary>
-        ///  存储多媒体数据检索应答 
-        ///  0x0802
-        ///  Store multimedia data retrieval replies
-        /// </summary>
-        _0x0802 = 0x0802,
     }
 }

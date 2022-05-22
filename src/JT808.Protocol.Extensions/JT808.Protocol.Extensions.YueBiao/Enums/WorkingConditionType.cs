@@ -11,23 +11,28 @@ namespace JT808.Protocol.Extensions.YueBiao.Enums
     {
         /// <summary>
         /// 正常工作
+        /// normal_normal
         /// </summary>
-        正常工作 = 0x01,
+        normal_normal = 0x01,
         /// <summary>
         /// 待机状态
+        /// stand_by
         /// </summary>
-        待机状态 = 0x02,
+        stand_by = 0x02,
         /// <summary>
         /// 升级维护
+        /// upgrade_maintain
         /// </summary>
-        升级维护 = 0x03,
+        upgrade_maintain = 0x03,
         /// <summary>
         /// 设备异常
+        /// unit exception
         /// </summary>
-        设备异常 = 0x04,
+        unit_exception = 0x04,
         /// <summary>
         /// 断开连接
+        /// disconnect
         /// </summary>
-        断开连接 = 0x10,
+        disconnect = 0x10,
     }
 }

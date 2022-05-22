@@ -929,20 +929,21 @@
             <summary>
             查询终端参数
             0x8104
+            Querying Terminal Parameters
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808MsgId._0x0104">
             <summary>
             查询终端参数应答
             0x0104
-            Querying Terminal Parameters
+            Query terminal parameter response
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808MsgId._0x8105">
             <summary>
             终端控制
             0x8105
-            terminal control
+            Terminal control
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808MsgId._0x8106">
@@ -1069,7 +1070,7 @@
             <summary>
             信息服务
             0x8304
-            information service
+            Information service
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808MsgId._0x8400">
@@ -1090,7 +1091,7 @@
             <summary>
             车辆控制
             0x8500
-            vehicle control
+            Vehicle control
             </summary>
         </member>
         <member name="F:JT808.Protocol.Enums.JT808MsgId._0x0500">
@@ -1254,6 +1255,13 @@
             Store multimedia data retrieval
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808MsgId._0x0802">
+            <summary>
+             存储多媒体数据检索应答 
+             0x0802
+             Store multimedia data retrieval replies
+            </summary>
+        </member>
         <member name="F:JT808.Protocol.Enums.JT808MsgId._0x8803">
             <summary>
             存储多媒体数据上传
@@ -1350,13 +1358,6 @@
              查询区域或线路数据应答 
              0x0608
              Query area or line data reply
-            </summary>
-        </member>
-        <member name="F:JT808.Protocol.Enums.JT808MsgId._0x0802">
-            <summary>
-             存储多媒体数据检索应答 
-             0x0802
-             Store multimedia data retrieval replies
             </summary>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808MultimediaCodingFormat">

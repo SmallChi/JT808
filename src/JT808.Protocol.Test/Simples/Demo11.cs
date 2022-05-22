@@ -27,6 +27,7 @@ namespace JT808.Protocol.Test.Simples
             var package = JT808Serializer.Deserialize<JT808Package>(bytes);
             var bodies = package.Bodies as JT808_0x0704;
             //从第几个补传数据开始后续的包就有问题
+            //There are problems with subsequent packets from the number of data to be sent
             Assert.Equal(1,bodies.ErrorRemainPositions.FirstOrDefault(i=>i.Key==1).Key);
             Assert.Equal(2, bodies.Count);
             Assert.Single(bodies.Positions);

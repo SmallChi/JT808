@@ -40,7 +40,7 @@ namespace JT808.Protocol.Extensions.JT1078.Test
             };
             jT808UploadLocationRequest.CustomLocationAttachData.Add(JT808_JT1078_Constants.JT808_0X0200_0x14, new JT808_0x0200_0x14
             {
-                 VideoRelateAlarm = (uint)(VideoRelateAlarmType.视频信号遮挡报警 | VideoRelateAlarmType.其他视频设备故障报警)
+                 VideoRelateAlarm = (uint)(VideoRelateAlarmType.video_signal_occlusion_alarm | VideoRelateAlarmType.other_video_equipment_fault_alarm)
             });
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
             Assert.Equal("000000010000000200BA7F0E07E4F11C0028003C000020013120202014040000000A", hex);
@@ -57,7 +57,7 @@ namespace JT808.Protocol.Extensions.JT1078.Test
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal((uint)(VideoRelateAlarmType.视频信号遮挡报警 | VideoRelateAlarmType.其他视频设备故障报警), ((JT808_0x0200_0x14)jT808UploadLocationRequest.CustomLocationAttachData[JT808_JT1078_Constants.JT808_0X0200_0x14]).VideoRelateAlarm);
+            Assert.Equal((uint)(VideoRelateAlarmType.video_signal_occlusion_alarm | VideoRelateAlarmType.other_video_equipment_fault_alarm), ((JT808_0x0200_0x14)jT808UploadLocationRequest.CustomLocationAttachData[JT808_JT1078_Constants.JT808_0X0200_0x14]).VideoRelateAlarm);
         }
 
         [Fact]

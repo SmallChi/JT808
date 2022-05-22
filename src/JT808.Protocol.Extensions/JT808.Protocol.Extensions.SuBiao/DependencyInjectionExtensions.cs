@@ -11,11 +11,13 @@ namespace JT808.Protocol.Extensions.SuBiao
 {
     /// <summary>
     /// 添加苏标-主动安全
+    /// Added Su Biao - Active Safety
     /// </summary>
     public static class DependencyInjectionExtensions
     {
         /// <summary>
         /// 添加苏标-主动安全
+        /// Register SU Biao - Active safety
         /// </summary>
         /// <param name="jT808Builder"></param>
         /// <returns></returns>

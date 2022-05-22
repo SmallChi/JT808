@@ -10,12 +10,13 @@ using System.Text;
 namespace JT808.Protocol.Extensions.JT1078
 {
     /// <summary>
-    /// 1078扩展808
+    /// JT/T1078 extension JT/T808
     /// </summary>
     public static class DependencyInjectionExtensions
     {
         /// <summary>
-        /// 注册1078扩展808
+        /// 注册JT/T1078扩展JT/T808
+        /// Register JT/T1078 extension JT/T808
         /// </summary>
         /// <param name="jT808Builder"></param>
         /// <returns></returns>

@@ -26,7 +26,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
             {
                 ErrorCode=1,
                  MsgNum=2,
-                  UpgradeStatus= Enums.JT808UpgradeStatus.固件下载中,
+                  UpgradeStatus= Enums.JT808UpgradeStatus.firmware_download,
                    UpgradeType= Protocol.Enums.JT808UpgradeType.beidou_module,
                     UploadProgress=3
             };
@@ -39,7 +39,7 @@ namespace JT808.Protocol.Extensions.YueBiao.Test
             var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x1FC4>("000234010301".ToHexBytes());
             Assert.Equal(1, jT808UploadLocationRequest.ErrorCode);
             Assert.Equal(2, jT808UploadLocationRequest.MsgNum);
-            Assert.Equal(Enums.JT808UpgradeStatus.固件下载中, jT808UploadLocationRequest.UpgradeStatus);
+            Assert.Equal(Enums.JT808UpgradeStatus.firmware_download, jT808UploadLocationRequest.UpgradeStatus);
             Assert.Equal(Protocol.Enums.JT808UpgradeType.beidou_module, jT808UploadLocationRequest.UpgradeType);
             Assert.Equal(3, jT808UploadLocationRequest.UploadProgress);
         }

@@ -11,27 +11,33 @@ namespace JT808.Protocol.Extensions.YueBiao.Enums
     {
         /// <summary>
         /// 报警附件信息消息
+        /// Alarm attachment information message
         /// </summary>
-        报警附件信息消息 = 0x1210,
+        alarm_attachment_information_message = 0x1210,
         /// <summary>
         /// 文件信息上传
+        /// Uploading File Information
         /// </summary>
         文件信息上传 = 0x1211,
         /// <summary>
         /// 文件上传完成消息
+        /// Message indicating that file uploading is complete
         /// </summary>
-        文件上传完成消息 = 0x1212,
+        message_indicating_that_file_uploading_complete = 0x1212,
         /// <summary>
         /// 报警附件上传指令
+        /// Alarm attachment upload instruction
         /// </summary>
-        报警附件上传指令 = 0x9208,
+        alarm_attachment_upload_instruction = 0x9208,
         /// <summary>
         /// 文件上传完成消息应答
+        /// File upload complete reply message
         /// </summary>
-        文件上传完成消息应答 = 0x9212,
+        file_upload_complete_reply_message = 0x9212,
         /// <summary>
         /// 终端升级进度上报
+        /// Terminal upgrade progress reported
         /// </summary>
-        终端升级进度上报 = 0x1FC4,
+        terminal_upgrade_progress_reported = 0x1FC4,
     }
 }

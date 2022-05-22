@@ -7,11 +7,13 @@
         <member name="T:JT808.Protocol.Extensions.SuBiao.DependencyInjectionExtensions">
             <summary>
             添加苏标-主动安全
+            Added Su Biao - Active Safety
             </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.SuBiao.DependencyInjectionExtensions.AddSuBiaoConfigure(JT808.Protocol.IJT808Builder)">
             <summary>
             添加苏标-主动安全
+            Register SU Biao - Active safety
             </summary>
             <param name="jT808Builder"></param>
             <returns></returns>
@@ -19,61 +21,73 @@
         <member name="T:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType">
             <summary>
             主动拍照策略
+            Active photo taking strategy
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.不开启">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.not_enabled">
             <summary>
             不开启
+            Is not enabled
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.定时拍照">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.camera_timer">
             <summary>
             定时拍照
+            Camera Timer
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.定距拍照">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.distance_take_photos">
             <summary>
             定距拍照
+            Distance take photos
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.保留">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.reserve">
             <summary>
             保留
+            reserve
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.不修改参数">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.ActivePhotographyStrategyType.not_modify_parameters">
             <summary>
             不修改参数
+            Do not Modify parameters
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId">
             <summary>
             主动安全消息Id
+            Active security message Id
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.报警附件信息消息">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.alarm_attachment_information_message">
             <summary>
             报警附件信息消息
+            Alarm attachment information message
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.文件信息上传">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.uploading_file_information">
             <summary>
             文件信息上传
+            Uploading File Information
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.文件上传完成消息">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.message_indicating_that_file_uploading_complete">
             <summary>
             文件上传完成消息
+            Message indicating that file uploading is complete
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.报警附件上传指令">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.alarm_attachment_upload_instruction">
             <summary>
             报警附件上传指令
+            Alarm attachment upload instruction
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.文件上传完成消息应答">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.JT808_SuBiao_MsgId.file_upload_complete_reply_message">
             <summary>
             文件上传完成消息应答
+            File upload complete reply message
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.SuBiao.Enums.PhotoResolutionType">
@@ -111,34 +125,40 @@
             1920x1080
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.PhotoResolutionType.不修改参数">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.PhotoResolutionType.not_modify_parameters">
             <summary>
             不修改参数
+            not_modify_parameters
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.SuBiao.Enums.USBIDType">
             <summary>
             USB编号类型
+            USB number type 
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.USBIDType.ADAS">
             <summary>
             高级驾驶辅助系统
+            ADAS
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.USBIDType.DSM">
             <summary>
             驾驶员状态监控系统
+            DSM
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.USBIDType.TPMS">
             <summary>
             轮胎气压监测系统
+            TPMS
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.USBIDType.BSD">
             <summary>
             盲点监测系统
+            BSD
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.SuBiao.Enums.VideoRecordingResolutionType">
@@ -181,39 +201,46 @@
             1080P
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.VideoRecordingResolutionType.不修改参数">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.VideoRecordingResolutionType.not_modify_parameters">
             <summary>
             不修改参数
+            not_modify_parameters
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType">
             <summary>
             工作状态
+            Working
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.正常工作">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.normal_normal">
             <summary>
             正常工作
+            normal_normal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.待机状态">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.stand_by">
             <summary>
             待机状态
+            stand by
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.升级维护">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.upgrade_maintain">
             <summary>
             升级维护
+            Upgrade maintenance
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.设备异常">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.unit_exception">
             <summary>
             设备异常
+            unit exception
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.断开连接">
+        <member name="F:JT808.Protocol.Extensions.SuBiao.Enums.WorkingConditionType.disconnect">
             <summary>
             断开连接
+            disconnect 
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.SuBiao.JT808_SuBiao_Constants">

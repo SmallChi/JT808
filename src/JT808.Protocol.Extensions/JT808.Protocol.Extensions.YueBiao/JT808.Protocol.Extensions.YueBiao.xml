@@ -22,89 +22,104 @@
             主动拍照策略
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.不开启">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.not_enabled">
             <summary>
             不开启
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.定时拍照">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.camera_timer">
             <summary>
             定时拍照
+            Camera Timer
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.定距拍照">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.distance_take_photos">
             <summary>
-            定距拍照
+            Distance take photos
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.保留">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.reserve">
             <summary>
             保留
+            reserve
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.不修改参数">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.ActivePhotographyStrategyType.not_modify_parameters">
             <summary>
             不修改参数
+            Do not Modify parameters
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus">
             <summary>
             升级状态
+            Upgrade Status
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.固件下载中">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.firmware_download">
             <summary>
             固件下载中
+            Firmware download
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.固件下载成功">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.firmware_download_success">
             <summary>
             固件下载成功
+            Firmware downloaded successfully
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.固件下载失败">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.firmware_download_failure">
             <summary>
             固件下载失败
+            Firmware download failure
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.固件安装中">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.firmware_install">
             <summary>
             固件安装中
+            Firmware Install
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.安装成功">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.install_success">
             <summary>
             安装成功
+            Install Success
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.安装失败">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.install_failed">
             <summary>
             安装失败
+            Install Failed
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.未找到目标设备">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.target_device_not_found">
             <summary>
             未找到目标设备
+            Target device not found
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.硬件型号不支持">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.hardware_model_not_supported">
             <summary>
             硬件型号不支持
+            The hardware model is not supported
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.软件版本相同">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.same_software_version">
             <summary>
             软件版本相同
+            Same Software Version
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.软件版本不支持">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.software_version_not_supported">
             <summary>
             软件版本不支持
+            The software version is not supported
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.其他">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808UpgradeStatus.Other">
             <summary>
             其他
+            Other
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId">
@@ -112,34 +127,40 @@
             主动安全消息Id
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.报警附件信息消息">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.alarm_attachment_information_message">
             <summary>
             报警附件信息消息
+            Alarm attachment information message
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.文件信息上传">
             <summary>
             文件信息上传
+            Uploading File Information
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.文件上传完成消息">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.message_indicating_that_file_uploading_complete">
             <summary>
             文件上传完成消息
+            Message indicating that file uploading is complete
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.报警附件上传指令">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.alarm_attachment_upload_instruction">
             <summary>
             报警附件上传指令
+            Alarm attachment upload instruction
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.文件上传完成消息应答">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.file_upload_complete_reply_message">
             <summary>
             文件上传完成消息应答
+            File upload complete reply message
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.终端升级进度上报">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.JT808_YueBiao_MsgId.terminal_upgrade_progress_reported">
             <summary>
             终端升级进度上报
+            Terminal upgrade progress reported
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.PhotoResolutionType">
@@ -177,39 +198,46 @@
             1920x1080
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.PhotoResolutionType.不修改参数">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.PhotoResolutionType.not_modify_parameters">
             <summary>
             不修改参数
+            not Modify parameters
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.USBIDType">
             <summary>
             USB编号类型
+            USB number type
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.USBIDType.ADAS">
             <summary>
             高级驾驶辅助系统
+            ADAS
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.USBIDType.DSM">
             <summary>
             驾驶员状态监控系统
+            DSM
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.USBIDType.TPMS">
             <summary>
             轮胎气压监测系统
+            TPMS
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.USBIDType.BSD">
             <summary>
             盲点监测系统
+            BSD
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.VideoRecordingResolutionType">
             <summary>
             视频录制分辨率
+            Video recording resolution
             </summary>
         </member>
         <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.VideoRecordingResolutionType.CIF">
@@ -247,9 +275,10 @@
             1080P
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.VideoRecordingResolutionType.不修改参数">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.VideoRecordingResolutionType.not_modify_parameters">
             <summary>
             不修改参数
+            Do not Modify parameters
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType">
@@ -257,29 +286,34 @@
             工作状态
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.正常工作">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.normal_normal">
             <summary>
             正常工作
+            normal_normal
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.待机状态">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.stand_by">
             <summary>
             待机状态
+            stand_by
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.升级维护">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.upgrade_maintain">
             <summary>
             升级维护
+            upgrade_maintain
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.设备异常">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.unit_exception">
             <summary>
             设备异常
+            unit exception
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.断开连接">
+        <member name="F:JT808.Protocol.Extensions.YueBiao.Enums.WorkingConditionType.disconnect">
             <summary>
             断开连接
+            disconnect
             </summary>
         </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.JT808_YueBiao_Constants">
