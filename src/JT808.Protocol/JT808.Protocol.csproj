@@ -4,12 +4,12 @@
     <PackageId>JT808</PackageId>
     <Product>JT808</Product>
     <Description>
-		JT/T808 protocol,JT808 protocol, GB808 protocol, Road Transport Vehicle Satellite positioning system - Beidou Compatible Vehicle Terminal communication protocol (support 2011, 2013, 2019 version)
-		JT/T808协议、JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议(支持2011、2013、2019版本)
+		JT/T808 protocol,JT808 protocol, GB808 protocol(support 2011, 2013, 2019 version).
+		JT/T808协议、JT808协议、GB808协议(支持2011、2013、2019版本)。
 	</Description>
     <PackageReleaseNotes>
-		JT/T808 protocol,JT808 protocol, GB808 protocol, Road Transport Vehicle Satellite positioning system - Beidou Compatible Vehicle Terminal communication protocol (support 2011, 2013, 2019 version)
-		JT808协议、GB808协议、道路运输车辆卫星定位系统-北斗兼容车载终端通讯协议(支持2011、2013、2019版本)
+		JT/T808 protocol,JT808 protocol, GB808 protocol(support 2011, 2013, 2019 version).
+		JT/T808协议、JT808协议、GB808协议(支持2011、2013、2019版本)。
 	</PackageReleaseNotes>
     <DocumentationFile>JT808.Protocol.xml</DocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
@@ -39,6 +39,7 @@
     <None Remove="Metadata\JT808LocationAttachProperties\**" />
     <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
     <None Include="..\..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\..\README.en.md" Pack="true" PackagePath="" />
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
@@ -62,14 +63,14 @@
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
     <PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
-    <PackageReference Include="System.Text.Json" Version="6.0.3" />
+    <PackageReference Include="System.Text.Json" Version="6.0.4" />
 	<PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.1' ">
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-	<PackageReference Include="System.Text.Json" Version="6.0.3" />
+	<PackageReference Include="System.Text.Json" Version="6.0.4" />
 	<PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
 	<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
