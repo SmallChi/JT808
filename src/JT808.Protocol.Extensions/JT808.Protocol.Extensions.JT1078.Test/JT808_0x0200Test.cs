@@ -110,5 +110,16 @@ namespace JT808.Protocol.Extensions.JT1078.Test
             byte[] bodys = "000000010000000200BA7F0E07E4F11C0028003C0000200131202020150400000003".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808_0x0200>(bodys);
         }
+
+        /// <summary>
+        /// 感谢大兄弟提供的数据
+        /// ref:https://github.com/SmallChi/JTTools/issues/8
+        /// </summary>
+        [Fact]
+        public void Test_0x15_4()
+        {
+            byte[] bodys = "7e020040420100000000013419905507021200040000001410010213679206c4a97d01001300000002220720103957010400000e3e020200000302025825040000001030014531010814040000000115040000000c797e".ToHexBytes();
+            string json = JT808Serializer.Analyze<JT808Package>(bodys);
+        }
     }
 }

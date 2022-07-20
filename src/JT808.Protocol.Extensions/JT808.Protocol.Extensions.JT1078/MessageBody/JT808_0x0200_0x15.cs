@@ -42,7 +42,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteNumber($"[{value.VideoSignalLoseAlarmStatus.ReadNumber()}]视频信号丢失报警状态", value.VideoSignalLoseAlarmStatus);
             var videoSignalLoseAlarmStatusSpan = Convert.ToString(value.VideoSignalLoseAlarmStatus, 2).PadLeft(32, '0').AsSpan();
             writer.WriteStartArray("视频信号丢失报警状态集合");
-            int index = 0;
+            int index = 32;
             foreach (var item in videoSignalLoseAlarmStatusSpan)
             {
                 if (item == '1')
@@ -53,7 +53,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 {
                     writer.WriteStringValue($"{index}通道视频正常");
                 }
-                index++;
+                index--;
             }
             writer.WriteEndArray();
         }
