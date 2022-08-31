@@ -253,7 +253,8 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 3. 当N包数据上来，延续步骤2的方式。
 
-> 普及知识点1：由于消息体长度最大为10bit也就是1023的字节，所以这边就有个硬性条件不能超过最大长度
+> 普及知识点1：由于消息体长度最大为10bit也就是1023的字节，所以这边就有个硬性条件不能超过最大长度。
+
 > 普及知识点2：一般行业分包是按256的整数倍，太多不行，太少也不行，必须刚刚好。
 
 [可以参考Simples的Demo5](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo5.cs)
@@ -267,8 +268,7 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 ***解决方式：***
 
-可以根据设备类型去实现(GlobalConfigBase)对应的配置，根据不同的GlobalConfigBase实例去绑定对应
-协议解析器。
+可以根据设备类型去实现(GlobalConfigBase)对应的配置，根据不同的GlobalConfigBase实例去绑定对应协议解析器。
 
 [可以参考Simples的Demo6](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo6.cs)
 

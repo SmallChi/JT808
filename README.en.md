@@ -253,6 +253,7 @@ When the device uploads multimedia data, due to the large amount of data, it can
 3. When N packet data comes in, continue as in Step 2.
 
 > General Knowledge 1:Since the maximum length of the message body is 10bits (1023 bytes), there is a hard condition that the maximum length cannot be exceeded.
+
 > General Knowledge 2:General industry subcontracting is an integer multiple of 256, too much is not good, too little is not good, must be just right.  
 
 [See Demo5 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo5.cs)
