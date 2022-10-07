@@ -4,12 +4,10 @@
     <PackageId>JT808.Protocol.Extensions.YueBiao</PackageId>
     <Product>JT808.Protocol.Extensions.YueBiao</Product>
     <Description>
-		Active Secure Message Protocol Based on JT/T808 protocol and GB808 Protocol Extension (Yue Biao).
-		基于JT/T808协议、GB808协议扩展的主动安全消息协议(粤标)。
+		Active Secure Message Protocol Based on JT/T808 protocol and GB808 Protocol Extension (Yue Biao).基于JT/T808协议、GB808协议扩展的主动安全消息协议(粤标)。
 	</Description>
     <PackageReleaseNotes>
-		Active Secure Message Protocol Based on JT/T808 protocol and GB808 Protocol Extension (Yue Biao).
-		基于JT/T808协议、GB808协议扩展的主动安全消息协议(粤标)。
+		Active Secure Message Protocol Based on JT/T808 protocol and GB808 Protocol Extension (Yue Biao).基于JT/T808协议、GB808协议扩展的主动安全消息协议(粤标)。
 	</PackageReleaseNotes>
     <DocumentationFile>JT808.Protocol.Extensions.YueBiao.xml</DocumentationFile>
   </PropertyGroup>

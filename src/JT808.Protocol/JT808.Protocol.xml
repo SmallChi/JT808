@@ -2239,29 +2239,6 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="T:JT808.Protocol.Extensions.HexUtil">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:JT808.Protocol.Extensions.HexUtil.DoHexDump(System.ReadOnlySpan{System.Byte},System.Int32,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="buffer"></param>
-            <param name="fromIndex"></param>
-            <param name="length"></param>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Protocol.Extensions.HexUtil.DoHexDump(System.Byte[],System.Int32,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="array"></param>
-            <param name="fromIndex"></param>
-            <param name="length"></param>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.Extensions.JT808MessagePackFormatterResolverExtensions">
             <summary>
             

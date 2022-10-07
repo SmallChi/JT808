@@ -360,6 +360,18 @@ We can refer to the subcontracting data structure of the equipment in [Example 5
 
 [See Demo16 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
 
+### 举个栗子17
+
+***scene:***
+The additional data of the JT/T808 0x0200 standard protocol is explicitly reserved for some additional information ids. Therefore, according to the standard, some device manufacturers use the additional information ids of the standard. Therefore, to resolve the problem, you can refer to the external custom additional information registration method.
+
+[see Demo10 for Simples](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo10.cs).
+
+### 举个栗子18
+
+***scene:***
+Due to access many different equipment vendor's agreement, but each protocol docking and less, think at the same time in a class library under the unified management, then in each manufacturer not conflict using the assembly way of registration is no problem, once has the conflict, then use the assembly way registered will quote Id conflict, The library does not support this way of isolation, so I use [SetMap] to manage this situation.
+
 ## NuGet Install
 
 | Package Name| Version| Preview  Version |Downloads|Remark|

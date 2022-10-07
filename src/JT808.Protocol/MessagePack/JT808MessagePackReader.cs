@@ -364,7 +364,7 @@ namespace JT808.Protocol.MessagePack
         public string ReadHex(int len)
         {
             var readOnlySpan = GetReadOnlySpan(len);
-            string hex = HexUtil.DoHexDump(readOnlySpan, 0, len);
+            string hex = Convert.ToHexString(readOnlySpan.Slice(0, len));
             return hex;
         }
         /// <summary>

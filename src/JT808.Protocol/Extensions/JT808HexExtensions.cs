@@ -15,7 +15,7 @@ namespace JT808.Protocol.Extensions
         /// <returns></returns>
         public static string ToHexString(this byte[] source)
         {
-            return HexUtil.DoHexDump(source, 0, source.Length).ToUpper();
+            return Convert.ToHexString(source, 0, source.Length);
         }
 
         /// <summary>
@@ -26,16 +26,7 @@ namespace JT808.Protocol.Extensions
         public static byte[] ToHexBytes(this string hexString)
         {
             hexString = hexString.Replace(" ", "");
-            byte[] buf = new byte[hexString.Length / 2];
-            ReadOnlySpan<char> readOnlySpan = hexString.AsSpan();
-            for (int i = 0; i < hexString.Length; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    buf[i / 2] = Convert.ToByte(readOnlySpan.Slice(i, 2).ToString(), 16);
-                }
-            }
-            return buf;
+            return Convert.FromHexString(hexString);
         }
 
         /// <summary>
@@ -47,8 +38,7 @@ namespace JT808.Protocol.Extensions
         /// <returns></returns>
         public static string ReadHexStringLittle(ReadOnlySpan<byte> read, ref int offset, int len)
         {
-            //ReadOnlySpan<byte> source = read.Slice(offset, len);
-            string hex = HexUtil.DoHexDump(read, offset, len);
+            string hex = Convert.ToHexString(read.Slice(offset, len));
             offset += len;
             return hex;
         }
@@ -198,68 +188,6 @@ namespace JT808.Protocol.Extensions
         public static ReadOnlySpan<char> ReadBinary(this byte value)
         {
             return System.Convert.ToString(value, 2).PadLeft(8, '0').AsSpan();
-        }
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public static class HexUtil
-    {
-        static readonly char[] HexdumpTable = new char[256 * 4];
-        static HexUtil()
-        {
-            char[] digits = "0123456789ABCDEF".ToCharArray();
-            for (int i = 0; i < 256; i++)
-            {
-                HexdumpTable[i << 1] = digits[(int)((uint)i >> 4 & 0x0F)];
-                HexdumpTable[(i << 1) + 1] = digits[i & 0x0F];
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="fromIndex"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        public static string DoHexDump(ReadOnlySpan<byte> buffer, int fromIndex, int length)
-        {
-            if (length == 0)
-            {
-                return "";
-            }
-            int endIndex = fromIndex + length;
-            var buf = new char[length << 1];
-            int srcIdx = fromIndex;
-            int dstIdx = 0;
-            for (; srcIdx < endIndex; srcIdx++, dstIdx += 2)
-            {
-                Array.Copy(HexdumpTable, buffer[srcIdx] << 1, buf, dstIdx, 2);
-            }
-            return new string(buf);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="array"></param>
-        /// <param name="fromIndex"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        public static string DoHexDump(byte[] array, int fromIndex, int length)
-        {
-            if (length == 0)
-            {
-                return "";
-            }
-            int endIndex = fromIndex + length;
-            var buf = new char[length << 1];
-            int srcIdx = fromIndex;
-            int dstIdx = 0;
-            for (; srcIdx < endIndex; srcIdx++, dstIdx += 2)
-            {
-                Array.Copy(HexdumpTable, (array[srcIdx] & 0xFF) << 1, buf, dstIdx, 2);
-            }
-            return new string(buf);
         }
     }
 }

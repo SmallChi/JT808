@@ -4,12 +4,10 @@
     <PackageId>JT808.Protocol.Extensions.SuBiao</PackageId>
     <Product>JT808.Protocol.Extensions.SuBiao</Product>
     <Description>
-		Active secure message protocol (Su Biao) based on JT/T808 protocol and GB808 protocol extension.
-		基于JT/T808协议、GB808协议扩展的主动安全消息协议(苏标)。
+		Active secure message protocol (Su Biao) based on JT/T808 protocol and GB808 protocol extension.基于JT/T808协议、GB808协议扩展的主动安全消息协议(苏标)。
 	</Description>
     <PackageReleaseNotes>
-		Active secure message protocol (Su Biao) based on JT/T808 protocol and GB808 protocol extension.
-		基于JT/T808协议、GB808协议扩展的主动安全消息协议(苏标)。
+		Active secure message protocol (Su Biao) based on JT/T808 protocol and GB808 protocol extension.基于JT/T808协议、GB808协议扩展的主动安全消息协议(苏标)。
 	</PackageReleaseNotes>
     <DocumentationFile>JT808.Protocol.Extensions.SuBiao.xml</DocumentationFile>
   </PropertyGroup>

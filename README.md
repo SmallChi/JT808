@@ -358,9 +358,19 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 场景:
 平台下发分包数据到设备
 
-可以参考【栗子5】中，设备上来的分包数据结构，然后举一反三的去实现。
+可以参考【举个栗子5】中，设备上来的分包数据结构，然后举一反三的去实现。
 
-[可以参考Simples的Demo16](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo16.cs)
+### 举个栗子17
+
+场景:
+由于808的0x0200标准协议的附加数据是有明确的表示对部分附加信息Id进行保留的，所以按照标准，有些设备厂商把标准的附加信息Id占用，所以需要解析这部分的数据，可以参考外部自定义附加信息注册的方式来解决解析问题。
+
+可以参考[举个栗子10](https://github.com/SmallChi/JT808/blob/master/src/JT808.Protocol.Test/Simples/Demo10.cs)中的程序。
+
+### 举个栗子18
+
+场景:
+由于接入很多不同设备厂商的协议，但是每个协议对接又比较少，想同时放在一个类库下面进行统一管理，那么在各个厂家不冲突的情况下使用程序集方式的注册是没有问题的，一旦有冲突，那么使用程序集的方式进行注册会报Id冲突，本身库不支持这种方式进行隔离的，所以遇到这种情况自己使用SetMap的方式进行管理。
 
 ## NuGet安装
 
