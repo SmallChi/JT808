@@ -19,8 +19,6 @@ namespace JT808.Protocol.Benchmark
             //安装NuGet包，BenchmarkDotNet
             //在需要做性能测试的方法前加上属性[Benchmark]。 
             Summary summary = BenchmarkRunner.Run<JT808SerializerContext>();
-            //Summary summary1 = BenchmarkRunner.Run<JT808DeEscapeContext>();
-            //Summary summary2 = BenchmarkRunner.Run<JT808EscapeContext>();
         }
     }
 }
