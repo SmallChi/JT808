@@ -16,17 +16,17 @@ namespace JT808.Protocol.MessageBody
     /// 0x0C，按累计距离上传，达到距离后自动停止上传；
     /// 0x0D，按累计条数上传，达到上传条数后自动停止上传。
     /// </summary>
-    public class JT808_0x8103_0x0094 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0094>, IJT808Analyze
+    public class JT808_0x8103_0x0094 : JT808MessagePackFormatter<JT808_0x8103_0x0094>, JT808_0x8103_BodyBase,  IJT808Analyze
     {
         /// <summary>
         /// 0x0094
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0094;
+        public uint ParamId { get; set; } = 0x0094;
         /// <summary>
         /// 数据长度
         /// 1 byte
         /// </summary>
-        public override byte ParamLength { get; set; } = 1;
+        public byte ParamLength { get; set; } = 1;
         /// <summary>
         /// GNSS 模块详细定位数据上传方式
         /// 0x00，本地存储，不上传（默认值）；
@@ -40,7 +40,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// GNSS 模块详细定位数据上传方式
         /// </summary>
-        public override string Description => "GNSS模块详细定位数据上传方式";
+        public string Description => "GNSS模块详细定位数据上传方式";
 
         /// <summary>
         /// 
@@ -83,7 +83,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0094 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0094 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0094 jT808_0x8103_0x0094 = new JT808_0x8103_0x0094();
             jT808_0x8103_0x0094.ParamId = reader.ReadUInt32();
@@ -97,7 +97,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0094 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0094 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

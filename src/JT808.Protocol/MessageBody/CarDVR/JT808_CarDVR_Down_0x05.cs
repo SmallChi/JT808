@@ -19,14 +19,14 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x05
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.collect_vehicle_information.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.collect_vehicle_information.ToByteValue();
         /// <summary>
         /// 车辆识别代号、机动车号牌号码和机动车号牌分类
         /// </summary>
-        public override string Description => "车辆识别代号、机动车号牌号码和机动车号牌分类";
+        public string Description => "车辆识别代号、机动车号牌号码和机动车号牌分类";
         /// <summary>
         /// 
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization => true;
     }
 }

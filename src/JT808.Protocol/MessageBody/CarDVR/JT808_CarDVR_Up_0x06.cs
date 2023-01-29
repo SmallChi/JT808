@@ -15,12 +15,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集记录仪状态信号配置信息
     /// 返回：状态信号配置信息
     /// </summary>
-    public class JT808_CarDVR_Up_0x06 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x06>, IJT808Analyze
+    public class JT808_CarDVR_Up_0x06 : JT808MessagePackFormatter<JT808_CarDVR_Up_0x06>, JT808CarDVRUpBodies, IJT808Analyze
     {
         /// <summary>
         /// 0x06
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.collect_recorder_status_signal_configuration_information.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.collect_recorder_status_signal_configuration_information.ToByteValue();
         /// <summary>
         /// 实时时间
         /// </summary>
@@ -70,7 +70,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 状态信号配置信息
         /// </summary>
-        public override string Description => "状态信号配置信息";
+        public string Description => "状态信号配置信息";
         /// <summary>
         /// 
         /// </summary>
@@ -116,7 +116,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x06 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x06 value, IJT808Config config)
         {
             writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
             writer.WriteByte(value.SignalOperate);
@@ -151,7 +151,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Up_0x06 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Up_0x06 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x06 value = new JT808_CarDVR_Up_0x06();
             value.RealTime = reader.ReadDateTime_yyMMddHHmmss();

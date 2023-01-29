@@ -13,16 +13,16 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 高级驾驶辅助系统报警信息
     /// </summary>
-    public class JT808_0x0200_0x64 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x64>, IJT808Analyze,IJT808_2019_Version
+    public class JT808_0x0200_0x64 : JT808MessagePackFormatter<JT808_0x0200_0x64>, JT808_0x0200_CustomBodyBase, IJT808Analyze,IJT808_2019_Version
     {
         /// <summary>
         /// 高级驾驶辅助系统报警信息Id
         /// </summary>
-        public override byte AttachInfoId { get; set; } = JT808_YueBiao_Constants.JT808_0X0200_0x64;
+        public byte AttachInfoId { get; set; } = JT808_YueBiao_Constants.JT808_0X0200_0x64;
         /// <summary>
         /// 高级驾驶辅助系统报警信息附加长度
         /// </summary>
-        public override byte AttachInfoLength { get; set; } = 73;
+        public byte AttachInfoLength { get; set; } = 73;
         /// <summary>
         /// 报警ID
         /// </summary>
@@ -290,7 +290,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200_0x64 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0x64 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {          
             JT808_0x0200_0x64 value = new JT808_0x0200_0x64();
             value.AttachInfoId = reader.ReadByte();
@@ -327,7 +327,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x64 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x64 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.Skip(1, out int AttachInfoLengthPosition);

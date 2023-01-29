@@ -14,17 +14,17 @@ namespace JT808.Protocol.MessageBody
     /// 0x02：19200；0x03：38400；
     /// 0x04：57600；0x05：115200。
     /// </summary>
-    public class JT808_0x8103_0x0091 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0091>, IJT808Analyze
+    public class JT808_0x8103_0x0091 : JT808MessagePackFormatter<JT808_0x8103_0x0091>, JT808_0x8103_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 0x0091
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0091;
+        public  uint ParamId { get; set; } = 0x0091;
         /// <summary>
         /// 数据长度
         /// 1 byte
         /// </summary>
-        public override byte ParamLength { get; set; } = 1;
+        public  byte ParamLength { get; set; } = 1;
         /// <summary>
         /// GNSS 波特率，定义如下：
         /// 0x00：4800；0x01：9600；
@@ -35,7 +35,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// GNSS 波特率
         /// </summary>
-        public override string Description => "GNSS波特率";
+        public  string Description => "GNSS波特率";
 
         /// <summary>
         /// 
@@ -59,7 +59,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0091 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0091 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0091 jT808_0x8103_0x0091 = new JT808_0x8103_0x0091();
             jT808_0x8103_0x0091.ParamId = reader.ReadUInt32();
@@ -73,7 +73,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0091 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0091 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

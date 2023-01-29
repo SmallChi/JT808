@@ -12,16 +12,16 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 终端升级进度上报
     /// </summary>
-    public class JT808_0x1FC4 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x1FC4>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x1FC4 : JT808MessagePackFormatter<JT808_0x1FC4>, JT808Bodies, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 终端升级进度上报
         /// </summary>
-        public override string Description => "终端升级进度上报";
+        public string Description => "终端升级进度上报";
         /// <summary>
         /// 终端升级进度上报
         /// </summary>
-        public override ushort MsgId => JT808_YueBiao_MsgId.terminal_upgrade_progress_reported.ToUInt16Value();
+        public ushort MsgId => JT808_YueBiao_MsgId.terminal_upgrade_progress_reported.ToUInt16Value();
         /// <summary>
         /// 流水号
         /// </summary>
@@ -71,7 +71,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x1FC4 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x1FC4 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1FC4 value = new JT808_0x1FC4();
             value.MsgNum = reader.ReadUInt16();
@@ -87,7 +87,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1FC4 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x1FC4 value, IJT808Config config)
         {
             writer.WriteUInt16(value.MsgNum);
             writer.WriteByte(value.UpgradeType.ToByteValue());

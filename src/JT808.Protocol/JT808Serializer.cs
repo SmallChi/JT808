@@ -18,6 +18,10 @@ namespace JT808.Protocol
     {
         private readonly static JT808Package jT808Package = new JT808Package();
 
+        private readonly static Type JT808_Header_Package_Type = typeof(JT808HeaderPackage);
+
+        private readonly static Type JT808_Package_Type = typeof(JT808Package);
+
         /// <summary>
         /// 
         /// </summary>
@@ -53,7 +57,7 @@ namespace JT808.Protocol
             try
             {
                 JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer, version);
-                jT808Package.Serialize(ref jT808MessagePackWriter, package, jT808Config);
+                package.Serialize(ref jT808MessagePackWriter, package, jT808Config);
                 return jT808MessagePackWriter.FlushAndGetEncodingArray();
             }
             finally
@@ -74,7 +78,7 @@ namespace JT808.Protocol
             try
             {
                 JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer, version);
-                jT808Package.Serialize(ref jT808MessagePackWriter, package, jT808Config);
+                package.Serialize(ref jT808MessagePackWriter, package, jT808Config);
                 return jT808MessagePackWriter.FlushAndGetEncodingReadOnlySpan();
             }
             finally
@@ -180,7 +184,7 @@ namespace JT808.Protocol
         /// <returns></returns>
         private static bool CheckPackageType(Type type)
         {
-            return type == typeof(JT808Package) || type == typeof(JT808HeaderPackage);
+            return type == JT808_Package_Type || type == JT808_Header_Package_Type;
         }
 
         /// <summary>
@@ -222,7 +226,7 @@ namespace JT808.Protocol
                 JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
                 if (CheckPackageType(type))
                     jT808MessagePackReader.Decode(buffer);
-                return JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(formatter,ref jT808MessagePackReader, jT808Config);
+                return formatter.Deserialize(ref jT808MessagePackReader, jT808Config);
             }
             finally
             {
@@ -305,7 +309,7 @@ namespace JT808.Protocol
             {
                 if(jT808Config.MsgIdFactory.TryGetValue(msgid,out object msgHandle))
                 {
-                    if (jT808Config.FormatterFactory.FormatterDict.TryGetValue(msgHandle.GetType().GUID, out object instance))
+                    if (msgHandle is IJT808MessagePackFormatter instance)
                     {
                         using MemoryStream memoryStream = new MemoryStream();
                         using Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options);
@@ -343,7 +347,7 @@ namespace JT808.Protocol
             {
                 if (jT808Config.MsgIdFactory.TryGetValue(msgid, out object msgHandle))
                 {
-                    if (jT808Config.FormatterFactory.FormatterDict.TryGetValue(msgHandle.GetType().GUID, out object instance))
+                    if (msgHandle is IJT808MessagePackFormatter instance)
                     {
                         using MemoryStream memoryStream = new MemoryStream();
                         using Utf8JsonWriter utf8JsonWriter = new Utf8JsonWriter(memoryStream, options);

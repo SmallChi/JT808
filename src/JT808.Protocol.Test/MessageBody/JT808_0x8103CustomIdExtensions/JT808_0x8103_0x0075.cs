@@ -15,13 +15,13 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions
     /// 音视频参数设置
     /// 0x8103_0x0075
     /// </summary>
-    public class JT808_0x8103_0x0075 : JT808_0x8103_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0075>,IJT808Analyze
+    public class JT808_0x8103_0x0075 : JT808MessagePackFormatter<JT808_0x8103_0x0075>, JT808_0x8103_CustomBodyBase, IJT808Analyze
     {
-        public override uint ParamId { get; set; } = 0x0075;
+        public uint ParamId { get; set; } = 0x0075;
         /// <summary>
         /// 数据 长度
         /// </summary>
-        public override byte ParamLength { get; set; } = 21;
+        public byte ParamLength { get; set; } = 21;
         /// <summary>
         /// 实时流编码模式
         /// </summary>
@@ -79,7 +79,7 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions
         /// <summary>
         /// 音视频参数设置
         /// </summary>
-        public override string Description => "音视频参数设置";
+        public string Description => "音视频参数设置";
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
@@ -114,7 +114,7 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions
             writer.WriteNumber($"[{value.AudioOutputEnabled.ReadNumber()}]是否启用音频输出", value.AudioOutputEnabled);
         }
 
-        public JT808_0x8103_0x0075 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0075 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0075 jT808_0X8103_0X0075 = new JT808_0x8103_0x0075();
             jT808_0X8103_0X0075.ParamId = reader.ReadUInt32();
@@ -134,7 +134,7 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0x8103CustomIdExtensions
             return jT808_0X8103_0X0075;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0075 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0075 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

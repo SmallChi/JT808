@@ -20,14 +20,14 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0xE4
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.return_normal_working_status.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.return_normal_working_status.ToByteValue();
         /// <summary>
         /// 返回正常工作状态
         /// </summary>
-        public override string Description => "返回正常工作状态";
+        public string Description => "返回正常工作状态";
         /// <summary>
         /// 
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization => true;
     }
 }

@@ -12,16 +12,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 设置电话本
     /// </summary>
-    public class JT808_0x8401 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8401>, IJT808Analyze
+    public class JT808_0x8401 : JT808MessagePackFormatter<JT808_0x8401>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x8401
         /// </summary>
-        public override ushort MsgId { get; } = 0x8401;
+        public ushort MsgId =>0x8401;
         /// <summary>
         /// 设置电话本
         /// </summary>
-        public override string Description => "设置电话本";
+        public string Description => "设置电话本";
         /// <summary>
         /// 设置类型
         /// </summary>
@@ -40,7 +40,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8401 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8401 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8401 jT808_0X8401 = new JT808_0x8401();
             jT808_0X8401.SettingTelephoneBook = (JT808SettingTelephoneBook)reader.ReadByte();
@@ -65,7 +65,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8401 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8401 value, IJT808Config config)
         {
             writer.WriteByte((byte)value.SettingTelephoneBook);
             writer.WriteByte((byte)value.JT808ContactProperties.Count);

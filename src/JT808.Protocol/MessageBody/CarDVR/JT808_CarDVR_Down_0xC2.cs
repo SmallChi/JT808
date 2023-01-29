@@ -15,12 +15,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 设置记录仪时间
     /// 返回：北京时间的日期、时钟
     /// </summary>
-    public class JT808_CarDVR_Down_0xC2 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0xC2>, IJT808Analyze
+    public class JT808_CarDVR_Down_0xC2 : JT808MessagePackFormatter<JT808_CarDVR_Down_0xC2>, JT808CarDVRDownBodies,  IJT808Analyze
     {
         /// <summary>
         /// 0xC2
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.set_recorder_time.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.set_recorder_time.ToByteValue();
         /// <summary>
         /// 实时时间
         /// </summary>
@@ -28,7 +28,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 北京时间的日期、时钟
         /// </summary>
-        public override string Description => "北京时间的日期、时钟";
+        public string Description => "北京时间的日期、时钟";
         /// <summary>
         /// 
         /// </summary>
@@ -48,7 +48,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC2 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC2 value, IJT808Config config)
         {
             writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
         }
@@ -58,7 +58,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Down_0xC2 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Down_0xC2 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC2 value = new JT808_CarDVR_Down_0xC2();
             value.RealTime = reader.ReadDateTime_yyMMddHHmmss();

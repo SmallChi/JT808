@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 终端上传音视频属性
     /// </summary>
-    public class JT808_0x1003 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x1003>, IJT808Analyze
+    public class JT808_0x1003 : JT808MessagePackFormatter<JT808_0x1003>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 输入音频编码方式
@@ -52,11 +52,11 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <summary>
         /// 
         /// </summary>
-        public override ushort MsgId => 0x1003;
+        public ushort MsgId => 0x1003;
         /// <summary>
         /// 
         /// </summary>
-        public override string Description => "终端上传音视频属性";
+        public string Description => "终端上传音视频属性";
         /// <summary>
         /// 
         /// </summary>
@@ -142,7 +142,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x1003 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x1003 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1003 jT808_0x1003 = new JT808_0x1003();
             jT808_0x1003.EnterAudioEncoding = reader.ReadByte();
@@ -162,7 +162,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1003 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x1003 value, IJT808Config config)
         {
             writer.WriteByte(value.EnterAudioEncoding);
             writer.WriteByte(value.EnterAudioChannelsNumber);

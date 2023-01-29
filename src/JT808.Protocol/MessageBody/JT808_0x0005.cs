@@ -11,16 +11,16 @@ namespace JT808.Protocol.MessageBody
     /// 终端补传分包请求
     /// 2019版本
     /// </summary>
-    public class JT808_0x0005 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0005>, IJT808_2019_Version, IJT808Analyze
+    public class JT808_0x0005 : JT808MessagePackFormatter<JT808_0x0005>, JT808Bodies, IJT808_2019_Version, IJT808Analyze
     {
         /// <summary>
         /// 0x0005
         /// </summary>
-        public override ushort MsgId { get; } = 0x0005;
+        public ushort MsgId  => 0x0005;
         /// <summary>
         /// 终端补传分包请求
         /// </summary>
-        public override string Description => "终端补传分包请求";
+        public string Description => "终端补传分包请求";
         /// <summary>
         /// 原始消息流水号
         /// 对应要求补传的原始消息第一包的消息流水号
@@ -43,7 +43,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0005 value = new JT808_0x0005();
             value.OriginalMsgNum = reader.ReadUInt16();
@@ -64,7 +64,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0005 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0005 value, IJT808Config config)
         {
             writer.WriteUInt16(value.OriginalMsgNum);
             if(writer.Version== JT808Version.JTT2013)

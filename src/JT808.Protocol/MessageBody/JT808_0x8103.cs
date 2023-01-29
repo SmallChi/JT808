@@ -13,16 +13,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 设置终端参数
     /// </summary>
-    public class JT808_0x8103 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8103>, IJT808Analyze
+    public class JT808_0x8103 : JT808MessagePackFormatter<JT808_0x8103>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x8103
         /// </summary>
-        public override ushort MsgId { get; } = 0x8103;
+        public ushort MsgId  => 0x8103;
         /// <summary>
         /// 设置终端参数
         /// </summary>
-        public override string Description => "设置终端参数";
+        public string Description => "设置终端参数";
         /// <summary>
         /// 参数总数
         /// </summary>
@@ -52,7 +52,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103 value = new JT808_0x8103
             {
@@ -67,13 +67,19 @@ namespace JT808.Protocol.MessageBody
                     var paramId = reader.ReadVirtualUInt32();//参数ID         
                     if (config.JT808_0X8103_Factory.Map.TryGetValue(paramId, out object instance))
                     {
-                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
-                        value.ParamList.Add(attachImpl);
+                        var bodyValue = instance.DeserializeExt<JT808_0x8103_BodyBase>(ref reader, config);
+                        if (bodyValue != null)
+                        {
+                            value.ParamList.Add(bodyValue);
+                        }
                     }
                     else if (config.JT808_0X8103_Custom_Factory.Map.TryGetValue(paramId, out object customInstance))
                     {
-                        dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customInstance, ref reader, config);
-                        value.CustomParamList.Add(attachImpl);
+                        var bodyValue = customInstance.DeserializeExt<JT808_0x8103_CustomBodyBase>(ref reader, config);
+                        if (bodyValue != null)
+                        {
+                            value.CustomParamList.Add(bodyValue);
+                        }
                     }
                 }
             }
@@ -89,20 +95,20 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103 value, IJT808Config config)
         {
             writer.WriteByte(value.ParamCount);
             try
             {
                 foreach (var item in value.ParamList)
                 {
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
+                    item.SerializeExt(ref writer, item, config);
                 }
                 if (value.CustomParamList != null)
                 {
                     foreach (var item in value.CustomParamList)
                     {
-                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
+                        item.SerializeExt(ref writer, item, config);
                     }
                 }
             }

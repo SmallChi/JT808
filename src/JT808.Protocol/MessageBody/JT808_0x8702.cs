@@ -8,14 +8,14 @@
         /// <summary>
         /// 0x8702
         /// </summary>
-        public override ushort MsgId { get; } = 0x8702;
+        public ushort MsgId { get; } = 0x8702;
         /// <summary>
         /// 上报驾驶员身份信息请求
         /// </summary>
-        public override string Description => "上报驾驶员身份信息请求";
+        public string Description => "上报驾驶员身份信息请求";
         /// <summary>
         /// 跳过数据体序列化
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization  => true;
     }
 }

@@ -13,16 +13,16 @@ namespace JT808.Protocol.MessageBody
     /// 信息点播菜单设置
     /// 0x8303
     /// </summary>
-    public class JT808_0x8303 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8303>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8303 : JT808MessagePackFormatter<JT808_0x8303>, JT808Bodies, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x8303
         /// </summary>
-        public override ushort MsgId { get; } = 0x8303;
+        public ushort MsgId =>0x8303;
         /// <summary>
         /// 信息点播菜单设置
         /// </summary>
-        public override string Description => "信息点播菜单设置";
+        public string Description => "信息点播菜单设置";
         /// <summary>
         /// 设置类型
         /// <see cref="JT808.Protocol.Enums.JT808InformationSettingType"/>
@@ -43,7 +43,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8303 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8303 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8303 jT808_0X8303 = new JT808_0x8303();
             jT808_0X8303.SettingType = reader.ReadByte();
@@ -65,7 +65,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8303 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8303 value, IJT808Config config)
         {
             writer.WriteByte(value.SettingType);
             writer.WriteByte((byte)value.InformationItems.Count);

@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 终端上传音视频资源列表
     /// </summary>
-    public class JT808_0x1205_AVResouce:IJT808MessagePackFormatter<JT808_0x1205_AVResouce>, IJT808Analyze
+    public class JT808_0x1205_AVResouce:JT808MessagePackFormatter<JT808_0x1205_AVResouce>, IJT808Analyze
     {
         /// <summary>
         /// 逻辑通道号
@@ -152,7 +152,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x1205_AVResouce Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x1205_AVResouce Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1205_AVResouce jT808_0x1205_AVResouce = new JT808_0x1205_AVResouce();
             jT808_0x1205_AVResouce.LogicChannelNo = reader.ReadByte();
@@ -171,7 +171,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1205_AVResouce value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x1205_AVResouce value, IJT808Config config)
         {
             writer.WriteByte(value.LogicChannelNo);
             writer.WriteDateTime_yyMMddHHmmss(value.BeginTime);

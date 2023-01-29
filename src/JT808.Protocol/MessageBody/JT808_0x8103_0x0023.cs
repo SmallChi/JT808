@@ -11,17 +11,17 @@ namespace JT808.Protocol.MessageBody
     /// 从服务器APN。该值为空时，终端应使用主服务器相同配置
     /// 2019版本
     /// </summary>
-    public class JT808_0x8103_0x0023 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0023>, IJT808_2019_Version, IJT808Analyze
+    public class JT808_0x8103_0x0023 : JT808MessagePackFormatter<JT808_0x8103_0x0023>, JT808_0x8103_BodyBase, IJT808_2019_Version, IJT808Analyze
     {
         /// <summary>
         /// 0x0023
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0023;
+        public uint ParamId { get; set; } = 0x0023;
         /// <summary>
         /// 数据长度
         /// n byte
         /// </summary>
-        public override byte ParamLength { get; set; }
+        public byte ParamLength { get; set; }
         /// <summary>
         /// 参数值
         /// 从服务器APN
@@ -30,7 +30,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 从服务器APN
         /// </summary>
-        public override string Description => "从服务器APN";
+        public string Description => "从服务器APN";
 
         /// <summary>
         /// 
@@ -55,7 +55,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0023 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0023 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0023 value = new JT808_0x8103_0x0023();
             value.ParamId = reader.ReadUInt32();
@@ -69,7 +69,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0023 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0023 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.Skip(1, out int skipPosition);

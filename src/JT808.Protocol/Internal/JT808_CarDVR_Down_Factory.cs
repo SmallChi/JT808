@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JT808.Protocol.MessageBody;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -29,7 +30,7 @@ namespace JT808.Protocol.Interfaces
         /// <param name="externalAssembly"></param>
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808CarDVRDownBodies)).ToList();
+            var types = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808CarDVRDownBodies)) == typeof(JT808CarDVRDownBodies)).ToList();
             foreach (var type in types)
             {
                 var instance = Activator.CreateInstance(type);

@@ -12,16 +12,16 @@ namespace JT808.Protocol.MessageBody
     /// 行驶记录仪数据上传
     /// 0x0700
     /// </summary>
-    public class JT808_0x0700 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0700>, IJT808Analyze
+    public class JT808_0x0700 : JT808MessagePackFormatter<JT808_0x0700>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 0x0700
         /// </summary>
-        public override ushort MsgId { get; } = 0x0700;
+        public ushort MsgId  => 0x0700;
         /// <summary>
         /// 行驶记录仪数据上传
         /// </summary>
-        public override string Description => "行驶记录仪数据上传";
+        public string Description => "行驶记录仪数据上传";
         /// <summary>
         /// 应答流水号
         /// </summary>
@@ -59,7 +59,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0700 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0700 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0700 value = new JT808_0x0700();
             value.ReplyMsgNum = reader.ReadUInt16();
@@ -73,7 +73,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0700 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0700 value, IJT808Config config)
         {
             writer.WriteUInt16(value.ReplyMsgNum);
             writer.WriteByte(value.CommandId);

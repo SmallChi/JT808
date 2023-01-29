@@ -2,6 +2,7 @@
 using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -20,7 +21,7 @@ namespace JT808.Protocol.Internal
 
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(ICusotmCommandParameter)).ToList();
+            var types = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(ICusotmCommandParameter)) == typeof(ICusotmCommandParameter)).ToList();
             foreach(var type in types)
             {
                 var instance = Activator.CreateInstance(type);

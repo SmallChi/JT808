@@ -28,7 +28,7 @@ namespace JT808.Protocol.Internal
 
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x0200_CustomBodyBase)).ToList();
+            var types = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x0200_CustomBodyBase)) == typeof(JT808_0x0200_CustomBodyBase)).ToList();
             foreach(var type in types)
             {
                 var instance = Activator.CreateInstance(type);
@@ -43,7 +43,7 @@ namespace JT808.Protocol.Internal
                 }
             }
 
-            var types2 = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x0200_CustomBodyBase2)).ToList();
+            var types2 = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x0200_CustomBodyBase2)) == typeof(JT808_0x0200_CustomBodyBase2)).ToList();
             foreach (var type in types2)
             {
                 var instance = Activator.CreateInstance(type);
@@ -58,7 +58,7 @@ namespace JT808.Protocol.Internal
                 }
             }
 
-            var types3 = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x0200_CustomBodyBase3)).ToList();
+            var types3 = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x0200_CustomBodyBase3)) == typeof(JT808_0x0200_CustomBodyBase3)).ToList();
             foreach (var type in types3)
             {
                 var instance = Activator.CreateInstance(type);
@@ -73,7 +73,7 @@ namespace JT808.Protocol.Internal
                 }
             }
 
-            var types4 = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x0200_CustomBodyBase4)).ToList();
+            var types4 = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x0200_CustomBodyBase4)) == typeof(JT808_0x0200_CustomBodyBase4)).ToList();
             foreach (var type in types4)
             {
                 var instance = Activator.CreateInstance(type);

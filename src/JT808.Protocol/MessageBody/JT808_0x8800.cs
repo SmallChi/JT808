@@ -11,16 +11,16 @@ namespace JT808.Protocol.MessageBody
     /// 多媒体数据上传应答
     /// 0x8800
     /// </summary>
-    public class JT808_0x8800 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8800>, IJT808Analyze
+    public class JT808_0x8800 : JT808MessagePackFormatter<JT808_0x8800>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x8800
         /// </summary>
-        public override ushort MsgId { get; } = 0x8800;
+        public ushort MsgId => 0x8800;
         /// <summary>
         /// 多媒体数据上传应答
         /// </summary>
-        public override string Description => "多媒体数据上传应答";
+        public string Description => "多媒体数据上传应答";
         /// <summary>
         /// 多媒体ID
         /// </summary>
@@ -40,7 +40,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8800 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8800 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8800 jT808_0X8800 = new JT808_0x8800();
             jT808_0X8800.MultimediaId = reader.ReadUInt32();
@@ -59,7 +59,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8800 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8800 value, IJT808Config config)
         {
             writer.WriteUInt32(value.MultimediaId);
             if (writer.Version == Enums.JT808Version.JTT2011)

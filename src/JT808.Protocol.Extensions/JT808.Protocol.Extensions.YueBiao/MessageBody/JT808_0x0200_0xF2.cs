@@ -13,16 +13,16 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 算法异常信息
     /// </summary>
-    public class JT808_0x0200_0xF2 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0xF2>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x0200_0xF2 : JT808MessagePackFormatter<JT808_0x0200_0xF2>, JT808_0x0200_CustomBodyBase,  IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 算法异常信息附件ID
         /// </summary>
-        public override byte AttachInfoId { get; set; } = JT808_YueBiao_Constants.JT808_0X0200_0xF2;
+        public byte AttachInfoId { get; set; } = JT808_YueBiao_Constants.JT808_0X0200_0xF2;
         /// <summary>
         /// 算法异常信息长度
         /// </summary>
-        public override byte AttachInfoLength { get; set; } = 4;
+        public byte AttachInfoLength { get; set; } = 4;
         /// <summary>
         /// 厂家自定义
         /// </summary>
@@ -49,7 +49,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200_0xF2 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0xF2 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0xF2 value = new JT808_0x0200_0xF2();
             value.AttachInfoId = reader.ReadByte();
@@ -63,7 +63,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0xF2 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0xF2 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);

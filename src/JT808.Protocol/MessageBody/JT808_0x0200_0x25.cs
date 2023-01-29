@@ -10,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 扩展车辆信号状态位
     /// </summary>
-    public class JT808_0x0200_0x25 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x25>, IJT808Analyze
+    public class JT808_0x0200_0x25 : JT808MessagePackFormatter<JT808_0x0200_0x25>, JT808_0x0200_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 扩展车辆信号状态位
@@ -20,11 +20,11 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// JT808_0x0200_0x25
         /// </summary>
-        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x25;
+        public byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x25;
         /// <summary>
         /// 4 byte
         /// </summary>
-        public override byte AttachInfoLength { get; set; } = 4;
+        public byte AttachInfoLength { get; set; } = 4;
         /// <summary>
         /// 
         /// </summary>
@@ -67,7 +67,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200_0x25 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0x25 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x25 value = new JT808_0x0200_0x25();
             value.AttachInfoId = reader.ReadByte();
@@ -81,7 +81,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x25 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x25 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);

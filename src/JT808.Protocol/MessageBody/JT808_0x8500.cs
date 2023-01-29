@@ -13,16 +13,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 车辆控制
     /// </summary>
-    public class JT808_0x8500 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8500>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8500 : JT808MessagePackFormatter<JT808_0x8500>, JT808Bodies, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x8500
         /// </summary>
-        public override ushort MsgId { get; } = 0x8500;
+        public ushort MsgId => 0x8500;
         /// <summary>
         /// 车辆控制
         /// </summary>
-        public override string Description => "车辆控制";
+        public string Description => "车辆控制";
         /// <summary>
         /// 控制标志 
         /// 控制指令标志位数据格式
@@ -90,7 +90,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8500 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8500 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8500 value = new JT808_0x8500();
             if(reader.Version== JT808Version.JTT2019)
@@ -102,7 +102,11 @@ namespace JT808.Protocol.MessageBody
                     var controlTypeId = reader.ReadVirtualUInt16();
                     if (config.JT808_0x8500_2019_Factory.Map.TryGetValue(controlTypeId, out object instance))
                     {
-                        value.ControlTypes.Add(JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config));
+                        var bodyValue = instance.DeserializeExt<JT808_0x8500_ControlType>(ref reader, config);
+                        if(bodyValue != null)
+                        {
+                            value.ControlTypes.Add(bodyValue);
+                        }
                     }
                     else
                     {
@@ -122,7 +126,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8500 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8500 value, IJT808Config config)
         {
             if (writer.Version == JT808Version.JTT2019)
             {
@@ -131,7 +135,7 @@ namespace JT808.Protocol.MessageBody
                     writer.WriteUInt16((ushort)value.ControlTypes.Count);
                     foreach (var item in value.ControlTypes)
                     {
-                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
+                        item.SerializeExt(ref writer, item, config);
                     }
                 }
                 else

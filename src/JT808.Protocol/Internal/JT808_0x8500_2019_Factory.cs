@@ -2,9 +2,11 @@
 using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using static JT808.Protocol.MessageBody.JT808_0x8105;
 
 namespace JT808.Protocol.Internal
 {
@@ -19,7 +21,7 @@ namespace JT808.Protocol.Internal
 
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x8500_ControlType)).ToList();
+            var types = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x8500_ControlType)) == typeof(JT808_0x8500_ControlType)).ToList();
             foreach(var type in types)
             {
                 var instance = Activator.CreateInstance(type);

@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 里程
     /// </summary>
-    public class JT808_0x0200_0x01 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x01>, IJT808Analyze
+    public class JT808_0x0200_0x01 : JT808MessagePackFormatter<JT808_0x0200_0x01>, JT808_0x0200_BodyBase,  IJT808Analyze
     {
         /// <summary>
         /// JT808_0x0200_0x01
         /// </summary>
-        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x01;
+        public byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x01;
         /// <summary>
         ///  4 byte
         /// </summary>
-        public override byte AttachInfoLength { get; set; } = 4;
+        public byte AttachInfoLength { get; set; } = 4;
         /// <summary>
         /// 里程
         /// </summary>
@@ -51,7 +51,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200_0x01 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0x01 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x01 value = new JT808_0x0200_0x01();
             value.AttachInfoId = reader.ReadByte();
@@ -65,7 +65,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x01 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x01 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);

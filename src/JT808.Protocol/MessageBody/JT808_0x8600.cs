@@ -16,16 +16,16 @@ namespace JT808.Protocol.MessageBody
     /// 0x8600
     /// 注：本条消息协议支持周期时间范围，如要限制每天的8:30-18:00，起始/结束时间设为：00-00-00-08-30-00/00-00-00-18-00-00，其他以此类推
     /// </summary>
-    public class JT808_0x8600 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8600>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8600 : JT808MessagePackFormatter<JT808_0x8600>, JT808Bodies,  IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x8600
         /// </summary>
-        public override ushort MsgId { get; } = 0x8600;
+        public ushort MsgId => 0x8600;
         /// <summary>
         /// 设置圆形区域
         /// </summary>
-        public override string Description => "设置圆形区域";
+        public string Description => "设置圆形区域";
         /// <summary>
         /// 设置属性
         /// <see cref="JT808.Protocol.Enums.JT808SettingProperty"/>
@@ -45,7 +45,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8600 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8600 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8600 jT808_0X8600 = new JT808_0x8600();
             jT808_0X8600.SettingAreaProperty = reader.ReadByte();
@@ -91,7 +91,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8600 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8600 value, IJT808Config config)
         {
             writer.WriteByte(value.SettingAreaProperty);
             if (value.AreaItems != null)

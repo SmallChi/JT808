@@ -20,14 +20,14 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x84
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.set_state_quantity_configuration_information.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.set_state_quantity_configuration_information.ToByteValue();
         /// <summary>
         /// 状态量配置信息
         /// </summary>
-        public override string Description => "状态量配置信息";
+        public string Description => "状态量配置信息";
         /// <summary>
         /// 
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization => true;
     }
 }

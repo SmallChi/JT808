@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 终端注册应答
     /// </summary>
-    public class JT808_0x8100 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8100>, IJT808Analyze
+    public class JT808_0x8100 : JT808MessagePackFormatter<JT808_0x8100>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 0x8100
         /// </summary>
-        public override ushort MsgId { get; } = 0x8100;
+        public ushort MsgId  => 0x8100;
         /// <summary>
         /// 终端注册应答
         /// </summary>
-        public override string Description => "终端注册应答";
+        public string Description => "终端注册应答";
         /// <summary>
         /// 应答流水号
         /// 对应的终端注册消息的流水号
@@ -63,7 +63,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8100 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8100 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8100 value = new JT808_0x8100();
             value.AckMsgNum = reader.ReadUInt16();
@@ -81,7 +81,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8100 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8100 value, IJT808Config config)
         {
             writer.WriteUInt16(value.AckMsgNum);
             writer.WriteByte((byte)value.JT808TerminalRegisterResult);

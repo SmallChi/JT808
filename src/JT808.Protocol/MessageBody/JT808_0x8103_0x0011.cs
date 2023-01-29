@@ -10,17 +10,17 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 主服务器无线通信拨号用户名
     /// </summary>
-    public class JT808_0x8103_0x0011 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0011>, IJT808Analyze
+    public class JT808_0x8103_0x0011 : JT808MessagePackFormatter<JT808_0x8103_0x0011>, JT808_0x8103_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 0x0011
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0011;
+        public  uint ParamId { get; set; } = 0x0011;
         /// <summary>
         /// 数据长度
         /// n byte
         /// </summary>
-        public override byte ParamLength { get; set; }
+        public  byte ParamLength { get; set; }
         /// <summary>
         /// 主服务器无线通信拨号用户名
         /// </summary>
@@ -28,7 +28,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 主服务器无线通信拨号用户名
         /// </summary>
-        public override string Description => "主服务器无线通信拨号用户名";
+        public  string Description => "主服务器无线通信拨号用户名";
 
         /// <summary>
         /// 
@@ -53,7 +53,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0011 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0011 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0011 jT808_0x8103_0x0011 = new JT808_0x8103_0x0011();
             jT808_0x8103_0x0011.ParamId = reader.ReadUInt32();
@@ -67,7 +67,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0011 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0011 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.Skip(1, out int skipPosition);

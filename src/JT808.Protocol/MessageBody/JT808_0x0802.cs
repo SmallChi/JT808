@@ -13,16 +13,16 @@ namespace JT808.Protocol.MessageBody
     /// 存储多媒体数据检索应答
     /// 0x0802
     /// </summary>
-    public class JT808_0x0802 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0802>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x0802 : JT808MessagePackFormatter<JT808_0x0802>, JT808Bodies,  IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x0802
         /// </summary>
-        public override ushort MsgId { get; } = 0x0802;
+        public ushort MsgId => 0x0802;
         /// <summary>
         /// 存储多媒体数据检索应答
         /// </summary>
-        public override string Description => "存储多媒体数据检索应答";
+        public string Description => "存储多媒体数据检索应答";
         /// <summary>
         /// 应答流水号
         /// 对应的多媒体数据检索消息的流水号
@@ -81,7 +81,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0802 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0802 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0802 value = new JT808_0x0802();
             value.MsgNum = reader.ReadUInt16();
@@ -111,7 +111,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0802 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0802 value, IJT808Config config)
         {
             writer.WriteUInt16(value.MsgNum);
             writer.WriteUInt16((ushort)value.MultimediaSearchItems.Count);

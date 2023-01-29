@@ -12,12 +12,12 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 控制类型
     /// </summary>
-    public  class JT808_0x8500_0x0001 : JT808_0x8500_ControlType, IJT808MessagePackFormatter<JT808_0x8500_0x0001>, IJT808Analyze
+    public  class JT808_0x8500_0x0001 : JT808MessagePackFormatter<JT808_0x8500_0x0001>, JT808_0x8500_ControlType,  IJT808Analyze
     {
         /// <summary>
         /// 0x0001
         /// </summary>
-        public override ushort ControlTypeId { get; set; } = 0x0001;
+        public ushort ControlTypeId { get; set; } = 0x0001;
         /// <summary>
         /// 控制类型参数
         /// </summary>
@@ -43,7 +43,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8500_0x0001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8500_0x0001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8500_0x0001 value = new JT808_0x8500_0x0001();
             value.ControlTypeId = reader.ReadUInt16();
@@ -56,7 +56,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8500_0x0001 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8500_0x0001 value, IJT808Config config)
         {
             writer.WriteUInt16(value.ControlTypeId);
             writer.WriteByte(value.ControlTypeParameter);

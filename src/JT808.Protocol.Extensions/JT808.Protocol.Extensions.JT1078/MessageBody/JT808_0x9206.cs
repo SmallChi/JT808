@@ -11,16 +11,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 文件上传指令
     /// </summary>
-    public class JT808_0x9206 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9206>, IJT808Analyze
+    public class JT808_0x9206 : JT808MessagePackFormatter<JT808_0x9206>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 文件上传指令
         /// </summary>
-        public override string Description => "文件上传指令";
+        public string Description => "文件上传指令";
         /// <summary>
         /// 0x9206
         /// </summary>
-        public override ushort MsgId => 0x9206;
+        public ushort MsgId => 0x9206;
         /// <summary>
         /// 服务器IP地址服务
         /// </summary>
@@ -206,7 +206,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x9206 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x9206 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             var jT808_0x9206 = new JT808_0x9206();
             jT808_0x9206.ServerIpLength = reader.ReadByte();
@@ -234,7 +234,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9206 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9206 value, IJT808Config config)
         {
             writer.Skip(1, out int serverIpLengthposition);
             writer.WriteString(value.ServerIp);

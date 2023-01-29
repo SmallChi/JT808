@@ -11,12 +11,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 文件上传控制
     /// </summary>
-    public class JT808_0x9207 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9207>, IJT808Analyze
+    public class JT808_0x9207 : JT808MessagePackFormatter<JT808_0x9207>, JT808Bodies, IJT808Analyze
     {
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
-        public override string Description => "文件上传控制";
-        public override ushort MsgId => 0x9207;
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 文件上传控制
+        /// </summary>
+        public string Description => "文件上传控制";
+        /// <summary>
+        /// 0x9207
+        /// </summary>
+        public ushort MsgId => 0x9207;
         /// <summary>
         /// 流水号
         /// </summary>
@@ -26,7 +30,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public byte UploadControl { get; set; }
 
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x9207 value = new JT808_0x9207();
@@ -44,20 +53,29 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 };
             }
         }
-
-        public JT808_0x9207 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public override JT808_0x9207 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             var jT808_0x9207 = new JT808_0x9207();
             jT808_0x9207.MgsNum = reader.ReadUInt16();
             jT808_0x9207.UploadControl = reader.ReadByte();
             return jT808_0x9207;
         }
-
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9207 value, IJT808Config config)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9207 value, IJT808Config config)
         {
             writer.WriteUInt16(value.MgsNum);
             writer.WriteByte(value.UploadControl);
         }
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
     }
 }

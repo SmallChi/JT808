@@ -11,16 +11,16 @@ namespace JT808.Protocol.MessageBody
     /// 删除路线
     /// 0x8607
     /// </summary>
-    public class JT808_0x8607 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8607>, IJT808Analyze
+    public class JT808_0x8607 : JT808MessagePackFormatter<JT808_0x8607>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 0x8607
         /// </summary>
-        public override ushort MsgId { get; } = 0x8607;
+        public ushort MsgId => 0x8607;
         /// <summary>
         /// 删除路线
         /// </summary>
-        public override string Description => "删除路线";
+        public string Description => "删除路线";
         /// <summary>
         /// 区域数
         /// 本条消息中包含的区域数，不超过 125 个，多于 125个建议用多条消息，0 为删除所有圆形区域
@@ -36,7 +36,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8607 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8607 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8607 jT808_0X8607 = new JT808_0x8607();
             jT808_0X8607.AreaCount = reader.ReadByte();
@@ -53,7 +53,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8607 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8607 value, IJT808Config config)
         {
             if (value.AreaIds != null)
             {

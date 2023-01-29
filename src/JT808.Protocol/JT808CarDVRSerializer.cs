@@ -1,7 +1,5 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
-using JT808.Protocol.Formatters;
-using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
 using JT808.Protocol.MessagePack;
 using System;
@@ -228,7 +226,7 @@ namespace JT808.Protocol
         {
             var formatter = jT808Config.GetMessagePackFormatterByType(type);
             JT808MessagePackReader jT808MessagePackReader = new JT808MessagePackReader(bytes, version);
-            return JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(formatter,ref jT808MessagePackReader, jT808Config);
+            return formatter.Deserialize(ref jT808MessagePackReader, jT808Config);
         }
         /// <summary>
         /// 

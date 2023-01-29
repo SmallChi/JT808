@@ -33,7 +33,7 @@ namespace JT808.Protocol.Test.Extensions
         public void Test2()
         {
             var types = Enum.GetNames(typeof(JT808MsgId));
-            var bodyTypes = Assembly.GetAssembly(typeof(JT808Package)).GetTypes().Where(w => w.BaseType == typeof(JT808Bodies)).ToList();
+            var bodyTypes = Assembly.GetAssembly(typeof(JT808Package)).GetTypes().Where(w => w.GetInterface(nameof(JT808Bodies)) == typeof(JT808Bodies)).ToList();
             Assert.Equal(types.Length, bodyTypes.Count);
         }
 
@@ -41,7 +41,7 @@ namespace JT808.Protocol.Test.Extensions
         public void Test3()
         {
             var types = Enum.GetNames(typeof(JT808MsgId));
-            var bodyTypes = Assembly.GetAssembly(typeof(JT808Package)).GetTypes().Where(w => w.BaseType == typeof(JT808Bodies)).ToList();
+            var bodyTypes = Assembly.GetAssembly(typeof(JT808Package)).GetTypes().Where(w => w.GetInterface(nameof(JT808Bodies)) == typeof(JT808Bodies)).ToList();
             foreach (var type in bodyTypes)
             {
                 var instance = Activator.CreateInstance(type);

@@ -12,7 +12,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 报警附件信息消息
     /// </summary>
-    public class JT808_0x1210: JT808Bodies, IJT808MessagePackFormatter<JT808_0x1210>, IJT808Analyze,IJT808_2019_Version
+    public class JT808_0x1210: JT808MessagePackFormatter<JT808_0x1210>, JT808Bodies,  IJT808Analyze,IJT808_2019_Version
     {
         /// <summary>
         /// 终端 ID
@@ -45,11 +45,11 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <summary>
         /// 报警附件信息消息Id
         /// </summary>
-        public override ushort MsgId => 0x1210;
+        public ushort MsgId => 0x1210;
         /// <summary>
         /// 报警附件信息消息
         /// </summary>
-        public override string Description => "报警附件信息消息";
+        public string Description => "报警附件信息消息";
         /// <summary>
         /// 
         /// </summary>
@@ -108,7 +108,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x1210 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x1210 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1210 value = new JT808_0x1210();
             value.TerminalId = reader.ReadString(30);
@@ -144,7 +144,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1210 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x1210 value, IJT808Config config)
         {
             writer.WriteString(value.TerminalId.PadRight(30, '\0'));
             if (value.AlarmIdentification == null)

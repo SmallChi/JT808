@@ -12,17 +12,17 @@ namespace JT808.Protocol.MessageBody
     /// b7-b0： 碰撞时间，单位 4ms；
     /// b15-b8：碰撞加速度，单位 0.1g，设置范围在：0-79 之间，默认为10。
     /// </summary>
-    public class JT808_0x8103_0x005D : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x005D>, IJT808Analyze
+    public class JT808_0x8103_0x005D : JT808MessagePackFormatter<JT808_0x8103_0x005D>, JT808_0x8103_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 0x005D
         /// </summary>
-        public override uint ParamId { get; set; } = 0x005D;
+        public  uint ParamId { get; set; } = 0x005D;
         /// <summary>
         /// 数据长度
         /// 2 byte
         /// </summary>
-        public override byte ParamLength { get; set; } = 2;
+        public  byte ParamLength { get; set; } = 2;
         /// <summary>
         /// 碰撞报警参数设置
         /// b7-b0： 碰撞时间，单位4ms；
@@ -32,7 +32,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 碰撞报警参数设置
         /// </summary>
-        public override string Description => "碰撞报警参数设置";
+        public  string Description => "碰撞报警参数设置";
 
         /// <summary>
         /// 
@@ -56,7 +56,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x005D Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x005D Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x005D jT808_0x8103_0x005D = new JT808_0x8103_0x005D();
             jT808_0x8103_0x005D.ParamId = reader.ReadUInt32();
@@ -70,7 +70,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x005D value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x005D value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

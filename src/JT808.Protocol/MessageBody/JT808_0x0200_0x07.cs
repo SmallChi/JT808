@@ -12,7 +12,7 @@ namespace JT808.Protocol.MessageBody
     /// 卫星状态数据
     ///  2019版本
     /// </summary>
-    public class JT808_0x0200_0x07 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x07>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x0200_0x07 : JT808MessagePackFormatter<JT808_0x0200_0x07>, JT808_0x0200_BodyBase,  IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 
@@ -27,11 +27,11 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// JT808_0x0200_0x07
         /// </summary>
-        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x07;
+        public byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x07;
         /// <summary>
         /// 4 的倍数
         /// </summary>
-        public override byte AttachInfoLength { get; set; }
+        public byte AttachInfoLength { get; set; }
         /// <summary>
         /// BeiDou
         /// 最小值是 0，最大值 12，CN 值大于等于 20 的卫星数量
@@ -125,7 +125,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200_0x07 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0x07 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x07 value = new JT808_0x0200_0x07();
             value.AttachInfoId = reader.ReadByte();
@@ -178,7 +178,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x07 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x07 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             //各个类型的卫星数量为1个字节

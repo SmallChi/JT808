@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 查询区域或线路数据应答
     /// </summary>
-    public class JT808_0x0608 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0608>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x0608 : JT808MessagePackFormatter<JT808_0x0608>, JT808Bodies, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x0608
         /// </summary>
-        public override ushort MsgId { get; } = 0x0608;
+        public ushort MsgId  => 0x0608;
         /// <summary>
         /// 查询区域或线路数据应答
         /// </summary>
-        public override string Description => "查询区域或线路数据应答";
+        public string Description => "查询区域或线路数据应答";
         /// <summary>
         /// 查询类型
         /// </summary>
@@ -73,7 +73,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteStartArray("设置圆形区域");
                         for (int i = 0; i < value.Count; i++)
                         {
-                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8600).GUID, out object instance))
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8600).GUID, out IJT808MessagePackFormatter instance))
                             {
                                 writer.WriteStartObject();
                                 instance.Analyze(ref reader, writer, config);
@@ -86,7 +86,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteStartArray("设置矩形区域");
                         for (int i = 0; i < value.Count; i++)
                         {
-                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8602).GUID, out object instance))
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8602).GUID, out IJT808MessagePackFormatter instance))
                             {
                                 writer.WriteStartObject();
                                 instance.Analyze(ref reader, writer, config);
@@ -99,7 +99,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteStartArray("设置多边形区域");
                         for (int i = 0; i < value.Count; i++)
                         {
-                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8604).GUID, out object instance))
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8604).GUID, out IJT808MessagePackFormatter instance))
                             {
                                 writer.WriteStartObject();
                                 instance.Analyze(ref reader, writer, config);
@@ -112,7 +112,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteStartArray("设置路线");
                         for (int i = 0; i < value.Count; i++)
                         {
-                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8606).GUID, out object instance))
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8606).GUID, out IJT808MessagePackFormatter instance))
                             {
                                 writer.WriteStartObject();
                                 instance.Analyze(ref reader, writer, config);
@@ -141,7 +141,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0608 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0608 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0608 value = new JT808_0x0608();
             value.QueryType = reader.ReadByte();
@@ -154,10 +154,13 @@ namespace JT808.Protocol.MessageBody
                         value.JT808_0x8600s = new List<JT808_0x8600>();
                         for (int i = 0; i < value.Count; i++)
                         {
-                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8600).GUID, out object instance))
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8600).GUID, out IJT808MessagePackFormatter instance))
                             {
-                                dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
-                                value.JT808_0x8600s.Add(attachImpl);
+                                object attachImpl = instance.Deserialize(ref reader, config);
+                                if (attachImpl != null)
+                                {
+                                    value.JT808_0x8600s.Add((JT808_0x8600)attachImpl);
+                                }
                             }         
                         }
                         break;
@@ -165,10 +168,13 @@ namespace JT808.Protocol.MessageBody
                         value.JT808_0x8602s = new List<JT808_0x8602>();
                         for (int i = 0; i < value.Count; i++)
                         {
-                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8602).GUID, out object instance))
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8602).GUID, out IJT808MessagePackFormatter instance))
                             {
-                                dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
-                                value.JT808_0x8602s.Add(attachImpl);
+                                object attachImpl = instance.Deserialize(ref reader, config);
+                                if (attachImpl != null)
+                                {
+                                    value.JT808_0x8602s.Add((JT808_0x8602)attachImpl);
+                                }
                             }
                         }
                         break;
@@ -176,10 +182,13 @@ namespace JT808.Protocol.MessageBody
                         value.JT808_0x8604s = new List<JT808_0x8604>();
                         for (int i = 0; i < value.Count; i++)
                         {
-                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8604).GUID, out object instance))
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8604).GUID, out IJT808MessagePackFormatter instance))
                             {
-                                dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
-                                value.JT808_0x8604s.Add(attachImpl);
+                                object attachImpl = instance.Deserialize(ref reader, config);
+                                if (attachImpl != null)
+                                {
+                                    value.JT808_0x8604s.Add((JT808_0x8604)attachImpl);
+                                }
                             }
                         }
                         break;
@@ -187,10 +196,13 @@ namespace JT808.Protocol.MessageBody
                         value.JT808_0x8606s = new List<JT808_0x8606>();
                         for (int i = 0; i < value.Count; i++)
                         {
-                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8606).GUID, out object instance))
+                            if (config.FormatterFactory.FormatterDict.TryGetValue(typeof(JT808_0x8606).GUID, out IJT808MessagePackFormatter instance))
                             {
-                                dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
-                                value.JT808_0x8606s.Add(attachImpl);
+                                object attachImpl = instance.Deserialize(ref reader, config);
+                                if (attachImpl != null)
+                                {
+                                    value.JT808_0x8606s.Add((JT808_0x8606)attachImpl);
+                                }
                             }
                         }
                         break;
@@ -211,7 +223,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0608 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0608 value, IJT808Config config)
         {
             writer.WriteByte(value.QueryType);
             switch (value.QueryType)
@@ -222,7 +234,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteUInt32((uint)value.JT808_0x8600s.Count);
                         foreach (var item in value.JT808_0x8600s)
                         {
-                            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
+                            item.SerializeExt(ref writer, item, config);
                         }
                     }
                     break;
@@ -232,7 +244,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteUInt32((uint)value.JT808_0x8602s.Count);
                         foreach (var item in value.JT808_0x8602s)
                         {
-                            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
+                            item.SerializeExt(ref writer, item, config);
                         }
                     }
                     break;
@@ -242,7 +254,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteUInt32((uint)value.JT808_0x8604s.Count);
                         foreach (var item in value.JT808_0x8604s)
                         {
-                            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
+                            item.SerializeExt(ref writer, item, config);
                         }
                     }
                     break;
@@ -252,7 +264,7 @@ namespace JT808.Protocol.MessageBody
                         writer.WriteUInt32((uint)value.JT808_0x8606s.Count);
                         foreach (var item in value.JT808_0x8606s)
                         {
-                            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item, ref writer, item, config);
+                            item.SerializeExt(ref writer, item, config);
                         }
                     }
                     break;

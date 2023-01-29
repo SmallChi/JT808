@@ -10,7 +10,7 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 超速报警附加信息
     /// </summary>
-    public class JT808_0x0200_0x11 : JT808_0x0200_BodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x11>, IJT808Analyze
+    public class JT808_0x0200_0x11 : JT808MessagePackFormatter<JT808_0x0200_0x11>, JT808_0x0200_BodyBase,  IJT808Analyze
     {
         /// <summary>
         /// 超速报警附加信息
@@ -30,11 +30,11 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// JT808_0x0200_0x11
         /// </summary>
-        public override byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x11;
+        public byte AttachInfoId { get; set; } = JT808Constants.JT808_0x0200_0x11;
         /// <summary>
         /// 1或5 byte
         /// </summary>
-        public override byte AttachInfoLength
+        public byte AttachInfoLength
         {
             get
             {
@@ -76,7 +76,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200_0x11 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0x11 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x11 value = new JT808_0x0200_0x11();
             value.AttachInfoId = reader.ReadByte();
@@ -94,7 +94,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x11 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x11 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);

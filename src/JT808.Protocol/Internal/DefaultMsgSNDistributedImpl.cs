@@ -8,14 +8,24 @@ namespace JT808.Protocol.Internal
 {
     internal class DefaultMsgSNDistributedImpl : IJT808MsgSNDistributed
     {
-        ConcurrentDictionary<string, int> counterDict;
+        ConcurrentDictionary<string, ushort> counterDict;
         public DefaultMsgSNDistributedImpl()
         {
-            counterDict = new ConcurrentDictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            counterDict = new ConcurrentDictionary<string, ushort>(StringComparer.OrdinalIgnoreCase);
         }
         public ushort Increment(string terminalPhoneNo)
         {
-            return (ushort)counterDict.AddOrUpdate(terminalPhoneNo, 1, (id, count) => count + 1);
+            if (counterDict.TryGetValue(terminalPhoneNo, out ushort value)) 
+            {
+                ushort newValue = ++value;
+                counterDict.TryUpdate(terminalPhoneNo, newValue, value);
+                return newValue;
+            }
+            else
+            {
+                counterDict.TryAdd(terminalPhoneNo, 1);
+                return 1;
+            }
         }
     }
 }

@@ -10,14 +10,14 @@ namespace JT808.Protocol.Test.JT808LocationAttach
     /// UserName-BCD(10)
     /// Gerder-byte-1
     /// </summary>
-    public class JT808LocationAttachImpl0x61: JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808LocationAttachImpl0x61>
+    public class JT808LocationAttachImpl0x61: JT808MessagePackFormatter<JT808LocationAttachImpl0x61>, JT808_0x0200_CustomBodyBase 
     {
-        public override byte AttachInfoId { get;  set; } = 0x61;
-        public override byte AttachInfoLength { get;  set; } = 13;
+        public byte AttachInfoId { get;  set; } = 0x61;
+        public byte AttachInfoLength { get;  set; } = 13;
         public int Age { get; set; }
         public byte Gender { get; set; }
         public string UserName { get; set; }
-        public JT808LocationAttachImpl0x61 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public  override JT808LocationAttachImpl0x61 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808LocationAttachImpl0x61 jT808LocationAttachImpl0x61 = new JT808LocationAttachImpl0x61();
             jT808LocationAttachImpl0x61.AttachInfoId = reader.ReadByte();
@@ -28,7 +28,7 @@ namespace JT808.Protocol.Test.JT808LocationAttach
             return jT808LocationAttachImpl0x61;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, JT808LocationAttachImpl0x61 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808LocationAttachImpl0x61 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);

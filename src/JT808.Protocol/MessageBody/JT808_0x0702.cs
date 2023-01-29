@@ -11,16 +11,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 驾驶员身份信息采集上报
     /// </summary>
-    public class JT808_0x0702 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0702>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x0702 : JT808MessagePackFormatter<JT808_0x0702>, JT808Bodies, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x0702
         /// </summary>
-        public override ushort MsgId { get; } = 0x0702;
+        public ushort MsgId  => 0x0702;
         /// <summary>
         /// Description
         /// </summary>
-        public override string Description => "驾驶员身份信息采集上报";
+        public string Description => "驾驶员身份信息采集上报";
         /// <summary>
         /// 状态
         /// 0x01：从业资格证 IC 卡插入（驾驶员上班）；
@@ -180,7 +180,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0702 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0702 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0702 value = new JT808_0x0702();
             var firstByte = reader.ReadVirtualByte();
@@ -238,7 +238,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0702 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0702 value, IJT808Config config)
         {
             if (writer.Version == JT808Version.JTT2011)
             {

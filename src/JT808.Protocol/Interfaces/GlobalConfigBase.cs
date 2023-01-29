@@ -165,7 +165,7 @@ namespace JT808.Protocol.Interfaces
             TTargetJT808Bodies bodies = new TTargetJT808Bodies();
             MsgIdFactory.Map[bodies.MsgId] = bodies;
             FormatterFactory.FormatterDict.Remove(typeof(TSourceJT808Bodies).GUID);
-            FormatterFactory.FormatterDict.Add(typeof(TTargetJT808Bodies).GUID, bodies);
+            FormatterFactory.FormatterDict.Add(typeof(TTargetJT808Bodies).GUID, (IJT808MessagePackFormatter)bodies);
         }
     }
 }

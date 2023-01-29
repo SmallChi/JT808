@@ -10,17 +10,17 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 紧急报警时汇报时间间隔，单位为秒（s），>0
     /// </summary>
-    public class JT808_0x8103_0x0028 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0028>, IJT808Analyze
+    public class JT808_0x8103_0x0028 : JT808MessagePackFormatter<JT808_0x8103_0x0028>, JT808_0x8103_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 0x0028
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0028;
+        public uint ParamId { get; set; } = 0x0028;
         /// <summary>
         /// 数据长度
         /// 4 byte
         /// </summary>
-        public override byte ParamLength { get; set; } = 4;
+        public byte ParamLength { get; set; } = 4;
         /// <summary>
         /// 参数值
         /// 紧急报警时汇报时间间隔，单位为秒（s），>0
@@ -29,7 +29,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 紧急报警时汇报时间间隔
         /// </summary>
-        public override string Description => "紧急报警时汇报时间间隔";
+        public string Description => "紧急报警时汇报时间间隔";
 
         /// <summary>
         /// 
@@ -53,7 +53,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0028 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0028 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0028 jT808_0x8103_0x0028 = new JT808_0x8103_0x0028();
             jT808_0x8103_0x0028.ParamId = reader.ReadUInt32();
@@ -67,7 +67,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0028 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0028 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

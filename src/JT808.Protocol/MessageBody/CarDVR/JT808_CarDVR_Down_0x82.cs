@@ -15,12 +15,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 设置车辆信息
     /// 返回：车辆信息
     /// </summary>
-    public class JT808_CarDVR_Down_0x82 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0x82>, IJT808Analyze
+    public class JT808_CarDVR_Down_0x82 : JT808MessagePackFormatter<JT808_CarDVR_Down_0x82>, JT808CarDVRDownBodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x82
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.setting_vehicle_information.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.setting_vehicle_information.ToByteValue();
         /// <summary>
         /// 车辆识别代号
         /// </summary>
@@ -38,7 +38,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 车辆信息
         /// </summary>
-        public override string Description => "车辆信息";
+        public string Description => "车辆信息";
         /// <summary>
         /// 
         /// </summary>
@@ -64,7 +64,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x82 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x82 value, IJT808Config config)
         {
             var currentPosition = writer.GetCurrentPosition();
             writer.WriteASCII(value.Vin);
@@ -82,7 +82,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Down_0x82 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Down_0x82 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0x82 value = new JT808_CarDVR_Down_0x82();
             value.Vin = reader.ReadASCII(17);

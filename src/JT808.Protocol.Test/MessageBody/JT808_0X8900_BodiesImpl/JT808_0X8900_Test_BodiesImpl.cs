@@ -7,12 +7,12 @@ using System.Text.Json;
 
 namespace JT808.Protocol.Test.MessageBody.JT808_0X8900_BodiesImpl
 {
-    public class JT808_0X8900_Test_BodiesImpl: JT808_0x8900_BodyBase, IJT808MessagePackFormatter<JT808_0X8900_Test_BodiesImpl>, IJT808Analyze
+    public class JT808_0X8900_Test_BodiesImpl: JT808MessagePackFormatter<JT808_0X8900_Test_BodiesImpl>, JT808_0x8900_BodyBase,  IJT808Analyze
     {
          public uint Id { get; set; }
 
          public byte Sex { get; set; }
-        public override byte PassthroughType { get; set; } = 0x0B;
+        public byte PassthroughType { get; set; } = 0x0B;
 
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
@@ -23,7 +23,7 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0X8900_BodiesImpl
             writer.WriteNumber($"[{value.Sex.ReadNumber()}]性别", value.Sex);
         }
 
-        public JT808_0X8900_Test_BodiesImpl Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0X8900_Test_BodiesImpl Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0X8900_Test_BodiesImpl value = new JT808_0X8900_Test_BodiesImpl();
             value.Id = reader.ReadUInt32();
@@ -31,7 +31,7 @@ namespace JT808.Protocol.Test.MessageBody.JT808_0X8900_BodiesImpl
             return value;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0X8900_Test_BodiesImpl value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0X8900_Test_BodiesImpl value, IJT808Config config)
         {
             writer.WriteUInt32(value.Id);
             writer.WriteByte(value.Sex);

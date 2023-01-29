@@ -15,12 +15,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 设置记录仪初次安装日期
     /// 返回：初次安装日期
     /// </summary>
-    public class JT808_CarDVR_Down_0x83 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0x83>, IJT808Analyze
+    public class JT808_CarDVR_Down_0x83 : JT808MessagePackFormatter<JT808_CarDVR_Down_0x83>, JT808CarDVRDownBodies, IJT808Analyze
     {
         /// <summary>
         /// 0x83
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.set_first_install_date_recorder.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.set_first_install_date_recorder.ToByteValue();
         /// <summary>
         /// 实时时间
         /// </summary>
@@ -28,7 +28,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 初次安装日期
         /// </summary>
-        public override string Description => "初次安装日期";
+        public string Description => "初次安装日期";
         /// <summary>
         /// 
         /// </summary>
@@ -47,7 +47,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x83 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x83 value, IJT808Config config)
         {
             writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
         }
@@ -57,7 +57,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Down_0x83 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Down_0x83 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0x83 value = new JT808_CarDVR_Down_0x83();
             value.RealTime = reader.ReadDateTime_yyMMddHHmmss();

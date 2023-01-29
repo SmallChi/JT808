@@ -11,16 +11,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 终端上传乘客流量
     /// </summary>
-    public class JT808_0x1005 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x1005>, IJT808Analyze
+    public class JT808_0x1005 : JT808MessagePackFormatter<JT808_0x1005>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 
         /// </summary>
-        public override string Description => "终端上传乘客流量";
+        public string Description => "终端上传乘客流量";
         /// <summary>
         /// 
         /// </summary>
-        public override ushort MsgId => 0x1005;
+        public ushort MsgId => 0x1005;
         /// <summary>
         /// 起始时间
         /// </summary>
@@ -61,7 +61,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x1005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x1005 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x1005 jT808_0x1005 = new JT808_0x1005();
             jT808_0x1005.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
@@ -76,7 +76,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x1005 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x1005 value, IJT808Config config)
         {
             writer.WriteDateTime_yyMMddHHmmss(value.BeginTime);
             writer.WriteDateTime_yyMMddHHmmss(value.EndTime);

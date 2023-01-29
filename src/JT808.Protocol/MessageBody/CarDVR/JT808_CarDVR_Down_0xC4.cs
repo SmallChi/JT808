@@ -15,12 +15,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 设置初始里程
     /// 返回：记录仪初次安装时车辆已行驶的总里程
     /// </summary>
-    public class JT808_CarDVR_Down_0xC4 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0xC4>, IJT808Analyze
+    public class JT808_CarDVR_Down_0xC4 : JT808MessagePackFormatter<JT808_CarDVR_Down_0xC4>, JT808CarDVRDownBodies,  IJT808Analyze
     {
         /// <summary>
         /// 0xC4
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.set_init_mileage.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.set_init_mileage.ToByteValue();
         /// <summary>
         /// 实时时间
         /// </summary>
@@ -40,7 +40,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 车辆识别代号、机动车号牌号码和机动车号牌分类
         /// </summary>
-        public override string Description => "车辆识别代号、机动车号牌号码和机动车号牌分类";
+        public string Description => "车辆识别代号、机动车号牌号码和机动车号牌分类";
         /// <summary>
         /// 
         /// </summary>
@@ -65,7 +65,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC4 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC4 value, IJT808Config config)
         {
             writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
             writer.WriteDateTime_yyMMddHHmmss(value.FirstInstallTime);
@@ -78,7 +78,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Down_0xC4 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Down_0xC4 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC4 value = new JT808_CarDVR_Down_0xC4();
             value.RealTime = reader.ReadDateTime_yyMMddHHmmss();

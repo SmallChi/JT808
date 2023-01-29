@@ -19,7 +19,7 @@ namespace JT808.Protocol.Internal
 
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x0900_BodyBase)).ToList();
+            var types = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x0900_BodyBase)) == typeof(JT808_0x0900_BodyBase)).ToList();
             foreach(var type in types)
             {
                 var instance = Activator.CreateInstance(type);

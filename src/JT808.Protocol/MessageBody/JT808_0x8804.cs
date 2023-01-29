@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 录音开始命令
     /// </summary>
-    public class JT808_0x8804 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8804>, IJT808Analyze
+    public class JT808_0x8804 : JT808MessagePackFormatter<JT808_0x8804>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 0x8804
         /// </summary>
-        public override ushort MsgId { get; } = 0x8804;
+        public ushort MsgId => 0x8804;
         /// <summary>
         /// 录音开始命令
         /// </summary>
-        public override string Description => "录音开始命令";
+        public string Description => "录音开始命令";
         /// <summary>
         /// 录音命令
         /// 0：停止录音；0x01：开始录音；
@@ -45,7 +45,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8804 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8804 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8804 jT808_0X8804 = new JT808_0x8804();
             jT808_0X8804.RecordCmd = (JT808RecordCmd)reader.ReadByte();
@@ -60,7 +60,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8804 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8804 value, IJT808Config config)
         {
             writer.WriteByte((byte)value.RecordCmd);
             writer.WriteUInt16(value.RecordTime);

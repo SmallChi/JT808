@@ -15,16 +15,16 @@ namespace JT808.Protocol.MessageBody
     /// 设置路线
     /// 0x8606
     /// </summary>
-    public class JT808_0x8606 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8606>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8606 : JT808MessagePackFormatter<JT808_0x8606>, JT808Bodies,  IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x8606
         /// </summary>
-        public override ushort MsgId { get; } = 0x8606;
+        public ushort MsgId => 0x8606;
         /// <summary>
         /// 设置路线
         /// </summary>
-        public override string Description => "设置路线";
+        public string Description => "设置路线";
         /// <summary>
         /// 路线 ID
         /// </summary>
@@ -66,7 +66,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8606 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8606 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8606 jT808_0X8606 = new JT808_0x8606();
             jT808_0X8606.RouteId = reader.ReadUInt32();
@@ -119,7 +119,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8606 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8606 value, IJT808Config config)
         {
             writer.WriteUInt32(value.RouteId);
             writer.WriteUInt16(value.RouteProperty);

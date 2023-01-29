@@ -15,16 +15,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 位置信息汇报
     /// </summary>
-    public class JT808_0x0200 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0200>, IJT808Analyze
+    public class JT808_0x0200 : JT808MessagePackFormatter<JT808_0x0200>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 0x0200
         /// </summary>
-        public override ushort MsgId { get; } = 0x0200;
+        public ushort MsgId  => 0x0200;
         /// <summary>
         /// 位置信息汇报
         /// </summary>
-        public override string Description => "位置信息汇报";
+        public string Description => "位置信息汇报";
         /// <summary>
         /// 报警标志 
         /// <see cref="JT808.Protocol.Enums.JT808Alarm"/>
@@ -106,9 +106,9 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x0200 jT808_0X0200 = new JT808_0x0200();
+            JT808_0x0200 jT808_0X0200 = new ();
             jT808_0X0200.AlarmFlag = reader.ReadUInt32();
             jT808_0X0200.StatusFlag = reader.ReadUInt32();
             if (((jT808_0X0200.StatusFlag >> 28) & 1) == 1)
@@ -162,8 +162,11 @@ namespace JT808.Protocol.MessageBody
                         }
                         else
                         {
-                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(attachInstance, ref reader, config);
-                            jT808_0X0200.BasicLocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
+                            var attachImpl = attachInstance.DeserializeExt<JT808_0x0200_BodyBase>(ref reader, config); ;
+                            if (attachImpl != null)
+                            {
+                                jT808_0X0200.BasicLocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
+                            }
                         }
                     }
                     else if (config.JT808_0X0200_Custom_Factory.Map.TryGetValue(attachId, out object customAttachInstance))
@@ -177,8 +180,11 @@ namespace JT808.Protocol.MessageBody
                         }
                         else
                         {
-                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance, ref reader, config);
-                            jT808_0X0200.CustomLocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
+                            var attachImpl = customAttachInstance.DeserializeExt<JT808_0x0200_CustomBodyBase>(ref reader, config); ;
+                            if (attachImpl != null)
+                            {
+                                jT808_0X0200.CustomLocationAttachData.Add(attachImpl.AttachInfoId, attachImpl);
+                            }
                         }
                     }
                     else if (config.JT808_0X0200_Custom_Factory.Map2.TryGetValue(attachId2_3, out object customAttachInstance2))
@@ -192,8 +198,11 @@ namespace JT808.Protocol.MessageBody
                         }
                         else
                         {
-                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance2, ref reader, config);
-                            jT808_0X0200.CustomLocationAttachData2.Add(attachImpl.AttachInfoId, attachImpl);
+                            var attachImpl = customAttachInstance2.DeserializeExt<JT808_0x0200_CustomBodyBase2>(ref reader, config); ;
+                            if (attachImpl != null)
+                            {
+                                jT808_0X0200.CustomLocationAttachData2.Add(attachImpl.AttachInfoId, attachImpl);
+                            }
                         }
                     }
                     else if (config.JT808_0X0200_Custom_Factory.Map4.TryGetValue(attachId, out object customAttachInstance4))
@@ -207,8 +216,11 @@ namespace JT808.Protocol.MessageBody
                         }
                         else
                         {
-                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance4, ref reader, config);
-                            jT808_0X0200.CustomLocationAttachData4.Add(attachImpl.AttachInfoId, attachImpl);
+                            var attachImpl = customAttachInstance4.DeserializeExt<JT808_0x0200_CustomBodyBase4>(ref reader, config); ;
+                            if (attachImpl != null)
+                            {
+                                jT808_0X0200.CustomLocationAttachData4.Add(attachImpl.AttachInfoId, attachImpl);
+                            }
                         }
                     }
                     else if (config.JT808_0X0200_Custom_Factory.Map3.TryGetValue(attachId2_3, out object customAttachInstance3))
@@ -222,8 +234,11 @@ namespace JT808.Protocol.MessageBody
                         }
                         else
                         {
-                            dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(customAttachInstance3, ref reader, config);
-                            jT808_0X0200.CustomLocationAttachData3.Add(attachImpl.AttachInfoId, attachImpl);
+                            var attachImpl = customAttachInstance3.DeserializeExt<JT808_0x0200_CustomBodyBase3>(ref reader, config); ;
+                            if (attachImpl != null)
+                            {
+                                jT808_0X0200.CustomLocationAttachData3.Add(attachImpl.AttachInfoId, attachImpl);
+                            }
                         }
                     }
                     else
@@ -278,7 +293,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200 value, IJT808Config config)
         {
             writer.WriteUInt32(value.AlarmFlag);
             writer.WriteUInt32(value.StatusFlag);
@@ -321,7 +336,7 @@ namespace JT808.Protocol.MessageBody
                 {
                     try
                     {
-                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
+                        item.Value.SerializeExt(ref writer, item.Value, config);
                     }
                     catch
                     {
@@ -333,28 +348,28 @@ namespace JT808.Protocol.MessageBody
             {
                 foreach (var item in value.CustomLocationAttachData)
                 {
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
+                    item.Value.SerializeExt(ref writer, item.Value, config);
                 }
             }
             if (value.CustomLocationAttachData2 != null && value.CustomLocationAttachData2.Count > 0)
             {
                 foreach (var item in value.CustomLocationAttachData2)
                 {
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
+                    item.Value.SerializeExt(ref writer, item.Value, config);
                 }
             }
             if (value.CustomLocationAttachData3 != null && value.CustomLocationAttachData3.Count > 0)
             {
                 foreach (var item in value.CustomLocationAttachData3)
                 {
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
+                    item.Value.SerializeExt(ref writer, item.Value, config);
                 }
             }
             if (value.CustomLocationAttachData4 != null && value.CustomLocationAttachData4.Count > 0)
             {
                 foreach (var item in value.CustomLocationAttachData4)
                 {
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(item.Value, ref writer, item.Value, config);
+                    item.Value.SerializeExt(ref writer, item.Value, config);
                 }
             }
             if (value.UnknownLocationAttachData!=null && value.UnknownLocationAttachData.Count > 0)
@@ -386,7 +401,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            JT808_0x0200 value = new JT808_0x0200();
+            JT808_0x0200 value = new ();
             value.AlarmFlag = reader.ReadUInt32();
             writer.WriteNumber($"[{value.AlarmFlag.ReadBinary().ToString()}]报警标志", value.AlarmFlag);
             value.StatusFlag = reader.ReadUInt32();

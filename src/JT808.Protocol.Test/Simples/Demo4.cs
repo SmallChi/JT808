@@ -35,6 +35,7 @@ namespace JT808.Protocol.Test.Simples
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
             jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT1_0x81>();
+            jT808Config.FormatterFactory.SetMap<JT808_0x0200_DT1_0x81>();
             JT808Serializer demo5JT808Serializer = new JT808Serializer(jT808Config);
 
             JT808Package jT808Package = JT808MsgId._0x0200.Create("123456789012",
@@ -167,7 +168,9 @@ namespace JT808.Protocol.Test.Simples
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
             jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT1_0x81>();
+            jT808Config.FormatterFactory.SetMap<JT808_0x0200_DT1_0x81>();
             jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT1_0x82>();
+            jT808Config.FormatterFactory.SetMap<JT808_0x0200_DT1_0x82>();
             JT808Serializer = new JT808Serializer(jT808Config);
         }
         public override Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
@@ -185,7 +188,7 @@ namespace JT808.Protocol.Test.Simples
                             IExtDataProcessor extDataProcessor81 = new JT808_0x0200_DT1_0x81_ExtDataProcessor(info81);
                             extDataProcessor81.Processor(ExtData);
                             JT808CustomLocationAttachData.Add(dt1_0x81, info81);
-                            
+
                             break;
                         case dt1_0x82:
                             var info82 = (JT808_0x0200_DT1_0x82)item.Value;
@@ -209,6 +212,7 @@ namespace JT808.Protocol.Test.Simples
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
             jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808_0x0200_DT2_0x81>();
+            jT808Config.FormatterFactory.SetMap<JT808_0x0200_DT2_0x81>();
             JT808Serializer = new JT808Serializer(jT808Config);
         }
         public override Dictionary<byte, JT808_0x0200_CustomBodyBase> JT808CustomLocationAttachData { get; protected set; }
@@ -227,7 +231,7 @@ namespace JT808.Protocol.Test.Simples
                             var info81 = (JT808_0x0200_DT2_0x81)item.Value;
                             IExtDataProcessor extDataProcessor = new JT808_0x0200_DT2_0x81_ExtDataProcessor(info81);
                             extDataProcessor.Processor(ExtData);
-                            JT808CustomLocationAttachData.Add(dt2_0x81, info81);        
+                            JT808CustomLocationAttachData.Add(dt2_0x81, info81);
                             break;
                     }
                 }
@@ -242,15 +246,15 @@ namespace JT808.Protocol.Test.Simples
     /// <summary>
     /// 设备类型1-对应消息协议0x81
     /// </summary>
-    public class JT808_0x0200_DT1_0x81 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_DT1_0x81>
+    public class JT808_0x0200_DT1_0x81 : JT808MessagePackFormatter<JT808_0x0200_DT1_0x81>, JT808_0x0200_CustomBodyBase
     {
-        public override byte AttachInfoId { get; set; } = 0x81;
-        public override byte AttachInfoLength { get; set; } = 13;
+        public byte AttachInfoId { get; set; } = 0x81;
+        public byte AttachInfoLength { get; set; } = 13;
         public uint Age { get; set; }
         public byte Gender { get; set; }
         public string UserName { get; set; }
 
-        public JT808_0x0200_DT1_0x81 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_DT1_0x81 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_DT1_0x81 jT808_0X0200_DT1_0X81 = new JT808_0x0200_DT1_0x81();
             jT808_0X0200_DT1_0X81.AttachInfoId = reader.ReadByte();
@@ -260,7 +264,7 @@ namespace JT808.Protocol.Test.Simples
             jT808_0X0200_DT1_0X81.UserName = reader.ReadRemainStringContent();
             return jT808_0X0200_DT1_0X81;
         }
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_DT1_0x81 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_DT1_0x81 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);
@@ -272,12 +276,12 @@ namespace JT808.Protocol.Test.Simples
     /// <summary>
     /// 设备类型1-对应消息协议0x82
     /// </summary>
-    public class JT808_0x0200_DT1_0x82 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_DT1_0x82>
+    public class JT808_0x0200_DT1_0x82 : JT808MessagePackFormatter<JT808_0x0200_DT1_0x82>, JT808_0x0200_CustomBodyBase
     {
-        public override byte AttachInfoId { get; set; } = 0x82;
-        public override byte AttachInfoLength { get; set; } = 1;
+        public byte AttachInfoId { get; set; } = 0x82;
+        public byte AttachInfoLength { get; set; } = 1;
         public byte Gender1 { get; set; }
-        public JT808_0x0200_DT1_0x82 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_DT1_0x82 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_DT1_0x82 jT808_0X0200_DT1_0X82 = new JT808_0x0200_DT1_0x82();
             jT808_0X0200_DT1_0X82.AttachInfoId = reader.ReadByte();
@@ -286,7 +290,7 @@ namespace JT808.Protocol.Test.Simples
             return jT808_0X0200_DT1_0X82;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_DT1_0x82 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_DT1_0x82 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);
@@ -296,14 +300,14 @@ namespace JT808.Protocol.Test.Simples
     /// <summary>
     /// 设备类型2-对应消息协议0x81
     /// </summary>
-    public class JT808_0x0200_DT2_0x81 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_DT2_0x81>
+    public class JT808_0x0200_DT2_0x81 : JT808MessagePackFormatter<JT808_0x0200_DT2_0x81>, JT808_0x0200_CustomBodyBase
     {
-        public override byte AttachInfoId { get; set; } = 0x81;
-        public override byte AttachInfoLength { get; set; } = 7;
+        public byte AttachInfoId { get; set; } = 0x81;
+        public byte AttachInfoLength { get; set; } = 7;
         public uint Age { get; set; }
         public byte Gender { get; set; }
         public ushort MsgNum { get; set; }
-        public JT808_0x0200_DT2_0x81 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_DT2_0x81 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_DT2_0x81 jT808_0X0200_DT2_0X81 = new JT808_0x0200_DT2_0x81();
             jT808_0X0200_DT2_0X81.AttachInfoId = reader.ReadByte();
@@ -314,7 +318,7 @@ namespace JT808.Protocol.Test.Simples
             return jT808_0X0200_DT2_0X81;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_DT2_0x81 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_DT2_0x81 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);

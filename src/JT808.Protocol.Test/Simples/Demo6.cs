@@ -67,7 +67,9 @@ namespace JT808.Protocol.Test.Simples
             //这边是因为程序集存在协议冲突的情况，所以不直接采用注册程序集的方式。
             //根据不同的设备终端号，添加自定义消息Id
             DT1JT808Config.MsgIdFactory.SetMap<DT1Demo6>();
+            DT1JT808Config.FormatterFactory.SetMap<DT1Demo6>();
             DT2JT808Config.MsgIdFactory.SetMap<DT2Demo6>();
+            DT2JT808Config.FormatterFactory.SetMap<DT2Demo6>();
 
             Assert.Equal("DT1", DT1JT808Config.ConfigId);
             Assert.Equal("DT2", DT2JT808Config.ConfigId);
@@ -140,17 +142,17 @@ namespace JT808.Protocol.Test.Simples
         }
     }
 
-    public class DT1Demo6 : JT808Bodies, IJT808MessagePackFormatter<DT1Demo6>
+    public class DT1Demo6 : JT808MessagePackFormatter<DT1Demo6>, JT808Bodies
     {
         public byte Sex1 { get; set; }
 
         public ushort Age1 { get; set; }
 
-        public override ushort MsgId => 0x91;
+        public ushort MsgId => 0x91;
 
-        public override string Description =>"DT1Demo6";
+        public string Description =>"DT1Demo6";
 
-        public DT1Demo6 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override DT1Demo6 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             DT1Demo6 dT1Demo6 = new DT1Demo6();
             dT1Demo6.Sex1 = reader.ReadByte();
@@ -158,23 +160,23 @@ namespace JT808.Protocol.Test.Simples
             return dT1Demo6;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, DT1Demo6 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, DT1Demo6 value, IJT808Config config)
         {
             writer.WriteByte(value.Sex1);
             writer.WriteUInt16(value.Age1);
         }
     }
 
-    public class DT2Demo6 : JT808Bodies, IJT808MessagePackFormatter<DT2Demo6>
+    public class DT2Demo6 : JT808MessagePackFormatter<DT2Demo6>,JT808Bodies
     {
-        public override ushort MsgId => 0x91;
+        public ushort MsgId => 0x91;
         public byte Sex2 { get; set; }
 
         public ushort Age2 { get; set; }
 
-        public override string Description => "DT2Demo6";
+        public string Description => "DT2Demo6";
 
-        public DT2Demo6 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override DT2Demo6 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             DT2Demo6 dT2Demo6 = new DT2Demo6();
             dT2Demo6.Sex2 = reader.ReadByte();
@@ -182,7 +184,7 @@ namespace JT808.Protocol.Test.Simples
             return dT2Demo6;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, DT2Demo6 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, DT2Demo6 value, IJT808Config config)
         {
             writer.WriteByte(value.Sex2);
             writer.WriteUInt16(value.Age2);

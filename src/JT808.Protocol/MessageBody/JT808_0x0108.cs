@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 终端升级结果通知
     /// </summary>
-    public class JT808_0x0108 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0108>, IJT808Analyze
+    public class JT808_0x0108 : JT808MessagePackFormatter<JT808_0x0108>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 0x0108
         /// </summary>
-        public override ushort MsgId { get; } = 0x0108;
+        public ushort MsgId  => 0x0108;
         /// <summary>
         /// 终端升级结果通知
         /// </summary>
-        public override string Description => "终端升级结果通知";
+        public string Description => "终端升级结果通知";
         /// <summary>
         /// 升级类型
         /// 0：终端，12：道路运输证 IC 卡读卡器，52：北斗卫星定位模块
@@ -37,7 +37,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0108 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0108 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0108 jT808_0X0108 = new JT808_0x0108();
             jT808_0X0108.UpgradeType = (JT808UpgradeType)reader.ReadByte();
@@ -50,7 +50,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0108 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0108 value, IJT808Config config)
         {
             writer.WriteByte((byte)value.UpgradeType);
             writer.WriteByte((byte)value.UpgradeResult);

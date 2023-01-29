@@ -6,7 +6,7 @@ namespace JT808.Protocol
     /// <summary>
     /// 头部
     /// </summary>
-    public class JT808Header : IJT808MessagePackFormatter<JT808Header>
+    public class JT808Header : JT808MessagePackFormatter<JT808Header>
     {
         /// <summary>
         /// 消息ID 
@@ -55,7 +55,7 @@ namespace JT808.Protocol
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808Header Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808Header Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808Header jT808Header = new JT808Header();
             // 1.消息ID
@@ -93,7 +93,7 @@ namespace JT808.Protocol
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808Header value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808Header value, IJT808Config config)
         {
             // 1.消息ID
             writer.WriteUInt16(value.MsgId);

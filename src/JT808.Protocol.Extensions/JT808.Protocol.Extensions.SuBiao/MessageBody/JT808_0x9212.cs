@@ -10,12 +10,12 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
     /// <summary>
     /// 文件上传完成消息应答
     /// </summary>
-    public class JT808_0x9212: JT808Bodies, IJT808MessagePackFormatter<JT808_0x9212>, IJT808Analyze
+    public class JT808_0x9212: JT808MessagePackFormatter<JT808_0x9212>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 文件上传完成消息应答
         /// </summary>
-        public override string Description => "文件上传完成消息应答";
+        public string Description => "文件上传完成消息应答";
         /// <summary>
         /// 文件名称长度
         /// </summary>
@@ -44,7 +44,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// <summary>
         /// 文件上传完成消息应答Id
         /// </summary>
-        public override ushort MsgId => 0x9212;
+        public ushort MsgId => 0x9212;
         /// <summary>
         /// 
         /// </summary>
@@ -87,7 +87,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x9212 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x9212 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x9212 value = new JT808_0x9212();
             value.FileNameLength = reader.ReadByte();
@@ -114,7 +114,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9212 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9212 value, IJT808Config config)
         {
             writer.Skip(1, out int FileNameLengthPosition);
             writer.WriteString(value.FileName);

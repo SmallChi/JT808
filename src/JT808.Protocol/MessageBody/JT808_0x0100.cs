@@ -12,16 +12,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 终端注册
     /// </summary>
-    public class JT808_0x0100 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0100>, IJT808_2019_Version,IJT808Analyze
+    public class JT808_0x0100 : JT808MessagePackFormatter<JT808_0x0100>, JT808Bodies, IJT808_2019_Version,IJT808Analyze
     {
         /// <summary>
         /// 0x0100
         /// </summary>
-        public override ushort MsgId { get; } = 0x0100;
+        public ushort MsgId  => 0x0100;
         /// <summary>
         /// 终端注册
         /// </summary>
-        public override string Description => "终端注册";
+        public string Description => "终端注册";
         /// <summary>
         /// 省域 ID
         /// 标示终端安装车辆所在的省域，0 保留，由平台取默
@@ -79,7 +79,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0100 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0100 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0100 jT808_0X0100 = new JT808_0x0100();
             jT808_0X0100.AreaID = reader.ReadUInt16();
@@ -114,7 +114,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0100 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0100 value, IJT808Config config)
         {
             writer.WriteUInt16(value.AreaID);
             writer.WriteUInt16(value.CityOrCountyId);

@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     ///终端休眠模式唤醒设置
     /// 0x8103_0x007C
     /// </summary>
-    public class JT808_0x8103_0x007C_TimerWakeDayParamter:IJT808MessagePackFormatter<JT808_0x8103_0x007C_TimerWakeDayParamter>, IJT808Analyze
+    public class JT808_0x8103_0x007C_TimerWakeDayParamter:JT808MessagePackFormatter<JT808_0x8103_0x007C_TimerWakeDayParamter>, IJT808Analyze
     {
         /// <summary>
         /// 定时唤醒启用标志
@@ -99,7 +99,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x007C_TimerWakeDayParamter Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x007C_TimerWakeDayParamter Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x007C_TimerWakeDayParamter jT808_0x8103_0x007C_TimerWakeDayParamter = new JT808_0x8103_0x007C_TimerWakeDayParamter();
             jT808_0x8103_0x007C_TimerWakeDayParamter.TimerWakeEnableFlag = reader.ReadByte();
@@ -119,7 +119,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x007C_TimerWakeDayParamter value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x007C_TimerWakeDayParamter value, IJT808Config config)
         {
             writer.WriteByte(value.TimerWakeEnableFlag);
             writer.WriteBCD(value.TimePeriod1WakeTime, 4);

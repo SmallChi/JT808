@@ -11,16 +11,16 @@ namespace JT808.Protocol.MessageBody
     /// 电子运单上报
     /// 0x0701
     /// </summary>
-    public class JT808_0x0701 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0701>, IJT808Analyze
+    public class JT808_0x0701 : JT808MessagePackFormatter<JT808_0x0701>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x0701
         /// </summary>
-        public override ushort MsgId { get; } = 0x0701;
+        public ushort MsgId  => 0x0701;
         /// <summary>
         /// 电子运单上报
         /// </summary>
-        public override string Description => "电子运单上报";
+        public string Description => "电子运单上报";
         /// <summary>
         /// 电子运单长度
         /// </summary>
@@ -54,7 +54,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0701 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0701 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0701 value = new JT808_0x0701();
             value.ElectronicWaybillLength = reader.ReadUInt32();
@@ -67,11 +67,11 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0701 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0701 value, IJT808Config config)
         {
             writer.Skip(4, out int skipPosition);
-            object obj = config.GetMessagePackFormatterByType(value.ElectronicContentObj.GetType());
-            JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(obj, ref writer, value.ElectronicContentObj, config);
+            IJT808MessagePackFormatter formatter = config.GetMessagePackFormatterByType(value.ElectronicContentObj.GetType());
+            formatter.Serialize(ref writer, value.ElectronicContentObj, config);
             int contentLength = writer.GetCurrentPosition() - skipPosition - 4;
             writer.WriteInt32Return(contentLength, skipPosition);
         }

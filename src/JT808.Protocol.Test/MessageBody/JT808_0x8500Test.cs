@@ -96,9 +96,9 @@ namespace JT808.Protocol.Test.MessageBody
     /// <summary>
     /// 自定义控制类型
     /// </summary>
-    public class JT808_0x8500_0xF001 : JT808_0x8500_ControlType, IJT808MessagePackFormatter<JT808_0x8500_0xF001>, IJT808Analyze
+    public class JT808_0x8500_0xF001 : JT808MessagePackFormatter<JT808_0x8500_0xF001>, JT808_0x8500_ControlType, IJT808Analyze
     {
-        public override ushort ControlTypeId { get; set; } = 0xF001;
+        public ushort ControlTypeId { get; set; } = 0xF001;
 
         public byte ControlTypeParameter { get; set; }
 
@@ -111,7 +111,7 @@ namespace JT808.Protocol.Test.MessageBody
             writer.WriteNumber($"[{ value.ControlTypeParameter.ReadNumber()}]控制类型参数", value.ControlTypeParameter);
         }
 
-        public JT808_0x8500_0xF001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8500_0xF001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8500_0xF001 value = new JT808_0x8500_0xF001();
             value.ControlTypeId = reader.ReadUInt16();
@@ -119,7 +119,7 @@ namespace JT808.Protocol.Test.MessageBody
             return value;
         }
 
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8500_0xF001 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8500_0xF001 value, IJT808Config config)
         {
             writer.WriteUInt16(value.ControlTypeId);
             writer.WriteByte(value.ControlTypeParameter);

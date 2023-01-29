@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 
     /// </summary>
-    public class JT808_0x8103_0x0077_SignalChannel: IJT808MessagePackFormatter<JT808_0x8103_0x0077_SignalChannel>, IJT808Analyze
+    public class JT808_0x8103_0x0077_SignalChannel: JT808MessagePackFormatter<JT808_0x8103_0x0077_SignalChannel>, IJT808Analyze
     {
         /// <summary>
         /// 逻辑通道号
@@ -233,7 +233,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0077_SignalChannel Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0077_SignalChannel Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0077_SignalChannel jT808_0X8103_0X0077_SignalChannel = new JT808_0x8103_0x0077_SignalChannel();
             jT808_0X8103_0X0077_SignalChannel.LogicChannelNo = reader.ReadByte();
@@ -256,7 +256,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0077_SignalChannel value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0077_SignalChannel value, IJT808Config config)
         {
             writer.WriteByte(value.LogicChannelNo);
             writer.WriteByte(value.RTS_EncodeMode);

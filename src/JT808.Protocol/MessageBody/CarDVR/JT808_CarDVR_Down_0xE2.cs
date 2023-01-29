@@ -20,14 +20,14 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0xE2
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.enter_pulse_coefficient_error_measurement.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.enter_pulse_coefficient_error_measurement.ToByteValue();
         /// <summary>
         /// 通过DB9的7脚输出车速传感器信号（TTL 电平）
         /// </summary>
-        public override string Description => "通过DB9的7脚输出车速传感器信号（TTL 电平）";
+        public string Description => "通过DB9的7脚输出车速传感器信号（TTL 电平）";
         /// <summary>
         /// 
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization => true;
     }
 }

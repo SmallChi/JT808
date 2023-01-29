@@ -13,16 +13,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 查询终端属性应答
     /// </summary>
-    public class JT808_0x0107 : JT808Bodies,IJT808MessagePackFormatter<JT808_0x0107>, IJT808_2019_Version,IJT808Analyze
+    public class JT808_0x0107 : JT808MessagePackFormatter<JT808_0x0107>, JT808Bodies, IJT808_2019_Version,IJT808Analyze
     {
         /// <summary>
         /// 0x0107
         /// </summary>
-        public override ushort MsgId { get; } = 0x0107;
+        public ushort MsgId => 0x0107;
         /// <summary>
         /// 查询终端属性应答
         /// </summary>
-        public override string Description => "查询终端属性应答";
+        public string Description => "查询终端属性应答";
         /// <summary>
         /// 终端类型
         /// bit0，0：不适用客运车辆，1：适用客运车辆；
@@ -99,7 +99,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0107 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0107 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0107 jT808_0X0107 = new JT808_0x0107();
             jT808_0X0107.TerminalType = reader.ReadUInt16();
@@ -130,7 +130,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0107 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0107 value, IJT808Config config)
         {
             writer.WriteUInt16(value.TerminalType);
             if (writer.Version == JT808Version.JTT2019)
@@ -159,7 +159,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="writer"></param>
         /// <param name="config"></param>
-        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        public  void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0107 jT808_0X0107 = new JT808_0x0107();
             jT808_0X0107.TerminalType = reader.ReadUInt16();

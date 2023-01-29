@@ -15,12 +15,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 设置记录仪脉冲系数
     /// 返回：记录仪脉冲系数
     /// </summary>
-    public class JT808_CarDVR_Down_0xC3 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0xC3>, IJT808Analyze
+    public class JT808_CarDVR_Down_0xC3 : JT808MessagePackFormatter<JT808_CarDVR_Down_0xC3>, JT808CarDVRDownBodies, IJT808Analyze
     {
         /// <summary>
         /// 0xC3
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.set_pulse_coefficient_recorder.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.set_pulse_coefficient_recorder.ToByteValue();
         /// <summary>
         /// 当前时间
         /// </summary>
@@ -32,7 +32,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 记录仪脉冲系数
         /// </summary>
-        public override string Description => "记录仪脉冲系数";
+        public string Description => "记录仪脉冲系数";
 
         /// <summary>
         /// 
@@ -56,7 +56,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC3 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0xC3 value, IJT808Config config)
         {
             writer.WriteDateTime_yyMMddHHmmss(value.RealTime);
             writer.WriteUInt16(value.PulseCoefficient);
@@ -67,7 +67,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Down_0xC3 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Down_0xC3 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0xC3 value = new JT808_CarDVR_Down_0xC3();
             value.RealTime = reader.ReadDateTime_yyMMddHHmmss();

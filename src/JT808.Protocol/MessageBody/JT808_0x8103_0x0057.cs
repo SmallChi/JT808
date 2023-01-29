@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 连续驾驶时间门限，单位为秒（s）
     /// </summary>
-    public class JT808_0x8103_0x0057 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0057>, IJT808Analyze
+    public class JT808_0x8103_0x0057 : JT808MessagePackFormatter<JT808_0x8103_0x0057>, JT808_0x8103_BodyBase,  IJT808Analyze
     {
         /// <summary>
         /// 0x0057
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0057;
+        public  uint ParamId { get; set; } = 0x0057;
         /// <summary>
         /// 数据长度
         /// </summary>
-        public override byte ParamLength { get; set; } = 4;
+        public  byte ParamLength { get; set; } = 4;
         /// <summary>
         /// 连续驾驶时间门限，单位为秒（s）
         /// </summary>
@@ -27,7 +27,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 连续驾驶时间门限
         /// </summary>
-        public override string Description => "连续驾驶时间门限";
+        public  string Description => "连续驾驶时间门限";
 
         /// <summary>
         /// 
@@ -51,7 +51,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0057 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0057 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0057 jT808_0x8103_0x0057 = new JT808_0x8103_0x0057();
             jT808_0x8103_0x0057.ParamId = reader.ReadUInt32();
@@ -65,7 +65,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0057 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0057 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

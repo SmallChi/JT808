@@ -9,16 +9,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 临时位置跟踪控制
     /// </summary>
-    public class JT808_0x8202 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8202>, IJT808Analyze
+    public class JT808_0x8202 : JT808MessagePackFormatter<JT808_0x8202>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x8202
         /// </summary>
-        public override ushort MsgId { get; } = 0x8202;
+        public ushort MsgId => 0x8202;
         /// <summary>
         /// 临时位置跟踪控制
         /// </summary>
-        public override string Description => "临时位置跟踪控制";
+        public string Description => "临时位置跟踪控制";
         /// <summary>
         /// 时间间隔
         /// 单位为秒（s），0 则停止跟踪。停止跟踪无需带后继字段
@@ -35,7 +35,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8202 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8202 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8202 jT808_0X8202 = new JT808_0x8202();
             jT808_0X8202.Interval = reader.ReadUInt16();
@@ -48,7 +48,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8202 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8202 value, IJT808Config config)
         {
             writer.WriteUInt16(value.Interval);
             writer.WriteInt32(value.LocationTrackingValidity);

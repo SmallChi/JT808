@@ -16,12 +16,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 返回：符合条件的位置信息记录
     /// 指定的时间范围内无数据记录，则本数据块数据为空
     /// </summary>
-    public class JT808_CarDVR_Up_0x09 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x09>, IJT808Analyze
+    public class JT808_CarDVR_Up_0x09 : JT808MessagePackFormatter<JT808_CarDVR_Up_0x09>, JT808CarDVRUpBodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x09
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.collect_specified_location_information.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.collect_specified_location_information.ToByteValue();
         /// <summary>
         /// 请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
         /// </summary>
@@ -29,7 +29,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 符合条件的位置信息记录
         /// </summary>
-        public override string Description => "符合条件的位置信息记录";
+        public string Description => "符合条件的位置信息记录";
         /// <summary>
         /// 
         /// </summary>
@@ -73,7 +73,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x09 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x09 value, IJT808Config config)
         {
             foreach (var positionPerHour in value.JT808_CarDVR_Up_0x09_PositionPerHours)
             {
@@ -102,7 +102,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Up_0x09 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Up_0x09 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x09 value = new JT808_CarDVR_Up_0x09();
             value.JT808_CarDVR_Up_0x09_PositionPerHours = new List<JT808_CarDVR_Up_0x09_PositionPerHour>();

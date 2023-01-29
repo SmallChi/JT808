@@ -11,16 +11,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 终端鉴权
     /// </summary>
-    public class JT808_0x0102 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0102>, IJT808_2019_Version, IJT808Analyze
+    public class JT808_0x0102 : JT808MessagePackFormatter<JT808_0x0102>, JT808Bodies, IJT808_2019_Version, IJT808Analyze
     {
         /// <summary>
         /// 0x0102
         /// </summary>
-        public override ushort MsgId { get; } = 0x0102;
+        public ushort MsgId => 0x0102;
         /// <summary>
         /// 终端鉴权
         /// </summary>
-        public override string Description => "终端鉴权";
+        public string Description => "终端鉴权";
         /// <summary>
         /// 鉴权码
         /// 鉴权码内容 2019版本
@@ -44,7 +44,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0102 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0102 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0102 jT808_0X0102 = new JT808_0x0102();
             if(reader.Version== JT808Version.JTT2019)
@@ -67,7 +67,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0102 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0102 value, IJT808Config config)
         {
             if (writer.Version == JT808Version.JTT2019)
             {

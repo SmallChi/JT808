@@ -20,15 +20,15 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0xE0
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.enters_maintains_check_state.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.enters_maintains_check_state.ToByteValue();
         /// <summary>
         /// 进入或保持检定状态
         /// </summary>
-        public override string Description => "进入或保持检定状态";
+        public string Description => "进入或保持检定状态";
         /// <summary>
         /// 
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization =>true;
 
     }
 }

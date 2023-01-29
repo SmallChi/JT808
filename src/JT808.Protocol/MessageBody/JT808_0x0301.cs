@@ -12,16 +12,16 @@ namespace JT808.Protocol.MessageBody
     /// 0x0301
     /// 2019版本已作删除
     /// </summary>
-    public class JT808_0x0301 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0301>, IJT808_2019_Version, IJT808Analyze
+    public class JT808_0x0301 : JT808MessagePackFormatter<JT808_0x0301>, JT808Bodies, IJT808_2019_Version, IJT808Analyze
     {
         /// <summary>
         /// 0x0301
         /// </summary>
-        public override ushort MsgId { get; } = 0x0301;
+        public ushort MsgId  => 0x0301;
         /// <summary>
         /// 事件报告
         /// </summary>
-        public override string Description => "事件报告";
+        public string Description => "事件报告";
         /// <summary>
         /// 事件 ID 
         /// </summary>
@@ -43,7 +43,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0301 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0301 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0301 jT808_0X0301 = new JT808_0x0301();
             jT808_0X0301.EventId = reader.ReadByte();
@@ -55,7 +55,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0301 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0301 value, IJT808Config config)
         {
             writer.WriteByte(value.EventId);
         }

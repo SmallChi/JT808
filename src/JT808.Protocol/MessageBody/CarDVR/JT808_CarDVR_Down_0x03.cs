@@ -19,14 +19,14 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x03
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.collect_accumulated_mileage.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.collect_accumulated_mileage.ToByteValue();
         /// <summary>
         /// 实时时间、安装时的初始里程及安装后的累计行驶里程
         /// </summary>
-        public override string Description => "实时时间、安装时的初始里程及安装后的累计行驶里程";
+        public string Description => "实时时间、安装时的初始里程及安装后的累计行驶里程";
         /// <summary>
         /// 
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization =>true;
     }
 }

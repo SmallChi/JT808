@@ -6,7 +6,7 @@ namespace JT808.Protocol.MessageBody
     /// 电子运单内容基类
     /// 注意:需要具体的实现
     /// </summary>
-    public abstract class JT808_0x0701_CustomBodyBase
+    public interface JT808_0x0701_CustomBodyBase
     {
         
     }

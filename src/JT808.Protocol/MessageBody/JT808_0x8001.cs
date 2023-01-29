@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 平台通用应答
     /// </summary>
-    public class JT808_0x8001 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8001>, IJT808Analyze
+    public class JT808_0x8001 : JT808MessagePackFormatter<JT808_0x8001>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 0x8001
         /// </summary>
-        public override ushort MsgId { get; } = 0x8001;
+        public ushort MsgId  => 0x8001;
         /// <summary>
         /// 平台通用应答
         /// </summary>
-        public override string Description => "平台通用应答";
+        public string Description => "平台通用应答";
         /// <summary>
         /// 应答消息流水号
         /// </summary>
@@ -56,7 +56,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8001 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8001 value = new JT808_0x8001();
             value.MsgNum = reader.ReadUInt16();
@@ -70,7 +70,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8001 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8001 value, IJT808Config config)
         {
             writer.WriteUInt16(value.MsgNum);
             writer.WriteUInt16(value.AckMsgId);

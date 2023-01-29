@@ -17,6 +17,7 @@ namespace JT808.Protocol.Test.MessageBody
         {
             IJT808Config jT808Config = new DefaultGlobalConfig();
             jT808Config.JT808_0X8103_Custom_Factory.SetMap<JT808_0x8103_0x0075>();
+            jT808Config.FormatterFactory.SetMap<JT808_0x8103_0x0075>();
             JT808Serializer = new JT808Serializer(jT808Config);
         }
         [Fact]

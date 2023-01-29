@@ -10,17 +10,17 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 车辆所在的省域 ID
     /// </summary>
-    public class JT808_0x8103_0x0081 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0081>, IJT808Analyze
+    public class JT808_0x8103_0x0081 : JT808MessagePackFormatter<JT808_0x8103_0x0081>, JT808_0x8103_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 0x0081
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0081;
+        public  uint ParamId { get; set; } = 0x0081;
         /// <summary>
         /// 数据长度
         /// 2 byte
         /// </summary>
-        public override byte ParamLength { get; set; } = 2;
+        public  byte ParamLength { get; set; } = 2;
         /// <summary>
         /// 车辆所在的省域 ID
         /// </summary>
@@ -28,7 +28,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 车辆所在的省域ID
         /// </summary>
-        public override string Description => "车辆所在的省域ID";
+        public  string Description => "车辆所在的省域ID";
 
         /// <summary>
         /// 
@@ -52,7 +52,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0081 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0081 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0081 jT808_0x8103_0x0081 = new JT808_0x8103_0x0081();
             jT808_0x8103_0x0081.ParamId = reader.ReadUInt32();
@@ -66,7 +66,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0081 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0081 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

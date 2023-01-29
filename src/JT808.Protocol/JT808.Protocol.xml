@@ -2239,32 +2239,6 @@
             <param name="value"></param>
             <returns></returns>
         </member>
-        <member name="T:JT808.Protocol.Extensions.JT808MessagePackFormatterResolverExtensions">
-            <summary>
-            
-            ref http://adamsitnik.com/Span/#span-must-not-be-a-generic-type-argument
-            ref http://adamsitnik.com/Span/
-            ref:MessagePack.Formatters.DynamicObjectTypeFallbackFormatter
-            </summary>
-        </member>
-        <member name="M:JT808.Protocol.Extensions.JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(System.Object,JT808.Protocol.MessagePack.JT808MessagePackWriter@,System.Object,JT808.Protocol.IJT808Config)">
-            <summary>
-            JT808动态序列化
-            </summary>
-            <param name="objFormatter"></param>
-            <param name="writer"></param>
-            <param name="value"></param>
-            <param name="config"></param>
-        </member>
-        <member name="M:JT808.Protocol.Extensions.JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(System.Object,JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
-            <summary>
-            JT808动态反序列化
-            </summary>
-            <param name="objFormatter"></param>
-            <param name="reader"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
         <member name="T:JT808.Protocol.Extensions.JT808PackageExtensions">
             <summary>
             JT808创建包扩展
@@ -4145,6 +4119,34 @@
             <param name="type"></param>
             <returns></returns>
         </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.Cast``1(System.Object)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.DeserializeExt``1(System.Object,JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <typeparam name="TValue"></typeparam>
+            <param name="instance"></param>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.JT808ConfigExtensions.SerializeExt(System.Object,JT808.Protocol.MessagePack.JT808MessagePackWriter@,System.Object,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="instance"></param>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="M:JT808.Protocol.JT808ConfigExtensions.GetAnalyzeByType(JT808.Protocol.IJT808Config,System.Type)">
             <summary>
             通过类型获取对应的消息分析器
@@ -4198,7 +4200,7 @@
             <summary>
             
             </summary>
-            <typeparam name="TIJT808Formatter"></typeparam>
+            <typeparam name="TJT808MessagePackFormatter"></typeparam>
             <returns></returns>
         </member>
         <member name="T:JT808.Protocol.Formatters.IJT808MessagePackFormatter`1">
@@ -4223,10 +4225,48 @@
             <param name="config"></param>
             <returns></returns>
         </member>
-        <member name="T:JT808.Protocol.Formatters.IJT808Formatter">
+        <member name="T:JT808.Protocol.Formatters.IJT808MessagePackFormatter">
             <summary>
             
             </summary>
+        </member>
+        <member name="M:JT808.Protocol.Formatters.IJT808MessagePackFormatter.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,System.Object,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Formatters.IJT808MessagePackFormatter.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Formatters.JT808MessagePackFormatter`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:JT808.Protocol.Formatters.JT808MessagePackFormatter`1.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Formatters.JT808MessagePackFormatter`1.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,`0,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
         </member>
         <member name="T:JT808.Protocol.IJT808Builder">
             <summary>
@@ -4942,7 +4982,7 @@
         </member>
         <member name="T:JT808.Protocol.JT808Bodies">
             <summary>
-            JT808抽象数据体
+            JT808数据体
             </summary>
         </member>
         <member name="P:JT808.Protocol.JT808Bodies.SkipSerialization">
@@ -4955,11 +4995,6 @@
         <member name="P:JT808.Protocol.JT808Bodies.MsgId">
             <summary>
             消息Id
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.JT808Bodies.Description">
-            <summary>
-            消息描述
             </summary>
         </member>
         <member name="T:JT808.Protocol.JT808CarDVRDownBodies">
@@ -4977,11 +5012,6 @@
             跳过数据体序列化
             默认不跳过
             当数据体为空的时候，使用null作为空包感觉不适合，所以就算使用空包也需要new一下来表达意思。
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.JT808CarDVRDownBodies.Description">
-            <summary>
-            消息描述
             </summary>
         </member>
         <member name="T:JT808.Protocol.JT808CarDVRDownPackage">
@@ -5245,11 +5275,6 @@
             跳过数据体序列化
             默认不跳过
             当数据体为空的时候，使用null作为空包感觉不适合，所以就算使用空包也需要new一下来表达意思。
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.JT808CarDVRUpBodies.Description">
-            <summary>
-            消息描述
             </summary>
         </member>
         <member name="T:JT808.Protocol.JT808CarDVRUpPackage">
@@ -16090,11 +16115,6 @@
             参数长度
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_BodyBase.Description">
-            <summary>
-            消息描述
-            </summary>
-        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8103_CustomBodyBase">
             <summary>
             自定义终端参数设置
@@ -16108,11 +16128,6 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_CustomBodyBase.ParamLength">
             <summary>
             参数长度
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x8103_CustomBodyBase.Description">
-            <summary>
-            消息描述
             </summary>
         </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x8104">

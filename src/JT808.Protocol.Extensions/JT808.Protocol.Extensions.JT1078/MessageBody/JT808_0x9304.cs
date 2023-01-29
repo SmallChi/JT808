@@ -11,11 +11,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 云台雨刷控制
     /// </summary>
-    public class JT808_0x9304 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9304>, IJT808Analyze
+    public class JT808_0x9304 : JT808MessagePackFormatter<JT808_0x9304>, JT808Bodies, IJT808Analyze
     {
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
-        public override string Description => "云台雨刷控制";
-        public override ushort MsgId => 0x9304;
+        /// <summary>
+        /// 云台雨刷控制
+        /// </summary>
+        public string Description => "云台雨刷控制";
+        /// <summary>
+        /// 0x9304
+        /// </summary>
+        public ushort MsgId => 0x9304;
         /// <summary>
         /// 逻辑通道号
         /// </summary>
@@ -24,7 +29,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 启停标识
         /// </summary>
         public byte StartOrStop  { get; set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x9304 value = new JT808_0x9304();
@@ -56,20 +66,29 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 };
             }
         }
-
-        public JT808_0x9304 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public override JT808_0x9304 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             var jT808_0x9304 = new JT808_0x9304();
             jT808_0x9304.ChannelNo = reader.ReadByte();
             jT808_0x9304.StartOrStop = reader.ReadByte();
             return jT808_0x9304;
         }
-
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9304 value, IJT808Config config)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9304 value, IJT808Config config)
         {
             writer.WriteByte(value.ChannelNo);
             writer.WriteByte(value.StartOrStop);
         }
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
     }
 }

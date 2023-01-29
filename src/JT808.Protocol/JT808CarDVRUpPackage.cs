@@ -14,7 +14,7 @@ namespace JT808.Protocol
     /// <summary>
     /// 行车记录仪上行数据包
     /// </summary>
-    public class JT808CarDVRUpPackage : IJT808_CarDVR_Up_Package,IJT808MessagePackFormatter<JT808CarDVRUpPackage>, IJT808Analyze
+    public class JT808CarDVRUpPackage : JT808MessagePackFormatter<JT808CarDVRUpPackage>, IJT808_CarDVR_Up_Package, IJT808Analyze
     {
         /// <summary>
         /// 起始字头
@@ -105,7 +105,7 @@ namespace JT808.Protocol
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808CarDVRUpPackage Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808CarDVRUpPackage Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808CarDVRUpPackage value = new JT808CarDVRUpPackage();
             int currentPosition = reader.ReaderCount;
@@ -123,8 +123,7 @@ namespace JT808.Protocol
                 if (config.JT808_CarDVR_Up_Factory.Map.TryGetValue(value.CommandId, out var instance))
                 {
                     //4.2.处理消息体
-                    dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
-                    value.Bodies = attachImpl;
+                    value.Bodies = instance.DeserializeExt<JT808CarDVRUpBodies>(ref reader, config);
                 }
             }
             var (CalculateXorCheckCode, RealXorCheckCode) = reader.ReadCarDVRCheckCode(currentPosition);
@@ -142,7 +141,7 @@ namespace JT808.Protocol
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpPackage value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRUpPackage value, IJT808Config config)
         {
             var currentPosition = writer.GetCurrentPosition();
             writer.WriteUInt16(value.Begin);
@@ -161,7 +160,7 @@ namespace JT808.Protocol
                     if (!value.Bodies.SkipSerialization)
                     {
                         //4.2.处理消息体
-                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(instance, ref writer, value.Bodies, config);
+                        instance.SerializeExt(ref writer, value.Bodies, config);
                     }
                 }
                 writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - 2 - 1 - datalengthPosition), datalengthPosition);//此处-2：减去数据长度字段2位，-1：减去保留字长度

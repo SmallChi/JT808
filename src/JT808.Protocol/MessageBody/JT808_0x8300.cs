@@ -13,16 +13,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 文本信息下发
     /// </summary>
-    public class JT808_0x8300 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8300>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8300 : JT808MessagePackFormatter<JT808_0x8300>, JT808Bodies,  IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x8300
         /// </summary>
-        public override ushort MsgId { get; } = 0x8300;
+        public ushort MsgId  => 0x8300;
         /// <summary>
         /// 文本信息下发
         /// </summary>
-        public override string Description => "文本信息下发";
+        public string Description => "文本信息下发";
         /// <summary>
         /// 文本信息标志位含义见 表 38
         /// </summary>
@@ -44,7 +44,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8300 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8300 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8300 jT808_0X8300 = new JT808_0x8300();
             jT808_0X8300.TextFlag = reader.ReadByte();
@@ -61,7 +61,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8300 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8300 value, IJT808Config config)
         {
             writer.WriteByte(value.TextFlag);
             if (writer.Version == JT808Version.JTT2019)

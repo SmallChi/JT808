@@ -11,16 +11,16 @@ namespace JT808.Protocol.MessageBody
     /// 多媒体数据上传
     /// 0x0801
     /// </summary>
-    public class JT808_0x0801 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0801>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x0801 : JT808MessagePackFormatter<JT808_0x0801>, JT808Bodies, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x0801
         /// </summary>
-        public override ushort MsgId { get; } = 0x0801;
+        public ushort MsgId  => 0x0801;
         /// <summary>
         /// 多媒体数据上传
         /// </summary>
-        public override string Description => "多媒体数据上传";
+        public string Description => "多媒体数据上传";
         /// <summary>
         /// 多媒体 ID
         /// </summary>
@@ -106,7 +106,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0801 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0801 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0801 value = new JT808_0x0801();
             value.MultimediaId = reader.ReadUInt32();
@@ -140,7 +140,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0801 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0801 value, IJT808Config config)
         {
             writer.WriteUInt32(value.MultimediaId);
             writer.WriteByte(value.MultimediaType);

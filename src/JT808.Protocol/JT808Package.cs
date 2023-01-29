@@ -12,7 +12,7 @@ namespace JT808.Protocol
     /// <summary>
     /// JT808数据包
     /// </summary>
-    public class JT808Package : IJT808MessagePackFormatter<JT808Package>, IJT808Analyze
+    public class JT808Package : JT808MessagePackFormatter<JT808Package>, IJT808Analyze
     {
         /// <summary>
         /// 起始符
@@ -57,7 +57,7 @@ namespace JT808.Protocol
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808Package Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808Package Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             // 1. 验证校验和
             if (!config.SkipCRCCode)
@@ -132,9 +132,7 @@ namespace JT808.Protocol
                         try
                         {
                             //4.2.处理消息体
-                            jT808Package.Bodies = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(
-                                instance,
-                                ref reader, config);
+                            jT808Package.Bodies = instance.DeserializeExt<JT808Bodies>(ref reader, config);
                         }
                         catch (Exception ex)
                         {
@@ -156,7 +154,7 @@ namespace JT808.Protocol
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808Package value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808Package value, IJT808Config config)
         {
             // ---------------开始组包--------------
             // 1.起始符
@@ -217,9 +215,7 @@ namespace JT808.Protocol
                 {
                     if (!value.Bodies.SkipSerialization)
                     {
-                        JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(value.Bodies,
-                            ref writer, value.Bodies,
-                            config);
+                        value.Bodies.SerializeExt(ref writer, value.Bodies, config);
                     }
                 }
             }

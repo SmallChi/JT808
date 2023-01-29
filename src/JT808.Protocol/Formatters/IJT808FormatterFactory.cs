@@ -15,13 +15,12 @@ namespace JT808.Protocol.Formatters
         /// <summary>
         /// 
         /// </summary>
-        IDictionary<Guid,object> FormatterDict { get;}
+        IDictionary<Guid, IJT808MessagePackFormatter> FormatterDict { get;}
         /// <summary>
         /// 
         /// </summary>
-        /// <typeparam name="TIJT808Formatter"></typeparam>
+        /// <typeparam name="TJT808MessagePackFormatter"></typeparam>
         /// <returns></returns>
-        IJT808FormatterFactory SetMap<TIJT808Formatter>()
-                    where TIJT808Formatter : IJT808Formatter;
+        IJT808FormatterFactory SetMap<TJT808MessagePackFormatter>() where TJT808MessagePackFormatter : IJT808MessagePackFormatter;
     }
 }

@@ -23,7 +23,7 @@ namespace JT808.Protocol.Internal
 
         private void InitMap(Assembly assembly)
         {
-            var types = assembly.GetTypes().Where(w => w.BaseType == typeof(JT808Bodies)).ToList();
+            var types = assembly.GetTypes().Where(w => w.GetInterface(nameof(JT808Bodies)) == typeof(JT808Bodies)).ToList();
             foreach (var type in types)
             {
                 var instance = Activator.CreateInstance(type);

@@ -8,14 +8,14 @@
         /// <summary>
         /// 跳过数据体序列化
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization => true;
         /// <summary>
         /// 0x0002
         /// </summary>
-        public override ushort MsgId { get; } = 0x0002;
+        public ushort MsgId  => 0x0002;
         /// <summary>
         /// 终端心跳
         /// </summary>
-        public override string Description => "终端心跳";
+        public string Description => "终端心跳";
     }
 }

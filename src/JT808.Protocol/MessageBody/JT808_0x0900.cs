@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 数据上行透传
     /// </summary>
-    public class JT808_0x0900 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0900>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x0900 : JT808MessagePackFormatter<JT808_0x0900>, JT808Bodies, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x0900
         /// </summary>
-        public override ushort MsgId { get; } = 0x0900;
+        public ushort MsgId => 0x0900;
         /// <summary>
         /// 数据上行透传
         /// </summary>
-        public override string Description => "数据上行透传";
+        public string Description => "数据上行透传";
         /// <summary>
         /// 透传消息类型
         /// </summary>
@@ -70,13 +70,13 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0900 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0900 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0900 value = new JT808_0x0900();
             value.PassthroughType = reader.ReadByte();
             if(config.JT808_0x0900_Custom_Factory.Map.TryGetValue(value.PassthroughType,out var instance))
             {
-                value.JT808_0x0900_BodyBase = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
+                value.JT808_0x0900_BodyBase = instance.DeserializeExt<JT808_0x0900_BodyBase>(ref reader, config);
             }
             else
             {
@@ -90,14 +90,14 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0900 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0900 value, IJT808Config config)
         {
             writer.WriteByte(value.PassthroughType);
 
             if ( value.JT808_0x0900_BodyBase != null )
             {
-                object obj = config.GetMessagePackFormatterByType( value.JT808_0x0900_BodyBase.GetType() );
-                JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize( obj, ref writer, value.JT808_0x0900_BodyBase, config );
+                IJT808MessagePackFormatter formatter = config.GetMessagePackFormatterByType( value.JT808_0x0900_BodyBase.GetType() );
+                formatter.Serialize(ref writer, value.JT808_0x0900_BodyBase, config );
             }
             else
             {

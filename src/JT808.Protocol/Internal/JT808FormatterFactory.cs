@@ -12,28 +12,31 @@ namespace JT808.Protocol.Internal
 {
    internal class JT808FormatterFactory : IJT808FormatterFactory
     {
-        public IDictionary<Guid, object> FormatterDict { get; }
+        public IDictionary<Guid, IJT808MessagePackFormatter> FormatterDict { get; }
 
         public JT808FormatterFactory()
         {
-            FormatterDict = new Dictionary<Guid, object>();
+            FormatterDict = new Dictionary<Guid, IJT808MessagePackFormatter>();
             Init(Assembly.GetExecutingAssembly());
         }
 
         private void Init(Assembly assembly)
         {
-           foreach(var type in assembly.GetTypes().Where(w=>w.GetInterfaces().Contains(typeof(IJT808Formatter))))
+           foreach(var type in assembly.GetTypes().Where(w=>w.GetInterfaces().Contains(typeof(IJT808MessagePackFormatter))))
            {
                 var implTypes = type.GetInterfaces();
                 if(implTypes!=null && implTypes .Length>1)
                 {
-                    var firstType = implTypes.FirstOrDefault(f=>f.Name== typeof(IJT808MessagePackFormatter<>).Name);
-                    var genericImplType = firstType.GetGenericArguments().FirstOrDefault();
-                    if (genericImplType != null)
+                    var firstType = implTypes.FirstOrDefault(f=>f.Name== typeof(IJT808MessagePackFormatter<>).Name && !string.IsNullOrEmpty(f.FullName));
+                    if (firstType != null)
                     {
-                        if (!FormatterDict.ContainsKey(genericImplType.GUID))
+                        var genericImplType = firstType.GetGenericArguments().FirstOrDefault();
+                        if (genericImplType != null)
                         {
-                            FormatterDict.Add(genericImplType.GUID, Activator.CreateInstance(genericImplType));
+                            if (!FormatterDict.ContainsKey(genericImplType.GUID))
+                            {
+                                FormatterDict.Add(genericImplType.GUID, (IJT808MessagePackFormatter)Activator.CreateInstance(genericImplType));
+                            }
                         }
                     }
                 }
@@ -45,12 +48,12 @@ namespace JT808.Protocol.Internal
             Init(externalAssembly);
         }
 
-        public IJT808FormatterFactory SetMap<TIJT808Formatter>() where TIJT808Formatter : IJT808Formatter
+        public IJT808FormatterFactory SetMap<TJT808MessagePackFormatter>() where TJT808MessagePackFormatter : IJT808MessagePackFormatter
         {
-            Type type = typeof(TIJT808Formatter);
+            Type type = typeof(TJT808MessagePackFormatter);
             if (!FormatterDict.ContainsKey(type.GUID))
             {
-                FormatterDict.Add(type.GUID, Activator.CreateInstance(type));
+                FormatterDict.Add(type.GUID, (IJT808MessagePackFormatter)Activator.CreateInstance(type));
             }
             return this;
         }

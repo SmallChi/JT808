@@ -20,14 +20,14 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0xC2
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.set_recorder_time.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.set_recorder_time.ToByteValue();
         /// <summary>
         /// 北京时间的日期、时钟
         /// </summary>
-        public override string Description => "北京时间的日期、时钟";
+        public string Description => "北京时间的日期、时钟";
         /// <summary>
         /// 
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization =>true;
     }
 }

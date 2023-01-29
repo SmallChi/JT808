@@ -14,7 +14,7 @@ namespace JT808.Protocol
     /// <summary>
     /// 行车记录仪下行数据包
     /// </summary>
-    public class JT808CarDVRDownPackage : IJT808_CarDVR_Down_Package, IJT808MessagePackFormatter<JT808CarDVRDownPackage>, IJT808Analyze
+    public class JT808CarDVRDownPackage : JT808MessagePackFormatter<JT808CarDVRDownPackage>, IJT808_CarDVR_Down_Package, IJT808Analyze
     {
         /// <summary>
         /// 头标识
@@ -50,7 +50,7 @@ namespace JT808.Protocol
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRDownPackage value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808CarDVRDownPackage value, IJT808Config config)
         {
             var currentPosition = writer.GetCurrentPosition();
             writer.WriteUInt16(value.Begin);
@@ -62,7 +62,7 @@ namespace JT808.Protocol
                 if (!value.Bodies?.SkipSerialization == true)
                 {
                     //4.2.处理消息体
-                    JT808MessagePackFormatterResolverExtensions.JT808DynamicSerialize(instance, ref writer, value.Bodies, config);
+                    instance.SerializeExt(ref writer, value.Bodies, config);
                 }
             }
             writer.WriteUInt16Return((ushort)(writer.GetCurrentPosition() - 2 - 1 - datalengthPosition), datalengthPosition);//此处-2：减去数据长度字段2位，-1：减去保留字长度
@@ -74,7 +74,7 @@ namespace JT808.Protocol
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808CarDVRDownPackage Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808CarDVRDownPackage Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808CarDVRDownPackage value = new JT808CarDVRDownPackage();
             int currentPosition = reader.ReaderCount;
@@ -87,8 +87,7 @@ namespace JT808.Protocol
                 if (config.JT808_CarDVR_Down_Factory.Map.TryGetValue(value.CommandId, out var instance))
                 {
                     //4.2.处理消息体
-                    dynamic attachImpl = JT808MessagePackFormatterResolverExtensions.JT808DynamicDeserialize(instance, ref reader, config);
-                    value.Bodies = attachImpl;
+                    value.Bodies = instance.DeserializeExt<JT808CarDVRDownBodies>(ref reader, config);
                 }
             }
             var carDVRCheckCode = reader.ReadCarDVRCheckCode(currentPosition);

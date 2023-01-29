@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// CAN 总线通道 1 采集时间间隔(ms)，0 表示不采集
     /// </summary>
-    public class JT808_0x8103_0x0100 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0100>, IJT808Analyze
+    public class JT808_0x8103_0x0100 : JT808MessagePackFormatter<JT808_0x8103_0x0100>, JT808_0x8103_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 0x0100
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0100;
+        public uint ParamId { get; set; } = 0x0100;
         /// <summary>
         /// 数据 长度
         /// </summary>
-        public override byte ParamLength { get; set; } = 4;
+        public  byte ParamLength { get; set; } = 4;
         /// <summary>
         /// CAN 总线通道 1 采集时间间隔(ms)，0 表示不采集
         /// </summary>
@@ -27,7 +27,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// CAN 总线通道 1 采集时间间隔
         /// </summary>
-        public override string Description => "CAN总线通道1采集时间间隔";
+        public  string Description => "CAN总线通道1采集时间间隔";
 
         /// <summary>
         /// 
@@ -51,7 +51,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0100 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0100 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0100 jT808_0x8103_0x0100 = new JT808_0x8103_0x0100();
             jT808_0x8103_0x0100.ParamId = reader.ReadUInt32();
@@ -65,7 +65,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0100 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0100 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

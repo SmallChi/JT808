@@ -11,16 +11,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// 视频信号遮挡报警状态
     /// 0x0200_0x16
     /// </summary>
-    public class JT808_0x0200_0x16 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x16>, IJT808Analyze
+    public class JT808_0x0200_0x16 : JT808MessagePackFormatter<JT808_0x0200_0x16>, JT808_0x0200_CustomBodyBase,  IJT808Analyze
     {
         /// <summary>
         /// 
         /// </summary>
-        public override byte AttachInfoId { get; set; } = 0x16;
+        public byte AttachInfoId { get; set; } = 0x16;
         /// <summary>
         /// 数据 长度
         /// </summary>
-        public override byte AttachInfoLength { get; set; } = 4;
+        public byte AttachInfoLength { get; set; } = 4;
         /// <summary>
         /// 视频信号遮挡报警状态
         /// </summary>
@@ -63,7 +63,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200_0x16 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0x16 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x16 value = new JT808_0x0200_0x16();
             value.AttachInfoId = reader.ReadByte();
@@ -77,7 +77,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x16 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x16 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);

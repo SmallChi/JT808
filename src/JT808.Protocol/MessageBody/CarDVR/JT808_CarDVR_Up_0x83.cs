@@ -20,14 +20,14 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 0x83
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.set_first_install_date_recorder.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.set_first_install_date_recorder.ToByteValue();
         /// <summary>
         /// 初次安装日期
         /// </summary>
-        public override string Description => "初次安装日期";
+        public string Description => "初次安装日期";
         /// <summary>
         /// 
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization => true;
     }
 }

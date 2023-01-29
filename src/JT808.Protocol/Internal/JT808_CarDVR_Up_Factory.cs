@@ -29,7 +29,7 @@ namespace JT808.Protocol.Interfaces
         /// <param name="externalAssembly"></param>
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808CarDVRUpBodies)).ToList();
+            var types = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808CarDVRUpBodies)) == typeof(JT808CarDVRUpBodies)).ToList();
             foreach (var type in types)
             {
                 var instance = Activator.CreateInstance(type);

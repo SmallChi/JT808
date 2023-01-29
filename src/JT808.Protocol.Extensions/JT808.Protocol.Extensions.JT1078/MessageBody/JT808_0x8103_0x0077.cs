@@ -12,16 +12,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     ///单独视频通道参数设置
     /// 0x8103_0x0077
     /// </summary>
-    public class JT808_0x8103_0x0077 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0077>, IJT808Analyze
+    public class JT808_0x8103_0x0077 : JT808MessagePackFormatter<JT808_0x8103_0x0077>, JT808_0x8103_BodyBase,  IJT808Analyze
     {
         /// <summary>
         /// 
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0077;
+        public uint ParamId { get; set; } = 0x0077;
         /// <summary>
         /// 数据 长度
         /// </summary>
-        public override byte ParamLength { get; set; }
+        public byte ParamLength { get; set; }
         /// <summary>
         /// 需单独设置视频参数的通道数量 用n表示
         /// </summary>
@@ -33,7 +33,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <summary>
         /// 单独视频通道参数设置
         /// </summary>
-        public override string Description => "单独视频通道参数设置";
+        public string Description => "单独视频通道参数设置";
 
         /// <summary>
         /// 
@@ -66,7 +66,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0077 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0077 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0077 jT808_0X8103_0X0077 = new JT808_0x8103_0x0077();
             jT808_0X8103_0X0077.ParamId = reader.ReadUInt32();
@@ -89,7 +89,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0077 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0077 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.Skip(1, out var position);

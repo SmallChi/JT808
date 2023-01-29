@@ -11,12 +11,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 平台下发远程录像回放请求(vod点播请求)
     /// </summary>
-    public class JT808_0x9201 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9201>, IJT808Analyze
+    public class JT808_0x9201 : JT808MessagePackFormatter<JT808_0x9201>, JT808Bodies, IJT808Analyze
     {
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
-        public override string Description => "平台下发远程录像回放请求";
-        public override ushort MsgId => 0x9201;
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 平台下发远程录像回放请求
+        /// </summary>
+        public string Description => "平台下发远程录像回放请求";
+        /// <summary>
+        /// 0x9201
+        /// </summary>
+        public ushort MsgId => 0x9201;
         /// <summary>
         /// 服务器IP地址长度
         /// </summary>
@@ -207,7 +211,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x9201 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x9201 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x9201 jT808_0x9201 = new JT808_0x9201();
             jT808_0x9201.ServerIpLength = reader.ReadByte();
@@ -231,7 +235,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9201 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9201 value, IJT808Config config)
         {
             writer.Skip(1, out int position);
             writer.WriteString(value.ServerIp);

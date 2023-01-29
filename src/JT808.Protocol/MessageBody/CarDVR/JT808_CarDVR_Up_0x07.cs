@@ -15,12 +15,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集记录仪唯一性编号
     /// 返回：唯一性编号及初次安装日期
     /// </summary>
-    public class JT808_CarDVR_Up_0x07 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x07>, IJT808Analyze
+    public class JT808_CarDVR_Up_0x07 : JT808MessagePackFormatter<JT808_CarDVR_Up_0x07>, JT808CarDVRUpBodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x07
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.collect_recorder_unique_number.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.collect_recorder_unique_number.ToByteValue();
         /// <summary>
         /// 生产厂 CCC 认证代码  7字节
         /// </summary>
@@ -44,7 +44,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 唯一性编号及初次安装日期
         /// </summary>
-        public override string Description => "唯一性编号及初次安装日期";
+        public string Description => "唯一性编号及初次安装日期";
         /// <summary>
         /// 
         /// </summary>
@@ -76,7 +76,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x07 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x07 value, IJT808Config config)
         {
             var currentPosition = writer.GetCurrentPosition();
             writer.WriteASCII(value.ProductionPlantCCCCertificationCode);
@@ -98,7 +98,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Up_0x07 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Up_0x07 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x07 value = new JT808_CarDVR_Up_0x07();
             value.ProductionPlantCCCCertificationCode = reader.ReadASCII(7);

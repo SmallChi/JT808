@@ -11,14 +11,14 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 跳过数据体序列化
         /// </summary>
-        public override bool SkipSerialization { get; set; } = true;
+        public bool SkipSerialization => true;
         /// <summary>
         /// 0x0004
         /// </summary>
-        public override ushort MsgId { get; } = 0x0004;
+        public ushort MsgId => 0x0004;
         /// <summary>
         /// 查询服务器时间请求
         /// </summary>
-        public override string Description => "查询服务器时间请求";
+        public string Description => "查询服务器时间请求";
     }
 }

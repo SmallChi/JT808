@@ -10,17 +10,17 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 道路运输证 IC 卡认证主服务器 UDP 端口
     /// </summary>
-    public class JT808_0x8103_0x001C : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x001C>, IJT808Analyze
+    public class JT808_0x8103_0x001C : JT808MessagePackFormatter<JT808_0x8103_0x001C>, JT808_0x8103_BodyBase,  IJT808Analyze
     {
         /// <summary>
         /// 0x001C
         /// </summary>
-        public override uint ParamId { get; set; } = 0x001C;
+        public  uint ParamId { get; set; } = 0x001C;
         /// <summary>
         /// 数据长度
         /// 4 byte
         /// </summary>
-        public override byte ParamLength { get; set; } = 4;
+        public  byte ParamLength { get; set; } = 4;
         /// <summary>
         ///道路运输证 IC 卡认证主服务器 UDP 端口
         /// </summary>
@@ -28,7 +28,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 道路运输证IC卡认证主服务器UDP端口
         /// </summary>
-        public override string Description => "道路运输证IC卡认证主服务器UDP端口";
+        public string Description => "道路运输证IC卡认证主服务器UDP端口";
 
         /// <summary>
         /// 
@@ -52,7 +52,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x001C Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x001C Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x001C jT808_0x8103_0x001C = new JT808_0x8103_0x001C();
             jT808_0x8103_0x001C.ParamId = reader.ReadUInt32();
@@ -66,7 +66,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x001C value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x001C value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

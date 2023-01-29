@@ -10,17 +10,17 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 车牌颜色，按照 JT/T415-2006 的 5.4.12
     /// </summary>
-    public class JT808_0x8103_0x0084 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0x0084>, IJT808_2019_Version, IJT808Analyze
+    public class JT808_0x8103_0x0084 : JT808MessagePackFormatter<JT808_0x8103_0x0084>, JT808_0x8103_BodyBase, IJT808_2019_Version, IJT808Analyze
     {
         /// <summary>
         /// 0x0084
         /// </summary>
-        public override uint ParamId { get; set; } = 0x0084;
+        public uint ParamId { get; set; } = 0x0084;
         /// <summary>
         /// 数据长度
         /// n byte
         /// </summary>
-        public override byte ParamLength { get; set; } = 1;
+        public byte ParamLength { get; set; } = 1;
         /// <summary>
         /// 车牌颜色，按照 JT/T415-2006 的 5.4.12
         /// </summary>
@@ -28,7 +28,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 车牌颜色
         /// </summary>
-        public override string Description => "车牌颜色";
+        public  string Description => "车牌颜色";
 
         /// <summary>
         /// 
@@ -52,7 +52,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0084 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0084 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0084 jT808_0x8103_0x0084 = new JT808_0x8103_0x0084();
             jT808_0x8103_0x0084.ParamId = reader.ReadUInt32();
@@ -66,7 +66,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0084 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0084 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

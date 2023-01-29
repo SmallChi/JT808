@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// 查询服务器时间应答
     /// 2019版本
     /// </summary>
-    public class JT808_0x8004 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8004>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8004 : JT808MessagePackFormatter<JT808_0x8004>, JT808Bodies, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 0x8004
         /// </summary>
-        public override ushort MsgId { get; } = 0x8004;
+        public ushort MsgId  => 0x8004;
         /// <summary>
         /// 查询服务器时间应答
         /// </summary>
-        public override string Description => "查询服务器时间应答";
+        public string Description => "查询服务器时间应答";
         /// <summary>
         /// 服务器时间
         /// </summary>
@@ -41,7 +41,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8004 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8004 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8004 value = new JT808_0x8004();
             value.Time = reader.ReadDateTime_yyMMddHHmmss();
@@ -53,7 +53,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8004 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8004 value, IJT808Config config)
         {
             writer.WriteDateTime_yyMMddHHmmss(value.Time);
         }

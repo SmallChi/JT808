@@ -11,12 +11,17 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 实时音视频传输状态通知
     /// </summary>
-    public class JT808_0x9105 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9105>, IJT808Analyze
+    public class JT808_0x9105 : JT808MessagePackFormatter<JT808_0x9105>, JT808Bodies, IJT808Analyze
     {
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
-        public override string Description => "实时音视频传输状态通知";
-        public override ushort MsgId => 0x9105;
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 实时音视频传输状态通知
+        /// </summary>
+        public string Description => "实时音视频传输状态通知";
+        /// <summary>
+        /// 0x9105
+        /// </summary>
+        public ushort MsgId => 0x9105;
+
         /// <summary>
         /// 逻辑通道号
         /// </summary>
@@ -70,7 +75,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x9105 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x9105 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x9105 jT808_0x9105 = new JT808_0x9105();
             jT808_0x9105.ChannelNo = reader.ReadByte();
@@ -83,7 +88,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9105 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9105 value, IJT808Config config)
         {
             writer.WriteByte(value.ChannelNo);
             writer.WriteByte(value.DropRate);

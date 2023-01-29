@@ -9,16 +9,16 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 智能视频协议版本信息
     /// </summary>
-    public class JT808_0x8103_0xF370 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0xF370>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8103_0xF370 : JT808MessagePackFormatter<JT808_0x8103_0xF370>, JT808_0x8103_BodyBase, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 系统参数Id
         /// </summary>
-        public override uint ParamId { get; set; } = JT808_YueBiao_Constants.JT808_0X8103_0xF370;
+        public uint ParamId { get; set; } = JT808_YueBiao_Constants.JT808_0X8103_0xF370;
         /// <summary>
         /// 参数长度
         /// </summary>
-        public override byte ParamLength { get; set; } = 1;
+        public byte ParamLength { get; set; } = 1;
         /// <summary>
         /// 智能视频协议版本信息
         /// 引入此智能视频协议版本信息方便平台进行版本控制初始版本是 
@@ -29,7 +29,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <summary>
         /// 智能视频协议版本信息
         /// </summary>
-        public override string Description => "智能视频协议版本信息";
+        public string Description => "智能视频协议版本信息";
 
         /// <summary>
         /// 
@@ -53,7 +53,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0xF370 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0xF370 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0xF370 value = new JT808_0x8103_0xF370();
             value.ParamId = reader.ReadUInt32();
@@ -67,7 +67,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0xF370 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0xF370 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);

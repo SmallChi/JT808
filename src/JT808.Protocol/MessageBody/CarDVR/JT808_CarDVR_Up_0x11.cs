@@ -15,12 +15,12 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集指定的超时驾驶记录
     /// 返回：符合条件的超时驾驶记录
     /// </summary>
-    public class JT808_CarDVR_Up_0x11 : JT808CarDVRUpBodies, IJT808MessagePackFormatter<JT808_CarDVR_Up_0x11>, IJT808Analyze
+    public class JT808_CarDVR_Up_0x11 : JT808MessagePackFormatter<JT808_CarDVR_Up_0x11>, JT808CarDVRUpBodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x11
         /// </summary>
-        public override byte CommandId =>  JT808CarDVRCommandID.collect_specified_driving_overtime_records.ToByteValue();
+        public byte CommandId =>  JT808CarDVRCommandID.collect_specified_driving_overtime_records.ToByteValue();
         /// <summary>
         /// 请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
         /// </summary>
@@ -28,7 +28,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 符合条件的超时驾驶记录
         /// </summary>
-        public override string Description => "符合条件的超时驾驶记录";
+        public string Description => "符合条件的超时驾驶记录";
         /// <summary>
         /// 
         /// </summary>
@@ -80,7 +80,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x11 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Up_0x11 value, IJT808Config config)
         {
             foreach (var driveOverTime in value.JT808_CarDVR_Up_0x11_DriveOverTimes)
             {
@@ -103,7 +103,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Up_0x11 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Up_0x11 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Up_0x11 value = new JT808_CarDVR_Up_0x11();
             value.JT808_CarDVR_Up_0x11_DriveOverTimes = new List<JT808_CarDVR_Up_0x11_DriveOverTime>();

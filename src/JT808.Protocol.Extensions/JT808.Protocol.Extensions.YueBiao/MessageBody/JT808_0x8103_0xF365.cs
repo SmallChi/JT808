@@ -12,16 +12,16 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 驾驶员状态监测系统参数
     /// </summary>
-    public class JT808_0x8103_0xF365 : JT808_0x8103_BodyBase, IJT808MessagePackFormatter<JT808_0x8103_0xF365>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8103_0xF365 : JT808MessagePackFormatter<JT808_0x8103_0xF365>, JT808_0x8103_BodyBase, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 驾驶员状态监测系统参数
         /// </summary>
-        public override uint ParamId { get; set; } = JT808_YueBiao_Constants.JT808_0X8103_0xF365;
+        public uint ParamId { get; set; } = JT808_YueBiao_Constants.JT808_0X8103_0xF365;
         /// <summary>
         /// 驾驶员状态监测系统参数长度
         /// </summary>
-        public override byte ParamLength { get; set; }
+        public byte ParamLength { get; set; }
         /// <summary>
         /// 报警判断速度阈值
         /// </summary>
@@ -238,7 +238,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <summary>
         /// 驾驶员状态监测系统参数
         /// </summary>
-        public override string Description => "驾驶员状态监测系统参数";
+        public string Description => "驾驶员状态监测系统参数";
 
         /// <summary>
         /// 
@@ -406,7 +406,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0xF365 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0xF365 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0xF365 value = new JT808_0x8103_0xF365();
             value.ParamId = reader.ReadUInt32();
@@ -477,7 +477,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0xF365 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0xF365 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
             writer.Skip(1, out int ParamLengthPosition);

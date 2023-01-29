@@ -13,16 +13,16 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
     /// <summary>
     /// 盲区监测系统报警信息
     /// </summary>
-    public class JT808_0x0200_0x67 : JT808_0x0200_CustomBodyBase, IJT808MessagePackFormatter<JT808_0x0200_0x67>, IJT808Analyze
+    public class JT808_0x0200_0x67 : JT808MessagePackFormatter<JT808_0x0200_0x67>, JT808_0x0200_CustomBodyBase, IJT808Analyze
     {
         /// <summary>
         /// 盲区监测系统报警信息Id
         /// </summary>
-        public override byte AttachInfoId { get; set; } = JT808_SuBiao_Constants.JT808_0X0200_0x67;
+        public byte AttachInfoId { get; set; } = JT808_SuBiao_Constants.JT808_0X0200_0x67;
         /// <summary>
         /// 盲区监测系统报警信息长度
         /// </summary>
-        public override byte AttachInfoLength { get; set; }
+        public byte AttachInfoLength { get; set; }
         /// <summary>
         /// 报警ID
         /// </summary>
@@ -220,7 +220,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0200_0x67 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0x67 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0200_0x67 value = new JT808_0x0200_0x67();
             value.AttachInfoId = reader.ReadByte();
@@ -251,7 +251,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x67 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x67 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
             writer.Skip(1, out int AttachInfoLengthPosition);

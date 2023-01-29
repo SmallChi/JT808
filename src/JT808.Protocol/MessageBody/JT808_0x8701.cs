@@ -13,16 +13,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 行驶记录参数下传命令
     /// </summary>
-    public class JT808_0x8701: JT808Bodies, IJT808MessagePackFormatter<JT808_0x8701>, IJT808_2019_Version, IJT808Analyze
+    public class JT808_0x8701: JT808MessagePackFormatter<JT808_0x8701>, JT808Bodies, IJT808_2019_Version, IJT808Analyze
     {
         /// <summary>
         /// 0x8701
         /// </summary>
-        public override ushort MsgId => 0x8701;
+        public ushort MsgId => 0x8701;
         /// <summary>
         /// 行驶记录参数下传命令
         /// </summary>
-        public override string Description => "行驶记录参数下传命令";
+        public string Description => "行驶记录参数下传命令";
         /// <summary>
         /// 命令Id
         /// </summary>
@@ -54,7 +54,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8701 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8701 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8701 value = new JT808_0x8701();
             value.CommandId = reader.ReadByte();
@@ -67,7 +67,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8701 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8701 value, IJT808Config config)
         {
             writer.WriteByte(value.CommandId);
             JT808CarDVRSerializer.JT808CarDVRDownPackage.Serialize(ref writer, value.JT808CarDVRDownPackage, config);

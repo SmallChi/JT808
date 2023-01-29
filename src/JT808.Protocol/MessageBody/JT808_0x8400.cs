@@ -10,16 +10,16 @@ namespace JT808.Protocol.MessageBody
     /// <summary>
     /// 电话回拨
     /// </summary>
-    public class JT808_0x8400 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8400>, IJT808Analyze
+    public class JT808_0x8400 : JT808MessagePackFormatter<JT808_0x8400>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// 0x8400
         /// </summary>
-        public override ushort MsgId { get; } = 0x8400;
+        public ushort MsgId =>0x8400;
         /// <summary>
         /// 电话回拨
         /// </summary>
-        public override string Description => "电话回拨";
+        public string Description => "电话回拨";
         /// <summary>
         /// 0:普通通话；1:监听
         /// </summary>
@@ -35,7 +35,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8400 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8400 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8400 jT808_0X8400 = new JT808_0x8400();
             jT808_0X8400.CallBack = (JT808CallBackType)reader.ReadByte();
@@ -49,7 +49,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8400 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8400 value, IJT808Config config)
         {
             writer.WriteByte((byte)value.CallBack);
             writer.WriteString(value.PhoneNumber.ValiMaxString(nameof(value.PhoneNumber),20));

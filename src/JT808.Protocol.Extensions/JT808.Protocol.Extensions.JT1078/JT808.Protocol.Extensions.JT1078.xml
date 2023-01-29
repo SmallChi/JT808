@@ -1505,9 +1505,34 @@
             查询终端音视频属性
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9003.Description">
+            <summary>
+            查询终端音视频属性
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9003.MsgId">
+            <summary>
+            0x9003
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9003.SkipSerialization">
+            <summary>
+            SkipSerialization
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101">
             <summary>
             实时音视频传输请求（live、talk、listen、fanout、passThrough直播、对讲、监听、广播、透传请求）
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.Description">
+            <summary>
+            实时音视频传输请求
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.MsgId">
+            <summary>
+            0x9101
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.ServerIpLength">
@@ -1582,6 +1607,16 @@
             音视频实时传输控制(LiveControl直播控制)
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.Description">
+            <summary>
+            音视频实时传输控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.MsgId">
+            <summary>
+            0x9102
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.ChannelNo">
             <summary>
             逻辑通道号
@@ -1644,6 +1679,16 @@
             实时音视频传输状态通知
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.Description">
+            <summary>
+            实时音视频传输状态通知
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.MsgId">
+            <summary>
+            0x9105
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.ChannelNo">
             <summary>
             逻辑通道号
@@ -1682,6 +1727,16 @@
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201">
             <summary>
             平台下发远程录像回放请求(vod点播请求)
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.Description">
+            <summary>
+            平台下发远程录像回放请求
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.MsgId">
+            <summary>
+            0x9201
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.ServerIpLength">
@@ -1795,6 +1850,16 @@
             平台下发远程录像回放控制(VodControl点播控制)
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.Description">
+            <summary>
+            平台下发远程录像回放控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.MsgId">
+            <summary>
+            0x9202
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.ChannelNo">
             <summary>
             音视频通道号
@@ -1857,6 +1922,16 @@
             查询资源列表
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.Description">
+            <summary>
+            查询资源列表
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.MsgId">
+            <summary>
+            0x9205
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.ChannelNo">
             <summary>
             逻辑通道号
@@ -1901,6 +1976,30 @@
             1：主存储器
             2：灾备存储器
             </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
         </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206">
             <summary>
@@ -2031,6 +2130,16 @@
             文件上传控制
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.Description">
+            <summary>
+            文件上传控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.MsgId">
+            <summary>
+            0x9207
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.MgsNum">
             <summary>
             流水号
@@ -2041,9 +2150,43 @@
             上传控制
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301">
             <summary>
             云台旋转
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.Description">
+            <summary>
+            云台旋转
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.MsgId">
+            <summary>
+            0x9301
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.ChannelNo">
@@ -2067,9 +2210,43 @@
             0-255
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302">
             <summary>
             云台调整焦距控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.Description">
+            <summary>
+            云台调整焦距控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.MsgId">
+            <summary>
+            0x9302
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.LogicChannelNo">
@@ -2082,9 +2259,43 @@
             焦距调整方向
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303">
             <summary>
             云台调整光圈控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.Description">
+            <summary>
+            云台调整光圈控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.MsgId">
+            <summary>
+            0x9303
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.ChannelNo">
@@ -2097,9 +2308,43 @@
             光圈调整方式
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304">
             <summary>
             云台雨刷控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.Description">
+            <summary>
+            云台雨刷控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.MsgId">
+            <summary>
+            0x9304
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.ChannelNo">
@@ -2112,9 +2357,43 @@
             启停标识
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305">
             <summary>
             红外补光控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.Description">
+            <summary>
+            红外补光控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.MsgId">
+            <summary>
+            0x9305
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.ChannelNo">
@@ -2127,9 +2406,44 @@
             启停标识
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306">
             <summary>
             云台变倍控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.Description">
+            <summary>
+            云台变倍控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.MsgId">
+            <summary>
+            0x9306
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.ChannelNo">
@@ -2141,6 +2455,30 @@
             <summary>
             变倍控制
             </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
         </member>
     </members>
 </doc>

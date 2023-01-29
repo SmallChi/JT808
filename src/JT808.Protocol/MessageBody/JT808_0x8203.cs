@@ -12,16 +12,16 @@ namespace JT808.Protocol.MessageBody
     /// 人工确认报警消息
     /// 0x8203
     /// </summary>
-    public class JT808_0x8203 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8203>, IJT808Analyze
+    public class JT808_0x8203 : JT808MessagePackFormatter<JT808_0x8203>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x8203
         /// </summary>
-        public override ushort MsgId { get; } = 0x8203;
+        public ushort MsgId => 0x8203;
         /// <summary>
         /// 人工确认报警消息
         /// </summary>
-        public override string Description => "人工确认报警消息";
+        public string Description => "人工确认报警消息";
         /// <summary>
         /// 报警消息流水号
         /// 需人工确认的报警消息流水号，0 表示该报警类型所有消息
@@ -37,7 +37,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8203 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8203 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8203 jT808_0X8203 = new JT808_0x8203();
             jT808_0X8203.AlarmMsgNum = reader.ReadUInt16();
@@ -50,7 +50,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8203 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8203 value, IJT808Config config)
         {
             writer.WriteUInt16(value.AlarmMsgNum);
             writer.WriteUInt32(value.ManualConfirmAlarmType);

@@ -26,6 +26,7 @@ namespace JT808.Protocol.Test.MessageBody
             IJT808Config jT808Config1 = new DefaultGlobalConfig();
             jT808Config1.SkipCRCCode = true;
             jT808Config.JT808_0X0200_Custom_Factory.SetMap<JT808LocationAttachImpl0x61>();
+            jT808Config.FormatterFactory.SetMap<JT808LocationAttachImpl0x61>();
             JT808Serializer = new JT808Serializer(jT808Config);
             JT808Serializer1 = new JT808Serializer(jT808Config1);
         }

@@ -11,12 +11,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 平台下发远程录像回放控制(VodControl点播控制)
     /// </summary>
-    public class JT808_0x9202 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9202>, IJT808Analyze
+    public class JT808_0x9202 : JT808MessagePackFormatter<JT808_0x9202>, JT808Bodies,  IJT808Analyze
     {
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
-        public override string Description => "平台下发远程录像回放控制";
-        public override ushort MsgId => 0x9202;
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 平台下发远程录像回放控制
+        /// </summary>
+        public string Description => "平台下发远程录像回放控制";
+        /// <summary>
+        /// 0x9202
+        /// </summary>
+        public ushort MsgId => 0x9202;
         /// <summary>
         /// 音视频通道号
         /// </summary>
@@ -118,7 +122,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x9202 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x9202 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             var jT808_0x9202 = new JT808_0x9202();
             jT808_0x9202.ChannelNo = reader.ReadByte();
@@ -133,7 +137,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9202 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9202 value, IJT808Config config)
         {
             writer.WriteByte(value.ChannelNo);
             writer.WriteByte(value.PlayControl);

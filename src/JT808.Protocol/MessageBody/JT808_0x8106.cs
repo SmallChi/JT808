@@ -11,16 +11,16 @@ namespace JT808.Protocol.MessageBody
     /// 查询指定终端参数
     /// 0x8106
     /// </summary>
-    public class JT808_0x8106 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x8106>, IJT808Analyze
+    public class JT808_0x8106 : JT808MessagePackFormatter<JT808_0x8106>, JT808Bodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x8106
         /// </summary>
-        public override ushort MsgId { get; } = 0x8106;
+        public ushort MsgId  => 0x8106;
         /// <summary>
         /// 查询指定终端参数
         /// </summary>
-        public override string Description => "查询指定终端参数";
+        public string Description => "查询指定终端参数";
         /// <summary>
         /// 参数总数
         /// 参数总数为 n
@@ -37,7 +37,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8106 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8106 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8106 jT808_0X8106 = new JT808_0x8106();
             jT808_0X8106.ParameterCount = reader.ReadByte();
@@ -54,7 +54,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8106 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8106 value, IJT808Config config)
         {
             writer.WriteByte(value.ParameterCount);
             for (int i = 0; i < value.ParameterCount; i++)

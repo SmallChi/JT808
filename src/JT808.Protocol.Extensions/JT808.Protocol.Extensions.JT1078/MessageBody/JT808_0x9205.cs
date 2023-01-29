@@ -11,12 +11,16 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 查询资源列表
     /// </summary>
-    public class JT808_0x9205 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9205>, IJT808Analyze
+    public class JT808_0x9205 : JT808MessagePackFormatter<JT808_0x9205>, JT808Bodies, IJT808Analyze
     {
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
-        public override string Description => "查询资源列表";
-        public override ushort MsgId => 0x9205;
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 查询资源列表
+        /// </summary>
+        public string Description => "查询资源列表";
+        /// <summary>
+        /// 0x9205
+        /// </summary>
+        public ushort MsgId => 0x9205;
         /// <summary>
         /// 逻辑通道号
         /// </summary>
@@ -55,7 +59,12 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 2：灾备存储器
         /// </summary>
         public byte MemoryType { get; set; }
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="writer"></param>
+        /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x9205 value = new JT808_0x9205();
@@ -128,8 +137,13 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 };
             }
         }
-
-        public JT808_0x9205 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public override JT808_0x9205 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             var jT808_0x9205 = new JT808_0x9205();
             jT808_0x9205.ChannelNo = reader.ReadByte();
@@ -141,8 +155,13 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             jT808_0x9205.MemoryType = reader.ReadByte();
             return jT808_0x9205;
         }
-
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9205 value, IJT808Config config)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="writer"></param>
+        /// <param name="value"></param>
+        /// <param name="config"></param>
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9205 value, IJT808Config config)
         {
             writer.WriteByte(value.ChannelNo);
             writer.WriteDateTime_yyMMddHHmmss(value.BeginTime);
@@ -152,6 +171,5 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteByte(value.StreamType);
             writer.WriteByte(value.MemoryType);
         }
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
     }
 }

@@ -11,12 +11,17 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// <summary>
     /// 音视频实时传输控制(LiveControl直播控制)
     /// </summary>
-    public class JT808_0x9102 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x9102>, IJT808Analyze
+    public class JT808_0x9102 : JT808MessagePackFormatter<JT808_0x9102>, JT808Bodies, IJT808Analyze
     {
-#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
-        public override string Description => "音视频实时传输控制";
-        public override ushort MsgId => 0x9102;
-#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
+        /// <summary>
+        /// 音视频实时传输控制
+        /// </summary>
+        public string Description => "音视频实时传输控制";
+        /// <summary>
+        /// 0x9102
+        /// </summary>
+        public ushort MsgId => 0x9102;
+
         /// <summary>
         /// 逻辑通道号
         /// </summary>
@@ -116,7 +121,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x9102 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x9102 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             var jT808_0X9102 = new JT808_0x9102();
             jT808_0X9102.ChannelNo = reader.ReadByte();
@@ -131,7 +136,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x9102 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x9102 value, IJT808Config config)
         {
             writer.WriteByte(value.ChannelNo);
             writer.WriteByte(value.ControlCmd);

@@ -13,16 +13,16 @@ namespace JT808.Protocol.MessageBody
     /// 0x0302
     /// 2019版本已作删除
     /// </summary>
-    public class JT808_0x0302 : JT808Bodies, IJT808MessagePackFormatter<JT808_0x0302>,IJT808_2019_Version, IJT808Analyze
+    public class JT808_0x0302 : JT808MessagePackFormatter<JT808_0x0302>, JT808Bodies, IJT808_2019_Version, IJT808Analyze
     {
         /// <summary>
         /// 0x0302
         /// </summary>
-        public override ushort MsgId { get; } = 0x0302;
+        public ushort MsgId  => 0x0302;
         /// <summary>
         /// 提问应答
         /// </summary>
-        public override string Description => "提问应答";
+        public string Description => "提问应答";
         /// <summary>
         /// 应答流水号
         /// 对应的提问下发消息的流水号
@@ -53,7 +53,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x0302 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0302 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x0302 jT808_0X0302 = new JT808_0x0302();
             jT808_0X0302.ReplySNo = reader.ReadUInt16();
@@ -66,7 +66,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x0302 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0302 value, IJT808Config config)
         {
             writer.WriteUInt16(value.ReplySNo);
             writer.WriteByte(value.AnswerId);

@@ -10,13 +10,13 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
     /// <summary>
     /// 信息查询
     /// </summary>
-    public class JT808_0x8900_0xF8 : JT808_0x8900_BodyBase, IJT808MessagePackFormatter<JT808_0x8900_0xF8>, IJT808Analyze, IJT808_2019_Version
+    public class JT808_0x8900_0xF8 : JT808MessagePackFormatter<JT808_0x8900_0xF8>, JT808_0x8900_BodyBase, IJT808Analyze, IJT808_2019_Version
     {
         /// <summary>
         /// 查询基本信息透传类型
         /// 外设传感器的基本信息：公司信息、 产品代码、 版本号、 外设 ID、 客户代码。对应的消息内容见表
         /// </summary>
-        public override byte PassthroughType { get; set; } = JT808_YueBiao_Constants.JT808_0X0900_0xF8;
+        public byte PassthroughType { get; set; } = JT808_YueBiao_Constants.JT808_0X0900_0xF8;
         /// <summary>
         /// 外设ID列表总数
         /// </summary>
@@ -55,7 +55,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8900_0xF8 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8900_0xF8 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8900_0xF8 value = new JT808_0x8900_0xF8();
             value.USBCount = reader.ReadByte();
@@ -75,7 +75,7 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8900_0xF8 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8900_0xF8 value, IJT808Config config)
         {
             if (value.MultipleUSB != null && value.MultipleUSB.Count > 0)
             {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -101,7 +102,7 @@ namespace JT808.Protocol.Interfaces
 
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.BaseType == typeof(JT808_0x8103_BodyBase)).ToList();
+            var types = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x8103_BodyBase)) == typeof(JT808_0x8103_BodyBase)).ToList();
             foreach (var type in types)
             {
                 var instance = Activator.CreateInstance(type);

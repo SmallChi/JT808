@@ -14,16 +14,16 @@ namespace JT808.Protocol.MessageBody.CarDVR
     /// 采集指定的速度状态日志
     /// 返回：符合条件的速度状态日志
     /// </summary>
-    public class JT808_CarDVR_Down_0x15 : JT808CarDVRDownBodies, IJT808MessagePackFormatter<JT808_CarDVR_Down_0x15>, IJT808Analyze
+    public class JT808_CarDVR_Down_0x15 : JT808MessagePackFormatter<JT808_CarDVR_Down_0x15>, JT808CarDVRDownBodies,  IJT808Analyze
     {
         /// <summary>
         /// 0x15
         /// </summary>
-        public override byte CommandId => JT808CarDVRCommandID.collect_specified_speed_status_logs.ToByteValue();
+        public byte CommandId => JT808CarDVRCommandID.collect_specified_speed_status_logs.ToByteValue();
         /// <summary>
         /// 符合条件的速度状态日志
         /// </summary>
-        public override string Description => "符合条件的速度状态日志";
+        public string Description => "符合条件的速度状态日志";
         /// <summary>
         /// 开始时间
         /// </summary>
@@ -42,7 +42,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x15 value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_CarDVR_Down_0x15 value, IJT808Config config)
         {
             writer.WriteDateTime_yyMMddHHmmss(value.StartTime);
             writer.WriteDateTime_yyMMddHHmmss(value.EndTime);
@@ -54,7 +54,7 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_CarDVR_Down_0x15 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_CarDVR_Down_0x15 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_CarDVR_Down_0x15 value = new JT808_CarDVR_Down_0x15();
             value.StartTime = reader.ReadDateTime_yyMMddHHmmss();

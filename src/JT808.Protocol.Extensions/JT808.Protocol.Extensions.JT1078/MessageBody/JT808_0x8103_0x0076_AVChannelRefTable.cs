@@ -9,7 +9,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// 音视频通道列表设置
     /// 0x8103_0x0076_AVChannelRefTable
     /// </summary>
-    public class JT808_0x8103_0x0076_AVChannelRefTable: IJT808MessagePackFormatter<JT808_0x8103_0x0076_AVChannelRefTable>, IJT808Analyze
+    public class JT808_0x8103_0x0076_AVChannelRefTable: JT808MessagePackFormatter<JT808_0x8103_0x0076_AVChannelRefTable>, IJT808Analyze
     {
         /// <summary>
         /// 物理通道号
@@ -113,7 +113,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public JT808_0x8103_0x0076_AVChannelRefTable Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x8103_0x0076_AVChannelRefTable Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
             JT808_0x8103_0x0076_AVChannelRefTable jT808_0X8103_0X0076_AVChannelRefTable = new JT808_0x8103_0x0076_AVChannelRefTable();
             jT808_0X8103_0X0076_AVChannelRefTable.PhysicalChannelNo = reader.ReadByte();
@@ -128,7 +128,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0076_AVChannelRefTable value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0076_AVChannelRefTable value, IJT808Config config)
         {
             writer.WriteByte(value.PhysicalChannelNo);
             writer.WriteByte(value.LogicChannelNo);
