@@ -58,9 +58,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteString($"[{value.LogicChannelNo.ReadNumber()}]逻辑通道号", LogicalChannelNoDisplay(value.LogicChannelNo));
             value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
             writer.WriteString($"[{value.BeginTime.ToString("yyMMddHHmmss")}]开始时间", value.BeginTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
-            writer.WriteString($"[{value.BeginTime.ToString("yyMMddHHmmss")}]开始时间", value.BeginTime.ToString("yyyy-MM-dd HH:mm:ss"));
-            value.AlarmFlag = reader.ReadUInt32();
+            value.EndTime = reader.ReadDateTime_yyMMddHHmmss();
+            writer.WriteString($"[{value.EndTime.ToString("yyMMddHHmmss")}]结束时间", value.EndTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            value.AlarmFlag = reader.ReadUInt64();
             writer.WriteNumber($"[{value.AlarmFlag.ReadNumber()}]报警标志", value.AlarmFlag);//此处的报警标志不是很明白
             value.AVResourceType = reader.ReadByte();
             writer.WriteString($"[{value.AVResourceType.ReadNumber()}]音视频资源类型", AVResourceTypeDisplay(value.AVResourceType));
