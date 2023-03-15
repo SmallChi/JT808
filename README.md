@@ -382,6 +382,7 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 | Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JT1078.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |JT1078扩展JT808|
 | Install-Package JT808.Protocol.Extensions.SuBiao| ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.SuBiao.svg) | ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.SuBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.SuBiao.svg) |主动安全（苏标）扩展JT808|
 | Install-Package JT808.Protocol.Extensions.YueBiao| ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.YueBiao.svg) | ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.YueBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.YueBiao.svg) |主动安全（粤标）扩展JT808|
+| Install-Package JT808.Protocol.DependencyInjection| ![JT808.Protocol.DependencyInjection](https://img.shields.io/nuget/v/JT808.Protocol.DependencyInjection.svg) | ![JT808.Protocol.DependencyInjection](https://img.shields.io/nuget/vpre/JT808.Protocol.DependencyInjection.svg)|![JT808.Protocol.DependencyInjection](https://img.shields.io/nuget/dt/JT808.Protocol.DependencyInjection.svg) |JT808依赖注入扩展|
 
 ## 使用BenchmarkDotNet性能测试报告（只是玩玩，不能当真）
 
@@ -532,9 +533,12 @@ Platform=AnyCpu  Server=False  Toolchain=.NET 7.0
 ## 使用方法
 
 ```csharp
+DI:
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddJT1078Configure();
+全局注册：
+JT808Serializer.Instance.Register(JT808_JT1078_Constants.GetCurrentAssembly());
 ```
 
 ## 主动安全（苏标）扩展JT808协议消息对照表
@@ -564,9 +568,13 @@ serviceDescriptors1.AddJT808Configure()
 ## 使用方法
 
 ```csharp
+DI:
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddSuBiaoConfigure();
+
+全局注册:
+JT808Serializer.Instance.Register(JT808_SuBiao_Constants.GetCurrentAssembly());
 ```
 
 ## 主动安全（粤标）扩展JT808协议消息对照表
@@ -600,7 +608,11 @@ serviceDescriptors1.AddJT808Configure()
 ## 使用方法
 
 ```csharp
+DI:
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddYueBiaoConfigure();
+
+全局注册:
+JT808Serializer.Instance.Register(JT808_YueBiao_Constants.GetCurrentAssembly());
 ```

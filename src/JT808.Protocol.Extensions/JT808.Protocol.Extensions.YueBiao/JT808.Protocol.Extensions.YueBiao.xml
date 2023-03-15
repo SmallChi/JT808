@@ -387,6 +387,12 @@
             信息查询
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.YueBiao.JT808_YueBiao_Constants.GetCurrentAssembly">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x0200_0x64">
             <summary>
             高级驾驶辅助系统报警信息

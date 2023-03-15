@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
+using System.Reflection;
 
 namespace JT808.Protocol.Extensions.JT1078.Test
 {
@@ -120,6 +121,17 @@ namespace JT808.Protocol.Extensions.JT1078.Test
         {
             byte[] bodys = "7e020040420100000000013419905507021200040000001410010213679206c4a97d01001300000002220720103957010400000e3e020200000302025825040000001030014531010814040000000115040000000c797e".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808Package>(bodys);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Fact]
+        public void Test_0x15_5()
+        {
+            JT808Serializer.Instance.Register(JT808_JT1078_Constants.GetCurrentAssembly());
+            byte[] bodys = "7e020040420100000000013419905507021200040000001410010213679206c4a97d01001300000002220720103957010400000e3e020200000302025825040000001030014531010814040000000115040000000c797e".ToHexBytes();
+            string json = JT808Serializer.Instance.Analyze<JT808Package>(bodys);
         }
     }
 }

@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JT808.Protocol.DependencyInjection</name>
+    </assembly>
+    <members>
+        <member name="T:JT808.Protocol.DependencyInjection.DefaultDIBuilder">
+            <summary>
+            默认JT808构造器
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.DependencyInjection.DefaultDIBuilder.Config">
+            <summary>
+            JT808配置
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.DependencyInjection.DefaultDIBuilder.Services">
+            <summary>
+            DI ServiceCollection
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjection.DefaultDIBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.DependencyInjection.IJT808DIBuilder">
+            <summary>
+            JT808 DI Builder
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.DependencyInjection.IJT808DIBuilder.Services">
+            <summary>
+            服务注册
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.DependencyInjectionExtensions">
+            <summary>
+            JT808 DI扩展
+            JT808 DependencyInjectionExtensions
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure(Microsoft.Extensions.DependencyInjection.IServiceCollection,JT808.Protocol.IJT808Config)">
+            <summary>
+            注册808配置
+            </summary>
+            <param name="services"></param>
+            <param name="jT808Config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure(JT808.Protocol.DependencyInjection.IJT808DIBuilder,JT808.Protocol.IJT808Config)">
+            <summary>
+            注册808配置
+            </summary>
+            <param name="builder"></param>
+            <param name="jT808Config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册808配置
+            </summary>
+            <typeparam name="TJT808Config"></typeparam>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure``1(JT808.Protocol.DependencyInjection.IJT808DIBuilder)">
+            <summary>
+            注册808配置
+            </summary>
+            <typeparam name="TJT808Config"></typeparam>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册808配置
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

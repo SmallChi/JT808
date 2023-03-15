@@ -262,6 +262,12 @@
             Wake up in hibernation mode
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.JT808_JT1078_Constants.GetCurrentAssembly">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x14">
             <summary>
             视频相关报警

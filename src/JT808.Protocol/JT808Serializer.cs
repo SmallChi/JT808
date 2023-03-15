@@ -1,14 +1,14 @@
 ﻿using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
-using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
 using JT808.Protocol.MessagePack;
-using System;
-using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 
+[assembly: InternalsVisibleTo("JT808.Protocol.DependencyInjection")]
 namespace JT808.Protocol
 {
     /// <summary>
@@ -23,6 +23,17 @@ namespace JT808.Protocol
         private readonly static Type JT808_Package_Type = typeof(JT808Package);
 
         /// <summary>
+        /// 默认实例
+        /// default instance
+        /// </summary>
+        public readonly static JT808Serializer Instance;
+
+        static JT808Serializer()
+        {
+            Instance= new JT808Serializer();
+        }
+        
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="jT808Config"></param>
@@ -30,6 +41,7 @@ namespace JT808.Protocol
         {
             this.jT808Config = jT808Config;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -59,27 +71,6 @@ namespace JT808.Protocol
                 JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer, version);
                 package.Serialize(ref jT808MessagePackWriter, package, jT808Config);
                 return jT808MessagePackWriter.FlushAndGetEncodingArray();
-            }
-            finally
-            {
-                JT808ArrayPool.Return(buffer);
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="package"></param>
-        /// <param name="version"></param>
-        /// <param name="minBufferSize"></param>
-        /// <returns></returns>
-        public ReadOnlySpan<byte> SerializeReadOnlySpan(JT808Package package, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
-        {
-            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
-            try
-            {
-                JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer, version);
-                package.Serialize(ref jT808MessagePackWriter, package, jT808Config);
-                return jT808MessagePackWriter.FlushAndGetEncodingReadOnlySpan();
             }
             finally
             {
@@ -124,29 +115,6 @@ namespace JT808.Protocol
                 JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer, version);
                 formatter.Serialize(ref jT808MessagePackWriter, obj, jT808Config);
                 return jT808MessagePackWriter.FlushAndGetEncodingArray();
-            }
-            finally
-            {
-                JT808ArrayPool.Return(buffer);
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <param name="version"></param>
-        /// <param name="minBufferSize"></param>
-        /// <returns></returns>
-        public ReadOnlySpan<byte> SerializeReadOnlySpan<T>(T obj, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
-        {
-            byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
-            try
-            {
-                var formatter = jT808Config.GetMessagePackFormatter<T>();
-                JT808MessagePackWriter jT808MessagePackWriter = new JT808MessagePackWriter(buffer, version);
-                formatter.Serialize(ref jT808MessagePackWriter, obj, jT808Config);
-                return jT808MessagePackWriter.FlushAndGetEncodingReadOnlySpan();
             }
             finally
             {
@@ -217,7 +185,7 @@ namespace JT808.Protocol
         /// <param name="version"></param>
         /// <param name="minBufferSize"></param>
         /// <returns></returns>
-        public dynamic Deserialize(ReadOnlySpan<byte> bytes, Type type, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
+        public object Deserialize(ReadOnlySpan<byte> bytes, Type type, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
             try
@@ -423,6 +391,23 @@ namespace JT808.Protocol
             {
                 JT808ArrayPool.Return(buffer);
             }
+        }
+
+        /// <summary>
+        /// 外部注册
+        /// </summary>
+        /// <param name="externalAssemblies"></param>
+        /// <returns></returns>
+        public JT808Serializer Register(params Assembly[] externalAssemblies)
+        {
+            if(externalAssemblies!=null && externalAssemblies.Length > 0)
+            {
+                foreach(var asm in externalAssemblies)
+                {
+                    jT808Config.Register(asm);
+                }
+            }
+            return this;
         }
     }
 }

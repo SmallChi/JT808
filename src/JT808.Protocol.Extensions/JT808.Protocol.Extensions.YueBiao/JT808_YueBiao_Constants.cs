@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace JT808.Protocol.Extensions.YueBiao
@@ -62,5 +63,13 @@ namespace JT808.Protocol.Extensions.YueBiao
         /// 信息查询
         /// </summary>
         public const byte JT808_0X0900_0xF8 = 0xF8;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static Assembly GetCurrentAssembly()
+        {
+            return Assembly.GetExecutingAssembly();
+        }
     }
 }

@@ -1,10 +1,11 @@
 ﻿using JT808.Protocol.Interfaces;
+using System.Runtime.CompilerServices;
 
 namespace JT808.Protocol.Internal
 {
     /// <summary>
     /// 默认全局配置
-    /// </summary>
+    /// </summary> 
     class DefaultGlobalConfig : GlobalConfigBase
     {
         /// <summary>

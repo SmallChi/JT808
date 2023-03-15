@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JT808.Protocol.DependencyInjection\JT808.Protocol.DependencyInjection.csproj" />
     <ProjectReference Include="..\JT808.Protocol.Extensions.SuBiao\JT808.Protocol.Extensions.SuBiao.csproj" />
   </ItemGroup>
 

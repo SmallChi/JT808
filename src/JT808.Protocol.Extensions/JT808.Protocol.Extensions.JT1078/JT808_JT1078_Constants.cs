@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace JT808.Protocol.Extensions.JT1078
@@ -69,5 +70,13 @@ namespace JT808.Protocol.Extensions.JT1078
         /// Wake up in hibernation mode
         /// </summary>
         public const uint JT808_0X8103_0x007C = 0x007C;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static Assembly GetCurrentAssembly()
+        {
+            return Assembly.GetExecutingAssembly();
+        }
     }
 }

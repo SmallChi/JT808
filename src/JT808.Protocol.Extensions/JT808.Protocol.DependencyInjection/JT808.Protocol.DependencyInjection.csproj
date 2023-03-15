@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\..\Info.props" />
+	<PropertyGroup>
+		<PackageId>JT808.Protocol.DependencyInjection</PackageId>
+		<Product>JT808.Protocol.DependencyInjection</Product>
+		<Description>
+			JT808.Protocol.DependencyInjection.
+		</Description>
+		<PackageReleaseNotes>
+			JT808.Protocol.DependencyInjection.
+		</PackageReleaseNotes>
+		<DocumentationFile>JT808.Protocol.DependencyInjection.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\..\LICENSE" Pack="true" PackagePath="" />
+		<None Include="..\..\..\README.md" Pack="true" PackagePath="" />
+		<None Include="..\..\..\README.en.md" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\JT808.Protocol\JT808.Protocol.csproj" />
+  </ItemGroup>
+
+</Project>

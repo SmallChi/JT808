@@ -298,6 +298,12 @@
             信息查询
             </summary>
         </member>
+        <member name="M:JT808.Protocol.Extensions.SuBiao.JT808_SuBiao_Constants.GetCurrentAssembly">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x64">
             <summary>
             高级驾驶辅助系统报警信息

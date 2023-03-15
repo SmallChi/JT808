@@ -1,7 +1,6 @@
 ﻿using JT808.Protocol.Extensions.SuBiao.Enums;
 using JT808.Protocol.Extensions.SuBiao.MessageBody;
 using JT808.Protocol.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

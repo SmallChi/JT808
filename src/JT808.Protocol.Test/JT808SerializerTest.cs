@@ -30,31 +30,6 @@ namespace JT808.Protocol.Test
         }
 
         [Fact]
-        public void ReadOnlySpanTest1()
-        {
-            IJT808Config jT808Config = new DefaultGlobalConfig();
-            JT808Serializer jT808Serializer = new JT808Serializer(jT808Config);
-            JT808Package jT808Package = new JT808Package
-            {
-                Header = new JT808Header
-                {
-                    MsgId = Enums.JT808MsgId._0x0001.ToUInt16Value(),
-                    MsgNum = 1203,
-                    TerminalPhoneNo = "012345678900",
-                    MessageBodyProperty=new JT808HeaderMessageBodyProperty()
-                },
-                Bodies = new JT808_0x0001
-                {
-                    ReplyMsgId = Enums.JT808MsgId._0x0002.ToUInt16Value(),
-                    ReplyMsgNum = 1000,
-                    TerminalResult = Enums.JT808TerminalResult.Success
-                }
-            };
-            var hexSpan = jT808Serializer.SerializeReadOnlySpan(jT808Package);
-            Assert.Equal(0x7e, hexSpan[0]);
-        }
-
-        [Fact]
         public unsafe void DefaultGlobalConfigTest1()
         {
             List<DefaultGlobalConfig> defaultGlobalConfigs = new List<DefaultGlobalConfig>();

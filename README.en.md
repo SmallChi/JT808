@@ -382,6 +382,7 @@ Due to access many different equipment vendor's agreement, but each protocol doc
 | Install-Package JT808.Protocol.Extensions.JT1078 | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg) | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JT1078.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg) |JT1078 extension JT808|
 | Install-Package JT808.Protocol.Extensions.SuBiao| ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.SuBiao.svg) | ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.SuBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.SuBiao.svg) |Active Safety (Su Biao) extension JT808|
 | Install-Package JT808.Protocol.Extensions.YueBiao| ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.YueBiao.svg) | ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.YueBiao.svg)|![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.YueBiao.svg) |Active Safety (Yue Biao) extension JT808|
+| Install-Package JT808.Protocol.DependencyInjection| ![JT808.Protocol.DependencyInjection](https://img.shields.io/nuget/v/JT808.Protocol.DependencyInjection.svg) | ![JT808.Protocol.DependencyInjection](https://img.shields.io/nuget/vpre/JT808.Protocol.DependencyInjection.svg)|![JT808.Protocol.DependencyInjection](https://img.shields.io/nuget/dt/JT808.Protocol.DependencyInjection.svg) |JT808 DependencyInjection|
 
 ## Using BenchmarkDotNet performance test reports (just for fun, not to be taken seriously)
 
@@ -532,9 +533,13 @@ Platform=AnyCpu  Server=False  Toolchain=.NET 7.0
 ## usage
 
 ```csharp
+Use DI:
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddJT1078Configure();
+
+Use Global:
+JT808Serializer.Instance.Register(JT808_JT1078_Constants.GetCurrentAssembly());
 ```
 
 ## Active Security (SuBiao) extended JT808 protocol message comparison table
@@ -564,9 +569,13 @@ serviceDescriptors1.AddJT808Configure()
 ## usage
 
 ```csharp
+Use DI:
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddSuBiaoConfigure();
+
+Use Global:
+JT808Serializer.Instance.Register(JT808_SuBiao_Constants.GetCurrentAssembly());
 ```
 
 ## Active Security (Yue Biao) extended JT808 protocol message comparison table
@@ -600,7 +609,11 @@ serviceDescriptors1.AddJT808Configure()
 ## usage
 
 ```csharp
+Use DI:
 IServiceCollection serviceDescriptors1 = new ServiceCollection();
 serviceDescriptors1.AddJT808Configure()
                    .AddYueBiaoConfigure();
+
+Use Global:
+JT808Serializer.Instance.Register(JT808_YueBiao_Constants.GetCurrentAssembly());
 ```

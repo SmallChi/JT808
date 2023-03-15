@@ -21,6 +21,7 @@
     <PackageReference Include="System.Memory" Version="4.5.5" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JT808.Protocol.Extensions\JT808.Protocol.DependencyInjection\JT808.Protocol.DependencyInjection.csproj" />
     <ProjectReference Include="..\JT808.Protocol\JT808.Protocol.csproj" />
   </ItemGroup>
 </Project>
