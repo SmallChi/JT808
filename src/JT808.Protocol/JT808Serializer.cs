@@ -106,7 +106,7 @@ namespace JT808.Protocol
         /// <param name="version">协议版本</param>
         /// <param name="minBufferSize">最低所需缓冲区大小</param>
         /// <returns>元数据</returns>
-        public byte[] Serialize<T>(T obj, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096) where T : JT808Package
+        public byte[] Serialize<T>(T obj, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
             try
@@ -129,7 +129,7 @@ namespace JT808.Protocol
         /// <param name="version">协议版本</param>
         /// <param name="minBufferSize">最低所需缓冲区大小</param>
         /// <returns>数据包</returns>
-        public T Deserialize<T>(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096) where T : JT808Package
+        public T Deserialize<T>(ReadOnlySpan<byte> bytes, JT808Version version = JT808Version.JTT2013, int minBufferSize = 4096)
         {
             byte[] buffer = JT808ArrayPool.Rent(minBufferSize);
             try
