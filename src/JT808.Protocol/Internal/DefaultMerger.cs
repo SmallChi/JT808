@@ -21,10 +21,8 @@ namespace JT808.Protocol.Internal
             body = null;
             if (header.PackageIndex == header.PackgeCount)
             {
-                if (SplitPackages.TryGetValue(header.TerminalPhoneNo, out var item) && item.TryRemove(header.MsgId, out var packages))
+                if (SplitPackages.TryRemove(header.TerminalPhoneNo, out var item) && item.TryRemove(header.MsgId, out var packages))
                 {
-                    SplitPackages.TryRemove(header.TerminalPhoneNo, out _);
-
                     var mateData = packages.OrderBy(x => x.index).SelectMany(x => x.data).Concat(data).ToArray();
 
                     byte[] buffer = JT808ArrayPool.Rent(mateData.Length);
