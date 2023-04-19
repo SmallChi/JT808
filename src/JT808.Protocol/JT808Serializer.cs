@@ -5,6 +5,7 @@ using System.Text.Json;
 using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
 using JT808.Protocol.MessagePack;
 
@@ -16,6 +17,7 @@ namespace JT808.Protocol
     /// </summary>
     public class JT808Serializer
     {
+        internal readonly IMerger merger;
         private readonly static JT808Package jT808Package = new JT808Package();
 
         private readonly static Type JT808_Header_Package_Type = typeof(JT808HeaderPackage);
@@ -39,16 +41,15 @@ namespace JT808.Protocol
         /// <param name="jT808Config"></param>
         public JT808Serializer(IJT808Config jT808Config)
         {
+            if (jT808Config.EnableAutoMerge)
+                merger = new DefaultMerger();
             this.jT808Config = jT808Config;
         }
 
         /// <summary>
         /// ctor
         /// </summary>
-        public JT808Serializer() : this(new DefaultGlobalConfig())
-        {
-
-        }
+        public JT808Serializer() : this(new DefaultGlobalConfig()) { }
 
         /// <summary>
         /// 标识

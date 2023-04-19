@@ -4351,6 +4351,9 @@
             终端控制自定义参数命令工厂
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Interfaces.GlobalConfigBase.EnableAutoMerge">
+            <inheritdoc/>
+        </member>
         <member name="M:JT808.Protocol.Interfaces.GlobalConfigBase.Register(System.Reflection.Assembly[])">
             <summary>
             外部扩展程序集注册
@@ -4689,6 +4692,21 @@
             
             </summary>
         </member>
+        <member name="T:JT808.Protocol.Interfaces.IMerger">
+            <summary>
+            合并分包数据接口
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Interfaces.IMerger.TryMerge(JT808.Protocol.JT808Header,System.Byte[],JT808.Protocol.IJT808Config,JT808.Protocol.JT808Bodies@)">
+            <summary>
+            合并元数据并反序列化数据包
+            </summary>
+            <param name="header">消息头</param>
+            <param name="data">分包数据包中的消息体部分元数据<see cref="P:JT808.Protocol.JT808Package.SubDataBodies"/></param>
+            <param name="config">配置项</param>
+            <param name="body">反序列化得出的数据包</param>
+            <returns>是否反序列化成功</returns>
+        </member>
         <member name="T:JT808.Protocol.Interfaces.JT808_CarDVR_Down_Factory">
             <summary>
             记录仪工厂
@@ -4862,6 +4880,13 @@
             设备终端号(默认12位)
             </summary>
         </member>
+        <member name="P:JT808.Protocol.IJT808Config.EnableAutoMerge">
+            <summary>
+            是否启用自动组包，默认不启用。
+            <para>当反序列化时遇到分包消息时，将分包数据缓存至内存，直到收到最后一包数据，将其取出进行反序列化，并清除相应缓存</para>
+            </summary>
+            <remarks>启用该选项存在一定风险，请谨慎使用。</remarks>
+        </member>
         <member name="M:JT808.Protocol.IJT808Config.Register(System.Reflection.Assembly[])">
             <summary>
             全局注册外部程序集
@@ -4905,6 +4930,20 @@
             
             </summary>
             <param name="configId"></param>
+        </member>
+        <member name="T:JT808.Protocol.Internal.DefaultMerger">
+            <summary>
+            默认分包合并实现
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Internal.DefaultMerger.SplitPackages">
+            <summary>
+            分包数据缓存
+            <para>key为sim卡号，value为字典，key为消息id,value为元组，结构为：(分包索引,分包元数据)</para>
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Internal.DefaultMerger.TryMerge(JT808.Protocol.JT808Header,System.Byte[],JT808.Protocol.IJT808Config,JT808.Protocol.JT808Bodies@)">
+            <inheritdoc/>
         </member>
         <member name="T:JT808.Protocol.JT808ArrayPool">
             <summary>
@@ -6103,104 +6142,104 @@
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.#ctor(JT808.Protocol.IJT808Config)">
             <summary>
-            
+            ctor
             </summary>
             <param name="jT808Config"></param>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.#ctor">
             <summary>
-            
+            ctor
             </summary>
         </member>
         <member name="P:JT808.Protocol.JT808Serializer.SerializerId">
             <summary>
-            
+            标识
             </summary>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Serialize(JT808.Protocol.JT808Package,JT808.Protocol.Enums.JT808Version,System.Int32)">
             <summary>
-            
+            序列化数据包
             </summary>
-            <param name="package"></param>
-            <param name="version"></param>
-            <param name="minBufferSize"></param>
-            <returns></returns>
+            <param name="package">数据包</param>
+            <param name="version">协议版本</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
+            <returns>元数据</returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Deserialize(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Int32)">
             <summary>
-            
+            反序列化
             </summary>
-            <param name="bytes"></param>
-            <param name="version"></param>
-            <param name="minBufferSize"></param>
-            <returns></returns>
+            <param name="bytes">元数据</param>
+            <param name="version">协议版本</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
+            <returns>数据包</returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Serialize``1(``0,JT808.Protocol.Enums.JT808Version,System.Int32)">
             <summary>
-            
+            序列化
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="obj"></param>
-            <param name="version"></param>
-            <param name="minBufferSize"></param>
-            <returns></returns>
+            <param name="obj">数据包</param>
+            <param name="version">协议版本</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
+            <returns>元数据</returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Deserialize``1(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Int32)">
             <summary>
-            
+            根据泛型反序列化元数据
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="bytes"></param>
-            <param name="version"></param>
-            <param name="minBufferSize"></param>
-            <returns></returns>
+            <param name="bytes">元素书</param>
+            <param name="version">协议版本</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
+            <returns>数据包</returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.CheckPackageType(System.Type)">
             <summary>
-            
+            验证类型是否为<see cref="F:JT808.Protocol.JT808Serializer.JT808_Package_Type"/>或者<see cref="F:JT808.Protocol.JT808Serializer.JT808_Header_Package_Type"/>
             </summary>
-            <param name="type"></param>
+            <param name="type">需要验证的类型</param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.HeaderDeserialize(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Int32)">
             <summary>
-            用于负载或者分布式的时候，在网关只需要解到头部。
-            根据头部的消息Id进行分发处理，可以防止小部分性能损耗。
+            反序列化消息头
+            <para>用于负载或者分布式的时候，在网关只需要解到头部，根据头部的消息Id进行分发处理，可以防止小部分性能损耗。</para>
             </summary>
-            <param name="bytes"></param>
-            <param name="version"></param>
-            <param name="minBufferSize"></param>
+            <param name="bytes">元数据</param>
+            <param name="version">协议版本</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Deserialize(System.ReadOnlySpan{System.Byte},System.Type,JT808.Protocol.Enums.JT808Version,System.Int32)">
             <summary>
-            
+            根据类型反序列化
             </summary>
-            <param name="bytes"></param>
-            <param name="type"></param>
-            <param name="version"></param>
-            <param name="minBufferSize"></param>
+            <param name="bytes">元数据</param>
+            <param name="type">类型</param>
+            <param name="version">协议版本</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Analyze(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Text.Json.JsonWriterOptions,System.Int32)">
             <summary>
-            
+            分析元数据至json
             </summary>
-            <param name="bytes"></param>
-            <param name="version"></param>
-            <param name="options"></param>
-            <param name="minBufferSize"></param>
+            <param name="bytes">元数据</param>
+            <param name="version">协议版本</param>
+            <param name="options">json选项</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Analyze``1(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Text.Json.JsonWriterOptions,System.Int32)">
             <summary>
-            
+            分析元数据至json
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="bytes"></param>
-            <param name="version"></param>
-            <param name="options"></param>
-            <param name="minBufferSize"></param>
+            <param name="bytes">元数据</param>
+            <param name="version">协议版本</param>
+            <param name="options">json序列化选项</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Analyze(System.UInt16,System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Text.Json.JsonWriterOptions,System.Int32)">
@@ -6227,23 +6266,23 @@
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.AnalyzeJsonBuffer(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Text.Json.JsonWriterOptions,System.Int32)">
             <summary>
-            
+            分析元数据至json
             </summary>
-            <param name="bytes"></param>
-            <param name="version"></param>
-            <param name="options"></param>
-            <param name="minBufferSize"></param>
+            <param name="bytes">元数据</param>
+            <param name="version">协议版本</param>
+            <param name="options">json选项</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.AnalyzeJsonBuffer``1(System.ReadOnlySpan{System.Byte},JT808.Protocol.Enums.JT808Version,System.Text.Json.JsonWriterOptions,System.Int32)">
             <summary>
-            
+            分析元数据至json
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="bytes"></param>
-            <param name="version"></param>
-            <param name="options"></param>
-            <param name="minBufferSize"></param>
+            <param name="bytes">元数据</param>
+            <param name="version">协议版本</param>
+            <param name="options">json选项</param>
+            <param name="minBufferSize">最低所需缓冲区大小</param>
             <returns></returns>
         </member>
         <member name="M:JT808.Protocol.JT808Serializer.Register(System.Reflection.Assembly[])">

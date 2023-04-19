@@ -1,11 +1,7 @@
-﻿using JT808.Protocol.Enums;
+﻿using System.Reflection;
+using System.Text;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Internal;
-using JT808.Protocol.MessageBody;
-using System;
-using System.Reflection;
-using System.Text;
-using static JT808.Protocol.MessageBody.JT808_0x8105;
 
 namespace JT808.Protocol.Interfaces
 {
@@ -126,6 +122,9 @@ namespace JT808.Protocol.Interfaces
         /// 终端控制自定义参数命令工厂
         /// </summary>
         public virtual IJT808_0x8105_Cusotm_Factory JT808_0x8105_Cusotm_Factory { get; set; }
+        /// <inheritdoc/>
+        public virtual bool EnableAutoMerge { get; set; }
+
         /// <summary>
         /// 外部扩展程序集注册
         /// </summary>
