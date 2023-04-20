@@ -50,7 +50,7 @@ namespace JT808.Protocol.Test
         [Fact]
         public void MergerTest()
         {
-            var config = new DefaultGlobalConfig();
+            var config = new DefaultGlobalConfig("merge");
             config.EnableAutoMerge = true;
             config.AutoMergeTimeoutSecond = 5;
             var array = new[]
