@@ -68,6 +68,11 @@ namespace JT808.Protocol.Test
                 if (i == array.Length)
                 {
                     Assert.NotNull(package.Bodies);
+                    //分包合并成功并获取消息体进行处理
+                    if (package.Bodies is JT808_0x0104 _0x0104 && _0x0104.AnswerParamsCount > 0)
+                    {
+                        Assert.NotEmpty(_0x0104.ParamList);
+                    }
                 }
                 else
                 {
@@ -82,6 +87,11 @@ namespace JT808.Protocol.Test
                 if (i == 0)
                 {
                     Assert.NotNull(package.Bodies);
+                    //分包合并成功并获取消息体进行处理
+                    if (package.Bodies is JT808_0x0104 _0x0104 && _0x0104.AnswerParamsCount > 0)
+                    {
+                        Assert.NotEmpty(_0x0104.ParamList);
+                    }
                 }
                 else
                 {
@@ -97,6 +107,7 @@ namespace JT808.Protocol.Test
                 {
                     Thread.Sleep(TimeSpan.FromSeconds(config.AutoMergeTimeoutSecond + 1));
                 }
+                //由于超时导致合并分包失败，且package.Bodies为null
                 Assert.Null(package.Bodies);
             }
         }

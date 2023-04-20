@@ -386,6 +386,7 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 注意事项：
 
 - 默认缓存超时时间为5分钟
+- 如果合并且反序列化成功则[JT808Package](src/JT808.Protocol//JT808Package.cs)的`Bodies`不为空，反之亦然
 - 超时计时为收到指定终端的指定消息id第一包开始，期间如果收到所有分包数据，在收到最后一个分包时自动反序列化，如果期间未收到所有分包数据，则后续将无法合并出完整的数据并反序列化
 - 如有特殊需求请重写[默认实现](src/JT808.Protocol/Internal/DefaultMerger.cs)或自行实现[接口](src/JT808.Protocol/Interfaces/IMerger.cs)并手动设置[全局配置](src/JT808.Protocol/Interfaces/GlobalConfigBase.cs#L130)的`Jt808PackageMerger`属性
 
