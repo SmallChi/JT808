@@ -36,6 +36,10 @@ namespace JT808.Protocol
         /// </summary>
         IJT808SplitPackageStrategy SplitPackageStrategy { get; set; }
         /// <summary>
+        /// 808自动合并组包接口
+        /// </summary>
+        IMerger Jt808PackageMerger { get; set; }
+        /// <summary>
         /// 序列化器工厂
         /// </summary>
         IJT808FormatterFactory FormatterFactory { get; set; }
@@ -111,6 +115,12 @@ namespace JT808.Protocol
         /// </summary>
         /// <remarks>启用该选项存在一定风险，请谨慎使用。</remarks>
         bool EnableAutoMerge { get; set; }
+        /// <summary>
+        /// 自动合并分包超时时间,收到第一个分包开始计算，单位：秒，默认值300秒
+        /// <para>如该值为30且第一个分包在2011-11-11 11:11:11时收到，则在2011-11-11 11:11:41时认为过期，期间如果未收到所有分包，则自动合并分包将无法完成，并将自动清理相关缓存</para>
+        /// </summary>
+        double AutoMergeTimeoutSecond { get; set; }
+
         /// <summary>
         /// 全局注册外部程序集
         /// </summary>

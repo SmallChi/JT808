@@ -121,15 +121,10 @@ namespace JT808.Protocol
                         //读取分包的数据体
                         try
                         {
-                            var data = reader.ReadArray(jT808Package.Header.MessageBodyProperty.DataLength).ToArray();
-
-                            if (config.EnableAutoMerge && config.GetSerializer().merger.TryMerge(jT808Package.Header, data, config, out var body))
+                            jT808Package.SubDataBodies = reader.ReadArray(jT808Package.Header.MessageBodyProperty.DataLength).ToArray();
+                            if (config.EnableAutoMerge && config.Jt808PackageMerger.TryMerge(jT808Package.Header, jT808Package.SubDataBodies, config, out var body))
                             {
                                 jT808Package.Bodies = body;
-                            }
-                            else
-                            {
-                                jT808Package.SubDataBodies = data;
                             }
                         }
                         catch (Exception ex)

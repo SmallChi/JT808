@@ -4354,6 +4354,12 @@
         <member name="P:JT808.Protocol.Interfaces.GlobalConfigBase.EnableAutoMerge">
             <inheritdoc/>
         </member>
+        <member name="P:JT808.Protocol.Interfaces.GlobalConfigBase.AutoMergeTimeoutSecond">
+            <inheritdoc/>
+        </member>
+        <member name="P:JT808.Protocol.Interfaces.GlobalConfigBase.Jt808PackageMerger">
+            <inheritdoc/>
+        </member>
         <member name="M:JT808.Protocol.Interfaces.GlobalConfigBase.Register(System.Reflection.Assembly[])">
             <summary>
             外部扩展程序集注册
@@ -4794,6 +4800,11 @@
             注意:处理808的分包读取完流需要先进行转义在进行分包
             </summary>
         </member>
+        <member name="P:JT808.Protocol.IJT808Config.Jt808PackageMerger">
+            <summary>
+            808自动合并组包接口
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.IJT808Config.FormatterFactory">
             <summary>
             序列化器工厂
@@ -4887,6 +4898,12 @@
             </summary>
             <remarks>启用该选项存在一定风险，请谨慎使用。</remarks>
         </member>
+        <member name="P:JT808.Protocol.IJT808Config.AutoMergeTimeoutSecond">
+            <summary>
+            自动合并分包超时时间,收到第一个分包开始计算，单位：秒，默认值300秒
+            <para>如该值为30且第一个分包在2011-11-11 11:11:11时收到，则在2011-11-11 11:11:41时认为过期，期间如果未收到所有分包，则自动合并分包将无法完成，并将自动清理相关缓存</para>
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.IJT808Config.Register(System.Reflection.Assembly[])">
             <summary>
             全局注册外部程序集
@@ -4936,7 +4953,7 @@
             默认分包合并实现
             </summary>
         </member>
-        <member name="F:JT808.Protocol.Internal.DefaultMerger.SplitPackages">
+        <member name="F:JT808.Protocol.Internal.DefaultMerger.splitPackageDictionary">
             <summary>
             分包数据缓存
             <para>key为sim卡号，value为字典，key为消息id,value为元组，结构为：(分包索引,分包元数据)</para>

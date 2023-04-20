@@ -124,6 +124,10 @@ namespace JT808.Protocol.Interfaces
         public virtual IJT808_0x8105_Cusotm_Factory JT808_0x8105_Cusotm_Factory { get; set; }
         /// <inheritdoc/>
         public virtual bool EnableAutoMerge { get; set; }
+        /// <inheritdoc/>
+        public double AutoMergeTimeoutSecond { get; set; } = 300;
+        /// <inheritdoc/>
+        public IMerger Jt808PackageMerger { get; set; } = new DefaultMerger();
 
         /// <summary>
         /// 外部扩展程序集注册
