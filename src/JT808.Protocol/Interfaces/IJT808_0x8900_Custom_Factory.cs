@@ -1,7 +1,7 @@
-﻿using JT808.Protocol.MessageBody;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using JT808.Protocol.MessageBody;
 
 namespace JT808.Protocol.Interfaces
 {
@@ -19,6 +19,6 @@ namespace JT808.Protocol.Interfaces
         /// </summary>
         /// <typeparam name="TJT808_0x8900_BodyBase"></typeparam>
         /// <returns></returns>
-        IJT808_0x8900_Custom_Factory SetMap<TJT808_0x8900_BodyBase>() where TJT808_0x8900_BodyBase : JT808_0x8900_BodyBase;
+        IJT808_0x8900_Custom_Factory SetMap<TJT808_0x8900_BodyBase>();
     }
 }
