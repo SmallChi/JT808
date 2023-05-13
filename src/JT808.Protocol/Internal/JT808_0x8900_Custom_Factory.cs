@@ -1,10 +1,6 @@
-﻿using JT808.Protocol.Interfaces;
+﻿using System.Reflection;
+using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessageBody;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 
 namespace JT808.Protocol.Internal
 {
@@ -19,8 +15,7 @@ namespace JT808.Protocol.Internal
 
         public void Register(Assembly externalAssembly)
         {
-            var types = externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x0200_CustomBodyBase)) == typeof(JT808_0x0200_CustomBodyBase)).ToList();
-            foreach(var type in types)
+            foreach (var type in externalAssembly.GetTypes().Where(w => w.GetInterface(nameof(JT808_0x8900_BodyBase)) == typeof(JT808_0x8900_BodyBase)))
             {
                 var instance = Activator.CreateInstance(type);
                 var attachid = (byte)type.GetProperty(nameof(JT808_0x0200_CustomBodyBase.AttachInfoId)).GetValue(instance);
