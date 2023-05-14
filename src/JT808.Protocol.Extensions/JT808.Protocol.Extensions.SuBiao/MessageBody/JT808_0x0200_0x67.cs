@@ -1,24 +1,26 @@
-﻿using JT808.Protocol.Extensions.SuBiao.Metadata;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.Json;
+using JT808.Protocol.Extensions.SuBiao.Metadata;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.MessagePack;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
 
 namespace JT808.Protocol.Extensions.SuBiao.MessageBody
 {
     /// <summary>
     /// 盲区监测系统报警信息
     /// </summary>
-    public class JT808_0x0200_0x67 : JT808MessagePackFormatter<JT808_0x0200_0x67>, JT808_0x0200_CustomBodyBase, IJT808Analyze
+    public class JT808_0x0200_0x67 : JT808MessagePackFormatter<JT808_0x0200_0x67>, JT808_0x0200_CustomBodyBase, JT808_0x8900_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 盲区监测系统报警信息Id
         /// </summary>
         public byte AttachInfoId { get; set; } = JT808_SuBiao_Constants.JT808_0X0200_0x67;
+        /// <inheritdoc/>
+        public byte PassthroughType { get; set; } = JT808_SuBiao_Constants.JT808_0X0200_0x67;
         /// <summary>
         /// 盲区监测系统报警信息长度
         /// </summary>
@@ -34,7 +36,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// <summary>
         /// 报警/事件类型
         /// </summary>
-        public byte AlarmOrEventType{ get; set; }
+        public byte AlarmOrEventType { get; set; }
         /// <summary>
         /// 报警/事件类型
         /// </summary>
@@ -182,12 +184,12 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             writer.WriteString($"[{value.AlarmTime.ToString("yyMMddHHmmss")}]日期时间", value.AlarmTime.ToString("yyyy-MM-dd HH:mm:ss"));
             value.VehicleState = reader.ReadUInt16();
             writer.WriteNumber($"[{value.VehicleState.ReadNumber()}]车辆状态", value.VehicleState);
-            var vehicleStateBits=Convert.ToString(value.VehicleState, 2).PadLeft(16, '0');
+            var vehicleStateBits = Convert.ToString(value.VehicleState, 2).PadLeft(16, '0');
             writer.WriteStartObject($"车辆状态对象[{vehicleStateBits}]");
-            writer.WriteString($"[{vehicleStateBits[15]}]Bit0ACC状态", vehicleStateBits[15]=='0'?"关闭":"打开");
-            writer.WriteString($"[{vehicleStateBits[14]}]Bit1左转向状态", vehicleStateBits[14]=='0'?"关闭":"打开");
-            writer.WriteString($"[{vehicleStateBits[13]}]Bit2右转向状态", vehicleStateBits[13]=='0'?"关闭":"打开");
-            writer.WriteString($"[{vehicleStateBits[12]}]Bit3雨刮器状态", vehicleStateBits[12]=='0'?"关闭":"打开");
+            writer.WriteString($"[{vehicleStateBits[15]}]Bit0ACC状态", vehicleStateBits[15] == '0' ? "关闭" : "打开");
+            writer.WriteString($"[{vehicleStateBits[14]}]Bit1左转向状态", vehicleStateBits[14] == '0' ? "关闭" : "打开");
+            writer.WriteString($"[{vehicleStateBits[13]}]Bit2右转向状态", vehicleStateBits[13] == '0' ? "关闭" : "打开");
+            writer.WriteString($"[{vehicleStateBits[12]}]Bit3雨刮器状态", vehicleStateBits[12] == '0' ? "关闭" : "打开");
             writer.WriteString($"[{vehicleStateBits[11]}]Bit4制动状态", vehicleStateBits[11] == '0' ? "未制动" : "制动");
             writer.WriteString($"[{vehicleStateBits[10]}]Bit5插卡状态", vehicleStateBits[10] == '0' ? "未插卡" : "已插卡");
             writer.WriteString($"[{vehicleStateBits[9]}]Bit6自定义", vehicleStateBits[9].ToString());

@@ -1,24 +1,26 @@
-﻿using JT808.Protocol.Extensions.SuBiao.Metadata;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Text.Json;
+using JT808.Protocol.Extensions.SuBiao.Metadata;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.MessagePack;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
 
 namespace JT808.Protocol.Extensions.SuBiao.MessageBody
 {
     /// <summary>
     /// 驾驶员状态监测系统报警信息
     /// </summary>
-    public class JT808_0x0200_0x65 : JT808MessagePackFormatter<JT808_0x0200_0x65>, JT808_0x0200_CustomBodyBase,  IJT808Analyze
+    public class JT808_0x0200_0x65 : JT808MessagePackFormatter<JT808_0x0200_0x65>, JT808_0x0200_CustomBodyBase, JT808_0x8900_BodyBase, IJT808Analyze
     {
         /// <summary>
         /// 驾驶员状态监测系统报警信息Id
         /// </summary>
         public byte AttachInfoId { get; set; } = JT808_SuBiao_Constants.JT808_0X0200_0x65;
+        /// <inheritdoc/>
+        public byte PassthroughType { get; set; } = JT808_SuBiao_Constants.JT808_0X0200_0x65;
         /// <summary>
         /// 驾驶员状态监测系统报警信息长度
         /// </summary>
@@ -34,7 +36,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// <summary>
         /// 报警/事件类型
         /// </summary>
-        public byte AlarmOrEventType{ get; set; }
+        public byte AlarmOrEventType { get; set; }
         /// <summary>
         /// 报警级别
         /// </summary>
@@ -86,7 +88,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0200_0x65 value = new JT808_0x0200_0x65();
-            value.AttachInfoId = reader.ReadByte(); 
+            value.AttachInfoId = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoId.ReadNumber()}]附加信息Id", value.AttachInfoId);
             value.AttachInfoLength = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);

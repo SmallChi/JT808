@@ -15,15 +15,15 @@ namespace JT808.Protocol.Internal
 
         public void Register(Assembly externalAssembly)
         {
-            foreach (var item in externalAssembly.GetTypes().Where(x => x.GetConstructor(Type.EmptyTypes) != default))
+            foreach (var item in externalAssembly.GetTypes().Where(x => x is JT808_0x8900_BodyBase && x.GetConstructor(Type.EmptyTypes) != default))
             {
                 Register(item);
             }
         }
 
-        public IJT808_0x8900_Custom_Factory SetMap<T>()
+        public IJT808_0x8900_Custom_Factory SetMap<TJT808_0x8900_BodyBase>() where TJT808_0x8900_BodyBase : JT808_0x8900_BodyBase
         {
-            var type = typeof(T);
+            var type = typeof(TJT808_0x8900_BodyBase);
             if (type.GetConstructor(Type.EmptyTypes) != default)
             {
                 Register(type);
@@ -38,19 +38,7 @@ namespace JT808.Protocol.Internal
         void Register(Type type)
         {
             var instance = Activator.CreateInstance(type);
-            if (instance is JT808_0x0200_CustomBodyBase jT808_0X0200_Custom)
-            {
-                var key = jT808_0X0200_Custom.AttachInfoId;
-                if (Map.ContainsKey(key))
-                {
-                    throw new ArgumentException($"{type.FullName} {key} An element with the same key already exists.");
-                }
-                else
-                {
-                    Map.Add(key, instance);
-                }
-            }
-            else if (instance is JT808_0x8900_BodyBase jT808_0X8900_Custom)
+            if (instance is JT808_0x8900_BodyBase jT808_0X8900_Custom)
             {
                 var key = jT808_0X8900_Custom.PassthroughType;
                 if (Map.ContainsKey(key))
@@ -61,6 +49,10 @@ namespace JT808.Protocol.Internal
                 {
                     Map.Add(key, instance);
                 }
+            }
+            else
+            {
+                throw new ArgumentException($"{type.FullName} must be implement of {typeof(JT808_0x8900_BodyBase).FullName}.");
             }
         }
     }
