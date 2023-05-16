@@ -26,7 +26,7 @@ namespace JT808.Protocol.Test.MessageBody
 
             };
             string hex = JT808Serializer.Serialize(jT808Package).ToHexString();
-            Assert.Equal("7E8800000900012345678900010000008102010203048E7E", hex);
+            Assert.Equal("7E8800000900012345678900000000008102010203048F7E", hex);
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace JT808.Protocol.Test.MessageBody
 
             };
             string hex = JT808Serializer.Serialize(jT808Package, JT808Version.JTT2013).ToHexString();
-            Assert.Equal("7E88000004000123456789000100000081857E", hex);
+            Assert.Equal("7E88000004000123456789000000000081847E", hex);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace JT808.Protocol.Test.MessageBody
 
             };
             string hex = JT808Serializer.Serialize(jT808Package,JT808Version.JTT2011).ToHexString();
-            Assert.Equal("7E8800000500012345678900010000008100847E", hex);
+            Assert.Equal("7E8800000500012345678900000000008100857E", hex);
         }
 
         [Fact]

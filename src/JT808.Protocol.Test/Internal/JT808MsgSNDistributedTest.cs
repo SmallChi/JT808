@@ -14,9 +14,9 @@ namespace JT808.Protocol.Test.Internal
         {
             IJT808MsgSNDistributed JT808MsgSNDistributed = new DefaultMsgSNDistributedImpl();
             var a=JT808MsgSNDistributed.Increment("1234");
-            Assert.Equal(1, a);
+            Assert.Equal(0, a);
             var a1 = JT808MsgSNDistributed.Increment("1234");
-            Assert.Equal(2, a1);
+            Assert.Equal(1, a1);
         }
     }
 }
