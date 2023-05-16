@@ -5997,6 +5997,11 @@
             版本标识（默认为1=true）
             </summary>
         </member>
+        <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.Reserve">
+            <summary>
+            保留
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.IsPackage">
             <summary>
             是否分包

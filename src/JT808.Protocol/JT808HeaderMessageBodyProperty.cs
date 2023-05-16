@@ -1,7 +1,7 @@
 ﻿
+using System;
 using JT808.Protocol.Enums;
 using JT808.Protocol.Formatters;
-using System;
 
 namespace JT808.Protocol
 {
@@ -17,7 +17,7 @@ namespace JT808.Protocol
         /// <param name="isPackage"></param>
         /// <param name="versionFlag"></param>
         /// <param name="jT808EncryptMethod"></param>
-        public JT808HeaderMessageBodyProperty(int dataLength,bool isPackage, bool versionFlag= false, JT808EncryptMethod jT808EncryptMethod= JT808EncryptMethod.None)
+        public JT808HeaderMessageBodyProperty(int dataLength, bool isPackage, bool versionFlag = false, JT808EncryptMethod jT808EncryptMethod = JT808EncryptMethod.None)
         {
             IsPackage = isPackage;
             Encrypt = jT808EncryptMethod;
@@ -52,13 +52,14 @@ namespace JT808.Protocol
         /// <summary>
         /// 
         /// </summary>
-        public JT808HeaderMessageBodyProperty(){}
+        public JT808HeaderMessageBodyProperty() { }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="value"></param>
         public JT808HeaderMessageBodyProperty(ushort value)
         {
+            Reserve = value & 0x8000;
             VersionFlag = (value >> 14 & 0x01) == 1;
             IsPackage = ((value >> 13) & 0x001) == 1;
             switch ((value & 0x400) >> 10)
@@ -79,6 +80,10 @@ namespace JT808.Protocol
         /// 版本标识（默认为1=true）
         /// </summary>
         public bool VersionFlag { get; set; } = false;
+        /// <summary>
+        /// 保留
+        /// </summary>
+        public int Reserve { get; set; }
         /// <summary>
         /// 是否分包
         ///  true-1  表示消息体为长消息，进行分包发送处理
@@ -135,7 +140,7 @@ namespace JT808.Protocol
             {
                 versionFlag = 1 << 14;
             }
-            return (ushort)(versionFlag|tmpIsPacke | tmpEncrypt | DataLength);
+            return (ushort)(Reserve | versionFlag | tmpIsPacke | tmpEncrypt | DataLength);
         }
     }
 }
