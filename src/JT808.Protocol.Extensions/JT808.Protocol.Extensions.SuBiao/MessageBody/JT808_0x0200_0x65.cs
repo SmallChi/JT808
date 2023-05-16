@@ -13,14 +13,12 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
     /// <summary>
     /// 驾驶员状态监测系统报警信息
     /// </summary>
-    public class JT808_0x0200_0x65 : JT808MessagePackFormatter<JT808_0x0200_0x65>, JT808_0x0200_CustomBodyBase, JT808_0x8900_BodyBase, IJT808Analyze
+    public class JT808_0x0200_0x65 : JT808MessagePackFormatter<JT808_0x0200_0x65>, JT808_0x0200_CustomBodyBase, IJT808Analyze
     {
         /// <summary>
         /// 驾驶员状态监测系统报警信息Id
         /// </summary>
         public byte AttachInfoId { get; set; } = JT808_SuBiao_Constants.JT808_0X0200_0x65;
-        /// <inheritdoc/>
-        public byte PassthroughType { get; set; } = JT808_SuBiao_Constants.JT808_0X0200_0x65;
         /// <summary>
         /// 驾驶员状态监测系统报警信息长度
         /// </summary>

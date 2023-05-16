@@ -314,9 +314,6 @@
             高级驾驶辅助系统报警信息Id
             </summary>
         </member>
-        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x64.PassthroughType">
-            <inheritdoc/>
-        </member>
         <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x64.AttachInfoLength">
             <summary>
             高级驾驶辅助系统报警信息附加长度
@@ -438,9 +435,6 @@
             驾驶员状态监测系统报警信息Id
             </summary>
         </member>
-        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x65.PassthroughType">
-            <inheritdoc/>
-        </member>
         <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x65.AttachInfoLength">
             <summary>
             驾驶员状态监测系统报警信息长度
@@ -547,9 +541,6 @@
             胎压监测系统报警信息Id
             </summary>
         </member>
-        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x66.PassthroughType">
-            <inheritdoc/>
-        </member>
         <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x66.AttachInfoLength">
             <summary>
             胎压监测系统报警信息长度
@@ -645,9 +636,6 @@
             <summary>
             盲区监测系统报警信息Id
             </summary>
-        </member>
-        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x67.PassthroughType">
-            <inheritdoc/>
         </member>
         <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x67.AttachInfoLength">
             <summary>
