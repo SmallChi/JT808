@@ -193,7 +193,8 @@ namespace JT808.Protocol
             else
             {
                 //  2.4.消息流水号
-                value.Header.MsgNum = config.MsgSNDistributed.Increment(value.Header.TerminalPhoneNo);
+                if (value.Header.MsgNum <= 0)
+                    value.Header.MsgNum = config.MsgSNDistributed.Increment(value.Header.TerminalPhoneNo);
                 writer.WriteUInt16(value.Header.MsgNum);
             }
             //  2.5.判断是否分包
