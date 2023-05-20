@@ -14,8 +14,8 @@ namespace JT808.Protocol.Internal
         {
             if (counterDict.TryGetValue(terminalPhoneNo, out ushort value))
             {
-                ushort newValue = ++value;
-                counterDict.TryUpdate(terminalPhoneNo, newValue, value);
+                ushort newValue = value;
+                counterDict.TryUpdate(terminalPhoneNo, ++newValue, value);
                 return newValue;
             }
             else
