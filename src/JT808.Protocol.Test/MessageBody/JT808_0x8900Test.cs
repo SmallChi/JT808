@@ -1,9 +1,8 @@
-﻿using JT808.Protocol.Extensions;
-using JT808.Protocol.Interfaces;
+﻿using System.Reflection;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Internal;
 using JT808.Protocol.MessageBody;
 using JT808.Protocol.Test.MessageBody.JT808_0X8900_BodiesImpl;
-using System.Reflection;
 using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
@@ -50,6 +49,32 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "0B0000303901".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808_0x8900>(bytes);
+        }
+
+        [Fact]
+        public void Test4()
+        {
+            var config = new DefaultGlobalConfig(GetType().Name+nameof(Test4));
+            config.JT808_0x8900_Custom_Factory.Register(Assembly.GetExecutingAssembly());
+            var serializer = config.GetSerializer();
+            var jT808_0X8900 = new JT808_0x8900
+            {
+                PassthroughType = 0x0B,
+                JT808_0X8900_BodyBase = new JT808_0X8900_Test_BodiesImpl
+                {
+                    Id = 12345,
+                    Sex = 0x01
+                }
+            };
+            string hex = serializer.Serialize(jT808_0X8900).ToHexString();
+            Assert.Equal("0B0000303901", hex);
+            byte[] bytes = hex.ToHexBytes();
+
+            jT808_0X8900 = serializer.Deserialize<JT808_0x8900>(bytes);
+            JT808_0X8900_Test_BodiesImpl jT808_0X8900_Test_BodiesImpl = (JT808_0X8900_Test_BodiesImpl)jT808_0X8900.JT808_0X8900_BodyBase;
+            Assert.Equal(0x0B, jT808_0X8900.PassthroughType);
+            Assert.Equal((uint)12345, jT808_0X8900_Test_BodiesImpl.Id);
+            Assert.Equal(0x01, jT808_0X8900_Test_BodiesImpl.Sex);
         }
     }
 }

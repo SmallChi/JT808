@@ -15,7 +15,8 @@ namespace JT808.Protocol.Internal
 
         public void Register(Assembly externalAssembly)
         {
-            foreach (var item in externalAssembly.GetTypes().Where(x => x is JT808_0x8900_BodyBase && x.GetConstructor(Type.EmptyTypes) != default))
+            var baseType = typeof(JT808_0x8900_BodyBase);
+            foreach (var item in externalAssembly.GetTypes().Where(x => baseType.IsAssignableFrom(x) && x.GetConstructor(Type.EmptyTypes) != default))
             {
                 Register(item);
             }
