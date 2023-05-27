@@ -20,6 +20,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId => 0x8700;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 行驶记录数据采集命令
         /// </summary>
         public string Description => "行驶记录数据采集命令";

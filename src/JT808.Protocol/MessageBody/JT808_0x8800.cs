@@ -18,6 +18,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId => 0x8800;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 多媒体数据上传应答
         /// </summary>
         public string Description => "多媒体数据上传应答";

@@ -20,6 +20,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId  => 0x8103;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 设置终端参数
         /// </summary>
         public string Description => "设置终端参数";

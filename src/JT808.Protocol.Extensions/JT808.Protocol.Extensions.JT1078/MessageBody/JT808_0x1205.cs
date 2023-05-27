@@ -23,6 +23,10 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public ushort MsgId => 0x1205;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 流水号
         /// </summary>
         public ushort MsgNum { get; set; }
@@ -34,6 +38,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 音视频资源列表
         /// </summary>
         public List<JT808_0x1205_AVResouce> AVResouces { get; set; }
+
         /// <summary>
         /// 
         /// </summary>

@@ -20,6 +20,10 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <summary>
         /// 
         /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
+        /// 
+        /// </summary>
         public ushort MsgId => 0x1206;
         /// <summary>
         /// 流水号

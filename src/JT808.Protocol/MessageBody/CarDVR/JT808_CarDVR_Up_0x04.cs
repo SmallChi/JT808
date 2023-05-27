@@ -22,6 +22,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId =>  JT808CarDVRCommandID.collect_recorder_pulse_coefficient.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 当前时间
         /// </summary>
         public DateTime RealTime { get; set; }

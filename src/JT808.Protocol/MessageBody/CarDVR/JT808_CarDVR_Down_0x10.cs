@@ -22,6 +22,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId => JT808CarDVRCommandID.collect_specified_incident_suspect_records.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 符合条件的事故疑点记录
         /// </summary>
         public string Description => "符合条件的事故疑点记录";

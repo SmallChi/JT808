@@ -58,7 +58,7 @@ namespace JT808.Protocol.Test.Simples
             public ushort Age1 { get; set; }
 
             public ushort MsgId => 0x93;
-
+            public bool SkipSerialization => false;
             public string Description => "DT1Demo8";
 
             public  void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)

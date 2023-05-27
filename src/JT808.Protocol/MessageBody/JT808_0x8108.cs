@@ -17,6 +17,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId  => 0x8108;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 下发终端升级包
         /// </summary>
         public string Description => "下发终端升级包";

@@ -16,6 +16,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId => 0x8900;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 数据下行透传
         /// </summary>
         public string Description => "数据下行透传";

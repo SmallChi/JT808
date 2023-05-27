@@ -22,6 +22,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId => JT808CarDVRCommandID.collect_recorder_performs_standard_version.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 记录仪执行标准年号后 2 位  BCD 码
         /// 无应答则默认为 03
         /// </summary>

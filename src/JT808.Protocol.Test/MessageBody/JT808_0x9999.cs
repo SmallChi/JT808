@@ -11,7 +11,7 @@ namespace JT808.Protocol.Test.MessageBody
         public byte Sex { get; set; }
 
         public ushort MsgId => 0x9999;
-
+        public bool SkipSerialization => false;
         public string Description => "自定义消息";
 
         public override JT808_0x9999 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)

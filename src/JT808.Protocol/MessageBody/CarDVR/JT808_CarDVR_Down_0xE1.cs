@@ -22,6 +22,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId =>  JT808CarDVRCommandID.enter_mileage_error_measurement.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 记录仪唯一性编号
         /// </summary>
         public string UniqueNumber { get; set; }

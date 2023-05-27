@@ -18,6 +18,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId  => 0x8003;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 补传分包请求
         /// </summary>
         public string Description => "补传分包请求";

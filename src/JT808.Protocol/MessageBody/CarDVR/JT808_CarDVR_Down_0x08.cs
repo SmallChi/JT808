@@ -40,6 +40,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// <summary>
         /// 
         /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>

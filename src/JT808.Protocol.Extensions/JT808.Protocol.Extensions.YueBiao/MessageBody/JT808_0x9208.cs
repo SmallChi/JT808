@@ -17,6 +17,10 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public string Description => "报警附件上传指令";
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 服务IP地址长度
         /// </summary>
         public byte AttachmentServerIPLength { get; set; }

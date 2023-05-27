@@ -18,6 +18,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId  => 0x0901;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 数据压缩上报
         /// </summary>
         public string Description => "数据压缩上报";

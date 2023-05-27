@@ -18,6 +18,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId  => 0x0704;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 定位数据批量上传
         /// </summary>
         public string Description => "定位数据批量上传";

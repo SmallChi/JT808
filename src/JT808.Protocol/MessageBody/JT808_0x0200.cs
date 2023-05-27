@@ -26,6 +26,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public string Description => "位置信息汇报";
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 报警标志 
         /// <see cref="JT808.Protocol.Enums.JT808Alarm"/>
         /// </summary>
@@ -108,7 +112,7 @@ namespace JT808.Protocol.MessageBody
         /// <returns></returns>
         public override JT808_0x0200 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x0200 jT808_0X0200 = new ();
+            JT808_0x0200 jT808_0X0200 = new JT808_0x0200();
             jT808_0X0200.AlarmFlag = reader.ReadUInt32();
             jT808_0X0200.StatusFlag = reader.ReadUInt32();
             if (((jT808_0X0200.StatusFlag >> 28) & 1) == 1)

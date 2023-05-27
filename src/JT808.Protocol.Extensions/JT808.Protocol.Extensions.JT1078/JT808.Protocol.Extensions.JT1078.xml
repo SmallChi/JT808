@@ -554,6 +554,11 @@
             
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1003.Description">
             <summary>
             
@@ -589,6 +594,11 @@
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1005.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1005.SkipSerialization">
             <summary>
             
             </summary>
@@ -653,6 +663,11 @@
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205.MsgId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1205.SkipSerialization">
             <summary>
             
             </summary>
@@ -771,6 +786,11 @@
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1206.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x1206.SkipSerialization">
             <summary>
             
             </summary>
@@ -1536,6 +1556,11 @@
             实时音视频传输请求
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9101.MsgId">
             <summary>
             0x9101
@@ -1618,6 +1643,11 @@
             音视频实时传输控制
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9102.MsgId">
             <summary>
             0x9102
@@ -1690,6 +1720,11 @@
             实时音视频传输状态通知
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9105.MsgId">
             <summary>
             0x9105
@@ -1738,6 +1773,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.Description">
             <summary>
             平台下发远程录像回放请求
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9201.MsgId">
@@ -1861,6 +1901,11 @@
             平台下发远程录像回放控制
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9202.MsgId">
             <summary>
             0x9202
@@ -1931,6 +1976,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.Description">
             <summary>
             查询资源列表
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9205.MsgId">
@@ -2015,6 +2065,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.Description">
             <summary>
             文件上传指令
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9206.MsgId">
@@ -2141,6 +2196,11 @@
             文件上传控制
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9207.MsgId">
             <summary>
             0x9207
@@ -2188,6 +2248,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.Description">
             <summary>
             云台旋转
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9301.MsgId">
@@ -2250,6 +2315,11 @@
             云台调整焦距控制
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9302.MsgId">
             <summary>
             0x9302
@@ -2297,6 +2367,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.Description">
             <summary>
             云台调整光圈控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9303.MsgId">
@@ -2348,6 +2423,11 @@
             云台雨刷控制
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9304.MsgId">
             <summary>
             0x9304
@@ -2395,6 +2475,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.Description">
             <summary>
             红外补光控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9305.MsgId">
@@ -2445,6 +2530,11 @@
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.Description">
             <summary>
             云台变倍控制
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x9306.MsgId">

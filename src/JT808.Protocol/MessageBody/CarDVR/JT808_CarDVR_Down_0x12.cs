@@ -21,6 +21,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId => JT808CarDVRCommandID.collect_drivers_identification_records.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 符合条件的驾驶人登录退出记录
         /// </summary>
         public string Description => "符合条件的驾驶人登录退出记录";

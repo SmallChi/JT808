@@ -17,6 +17,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId  => 0x8004;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 查询服务器时间应答
         /// </summary>
         public string Description => "查询服务器时间应答";

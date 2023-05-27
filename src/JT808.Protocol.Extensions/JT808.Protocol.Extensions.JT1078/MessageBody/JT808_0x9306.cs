@@ -18,6 +18,10 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public string Description => "云台变倍控制";
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 0x9306
         /// </summary>
         public ushort MsgId => 0x9306;

@@ -151,6 +151,7 @@ namespace JT808.Protocol.Test.Simples
         public ushort MsgId => 0x91;
 
         public string Description =>"DT1Demo6";
+        public bool SkipSerialization => false;
 
         public override DT1Demo6 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
@@ -170,6 +171,7 @@ namespace JT808.Protocol.Test.Simples
     public class DT2Demo6 : JT808MessagePackFormatter<DT2Demo6>,JT808Bodies
     {
         public ushort MsgId => 0x91;
+        public bool SkipSerialization => false;
         public byte Sex2 { get; set; }
 
         public ushort Age2 { get; set; }

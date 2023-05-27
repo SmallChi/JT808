@@ -18,6 +18,10 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public string Description => "音视频实时传输控制";
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 0x9102
         /// </summary>
         public ushort MsgId => 0x9102;

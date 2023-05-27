@@ -19,6 +19,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId => 0x8608;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 查询区域或线路数据
         /// </summary>
         public string Description => "查询区域或线路数据";

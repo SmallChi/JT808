@@ -21,6 +21,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId => JT808CarDVRCommandID.collect_specified_driving_overtime_records.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 符合条件的超时驾驶记录
         /// </summary>
         public string Description => "符合条件的超时驾驶记录";

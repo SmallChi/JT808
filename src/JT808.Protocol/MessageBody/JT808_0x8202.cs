@@ -16,6 +16,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId => 0x8202;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 临时位置跟踪控制
         /// </summary>
         public string Description => "临时位置跟踪控制";

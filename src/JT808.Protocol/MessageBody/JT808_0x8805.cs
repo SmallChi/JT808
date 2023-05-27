@@ -16,6 +16,10 @@ namespace JT808.Protocol.MessageBody
         /// 0x8805
         /// </summary>
         public ushort MsgId => 0x8805;
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
 
         /// <summary>
         /// 单条存储多媒体数据检索上传命令

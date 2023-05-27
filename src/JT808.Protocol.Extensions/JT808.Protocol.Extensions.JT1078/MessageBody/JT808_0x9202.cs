@@ -18,6 +18,10 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// </summary>
         public string Description => "平台下发远程录像回放控制";
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 0x9202
         /// </summary>
         public ushort MsgId => 0x9202;

@@ -21,6 +21,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId => JT808CarDVRCommandID.collect_specified_speed_status_logs.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 符合条件的速度状态日志
         /// </summary>
         public string Description => "符合条件的速度状态日志";

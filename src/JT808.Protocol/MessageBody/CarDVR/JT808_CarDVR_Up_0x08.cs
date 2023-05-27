@@ -23,6 +23,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId =>  JT808CarDVRCommandID.collect_recorder_specified_speed.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 请求发送指定的时间范围内 N 个单位数据块的数据（N≥1）
         /// </summary>
         public List<JT808_CarDVR_Up_0x08_SpeedPerMinute> JT808_CarDVR_Up_0x08_SpeedPerMinutes { get; set; }

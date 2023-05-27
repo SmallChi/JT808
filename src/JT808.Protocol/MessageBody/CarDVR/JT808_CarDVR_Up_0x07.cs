@@ -22,6 +22,10 @@ namespace JT808.Protocol.MessageBody.CarDVR
         /// </summary>
         public byte CommandId => JT808CarDVRCommandID.collect_recorder_unique_number.ToByteValue();
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 生产厂 CCC 认证代码  7字节
         /// </summary>
         public string ProductionPlantCCCCertificationCode { get; set; }

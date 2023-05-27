@@ -1032,6 +1032,11 @@
             报警附件信息消息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1210.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1210.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -1064,6 +1069,11 @@
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1211.Description">
             <summary>
             文件信息上传
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1211.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1211.FileNameLength">
@@ -1126,6 +1136,11 @@
             文件上传完成消息
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1212.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1212.FileNameLength">
             <summary>
             文件名称长度
@@ -1184,6 +1199,11 @@
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.Description">
             <summary>
             终端升级进度上报
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x1FC4.MsgId">
@@ -2167,6 +2187,11 @@
             Description
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x9208.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x9208.AttachmentServerIPLength">
             <summary>
             服务IP地址长度
@@ -2240,6 +2265,11 @@
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x9212.Description">
             <summary>
             文件上传完成消息应答
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x9212.SkipSerialization">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.YueBiao.MessageBody.JT808_0x9212.FileNameLength">

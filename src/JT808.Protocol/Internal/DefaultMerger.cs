@@ -15,9 +15,9 @@ namespace JT808.Protocol.Internal
         /// </summary>
         private readonly ConcurrentDictionary<string, ConcurrentDictionary<ushort, List<(ushort index, byte[] data)>>> splitPackageDictionary = new();
 
-        private readonly ConcurrentDictionary<string, DateTime> timeoutDictionary = new();
+        private readonly ConcurrentDictionary<string, DateTime> timeoutDictionary = new ConcurrentDictionary<string, DateTime>();
         private readonly TimeSpan cleanInterval = TimeSpan.FromSeconds(60);
-        private readonly CancellationTokenSource cts = new();
+        private readonly CancellationTokenSource cts = new CancellationTokenSource();
         private bool disposed;
         public DefaultMerger()
         {
@@ -27,7 +27,8 @@ namespace JT808.Protocol.Internal
                 {
                     timeoutDictionary.ToList().ForEach(x =>
                     {
-                        var (key, datetime) = x;
+                        var key = x.Key;
+                        var datetime = x.Value;
                         if (datetime < DateTime.Now && TryParseKey(key, out var phoneNumber, out var messageId) && splitPackageDictionary.TryGetValue(phoneNumber, out var value) && value.TryRemove(messageId, out var caches) && value.Count == 0 && splitPackageDictionary.TryRemove(phoneNumber, out _))
                         {
                             timeoutDictionary.TryRemove(key, out _);
@@ -88,9 +89,10 @@ namespace JT808.Protocol.Internal
         }
         private bool CheckTimeout(string key) => !timeoutDictionary.TryGetValue(key, out var dateTime) || dateTime >= DateTime.Now;
 
-        private const string keyJoiner = "-";
+        private const char keyJoiner = '-';
+        private const string keyJoinerNET7 = "-";
 
-        private string GenerateKey(string phoneNumber, ushort messageId) => string.Join(keyJoiner, new[] { phoneNumber, messageId.ToString() });
+        private string GenerateKey(string phoneNumber, ushort messageId) => string.Join(keyJoinerNET7, new[] { phoneNumber, messageId.ToString() });
 
         private bool TryParseKey(string key, out string phoneNumber, out ushort messageId)
         {

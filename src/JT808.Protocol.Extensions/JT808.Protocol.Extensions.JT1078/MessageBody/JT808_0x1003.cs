@@ -56,6 +56,10 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <summary>
         /// 
         /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description => "终端上传音视频属性";
         /// <summary>
         /// 

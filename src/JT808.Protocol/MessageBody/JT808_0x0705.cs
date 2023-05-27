@@ -21,6 +21,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId  => 0x0705;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// CAN总线数据上传
         /// </summary>
         public string Description => "CAN总线数据上传";

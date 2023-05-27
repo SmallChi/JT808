@@ -17,6 +17,10 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// 查询资源列表
         /// </summary>
         public string Description => "查询资源列表";
+                /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
         /// <summary>
         /// 0x9205
         /// </summary>

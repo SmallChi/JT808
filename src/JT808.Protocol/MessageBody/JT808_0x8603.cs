@@ -20,6 +20,10 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 
         /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
+        /// 
+        /// </summary>
         public string Description => "删除矩形区域";
         /// <summary>
         /// 区域数

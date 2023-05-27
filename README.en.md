@@ -64,7 +64,7 @@ JT808Package jT808Package = new JT808Package();
 
 jT808Package.Header = new JT808Header
 {
-    MsgId = Enums.JT808MsgId._0x0200,
+    MsgId = (ushort)JT808.Protocol.Enums.JT808MsgId._0x0200,
     ManualMsgNum = 126,
     TerminalPhoneNo = "123456789012"
 };

@@ -38,6 +38,10 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// <summary>
         /// 
         /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="reader"></param>
         /// <param name="writer"></param>
         /// <param name="config"></param>

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-
+using static JT808.Protocol.Extensions.JT808BinaryExtensions;
 
 namespace JT808.Protocol.MessagePack
 {
@@ -364,7 +364,7 @@ namespace JT808.Protocol.MessagePack
         public string ReadHex(int len)
         {
             var readOnlySpan = GetReadOnlySpan(len);
-            string hex = Convert.ToHexString(readOnlySpan.Slice(0, len));
+            string hex = HexUtil.DoHexDump(readOnlySpan, 0, len);
             return hex;
         }
         /// <summary>

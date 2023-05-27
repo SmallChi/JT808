@@ -19,6 +19,10 @@ namespace JT808.Protocol.Extensions.YueBiao.MessageBody
         /// </summary>
         public string Description => "终端升级进度上报";
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 终端升级进度上报
         /// </summary>
         public ushort MsgId => JT808_YueBiao_MsgId.terminal_upgrade_progress_reported.ToUInt16Value();

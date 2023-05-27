@@ -33,7 +33,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Extensions.S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.Extensions.SuBiao.Test", "JT808.Protocol.Extensions\JT808.Protocol.Extensions.SuBiao.Test\JT808.Protocol.Extensions.SuBiao.Test.csproj", "{BEE2E12D-C123-4682-AB7E-210C2BF564B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JT808.Protocol.DependencyInjection", "JT808.Protocol.Extensions\JT808.Protocol.DependencyInjection\JT808.Protocol.DependencyInjection.csproj", "{7EB01F74-DFDB-4733-8F15-5785A9ED7DBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Protocol.DependencyInjection", "JT808.Protocol.Extensions\JT808.Protocol.DependencyInjection\JT808.Protocol.DependencyInjection.csproj", "{7EB01F74-DFDB-4733-8F15-5785A9ED7DBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,6 +15,10 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// </summary>
         public string Description => "文件上传完成消息";
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 文件名称长度
         /// </summary>
         public byte FileNameLength { get; set; }

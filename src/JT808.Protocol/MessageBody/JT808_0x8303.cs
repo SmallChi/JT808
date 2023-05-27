@@ -20,6 +20,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId =>0x8303;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 信息点播菜单设置
         /// </summary>
         public string Description => "信息点播菜单设置";

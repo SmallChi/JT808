@@ -91,6 +91,7 @@ namespace JT808.Protocol.Test.Simples
         /// 0x0001
         /// </summary>
         public ushort MsgId => 0x0001;
+        public bool SkipSerialization => false;
         /// <summary>
         /// 终端通用应答
         /// </summary>

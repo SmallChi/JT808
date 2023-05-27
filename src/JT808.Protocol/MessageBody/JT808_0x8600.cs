@@ -23,6 +23,10 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public ushort MsgId => 0x8600;
         /// <summary>
+        /// 
+        /// </summary>
+        public bool SkipSerialization => false;
+        /// <summary>
         /// 设置圆形区域
         /// </summary>
         public string Description => "设置圆形区域";
