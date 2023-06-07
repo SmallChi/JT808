@@ -15,6 +15,51 @@
             编码之前的写入位置
             </summary>
         </member>
+        <member name="T:JT808.Protocol.DependencyInjectionExtensions">
+            <summary>
+            JT808 DI扩展
+            JT808 DependencyInjectionExtensions
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure(Microsoft.Extensions.DependencyInjection.IServiceCollection,JT808.Protocol.IJT808Config)">
+            <summary>
+            注册808配置
+            </summary>
+            <param name="services"></param>
+            <param name="jT808Config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure(JT808.Protocol.IJT808Builder,JT808.Protocol.IJT808Config)">
+            <summary>
+            注册808配置
+            </summary>
+            <param name="builder"></param>
+            <param name="jT808Config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册808配置
+            </summary>
+            <typeparam name="TJT808Config"></typeparam>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure``1(JT808.Protocol.IJT808Builder)">
+            <summary>
+            注册808配置
+            </summary>
+            <typeparam name="TJT808Config"></typeparam>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            注册808配置
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808Alarm">
             <summary>
             报警标志
@@ -4256,6 +4301,11 @@
             JT808配置
             </summary>
         </member>
+        <member name="P:JT808.Protocol.IJT808Builder.Services">
+            <summary>
+            DI ServiceCollection
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Interfaces.GlobalConfigBase">
             <summary>
             全局配置基类
@@ -4943,15 +4993,21 @@
             默认JT808构造器
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Internal.DefaultBuilder.Services">
+            <summary>
+            DI服务
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Internal.DefaultBuilder.Config">
             <summary>
             JT808配置
             </summary>
         </member>
-        <member name="M:JT808.Protocol.Internal.DefaultBuilder.#ctor(JT808.Protocol.IJT808Config)">
+        <member name="M:JT808.Protocol.Internal.DefaultBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection,JT808.Protocol.IJT808Config)">
             <summary>
             
             </summary>
+            <param name="services"></param>
             <param name="config"></param>
         </member>
         <member name="T:JT808.Protocol.Internal.DefaultGlobalConfig">

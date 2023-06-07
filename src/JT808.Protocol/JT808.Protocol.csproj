@@ -27,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="DependencyInjectionExtensions.cs" />
     <Compile Remove="Formatters\JT808HeaderFormatter.cs" />
     <Compile Remove="Formatters\JT808HeaderPackageFormatter.cs" />
     <Compile Remove="Formatters\JT808PackageFormatter.cs" />
@@ -49,10 +48,12 @@
 		<PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
 		<PackageReference Include="System.Text.Json" Version="7.0.2" />
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition=" '$(TargetFramework)' == 'net7' ">
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 	</ItemGroup>
 	
 	

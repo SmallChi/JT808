@@ -14,14 +14,13 @@
     <None Remove="ReportTest\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.2" />
-    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.13.2" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.5" />
+    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.13.5" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JT808.Protocol.Extensions\JT808.Protocol.DependencyInjection\JT808.Protocol.DependencyInjection.csproj" />
     <ProjectReference Include="..\JT808.Protocol\JT808.Protocol.csproj" />
   </ItemGroup>
 </Project>

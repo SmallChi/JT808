@@ -108,7 +108,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.1" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
@@ -126,7 +126,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JT808.Protocol.Extensions\JT808.Protocol.DependencyInjection\JT808.Protocol.DependencyInjection.csproj" />
     <ProjectReference Include="..\JT808.Protocol\JT808.Protocol.csproj" />
   </ItemGroup>
 
