@@ -1,9 +1,9 @@
-﻿using JT808.Protocol.Extensions;
+﻿using System;
+using System.Text.Json;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
-using System;
-using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -60,6 +60,7 @@ namespace JT808.Protocol.MessageBody
         /// <param name="config"></param>
         public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8106 value, IJT808Config config)
         {
+            value.ParameterCount = (byte)value.Parameters.Length;
             writer.WriteByte(value.ParameterCount);
             for (int i = 0; i < value.ParameterCount; i++)
             {
