@@ -1,6 +1,6 @@
-﻿using JT808.Protocol.Extensions;
+﻿using System.Collections.Generic;
+using JT808.Protocol.Extensions;
 using JT808.Protocol.MessageBody;
-using System.Collections.Generic;
 using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
@@ -156,8 +156,15 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(0x0002, JT808Bodies.MsgNum);
             Assert.Equal(1, JT808Bodies.AnswerParamsCount);
             Assert.Null(JT808Bodies.ParamList);
+        }
 
-
+        [Theory]
+        [InlineData("7E0104004B01801550511313AE00000900000001040000000F00000002040000000A00000013103232332E3130382E3133332E31363300000000170100000000180400000328000000550400000078000000560400000000027E")]
+        public void Test4(string hex)
+        {
+            var bytes = hex.ToHexBytes();
+            var jT808Package = JT808Serializer.Deserialize(bytes);
+            Assert.IsType<JT808_0x0104>(jT808Package.Bodies);
         }
     }
 }

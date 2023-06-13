@@ -52,14 +52,5 @@ namespace JT808.Protocol.Test.MessageBody
             var jT808Package1 = JT808Serializer.Deserialize(hex, Enums.JT808Version.JTT2019);
             Assert.Equal("12345678900", jT808Package1.Header.TerminalPhoneNo);
         }
-
-        [Theory]
-        [InlineData("7E0104004B01801550511313AE00000900000001040000000F00000002040000000A00000013103232332E3130382E3133332E31363300000000170100000000180400000328000000550400000078000000560400000000027E")]
-        public void Test4(string hex)
-        {
-            var bytes = hex.ToHexBytes();
-            var jT808Package = JT808Serializer.Deserialize(bytes);
-            Assert.IsType<JT808_0x0104>(jT808Package.Bodies);
-        }
     }
 }
