@@ -1,11 +1,11 @@
-﻿using JT808.Protocol.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using JT808.Protocol.Enums;
 using JT808.Protocol.Extensions;
 using JT808.Protocol.Formatters;
 using JT808.Protocol.Interfaces;
 using JT808.Protocol.MessagePack;
-using System;
-using System.Collections.Generic;
-using System.Text.Json;
 
 namespace JT808.Protocol.MessageBody
 {
@@ -17,7 +17,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 0x0104
         /// </summary>
-        public ushort MsgId  => 0x0104;
+        public ushort MsgId => 0x0104;
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +50,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0104 jT808_0x0104 = new JT808_0x0104();
             jT808_0x0104.MsgNum = reader.ReadUInt16();
             jT808_0x0104.AnswerParamsCount = reader.ReadByte();
-            for (int i = 0; i < jT808_0x0104.AnswerParamsCount; i++)
+            for (int i = 0; i < jT808_0x0104.AnswerParamsCount && reader.ReadCurrentRemainContentLength() >= 4; i++)
             {
                 var paramId = reader.ReadVirtualUInt32();//参数ID         
                 if (config.JT808_0X8103_Factory.Map.TryGetValue(paramId, out object instance))
@@ -58,14 +58,14 @@ namespace JT808.Protocol.MessageBody
                     JT808_0x8103_BodyBase value = instance.DeserializeExt<JT808_0x8103_BodyBase>(ref reader, config);
                     if (jT808_0x0104.ParamList == null)
                     {
-                        jT808_0x0104.ParamList = new ();
+                        jT808_0x0104.ParamList = new();
                     }
                     if (value != null)
                     {
                         jT808_0x0104.ParamList.Add(value);
                     }
                 }
-                else 
+                else
                 {
                     //对于未能解析的自定义项，过滤其长度，以保证后续解析正常
                     reader.Skip(4);//跳过参数id长度
@@ -84,7 +84,7 @@ namespace JT808.Protocol.MessageBody
         public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0104 value, IJT808Config config)
         {
             writer.WriteUInt16(value.MsgNum);
-            writer.WriteByte(value.AnswerParamsCount);
+            writer.WriteByte((byte)value.ParamList.Count);
             foreach (var item in value.ParamList)
             {
                 IJT808MessagePackFormatter formatter = config.GetMessagePackFormatterByType(item.GetType());
@@ -103,15 +103,16 @@ namespace JT808.Protocol.MessageBody
             jT808_0x0104.MsgNum = reader.ReadUInt16();
             jT808_0x0104.AnswerParamsCount = reader.ReadByte();
             writer.WriteNumber($"[{jT808_0x0104.MsgNum.ReadNumber()}]应答流水号", jT808_0x0104.MsgNum);
-            writer.WriteNumber($"[{ jT808_0x0104.AnswerParamsCount.ReadNumber()}]应答参数个数", jT808_0x0104.AnswerParamsCount);
+            writer.WriteNumber($"[{jT808_0x0104.AnswerParamsCount.ReadNumber()}]应答参数个数", jT808_0x0104.AnswerParamsCount);
             writer.WriteStartArray($"参数列表");
-            for (int i = 0; i < jT808_0x0104.AnswerParamsCount; i++)
+            for (int i = 0; i < jT808_0x0104.AnswerParamsCount && reader.ReadCurrentRemainContentLength() >= 4; i++)
             {
                 writer.WriteStartObject();
                 var paramId = reader.ReadVirtualUInt32();//参数ID         
                 if (config.JT808_0X8103_Factory.Map.TryGetValue(paramId, out object instance))
                 {
-                    if (instance is IJT808Analyze  analyze) {
+                    if (instance is IJT808Analyze analyze)
+                    {
                         analyze.Analyze(ref reader, writer, config);
                     }
                 }
