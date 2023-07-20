@@ -46,7 +46,6 @@ namespace JT808.Protocol.Extensions.SuBiao.Test
                 },
                 AlarmTime = Convert.ToDateTime("2019-12-11 18:31:00"),
                 Altitude = 7,
-                AlarmLevel=8,
                 AlarmOrEventType=9,
                 FlagState = 12,
                 Latitude = 13,
@@ -55,12 +54,12 @@ namespace JT808.Protocol.Extensions.SuBiao.Test
                 VehicleState = 19
             });
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("000000010000000200BA7F0E07E4F11C0028003C0000180715101010672A000000010C09081100070000000D0000000E191211183100001334343434343434191210183100030200", hex);
+            Assert.Equal("000000010000000200BA7F0E07E4F11C0028003C00001807151010106729000000010C091100070000000D0000000E191211183100001334343434343434191210183100030200", hex);
         }
         [Fact]
         public void Deserialize()
         {
-            var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x0200>("000000010000000200BA7F0E07E4F11C0028003C0000180715101010672A000000010C09081100070000000D0000000E191211183100001334343434343434191210183100030200".ToHexBytes());
+            var jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x0200>("000000010000000200BA7F0E07E4F11C0028003C00001807151010106729000000010C091100070000000D0000000E191211183100001334343434343434191210183100030200".ToHexBytes());
             jT808UploadLocationRequest.CustomLocationAttachData.TryGetValue(JT808_SuBiao_Constants.JT808_0X0200_0x67, out var value);
             JT808_0x0200_0x67 jT808_0X0200_0X67 = value as JT808_0x0200_0x67;
             Assert.Equal(1u, jT808_0X0200_0X67.AlarmId);
@@ -70,10 +69,9 @@ namespace JT808.Protocol.Extensions.SuBiao.Test
             Assert.Equal(Convert.ToDateTime("2019-12-10 18:31:00"), jT808_0X0200_0X67.AlarmIdentification.Time);
             Assert.Equal(Convert.ToDateTime("2019-12-11 18:31:00"), jT808_0X0200_0X67.AlarmTime);
             Assert.Equal(7, jT808_0X0200_0X67.Altitude);
-            Assert.Equal(8, jT808_0X0200_0X67.AlarmLevel);
             Assert.Equal(9, jT808_0X0200_0X67.AlarmOrEventType);
             Assert.Equal(0x67, jT808_0X0200_0X67.AttachInfoId);
-            Assert.Equal(42, jT808_0X0200_0X67.AttachInfoLength);
+            Assert.Equal(41, jT808_0X0200_0X67.AttachInfoLength);
             Assert.Equal(12, jT808_0X0200_0X67.FlagState);
             Assert.Equal(13, jT808_0X0200_0X67.Latitude);
             Assert.Equal(14, jT808_0X0200_0X67.Longitude);

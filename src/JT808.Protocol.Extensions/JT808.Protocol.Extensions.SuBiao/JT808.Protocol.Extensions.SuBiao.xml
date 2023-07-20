@@ -657,11 +657,6 @@
             报警/事件类型
             </summary>
         </member>
-        <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x67.AlarmLevel">
-            <summary>
-            报警/事件类型
-            </summary>
-        </member>
         <member name="P:JT808.Protocol.Extensions.SuBiao.MessageBody.JT808_0x0200_0x67.Speed">
             <summary>
             车速

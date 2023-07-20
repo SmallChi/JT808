@@ -36,10 +36,6 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
         /// </summary>
         public byte AlarmOrEventType { get; set; }
         /// <summary>
-        /// 报警/事件类型
-        /// </summary>
-        public byte AlarmLevel { get; set; }
-        /// <summary>
         /// 车速
         /// </summary>
         public byte Speed { get; set; }
@@ -158,18 +154,6 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
                     break;
             }
             writer.WriteNumber($"[{value.AlarmOrEventType.ReadNumber()}]报警_事件类型-{alarmOrEventTypeString}", value.AlarmOrEventType);
-            value.AlarmLevel = reader.ReadByte();
-            string alarmLevelString = "未知";
-            switch (value.AlarmLevel)
-            {
-                case 0x01:
-                    alarmLevelString = "一级报警";
-                    break;
-                case 0x02:
-                    alarmLevelString = "二级报警";
-                    break;
-            }
-            writer.WriteNumber($"[{value.AlarmLevel.ReadNumber()}]报警级别-{alarmLevelString}", value.AlarmLevel);
             value.Speed = reader.ReadByte();
             writer.WriteNumber($"[{value.Speed.ReadNumber()}]车速", value.Speed);
             value.Altitude = reader.ReadUInt16();
@@ -228,7 +212,6 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             value.AlarmId = reader.ReadUInt32();
             value.FlagState = reader.ReadByte();
             value.AlarmOrEventType = reader.ReadByte();
-            value.AlarmLevel = reader.ReadByte();
             value.Speed = reader.ReadByte();
             value.Altitude = reader.ReadUInt16();
             value.Latitude = (int)reader.ReadUInt32();
@@ -258,7 +241,6 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             writer.WriteUInt32(value.AlarmId);
             writer.WriteByte(value.FlagState);
             writer.WriteByte(value.AlarmOrEventType);
-            writer.WriteByte(value.AlarmLevel);
             writer.WriteByte(value.Speed);
             writer.WriteUInt16(value.Altitude);
             writer.WriteUInt32((uint)value.Latitude);
