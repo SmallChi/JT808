@@ -857,9 +857,9 @@ namespace JT808.Protocol.Test.MessageBody
                 Direction = 0,
                 BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
             };
-            jT808UploadLocationRequest.StatusFlag = 0x18000000;
+            jT808UploadLocationRequest.StatusFlag = 0b1100;
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("0000000118000000FF4580F2F81B0EE40028003C0000180715101010", hex);
+            Assert.Equal("000000010000000CFF4580F2F81B0EE40028003C0000180715101010", hex);
         }
         [Fact]
         public void LatLngTest1_2()
@@ -887,9 +887,9 @@ namespace JT808.Protocol.Test.MessageBody
                 Direction = 0,
                 BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
             };
-            jT808UploadLocationRequest.StatusFlag = 0x18000000 | 0x302;
+            jT808UploadLocationRequest.StatusFlag = 0b1100;
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("0000000118000302FF4580F2F81B0EE40028003C0000180715101010", hex);
+            Assert.Equal("000000010000000CFF4580F2F81B0EE40028003C0000180715101010", hex);
         }
         [Fact]
         public void LatLngTest2_2()
@@ -917,9 +917,9 @@ namespace JT808.Protocol.Test.MessageBody
                 Direction = 0,
                 BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
             };
-            jT808UploadLocationRequest.StatusFlag = 0x10000000;
+            jT808UploadLocationRequest.StatusFlag = 0b100;
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("0000000110000000FF4580F207E4F11C0028003C0000180715101010", hex);
+            Assert.Equal("0000000100000004FF4580F207E4F11C0028003C0000180715101010", hex);
         }
         [Fact]
         public void LatTest1_2()
@@ -948,7 +948,7 @@ namespace JT808.Protocol.Test.MessageBody
                     Direction = 0,
                     BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
                 };
-                jT808UploadLocationRequest.StatusFlag = 1111;
+                jT808UploadLocationRequest.StatusFlag = 0b10000;
                 var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
             });
             Assert.Equal(JT808ErrorCode.LatOrLngError, exception.ErrorCode);
@@ -967,17 +967,17 @@ namespace JT808.Protocol.Test.MessageBody
                 Direction = 0,
                 BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
             };
-            jT808UploadLocationRequest.StatusFlag = 0x10000000 | 0x000300;
+            jT808UploadLocationRequest.StatusFlag = 0b0100;
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("0000000110000300FF4580F207E4F11C0028003C0000180715101010", hex);
+            Assert.Equal("0000000100000004FF4580F207E4F11C0028003C0000180715101010", hex);
         }
         [Fact]
         public void LatTest3_2()
         {
-            byte[] bodys = "0000000110000300FF4580F207E4F11C0028003C0000180715101010".ToHexBytes();
+            byte[] bodys = "0000000100000004FF4580F207E4F11C0028003C0000180715101010".ToHexBytes();
             JT808_0x0200 jT808UploadLocationRequest = JT808Serializer.Deserialize<JT808_0x0200>(bodys);
             Assert.Equal(1u, jT808UploadLocationRequest.AlarmFlag);
-            Assert.Equal((uint)(0x10000000 | 0x000300), jT808UploadLocationRequest.StatusFlag);
+            Assert.Equal(0b100u, jT808UploadLocationRequest.StatusFlag);
             Assert.Equal(DateTime.Parse("2018-07-15 10:10:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(-12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
@@ -997,9 +997,9 @@ namespace JT808.Protocol.Test.MessageBody
                 Direction = 0,
                 BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
             };
-            jT808UploadLocationRequest.StatusFlag = 0x8000000;
+            jT808UploadLocationRequest.StatusFlag = 0b1000;
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("000000010800000000BA7F0EF81B0EE40028003C0000180715101010", hex);
+            Assert.Equal("000000010000000800BA7F0EF81B0EE40028003C0000180715101010", hex);
         }
         [Fact]
         public void LngTest1_2()
@@ -1047,9 +1047,9 @@ namespace JT808.Protocol.Test.MessageBody
                 Direction = 0,
                 BasicLocationAttachData = new Dictionary<byte, JT808_0x0200_BodyBase>()
             };
-            jT808UploadLocationRequest.StatusFlag = 0x8000000|0x6601;
+            jT808UploadLocationRequest.StatusFlag = 0b1000;
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();
-            Assert.Equal("000000010800660100BA7F0EF81B0EE40028003C0000180715101010", hex);
+            Assert.Equal("000000010000000800BA7F0EF81B0EE40028003C0000180715101010", hex);
         }
         [Fact]
         public void LngTest3_2()
