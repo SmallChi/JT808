@@ -46,7 +46,7 @@
 		<PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
 		<PackageReference Include="System.Memory" Version="4.5.5" />
 		<PackageReference Include="System.Reflection.Extensions" Version="4.3.0" />
-		<PackageReference Include="System.Text.Json" Version="7.0.2" />
+		<PackageReference Include="System.Text.Json" Version="7.0.3" />
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 	</ItemGroup>
@@ -55,8 +55,7 @@
 		<PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 	</ItemGroup>
-	
-	
+
 	<ItemGroup>
     <None Update="Extensions\JT808PackageExtensionsTemplate.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
