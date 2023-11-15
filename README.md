@@ -401,33 +401,34 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 
 ## 使用 BenchmarkDotNet 性能测试报告（只是玩玩，不能当真）
 
-```ini
+``` ini
 
-BenchmarkDotNet=v0.13.2, OS=Windows 11 (10.0.22621.1105)
+BenchmarkDotNet v0.13.10, Windows 11 (10.0.22621.2428/22H2/2022Update/SunValley2)
 Intel Core i7-8700K CPU 3.70GHz (Coffee Lake), 1 CPU, 12 logical and 6 physical cores
-.NET SDK=7.0.102
-  [Host]     : .NET 7.0.2 (7.0.222.60605), X64 RyuJIT AVX2
-  Job-OIKLWD : .NET 7.0.2 (7.0.222.60605), X64 RyuJIT AVX2
+.NET SDK 8.0.100
+  [Host]     : .NET 8.0.0 (8.0.23.53103), X64 RyuJIT AVX2
+  Job-EBMZTG : .NET 8.0.0 (8.0.23.53103), X64 RyuJIT AVX2
 
-Platform=AnyCpu  Server=False  Toolchain=.NET 7.0
+Platform=AnyCpu  Server=False  Toolchain=.NET 8.0  
 
 ```
 
-| Method                            | Categories           | N          |              Mean |          Error |         StdDev |           Gen0 |     Gen1 |        Allocated |
-| --------------------------------- | -------------------- | ---------- | ----------------: | -------------: | -------------: | -------------: | -------: | ---------------: |
-| **0x0100Serialize**               | **0x0100Serializer** | **100**    |      **75.25 μs** |   **0.519 μs** |   **0.433 μs** |    **10.7422** |    **-** |     **66.41 KB** |
-| 0x0100Deserialize                 | 0x0100Serializer     | 100        |          66.56 μs |       0.412 μs |       0.385 μs |        15.7471 |        - |         96.88 KB |
-| **0x0100Serialize**               | **0x0100Serializer** | **10000**  |   **7,581.60 μs** | **108.729 μs** | **101.705 μs** |  **1078.1250** |    **-** |   **6640.63 KB** |
-| 0x0100Deserialize                 | 0x0100Serializer     | 10000      |       6,609.91 μs |      58.293 μs |      51.675 μs |      1578.1250 |        - |        9687.5 KB |
-| **0x0100Serialize**               | **0x0100Serializer** | **100000** |  **74,221.22 μs** | **514.498 μs** | **456.089 μs** | **10714.2857** |    **-** |  **66406.32 KB** |
-| 0x0100Deserialize                 | 0x0100Serializer     | 100000     |      65,918.35 μs |     173.702 μs |     162.481 μs |     15750.0000 |        - |      96875.06 KB |
-|                                   |                      |            |                   |                |                |                |          |                  |
-| **0x0200_All_AttachId_Serialize** | **0x0200Serializer** | **100**    |     **133.71 μs** |   **1.003 μs** |   **0.889 μs** |    **29.2969** |    **-** |    **180.47 KB** |
-| 0x0200_All_AttachId_Deserialize   | 0x0200Serializer     | 100        |         137.71 μs |       1.125 μs |       0.997 μs |        38.0859 |   0.2441 |        234.38 KB |
-| **0x0200_All_AttachId_Serialize** | **0x0200Serializer** | **10000**  |  **13,317.92 μs** |  **82.257 μs** |  **68.688 μs** |  **2937.5000** |    **-** |  **18046.88 KB** |
-| 0x0200_All_AttachId_Deserialize   | 0x0200Serializer     | 10000      |      14,040.86 μs |     242.740 μs |     227.060 μs |      3812.5000 |  15.6250 |      23437.51 KB |
-| **0x0200_All_AttachId_Serialize** | **0x0200Serializer** | **100000** | **131,292.10 μs** | **871.653 μs** | **815.344 μs** | **29250.0000** |    **-** | **180468.87 KB** |
-| 0x0200_All_AttachId_Deserialize   | 0x0200Serializer     | 100000     |     137,063.75 μs |   1,301.430 μs |   1,086.753 μs |     38250.0000 | 250.0000 |     234375.12 KB |
+| Method                          | Categories       | N      | Mean          | Error        | StdDev     | Gen0       | Gen1     | Allocated    |
+|-------------------------------- |----------------- |------- |--------------:|-------------:|-----------:|-----------:|---------:|-------------:|
+| **0x0100Serialize**                 | **0x0100Serializer** | **100**    |      **56.79 μs** |     **0.448 μs** |   **0.397 μs** |    **10.8032** |        **-** |     **66.41 KB** |
+| 0x0100Deserialize               | 0x0100Serializer | 100    |      51.04 μs |     0.538 μs |   0.477 μs |    15.8081 |        - |     96.88 KB |
+| **0x0100Serialize**                 | **0x0100Serializer** | **10000**  |   **5,316.12 μs** |    **40.148 μs** |  **37.554 μs** |  **1078.1250** |        **-** |   **6640.63 KB** |
+| 0x0100Deserialize               | 0x0100Serializer | 10000  |   5,170.64 μs |    47.209 μs |  44.160 μs |  1578.1250 |        - |    9687.5 KB |
+| **0x0100Serialize**                 | **0x0100Serializer** | **100000** |  **53,662.59 μs** |   **349.274 μs** | **326.711 μs** | **10800.0000** |        **-** |  **66406.32 KB** |
+| 0x0100Deserialize               | 0x0100Serializer | 100000 |  50,744.93 μs |   560.585 μs | 524.372 μs | 15800.0000 |        - |  96875.07 KB |
+|                                 |                  |        |               |              |            |            |          |              |
+| **0x0200_All_AttachId_Serialize**   | **0x0200Serializer** | **100**    |      **99.29 μs** |     **0.615 μs** |   **0.545 μs** |    **29.4189** |   **0.1221** |    **180.47 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer | 100    |     112.93 μs |     0.536 μs |   0.502 μs |    38.2080 |   0.2441 |    234.38 KB |
+| **0x0200_All_AttachId_Serialize**   | **0x0200Serializer** | **10000**  |  **10,000.00 μs** |    **57.313 μs** |  **50.806 μs** |  **2937.5000** |        **-** |  **18046.89 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer | 10000  |  11,079.90 μs |    74.979 μs |  66.467 μs |  3812.5000 |  15.6250 |  23437.51 KB |
+| **0x0200_All_AttachId_Serialize**   | **0x0200Serializer** | **100000** | **100,822.02 μs** | **1,061.507 μs** | **992.935 μs** | **29400.0000** |        **-** | **180468.88 KB** |
+| 0x0200_All_AttachId_Deserialize | 0x0200Serializer | 100000 | 113,578.52 μs |   801.568 μs | 669.345 μs | 38200.0000 | 200.0000 | 234375.13 KB |
+
 
 ## JT808 终端通讯协议消息对照表
 
