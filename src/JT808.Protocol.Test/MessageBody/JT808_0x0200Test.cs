@@ -494,6 +494,14 @@ namespace JT808.Protocol.Test.MessageBody
             var json = JT808Serializer1.Analyze(bodys);
         }
 
+
+        [Fact]
+        public void Test8_2()
+        {
+            var bytes = "7E020000670440054300360D0700000000000C01030158A18406C96FE0000F0000012423120709365201040000000C30011731010CEB06000400CE06D62B04000000005110FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF58100FFF0FFF0FFF0FFF0FFF0FFF0FFF0FFF55080000000000099066520103287E".ToHexBytes();
+            var package = JT808Serializer1.Analyze(bytes);
+        }
+
         [Fact]
         public void Test_all_attcahids()
         {
