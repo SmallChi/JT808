@@ -123,7 +123,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             value.MemoryType = reader.ReadByte();
             writer.WriteString($"[{value.MemoryType.ReadNumber()}]存储器类型", MemTypeDisplay(value.MemoryType));
             value.PlaybackWay = reader.ReadByte();
-            writer.WriteString($"[{value.PlaybackWay.ReadNumber()}]回访方式", PlayBackWayDisplay(value.PlaybackWay));
+            writer.WriteString($"[{value.PlaybackWay.ReadNumber()}]回放方式", PlayBackWayDisplay(value.PlaybackWay));
             value.PlaySpeed = reader.ReadByte();
             writer.WriteString($"[{value.PlaySpeed.ReadNumber()}]快进或快退倍数", FastForwardOrFastRewindMultiplesDisplay(value.PlaySpeed));
             value.BeginTime = reader.ReadDateTime_yyMMddHHmmss();
