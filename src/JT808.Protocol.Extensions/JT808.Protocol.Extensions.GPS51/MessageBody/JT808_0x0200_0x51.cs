@@ -43,7 +43,8 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             value.AttachInfoLength = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             value.Temperatures = new List<short>();
-            for (ushort i = 0; i < value.AttachInfoLength/2; i++) {
+            for (ushort i = 0; i < value.AttachInfoLength/2; i++) 
+            {
                 value.Temperatures.Add(reader.ReadInt16());
             }
             writer.WriteString($"[温度值：{string.Join("", value.Temperatures.Select(m=>m.ReadNumber()))}]",string.Join("，", value.Temperatures));

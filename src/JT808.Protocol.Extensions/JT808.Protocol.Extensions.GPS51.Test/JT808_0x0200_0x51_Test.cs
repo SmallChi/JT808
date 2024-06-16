@@ -14,7 +14,7 @@ namespace JT808.Protocol.Extensions.GPS51.Test
         {
             ServiceCollection serviceDescriptors = new ServiceCollection();
             serviceDescriptors.AddJT808Configure()
-                                        .AddGPS51Configure();
+                               .AddGPS51Configure();
 
             IJT808Config jT808Config = serviceDescriptors.BuildServiceProvider().GetRequiredService<IJT808Config>();
             JT808Serializer = new JT808Serializer(jT808Config);
@@ -22,6 +22,7 @@ namespace JT808.Protocol.Extensions.GPS51.Test
         [Fact]
         public void Serializer()
         {
+#warning ”–Œ Ã‚
             JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200
             {
                 AlarmFlag = 1,

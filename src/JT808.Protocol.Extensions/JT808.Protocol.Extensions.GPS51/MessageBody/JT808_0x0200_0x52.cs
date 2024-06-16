@@ -12,22 +12,23 @@ using JT808.Protocol.MessagePack;
 namespace JT808.Protocol.Extensions.GPS51.MessageBody
 {
     /// <summary>
-    /// 多路油耗模拟量
+    /// 正反转
     /// </summary>
-    public class JT808_0x0200_0x2B_Ext : JT808MessagePackFormatter<JT808_0x0200_0x2B_Ext>, JT808_0x0200_CustomBodyBase, IJT808Analyze
+    public class JT808_0x0200_0x52 : JT808MessagePackFormatter<JT808_0x0200_0x52>, JT808_0x0200_CustomBodyBase, IJT808Analyze
     {
         /// <summary>
-        /// 多路油耗模拟量,Id
+        /// 
         /// </summary>
-        public byte AttachInfoId { get; set; } = JT808_GPS51_Constants.JT808_0x0200_0x2B;
+        public byte AttachInfoId { get; set; } = JT808_GPS51_Constants.JT808_0x0200_0x52;
         /// <summary>
-        /// 多路油耗模拟量信息附加长度
+        /// 
         /// </summary>
         public byte AttachInfoLength { get; set; }
         /// <summary>
-        /// 油量数据
+        /// 正反转值
+        ///  0:未知；1：正转（空车）2:反转（重车）；3：停转 例子解析为：03
         /// </summary>
-        public List<ushort> Oils { get; set; }
+        public byte Direction { get; set; }
 
         /// <summary>
         /// 
@@ -37,17 +38,32 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
         /// <param name="config"></param>
         public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
-            JT808_0x0200_0x2B_Ext value = new JT808_0x0200_0x2B_Ext();
+            JT808_0x0200_0x52 value = new JT808_0x0200_0x52();
             value.AttachInfoId = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoId.ReadNumber()}]附加信息Id", value.AttachInfoId);
             value.AttachInfoLength = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
-            value.Oils = new List<ushort>();
-            for (ushort i = 0; i < value.AttachInfoLength/2; i++) 
+            value.Direction = reader.ReadByte();
+            if (value.Direction == 0)
             {
-                value.Oils.Add(reader.ReadUInt16());
+                writer.WriteString($"[{value.Direction.ReadNumber()}]正反转", "未知");
             }
-            writer.WriteString($"[油量值：{string.Join("", value.Oils.Select(m=>m.ReadNumber()))}]",string.Join("，", value.Oils));
+            else if(value.Direction==1)
+            {
+                writer.WriteString($"[{value.Direction.ReadNumber()}]正反转", "正转(空车)");
+            }
+            else if (value.Direction == 2)
+            {
+                writer.WriteString($"[{value.Direction.ReadNumber()}]正反转", "反转(重车)");
+            }
+            else if (value.Direction == 3)
+            {
+                writer.WriteString($"[{value.Direction.ReadNumber()}]正反转", "停转");
+            }
+            else
+            {
+                writer.WriteString($"[{value.Direction.ReadNumber()}]正反转", "未知2");
+            }
         }
         /// <summary>
         /// 
@@ -55,15 +71,12 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
         /// <param name="reader"></param>
         /// <param name="config"></param>
         /// <returns></returns>
-        public override JT808_0x0200_0x2B_Ext Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
+        public override JT808_0x0200_0x52 Deserialize(ref JT808MessagePackReader reader, IJT808Config config)
         {
-            JT808_0x0200_0x2B_Ext value = new JT808_0x0200_0x2B_Ext();
+            JT808_0x0200_0x52 value = new JT808_0x0200_0x52();
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
-            value.Oils = new List<ushort>();
-            for (int i = 0; i < value.AttachInfoLength/2; i++) {
-                value.Oils.Add(reader.ReadUInt16());
-            }
+            value.Direction = reader.ReadByte();
             return value;
         }
         /// <summary>
@@ -72,14 +85,11 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
         /// <param name="writer"></param>
         /// <param name="value"></param>
         /// <param name="config"></param>
-        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x2B_Ext value, IJT808Config config)
+        public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x52 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
-            writer.WriteByte((byte)(value.Oils.Count*2));
-            foreach (var item in value.Oils)
-            {
-                writer.WriteUInt16(item);
-            }
+            writer.WriteByte(1);
+            writer.WriteByte(value.Direction);
         }
     }
 }

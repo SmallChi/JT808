@@ -74,7 +74,7 @@ namespace JT808.Protocol.MessageBody
             value.MultimediaCodingFormat = reader.ReadByte();
             writer.WriteNumber($"[{value.MultimediaCodingFormat.ReadNumber()}]多媒体格式编码-{((JT808MultimediaCodingFormat)value.MultimediaCodingFormat).ToString()}", value.MultimediaCodingFormat);
             value.EventItemCoding = reader.ReadByte();
-            writer.WriteNumber($"[{value.EventItemCoding.ReadNumber()}]事件项编码-{((JT808EventItemCoding)value.EventItemCoding).ToString()}", value.MultimediaCodingFormat);
+            writer.WriteNumber($"[{value.EventItemCoding.ReadNumber()}]事件项编码-{((JT808EventItemCoding)value.EventItemCoding).ToString()}", value.EventItemCoding);
             value.ChannelId = reader.ReadByte();
             writer.WriteNumber($"[{value.ChannelId.ReadNumber()}]通道ID", value.ChannelId);
         }

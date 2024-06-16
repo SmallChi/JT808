@@ -398,6 +398,8 @@ JT808Serializer DT2JT808Serializer = new JT808Serializer(DT2JT808Config);
 | Install-Package JT808.Protocol.Extensions.JT1078   | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.JT1078.svg)     | ![JT808.Protocol.Extensions.JT1078](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.JT1078.svg)     | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.JT1078.svg)                                | JT1078 扩展 JT808          |
 | Install-Package JT808.Protocol.Extensions.SuBiao   | ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.SuBiao.svg)     | ![JT808.Protocol.Extensions.SuBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.SuBiao.svg)     | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.SuBiao.svg)                                | 主动安全（苏标）扩展 JT808 |
 | Install-Package JT808.Protocol.Extensions.YueBiao  | ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.YueBiao.svg)   | ![JT808.Protocol.Extensions.YueBiao](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.YueBiao.svg)   | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.YueBiao.svg)                               | 主动安全（粤标）扩展 JT808 |
+| Install-Package JT808.Protocol.Extensions.GPS51  | ![JT808.Protocol.Extensions.GPS51](https://img.shields.io/nuget/v/JT808.Protocol.Extensions.GPS51.svg)   | ![JT808.Protocol.Extensions.GPS51](https://img.shields.io/nuget/vpre/JT808.Protocol.Extensions.GPS51.svg)   | ![JT808](https://img.shields.io/nuget/dt/JT808.Protocol.Extensions.GPS51.svg)                               | 主动安全（粤标）扩展 JT808 |
+
 
 ## 使用 BenchmarkDotNet 性能测试报告（只是玩玩，不能当真）
 

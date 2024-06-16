@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using static System.Net.WebRequestMethods;
 
 namespace JT808.Protocol.Extensions.GPS51
 {
     /// <summary>
     /// GPS51 extension JT/T808
+    /// <see cref="https://gps51.com/#/jt808add"/>
     /// </summary>
     public static class DependencyInjectionExtensions
     {

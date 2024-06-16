@@ -1,0 +1,345 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JT808.Protocol.Extensions.GPS51</name>
+    </assembly>
+    <members>
+        <member name="T:JT808.Protocol.Extensions.GPS51.DependencyInjectionExtensions">
+            <summary>
+            GPS51 extension JT/T808
+            <see cref="!:https://gps51.com/#/jt808add"/>
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.DependencyInjectionExtensions.AddGPS51Configure(JT808.Protocol.IJT808Builder)">
+            <summary>
+            注册GPS51扩展JT/T808
+            Register GPS51 extension JT/T808
+            </summary>
+            <param name="jT808Builder"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.GPS51.Enums.ActivePhotographyStrategyType">
+            <summary>
+            主动拍照策略
+            Active photo taking strategy
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.Enums.ActivePhotographyStrategyType.not_enabled">
+            <summary>
+            不开启
+            Is not enabled
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.Enums.ActivePhotographyStrategyType.camera_timer">
+            <summary>
+            定时拍照
+            Camera Timer
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.Enums.ActivePhotographyStrategyType.distance_take_photos">
+            <summary>
+            定距拍照
+            Distance take photos
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.Enums.ActivePhotographyStrategyType.reserve">
+            <summary>
+            保留
+            reserve
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.Enums.ActivePhotographyStrategyType.not_modify_parameters">
+            <summary>
+            不修改参数
+            Do not Modify parameters
+            </summary>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants">
+            <summary>
+            主动安全常量
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0x2B">
+            <summary>
+            附加信息ID 多路油耗模拟量,
+            2*N
+            例子报文:2b049203a46f 
+            解析结果为：2路 模拟量分别为37379 42095
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0x51">
+            <summary>
+            附加信息ID 2个字节一组温度 0.1度 ffff 代表无效，
+            2*N
+            04F6代表未接或者传感器掉电，
+            第16位代表正负温度 51080134011A04F604F6 
+            308=30.8度 282=28.2度 8050=-80=-8度
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0x52">
+            <summary>
+            附加信息ID 
+            1
+            正反转 0:未知；1：正转（空车）2:反转（重车）；3：停转 
+            例子解析为：03
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0x54">
+            <summary>
+            附加信息ID 
+            1+7*N
+            Wifi数据：第1个字节wifi个数，后面为n个wifi数据；
+            WIFI数据：6字节 wifiMac 1字节 信号强度
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0x55">
+            <summary>
+            载重扩展 8
+            1/10千克 8 字节 
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0x58">
+            <summary>
+            湿度，
+            2*N
+            精度0.1，0fff 代表无效数据，例子数据： 0012 表示：1.8%
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0x61">
+            <summary>
+            电压,
+            2
+            单位0.01V,例子报文：61021d74，解析结果7540，最终电压75.40V
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0xe1">
+            <summary>
+            基站编码
+            4+7*N
+            的格式为 MCC MNC LAC CI Signal 2-2-2-4-1-2-4-1，
+            其中MCC 2个字节国家编码，MNC 为 2个字节网络编码，LAC为 2个字节地区编码,
+            CI 为 4个字节蜂窝 ID ,
+            信号强度 1字节,
+            单基站可以不用信号强度 1cc-0-696a-863a8d0-0
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0xe2">
+            <summary>
+            版本号,
+            N 
+            开机或者重连第一条上报,例子结果:GB201-GSM-21001-1.1.1
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0xf1">
+            <summary>
+            iccid,
+            20
+            一般开机或者重连第一条0200位置信息上报,
+            例子报文：f1143839383630343032313032303930393737303032,
+            解析结果为:89860402102090977002
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0xf6">
+            <summary>
+            IMEI数据：
+            8字节，
+            第1位为0，后面15位为imei的16进制数据 
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0xfa">
+            <summary>
+            4
+            第0位:震动报警 
+            第1位:拆除报警 例子:第0位:震动报警 fa0400000001 第1位:拆除报警 fa0400000002 
+            第2位:进入深度休眠 fa0400000004 
+            第3位:急加速 fa0400000008 
+            第4位:急减速 fa0400000010 
+            第5位:急转弯 fa0400000020 
+            第6位:acc开报警 fa0400000040 
+            第7位:acc关报警 fa0400000080 
+            第8位:内部电池电量低fa0400000100 
+            第9位:人为关机
+            第10位:低电关机
+            </summary>
+        </member>
+        <member name="F:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.JT808_0x0200_0xfb">
+            <summary>
+            4
+            电量百分比和外部电压,
+            电压精度0.01V,充电状态0未充电 1充电中,没有的数据传00 
+            例子:fb045F050701 
+            解析结果:电量百分比5F=95 电压:0507=1287 最终显示为12.87V 01:充电中
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.JT808_GPS51_Constants.GetCurrentAssembly">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext">
+            <summary>
+            多路油耗模拟量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.AttachInfoId">
+            <summary>
+            多路油耗模拟量,Id
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.AttachInfoLength">
+            <summary>
+            多路油耗模拟量信息附加长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.Oils">
+            <summary>
+            油量数据
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51">
+            <summary>
+            温度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51.AttachInfoId">
+            <summary>
+            温度,Id
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51.AttachInfoLength">
+            <summary>
+            温度信息附加长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51.Temperatures">
+            <summary>
+            温度数据
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x52">
+            <summary>
+            正反转
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x52.AttachInfoId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x52.AttachInfoLength">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x52.Direction">
+            <summary>
+            正反转值
+             0:未知；1：正转（空车）2:反转（重车）；3：停转 例子解析为：03
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x52.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x52.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x52.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x52,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.GPS51.Metadata.AlarmIdentificationProperty">
+            <summary>
+            报警标识号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.Metadata.AlarmIdentificationProperty.TerminalID">
+            <summary>
+            终端ID
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.Metadata.AlarmIdentificationProperty.Time">
+            <summary>
+            YY-MM-DD-hh-mm-ss
+            BCD[6]
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.Metadata.AlarmIdentificationProperty.SN">
+            <summary>
+            序号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.Metadata.AlarmIdentificationProperty.AttachCount">
+            <summary>
+            附件数量
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.Metadata.AlarmIdentificationProperty.Retain">
+            <summary>
+            预留
+            </summary>
+        </member>
+    </members>
+</doc>

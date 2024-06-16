@@ -1,8 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\Info.props" />
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>JT808.Protocol.Extensions.GPS51</PackageId>
+    <Product>JT808.Protocol.Extensions.GPS51</Product>
+    <Description>
+		JT/T1078 video message protocol based on JT/JT808 protocol and GB808 protocol extension.基于JT808协议、GB808协议扩展的JT1078视频消息协议。
+	</Description>
+    <PackageReleaseNotes>
+		JT/T1078 video message protocol based on JT/JT808 protocol and GB808 protocol extension.基于JT/T808协议、GB808协议扩展的JT/T1078视频消息协议。
+	</PackageReleaseNotes>
+    <DocumentationFile>JT808.Protocol.Extensions.GPS51.xml</DocumentationFile>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<LinkRefUrl>https://gps51.com/#/jt808add</LinkRefUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\..\..\README.md" Pack="true" PackagePath="" />
+	<None Include="..\..\..\README.en.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\JT808.Protocol\JT808.Protocol.csproj" />
