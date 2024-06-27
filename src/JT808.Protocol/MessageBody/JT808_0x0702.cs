@@ -102,13 +102,13 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0702 value = new JT808_0x0702();
             var firstByte = reader.ReadVirtualByte();
             //因2011第一个字节代表姓名长度 所以该值长度只能为  2，3，4，整个数据长度 62+m+n
-            if (firstByte == 0x01)
+            if (firstByte == 0x01 || firstByte == 0x02)
             {
                 value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
                 writer.WriteNumber($"[{((byte)value.IC_Card_Status).ReadNumber()}]状态-{value.IC_Card_Status.ToString()}", (byte)value.IC_Card_Status);
                 value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{value.IC_Card_PlugDateTime.ToString("yyMMddHHmmss")}]插拔卡时间", value.IC_Card_PlugDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
-                if (value.IC_Card_Status == JT808ICCardStatus.ic_card_into)
+                if (reader.ReadCurrentRemainContentLength() > 0)
                 {
                     value.IC_Card_ReadResult = (JT808ICCardReadResult)reader.ReadByte();
                     writer.WriteNumber($"[{((byte)value.IC_Card_ReadResult).ReadNumber()}]IC卡读取结果-{value.IC_Card_ReadResult.ToString()}", (byte)value.IC_Card_ReadResult);
@@ -149,33 +149,22 @@ namespace JT808.Protocol.MessageBody
             }
             else
             {
-                if (firstByte == 0x02 && reader.ReadCurrentRemainContentLength() == 7)
-                {
-                    //如果字节是0x02且长度只有7，那么该协议就是2013或者2019
-                    value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
-                    writer.WriteNumber($"[{((byte)value.IC_Card_Status).ReadNumber()}]状态-{value.IC_Card_Status.ToString()}", (byte)value.IC_Card_Status);
-                    value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
-                    writer.WriteString($"[{value.IC_Card_PlugDateTime.ToString("yyMMddHHmmss")}]插拔卡时间", value.IC_Card_PlugDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
-                }
-                else
-                {
-                    value.DriverUserNameLength = reader.ReadByte();
-                    writer.WriteNumber($"[{value.DriverUserNameLength.ReadNumber()}]驾驶员姓名长度", value.DriverUserNameLength);
-                    var driverUserNameBuffer = reader.ReadVirtualArray(value.DriverUserNameLength);
-                    value.DriverUserName = reader.ReadString(value.DriverUserNameLength);
-                    writer.WriteString($"[{driverUserNameBuffer.ToArray().ToHexString()}]驾驶员姓名", value.DriverUserName);
-                    var driverIdentityCardBuffer = reader.ReadVirtualArray(20);
-                    value.DriverIdentityCard = reader.ReadString(20);
-                    writer.WriteString($"[{driverIdentityCardBuffer.ToArray().ToHexString()}]驾驶员身份证号", value.DriverIdentityCard);
-                    var qualificationCodeBuffer = reader.ReadVirtualArray(40);
-                    value.QualificationCode = reader.ReadString(40);
-                    writer.WriteString($"[{qualificationCodeBuffer.ToArray().ToHexString()}]从业资格证编码", value.QualificationCode);
-                    value.LicenseIssuingLength = reader.ReadByte();
-                    writer.WriteNumber($"[{value.LicenseIssuingLength.ReadNumber()}]发证机构名称长度", value.LicenseIssuingLength);
-                    var licenseIssuingBuffer = reader.ReadVirtualArray(value.LicenseIssuingLength);
-                    value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
-                    writer.WriteString($"[{licenseIssuingBuffer.ToArray().ToHexString()}]发证机构名称", value.LicenseIssuing);
-                }
+                value.DriverUserNameLength = reader.ReadByte();
+                writer.WriteNumber($"[{value.DriverUserNameLength.ReadNumber()}]驾驶员姓名长度", value.DriverUserNameLength);
+                var driverUserNameBuffer = reader.ReadVirtualArray(value.DriverUserNameLength);
+                value.DriverUserName = reader.ReadString(value.DriverUserNameLength);
+                writer.WriteString($"[{driverUserNameBuffer.ToArray().ToHexString()}]驾驶员姓名", value.DriverUserName);
+                var driverIdentityCardBuffer = reader.ReadVirtualArray(20);
+                value.DriverIdentityCard = reader.ReadString(20);
+                writer.WriteString($"[{driverIdentityCardBuffer.ToArray().ToHexString()}]驾驶员身份证号", value.DriverIdentityCard);
+                var qualificationCodeBuffer = reader.ReadVirtualArray(40);
+                value.QualificationCode = reader.ReadString(40);
+                writer.WriteString($"[{qualificationCodeBuffer.ToArray().ToHexString()}]从业资格证编码", value.QualificationCode);
+                value.LicenseIssuingLength = reader.ReadByte();
+                writer.WriteNumber($"[{value.LicenseIssuingLength.ReadNumber()}]发证机构名称长度", value.LicenseIssuingLength);
+                var licenseIssuingBuffer = reader.ReadVirtualArray(value.LicenseIssuingLength);
+                value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
+                writer.WriteString($"[{licenseIssuingBuffer.ToArray().ToHexString()}]发证机构名称", value.LicenseIssuing);
             }
         }
         /// <summary>
@@ -189,11 +178,11 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0702 value = new JT808_0x0702();
             var firstByte = reader.ReadVirtualByte();
             //因2011第一个字节代表姓名长度 所以该值长度只能为  2，3，4，整个数据长度 62+m+n
-            if (firstByte == 0x01)
+            if (firstByte == 0x01|| firstByte == 0x02)
             {
                 value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
                 value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
-                if (value.IC_Card_Status == JT808ICCardStatus.ic_card_into)
+                if (reader.ReadCurrentRemainContentLength()>0)
                 {
                     value.IC_Card_ReadResult = (JT808ICCardReadResult)reader.ReadByte();
                     if (value.IC_Card_ReadResult == JT808ICCardReadResult.ic_card_reading_succeeded)
@@ -219,20 +208,13 @@ namespace JT808.Protocol.MessageBody
             }
             else 
             {
-                if (firstByte == 0x02 && reader.ReadCurrentRemainContentLength() == 7)
-                {
-                    //如果字节是0x02且长度只有7，那么该协议就是2013或者2019
-                    value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
-                    value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
-                }
-                else {
-                    value.DriverUserNameLength = reader.ReadByte();
-                    value.DriverUserName = reader.ReadString(value.DriverUserNameLength);
-                    value.DriverIdentityCard = reader.ReadString(20);
-                    value.QualificationCode = reader.ReadString(40);
-                    value.LicenseIssuingLength = reader.ReadByte();
-                    value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
-                }            
+                //默认是2011版本
+                value.DriverUserNameLength = reader.ReadByte();
+                value.DriverUserName = reader.ReadString(value.DriverUserNameLength);
+                value.DriverIdentityCard = reader.ReadString(20);
+                value.QualificationCode = reader.ReadString(40);
+                value.LicenseIssuingLength = reader.ReadByte();
+                value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
             }       
             return value;
         }

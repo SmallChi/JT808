@@ -40,7 +40,7 @@ namespace JT808.Protocol.Extensions.GPS51.Test
                 AttachInfoId = 0x2b,
                 AttachInfoLength = 4,
                  Temperatures = new List<short> {
-                   12,-34
+                   12,34
                   }
             });
             var hex = JT808Serializer.Serialize(jT808UploadLocationRequest).ToHexString();

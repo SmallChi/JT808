@@ -174,21 +174,21 @@ namespace JT808.Protocol.Test.MessageBody
         {
             JT808_0x0702 jT808_0X0702 = new JT808_0x0702
             {
-                DriverUserName = "tk",
+                DriverUserName = "tk1", //不能小于2个字节
                 DriverIdentityCard="123456789123456789",
                 QualificationCode = "qwe123456aaa",
                 LicenseIssuing = "qwertx"
             };
             var hex = JT808Serializer.Serialize(jT808_0X0702, JT808Version.JTT2011).ToHexString();
-            Assert.Equal("02746B00003132333435363738393132333435363738390000000000000000000000000000000000000000000000000000000071776531323334353661616106717765727478".Replace(" ", ""), hex);
+            Assert.Equal("03746B3100003132333435363738393132333435363738390000000000000000000000000000000000000000000000000000000071776531323334353661616106717765727478".Replace(" ", ""), hex);
         }
 
         [Fact]
         public void Test2011_2()
         {
-            byte[] bytes = "02746B00003132333435363738393132333435363738390000000000000000000000000000000000000000000000000000000071776531323334353661616106717765727478".ToHexBytes();
+            byte[] bytes = "03746B3100003132333435363738393132333435363738390000000000000000000000000000000000000000000000000000000071776531323334353661616106717765727478".ToHexBytes();
             JT808_0x0702 jT808_0X0702 = JT808Serializer.Deserialize<JT808_0x0702>(bytes);
-            Assert.Equal("tk", jT808_0X0702.DriverUserName);
+            Assert.Equal("tk1", jT808_0X0702.DriverUserName);
             Assert.Equal("qwe123456aaa", jT808_0X0702.QualificationCode);
             Assert.Equal("qwertx", jT808_0X0702.LicenseIssuing);
             Assert.Equal("123456789123456789", jT808_0X0702.DriverIdentityCard);
@@ -199,6 +199,15 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "02746B00003132333435363738393132333435363738390000000000000000000000000000000000000000000000000000000071776531323334353661616106717765727478".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808_0x0702>(bytes, JT808Version.JTT2011);
+        }
+        [Fact]
+        public void Test2013_1()
+        {
+            byte[] bytes = "7e0702003a016067308681006d0218061b0f362e000753696d626132326777313233000000000000000000000000000000044341524407e8061be27e".ToHexBytes();
+            var package = JT808Serializer.Deserialize<JT808Package>(bytes, JT808Version.JTT2013);
+
+            JT808_0x0702 jT808_0X0702= package.Bodies as JT808_0x0702;
+
         }
     }
 }
