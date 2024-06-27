@@ -43,19 +43,19 @@ namespace JT808.Protocol.Extensions.GPS51
         /// 载重扩展 8
         /// 1/10千克 8 字节 
         /// </summary>
-        public const uint JT808_0x0200_0x55 = 0x55;
+        public const byte JT808_0x0200_0x55 = 0x55;
         /// <summary>
         /// 湿度，
         /// 2*N
         /// 精度0.1，0fff 代表无效数据，例子数据： 0012 表示：1.8%
         /// </summary>
-        public const uint JT808_0x0200_0x58 = 0x58;
+        public const byte JT808_0x0200_0x58 = 0x58;
         /// <summary>
         /// 电压,
         /// 2
         /// 单位0.01V,例子报文：61021d74，解析结果7540，最终电压75.40V
         /// </summary>
-        public const uint JT808_0x0200_0x61 = 0x61;
+        public const byte JT808_0x0200_0x61 = 0x61;
         /// <summary>
         /// 基站编码
         /// 4+7*N
@@ -65,7 +65,7 @@ namespace JT808.Protocol.Extensions.GPS51
         /// 信号强度 1字节,
         /// 单基站可以不用信号强度 1cc-0-696a-863a8d0-0
         /// </summary>
-        public const uint JT808_0x0200_0xe1 = 0xe1;
+        public const byte JT808_0x0200_0xe1 = 0xe1;
         /// <summary>
         /// 版本号,
         /// N 
@@ -110,9 +110,23 @@ namespace JT808.Protocol.Extensions.GPS51
         /// </summary>
         public const byte JT808_0x0200_0xfb = 0xfb;
         /// <summary>
-        /// 
+        /// 锁车
         /// </summary>
         /// <returns></returns>
+        public const byte JT808_0x8105_0x64 = 0x64;
+        /// <summary>
+        /// 解锁车 恢复油电
+        /// </summary>
+        /// <returns></returns>
+        public const byte JT808_0x8105_0x65= 0x65;
+        /// <summary>
+        ///  设防
+        /// </summary>
+        public const byte JT808_0x8105_0xA0 = 0xA0;
+        /// <summary>
+        /// 撤防
+        /// </summary>
+        public const byte JT808_0x8105_0xA1 = 0xA1;
         public static Assembly GetCurrentAssembly()
         {
             return Assembly.GetExecutingAssembly();
