@@ -44,7 +44,7 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             value.AttachInfoLength = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             var version = reader.ReadVirtualArray(value.AttachInfoLength);
-            writer.WriteString($"[{version.ToArray().ToHexString()}]版本号", reader.ReadRemainStringContent());
+            writer.WriteString($"[{version.ToArray().ToHexString()}]版本号", reader.ReadString(value.AttachInfoLength));
         }
         /// <summary>
         /// 
@@ -57,7 +57,7 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             JT808_0x0200_0xe2 value = new JT808_0x0200_0xe2();
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
-            value.Version = reader.ReadRemainStringContent();
+            value.Version = reader.ReadString(value.AttachInfoLength);
             return value;
         }
         /// <summary>

@@ -376,6 +376,11 @@
             <param name="value"></param>
             <param name="config"></param>
         </member>
+        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.WifiInfo.WifiMac">
+            <summary>
+            wifimac
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.WifiInfo.SingnalStrength">
             <summary>
             信号轻度

@@ -45,7 +45,7 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             writer.WriteNumber($"[{reader.ReadContent(value.AttachInfoLength).ToArray().ToHexString()}]湿度列表", value.AttachInfoLength / 2);
             writer.WriteStartArray();
-            while (reader.ReadCurrentRemainContentLength() > 0) { 
+            for (int i = 0; i < value.AttachInfoLength / 2; i++) { 
                 writer.WriteNumber($"[{reader.ReadUInt16().ReadNumber()}]附加信息长度", reader.ReadUInt16());
             }
             writer.WriteStartArray();
@@ -63,7 +63,7 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
             value.Humiditys = new List<ushort>();
-            while (reader.ReadCurrentRemainContentLength() > 0)
+            for (int i = 0; i < value.AttachInfoLength/2; i++)
             {
                 value.Humiditys.Add(reader.ReadUInt16());
             }

@@ -22,7 +22,6 @@ namespace JT808.Protocol.Extensions.GPS51.Test
         [Fact]
         public void Serializer()
         {
-#warning ”–Œ Ã‚
             JT808_0x0200 jT808UploadLocationRequest = new JT808_0x0200
             {
                 AlarmFlag = 1,

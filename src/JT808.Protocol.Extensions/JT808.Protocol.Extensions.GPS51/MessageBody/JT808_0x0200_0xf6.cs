@@ -44,7 +44,7 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             value.AttachInfoLength = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             var imei = reader.ReadVirtualArray(value.AttachInfoLength);
-            writer.WriteString($"[{imei.ToArray().ToHexString()}]IMEI", reader.ReadRemainStringContent());
+            writer.WriteString($"[{imei.ToArray().ToHexString()}]IMEI", reader.ReadString(value.AttachInfoLength));
         }
         /// <summary>
         /// 
@@ -57,7 +57,7 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             JT808_0x0200_0xf6 value = new JT808_0x0200_0xf6();
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
-            value.IMEI = reader.ReadRemainStringContent();
+            value.IMEI = reader.ReadString(value.AttachInfoLength);
             return value;
         }
         /// <summary>

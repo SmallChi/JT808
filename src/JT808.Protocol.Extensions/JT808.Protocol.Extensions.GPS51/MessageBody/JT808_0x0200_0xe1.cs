@@ -48,21 +48,27 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             value.AttachInfoId = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoId.ReadNumber()}]附加信息Id", value.AttachInfoId);
             value.AttachInfoLength = reader.ReadByte();
+            int length = value.AttachInfoLength;
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             value.MCC = reader.ReadUInt16();
+            length = length - 2;
             writer.WriteNumber($"[{value.MCC.ReadNumber()}]国家编码", value.MCC);
             value.MNC=reader.ReadUInt16();
+            length = length - 2;
             writer.WriteNumber($"[{value.MNC.ReadNumber()}]网络编码", value.MNC);
             writer.WriteStartArray("地区编码列表");
-            while (reader.ReadCurrentRemainContentLength() > 0)
+            while (length > 0)
             {
                 var LAC = reader.ReadUInt16();
+                length = length - 2;
                 writer.WriteNumber($"[{LAC.ReadNumber()}]地区编码", LAC);            
                 var CI = reader.ReadUInt32();
+                length = length - 4;
                 writer.WriteNumber($"[{CI.ReadNumber()}]蜂窝 ID", CI);
-                if (reader.ReadCurrentRemainContentLength() > 0)
+                if (length > 0)
                 {
                     var Signal = reader.ReadByte();
+                    length = length - 1;
                     writer.WriteNumber($"[{Signal.ReadNumber()}]信号强度", Signal);
                 }
             }
@@ -80,17 +86,23 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             JT808_0x0200_0xe1 value = new JT808_0x0200_0xe1();
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
-            if (value.AttachInfoLength > 0) {
+            int length = value.AttachInfoLength;
+            if (length > 0) {
                 value.MCC = reader.ReadUInt16();
+                length= length - 2;
                 value.MNC = reader.ReadUInt16();
+                length = length - 2;
                 value.BaseStations = new List<BaseStation>();
-                while (reader.ReadCurrentRemainContentLength()> 0)
+                while (length > 0)
                 {
                     BaseStation baseStation = new BaseStation();
                     baseStation.LAC = reader.ReadUInt16();
+                    length = length - 2;
                     baseStation.CI = reader.ReadUInt32();
-                    if (reader.ReadCurrentRemainContentLength() > 0) {
+                    length = length - 4;
+                    if (length > 0) {
                         baseStation.Signal=reader.ReadByte();
+                        length = length - 1;
                     }
                     value.BaseStations.Add(baseStation);
                 }

@@ -48,12 +48,18 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             value.AttachInfoLength = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             value.Count = reader.ReadByte();
+            writer.WriteNumber($"[{value.Count.ReadNumber()}]Wifi数量", value.Count);
+            writer.WriteStartArray();
             for (int i = 0; i < value.Count; i++)
             {
-
-                // writer.WriteString($"[{value.Direction.ReadNumber()}]正反转", "未知");
-
+                writer.WriteStartObject();
+                var wifimac = reader.ReadArray(6).ToArray().ToHexString();
+                writer.WriteString($"[{wifimac}]WifiMac", wifimac);
+                var signalstrength = reader.ReadByte();
+                writer.WriteNumber($"[{signalstrength.ReadNumber()}]信号强度", signalstrength);
+                writer.WriteEndObject();
             }
+            writer.WriteEndArray();
         }
         /// <summary>
         /// 
@@ -67,11 +73,14 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
             value.Count = reader.ReadByte();
+            value.WifiInfos = new List<WifiInfo>();
             for (int i = 0; i < value.Count; i++)
             {
-
-                // 
-
+                value.WifiInfos.Add(new WifiInfo
+                {
+                    WifiMac = reader.ReadArray(6).ToArray().ToHexString(),
+                    SingnalStrength = reader.ReadByte()
+                });
             }
             return value;
         }
@@ -84,17 +93,21 @@ namespace JT808.Protocol.Extensions.GPS51.MessageBody
         public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0200_0x54 value, IJT808Config config)
         {
             writer.WriteByte(value.AttachInfoId);
-            writer.WriteByte(1);
+            writer.Skip(1,out int position);
             writer.WriteByte((byte)value.WifiInfos.Count);
             foreach (var wifi in value.WifiInfos)
             {
-
+                writer.WriteArray(wifi.WifiMac.ToHexBytes());
+                writer.WriteByte(wifi.SingnalStrength);
             }
         }
     }
 
     public class WifiInfo {
-
+        /// <summary>
+        /// wifimac
+        /// </summary>
+        public string WifiMac { get; set; }
         /// <summary>
         /// 信号轻度
         /// </summary>
