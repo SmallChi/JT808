@@ -33,3 +33,7 @@ jobs:
       run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.YueBiao.Test/JT808.Protocol.Extensions.YueBiao.Test.csproj
     - name: dotnet jt808_yuebiao test
       run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.YueBiao.Test/JT808.Protocol.Extensions.YueBiao.Test.csproj
+    - name: dotnet gps51 build
+      run: dotnet build ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.GPS51.Test/JT808.Protocol.Extensions.GPS51.Test.csproj
+    - name: dotnet gps51 test
+      run: dotnet test ./src/JT808.Protocol.Extensions/JT808.Protocol.Extensions.GPS51.Test/JT808.Protocol.Extensions.GPS51.Test.csproj
