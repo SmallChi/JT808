@@ -22,7 +22,7 @@ namespace JT808.Protocol
         public static IJT808Builder AddJT808Configure(this IServiceCollection services, IJT808Config jT808Config)
         {
             services.AddSingleton(jT808Config.GetType(), jT808Config);
-            return new DefaultBuilder(services,jT808Config);
+            return new DefaultBuilder(services, jT808Config);
         }
         /// <summary>
         /// 注册808配置
@@ -41,9 +41,10 @@ namespace JT808.Protocol
         /// <typeparam name="TJT808Config"></typeparam>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IJT808Builder AddJT808Configure<TJT808Config>(this IServiceCollection services)where TJT808Config : IJT808Config,new()
+        public static IJT808Builder AddJT808Configure<TJT808Config>(this IServiceCollection services, Action<TJT808Config> options = null) where TJT808Config : IJT808Config, new()
         {
             var config = new TJT808Config();
+            options?.Invoke(config);
             services.AddSingleton(typeof(TJT808Config), config);
             return new DefaultBuilder(services, config);
         }
@@ -52,10 +53,12 @@ namespace JT808.Protocol
         /// </summary>
         /// <typeparam name="TJT808Config"></typeparam>
         /// <param name="builder"></param>
+        /// <param name="options"></param>
         /// <returns></returns>
-        public static IJT808Builder AddJT808Configure<TJT808Config>(this IJT808Builder builder) where TJT808Config : IJT808Config, new()
+        public static IJT808Builder AddJT808Configure<TJT808Config>(this IJT808Builder builder, Action<TJT808Config> options = null) where TJT808Config : IJT808Config, new()
         {
             var config = new TJT808Config();
+            options?.Invoke(config);
             builder.Services.AddSingleton(typeof(TJT808Config), config);
             return builder;
         }
@@ -63,12 +66,14 @@ namespace JT808.Protocol
         /// 注册808配置
         /// </summary>
         /// <param name="services"></param>
+        /// <param name="options"></param>
         /// <returns></returns>
-        public static IJT808Builder AddJT808Configure(this IServiceCollection services)
+        public static IJT808Builder AddJT808Configure(this IServiceCollection services, Action<IJT808Config> options = null)
         {
             DefaultGlobalConfig config = new DefaultGlobalConfig();
+            options?.Invoke(config);
             services.AddSingleton<IJT808Config>(config);
-            return new DefaultBuilder(services,config);
+            return new DefaultBuilder(services, config);
         }
     }
 }

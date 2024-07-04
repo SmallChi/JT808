@@ -37,7 +37,7 @@
             <param name="jT808Config"></param>
             <returns></returns>
         </member>
-        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{``0})">
             <summary>
             注册808配置
             </summary>
@@ -45,19 +45,21 @@
             <param name="services"></param>
             <returns></returns>
         </member>
-        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure``1(JT808.Protocol.IJT808Builder)">
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure``1(JT808.Protocol.IJT808Builder,System.Action{``0})">
             <summary>
             注册808配置
             </summary>
             <typeparam name="TJT808Config"></typeparam>
             <param name="builder"></param>
+            <param name="options"></param>
             <returns></returns>
         </member>
-        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+        <member name="M:JT808.Protocol.DependencyInjectionExtensions.AddJT808Configure(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{JT808.Protocol.IJT808Config})">
             <summary>
             注册808配置
             </summary>
             <param name="services"></param>
+            <param name="options"></param>
             <returns></returns>
         </member>
         <member name="T:JT808.Protocol.Enums.JT808Alarm">
