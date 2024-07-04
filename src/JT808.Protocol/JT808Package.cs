@@ -166,6 +166,7 @@ namespace JT808.Protocol
             writer.WriteStart();
             // 2.写入头部 //部分有带数据体的长度，那么先跳过写入头部部分
             //  2.1.消息ID
+            if (value.Header.MsgId == default) value.Header.MsgId = value.Bodies.MsgId;
             writer.WriteUInt16(value.Header.MsgId);
             //  2.2.消息体属性(包含消息体长度所以先跳过)
             writer.Skip(2, out int msgBodiesPropertyPosition);
