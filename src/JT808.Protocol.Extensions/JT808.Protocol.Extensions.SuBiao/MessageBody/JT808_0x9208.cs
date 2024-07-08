@@ -10,7 +10,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
     /// <summary>
     /// 报警附件上传指令
     /// </summary>
-    public class JT808_0x9208: JT808MessagePackFormatter<JT808_0x9208>, JT808Bodies,  IJT808Analyze
+    public class JT808_0x9208 : JT808MessagePackFormatter<JT808_0x9208>, JT808Bodies, IJT808Analyze
     {
         /// <summary>
         /// Description
@@ -131,13 +131,13 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             {
                 throw new NullReferenceException($"{nameof(AlarmIdentificationProperty)}不为空");
             }
-            writer.WriteString(value.AlarmIdentification.TerminalID);
+            writer.WriteString(value.AlarmIdentification.TerminalID.PadLeft(7, '\0'));
             writer.WriteDateTime_yyMMddHHmmss(value.AlarmIdentification.Time);
             writer.WriteByte(value.AlarmIdentification.SN);
             writer.WriteByte(value.AlarmIdentification.AttachCount);
             writer.WriteByte(value.AlarmIdentification.Retain);
-            writer.WriteString(value.AlarmId);
-            writer.WriteArray(value.Retain);
+            writer.WriteString(value.AlarmId.PadRight(32, '\0'));
+            writer.WriteArray(Retain);
         }
     }
 }
