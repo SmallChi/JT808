@@ -425,6 +425,18 @@
             存储器故障报警状态
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.StorageFault">
+            <summary>
+            存储器故障集合
+            <para>表示第 1 ~ 12 个主存储器</para>
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.DisasterFault">
+            <summary>
+            灾备存储故障集合
+            <para>表示第 1 ~ 4 个灾备存储装置</para>
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
             <summary>
             
@@ -448,6 +460,34 @@
             <param name="writer"></param>
             <param name="value"></param>
             <param name="config"></param>
+        </member>
+        <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem">
+            <summary>
+            故障信息
+            </summary>
+            <param name="Index">存储器索引，表示第几个存储器，从1开始</param>
+            <param name="Fault">是否存在故障</param>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem.#ctor(System.Int32,System.Boolean)">
+            <summary>
+            故障信息
+            </summary>
+            <param name="Index">存储器索引，表示第几个存储器，从1开始</param>
+            <param name="Fault">是否存在故障</param>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem.Index">
+            <summary>存储器索引，表示第几个存储器，从1开始</summary>
+        </member>
+        <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem.Fault">
+            <summary>是否存在故障</summary>
+        </member>
+        <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem.Parse(System.UInt16,System.Collections.Generic.List{JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem}@,System.Collections.Generic.List{JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem}@)">
+            <summary>
+            解析故障信息
+            </summary>
+            <param name="value"></param>
+            <param name="storageFault"></param>
+            <param name="disasterFault"></param>
         </member>
         <member name="T:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x18">
             <summary>

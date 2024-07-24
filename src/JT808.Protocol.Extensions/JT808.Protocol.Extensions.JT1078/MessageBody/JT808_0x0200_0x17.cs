@@ -11,7 +11,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
     /// 存储器故障报警状态
     /// 0x0200_0x17
     /// </summary>
-    public class JT808_0x0200_0x17 : JT808MessagePackFormatter<JT808_0x0200_0x17>, JT808_0x0200_CustomBodyBase,  IJT808Analyze
+    public class JT808_0x0200_0x17 : JT808MessagePackFormatter<JT808_0x0200_0x17>, JT808_0x0200_CustomBodyBase, IJT808Analyze
     {
         /// <summary>
         /// 
@@ -24,7 +24,20 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <summary>
         /// 存储器故障报警状态
         /// </summary>
-        public ushort StorageFaultAlarmStatus{ get; set; }
+        public ushort StorageFaultAlarmStatus { get; set; }
+
+        /// <summary>
+        /// 存储器故障集合
+        /// <para>表示第 1 ~ 12 个主存储器</para>
+        /// </summary>
+        public List<FaultItem> StorageFault { get; set; } = new();
+
+        /// <summary>
+        /// 灾备存储故障集合
+        /// <para>表示第 1 ~ 4 个灾备存储装置</para>
+        /// </summary>
+        public List<FaultItem> DisasterFault { get; set; } = new();
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,35 +53,13 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
             value.StorageFaultAlarmStatus = reader.ReadUInt16();
             writer.WriteNumber($"[{value.StorageFaultAlarmStatus.ReadNumber()}]存储器故障报警状态", value.StorageFaultAlarmStatus);
+
+
             var storageFaultAlarmStatusSpan = Convert.ToString(value.StorageFaultAlarmStatus, 2).PadLeft(16, '0').AsSpan();
             writer.WriteStartArray("存储器故障报警状态集合");
-            int index = 0;
-            foreach (var item in storageFaultAlarmStatusSpan)
-            {
-                if (index < 4)
-                {
-                    if (item == '1')
-                    {
-                        writer.WriteStringValue($"{index}灾备存储装置故障");
-                    }
-                    else
-                    {
-                        writer.WriteStringValue($"{index}灾备存储装置正常");
-                    }
-                }
-                else
-                {
-                    if (item == '1')
-                    {
-                        writer.WriteStringValue($"{index}主存储器故障");
-                    }
-                    else
-                    {
-                        writer.WriteStringValue($"{index}主存储器正常");
-                    }
-                }
-                index++;
-            }
+            FaultItem.Parse(value.StorageFaultAlarmStatus, out var storageFault, out var disasterFault);
+            storageFault.ForEach(x => writer.WriteStringValue($"{x.Index}主存储器{(x.Fault ? "故障" : "正常")}"));
+            disasterFault.ForEach(x => writer.WriteStringValue($"{x.Index}灾备存储装置{(x.Fault ? "故障" : "正常")}"));
             writer.WriteEndArray();
         }
         /// <summary>
@@ -83,6 +74,9 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
             value.StorageFaultAlarmStatus = reader.ReadUInt16();
+            FaultItem.Parse(value.StorageFaultAlarmStatus, out var storageFault, out var disasterFault);
+            value.StorageFault = storageFault;
+            value.DisasterFault = disasterFault;
             return value;
         }
         /// <summary>
@@ -96,6 +90,33 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);
             writer.WriteUInt16(value.StorageFaultAlarmStatus);
+        }
+
+        /// <summary>
+        /// 故障信息
+        /// </summary>
+        /// <param name="Index">存储器索引，表示第几个存储器，从1开始</param>
+        /// <param name="Fault">是否存在故障</param>
+        public record FaultItem(int Index, bool Fault)
+        {
+            /// <summary>
+            /// 解析故障信息
+            /// </summary>
+            /// <param name="value"></param>
+            /// <param name="storageFault"></param>
+            /// <param name="disasterFault"></param>
+            public static void Parse(ushort value, out List<FaultItem> storageFault, out List<FaultItem> disasterFault)
+            {
+                disasterFault = storageFault = [];
+                for (int i = 0; i < 12; i++)
+                {
+                    storageFault.Add(new(i + 1, ((value >> i) & 1) > 0));
+                }
+                for (int i = 12; i < 16; i++)
+                {
+                    disasterFault.Add(new(i + 1, ((value >> i) & 1) > 0));
+                }
+            }
         }
     }
 }
