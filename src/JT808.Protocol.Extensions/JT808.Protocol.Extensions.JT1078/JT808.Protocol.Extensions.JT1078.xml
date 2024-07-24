@@ -465,21 +465,25 @@
             <summary>
             故障信息
             </summary>
-            <param name="Index">存储器索引，表示第几个存储器，从1开始</param>
-            <param name="Fault">是否存在故障</param>
+            <param name="index">存储器索引，表示第几个存储器，从1开始</param>
+            <param name="fault">是否存在故障</param>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem.#ctor(System.Int32,System.Boolean)">
             <summary>
             故障信息
             </summary>
-            <param name="Index">存储器索引，表示第几个存储器，从1开始</param>
-            <param name="Fault">是否存在故障</param>
+            <param name="index">存储器索引，表示第几个存储器，从1开始</param>
+            <param name="fault">是否存在故障</param>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem.Index">
-            <summary>存储器索引，表示第几个存储器，从1开始</summary>
+            <summary>
+            存储器索引，表示第几个存储器，从1开始
+            </summary>
         </member>
         <member name="P:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem.Fault">
-            <summary>是否存在故障</summary>
+            <summary>
+            是否存在故障
+            </summary>
         </member>
         <member name="M:JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem.Parse(System.UInt16,System.Collections.Generic.List{JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem}@,System.Collections.Generic.List{JT808.Protocol.Extensions.JT1078.MessageBody.JT808_0x0200_0x17.FaultItem}@)">
             <summary>

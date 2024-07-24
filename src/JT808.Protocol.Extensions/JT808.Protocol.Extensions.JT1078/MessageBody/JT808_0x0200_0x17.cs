@@ -95,10 +95,19 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
         /// <summary>
         /// 故障信息
         /// </summary>
-        /// <param name="Index">存储器索引，表示第几个存储器，从1开始</param>
-        /// <param name="Fault">是否存在故障</param>
-        public record FaultItem(int Index, bool Fault)
+        /// <param name="index">存储器索引，表示第几个存储器，从1开始</param>
+        /// <param name="fault">是否存在故障</param>
+        public class FaultItem(int index, bool fault)
         {
+
+            /// <summary>
+            /// 存储器索引，表示第几个存储器，从1开始
+            /// </summary>
+            public int Index { get; set; } = index;
+            /// <summary>
+            /// 是否存在故障
+            /// </summary>
+            public bool Fault { get; set; } = fault;
             /// <summary>
             /// 解析故障信息
             /// </summary>
