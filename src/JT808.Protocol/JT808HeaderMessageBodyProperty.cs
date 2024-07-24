@@ -91,6 +91,10 @@ namespace JT808.Protocol
         /// </summary>
         public bool IsPackage { get; set; } = false;
         /// <summary>
+        /// 当<see cref="IsPackage"/>为true时，表示是否已自动合并为完整的包
+        /// </summary>
+        public bool IsMerged { get; set; }
+        /// <summary>
         /// 加密标识，0为不加密
         /// 当此三位都为 0，表示消息体不加密；
         /// 当第 10 位为 1，表示消息体经过 RSA 算法加密；

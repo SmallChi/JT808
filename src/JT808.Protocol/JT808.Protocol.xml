@@ -6089,6 +6089,11 @@
              false-0 消息头中无消息包封装项字段。
             </summary>
         </member>
+        <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.IsMerged">
+            <summary>
+            当<see cref="P:JT808.Protocol.JT808HeaderMessageBodyProperty.IsPackage"/>为true时，表示是否已自动合并为完整的包
+            </summary>
+        </member>
         <member name="P:JT808.Protocol.JT808HeaderMessageBodyProperty.Encrypt">
             <summary>
             加密标识，0为不加密

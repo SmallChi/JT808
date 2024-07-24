@@ -137,7 +137,7 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             writer.WriteByte(value.AlarmIdentification.AttachCount);
             writer.WriteByte(value.AlarmIdentification.Retain);
             writer.WriteString(value.AlarmId.PadRight(32, '\0'));
-            writer.WriteArray(Retain);
+            writer.WriteArray(value.Retain);
         }
     }
 }

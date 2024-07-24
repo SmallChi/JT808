@@ -41,7 +41,6 @@ namespace JT808.Protocol.Internal
         /// <inheritdoc/>
         public bool TryMerge(JT808Header header, byte[] data, IJT808Config config, out JT808Bodies body)
         {
-            // TODO: 添加SplitPackages缓存超时，达到阈值时移除该项缓存
             body = null;
             var timeoutKey = GenerateKey(header.TerminalPhoneNo, header.MsgId);
             if (!CheckTimeout(timeoutKey)) return false;
@@ -65,6 +64,7 @@ namespace JT808.Protocol.Internal
                     if (config.MsgIdFactory.TryGetValue(header.MsgId, out var value) && value is JT808Bodies instance)
                     {
                         body = instance.DeserializeExt<JT808Bodies>(ref reader, config);
+                        header.MessageBodyProperty.IsMerged = true;
                         return true;
                     }
                 }

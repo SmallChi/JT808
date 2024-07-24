@@ -52,7 +52,7 @@ namespace JT808.Protocol.Test
         {
             var config = new DefaultGlobalConfig("merge");
             config.EnableAutoMerge = true;
-            config.AutoMergeTimeoutSecond = 5;
+            config.AutoMergeTimeoutSecond = 500;
             var array = new[]
             {
                 //分包数据第一包
@@ -67,6 +67,7 @@ namespace JT808.Protocol.Test
                 var package = config.GetSerializer().Deserialize(array[i - 1].ToHexBytes());
                 if (i == array.Length)
                 {
+                    Assert.True(package.Header.MessageBodyProperty.IsMerged);
                     Assert.NotNull(package.Bodies);
                     //分包合并成功并获取消息体进行处理
                     if (package.Bodies is JT808_0x0104 _0x0104 && _0x0104.AnswerParamsCount > 0)
@@ -86,6 +87,7 @@ namespace JT808.Protocol.Test
                 var package = config.GetSerializer().Deserialize(array[i].ToHexBytes());
                 if (i == 0)
                 {
+                    Assert.True(package.Header.MessageBodyProperty.IsMerged);
                     Assert.NotNull(package.Bodies);
                     //分包合并成功并获取消息体进行处理
                     if (package.Bodies is JT808_0x0104 _0x0104 && _0x0104.AnswerParamsCount > 0)
