@@ -52,7 +52,7 @@ namespace JT808.Protocol.Test
         {
             var config = new DefaultGlobalConfig("merge");
             config.EnableAutoMerge = true;
-            config.AutoMergeTimeoutSecond = 500;
+            config.AutoMergeTimeoutSecond = 5;
             var array = new[]
             {
                 //分包数据第一包
