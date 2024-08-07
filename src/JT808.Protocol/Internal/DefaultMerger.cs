@@ -44,7 +44,9 @@ namespace JT808.Protocol.Internal
             body = null;
             var timeoutKey = GenerateKey(header.TerminalPhoneNo, header.MsgId);
             if (!CheckTimeout(timeoutKey)) return false;
-            timeoutDictionary.TryAdd(timeoutKey, DateTime.Now.AddSeconds(config.AutoMergeTimeoutSecond));
+            var timeout = DateTime.Now.AddSeconds(config.AutoMergeTimeoutSecond);
+            if (timeoutDictionary.TryAdd(timeoutKey, timeout))
+                timeoutDictionary.TryUpdate(timeoutKey, timeout, timeout);
             if (splitPackageDictionary.TryGetValue(header.TerminalPhoneNo, out var item) && item.TryGetValue(header.MsgId, out var packages))
             {
                 packages.Add((header.PackageIndex, data));
