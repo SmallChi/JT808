@@ -67,7 +67,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(0, JT808Bodies.JT808_0x0200.Direction);
             Assert.Equal(60, JT808Bodies.JT808_0x0200.Speed);
             Assert.Equal((uint)2, JT808Bodies.JT808_0x0200.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)JT808Bodies.JT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)JT808Bodies.JT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)JT808Bodies.JT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
         }
 

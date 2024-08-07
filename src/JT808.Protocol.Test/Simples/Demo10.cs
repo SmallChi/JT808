@@ -103,7 +103,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal(2u, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
             var jT808LocationAttachImpl0XDF = (JT808LocationAttachImpl0xDF)jT808UploadLocationRequest.CustomLocationAttachData[0xDF];
             Assert.Equal(0xDF, jT808LocationAttachImpl0XDF.AttachInfoId);
@@ -167,7 +167,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal(2u, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
             var jT808LocationAttachImpl0XDD = (JT808LocationAttachImpl0xDD)jT808UploadLocationRequest.CustomLocationAttachData3[0xDD];
             Assert.Equal(0xDD, jT808LocationAttachImpl0XDD.AttachInfoId);
@@ -231,7 +231,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal(2u, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
             var jT808LocationAttachImpl0XDE = (JT808LocationAttachImpl0xDE)jT808UploadLocationRequest.CustomLocationAttachData2[0xDE];
             Assert.Equal(0xDE, jT808LocationAttachImpl0XDE.AttachInfoId);
@@ -295,7 +295,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal(2u, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
             var jT808LocationAttachImpl0X62 = (JT808LocationAttachImpl0x62)jT808UploadLocationRequest.CustomLocationAttachData4[0x62];
             Assert.Equal(0x62, jT808LocationAttachImpl0X62.AttachInfoId);
@@ -380,7 +380,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal(2u, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
 
             var jT808LocationAttachImpl0X62 = (JT808LocationAttachImpl0x62)jT808UploadLocationRequest.CustomLocationAttachData4[0x62];
@@ -475,7 +475,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal(2u, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
 
             var jT808LocationAttachImpl0XDF = (JT808LocationAttachImpl0xDF)jT808UploadLocationRequest.CustomLocationAttachData[0xDF];

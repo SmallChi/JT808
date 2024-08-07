@@ -50,7 +50,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal(0, jT808_0x0200.Direction);
             Assert.Equal((uint)2, jT808_0x0200.StatusFlag);
             //4.1.附加信息1
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             //4.2.附加信息2
             Assert.Equal(125, ((JT808_0x0200_0x02)jT808_0x0200.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
         }

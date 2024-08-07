@@ -23,7 +23,7 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 里程
         /// </summary>
-        public int Mileage { get; set; }
+        public uint Mileage { get; set; }
         /// <summary>
         /// 里程 1/10km，对应车上里程表读数
         /// </summary>
@@ -42,7 +42,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteNumber($"[{value.AttachInfoId.ReadNumber()}]附加信息Id", value.AttachInfoId);
             value.AttachInfoLength = reader.ReadByte();
             writer.WriteNumber($"[{value.AttachInfoLength.ReadNumber()}]附加信息长度", value.AttachInfoLength);
-            value.Mileage = reader.ReadInt32();
+            value.Mileage = reader.ReadUInt32();
             writer.WriteNumber($"[{value.Mileage.ReadNumber()}]里程", value.Mileage);
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x0200_0x01 value = new JT808_0x0200_0x01();
             value.AttachInfoId = reader.ReadByte();
             value.AttachInfoLength = reader.ReadByte();
-            value.Mileage = reader.ReadInt32();
+            value.Mileage = reader.ReadUInt32();
             return value;
         }
         /// <summary>
@@ -69,7 +69,7 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteByte(value.AttachInfoId);
             writer.WriteByte(value.AttachInfoLength);
-            writer.WriteInt32(value.Mileage);
+            writer.WriteUInt32(value.Mileage);
         }
     }
 }

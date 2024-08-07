@@ -143,7 +143,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(0, JT808Bodies.Positions[0].Direction);
             Assert.Equal(60, JT808Bodies.Positions[0].Speed);
             Assert.Equal((uint)2, JT808Bodies.Positions[0].StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)JT808Bodies.Positions[0].BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)JT808Bodies.Positions[0].BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)JT808Bodies.Positions[0].BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
 
             Assert.Equal((uint)2, JT808Bodies.Positions[1].AlarmFlag);
@@ -153,7 +153,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(54, JT808Bodies.Positions[1].Speed);
             Assert.Equal(120, JT808Bodies.Positions[1].Direction);
             Assert.Equal((uint)1, JT808Bodies.Positions[1].StatusFlag);
-            Assert.Equal(96, ((JT808_0x0200_0x01)JT808Bodies.Positions[1].BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(96u, ((JT808_0x0200_0x01)JT808Bodies.Positions[1].BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(66, ((JT808_0x0200_0x02)JT808Bodies.Positions[1].BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
         }
 

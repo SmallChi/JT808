@@ -140,7 +140,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
         }
 
@@ -215,7 +215,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
             var jT808LocationAttachImpl0x61 = (JT808LocationAttachImpl0x61)jT808UploadLocationRequest.CustomLocationAttachData[0x61];
             Assert.Equal(18, jT808LocationAttachImpl0x61.Age);
@@ -307,7 +307,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
             Assert.Equal(60, jT808UploadLocationRequest.Speed);
             Assert.Equal((uint)2, jT808UploadLocationRequest.StatusFlag);
-            Assert.Equal(100, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
+            Assert.Equal(100u, ((JT808_0x0200_0x01)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x01]).Mileage);
             Assert.Equal(55, ((JT808_0x0200_0x02)jT808UploadLocationRequest.BasicLocationAttachData[JT808Constants.JT808_0x0200_0x02]).Oil);
         }
         [Fact]
