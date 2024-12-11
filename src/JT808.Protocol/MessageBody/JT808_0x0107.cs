@@ -39,8 +39,7 @@ namespace JT808.Protocol.MessageBody
         public ushort TerminalType { get; set; }
         /// <summary>
         /// 制造商 ID
-        /// 2013版本 5 个字节，终端制造商编码
-        /// 2019版本 11 个字节，终端制造商编码
+        /// 2013版本 5 个字节，终端制造商编码 
         /// </summary>
         public string MakerId { get; set; }
         /// <summary>
@@ -107,18 +106,9 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x0107 jT808_0X0107 = new JT808_0x0107();
             jT808_0X0107.TerminalType = reader.ReadUInt16();
-            if(reader.Version== JT808Version.JTT2019)
-            {
-                jT808_0X0107.MakerId = reader.ReadString(11);
-                jT808_0X0107.TerminalModel = reader.ReadString(30);
-                jT808_0X0107.TerminalId = reader.ReadString(30);
-            }
-            else
-            {
-                jT808_0X0107.MakerId = reader.ReadString(5);
-                jT808_0X0107.TerminalModel = reader.ReadString(20);
-                jT808_0X0107.TerminalId = reader.ReadString(7);
-            }
+            jT808_0X0107.MakerId = reader.ReadString(5);
+            jT808_0X0107.TerminalModel = reader.ReadString(20);
+            jT808_0X0107.TerminalId = reader.ReadString(7);
             jT808_0X0107.Terminal_SIM_ICCID = reader.ReadBCD(20, config.Trim);
             jT808_0X0107.Terminal_Hardware_Version_Length = reader.ReadByte();
             jT808_0X0107.Terminal_Hardware_Version_Num = reader.ReadString(jT808_0X0107.Terminal_Hardware_Version_Length);
@@ -137,18 +127,9 @@ namespace JT808.Protocol.MessageBody
         public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0107 value, IJT808Config config)
         {
             writer.WriteUInt16(value.TerminalType);
-            if (writer.Version == JT808Version.JTT2019)
-            {
-                writer.WriteString(value.MakerId.PadRight(11, '\0').ValiString(nameof(value.MakerId),11));
-                writer.WriteString(value.TerminalModel.PadRight(30, '\0').ValiString(nameof(value.TerminalModel), 30));
-                writer.WriteString(value.TerminalId.PadRight(30, '\0').ValiString(nameof(value.TerminalId), 30));
-            }
-            else
-            {
-                writer.WriteString(value.MakerId.PadRight(5, '\0').ValiString(nameof(value.MakerId), 5));
-                writer.WriteString(value.TerminalModel.PadRight(20, '\0').ValiString(nameof(value.TerminalModel), 20));
-                writer.WriteString(value.TerminalId.PadRight(7, '\0').ValiString(nameof(value.TerminalId), 7));
-            }
+            writer.WriteString(value.MakerId.PadRight(5, '\0').ValiString(nameof(value.MakerId), 5));
+            writer.WriteString(value.TerminalModel.PadRight(20, '\0').ValiString(nameof(value.TerminalModel), 20));
+            writer.WriteString(value.TerminalId.PadRight(7, '\0').ValiString(nameof(value.TerminalId), 7));
             writer.WriteBCD(value.Terminal_SIM_ICCID.ValiString(nameof(value.Terminal_SIM_ICCID), 20), 20);
             writer.WriteByte((byte)value.Terminal_Hardware_Version_Num.Length);
             writer.WriteString(value.Terminal_Hardware_Version_Num);
