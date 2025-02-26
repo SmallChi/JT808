@@ -19,13 +19,13 @@ jobs:
         dotnet-version: '9.0.100'
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore src/JT808.Protocol.sln
 
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore src/JT808.Protocol.sln
 
     - name: Pack NuGet package
-      run: dotnet pack --configuration Release --no-build --output ./output
+      run: dotnet pack --configuration Release --no-build --output ./output src/JT808.Protocol.sln
 
     - name: Publish to NuGet
       run: dotnet nuget push ./output/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
