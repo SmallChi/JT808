@@ -5433,7 +5433,7 @@
             JT808常量
             </summary>
         </member>
-        <member name="F:JT808.Protocol.JT808Constants.DateLimitYear">
+        <member name="P:JT808.Protocol.JT808Constants.DateLimitYear">
             <summary>
             日期限制于2000年
             </summary>

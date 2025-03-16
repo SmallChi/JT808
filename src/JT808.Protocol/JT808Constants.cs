@@ -17,7 +17,14 @@ namespace JT808.Protocol
         /// <summary>
         /// 日期限制于2000年
         /// </summary>
-        public const int DateLimitYear = 2000;
+        public static int DateLimitYear
+        {
+            get
+            {
+                var result = DateTime.Today.Year;
+                return result - result % 100;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -25,7 +32,7 @@ namespace JT808.Protocol
         /// <summary>
         /// 
         /// </summary>
-        public static Encoding Encoding { get;}
+        public static Encoding Encoding { get; }
         /// <summary>
         /// JT808_0x0200_0x01
         /// </summary>
@@ -222,7 +229,7 @@ namespace JT808.Protocol
         /// <summary>
         /// 电子围栏半径（非法位移阈值），单位为米
         /// </summary>
-        public const uint JT808_0x8103_0x0032 = 0x0032;        
+        public const uint JT808_0x8103_0x0032 = 0x0032;
         /// <summary>
         /// 监控平台电话号码
         /// </summary>
