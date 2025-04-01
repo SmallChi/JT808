@@ -192,11 +192,11 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             value.AlarmIdentification.SN = reader.ReadByte();
             value.AlarmIdentification.AttachCount = reader.ReadByte();
             value.AlarmIdentification.Retain = reader.ReadByte();
-            writer.WriteString($"[{terminalIDHex}]终端ID", value.AlarmIdentification.TerminalID);
-            writer.WriteString($"[{value.AlarmIdentification.Time.ToString("yyMMddHHmmss")}]日期时间", value.AlarmIdentification.Time.ToString("yyyy-MM-dd HH:mm:ss"));
-            writer.WriteNumber($"[{value.AlarmIdentification.SN.ReadNumber()}]序号", value.AlarmIdentification.SN);
-            writer.WriteNumber($"[{value.AlarmIdentification.AttachCount.ReadNumber()}]附件数量", value.AlarmIdentification.AttachCount);
-            writer.WriteNumber($"[{value.AlarmIdentification.Retain.ReadNumber()}]预留", value.AlarmIdentification.Retain);
+            writer.WriteString($"[{terminalIDHex}]报警标识号_终端ID", value.AlarmIdentification.TerminalID);
+            writer.WriteString($"[{value.AlarmIdentification.Time.ToString("yyMMddHHmmss")}]报警标识号_日期时间", value.AlarmIdentification.Time.ToString("yyyy-MM-dd HH:mm:ss"));
+            writer.WriteNumber($"[{value.AlarmIdentification.SN.ReadNumber()}]报警标识号_序号", value.AlarmIdentification.SN);
+            writer.WriteNumber($"[{value.AlarmIdentification.AttachCount.ReadNumber()}]报警标识号_附件数量", value.AlarmIdentification.AttachCount);
+            writer.WriteNumber($"[{value.AlarmIdentification.Retain.ReadNumber()}]报警标识号_预留", value.AlarmIdentification.Retain);
         }
         /// <summary>
         /// 

@@ -9443,7 +9443,8 @@
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.MakerId">
             <summary>
             制造商 ID
-            2013版本 5 个字节，终端制造商编码 
+            2013版本 5 个字节，终端制造商编码
+            2019版本 11 个字节，终端制造商编码
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0107.TerminalModel">

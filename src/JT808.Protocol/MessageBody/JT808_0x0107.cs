@@ -39,7 +39,8 @@ namespace JT808.Protocol.MessageBody
         public ushort TerminalType { get; set; }
         /// <summary>
         /// 制造商 ID
-        /// 2013版本 5 个字节，终端制造商编码 
+        /// 2013版本 5 个字节，终端制造商编码
+        /// 2019版本 11 个字节，终端制造商编码
         /// </summary>
         public string MakerId { get; set; }
         /// <summary>
@@ -106,14 +107,15 @@ namespace JT808.Protocol.MessageBody
         {
             JT808_0x0107 jT808_0X0107 = new JT808_0x0107();
             jT808_0X0107.TerminalType = reader.ReadUInt16();
-            jT808_0X0107.MakerId = reader.ReadString(5);
             if (reader.Version == JT808Version.JTT2019)
-            { 
+            {
+                jT808_0X0107.MakerId = reader.ReadString(11);
                 jT808_0X0107.TerminalModel = reader.ReadString(30);
                 jT808_0X0107.TerminalId = reader.ReadString(30);
             }
             else
-            { 
+            {
+                jT808_0X0107.MakerId = reader.ReadString(5);
                 jT808_0X0107.TerminalModel = reader.ReadString(20);
                 jT808_0X0107.TerminalId = reader.ReadString(7);
             }
@@ -135,14 +137,15 @@ namespace JT808.Protocol.MessageBody
         public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x0107 value, IJT808Config config)
         {
             writer.WriteUInt16(value.TerminalType);
-            writer.WriteString(value.MakerId.PadRight(5, '\0').ValiString(nameof(value.MakerId), 5));
             if (writer.Version == JT808Version.JTT2019)
-            { 
+            {
+                writer.WriteString(value.MakerId.PadRight(11, '\0').ValiString(nameof(value.MakerId), 11));
                 writer.WriteString(value.TerminalModel.PadRight(30, '\0').ValiString(nameof(value.TerminalModel), 30));
                 writer.WriteString(value.TerminalId.PadRight(30, '\0').ValiString(nameof(value.TerminalId), 30));
             }
             else
-            { 
+            {
+                writer.WriteString(value.MakerId.PadRight(5, '\0').ValiString(nameof(value.MakerId), 5));
                 writer.WriteString(value.TerminalModel.PadRight(20, '\0').ValiString(nameof(value.TerminalModel), 20));
                 writer.WriteString(value.TerminalId.PadRight(7, '\0').ValiString(nameof(value.TerminalId), 7));
             }
@@ -160,12 +163,12 @@ namespace JT808.Protocol.MessageBody
         /// <param name="reader"></param>
         /// <param name="writer"></param>
         /// <param name="config"></param>
-        public  void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
+        public void Analyze(ref JT808MessagePackReader reader, Utf8JsonWriter writer, IJT808Config config)
         {
             JT808_0x0107 jT808_0X0107 = new JT808_0x0107();
             jT808_0X0107.TerminalType = reader.ReadUInt16();
             writer.WriteNumber($"[{jT808_0X0107.TerminalType.ReadNumber()}]终端类型", jT808_0X0107.TerminalType);
-            ReadOnlySpan<char> terminalTypeBits =string.Join("", Convert.ToString(jT808_0X0107.TerminalType, 2).PadLeft(16, '0').Reverse()).AsSpan();
+            ReadOnlySpan<char> terminalTypeBits = string.Join("", Convert.ToString(jT808_0X0107.TerminalType, 2).PadLeft(16, '0').Reverse()).AsSpan();
             writer.WriteStartObject("终端类型");
             writer.WriteString("bit0", terminalTypeBits[0] == '0' ? "不适用客运车辆" : "适用客运车辆");
             writer.WriteString("bit1", terminalTypeBits[1] == '0' ? "不适用危险品车辆" : "适用危险品车辆");
@@ -178,11 +181,11 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString("bit8", terminalTypeBits[8] == '0' ? "不适用挂车" : "适用挂车");
             }
             writer.WriteEndObject();
-            ReadOnlySpan<byte> makerIdSpan = reader.ReadVirtualArray(5);
-            jT808_0X0107.MakerId = reader.ReadString(5);
-            writer.WriteString($"[{makerIdSpan.ToArray().ToHexString()}]制造商ID", jT808_0X0107.MakerId);
             if (reader.Version == JT808Version.JTT2019)
             {
+                ReadOnlySpan<byte> makerIdSpan = reader.ReadVirtualArray(11);
+                jT808_0X0107.MakerId = reader.ReadString(11);
+                writer.WriteString($"[{makerIdSpan.ToArray().ToHexString()}]制造商ID", jT808_0X0107.MakerId);
                 ReadOnlySpan<byte> terminalModelSpan = reader.ReadVirtualArray(30);
                 jT808_0X0107.TerminalModel = reader.ReadString(30);
                 writer.WriteString($"[{terminalModelSpan.ToArray().ToHexString()}]终端型号", jT808_0X0107.TerminalModel);
@@ -191,7 +194,10 @@ namespace JT808.Protocol.MessageBody
                 writer.WriteString($"[{terminalIdSpan.ToArray().ToHexString()}]终端ID", jT808_0X0107.TerminalId);
             }
             else
-            { 
+            {
+                ReadOnlySpan<byte> makerIdSpan = reader.ReadVirtualArray(5);
+                jT808_0X0107.MakerId = reader.ReadString(5);
+                writer.WriteString($"[{makerIdSpan.ToArray().ToHexString()}]制造商ID", jT808_0X0107.MakerId);
                 ReadOnlySpan<byte> terminalModelSpan = reader.ReadVirtualArray(20);
                 jT808_0X0107.TerminalModel = reader.ReadString(20);
                 writer.WriteString($"[{terminalModelSpan.ToArray().ToHexString()}]终端型号", jT808_0X0107.TerminalModel);
@@ -213,7 +219,7 @@ namespace JT808.Protocol.MessageBody
             jT808_0X0107.Terminal_Firmware_Version_Num = reader.ReadString(jT808_0X0107.Terminal_Firmware_Version_Length);
             writer.WriteString($"[{firmwareVersionNumSpan.ToArray().ToHexString()}]终端固件版本号", jT808_0X0107.Terminal_Firmware_Version_Num);
             jT808_0X0107.GNSSModule = reader.ReadByte();
-            ReadOnlySpan<char> gNSSModuleBits =string.Join("", Convert.ToString(jT808_0X0107.GNSSModule, 2).PadLeft(8,'0').Reverse()).AsSpan();
+            ReadOnlySpan<char> gNSSModuleBits = string.Join("", Convert.ToString(jT808_0X0107.GNSSModule, 2).PadLeft(8, '0').Reverse()).AsSpan();
             writer.WriteNumber($"[{jT808_0X0107.GNSSModule.ReadNumber()}]GNSS模块属性", jT808_0X0107.GNSSModule);
             writer.WriteStartObject("GNSS模块属性");
             writer.WriteString("bit0", gNSSModuleBits[0] == '0' ? "不支持GPS定位" : "支持GPS定位");
@@ -222,7 +228,7 @@ namespace JT808.Protocol.MessageBody
             writer.WriteString("bit3", gNSSModuleBits[3] == '0' ? "不支持Galileo定位" : "支持Galileo定位");
             writer.WriteEndObject();
             jT808_0X0107.CommunicationModule = reader.ReadByte();
-            ReadOnlySpan<char> communicationModuleBits=string.Join("",Convert.ToString(jT808_0X0107.CommunicationModule, 2).PadLeft(8, '0').Reverse()).AsSpan();
+            ReadOnlySpan<char> communicationModuleBits = string.Join("", Convert.ToString(jT808_0X0107.CommunicationModule, 2).PadLeft(8, '0').Reverse()).AsSpan();
             writer.WriteNumber($"[{jT808_0X0107.CommunicationModule.ReadNumber()}]通信模块属性", jT808_0X0107.CommunicationModule);
             writer.WriteStartObject("通信模块属性");
             writer.WriteString("bit0", communicationModuleBits[0] == '0' ? "不支持GPRS通信" : "支持GPRS通信");
