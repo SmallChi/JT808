@@ -691,6 +691,12 @@
             经纬度错误
             </summary>
         </member>
+        <member name="F:JT808.Protocol.Enums.JT808ErrorCode.MessageBodyLengthTooLong">
+            <summary>
+            消息体长度过长
+            0b_001111111111
+            </summary>
+        </member>
         <member name="T:JT808.Protocol.Enums.JT808EventItemCoding">
             <summary>
             事件项编码

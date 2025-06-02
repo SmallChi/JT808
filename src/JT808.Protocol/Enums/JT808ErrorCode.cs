@@ -42,6 +42,11 @@
         /// <summary>
         /// 经纬度错误
         /// </summary>
-        LatOrLngError = 1009
+        LatOrLngError = 1009,
+        /// <summary>
+        /// 消息体长度过长
+        /// 0b_001111111111
+        /// </summary>
+        MessageBodyLengthTooLong = 1010,
     }
 }

@@ -228,6 +228,10 @@ namespace JT808.Protocol
             //  3.1.处理数据体长度
             // 2.2.回写消息体属性
             value.Header.MessageBodyProperty.DataLength = (writer.GetCurrentPosition() - headerLength);
+            if (value.Header.MessageBodyProperty.DataLength > 0b_0011_1111_1111)
+            {
+                throw new JT808Exception(JT808ErrorCode.MessageBodyLengthTooLong, $"消息体长度不能超过1023字节,当前:{value.Header.MessageBodyProperty.DataLength}字节");
+            }
             writer.WriteUInt16Return(value.Header.MessageBodyProperty.Wrap(), msgBodiesPropertyPosition);
             // 4.校验码
             writer.WriteXor();
