@@ -12,7 +12,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@master
       with:
-        dotnet-version: 9.0.201
+        global-json-file: global.json
     - name: dotnet info
       run: dotnet --info
     - name: dotnet restore
