@@ -1,5 +1,8 @@
 {
   "sdk": {
-    "version": "9.0.201"
+    "version": "9.0.201",
+    "rollForward": "latestFeature",
+    "paths": [ ".dotnet", "$host$" ],
+    "errorMessage": "The required .NET SDK wasn't found. Please update 'version' global.json."
   }
 }
