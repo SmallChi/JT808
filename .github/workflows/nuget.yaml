@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '9.0.100'
+        global-json-file: global.json
 
     - name: Restore dependencies
       run: dotnet restore src/JT808.Protocol.sln
