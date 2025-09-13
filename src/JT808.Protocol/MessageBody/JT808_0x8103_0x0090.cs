@@ -24,7 +24,7 @@ namespace JT808.Protocol.MessageBody
         /// 数据长度
         /// 1 byte
         /// </summary>
-        public  byte ParamLength { get; set; } = 1;
+        public  byte ParamLength { get; set; } = 4;
         /// <summary>
         /// GNSS 定位模式，定义如下：
         /// bit0，0：禁用 GPS 定位， 1：启用 GPS 定位；
@@ -32,7 +32,7 @@ namespace JT808.Protocol.MessageBody
         /// bit2，0：禁用 GLONASS 定位， 1：启用 GLONASS 定位；
         /// bit3，0：禁用 Galileo 定位， 1：启用 Galileo 定位。
         /// </summary>
-        public byte ParamValue { get; set; }
+        public uint ParamValue { get; set; }
         /// <summary>
         /// GNSS 定位模式
         /// </summary>
@@ -49,7 +49,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x8103_0x0090 jT808_0x8103_0x0090 = new JT808_0x8103_0x0090();
             jT808_0x8103_0x0090.ParamId = reader.ReadUInt32();
             jT808_0x8103_0x0090.ParamLength = reader.ReadByte();
-            jT808_0x8103_0x0090.ParamValue = reader.ReadByte();
+            jT808_0x8103_0x0090.ParamValue = reader.ReadUInt32();
             writer.WriteNumber($"[{ jT808_0x8103_0x0090.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0090.ParamId);
             writer.WriteNumber($"[{jT808_0x8103_0x0090.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0090.ParamLength);
             writer.WriteStartArray($"[{ jT808_0x8103_0x0090.ParamValue.ReadNumber()}]参数值[GNSS定位模式]");
@@ -70,7 +70,7 @@ namespace JT808.Protocol.MessageBody
             JT808_0x8103_0x0090 jT808_0x8103_0x0090 = new JT808_0x8103_0x0090();
             jT808_0x8103_0x0090.ParamId = reader.ReadUInt32();
             jT808_0x8103_0x0090.ParamLength = reader.ReadByte();
-            jT808_0x8103_0x0090.ParamValue = reader.ReadByte();
+            jT808_0x8103_0x0090.ParamValue = reader.ReadUInt32();
             return jT808_0x8103_0x0090;
         }
         /// <summary>
@@ -83,7 +83,7 @@ namespace JT808.Protocol.MessageBody
         {
             writer.WriteUInt32(value.ParamId);
             writer.WriteByte(value.ParamLength);
-            writer.WriteByte(value.ParamValue);
+            writer.WriteUInt32(value.ParamValue);
         }
     }
 }

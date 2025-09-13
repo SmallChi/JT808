@@ -75,8 +75,8 @@ namespace JT808.Protocol.Test.MessageBody
         {
             byte[] bytes = "00000A070000017B000000010000000200BA7F0E07E4F11C0028003C000018111523261001020304".ToHexBytes();
             string json = JT808Serializer.Analyze<JT808_0x0801>(bytes);
-        }
-
+        }      
+        
         [Fact]
         public void Package1()
         {

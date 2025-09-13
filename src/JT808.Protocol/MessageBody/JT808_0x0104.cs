@@ -116,6 +116,16 @@ namespace JT808.Protocol.MessageBody
                         analyze.Analyze(ref reader, writer, config);
                     }
                 }
+                else
+                {
+                    //对于未能解析的自定义项，过滤其长度，以保证后续解析正常
+                    reader.Skip(4);//跳过参数id长度
+                    var len = reader.ReadByte();//获取协议长度
+                    var buf=reader.ReadArray(len).ToArray();//跳过协议内容
+                    writer.WriteNumber($"[{paramId.ReadNumber()}]参数ID", paramId);
+                    writer.WriteNumber($"[{len.ReadNumber()}]数据内容长度", len);
+                    writer.WriteString($"数据内容", buf.ToHexString());
+                }
                 writer.WriteEndObject();
             }
             writer.WriteEndArray();
