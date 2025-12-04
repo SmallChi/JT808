@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+	  <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <LangVersion>12.0</LangVersion>
   </PropertyGroup>
@@ -34,6 +34,7 @@
     <Compile Include="Extensions\JT808PackageExtensionsTest.cs" />
     <Compile Include="Extensions\JT808ValidationExtensionsTest.cs" />
     <Compile Include="MessageBody\JT808LocationAttachExtensions\JT808LocationAttachImpl0x61.cs" />
+    <Compile Include="MessageBody\JT808_0x0304Test.cs" />
     <Compile Include="MessageBody\JT808_0x0001Test.cs" />
     <Compile Include="MessageBody\JT808_0x0002Test.cs" />
     <Compile Include="MessageBody\JT808_0x0003Test.cs" />
@@ -108,11 +109,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.10" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.10" />
-    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
+    <PackageReference Include="System.Drawing.Common" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.console" Version="2.9.3">
       <PrivateAssets>all</PrivateAssets>

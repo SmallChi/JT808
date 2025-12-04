@@ -1,9 +1,9 @@
 ﻿using JT808.Protocol.Interfaces;
 using JT808.Protocol.Internal;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace JT808.Protocol
 {

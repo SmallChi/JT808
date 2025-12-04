@@ -10808,6 +10808,75 @@
             <param name="value"></param>
             <param name="config"></param>
         </member>
+        <member name="T:JT808.Protocol.MessageBody.JT808_0x0304">
+            <summary>
+            信息点播/取消
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0304.MsgId">
+            <summary>
+            0x0304
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0304.SkipSerialization">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0304.Description">
+            <summary>
+            信息点播/取消
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0304.ReplyMsgNum">
+            <summary>
+            应答流水号
+            对应的平台消息的流水号
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0304.MessageType">
+            <summary>
+            消息类型
+            0x4E 英文短信 
+            0x4F 中文短信
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0304.MessageLength">
+            <summary>
+            应答信息长度
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0304.Message">
+            <summary>
+            消息
+            0x4E ASCII
+            0x4F GBK
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x0304.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x0304.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.MessageBody.JT808_0x0304,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="writer"></param>
+            <param name="value"></param>
+            <param name="config"></param>
+        </member>
+        <member name="M:JT808.Protocol.MessageBody.JT808_0x0304.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
+            <summary>
+            
+            </summary>
+            <param name="reader"></param>
+            <param name="writer"></param>
+            <param name="config"></param>
+        </member>
         <member name="T:JT808.Protocol.MessageBody.JT808_0x0500">
             <summary>
             车辆控制应答

@@ -476,7 +476,13 @@ namespace JT808.Protocol.MessageBody
             writer.WriteString($"[{StatusFlagBits[19]}]bit12", StatusFlagBits[19] == '0' ? "车门解锁" : "车门加锁");
             writer.WriteString($"[{StatusFlagBits[20]}]bit11", StatusFlagBits[20] == '0' ? "车辆电路正常" : "车辆电路断开");
             writer.WriteString($"[{StatusFlagBits[21]}]bit10", StatusFlagBits[21] == '0' ? "车辆油路正常" : "车辆油路断开");
-            var bit8And9 = string.Join("",StatusFlagBits.Slice(22, 2).ToArray().Reverse());
+#if NET10_0
+            var bit8And9 = string.Join("", StatusFlagBits.Slice(22, 2).ToArray().Reverse());
+#else
+            var aa=StatusFlagBits.Slice(22, 2).ToArray();
+            aa.Reverse();
+            var bit8And9 = string.Join("",aa);
+#endif
             switch (bit8And9)
             {
                 case "00":

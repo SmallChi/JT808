@@ -34,7 +34,8 @@ namespace JT808.Protocol.Test.Extensions
         {
             var types = Enum.GetNames(typeof(JT808MsgId));
             var bodyTypes = Assembly.GetAssembly(typeof(JT808Package)).GetTypes().Where(w => w.GetInterface(nameof(JT808Bodies)) == typeof(JT808Bodies)).ToList();
-            Assert.Equal(types.Length, bodyTypes.Count);
+            int ext_0304 = 1;
+            Assert.Equal(types.Length+ ext_0304, bodyTypes.Count);
         }
 
         [Fact]
@@ -52,7 +53,8 @@ namespace JT808.Protocol.Test.Extensions
                     Debug.WriteLine(type.FullName);
                 }
             }
-            Assert.Equal(types.Length, bodyTypes.Count);
+            int ext_0304 = 1;
+            Assert.Equal(types.Length+ ext_0304, bodyTypes.Count);
         }
     }
 }
