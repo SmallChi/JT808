@@ -193,50 +193,6 @@
             撤防
             </summary>
         </member>
-        <member name="T:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext">
-            <summary>
-            多路油耗模拟量
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.AttachInfoId">
-            <summary>
-            多路油耗模拟量,Id
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.AttachInfoLength">
-            <summary>
-            多路油耗模拟量信息附加长度
-            </summary>
-        </member>
-        <member name="P:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.Oils">
-            <summary>
-            油量数据
-            </summary>
-        </member>
-        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">
-            <summary>
-            
-            </summary>
-            <param name="reader"></param>
-            <param name="writer"></param>
-            <param name="config"></param>
-        </member>
-        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.Deserialize(JT808.Protocol.MessagePack.JT808MessagePackReader@,JT808.Protocol.IJT808Config)">
-            <summary>
-            
-            </summary>
-            <param name="reader"></param>
-            <param name="config"></param>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext.Serialize(JT808.Protocol.MessagePack.JT808MessagePackWriter@,JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x2B_Ext,JT808.Protocol.IJT808Config)">
-            <summary>
-            
-            </summary>
-            <param name="writer"></param>
-            <param name="value"></param>
-            <param name="config"></param>
-        </member>
         <member name="T:JT808.Protocol.Extensions.GPS51.MessageBody.JT808_0x0200_0x51">
             <summary>
             温度

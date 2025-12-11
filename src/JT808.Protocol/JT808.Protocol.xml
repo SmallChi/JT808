@@ -10382,11 +10382,6 @@
             模拟量
             </summary>
         </member>
-        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x2B.Analog">
-            <summary>
-            模拟量 bit0-15，AD0；bit16-31，AD1
-            </summary>
-        </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x2B.AttachInfoId">
             <summary>
             JT808_0x0200_0x2B
@@ -10394,7 +10389,17 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x2B.AttachInfoLength">
             <summary>
-            4 byte
+            标准808固定 4 byte
+            </summary>
+        </member>
+        <member name="P:JT808.Protocol.MessageBody.JT808_0x0200_0x2B.Analogs">
+            <summary>
+            标准 808 文档 模拟量 bit0-15，AD0；bit16-31，AD1
+            扩展兼容模拟量
+            1路：2b02aaaa
+            2路：2b04aaaabbbb
+            3路：2b06aaaabbbbcccc
+            4路：2b08aaaabbbbccccdddd
             </summary>
         </member>
         <member name="M:JT808.Protocol.MessageBody.JT808_0x0200_0x2B.Analyze(JT808.Protocol.MessagePack.JT808MessagePackReader@,System.Text.Json.Utf8JsonWriter,JT808.Protocol.IJT808Config)">

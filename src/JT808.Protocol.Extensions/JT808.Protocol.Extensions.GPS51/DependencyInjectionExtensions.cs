@@ -24,7 +24,6 @@ namespace JT808.Protocol.Extensions.GPS51
         /// <returns></returns>
         public static IJT808Builder AddGPS51Configure(this IJT808Builder jT808Builder) 
         {
-            jT808Builder.Config.JT808_0X0200_Factory.Map.Remove(JT808_GPS51_Constants.JT808_0x0200_0x2B);
             jT808Builder.Config.Register(Assembly.GetExecutingAssembly());
             return jT808Builder;
         }

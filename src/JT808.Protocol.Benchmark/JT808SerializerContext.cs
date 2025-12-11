@@ -101,7 +101,10 @@ namespace JT808.Protocol.Benchmark
                 });
                 jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x2B, new JT808_0x0200_0x2B
                 {
-                     Analog = 242
+                     Analogs=new List<ushort>
+                     {
+                         0,242
+                     }
                 });
                 jT808UploadLocationRequest.BasicLocationAttachData.Add(JT808Constants.JT808_0x0200_0x30, new JT808_0x0200_0x30
                 {
