@@ -100,56 +100,15 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
             switch (value.AlarmOrEventType)
             {
                 case 0x01:
-                    alarmOrEventTypeString = "前向碰撞报警";
+                    alarmOrEventTypeString = "后方接近报警";
                     break;
                 case 0x02:
-                    alarmOrEventTypeString = "车道偏离报警";
+                    alarmOrEventTypeString = "左侧后方接近报警";
                     break;
                 case 0x03:
-                    alarmOrEventTypeString = "车距过近报警";
+                    alarmOrEventTypeString = "右侧后方接近报警";
                     break;
-                case 0x04:
-                    alarmOrEventTypeString = "行人碰撞报警";
-                    break;
-                case 0x05:
-                    alarmOrEventTypeString = "频繁变道报警";
-                    break;
-                case 0x06:
-                    alarmOrEventTypeString = "道路标识超限报警";
-                    break;
-                case 0x07:
-                    alarmOrEventTypeString = "障碍物报警";
-                    break;
-                case 0x08:
-                case 0x09:
-                case 0x0A:
-                case 0x0B:
-                case 0x0C:
-                case 0x0D:
-                case 0x0E:
-                case 0x0F:
-                    alarmOrEventTypeString = "用户自定义";
-                    break;
-                case 0x10:
-                    alarmOrEventTypeString = "道路标志识别事件";
-                    break;
-                case 0x11:
-                    alarmOrEventTypeString = "主动抓拍事件";
-                    break;
-                case 0x12:
-                case 0x13:
-                case 0x14:
-                case 0x15:
-                case 0x16:
-                case 0x17:
-                case 0x18:
-                case 0x19:
-                case 0x1A:
-                case 0x1B:
-                case 0x1C:
-                case 0x1D:
-                case 0x1E:
-                case 0x1F:
+                default:
                     alarmOrEventTypeString = "用户自定义";
                     break;
             }

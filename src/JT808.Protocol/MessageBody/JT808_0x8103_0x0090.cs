@@ -19,12 +19,12 @@ namespace JT808.Protocol.MessageBody
         /// <summary>
         /// 0x0090
         /// </summary>
-        public  uint ParamId { get; set; } = 0x0090;
+        public uint ParamId { get; set; } = 0x0090;
         /// <summary>
         /// 数据长度
         /// 1 byte
         /// </summary>
-        public  byte ParamLength { get; set; } = 1;
+        public byte ParamLength { get; set; } = 1;
         /// <summary>
         /// GNSS 定位模式，定义如下：
         /// bit0，0：禁用 GPS 定位， 1：启用 GPS 定位；
@@ -33,10 +33,11 @@ namespace JT808.Protocol.MessageBody
         /// bit3，0：禁用 Galileo 定位， 1：启用 Galileo 定位。
         /// </summary>
         public byte ParamValue { get; set; }
+        public byte[] ParamValues { get; set; }
         /// <summary>
         /// GNSS 定位模式
         /// </summary>
-        public  string Description => "GNSS定位模式";
+        public string Description => "GNSS定位模式";
 
         /// <summary>
         /// 
@@ -49,15 +50,26 @@ namespace JT808.Protocol.MessageBody
             JT808_0x8103_0x0090 jT808_0x8103_0x0090 = new JT808_0x8103_0x0090();
             jT808_0x8103_0x0090.ParamId = reader.ReadUInt32();
             jT808_0x8103_0x0090.ParamLength = reader.ReadByte();
-            jT808_0x8103_0x0090.ParamValue = reader.ReadByte();
-            writer.WriteNumber($"[{ jT808_0x8103_0x0090.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0090.ParamId);
-            writer.WriteNumber($"[{jT808_0x8103_0x0090.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0090.ParamLength);
-            writer.WriteStartArray($"[{ jT808_0x8103_0x0090.ParamValue.ReadNumber()}]参数值[GNSS定位模式]");
-            writer.WriteStringValue((jT808_0x8103_0x0090.ParamValue & 01) > 0 ? "启用GPS定位" : "禁用GPS定位");
-            writer.WriteStringValue((jT808_0x8103_0x0090.ParamValue & 02) > 0 ? "启用北斗定位" : "禁用北斗定位");
-            writer.WriteStringValue((jT808_0x8103_0x0090.ParamValue & 04) > 0 ? "启用GLONASS定位" : "禁用GLONASS定位");
-            writer.WriteStringValue((jT808_0x8103_0x0090.ParamValue & 08) > 0 ? "启用Galileo定位" : "禁用Galileo定位");
-            writer.WriteEndArray();
+            if (jT808_0x8103_0x0090.ParamLength == 1)
+            {
+                var value1 = reader.ReadByte();
+                jT808_0x8103_0x0090.ParamValue = value1;
+                writer.WriteNumber($"[{jT808_0x8103_0x0090.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0090.ParamId);
+                writer.WriteNumber($"[{jT808_0x8103_0x0090.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0090.ParamLength);
+                writer.WriteStartArray($"[{value1.ReadNumber()}]参数值[GNSS定位模式]");
+                writer.WriteStringValue((value1 & 01) > 0 ? "启用GPS定位" : "禁用GPS定位");
+                writer.WriteStringValue((value1 & 02) > 0 ? "启用北斗定位" : "禁用北斗定位");
+                writer.WriteStringValue((value1 & 04) > 0 ? "启用GLONASS定位" : "禁用GLONASS定位");
+                writer.WriteStringValue((value1 & 08) > 0 ? "启用Galileo定位" : "禁用Galileo定位");
+                writer.WriteEndArray();
+            }
+            else if (jT808_0x8103_0x0090.ParamLength > 1)
+            {
+                writer.WriteNumber($"[{jT808_0x8103_0x0090.ParamId.ReadNumber()}]参数ID", jT808_0x8103_0x0090.ParamId);
+                writer.WriteNumber($"[{jT808_0x8103_0x0090.ParamLength.ReadNumber()}]参数长度", jT808_0x8103_0x0090.ParamLength);
+                jT808_0x8103_0x0090.ParamValues = reader.ReadArray(jT808_0x8103_0x0090.ParamLength).ToArray();
+                writer.WriteString("[未知数据(原GNSS定位模式)]", jT808_0x8103_0x0090.ParamValues.ToHexString());
+            }
         }
         /// <summary>
         /// 
@@ -70,7 +82,15 @@ namespace JT808.Protocol.MessageBody
             JT808_0x8103_0x0090 jT808_0x8103_0x0090 = new JT808_0x8103_0x0090();
             jT808_0x8103_0x0090.ParamId = reader.ReadUInt32();
             jT808_0x8103_0x0090.ParamLength = reader.ReadByte();
-            jT808_0x8103_0x0090.ParamValue = reader.ReadByte();
+            if (jT808_0x8103_0x0090.ParamLength == 1)
+            {
+                var value1 = reader.ReadByte();
+                jT808_0x8103_0x0090.ParamValue = value1;
+            }
+            else if (jT808_0x8103_0x0090.ParamLength > 1)
+            {
+                jT808_0x8103_0x0090.ParamValues = reader.ReadArray(jT808_0x8103_0x0090.ParamLength).ToArray();
+            }
             return jT808_0x8103_0x0090;
         }
         /// <summary>
@@ -82,8 +102,23 @@ namespace JT808.Protocol.MessageBody
         public override void Serialize(ref JT808MessagePackWriter writer, JT808_0x8103_0x0090 value, IJT808Config config)
         {
             writer.WriteUInt32(value.ParamId);
-            writer.WriteByte(value.ParamLength);
-            writer.WriteByte(value.ParamValue);
+            if (value.ParamLength == 1)
+            {
+                writer.WriteByte(value.ParamLength);
+                writer.WriteByte(value.ParamValue);
+            }
+            else if (value.ParamLength > 1)
+            {
+                if(value.ParamValues!=null && value.ParamValues.Length > 0)
+                {
+                    writer.WriteByte((byte)value.ParamValues.Length);
+                    writer.WriteArray(value.ParamValues);
+                }
+                else
+                {
+                    writer.WriteByte(0);
+                }
+            }
         }
     }
 }

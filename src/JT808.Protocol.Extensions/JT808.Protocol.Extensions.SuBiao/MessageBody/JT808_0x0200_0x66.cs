@@ -154,64 +154,51 @@ namespace JT808.Protocol.Extensions.SuBiao.MessageBody
                     item.TirePressureAlarmPosition = reader.ReadByte();
                     writer.WriteNumber($"[{item.TirePressureAlarmPosition.ReadNumber()}]胎压报警位置", item.TirePressureAlarmPosition);
                     item.AlarmOrEventType = reader.ReadUInt16();
-                    string alarmOrEventTypeString = "";
-                    switch (item.AlarmOrEventType)
+                    StringBuilder alarmOrEventTypeSB = new StringBuilder("");
+                    if (item.AlarmOrEventType == 0)
                     {
-                        case 0x01:
-                            alarmOrEventTypeString = "前向碰撞报警";
-                            break;
-                        case 0x02:
-                            alarmOrEventTypeString = "车道偏离报警";
-                            break;
-                        case 0x03:
-                            alarmOrEventTypeString = "车距过近报警";
-                            break;
-                        case 0x04:
-                            alarmOrEventTypeString = "行人碰撞报警";
-                            break;
-                        case 0x05:
-                            alarmOrEventTypeString = "频繁变道报警";
-                            break;
-                        case 0x06:
-                            alarmOrEventTypeString = "道路标识超限报警";
-                            break;
-                        case 0x07:
-                            alarmOrEventTypeString = "障碍物报警";
-                            break;
-                        case 0x08:
-                        case 0x09:
-                        case 0x0A:
-                        case 0x0B:
-                        case 0x0C:
-                        case 0x0D:
-                        case 0x0E:
-                        case 0x0F:
-                            alarmOrEventTypeString = "用户自定义";
-                            break;
-                        case 0x10:
-                            alarmOrEventTypeString = "道路标志识别事件";
-                            break;
-                        case 0x11:
-                            alarmOrEventTypeString = "主动抓拍事件";
-                            break;
-                        case 0x12:
-                        case 0x13:
-                        case 0x14:
-                        case 0x15:
-                        case 0x16:
-                        case 0x17:
-                        case 0x18:
-                        case 0x19:
-                        case 0x1A:
-                        case 0x1B:
-                        case 0x1C:
-                        case 0x1D:
-                        case 0x1E:
-                        case 0x1F:
-                            alarmOrEventTypeString = "用户自定义";
-                            break;
+                        alarmOrEventTypeSB.Append("无报警");
                     }
-                    writer.WriteNumber($"[{item.AlarmOrEventType.ReadNumber()}]报警_事件类型-{alarmOrEventTypeString}", item.AlarmOrEventType);
+                    else
+                    {
+                        if ((item.AlarmOrEventType & 0b_0000_0000_0000_0001) == 0b_0000_0000_0000_0001)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit0]胎压(定时上报)");
+                        }
+                        if ((item.AlarmOrEventType & 0b_0000_0000_0000_0010) == 0b_0000_0000_0000_0010)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit1]胎压过高报警");
+                        }
+                        if ((item.AlarmOrEventType & 0b_0000_0000_0000_0100) == 0b_0000_0000_0000_0100)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit2]胎压过低报警");
+                        }
+                        if ((item.AlarmOrEventType & 0b_0000_0000_0000_1000) == 0b_0000_0000_0000_1000)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit3]胎温过高报警");
+                        }
+                        if ((item.AlarmOrEventType & 0b_0000_0000_0001_0000) == 0b_0000_0000_0001_0000)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit4]传感器异常报警");
+                        }
+                        if ((item.AlarmOrEventType & 0b_0000_0000_0010_0000) == 0b_0000_0000_0010_0000)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit5]胎压不平衡报警");
+                        }
+                        if ((item.AlarmOrEventType & 0b_0000_0000_0100_0000) == 0b_0000_0000_0100_0000)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit6]慢漏气报警");
+                        }
+                        if ((item.AlarmOrEventType & 0b_0000_0000_1000_0000) == 0b_0000_0000_1000_0000)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit7]电池电量低报警");
+                        }
+                        if ((item.AlarmOrEventType >> 8) > 0)
+                        {
+                            alarmOrEventTypeSB.AppendLine("[bit8~15]自定义");
+                        }
+                    }
+                    writer.WriteString($"[{item.AlarmOrEventType.ReadNumber()}]报警_事件类型", alarmOrEventTypeSB.ToString());
                     item.TirePressure = reader.ReadUInt16();
                     writer.WriteNumber($"[{item.TirePressure.ReadNumber()}]胎压Kpa", item.TirePressure);
                     item.TireTemperature = reader.ReadUInt16();
