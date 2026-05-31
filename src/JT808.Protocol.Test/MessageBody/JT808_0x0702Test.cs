@@ -84,6 +84,15 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(DateTime.Parse("2018-08-16"), jT808_0X0702.CertificateExpiresDate);
         }
 
+
+        [Fact]
+        public void Test4_1()
+        {
+            byte[] bytes = "7E070200620182712086250202012604091727390014C4E3BAC3000000000000000000000000000000003431363735363139393030363035343334390000180000000000000000000000000000000000000000000000002034040934313637353631393930303630353433343900007D027E".ToHexBytes();
+            string json = JT808Serializer.Analyze(bytes);
+        }
+
+
         [Fact]
         public void Test_2019_1()
         {
@@ -209,5 +218,7 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x0702 jT808_0X0702= package.Bodies as JT808_0x0702;
 
         }
+
+
     }
 }

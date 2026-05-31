@@ -128,7 +128,7 @@ namespace JT808.Protocol.MessageBody
                         value.LicenseIssuing = reader.ReadString(value.LicenseIssuingLength);
                         writer.WriteString($"[{licenseIssuingLengtheBuffer.ToArray().ToHexString()}]发证机构名称", value.LicenseIssuing);
                         value.CertificateExpiresDate = reader.ReadDateTime_YYYYMMDD();
-                        writer.WriteString($"[{value.CertificateExpiresDate.ToString("yyMMdd")}]插拔卡时间", value.CertificateExpiresDate.ToString("yyyy-MM-dd"));
+                        writer.WriteString($"[{value.CertificateExpiresDate.ToString("yyyyMMdd")}]证件有效期", value.CertificateExpiresDate.ToString("yyyy-MM-dd"));
                         if (reader.Version == JT808Version.JTT2019)
                         {
                             var driverIdentityCardBuffer = reader.ReadVirtualArray(20);
