@@ -92,6 +92,13 @@ namespace JT808.Protocol.Test.MessageBody
             string json = JT808Serializer.Analyze(bytes);
         }
 
+        [Fact]
+        public void Test5_1()
+        {
+            byte[] bytes = "7E0702404D0100000000041587677411001101260617171000000AB2E2CAD4D4B1BCD720204138383838382A2A2A2A2A2A2A2A2A2A2A2A00000D32303236303430323134303838201510203436303330303838383838383838383838383838B27E".ToHexBytes();
+            string json = JT808Serializer.Analyze(bytes);
+        }
+
 
         [Fact]
         public void Test_2019_1()
@@ -218,7 +225,6 @@ namespace JT808.Protocol.Test.MessageBody
             JT808_0x0702 jT808_0X0702= package.Bodies as JT808_0x0702;
 
         }
-
 
     }
 }

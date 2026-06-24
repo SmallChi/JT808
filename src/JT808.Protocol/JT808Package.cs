@@ -336,6 +336,11 @@ namespace JT808.Protocol
             }
             // 4.处理数据体
             //  4.1.判断有无数据体
+            int remainContentLength = reader.ReadCurrentRemainContentLength();
+            if(remainContentLength!= headerMessageBodyProperty.DataLength)
+            {
+                writer.WriteString("消息体长度异常",$"实际消息体长度为:{remainContentLength}!!!");
+            }
             if (headerMessageBodyProperty.DataLength > 0)
             {
                 //数据体属性对象 开始
@@ -374,6 +379,7 @@ namespace JT808.Protocol
                         {
                             //数据体长度正常
                             writer.WriteString($"{description}", reader.ReadVirtualArray(reader.ReadCurrentRemainContentLength()).ToArray().ToHexString());
+
                             if (instance is IJT808Analyze analyze)
                             {
                                 //4.2.处理消息体

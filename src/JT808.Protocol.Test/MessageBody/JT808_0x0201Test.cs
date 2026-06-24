@@ -2,6 +2,8 @@
 using JT808.Protocol.MessageBody;
 using System;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using Xunit;
 
 namespace JT808.Protocol.Test.MessageBody
@@ -73,6 +75,13 @@ namespace JT808.Protocol.Test.MessageBody
         public void Test3()
         {
             byte[] bytes = "7E0201002811223344556622B83039000000010000000200BA7F0E07E4F11C0028003C000018071510101001040000006402020037517E".ToHexBytes();
+            string json = JT808Serializer.Analyze(bytes);
+        }
+        [Fact]
+        public void Test4()
+        {
+            byte[] bytes = "7E0201004504122030900509311AA90000000000080002020285F807149893000E00000154260617092230010400260E432A0200042B040014001430011D310110520103510804F604F604F604F65F0200FF8C007E".ToHexBytes();
+     
             string json = JT808Serializer.Analyze(bytes);
         }
     }

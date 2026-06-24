@@ -105,7 +105,7 @@ namespace JT808.Protocol.MessageBody
             if (firstByte == 0x01 || firstByte == 0x02)
             {
                 value.IC_Card_Status = (JT808ICCardStatus)reader.ReadByte();
-                writer.WriteNumber($"[{((byte)value.IC_Card_Status).ReadNumber()}]状态-{value.IC_Card_Status.ToString()}", (byte)value.IC_Card_Status);
+                writer.WriteString($"[{((byte)value.IC_Card_Status).ReadNumber()}]状态-{value.IC_Card_Status.ToString()}", value.IC_Card_Status== JT808ICCardStatus.ic_card_into? "插卡":"拔卡");
                 value.IC_Card_PlugDateTime = reader.ReadDateTime_yyMMddHHmmss();
                 writer.WriteString($"[{value.IC_Card_PlugDateTime.ToString("yyMMddHHmmss")}]插拔卡时间", value.IC_Card_PlugDateTime.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (reader.ReadCurrentRemainContentLength() > 0)
