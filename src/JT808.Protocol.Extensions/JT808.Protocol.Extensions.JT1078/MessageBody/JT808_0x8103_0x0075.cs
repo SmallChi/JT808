@@ -117,7 +117,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             writer.WriteString($"[{value.OSD.ReadNumber()}]OBD字幕叠加设置", OBDDisplay(value.OSD));
             value.AudioOutputEnabled = reader.ReadByte();
             writer.WriteString($"[{value.AudioOutputEnabled.ReadNumber()}]是否启用音频输出", value.AudioOutputEnabled == 0 ? "不启用" : "启用");
-           string RTS_EncodeModeDisplay(byte RTS_EncodeMode) {
+            string RTS_EncodeModeDisplay(byte RTS_EncodeMode) {
                 switch (RTS_EncodeMode)
                 {
                     case 0:
@@ -155,7 +155,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
             }
             string StreamStore_EncodeModeDisplay(byte StreamStore_EncodeMode) {
                 {
-                    switch (RTS_EncodeMode)
+                    switch (StreamStore_EncodeMode)
                     {
                         case 0:
                             return "CBR固定码流";
@@ -170,7 +170,7 @@ namespace JT808.Protocol.Extensions.JT1078.MessageBody
                 }
             }
             string StreamStore_ResolutionDisplay(byte StreamStore_Resolution) {
-                switch (RTS_Resolution)
+                switch (StreamStore_Resolution)
                 {
                     case 0:
                         return "QCIF";
