@@ -19,7 +19,18 @@ namespace JT808.Protocol.Internal
         private readonly TimeSpan cleanInterval = TimeSpan.FromSeconds(60);
         private readonly CancellationTokenSource cts = new CancellationTokenSource();
         private bool disposed;
-        public DefaultMerger()
+
+        private static readonly Lazy<DefaultMerger> _instance = new(() => new DefaultMerger());
+
+        /// <summary>
+        /// 获取默认分包合并实现单例
+        /// </summary>
+        public static DefaultMerger Instance => _instance.Value;
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        private DefaultMerger()
         {
             Task.Run(async () =>
             {
@@ -38,6 +49,7 @@ namespace JT808.Protocol.Internal
                 }
             }, cts.Token);
         }
+
         /// <inheritdoc/>
         public bool TryMerge(JT808Header header, byte[] data, IJT808Config config, out JT808Bodies body)
         {

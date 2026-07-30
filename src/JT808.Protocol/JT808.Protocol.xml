@@ -5045,6 +5045,16 @@
             <para>key为sim卡号，value为字典，key为消息id,value为元组，结构为：(分包索引,分包元数据)</para>
             </summary>
         </member>
+        <member name="P:JT808.Protocol.Internal.DefaultMerger.Instance">
+            <summary>
+            获取默认分包合并实现单例
+            </summary>
+        </member>
+        <member name="M:JT808.Protocol.Internal.DefaultMerger.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
         <member name="M:JT808.Protocol.Internal.DefaultMerger.TryMerge(JT808.Protocol.JT808Header,System.Byte[],JT808.Protocol.IJT808Config,JT808.Protocol.JT808Bodies@)">
             <inheritdoc/>
         </member>

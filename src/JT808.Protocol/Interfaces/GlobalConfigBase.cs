@@ -127,7 +127,7 @@ namespace JT808.Protocol.Interfaces
         /// <inheritdoc/>
         public double AutoMergeTimeoutSecond { get; set; } = 300;
         /// <inheritdoc/>
-        public IMerger Jt808PackageMerger { get; set; } = new DefaultMerger();
+        public IMerger Jt808PackageMerger { get; set; } = DefaultMerger.Instance;
 
         /// <summary>
         /// 外部扩展程序集注册
