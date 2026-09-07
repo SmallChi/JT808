@@ -77,7 +77,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)258, jT808_0X0802.MultimediaSearchItems[0].MultimediaId);
 
             Assert.Equal((uint)1, jT808_0X0802.MultimediaSearchItems[0].Position.AlarmFlag);
-            Assert.Equal((ushort)40, jT808_0X0802.MultimediaSearchItems[0].Position.Altitude);
+            Assert.Equal(40, jT808_0X0802.MultimediaSearchItems[0].Position.Altitude);
             Assert.Equal(DateTime.Parse("2018-11-16 20:20:20"), jT808_0X0802.MultimediaSearchItems[0].Position.GPSTime);
             Assert.Equal(12222222, jT808_0X0802.MultimediaSearchItems[0].Position.Lat);
             Assert.Equal(132444444, jT808_0X0802.MultimediaSearchItems[0].Position.Lng);
@@ -91,7 +91,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal((uint)259, jT808_0X0802.MultimediaSearchItems[1].MultimediaId);
 
             Assert.Equal((uint)1, jT808_0X0802.MultimediaSearchItems[1].Position.AlarmFlag);
-            Assert.Equal((ushort)40, jT808_0X0802.MultimediaSearchItems[1].Position.Altitude);
+            Assert.Equal(40, jT808_0X0802.MultimediaSearchItems[1].Position.Altitude);
             Assert.Equal(DateTime.Parse("2018-11-16 22:22:22"), jT808_0X0802.MultimediaSearchItems[1].Position.GPSTime);
             Assert.Equal(12222222, jT808_0X0802.MultimediaSearchItems[1].Position.Lat);
             Assert.Equal(132444444, jT808_0X0802.MultimediaSearchItems[1].Position.Lng);
@@ -170,7 +170,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(JT808MultimediaType.image.ToByteValue(), jT808_0X0802.MultimediaSearchItems[0].MultimediaType);
 
             Assert.Equal((uint)1, jT808_0X0802.MultimediaSearchItems[0].Position.AlarmFlag);
-            Assert.Equal((ushort)40, jT808_0X0802.MultimediaSearchItems[0].Position.Altitude);
+            Assert.Equal((short)40, jT808_0X0802.MultimediaSearchItems[0].Position.Altitude);
             Assert.Equal(DateTime.Parse("2018-11-16 20:20:20"), jT808_0X0802.MultimediaSearchItems[0].Position.GPSTime);
             Assert.Equal(12222222, jT808_0X0802.MultimediaSearchItems[0].Position.Lat);
             Assert.Equal(132444444, jT808_0X0802.MultimediaSearchItems[0].Position.Lng);
@@ -183,7 +183,7 @@ namespace JT808.Protocol.Test.MessageBody
             Assert.Equal(JT808MultimediaType.video.ToByteValue(), jT808_0X0802.MultimediaSearchItems[1].MultimediaType);
 
             Assert.Equal((uint)1, jT808_0X0802.MultimediaSearchItems[1].Position.AlarmFlag);
-            Assert.Equal((ushort)40, jT808_0X0802.MultimediaSearchItems[1].Position.Altitude);
+            Assert.Equal((short)40, jT808_0X0802.MultimediaSearchItems[1].Position.Altitude);
             Assert.Equal(DateTime.Parse("2018-11-16 22:22:22"), jT808_0X0802.MultimediaSearchItems[1].Position.GPSTime);
             Assert.Equal(12222222, jT808_0X0802.MultimediaSearchItems[1].Position.Lat);
             Assert.Equal(132444444, jT808_0X0802.MultimediaSearchItems[1].Position.Lng);

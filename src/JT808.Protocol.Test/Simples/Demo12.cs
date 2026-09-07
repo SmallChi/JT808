@@ -18,6 +18,7 @@ using static JT808.Protocol.MessageBody.JT808_0x8105;
 using System.Buffers.Binary;
 using Newtonsoft.Json;
 
+
 namespace JT808.Protocol.Test.Simples
 {
     public class Demo12

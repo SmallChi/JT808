@@ -42,7 +42,7 @@ namespace JT808.Protocol.Test.Simples
             //4.数据包体
             JT808_0x0200 jT808_0x0200 = (JT808_0x0200)jT808Package.Bodies;
             Assert.Equal((uint)1, jT808_0x0200.AlarmFlag);
-            Assert.Equal((uint)40, jT808_0x0200.Altitude);
+            Assert.Equal(40, jT808_0x0200.Altitude);
             Assert.Equal(DateTime.Parse("2018-10-15 10:10:10"), jT808_0x0200.GPSTime);
             Assert.Equal(12222222, jT808_0x0200.Lat);
             Assert.Equal(132444444, jT808_0x0200.Lng);

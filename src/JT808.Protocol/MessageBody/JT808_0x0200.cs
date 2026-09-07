@@ -50,10 +50,11 @@ namespace JT808.Protocol.MessageBody
         /// </summary>
         public int Lng { get; set; }
         /// <summary>
-        /// 高程
+        /// 高程(支持负数)
         /// 海拔高度，单位为米（m）
+        /// 理论不会飞那么高
         /// </summary>
-        public ushort Altitude { get; set; }
+        public short Altitude { get; set; }
         /// <summary>
         /// 速度 1/10km/h
         /// </summary>
@@ -125,7 +126,7 @@ namespace JT808.Protocol.MessageBody
             {   //西经 134217728 0x8000000
                 jT808_0X0200.Lng = -jT808_0X0200.Lng;
             }
-            jT808_0X0200.Altitude = reader.ReadUInt16();
+            jT808_0X0200.Altitude = (short)reader.ReadUInt16();
             jT808_0X0200.Speed = reader.ReadUInt16();
             jT808_0X0200.Direction = reader.ReadUInt16();
             jT808_0X0200.GPSTime = reader.ReadDateTime_yyMMddHHmmss();
@@ -324,7 +325,7 @@ namespace JT808.Protocol.MessageBody
                 }
                 writer.WriteInt32(value.Lng);
             }
-            writer.WriteUInt16(value.Altitude);
+            writer.WriteUInt16((ushort)value.Altitude);
             writer.WriteUInt16(value.Speed);
             writer.WriteUInt16(value.Direction);
             writer.WriteDateTime_yyMMddHHmmss(value.GPSTime);
@@ -526,8 +527,8 @@ namespace JT808.Protocol.MessageBody
                 value.Lng = reader.ReadInt32();
                 writer.WriteNumber($"[{value.Lng.ReadNumber()}]经度", value.Lng);
             }
-            value.Altitude = reader.ReadUInt16();
-            writer.WriteNumber($"[{value.Altitude.ReadNumber()}]高程", value.Altitude);
+            value.Altitude =(short)reader.ReadUInt16();
+            writer.WriteNumber($"[{value.Altitude.ReadNumber()}]高程(米)", value.Altitude);
             value.Speed = reader.ReadUInt16();
             writer.WriteNumber($"[{value.Speed.ReadNumber()}]速度", value.Speed);
             value.Direction = reader.ReadUInt16();

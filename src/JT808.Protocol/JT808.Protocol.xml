@@ -9659,8 +9659,9 @@
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.Altitude">
             <summary>
-            高程
+            高程(支持负数)
             海拔高度，单位为米（m）
+            理论不会飞那么高
             </summary>
         </member>
         <member name="P:JT808.Protocol.MessageBody.JT808_0x0200.Speed">

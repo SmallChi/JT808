@@ -97,7 +97,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
             Assert.Equal(1u, jT808UploadLocationRequest.AlarmFlag);
-            Assert.Equal(40u, jT808UploadLocationRequest.Altitude);
+            Assert.Equal(40, jT808UploadLocationRequest.Altitude);
             Assert.Equal(DateTime.Parse("2021-08-30 18:17:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
@@ -161,7 +161,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
             Assert.Equal(1u, jT808UploadLocationRequest.AlarmFlag);
-            Assert.Equal(40u, jT808UploadLocationRequest.Altitude);
+            Assert.Equal(40, jT808UploadLocationRequest.Altitude);
             Assert.Equal(DateTime.Parse("2021-08-30 18:17:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
@@ -225,7 +225,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
             Assert.Equal(1u, jT808UploadLocationRequest.AlarmFlag);
-            Assert.Equal(40u, jT808UploadLocationRequest.Altitude);
+            Assert.Equal(40, jT808UploadLocationRequest.Altitude);
             Assert.Equal(DateTime.Parse("2021-08-30 18:17:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
@@ -289,7 +289,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
             Assert.Equal(1u, jT808UploadLocationRequest.AlarmFlag);
-            Assert.Equal(40u, jT808UploadLocationRequest.Altitude);
+            Assert.Equal(40, jT808UploadLocationRequest.Altitude);
             Assert.Equal(DateTime.Parse("2021-05-31 18:17:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
@@ -374,7 +374,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
             Assert.Equal(1u, jT808UploadLocationRequest.AlarmFlag);
-            Assert.Equal(40u, jT808UploadLocationRequest.Altitude);
+            Assert.Equal(40, jT808UploadLocationRequest.Altitude);
             Assert.Equal(DateTime.Parse("2021-08-30 18:17:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
@@ -469,7 +469,7 @@ namespace JT808.Protocol.Test.Simples
             Assert.Equal("1122334455", jT808Package.Header.TerminalPhoneNo);
             JT808_0x0200 jT808UploadLocationRequest = (JT808_0x0200)jT808Package.Bodies;
             Assert.Equal(1u, jT808UploadLocationRequest.AlarmFlag);
-            Assert.Equal(40u, jT808UploadLocationRequest.Altitude);
+            Assert.Equal(40, jT808UploadLocationRequest.Altitude);
             Assert.Equal(DateTime.Parse("2021-08-30 18:17:10"), jT808UploadLocationRequest.GPSTime);
             Assert.Equal(12222222, jT808UploadLocationRequest.Lat);
             Assert.Equal(132444444, jT808UploadLocationRequest.Lng);
