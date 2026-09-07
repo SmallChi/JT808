@@ -4,5 +4,8 @@
     "rollForward": "latestFeature",
     "paths": [ ".dotnet", "$host$" ],
     "errorMessage": "The required .NET SDK wasn't found. Please update 'version' global.json."
+  },
+  "test": {
+    "runner": "Microsoft.Testing.Platform"
   }
 }
